@@ -18,6 +18,7 @@ import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import useThemeStore from '@/store/useThemeStore';
 import { useMediaQuery } from 'react-responsive';
+import React from 'react';
 
 const Decorations = lazy(() => import('./Decorations'));
 
@@ -175,7 +176,7 @@ const MainMenu = () => {
           )}
         >
           {links.map((link, i) => (
-            <>
+            <React.Fragment key={i}>
               <Link href={link.href} key={i} className={clsx('w-full')}>
                 <button
                   className={clsx(
@@ -212,7 +213,7 @@ const MainMenu = () => {
                   )}
                 />
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </div>

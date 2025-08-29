@@ -5,6 +5,7 @@ import Subset from './Subset';
 import { useClick } from '@/lib/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
 import { ChevronUp } from 'lucide-react';
+import React from 'react';
 
 const Hiragana = () => {
   const { playClick } = useClick();
@@ -66,7 +67,7 @@ const Hiragana = () => {
       )}
     >
       {kanaGroups.map((kanaGroup, i) => (
-        <>
+        <React.Fragment key={kanaGroup.name}>
           <form
             className={clsx(
               'flex flex-col w-full gap-2 sm:w-1/2 p-4 rounded-2xl'
@@ -178,7 +179,7 @@ const Hiragana = () => {
               )}
             />
           )}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

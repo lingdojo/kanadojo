@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import { usePathname } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
+import React from 'react';
 
 const GameModes = () => {
   const pathname = usePathname();
@@ -66,7 +67,7 @@ const GameModes = () => {
       )}
     >
       {gameModes.map((gameMode, i) => (
-        <>
+        <React.Fragment key={gameMode}>
           <label
             key={gameMode}
             className={clsx(
@@ -127,7 +128,7 @@ const GameModes = () => {
               )}
             />
           )}
-        </>
+        </React.Fragment>
       ))}
     </fieldset>
   );

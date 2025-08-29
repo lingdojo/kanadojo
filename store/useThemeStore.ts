@@ -16,6 +16,9 @@ interface ThemeState {
 
   hotkeysOn: boolean;
   setHotkeys: (hotkeys: boolean) => void;
+
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: (collapsed: boolean) => void;
 }
 
 const useThemeStore = create<ThemeState>()(
@@ -30,7 +33,11 @@ const useThemeStore = create<ThemeState>()(
       silentMode: false,
       setSilentMode: silent => set({ silentMode: silent }),
       hotkeysOn: true,
-      setHotkeys: hotkeys => set({ hotkeysOn: hotkeys })
+      setHotkeys: hotkeys => set({ hotkeysOn: hotkeys }),
+
+      // add sidebarCollapsed state + setter (persisted)
+      sidebarCollapsed: false,
+      setSidebarCollapsed: (collapsed: boolean) => set({ sidebarCollapsed: collapsed })
     }),
 
     {
