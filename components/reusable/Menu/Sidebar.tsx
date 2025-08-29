@@ -7,7 +7,11 @@ import { useEffect, useRef } from 'react';
 import useThemeStore from '@/store/useThemeStore';
 import { usePathname, useRouter } from 'next/navigation';
 
-const Sidebar = () => {
+type SidebarProps = {
+  collapsed?: boolean;
+};
+
+const Sidebar = ({ collapsed = false }: SidebarProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -35,32 +39,36 @@ const Sidebar = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [hotkeysOn]);
+  }, [hotkeysOn, router]);
 
   return (
     <div
       className={clsx(
         'flex lg:flex-col lg:items-start lg:gap-2',
-        'lg:w-1/5 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto',
-        'lg:pt-6',
+        // animate width smoothly on desktop
+        'transition-all duration-300 ease-in-out',
+        // collapsed -> narrow icon rail on desktop
+        collapsed
+          ? 'lg:w-16 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:pt-6 lg:px-1 lg:items-center'
+          : 'lg:w-1/5 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:pt-6 lg:px-3',
         'max-lg:fixed max-lg:bottom-0 max-lg:w-full',
         'max-lg:bg-[var(--card-color)]',
         'z-50',
         'max-lg:border-t-2 border-[var(--border-color)] max-lg:py-2 max-lg:justify-evenly max-lg:items-center',
-        'lg:border-r-2 lg:h-auto lg:w-0 lg:px-3'
+        'lg:border-r-2 lg:h-auto'
       )}
     >
-      <h1
+      {/* <h1
         className={clsx(
           'flex gap-1.5 items-center text-3xl pl-4',
-          'max-lg:hidden max-2xl:flex-col'
+          collapsed ? 'max-lg:hidden lg:flex-col lg:pl-0 lg:gap-1' : 'max-lg:hidden max-2xl:flex-col'
         )}
       >
         <span className='font-bold'>KanaDojo</span>
-        <span className={clsx('font-normal text-[var(--secondary-color)]')}>
+        <span className={clsx('font-normal text-[var(--secondary-color)]', collapsed && 'lg:hidden')}>
           かな道場️
         </span>
-      </h1>
+      </h1> */}
       <Link
         href='/'
         className={clsx(
@@ -72,7 +80,7 @@ const Sidebar = () => {
         onClick={playClick}
       >
         <House className='' />
-        <span className='max-lg:hidden'>Home</span>
+        <span className={clsx('max-lg:hidden', collapsed && 'lg:hidden')}>Home</span>
       </Link>
       <Link
         href='/kana'
@@ -84,7 +92,8 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        あ<span className='max-lg:hidden'>Kana</span>
+        <span className='text-2xl'>あ</span>
+        <span className={clsx('max-lg:hidden', collapsed && 'lg:hidden')}>Kana</span>
       </Link>
 
       <Link
@@ -97,7 +106,8 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        言<span className='max-lg:hidden'> Vocabulary</span>
+        <span className='text-2xl'>言</span>
+        <span className={clsx('max-lg:hidden', collapsed && 'lg:hidden')}> Vocabulary</span>
       </Link>
       <Link
         href='/kanji'
@@ -109,7 +119,8 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        間<span className='max-lg:hidden'> Kanji</span>
+        <span className='text-2xl'>間</span>
+        <span className={clsx('max-lg:hidden', collapsed && 'lg:hidden')}> Kanji</span>
       </Link>
       <Link
         href='/preferences'
@@ -122,7 +133,7 @@ const Sidebar = () => {
         onClick={playClick}
       >
         <Settings className='' />
-        <span className='max-lg:hidden'>Preferences</span>
+        <span className={clsx('max-lg:hidden', collapsed && 'lg:hidden')}>Preferences</span>
       </Link>
     </div>
   );
