@@ -48,6 +48,19 @@ const KanaCards = () => {
           sliceRange: [52, 60]
         }
       ]
+    },
+    {
+      name: 'Challenge チャレンジ',
+      subsets: [
+        {
+          name: 'CSimilar Hiragana',
+          sliceRange: [60, 66]
+        },
+        {
+          name: 'CConfusing Katakana',
+          sliceRange: [66, 69]
+        }
+      ]
     }
   ];
 
@@ -56,7 +69,9 @@ const KanaCards = () => {
     'hyoon',
     'kdakuon',
     'kyoon',
-    'kforeign sounds'
+    'kforeign sounds',
+    'csimilar hiragana',
+    'cconfusing katakana'
   ]);
 
   return (

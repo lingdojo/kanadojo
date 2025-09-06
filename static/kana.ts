@@ -298,5 +298,50 @@ export const kana = [
     romanji: ['tsa', 'tsi', 'tse', 'tso'],
     kana: ['ツァ', 'ツィ', 'ツェ', 'ツォ'],
     groupName: 'k.f.ts'
+  },
+  {
+    kana: ['さ', 'ち'],
+    romanji: ['sa', 'chi'],
+    groupName: 'challenge.similar.sachi'
+  },
+  {
+    kana: ['き', 'さ'],
+    romanji: ['ki', 'sa'],
+    groupName: 'challenge.similar.kisa'
+  },
+  {
+    kana: ['ね', 'わ'],
+    romanji: ['ne', 'wa'],
+    groupName: 'challenge.similar.newa'
+  },
+  {
+    kana: ['る', 'ろ'],
+    romanji: ['ru', 'ro'],
+    groupName: 'challenge.similar.ruro'
+  },
+  {
+    kana: ['ぬ', 'め'],
+    romanji: ['nu', 'me'],
+    groupName: 'challenge.similar.nume'
+  },
+  {
+    kana: ['は', 'ほ'],
+    romanji: ['ha', 'ho'],
+    groupName: 'challenge.similar.haho'
+  },
+  {
+    kana: ['ソ', 'ン', 'シ', 'ツ'],
+    romanji: ['so', 'n', 'shi', 'tsu'],
+    groupName: 'challenge.katakana.confusing'
+  },
+  {
+    kana: ['ク', 'ワ'],
+    romanji: ['ku', 'wa'],
+    groupName: 'challenge.katakana.kuwa'
+  },
+  {
+    kana: ['ウ', 'ラ'],
+    romanji: ['u', 'ra'],
+    groupName: 'challenge.katakana.ura'
   }
 ];
