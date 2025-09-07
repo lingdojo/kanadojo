@@ -174,7 +174,7 @@ const Pick = ({
         lang="ja"
       >
         <span>{correctWord}</span>
-        {showFurigana && <span class="text-base text-gray-500">{correctReading}</span>}
+        {showFurigana && <span class="text-base text-[var(--secondary-color)]">{correctReading}</span>}
       </p>
       <div
         className={clsx(

@@ -175,7 +175,7 @@ const Pick = ({
         lang="ja"
       >
         <span>{correctKanjiChar}</span>
-        {showFurigana && <span className="text-base text-gray-500">{correctKunyomiReadings?.join(', ')}</span>}
+        {showFurigana && <span className="text-base text-[var(--secondary-color)]">{correctKunyomiReadings?.join(', ')}</span>}
       </p>
       <div
         className={clsx(
