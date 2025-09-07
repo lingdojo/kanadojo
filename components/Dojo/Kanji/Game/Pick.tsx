@@ -1,6 +1,6 @@
 'use client';
 import clsx from 'clsx';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { CircleCheck } from 'lucide-react';
 import { CircleX } from 'lucide-react';
 import { Random } from 'random-js';
@@ -34,6 +34,7 @@ const Pick = ({
     addCharacterToHistory,
     addCorrectAnswerTime,
     incrementCharacterScore,
+    characterHistory,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -42,6 +43,17 @@ const Pick = ({
   const [correctKanjiChar, setCorrectKanjiChar] = useState(
     selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)].kanjiChar
   );
+
+  // avoid rerunning random.bool unless correctKanjiChar changes
+  const showFurigana = useMemo(() => {
+      const currentKanjiInHistory = characterHistory.indexOf(correctKanjiChar) > -1;
+      // show furigana if current kanji is not in history, or one in six times if it is
+      return !currentKanjiInHistory || random.bool(1, 6);
+  }, [correctKanjiChar])
+
+  const correctKunyomiReadings = selectedKanjiObjs.find(
+      obj => obj.kanjiChar === correctKanjiChar
+  )?.kunyomi;
 
   const correctMeaning = selectedKanjiObjs.find(
     obj => obj.kanjiChar === correctKanjiChar
@@ -159,10 +171,11 @@ const Pick = ({
       />
 
       <p
-        className="text-9xl"
+        className="flex flex-col gap-4 text-9xl text-center"
         lang="ja"
       >
-        {correctKanjiChar}
+        <span>{correctKanjiChar}</span>
+        {showFurigana && <span className="text-base text-gray-500">{correctKunyomiReadings?.join(', ')}</span>}
       </p>
       <div
         className={clsx(

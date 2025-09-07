@@ -1,6 +1,6 @@
 'use client';
 import clsx from 'clsx';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { CircleCheck } from 'lucide-react';
 import { CircleX } from 'lucide-react';
 import { Random } from 'random-js';
@@ -34,6 +34,7 @@ const Pick = ({
     addCharacterToHistory,
     addCorrectAnswerTime,
     incrementCharacterScore,
+    characterHistory,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -42,6 +43,19 @@ const Pick = ({
   const [correctWord, setCorrectWord] = useState(
     selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
   );
+
+  // avoid rerunning random.bool unless correctWord changes
+  const showFurigana = useMemo(() => {
+    const currentWordInHistory = characterHistory.indexOf(correctWord) > -1;
+    // show furigana if current word is not in history, or one in six times if it is
+    return !currentWordInHistory || random.bool(1, 6);
+  }, [correctWord])
+
+
+  // jp reading is the second word usually, so pick the last word when available
+  const correctReading = selectedWordObjs.find(
+    wordObj => wordObj.word == correctWord
+  )?.reading.split(' ').at(-1);
 
   const correctMeaning = selectedWordObjs.find(
     wordObj => wordObj.word === correctWord
@@ -156,10 +170,11 @@ const Pick = ({
         gameMode="pick"
       />
       <p
-        className="text-6xl md:text-9xl text-center"
+        className="flex flex-col gap-4 text-6xl md:text-9xl text-center"
         lang="ja"
       >
-        {correctWord}
+        <span>{correctWord}</span>
+        {showFurigana && <span class="text-base text-gray-500">{correctReading}</span>}
       </p>
       <div
         className={clsx(
