@@ -9,9 +9,9 @@ const Banner = () => {
     pathname === '/kana'
       ? 'Kana あ'
       : pathname === '/kanji'
-      ? 'Kanji 出'
+      ? 'Kanji 字'
       : pathname === '/vocabulary'
-      ? 'Vocabulary 言'
+      ? 'Vocabulary 語'
       : pathname === '/preferences'
       ? 'Preferences 設'
       : '';

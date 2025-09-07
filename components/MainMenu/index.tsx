@@ -41,12 +41,12 @@ const MainMenu = () => {
     },
     {
       name_en: 'Vocabulary',
-      name_ja: '言',
+      name_ja: '語',
       href: '/vocabulary'
     },
     {
       name_en: 'Kanji',
-      name_ja: '出',
+      name_ja: '字',
       // name_ja: '間',
       href: '/kanji'
     }
