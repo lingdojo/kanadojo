@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface IWordObj {
   word: string;
@@ -23,52 +24,60 @@ interface IFormState {
   clearVocabSets: () => void;
 }
 
-const useVocabStore = create<IFormState>(set => ({
-  selectedGameModeVocab: 'Pick',
-  selectedWordObjs: [],
-  setSelectedGameModeVocab: gameMode =>
-    set({ selectedGameModeVocab: gameMode }),
-  addWordObj: wordObj =>
-    set(state => ({
-      selectedWordObjs: state.selectedWordObjs
-        .map(wordObj => wordObj.word)
-        .includes(wordObj.word)
-        ? state.selectedWordObjs.filter(
-            currentWordObj => currentWordObj.word !== wordObj.word
+const useVocabStore = create<IFormState>()(
+  persist(
+    (set) => ({
+      selectedGameModeVocab: 'Pick',
+      selectedWordObjs: [],
+      setSelectedGameModeVocab: gameMode =>
+        set({ selectedGameModeVocab: gameMode }),
+      addWordObj: wordObj =>
+        set(state => ({
+          selectedWordObjs: state.selectedWordObjs
+            .map(wordObj => wordObj.word)
+            .includes(wordObj.word)
+            ? state.selectedWordObjs.filter(
+                currentWordObj => currentWordObj.word !== wordObj.word
+              )
+            : [...state.selectedWordObjs, wordObj]
+        })),
+      addWordObjs: wordObjs =>
+        set(state => ({
+          selectedWordObjs: wordObjs.every(currentWordObj =>
+            state.selectedWordObjs
+              .map(currentWordObj => currentWordObj.word)
+              .includes(currentWordObj.word)
           )
-        : [...state.selectedWordObjs, wordObj]
-    })),
-  addWordObjs: wordObjs =>
-    set(state => ({
-      selectedWordObjs: wordObjs.every(currentWordObj =>
-        state.selectedWordObjs
-          .map(currentWordObj => currentWordObj.word)
-          .includes(currentWordObj.word)
-      )
-        ? state.selectedWordObjs.filter(
-            currentWordObj =>
-              !wordObjs
-                .map(currentWordObj => currentWordObj.word)
-                .includes(currentWordObj.word)
-          )
-        : [...new Set([...state.selectedWordObjs, ...wordObjs])]
-    })),
-  clearWordObjs: () => {
-    set(() => ({
-      selectedWordObjs: []
-    }));
-  },
+            ? state.selectedWordObjs.filter(
+                currentWordObj =>
+                  !wordObjs
+                    .map(currentWordObj => currentWordObj.word)
+                    .includes(currentWordObj.word)
+              )
+            : [...new Set([...state.selectedWordObjs, ...wordObjs])]
+        })),
+      clearWordObjs: () => {
+        set(() => ({
+          selectedWordObjs: []
+        }));
+      },
 
-  selectedVocabCollection: 'n5',
-  setSelectedVocabCollection: collection =>
-    set({ selectedVocabCollection: collection }),
-  selectedVocabSets: [],
-  setSelectedVocabSets: sets => set({ selectedVocabSets: sets }),
-  clearVocabSets: () => {
-    set(() => ({
-      selectedVocabSets: []
-    }));
-  }
-}));
+      selectedVocabCollection: 'n5',
+      setSelectedVocabCollection: collection =>
+        set({ selectedVocabCollection: collection }),
+      selectedVocabSets: [],
+      setSelectedVocabSets: sets => set({ selectedVocabSets: sets }),
+      clearVocabSets: () => {
+        set(() => ({
+          selectedVocabSets: []
+        }));
+      }
+    }),
+    {
+      name: 'vocab-store',
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);
 
 export default useVocabStore;
