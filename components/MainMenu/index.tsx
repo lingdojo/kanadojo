@@ -20,6 +20,7 @@ import { useClick } from '@/lib/hooks/useAudio';
 import useThemeStore from '@/store/useThemeStore';
 import { useMediaQuery } from 'react-responsive';
 import { buttonBorderStyles } from '@/static/styles';
+import { Button } from '@/components/ui/button';
 
 const Decorations = lazy(() => import('./Decorations'));
 
@@ -73,11 +74,13 @@ const MainMenu = () => {
       {isLG && (
         <Suspense fallback={<></>}>
           {process.env.NODE_ENV === 'production' && <Decorations expandDecorations={expandDecorations}/>}
-          <button
+          <Button
+            variant='secondary'
+            size='icon'
             className={clsx(
-              'fixed top-4 right-8 z-50',
+              'fixed top-4 right-8 z-50 opacity-90',
               buttonBorderStyles,
-              'p-2.5 opacity-90'
+              'transition-transform duration-250 active:scale-95'
             )}
             onClick={() => {
               playClick();
@@ -85,7 +88,7 @@ const MainMenu = () => {
             }}
           >
             <Sparkle />
-          </button>
+          </Button>
         </Suspense>
       )}
       <div
