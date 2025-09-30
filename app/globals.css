@@ -77,6 +77,19 @@ input[type="checkbox"]:checked::after {
 
   --main-color: hsl(0, 0%, 0%);
   --secondary-color: hsl(0, 0%, 35%);
+
+  /* New aliases */
+  --surface: hsla(210, 17%, 100%, 1);
+  --on-surface: hsl(0, 0%, 0%);
+  --surface-variant: hsla(210, 17%, 91%, 1);
+  --on-surface-variant: hsl(0, 0%, 0%);
+  --outline: hsla(210, 17%, 76%, 1);
+  --primary: hsl(0, 0%, 0%);
+  --on-primary: hsla(210, 17%, 100%, 1);
+  --secondary: hsl(0, 0%, 35%);
+  --on-secondary: hsla(210, 17%, 100%, 1);
+  --background: hsla(210, 17%, 100%, 1);
+  --on-background: hsl(0, 0%, 0%);
 }
 
 /* @media (prefers-color-scheme: light) {
@@ -109,6 +122,18 @@ input[type="checkbox"]:checked::after {
 
   --main-color: hsl(0, 0%, 0%);
   --secondary-color: hsl(0, 0%, 35%);
+
+  --surface: hsla(210, 24%, 99%, 1);
+  --on-surface: hsl(222, 47%, 11%);
+  --surface-variant: hsla(210, 20%, 92%, 1);
+  --on-surface-variant: hsl(222, 32%, 20%);
+  --outline: hsla(210, 16%, 70%, 1);
+  --primary: hsl(212, 88%, 56%);
+  --on-primary: hsla(0, 0%, 100%, 1);
+  --secondary: hsl(33, 100%, 58%);
+  --on-secondary: hsla(0, 0%, 100%, 1);
+  --background: hsla(210, 28%, 97%, 1);
+  --on-background: hsl(222, 45%, 15%);
 }
 
 /* Dark Theme */
@@ -119,6 +144,18 @@ input[type="checkbox"]:checked::after {
 
   --main-color: hsl(0, 0%, 100%);
   --secondary-color: hsl(0, 0%, 75%);
+
+  --surface: hsla(0, 0%, 13%, 1);
+  --on-surface: hsl(204, 40%, 92%);
+  --surface-variant: hsla(204, 32%, 18%, 1);
+  --on-surface-variant: hsl(204, 40%, 80%);
+  --outline: hsla(204, 28%, 32%, 1);
+  --primary: hsl(212, 88%, 56%);
+  --on-primary: hsla(0, 0%, 100%, 1);
+  --secondary: hsl(33, 100%, 58%);
+  --on-secondary: hsla(0, 0%, 100%, 1);
+  --background: hsla(210, 25%, 9%, 1);
+  --on-background: hsl(204, 38%, 90%);
 }
 
 /* LIGHT THEMES */
