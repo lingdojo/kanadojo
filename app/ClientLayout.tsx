@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import useThemeStore from '@/store/useThemeStore';
 import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
+import WelcomeModal from '@/components/Modals/WelcomeModal';
 
 export default function ClientLayout({
   children
@@ -52,6 +53,7 @@ export default function ClientLayout({
     >
       {children}
       <ScrollRestoration />
+      <WelcomeModal />
     </div>
   );
 }
