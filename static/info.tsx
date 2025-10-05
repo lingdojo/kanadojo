@@ -4,7 +4,7 @@ import Link from 'next/link';
 const info = {
   '/': {
     header: (
-      <p className='flex gap-2 items-center'>
+      <p className='flex gap-2 items-center flex-1 overflow-hidden '>
         <span>Welcome to KanaDojo!</span>
         <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
           v0.1.2 (alpha)

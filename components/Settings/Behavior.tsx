@@ -37,7 +37,7 @@ const Behavior = () => {
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
-            'text-[var(--secondary-color)]'
+            'text-[var(--secondary-color)]',"flex-1 overflow-hidden"
           )}
           onClick={() => {
             playClick();
@@ -54,7 +54,7 @@ const Behavior = () => {
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
-            'text-[var(--secondary-color)]'
+            'text-[var(--secondary-color)]',"flex-1 overflow-hidden"
           )}
           onClick={() => {
             playClick();

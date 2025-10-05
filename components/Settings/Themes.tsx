@@ -29,7 +29,7 @@ const Themes = () => {
       <div className='flex gap-2'>
         <button
           className={clsx(
-            'p-6 flex justify-center items-center gap-2 w-full md:w-1/2',
+            'p-6 flex justify-center items-center gap-2 w-full md:w-1/2 flex-1 overflow-hidden',
             buttonBorderStyles
           )}
           onMouseEnter={() => setIsHovered(randomTheme.id)}
@@ -96,7 +96,7 @@ const Themes = () => {
             )}
           >
             {themeSet.themes.map(currentTheme => (
-              <label
+              <label 
                 key={currentTheme.id}
                 style={{
                   color: currentTheme.mainColor,
@@ -112,7 +112,7 @@ const Themes = () => {
                 onMouseLeave={() => setIsHovered('')}
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
-                  'py-4 flex justify-center items-center',
+                  'py-4 flex justify-center items-center','flex-1 overflow-hidden',
                   buttonBorderStyles
                 )}
                 onClick={() => {
@@ -150,7 +150,7 @@ const Themes = () => {
                   {currentTheme.id === 'long'
                     ? 'long loooooooong theme'
                     : currentTheme.id.split('-').map((themeNamePart, i) => (
-                        <span
+                        <span 
                           key={themeNamePart + Math.random() * 9999}
                           style={{
                             color:

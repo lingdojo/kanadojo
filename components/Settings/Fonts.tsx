@@ -26,7 +26,7 @@ const Fonts = () => {
         className={clsx(
           'p-6 flex justify-center items-center gap-2 w-1/4',
           buttonBorderStyles,
-          'text-xl w-full'
+          'text-xl w-full','flex-1 overflow-hidden'
         )}
         onClick={() => {
           playClick();
@@ -51,7 +51,7 @@ const Fonts = () => {
             className={clsx(
               'flex justify-center items-center',
               buttonBorderStyles,
-              'py-4 px-4'
+              'py-4 px-4','flex-1 overflow-hidden'
             )}
             onClick={() => playClick()}
           >
