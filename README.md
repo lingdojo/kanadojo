@@ -7,7 +7,7 @@
 **A beautiful, minimalist, and highly customizable platform for mastering Japanese**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE.md)
+[![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
@@ -25,18 +25,22 @@ Whether you're just starting with the basic kana syllabaries or preparing for th
 ### ✨ Key Features
 
 #### 🎯 **Three Training Dojos**
+
 - **Kana Dojo** - Master Hiragana and Katakana syllabaries with base, dakuon, yoon, and foreign sound groups
 - **Kanji Dojo** - Learn essential kanji characters organized by JLPT levels (N5, N4, N3, N2)
 - **Vocabulary Dojo** - Build your Japanese vocabulary with curated word collections by proficiency level
 
 #### 🎮 **Four Dynamic Game Modes**
+
 Each dojo supports four engaging training modes to reinforce learning:
+
 1. **Pick** - Multiple choice: Select the correct romanization/translation for the shown character
 2. **Reverse-Pick** - Reverse multiple choice: Select the correct character for the given romanization/translation
 3. **Input** - Text input: Type the correct romanization/translation
 4. **Reverse-Input** - Reverse text input: Type the correct character
 
 #### 🎨 **Extensive Customization**
+
 - **100+ Themes** - Choose from a vast collection of beautiful light and dark themes, or use the random theme feature
 - **28 Japanese Fonts** - Select from a variety of authentic Japanese typefaces to suit your aesthetic preferences
 - **Sound Effects** - Enjoy satisfying UI feedback sounds that can be toggled on/off
@@ -44,11 +48,13 @@ Each dojo supports four engaging training modes to reinforce learning:
 - **Hotkeys** - Keyboard shortcuts for efficient training (can be disabled)
 
 #### 📊 **Progress Tracking**
+
 - Real-time feedback with correct/incorrect counters
 - Streak tracking to maintain motivation
 - Statistics to monitor your learning progress
 
 #### 🌐 **Modern Web Experience**
+
 - Fully responsive design that works on desktop, tablet, and mobile
 - No installation required - train anywhere with an internet connection
 - Clean, minimalist interface that keeps you focused on learning
@@ -61,15 +67,19 @@ Each dojo supports four engaging training modes to reinforce learning:
 <div align="center">
 
 ### Home Page
+
 ![Home](https://github.com/user-attachments/assets/8a912762-f5f3-4520-a75c-d145cac0da62)
 
 ### Kana Selection
+
 ![Kana Selection](https://github.com/user-attachments/assets/294e2913-6909-4a84-8311-f934120247f2)
 
 ### Training Mode
+
 ![Training](https://github.com/user-attachments/assets/e0c5a7e0-098d-4bd1-9450-80b408d88bd1)
 
 ### Customization & Themes
+
 ![Preferences](https://github.com/user-attachments/assets/387a0014-0e13-4fb4-b5d2-b6e623b23861)
 
 </div>
@@ -81,24 +91,28 @@ Each dojo supports four engaging training modes to reinforce learning:
 KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility**. The design philosophy centers around:
 
 ### Minimalism First
+
 - Clean interfaces with minimal distractions
 - Focus on the learning content
 - Intuitive navigation and clear information hierarchy
 - Purposeful use of whitespace
 
 ### Aesthetic Customization
+
 - Extensive theme library (100+ options) ranging from soft pastels to vibrant neons
 - Support for both light and dark modes
 - Carefully curated color palettes that are easy on the eyes during extended study sessions
 - Seamless theme transitions
 
 ### User Experience
+
 - Smooth animations and micro-interactions for delightful feedback
 - Responsive design that adapts beautifully to any screen size
 - Audio feedback for interactions (optional)
 - Consistent visual language across all sections
 
 ### Japanese Typography
+
 - 28 authentic Japanese fonts covering various styles
 - Proper rendering of complex kanji characters
 - Clear distinction between similar-looking characters
@@ -111,11 +125,13 @@ KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility
 KanaDojo is built with modern web technologies for optimal performance and developer experience:
 
 ### Core Framework
+
 - **[Next.js 15](https://nextjs.org/)** - React framework with App Router for server-side rendering and optimal performance
 - **[React 19](https://react.dev/)** - Latest React with concurrent features
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
 
 ### Styling & UI
+
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[shadcn/ui](https://ui.shadcn.com/)** - High-quality, accessible component library
 - **[Framer Motion](https://www.framer.com/motion/)** - Smooth animations and transitions
@@ -123,10 +139,12 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[FontAwesome](https://fontawesome.com/)** - Additional icon support
 
 ### State Management
+
 - **[Zustand](https://zustand-demo.pmnd.rs/)** - Lightweight state management with minimal boilerplate
 - **Zustand Persist** - Local storage persistence for user preferences
 
 ### Utilities & Features
+
 - **[use-sound](https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/)** - Audio feedback system
 - **[canvas-confetti](https://www.npmjs.com/package/canvas-confetti)** - Celebration effects
 - **[react-timer-hook](https://www.npmjs.com/package/react-timer-hook)** - Timer functionality
@@ -135,10 +153,12 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[clsx](https://www.npmjs.com/package/clsx) + [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)** - Conditional styling utilities
 
 ### Development Tools
+
 - **[ESLint](https://eslint.org/)** - Code linting
 - **[next-sitemap](https://www.npmjs.com/package/next-sitemap)** - Automatic sitemap generation
 
 ### Analytics & Performance
+
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analytics
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performance monitoring
 
@@ -147,23 +167,27 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - **Node.js** 18.x or higher
 - **npm** 10.x or higher (comes with Node.js)
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/lingdojo/kanadojo.git
    cd kanadojo
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Run the development server**
+
    ```bash
    npm run dev
    ```
@@ -254,6 +278,7 @@ kanadojo/
 ### Key Concepts
 
 #### State Management Flow
+
 1. User selects content in menu components
 2. Selections stored in Zustand stores (`useKanaKanjiStore`, `useVocabStore`)
 3. Training components read from stores to generate questions
@@ -261,18 +286,22 @@ kanadojo/
 5. User preferences saved in `useThemeStore` with localStorage persistence
 
 #### Component Architecture
+
 - **Dojo Components**: Handle character/word selection for each content type
 - **Training Components**: Render game modes and handle user interactions
 - **Reusable Components**: Shared UI elements (buttons, cards, modals, etc.)
 - **Menu Components**: Navigation, info sections, and dojo selection
 
 #### Data Organization
+
 - **Kana**: Organized by type (hiragana/katakana) and groups (base, dakuon, yoon, foreign)
 - **Kanji**: Organized by JLPT level (N5-N2), with readings and meanings
 - **Vocabulary**: Organized by JLPT level and word type (nouns, verbs, etc.)
 
 #### Game Mode Implementation
+
 Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
+
 1. Reads selected content from the appropriate store
 2. Generates random questions from the selection
 3. Provides immediate feedback
@@ -285,6 +314,7 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 Contributions are welcome! KanaDojo is an open-source project built by the community, for the community.
 
 ### How to Contribute
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
@@ -292,6 +322,7 @@ Contributions are welcome! KanaDojo is an open-source project built by the commu
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow the existing code style and conventions
 - Use TypeScript for type safety
 - Test your changes thoroughly
@@ -302,7 +333,7 @@ Contributions are welcome! KanaDojo is an open-source project built by the commu
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ---
 

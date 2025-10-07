@@ -5,6 +5,7 @@ import useThemeStore from '@/store/useThemeStore';
 import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/components/Modals/WelcomeModal';
+import { applyTheme } from '@/static/themes';
 
 export default function ClientLayout({
   children
@@ -18,7 +19,7 @@ export default function ClientLayout({
     .className;
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    applyTheme(theme); // This now sets both CSS variables AND data-theme attribute
 
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
