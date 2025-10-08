@@ -68,19 +68,19 @@ Each dojo supports four engaging training modes to reinforce learning:
 
 ### Home Page
 
-![Home](https://github.com/user-attachments/assets/8a912762-f5f3-4520-a75c-d145cac0da62)
+![Home](/kanadojo/public/wallpapers/Home.png)
 
 ### Kana Selection
 
-![Kana Selection](https://github.com/user-attachments/assets/294e2913-6909-4a84-8311-f934120247f2)
+![Kana Selection](/kanadojo/public/wallpapers/Pick.png)
 
 ### Training Mode
 
-![Training](https://github.com/user-attachments/assets/e0c5a7e0-098d-4bd1-9450-80b408d88bd1)
+![Training](/kanadojo/public/wallpapers/Training.png)
 
 ### Customization & Themes
 
-![Preferences](https://github.com/user-attachments/assets/387a0014-0e13-4fb4-b5d2-b6e623b23861)
+![Preferences](/kanadojo/public/wallpapers/Customization.png)
 
 </div>
 
