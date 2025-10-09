@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { kana } from '@/static/kana';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanaStore from '@/store/useKanaStore';
 import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
@@ -31,7 +31,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore,
+    incrementCharacterScore
   } = useStats();
 
   const { playClick } = useClick();
@@ -43,7 +43,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
 
   const [inputValue, setInputValue] = useState('');
 
-  const kanaGroupIndices = useKanaKanjiStore(state => state.kanaGroupIndices);
+  const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
 
   const selectedKana = kanaGroupIndices.map(i => kana[i].kana).flat();
   const selectedRomaji = kanaGroupIndices.map(i => kana[i].romanji).flat();
@@ -119,7 +119,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     setFeedback(
       <>
         <span>{`${correctChar} = ${targetChar} `}</span>
-        <CircleCheck className="inline text-[var(--main-color)]" />
+        <CircleCheck className='inline text-[var(--main-color)]' />
       </>
     );
   };
@@ -129,7 +129,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     setFeedback(
       <>
         <span>{`${correctChar} ≠ ${inputValue} `}</span>
-        <CircleX className="inline text-[var(--main-color)]" />
+        <CircleX className='inline text-[var(--main-color)]' />
       </>
     );
     playErrorTwice();
@@ -169,14 +169,11 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
         isHidden ? 'hidden' : ''
       )}
     >
-      <GameIntel
-        gameMode={gameMode}
-        feedback={feedback}
-      />
-      <p className="text-8xl sm:text-9xl font-medium">{correctChar}</p>
+      <GameIntel gameMode={gameMode} feedback={feedback} />
+      <p className='text-8xl sm:text-9xl font-medium'>{correctChar}</p>
       <input
         ref={inputRef}
-        type="text"
+        type='text'
         value={inputValue}
         className={clsx(
           'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',

@@ -10,52 +10,25 @@ export interface IKanjiObj {
   meanings: string[];
 }
 
-interface IFormState {
-  selectedGameModeKana: string;
-  kanaGroupIndices: number[];
-  setSelectedGameModeKana: (mode: string) => void;
-  addKanaGroupIndex: (kanaGroupIndex: number) => void;
-  addKanaGroupIndices: (kanaGroupIndices: number[]) => void;
-
+interface IKanjiState {
   selectedGameModeKanji: string;
   selectedKanjiObjs: IKanjiObj[];
+  selectedKanjiCollection: string;
+  selectedKanjiSets: string[];
   setSelectedGameModeKanji: (mode: string) => void;
   addKanjiObj: (kanji: IKanjiObj) => void;
   addKanjiObjs: (kanjis: IKanjiObj[]) => void;
   clearKanjiObjs: () => void;
-
-  selectedKanjiCollection: string;
   setSelectedKanjiCollection: (collection: string) => void;
-
-  selectedKanjiSets: string[];
   setSelectedKanjiSets: (sets: string[]) => void;
   clearKanjiSets: () => void;
 }
 
-const useKanaKanjiStore = create<IFormState>(set => ({
-  // KANA
-  selectedGameModeKana: 'Pick',
-  kanaGroupIndices: [],
-
-  setSelectedGameModeKana: gameMode => set({ selectedGameModeKana: gameMode }),
-  addKanaGroupIndex: kanaGroupIndex =>
-    set(state => ({
-      kanaGroupIndices: state.kanaGroupIndices.includes(kanaGroupIndex)
-        ? state.kanaGroupIndices.filter(index => index !== kanaGroupIndex) // Remove if present
-        : [...state.kanaGroupIndices, kanaGroupIndex] // Add if not present
-    })),
-  addKanaGroupIndices: kanaGroupIndices =>
-    set(state => ({
-      kanaGroupIndices: kanaGroupIndices.every(i =>
-        state.kanaGroupIndices.includes(i)
-      )
-        ? state.kanaGroupIndices.filter(i => !kanaGroupIndices.includes(i)) // Remove if present
-        : [...new Set([...state.kanaGroupIndices, ...kanaGroupIndices])]
-    })),
-
-  // KANJI
+const useKanjiStore = create<IKanjiState>(set => ({
   selectedGameModeKanji: 'Pick',
   selectedKanjiObjs: [],
+  selectedKanjiCollection: 'n5',
+  selectedKanjiSets: [],
   setSelectedGameModeKanji: gameMode =>
     set({ selectedGameModeKanji: gameMode }),
   addKanjiObj: kanjiObj =>
@@ -88,12 +61,8 @@ const useKanaKanjiStore = create<IFormState>(set => ({
       selectedKanjiObjs: []
     }));
   },
-
-  selectedKanjiCollection: 'n5',
   setSelectedKanjiCollection: collection =>
     set({ selectedKanjiCollection: collection }),
-
-  selectedKanjiSets: [],
   setSelectedKanjiSets: sets => set({ selectedKanjiSets: sets }),
   clearKanjiSets: () => {
     set(() => ({
@@ -102,4 +71,4 @@ const useKanaKanjiStore = create<IFormState>(set => ({
   }
 }));
 
-export default useKanaKanjiStore;
+export default useKanjiStore;

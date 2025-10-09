@@ -1,6 +1,7 @@
 'use client';
 import { Fragment } from 'react';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanaStore from '@/store/useKanaStore';
+import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import { MousePointerClick, Keyboard, CircleCheck, Circle } from 'lucide-react';
 import clsx from 'clsx';
@@ -13,10 +14,17 @@ const GameModes = () => {
 
   const { playClick } = useClick();
 
-  const { selectedGameModeKana, selectedGameModeKanji } = useKanaKanjiStore(
+  const { selectedGameModeKana, setSelectedGameModeKana } = useKanaStore(
     useShallow(state => ({
       selectedGameModeKana: state.selectedGameModeKana,
-      selectedGameModeKanji: state.selectedGameModeKanji
+      setSelectedGameModeKana: state.setSelectedGameModeKana
+    }))
+  );
+
+  const { selectedGameModeKanji, setSelectedGameModeKanji } = useKanjiStore(
+    useShallow(state => ({
+      selectedGameModeKanji: state.selectedGameModeKanji,
+      setSelectedGameModeKanji: state.setSelectedGameModeKanji
     }))
   );
 
@@ -32,14 +40,6 @@ const GameModes = () => {
       : pathname === '/vocabulary'
       ? selectedGameModeVocab
       : '';
-
-  const { setSelectedGameModeKana, setSelectedGameModeKanji } =
-    useKanaKanjiStore(
-      useShallow(state => ({
-        setSelectedGameModeKana: state.setSelectedGameModeKana,
-        setSelectedGameModeKanji: state.setSelectedGameModeKanji
-      }))
-    );
 
   const setSelectedGameModeVocab = useVocabStore(
     useShallow(state => state.setSelectedGameModeVocab)

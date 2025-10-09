@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Return from '@/components/reusable/Game/ReturnFromGame';
 import Pick from './Pick';
 import Input from './Input';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
 import Stats from '@/components/reusable/Game/Stats';
 import { usePathname } from 'next/navigation';
@@ -15,8 +15,8 @@ const Game = () => {
 
   const resetStats = useStatsStore(state => state.resetStats);
 
-  const gameMode = useKanaKanjiStore(state => state.selectedGameModeKanji);
-  const selectedKanjiObjs = useKanaKanjiStore(state => state.selectedKanjiObjs);
+  const gameMode = useKanjiStore(state => state.selectedGameModeKanji);
+  const selectedKanjiObjs = useKanjiStore(state => state.selectedKanjiObjs);
 
   useEffect(() => {
     resetStats();
