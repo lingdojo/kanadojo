@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![KanaDojo Banner](https://github.com/user-attachments/assets/8a912762-f5f3-4520-a75c-d145cac0da62)
+![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
 
-**A beautiful, minimalist, and highly customizable platform for mastering Japanese**
+**An aesthetic, minimalist, and highly customizable platform for mastering Japanese**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
 [![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
@@ -76,11 +76,11 @@ Each dojo supports four engaging training modes to reinforce learning:
 
 ### Training Mode
 
-![Training](https://github.com/user-attachments/assets/e0c5a7e0-098d-4bd1-9450-80b408d88bd1)
+![Training](https://github.com/user-attachments/assets/053020ef-77c7-492b-b8db-c381d1ec7db8)
 
 ### Customization & Themes
 
-![Preferences](https://github.com/user-attachments/assets/387a0014-0e13-4fb4-b5d2-b6e623b23861)
+![Preferences](https://github.com/user-attachments/assets/f664a280-0344-4ff9-8639-83f9c1c4223b)
 
 </div>
 
