@@ -1,0 +1,361 @@
+# KanaDojo かな道場
+
+<div align="center">
+
+![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
+
+**Una plataforma estética, minimalista y altamente personalizable para dominar el japonés**
+
+[![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
+[![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+
+</div>
+
+---
+
+## 📖 Sobre KanaDojo
+
+KanaDojo es una plataforma de aprendizaje de japonés atractiva y basada en la web que hace que dominar Hiragana, Katakana, Kanji y  el vocabulario, sea divertido e intuitivo. Construido con un enfoque en la estética, la personalización y el aprendizaje efectivo, KanaDojo proporciona un entorno de entrenamiento inmersivo para los estudiantes de japonés de todos los niveles.
+
+Ya sea que estés comenzando con los silabarios kana básicos o preparándote para los exámenes JLPT con kanji y vocabulario avanzados, KanaDojo ofrece una experiencia de aprendizaje simplificada y sin distracciones que se adapta a tus preferencias y estilo de aprendizaje.
+
+### ✨ Características Clave
+
+#### 🎯 **Tres Dojos de Entrenamiento**
+
+- **Kana Dojo** - Domina los silabarios Hiragana y Katakana con grupos de sonidos base, dakuon, yoon y sonidos extranjeros
+- **Kanji Dojo** - Aprende caracteres kanji esenciales organizados por niveles JLPT (N5, N4, N3, N2)
+- **Vocabulary Dojo** - Amplía tu vocabulario japonés con colecciones de palabras curadas por nivel de competencia
+
+#### 🎮 **Cuatro Modos de Juego Dinámicos**
+
+Cada dojo admite cuatro modos de entrenamiento atractivos para reforzar el aprendizaje:
+
+1. **Pick** - Opción múltiple: Selecciona la romanización/traducción correcta para el carácter mostrado
+2. **Reverse-Pick** - Opción múltiple inversa: Selecciona el carácter correcto para la romanización/traducción dada
+3. **Input** - Entrada de texto: Escribe la romanización/traducción correcta
+4. **Reverse-Input** - Entrada de texto inversa: Escribe el carácter correcto
+
+#### 🎨 **Amplia Personalización**
+
+- **100+ Temas** - Elige entre una vasta colección de hermosos temas claros y oscuros, o utiliza la función de tema aleatorio
+- **28 Fuentes Japonesas** - Selecciona entre una variedad de tipografías japonesas auténticas para adaptarse a tus preferencias estéticas
+- **Efectos de Sonido** - Disfruta de sonidos de retroalimentación de UI satisfactorios que se pueden activar/desactivar
+- **Opciones de Visualización** - Alterna entre las visualizaciones de Romaji/Inglés y Kana/Kanji en los menús de selección
+- **Atajos de Teclado** - Atajos de teclado para un entrenamiento eficiente (se pueden desactivar)
+
+#### 📊 **Seguimiento del Progreso**
+
+- Retroalimentación en tiempo real con contadores de correctas/incorrectas
+- Seguimiento de rachas para mantener la motivación
+- Estadísticas para monitorear tu progreso de aprendizaje
+
+#### 🌐 **Experiencia Web Moderna**
+
+- Diseño completamente adaptable que funciona en escritorio, tableta y móvil
+- No se requiere instalación: entrena en cualquier lugar con una conexión a Internet
+- Interfaz limpia y minimalista que te mantiene enfocado en el aprendizaje
+- Animaciones y transiciones suaves impulsadas por Framer Motion
+
+---
+
+## 🖼️ Capturas de pantalla
+
+<div align="center">
+
+### Pagina Principal
+
+![Home](https://github.com/user-attachments/assets/8a912762-f5f3-4520-a75c-d145cac0da62)
+
+### Selección de Kana
+
+![Kana Selection](https://github.com/user-attachments/assets/294e2913-6909-4a84-8311-f934120247f2)
+
+### Modo de Entrenamiento
+
+![Training](https://github.com/user-attachments/assets/053020ef-77c7-492b-b8db-c381d1ec7db8)
+
+### Personalización y Temas
+
+![Preferences](https://github.com/user-attachments/assets/f664a280-0344-4ff9-8639-83f9c1c4223b)
+
+</div>
+
+---
+
+## 🎨 Filosofia de UI y Diseño
+
+KanaDojo embraces a **estetica minimalista** combinado con **flexibilidad máxima**. The design philosophy centers around:
+
+### Minimalismo primero
+
+- Interfaces limpias con distracciones mínimas
+- Enfoque en el contenido de aprendizaje
+- Navegación intuitiva y jerarquía de información clara
+- Uso intencionado del espacio en blanco
+
+### Customización Estética
+
+- Amplia biblioteca de temas (más de 100 opciones) que van desde suaves pasteles hasta vibrantes neones
+- Soporte para modos claros y oscuros
+- Paletas de colores cuidadosamente seleccionadas que son agradables a la vista durante las sesiones de estudio prolongadas
+- Transiciones de tema sin problemas
+
+### Experiencia del Usuario
+
+- Animaciones suaves e interacciones micro para una retroalimentación agradable
+- Diseño receptivo que se adapta maravillosamente a cualquier tamaño de pantalla
+- Retroalimentación de audio para interacciones (opcional)
+- Lenguaje visual consistente en todas las secciones
+
+### Tipografía Japonesa
+
+- 28 fuentes japonesas auténticas que cubren varios estilos
+- Renderizado adecuado de caracteres kanji complejos
+- Distincion clara entre caracteres similares
+- Previsualizacion de fuentes con muestras de textos reales en japones
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+KanaDojo esta contruido con tecnologias web modernas para un rendimiento optimo y una excelente experincia para los desarrolladores:
+
+### Framework Principal
+
+- **[Next.js 15](https://nextjs.org/)** - Framework de React con App Router para renderizado del lado del servidor y rendimiento optimo
+- **[React 19](https://react.dev/)** - Última versión de React con características concurrentes
+- **[TypeScript](https://www.typescriptlang.org/)** - Desarrollo seguro por tipos
+
+### Estilo y UI
+
+- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS de utilidad primero
+- **[shadcn/ui](https://ui.shadcn.com/)** - Biblioteca de componentes accesibles y de alta calidad
+- **[Framer Motion](https://www.framer.com/motion/)** - Animaciones y transiciones suaves
+- **[Lucide React](https://lucide.dev/)** - Biblioteca de iconos hermosa y consistente
+- **[FontAwesome](https://fontawesome.com/)** - Soporte adicional de iconos
+
+### Gestión del Estado
+
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - Gestión de estado ligera con un mínimo de boilerplate
+- **Zustand Persist** - Persistencia de almacenamiento local para preferencias de usuario
+
+### Utilidades y Características
+
+- **[use-sound](https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/)** - Sistema de retroalimentación de audio
+- **[canvas-confetti](https://www.npmjs.com/package/canvas-confetti)** - Efectos de celebración
+- **[react-timer-hook](https://www.npmjs.com/package/react-timer-hook)** - Funcionalidad de temporizador
+- **[react-markdown](https://github.com/remarkjs/react-markdown)** - Renderizado de Markdown para contenido educativo
+- **[random-js](https://www.npmjs.com/package/random-js)** - Generación de números aleatorios criptográficamente fuertes
+- **[clsx](https://www.npmjs.com/package/clsx) + [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)** - Utilidades de estilo condicional
+
+### Herramientas de Desarrollo
+
+- **[ESLint](https://eslint.org/)** - Análisis de código
+- **[next-sitemap](https://www.npmjs.com/package/next-sitemap)** - Generación de sitemap
+
+### Estadisticas y Rendimiento
+
+- **[@vercel/analytics](https://vercel.com/analytics)** - Estadísticas web
+- **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Monitoreo de rendimiento
+
+---
+
+## 🚀 Inicializando
+
+### Pre-requisitos
+
+- **Node.js** 18.x o superior
+- **npm** 10.x o superior (viene con Node.js)
+
+### Instalación
+
+1. **Clona el repositorio**
+
+   ```bash
+   git clone https://github.com/lingdojo/kanadojo.git
+   cd kanadojo
+   ```
+
+2. **Instala las dependencias**
+
+   ```bash
+   npm install
+   ```
+
+3. **Ejecuta el servidor**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Abre tu navegador**
+   Navega a [http://localhost:3000](http://localhost:3000)
+
+### Build para Producción
+
+```bash
+# Crear una build de producción optimizada
+npm run build
+
+# Iniciar el servidor de producción
+npm start
+```
+
+### Otros Comandos Útiles
+
+```bash
+# Iniciar ESLint
+npm run lint
+
+# Generar sitemap (se ejecuta automáticamente después de la build)
+npm run postbuild
+```
+
+---
+
+## 📁 Estructura de proyecto
+
+```
+kanadojo/
+├── app/                          # Páginas y rutas de Next.js
+│   ├── kana/                    # Páginas del dojo de Kana
+│   │   └── train/[gameMode]/   # Páginas de entrenamiento para cada modo de juego
+│   ├── kanji/                   # Páginas del dojo de Kanji
+│   │   └── train/[gameMode]/
+│   ├── vocabulary/              # Páginas del dojo de Vocabulario
+│   │   └── train/[gameMode]/
+│   ├── preferences/             # Configuración y personalización de páginas
+│   ├── academy/                 # Contenido educativo
+│   ├── layout.tsx               # Diseño raíz con proveedores
+│   └── page.tsx                 # Página principal
+│
+├── components/                   # Componentes de React
+│   ├── Dojo/                    # Componentes específicos de entrenamiento
+│   │   ├── Kana/               # Selección y tarjetas de Kana
+│   │   ├── Kanji/              # Selección y tarjetas de Kanji
+│   │   └── Vocab/              # Selección y tarjetas de Vocabulario
+│   ├── reusable/                # Componentes compartidos
+│   │   ├── Menu/               # Componentes de navegación y menú
+│   │   └── ...                 # Otros componentes reutilizables
+│   ├── Settings/                # Componentes de preferencias
+│   └── ui/                      # Componentes de shadcn/ui
+│
+├── lib/                         # Utilidades y funciones auxiliares
+│   ├── hooks/                   # Hooks personalizados de React
+│   │   ├── useAudio.ts         # Hooks para retroalimentación de audio
+│   │   └── ...
+│   ├── interfaces.ts            # Interfaces de TypeScript
+│   └── utils.ts                 # Funciones auxiliares
+│
+├── store/                       # Gestion del estado con Zustand
+│   ├── useKanaKanjiStore.ts    # Estado de selección de Kana/Kanji
+│   ├── useVocabStore.ts        # Estado de selección de Vocabulario
+│   ├── useStatsStore.ts        # Estadísticas y progreso
+│   └── useThemeStore.ts        # Tema y preferencias
+│
+├── static/                      # Datos y configuración estática
+│   ├── kana.ts                 # Datos de caracteres Kana
+│   ├── kanji/                  # Datos de Kanji por nivel JLPT
+│   ├── vocab/                  # Datos de vocabulario
+│   ├── themes.ts               # Definiciones de temas
+│   ├── fonts.ts                # Configuración de fuentes
+│   └── info.tsx                # Contenido informativo
+│
+├── public/                      # Recursos estáticos
+│   ├── sounds/                 # Archivos de audio
+│   └── wallpapers/             # Imágenes de fondo
+│
+├── CLAUDE.md                    # Documentación para desarrolladores
+├── next.config.ts              # Configuración de Next.js
+├── tailwind.config.js          # Configuración de Tailwind CSS
+└── tsconfig.json               # Configuración de TypeScript
+```
+
+### Conceptos Clave
+
+#### Flujo de Gestión del Estado
+
+1. El usuario selecciona contenido en los componentes del menú.
+2. Las selecciones se almacenan en los almacenes de Zustand (`useKanaKanjiStore`, `useVocabStore`)
+3. Los componentes de entrenamiento leen desde los  almacenes para generar preguntas.
+4. Las estadísticas se rastrean y persisten en `useStatsStore`.
+5. Las preferencias del usuario se guardan en `useThemeStore` con persistencia en localStorage.
+
+#### Arquitectura de Componentes
+
+- **Componentes de Dojo**: Manejan la selección de caracteres/palabras para cada tipo de contenido
+- **Componentes de Entrenamiento**: Renderizan modos de juego y manejan interacciones del usuario
+- **Componentes Reutilizables**: Elementos de UI compartidos (botones, tarjetas, modal, etc.)
+- **Componentes de Menú**: Navegación, secciones de información y selección de dojo
+
+#### Organización del Contenido
+
+- **Kana**: Organizado por tipo (hiragana/katakana) y grupos (base, dakuon, yoon, foreign)
+- **Kanji**: Organizado por nivel JLPT (N5-N2), con lecturas y significados
+- **Vocabulario**: Organizado por nivel JLPT y tipo de palabra (sustantivos, verbos, etc.)
+
+#### Implementación de Modos de Juego
+
+Cada modo de juego es una ruta dinámica (`/[contentType]/train/[gameMode]`) que:
+
+1. Lee el contenido seleccionado de la tienda correspondiente
+2. Genera preguntas aleatorias de la selección
+3. Proporciona retroalimentación inmediata
+4. Realiza un seguimiento de las estadísticas (correcto, incorrecto, racha)
+
+---
+
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! KanaDojo es un proyecto de código abierto construido por la comunidad y para la comunidad.
+
+### Cómo Contribuir
+
+1. Fork al repositorio
+2. Crea una rama para la nueva funcionalidad (`git checkout -b feature/AmazingFeature`)
+3. Realiza tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Sube la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+### Directrices de Desarrollo
+
+- Sigue el estilo y las convenciones de código existentes
+- Usa TypeScript para la seguridad de tipos
+- Prueba tus cambios a fondo
+- Actualiza la documentación según sea necesario
+- Mantén los componentes enfocados y reutilizables
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia AGPL 3.0 - consulta el archivo [LICENSE.md](LICENSE.md) para más detalles.
+
+---
+
+## 🙏 Agradecimientos
+
+- Datos e información sobre caracteres del idioma japonés
+- Comunidad de código abierto por las increíbles herramientas y bibliotecas
+- Todos los colaboradores que ayudan a mejorar KanaDojo
+
+---
+
+## 📞 Contacto y Enlaces
+
+- **Sitio Web**: [kanadojo.com](https://kanadojo.com)
+- **Repositorio**: [github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
+
+---
+
+<div align="center">
+
+**Hecho con ❤️ para los estudiantes de japonés en todo el mundo**
+
+がんばって！ (Ganbatte! - Do your best! - ¡Haz tu mejor esfuerzo!)
+
+</div>
