@@ -3,10 +3,10 @@ import N4Kanji from './kanji/N4';
 import N3Kanji from './kanji/N3';
 import N2Kanji from './kanji/N2';
 
-import N5Vocab from './vocab/jlpt/n5/nouns';
-import N4Vocab from './vocab/jlpt/n4/nouns';
-import N3Vocab from './vocab/jlpt/n3/nouns';
-import N2Vocab from './vocab/jlpt/n2/nouns';
+import N5Vocab from './vocab/n5/nouns';
+import N4Vocab from './vocab/n4/nouns';
+import N3Vocab from './vocab/n3/nouns';
+import N2Vocab from './vocab/n2/nouns';
 
 export const N5KanjiLength = N5Kanji.length;
 export const N4KanjiLength = N4Kanji.length;
