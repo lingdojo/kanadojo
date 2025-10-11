@@ -26,8 +26,8 @@ const themes: ThemeGroup[] = [
         cardColor: 'hsla(210, 17%, 91%, 1)',
         borderColor: 'hsla(210, 17%, 76%, 1)',
 
-        mainColor: 'hsl(0, 0%, 0%)',
-        secondaryColor: 'hsl(0, 0%, 35%)'
+        mainColor: 'hsla(0, 0%, 0%, 1)',
+        secondaryColor: 'hsla(0, 0%, 35%, 1)'
       },
       {
         id: 'dark',
@@ -35,8 +35,8 @@ const themes: ThemeGroup[] = [
         cardColor: 'hsla(0, 0%, 16%, 1)',
         borderColor: 'hsla(0, 0%, 30%, 1)',
 
-        mainColor: 'hsl(0, 0%, 100%)',
-        secondaryColor: 'hsl(0, 0%, 75%);'
+        mainColor: 'hsla(0, 0%, 100%, 1)',
+        secondaryColor: 'hsla(0, 0%, 75%, 1)'
       }
     ]
   },
