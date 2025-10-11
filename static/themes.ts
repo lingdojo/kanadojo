@@ -22,19 +22,21 @@ const themes: ThemeGroup[] = [
     themes: [
       {
         id: 'light',
-        backgroundColor: 'hsl(0, 0%, 100%)',
-        cardColor: '	hsl(0, 0%, 96%)',
-        borderColor: 'hsl(0, 0%, 75%)',
+        backgroundColor: 'hsla(210, 17%, 100%, 1)',
+        cardColor: 'hsla(210, 17%, 91%, 1)',
+        borderColor: 'hsla(210, 17%, 76%, 1)',
+
         mainColor: 'hsl(0, 0%, 0%)',
         secondaryColor: 'hsl(0, 0%, 35%)'
       },
       {
         id: 'dark',
-        backgroundColor: 'hsl(204, 36%, 10%)',
-        cardColor: 'hsl(204, 36%, 11%)',
-        borderColor: 'hsl(204, 36%, 20%)',
-        mainColor: '#F1F7FB',
-        secondaryColor: 'hsl(0, 0%, 75%)'
+        backgroundColor: 'hsla(0, 0%, 11%, 1)',
+        cardColor: 'hsla(0, 0%, 16%, 1)',
+        borderColor: 'hsla(0, 0%, 30%, 1)',
+
+        mainColor: 'hsl(0, 0%, 100%)',
+        secondaryColor: 'hsl(0, 0%, 75%);'
       }
     ]
   },
