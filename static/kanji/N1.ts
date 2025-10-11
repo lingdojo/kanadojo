@@ -1,4 +1,4 @@
-export const N1 = [
+const N1 = [
   {
     id: 1,
     kanjiChar: '氏',
@@ -13536,3 +13536,4 @@ meanings: ['sound of jewels']
     meanings: ['inkstone']
   }
 ];
+export default N1;
