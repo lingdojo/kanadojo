@@ -14,7 +14,7 @@
 
 </div>
 
----
+
 
 ## 📖 About KanaDojo
 
@@ -60,7 +60,7 @@ Each dojo supports four engaging training modes to reinforce learning:
 - Clean, minimalist interface that keeps you focused on learning
 - Smooth animations and transitions powered by Framer Motion
 
----
+
 
 ## 🖼️ Screenshots
 
@@ -84,7 +84,6 @@ Each dojo supports four engaging training modes to reinforce learning:
 
 </div>
 
----
 
 ## 🎨 UI & Design Philosophy
 
@@ -118,7 +117,7 @@ KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility
 - Clear distinction between similar-looking characters
 - Font previews with real Japanese text samples
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -162,7 +161,7 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analytics
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performance monitoring
 
----
+
 
 ## 🚀 Getting Started
 
@@ -196,6 +195,7 @@ KanaDojo is built with modern web technologies for optimal performance and devel
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Build for Production
+---
 
 ```bash
 # Create an optimized production build
@@ -206,6 +206,7 @@ npm start
 ```
 
 ### Other Commands
+---
 
 ```bash
 # Run ESLint
@@ -215,7 +216,7 @@ npm run lint
 npm run postbuild
 ```
 
----
+
 
 ## 📁 Project Structure
 
@@ -276,6 +277,7 @@ kanadojo/
 ```
 
 ### Key Concepts
+---
 
 #### State Management Flow
 
@@ -307,7 +309,7 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 3. Provides immediate feedback
 4. Tracks statistics (correct, incorrect, streak)
 
----
+
 
 ## 🤝 Contributing
 
@@ -329,13 +331,12 @@ Contributions are welcome! KanaDojo is an open-source project built by the commu
 - Update documentation as needed
 - Keep components focused and reusable
 
----
 
 ## 📄 License
 
 This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details.
 
----
+
 
 ## 🙏 Acknowledgments
 
@@ -343,7 +344,17 @@ This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICEN
 - Open-source community for the amazing tools and libraries
 - All contributors who help make KanaDojo better
 
----
+
+
+## Translations
+KanaDojo is available in multiple languages thanks to community contributions:
+- English (default)
+- [Español](README.es.md)
+- [Français](README.fr.md) in progress
+- [Deutsch](README.de.md) in progress
+- [Português](README.pt-br.md)
+- [中文](README.zh.md) in progress
+- [हिन्दी](README.hi.md)
 
 ## 📞 Contact & Links
 
