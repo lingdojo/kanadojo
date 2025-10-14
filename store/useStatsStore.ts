@@ -41,6 +41,15 @@ interface IStatsState {
 
   iconIndices: number[];
   addIconIndex: (newIconIndex: number) => void;
+
+  timedCorrectAnswers: number;
+timedWrongAnswers: number;
+timedStreak: number;
+
+incrementTimedCorrectAnswers: () => void;
+incrementTimedWrongAnswers: () => void;
+resetTimedStats: () => void;
+
 }
 
 const useStatsStore = create<IStatsState>(set => ({
@@ -140,7 +149,34 @@ const useStatsStore = create<IStatsState>(set => ({
   addIconIndex: newIconIndex =>
     set(state => ({
       iconIndices: [...state.iconIndices, newIconIndex]
-    }))
-}));
+    })),
+
+    timedCorrectAnswers: 0,
+    timedWrongAnswers: 0,
+    timedStreak: 0,
+
+incrementTimedCorrectAnswers: () => {
+  set(state => ({
+    timedCorrectAnswers: state.timedCorrectAnswers + 1,
+    timedStreak: state.timedStreak + 1
+  }));
+},
+
+incrementTimedWrongAnswers: () => {
+  set(state => ({
+    timedWrongAnswers: state.timedWrongAnswers + 1,
+    timedStreak: 0
+  }));
+},
+
+resetTimedStats: () => {
+  set(() => ({
+    timedCorrectAnswers: 0,
+    timedWrongAnswers: 0,
+    timedStreak: 0
+  }));
+},
+
+  }));
 
 export default useStatsStore;
