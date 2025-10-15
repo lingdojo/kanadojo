@@ -313,7 +313,7 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 
 ## 🤝 Contributing
 
-Contributions are welcome! KanaDojo is an open-source project built by the community, for the community.
+Contributions are welcome! KanaDojo is an open-source project built by the community, for the community. Check out [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
 
 ### How to Contribute
 
@@ -360,6 +360,7 @@ KanaDojo is available in multiple languages thanks to community contributions:
 
 - **Website**: [kanadojo.com](https://kanadojo.com)
 - **Repository**: [github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
+- **Email**: reservecrate@gmail.com
 
 ---
 
