@@ -311,7 +311,7 @@ kanadojo/
 
 ## 🤝 貢獻
 
-歡迎貢獻！KanaDojo 是一個開放原始碼專案，由社群打造、為社群服務。
+歡迎貢獻！KanaDojo 是一個開放原始碼專案，由社群打造、為社群服務，更多貢獻資訊請參考 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ### 如何貢獻
 
@@ -349,6 +349,7 @@ kanadojo/
 
 - **網站**：[kanadojo.com](https://kanadojo.com)
 - **儲存庫**：[github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
+- **電子郵件**: reservecrate@gmail.com
 
 ---
 
