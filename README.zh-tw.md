@@ -347,8 +347,8 @@ kanadojo/
 
 ## 📞 聯絡資訊與鏈結
 
-- **網站**: [kanadojo.com](https://kanadojo.com)
-- **儲存庫**: [github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
+- **網站**：[kanadojo.com](https://kanadojo.com)
+- **儲存庫**：[github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
 
 ---
 
