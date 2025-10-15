@@ -354,7 +354,7 @@ KanaDojo is available in multiple languages thanks to community contributions:
 - [Deutsch](README.de.md) in progress
 - [Português](README.pt-br.md)
 - [中文](README.zh.md) in progress
-- [हिन्दी](README.hi.md)
+- [हिन्दी](README.hin.md)
 
 ## 📞 Contact & Links
 
