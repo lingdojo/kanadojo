@@ -4,6 +4,7 @@ import Banner from '@/components/reusable/Menu/Banner';
 import Themes from './Themes';
 import Fonts from './Fonts';
 import Behavior from './Behavior';
+import Backup from './Backup';
 import {
   Joystick,
   Sparkles,
@@ -50,6 +51,12 @@ const Settings = () => {
               <span>Fonts</span>
             </h3>
             <Fonts />
+          </div>
+          <div className='flex flex-col gap-4'>
+            <h3 className='flex flex-row text-2xl gap-2 items-end pb-2 border-b-1 border-[var(--border-color)]'>
+              <span>Backup</span>
+            </h3>
+            <Backup />
           </div>
           <div className='flex flex-col gap-4 mb-12'>
             <h3
