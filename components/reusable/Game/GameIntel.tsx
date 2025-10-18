@@ -8,7 +8,7 @@ import { miniButtonBorderStyles } from '@/static/styles';
 import { ChartSpline } from 'lucide-react';
 import { useStopwatch } from 'react-timer-hook';
 import { useClick } from '@/lib/hooks/useAudio';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import { usePathname } from 'next/navigation';
 
@@ -34,7 +34,7 @@ const GameIntel = ({
 
   const trainingDojo = usePathname().split('/')[1];
 
-  const selectedKanjiSets = useKanaKanjiStore(state => state.selectedKanjiSets);
+  const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
 
   // useEffect(() => {

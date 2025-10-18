@@ -4,10 +4,10 @@ import { IWord } from '@/lib/interfaces';
 import { cardBorderStyles } from '@/static/styles';
 import useVocabStore from '@/store/useVocabStore';
 
-import N5Nouns from '@/static/vocab/jlpt/n5/nouns';
-import N4Nouns from '@/static/vocab/jlpt/n4/nouns';
-import N3Nouns from '@/static/vocab/jlpt/n3/nouns';
-import N2Nouns from '@/static/vocab/jlpt/n2/nouns';
+import N5Nouns from '@/static/vocab/n5/nouns';
+import N4Nouns from '@/static/vocab/n4/nouns';
+import N3Nouns from '@/static/vocab/n3/nouns';
+import N2Nouns from '@/static/vocab/n2/nouns';
 
 const createVocabSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(

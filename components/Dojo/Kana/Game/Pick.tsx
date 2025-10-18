@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { kana } from '@/static/kana';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanaStore from '@/store/useKanaStore';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
 import { useCorrect, useError } from '@/lib/hooks/useAudio';
@@ -38,7 +38,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
 
-  const kanaGroupIndices = useKanaKanjiStore(state => state.kanaGroupIndices);
+  const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
 
   const selectedKana = kanaGroupIndices.map(i => kana[i].kana).flat();
   const selectedRomaji = kanaGroupIndices.map(i => kana[i].romanji).flat();

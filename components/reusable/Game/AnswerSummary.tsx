@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { IKanjiObj } from '@/store/useKanaKanjiStore';
+import { IKanjiObj } from '@/store/useKanjiStore';
 import { IWordObj } from '@/store/useVocabStore';
 import { buttonBorderStyles } from '@/static/styles';
 import { CircleArrowRight } from 'lucide-react';

@@ -1,6 +1,6 @@
 'use client';
 import clsx from 'clsx';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import { usePathname } from 'next/navigation';
 import {
@@ -35,10 +35,10 @@ const numCollectionSets = {
 const CollectionSelector = () => {
   const { playClick } = useClick();
 
-  const selectedKanjiCollection = useKanaKanjiStore(
+  const selectedKanjiCollection = useKanjiStore(
     state => state.selectedKanjiCollection
   );
-  const setSelectedKanjiCollection = useKanaKanjiStore(
+  const setSelectedKanjiCollection = useKanjiStore(
     state => state.setSelectedKanjiCollection
   );
 
@@ -49,14 +49,14 @@ const CollectionSelector = () => {
     state => state.setSelectedVocabCollection
   );
 
-  const selectedKanjiSets = useKanaKanjiStore(state => state.selectedKanjiSets);
+  const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
 
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
 
-  const clearKanjiObjs = useKanaKanjiStore(state => state.clearKanjiObjs);
+  const clearKanjiObjs = useKanjiStore(state => state.clearKanjiObjs);
   const clearWordObjs = useVocabStore(state => state.clearWordObjs);
 
-  const clearKanjiSets = useKanaKanjiStore(state => state.clearKanjiSets);
+  const clearKanjiSets = useKanjiStore(state => state.clearKanjiSets);
   const clearVocabSets = useVocabStore(state => state.clearVocabSets);
 
   const pathname = usePathname();

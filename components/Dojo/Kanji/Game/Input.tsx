@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
-import { IKanjiObj } from '@/store/useKanaKanjiStore';
+import { IKanjiObj } from '@/store/useKanjiStore';
 import { useClick, useCorrect, useError } from '@/lib/hooks/useAudio';
 import GameIntel from '@/components/reusable/Game/GameIntel';
 import { buttonBorderStyles } from '@/static/styles';

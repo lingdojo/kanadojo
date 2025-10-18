@@ -8,10 +8,10 @@ import { useClick } from '@/lib/hooks/useAudio';
 import { ChevronUp, CircleCheck, Circle } from 'lucide-react';
 import useVocabStore from '@/store/useVocabStore';
 import VocabSetDictionary from '@/components/Dojo/Vocab/SetDictionary';
-import N5Nouns from '@/static/vocab/jlpt/n5/nouns';
-import N4Nouns from '@/static/vocab/jlpt/n4/nouns';
-import N3Nouns from '@/static/vocab/jlpt/n3/nouns';
-import N2Nouns from '@/static/vocab/jlpt/n2/nouns';
+import N5Nouns from '@/static/vocab/n5/nouns';
+import N4Nouns from '@/static/vocab/n4/nouns';
+import N3Nouns from '@/static/vocab/n3/nouns';
+import N2Nouns from '@/static/vocab/n2/nouns';
 
 const vocabCollections = {
   n5: {

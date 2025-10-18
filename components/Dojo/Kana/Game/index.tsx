@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Return from '@/components/reusable/Game/ReturnFromGame';
 import Pick from './Pick';
 import Input from './Input';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanaStore from '@/store/useKanaStore';
 import useStatsStore from '@/store/useStatsStore';
 import Stats from '@/components/reusable/Game/Stats';
 
@@ -13,7 +13,7 @@ const Game = () => {
 
   const resetStats = useStatsStore(state => state.resetStats);
 
-  const gameMode = useKanaKanjiStore(state => state.selectedGameModeKana);
+  const gameMode = useKanaStore(state => state.selectedGameModeKana);
 
   useEffect(() => {
     resetStats();

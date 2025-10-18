@@ -5,7 +5,7 @@ import N5KanjiArray from '@/static/kanji/N5';
 import N4KanjiArray from '@/static/kanji/N4';
 import N3KanjiArray from '@/static/kanji/N3';
 import N2KanjiArray from '@/static/kanji/N2';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanjiStore from '@/store/useKanjiStore';
 
 const createKanjiSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
@@ -26,7 +26,7 @@ const kanjiCollections = {
 };
 
 const KanjiSetDictionary = ({ set }: { set: string }) => {
-  const selectedKanjiCollection = useKanaKanjiStore(
+  const selectedKanjiCollection = useKanjiStore(
     state => state.selectedKanjiCollection
   );
   const displayKanjiCollection =

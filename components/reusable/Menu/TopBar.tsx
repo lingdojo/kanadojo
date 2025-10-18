@@ -2,7 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanaStore from '@/store/useKanaStore';
+import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import useThemeStore from '@/store/useThemeStore';
 import { useClick } from '@/lib/hooks/useAudio';
@@ -27,12 +28,17 @@ const TopBar: React.FC<ITopBarProps> = ({
 
   const { playClick } = useClick();
 
-  const { selectedGameModeKana, selectedGameModeKanji } = useKanaKanjiStore(
-    useShallow(state => ({
-      selectedGameModeKana: state.selectedGameModeKana,
-      selectedGameModeKanji: state.selectedGameModeKanji
-    }))
+  // Kana store
+  const selectedGameModeKana = useKanaStore(
+    state => state.selectedGameModeKana
   );
+  const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
+
+  // Kanji store
+  const selectedGameModeKanji = useKanjiStore(
+    state => state.selectedGameModeKanji
+  );
+  const selectedKanjiObjs = useKanjiStore(state => state.selectedKanjiObjs);
 
   const selectedGameModeVocab = useVocabStore(
     useShallow(state => state.selectedGameModeVocab)
@@ -47,8 +53,6 @@ const TopBar: React.FC<ITopBarProps> = ({
       ? selectedGameModeVocab
       : '';
 
-  const kanaGroupIndices = useKanaKanjiStore(state => state.kanaGroupIndices);
-  const selectedKanjiObjs = useKanaKanjiStore(state => state.selectedKanjiObjs);
   const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
 
   const isFilled =

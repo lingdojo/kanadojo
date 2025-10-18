@@ -1,23 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanaStore from '@/store/useKanaStore';
 import useStatsStore from '@/store/useStatsStore';
 import { useChallengeTimer } from '@/hooks/useTimer';
 import { Button } from '@/components/ui/button';
 import { generateKanaQuestion } from '@/lib/generateKanaQuestions';
-
-export type KanaCharacter = {
-  kana: string;
-  romaji: string;
-  type: string;
-  group: string;
-};
+import type { KanaCharacter } from '@/lib/generateKanaQuestions';
+import { flattenKanaGroups } from '@/lib/flattenKanaGroup';
 
 const CHALLENGE_DURATION = 60; // seconds
 
 export default function TimedChallengeKana() {
-  const selectedKana = useKanaKanjiStore((state) => state.selectedKana);
+  const kanaGroupIndices = useKanaStore((state) => state.kanaGroupIndices);
+  const selectedKana = flattenKanaGroups(kanaGroupIndices) as unknown as KanaCharacter[];
 
   const incrementTimedCorrectAnswers = useStatsStore((s) => s.incrementTimedCorrectAnswers);
   const incrementTimedWrongAnswers = useStatsStore((s) => s.incrementTimedWrongAnswers);

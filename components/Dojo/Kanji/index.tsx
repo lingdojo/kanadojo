@@ -10,7 +10,7 @@ import { chunkArray } from '@/lib/helperFunctions';
 import { ChevronUp, CircleCheck, Circle } from 'lucide-react';
 import { useClick } from '@/lib/hooks/useAudio';
 import useGridColumns from '@/lib/hooks/useGridColumns';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import useKanjiStore from '@/store/useKanjiStore';
 import KanjiSetDictionary from '@/components/Dojo/Kanji/SetDictionary';
 
 const kanjiCollections = {
@@ -35,14 +35,14 @@ const kanjiCollections = {
 };
 
 const KanjiCards = () => {
-  const selectedKanjiCollectionName = useKanaKanjiStore(
+  const selectedKanjiCollectionName = useKanjiStore(
     state => state.selectedKanjiCollection
   );
-  const selectedKanjiSets = useKanaKanjiStore(state => state.selectedKanjiSets);
-  const setSelectedKanjiSets = useKanaKanjiStore(
+  const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
+  const setSelectedKanjiSets = useKanjiStore(
     state => state.setSelectedKanjiSets
   );
-  const addKanjiObjs = useKanaKanjiStore(state => state.addKanjiObjs);
+  const addKanjiObjs = useKanjiStore(state => state.addKanjiObjs);
 
   // const selectedKanjiObjs = useKanaKanjiStore(state => state.selectedKanjiObjs);
 
