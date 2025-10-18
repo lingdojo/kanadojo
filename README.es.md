@@ -28,11 +28,11 @@ Ya sea que estés comenzando con los silabarios kana básicos o preparándote pa
 
 - **Kana Dojo** - Domina los silabarios Hiragana y Katakana con grupos de sonidos base, dakuon, yoon y sonidos extranjeros
 - **Kanji Dojo** - Aprende caracteres kanji esenciales organizados por niveles JLPT (N5, N4, N3, N2)
-- **Vocabulary Dojo** - Amplía tu vocabulario japonés con colecciones de palabras curadas por nivel de competencia
+- **Vocabulary Dojo** - Amplía tu vocabulario japonés con colecciones de palabras seleccionadas por nivel de competencia
 
 #### 🎮 **Cuatro Modos de Juego Dinámicos**
 
-Cada dojo admite cuatro modos de entrenamiento atractivos para reforzar el aprendizaje:
+Cada dojo admite cuatro atractivos modos de entrenamiento para reforzar el aprendizaje:
 
 1. **Pick** - Opción múltiple: Selecciona la romanización/traducción correcta para el carácter mostrado
 2. **Reverse-Pick** - Opción múltiple inversa: Selecciona el carácter correcto para la romanización/traducción dada
@@ -41,15 +41,15 @@ Cada dojo admite cuatro modos de entrenamiento atractivos para reforzar el apren
 
 #### 🎨 **Amplia Personalización**
 
-- **100+ Temas** - Elige entre una vasta colección de hermosos temas claros y oscuros, o utiliza la función de tema aleatorio
+- **+100 Temas** - Elige entre una vasta colección de hermosos temas claros y oscuros, o utiliza la función de tema aleatorio
 - **28 Fuentes Japonesas** - Selecciona entre una variedad de tipografías japonesas auténticas para adaptarse a tus preferencias estéticas
-- **Efectos de Sonido** - Disfruta de sonidos de retroalimentación de UI satisfactorios que se pueden activar/desactivar
+- **Efectos de Sonido** - Disfruta de sonidos de feedback de UI satisfactorios que se pueden activar/desactivar
 - **Opciones de Visualización** - Alterna entre las visualizaciones de Romaji/Inglés y Kana/Kanji en los menús de selección
 - **Atajos de Teclado** - Atajos de teclado para un entrenamiento eficiente (se pueden desactivar)
 
 #### 📊 **Seguimiento del Progreso**
 
-- Retroalimentación en tiempo real con contadores de correctas/incorrectas
+- Feedback en tiempo real con contadores de respuestas correctas/incorrectas
 - Seguimiento de rachas para mantener la motivación
 - Estadísticas para monitorear tu progreso de aprendizaje
 
@@ -66,7 +66,7 @@ Cada dojo admite cuatro modos de entrenamiento atractivos para reforzar el apren
 
 <div align="center">
 
-### Pagina Principal
+### Página Principal
 
 ![Home](https://github.com/user-attachments/assets/8a912762-f5f3-4520-a75c-d145cac0da62)
 
@@ -86,9 +86,9 @@ Cada dojo admite cuatro modos de entrenamiento atractivos para reforzar el apren
 
 ---
 
-## 🎨 Filosofia de UI y Diseño
+## 🎨 Filosofía de UI y Diseño
 
-KanaDojo embraces a **estetica minimalista** combinado con **flexibilidad máxima**. The design philosophy centers around:
+KanaDojo utiliza a **estética minimalista** combinada con **flexibilidad máxima**. Esta filosofía de diseño se centra en:
 
 ### Minimalismo primero
 
@@ -106,27 +106,27 @@ KanaDojo embraces a **estetica minimalista** combinado con **flexibilidad máxim
 
 ### Experiencia del Usuario
 
-- Animaciones suaves e interacciones micro para una retroalimentación agradable
+- Animaciones suaves e microinteracciones para una feedback agradable
 - Diseño receptivo que se adapta maravillosamente a cualquier tamaño de pantalla
-- Retroalimentación de audio para interacciones (opcional)
+- Feedback de audio para interacciones (opcional)
 - Lenguaje visual consistente en todas las secciones
 
 ### Tipografía Japonesa
 
 - 28 fuentes japonesas auténticas que cubren varios estilos
 - Renderizado adecuado de caracteres kanji complejos
-- Distincion clara entre caracteres similares
-- Previsualizacion de fuentes con muestras de textos reales en japones
+- Distinción clara entre caracteres similares
+- Previsualización de fuentes con muestras de textos reales en japonés
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
 
-KanaDojo esta contruido con tecnologias web modernas para un rendimiento optimo y una excelente experincia para los desarrolladores:
+KanaDojo esta construido con tecnologías web modernas para un rendimiento óptimo y una excelente experiencia para los desarrolladores:
 
 ### Framework Principal
 
-- **[Next.js 15](https://nextjs.org/)** - Framework de React con App Router para renderizado del lado del servidor y rendimiento optimo
+- **[Next.js 15](https://nextjs.org/)** - Framework de React con App Router para renderizado del lado del servidor y rendimiento óptimo
 - **[React 19](https://react.dev/)** - Última versión de React con características concurrentes
 - **[TypeScript](https://www.typescriptlang.org/)** - Desarrollo seguro por tipos
 
@@ -138,14 +138,14 @@ KanaDojo esta contruido con tecnologias web modernas para un rendimiento optimo 
 - **[Lucide React](https://lucide.dev/)** - Biblioteca de iconos hermosa y consistente
 - **[FontAwesome](https://fontawesome.com/)** - Soporte adicional de iconos
 
-### Gestión del Estado
+### Gestión de Estado
 
 - **[Zustand](https://zustand-demo.pmnd.rs/)** - Gestión de estado ligera con un mínimo de boilerplate
 - **Zustand Persist** - Persistencia de almacenamiento local para preferencias de usuario
 
 ### Utilidades y Características
 
-- **[use-sound](https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/)** - Sistema de retroalimentación de audio
+- **[use-sound](https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/)** - Sistema de feedback de audio
 - **[canvas-confetti](https://www.npmjs.com/package/canvas-confetti)** - Efectos de celebración
 - **[react-timer-hook](https://www.npmjs.com/package/react-timer-hook)** - Funcionalidad de temporizador
 - **[react-markdown](https://github.com/remarkjs/react-markdown)** - Renderizado de Markdown para contenido educativo
@@ -157,16 +157,16 @@ KanaDojo esta contruido con tecnologias web modernas para un rendimiento optimo 
 - **[ESLint](https://eslint.org/)** - Análisis de código
 - **[next-sitemap](https://www.npmjs.com/package/next-sitemap)** - Generación de sitemap
 
-### Estadisticas y Rendimiento
+### Estadísticas y Rendimiento
 
 - **[@vercel/analytics](https://vercel.com/analytics)** - Estadísticas web
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Monitoreo de rendimiento
 
 ---
 
-## 🚀 Inicializando
+## 🚀 Primeros Pasos
 
-### Pre-requisitos
+### Prerrequisitos
 
 - **Node.js** 18.x o superior
 - **npm** 10.x o superior (viene con Node.js)
@@ -280,7 +280,7 @@ kanadojo/
 #### Flujo de Gestión del Estado
 
 1. El usuario selecciona contenido en los componentes del menú.
-2. Las selecciones se almacenan en los almacenes de Zustand (`useKanaKanjiStore`, `useVocabStore`)
+2. Las selecciones se almacenan en los almacenes de Zustand (`useKanaKanjiStore`, `useVocabStore`).
 3. Los componentes de entrenamiento leen desde los  almacenes para generar preguntas.
 4. Las estadísticas se rastrean y persisten en `useStatsStore`.
 5. Las preferencias del usuario se guardan en `useThemeStore` con persistencia en localStorage.
@@ -304,7 +304,7 @@ Cada modo de juego es una ruta dinámica (`/[contentType]/train/[gameMode]`) que
 
 1. Lee el contenido seleccionado de la tienda correspondiente
 2. Genera preguntas aleatorias de la selección
-3. Proporciona retroalimentación inmediata
+3. Proporciona feedback inmediato
 4. Realiza un seguimiento de las estadísticas (correcto, incorrecto, racha)
 
 ---
@@ -315,7 +315,7 @@ Cada modo de juego es una ruta dinámica (`/[contentType]/train/[gameMode]`) que
 
 ### Cómo Contribuir
 
-1. Fork al repositorio
+1. Fork el repositorio
 2. Crea una rama para la nueva funcionalidad (`git checkout -b feature/AmazingFeature`)
 3. Realiza tus cambios (`git commit -m 'Add some AmazingFeature'`)
 4. Sube la rama (`git push origin feature/AmazingFeature`)
