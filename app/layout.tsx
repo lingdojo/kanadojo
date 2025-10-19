@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MSClarity from '@/components/analytics/MSClarity';
 import { Metadata } from 'next';
+import {NextIntlClientProvider} from "next-intl"
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
 const msVerificationToken = process.env.MS_VERIFICATION_TOKEN || '';
@@ -43,8 +44,8 @@ const isAnalyticsEnabled =
 interface RootLayoutProps {
   readonly children: React.ReactNode;
 }
-
-export default function RootLayout({ children }: RootLayoutProps) {
+// next-intl support for client component requires async RootLayout
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       {/* It's recommended to remove the <head> tag here, as Next.js 13+ with the App Router manages it via the metadata object */}
@@ -57,7 +58,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <SpeedInsights />
           </>
         )}
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout>
+          <NextIntlClientProvider>
+            {children}
+          </NextIntlClientProvider>
+          </ClientLayout>
       </body>
     </html>
   );
