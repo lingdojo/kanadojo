@@ -91,7 +91,8 @@ const TopBar: React.FC<ITopBarProps> = ({
         'rounded-2xl bg-[var(--card-color)]',
         'duration-250',
         'transition-all ease-in-out',
-        'w-full overflow-hidden'
+        'w-full',
+        'overflow-hidden'
       )}
     >
       <button
