@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface IStatsState {
   score: number;
@@ -43,16 +44,29 @@ interface IStatsState {
   addIconIndex: (newIconIndex: number) => void;
 
   timedCorrectAnswers: number;
-timedWrongAnswers: number;
-timedStreak: number;
+  timedWrongAnswers: number;
+  timedStreak: number;
 
-incrementTimedCorrectAnswers: () => void;
-incrementTimedWrongAnswers: () => void;
-resetTimedStats: () => void;
+  incrementTimedCorrectAnswers: () => void;
+  incrementTimedWrongAnswers: () => void;
+  resetTimedStats: () => void;
 
+  // Historical tracking
+  allTimeStats: {
+    totalSessions: number;
+    totalCorrect: number;
+    totalIncorrect: number;
+    bestStreak: number;
+    characterMastery: Record<string, { correct: number; incorrect: number; }>;
+  };
+  
+  saveSession: () => void;
+  clearAllProgress: () => void;
 }
 
-const useStatsStore = create<IStatsState>(set => ({
+const useStatsStore = create<IStatsState>()(
+  persist(
+    (set, get) => ({
   score: 0,
   setScore: newScore => {
     set(() => ({
@@ -177,6 +191,59 @@ resetTimedStats: () => {
   }));
 },
 
-  }));
+  // Historical tracking implementation
+  allTimeStats: {
+    totalSessions: 0,
+    totalCorrect: 0,
+    totalIncorrect: 0,
+    bestStreak: 0,
+    characterMastery: {}
+  },
+
+  saveSession: () => {
+    set((state) => {
+      const currentStreak = state.numCorrectAnswers;
+      const newAllTimeStats = {
+        totalSessions: state.allTimeStats.totalSessions + 1,
+        totalCorrect: state.allTimeStats.totalCorrect + state.numCorrectAnswers,
+        totalIncorrect: state.allTimeStats.totalIncorrect + state.numWrongAnswers,
+        bestStreak: Math.max(state.allTimeStats.bestStreak, currentStreak),
+        characterMastery: { ...state.allTimeStats.characterMastery }
+      };
+
+      // Update character mastery
+      Object.entries(state.characterScores).forEach(([char, scores]) => {
+        if (!newAllTimeStats.characterMastery[char]) {
+          newAllTimeStats.characterMastery[char] = { correct: 0, incorrect: 0 };
+        }
+        newAllTimeStats.characterMastery[char].correct += scores.correct;
+        newAllTimeStats.characterMastery[char].incorrect += scores.wrong;
+      });
+
+      return { allTimeStats: newAllTimeStats };
+    });
+  },
+
+  clearAllProgress: () => {
+    set(() => ({
+      allTimeStats: {
+        totalSessions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        bestStreak: 0,
+        characterMastery: {}
+      }
+    }));
+  }
+
+    }),
+    {
+      name: 'kanadojo-stats',
+      partialize: (state) => ({
+        allTimeStats: state.allTimeStats
+      })
+    }
+  )
+);
 
 export default useStatsStore;

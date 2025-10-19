@@ -4,11 +4,13 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useClick } from '@/lib/hooks/useAudio';
 import { useStopwatch } from 'react-timer-hook';
+import useStatsStore from '@/store/useStatsStore';
 import { X } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 
 const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
   const totalTimeStopwatch = useStopwatch({ autoStart: false });
+  const saveSession = useStatsStore(state => state.saveSession);
 
   const { playClick } = useClick();
 
@@ -46,7 +48,10 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
         href={href}
         className=""
         ref={buttonRef}
-        onClick={() => playClick()}
+        onClick={() => {
+          playClick();
+          saveSession();
+        }}
       >
         <X
           size={32}
