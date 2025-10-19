@@ -24,7 +24,7 @@ const Info = () => {
   return (
     <div
       className={clsx(
-        'p-4 rounded-2xl w-full flex flex-col gap-1',
+        'p-4 rounded-2xl w-full flex flex-col gap-1 overflow-hidden',
         cardBorderStyles
       )}
     >

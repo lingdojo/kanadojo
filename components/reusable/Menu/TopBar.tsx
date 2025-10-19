@@ -91,13 +91,14 @@ const TopBar: React.FC<ITopBarProps> = ({
         'rounded-2xl bg-[var(--card-color)]',
         'duration-250',
         'transition-all ease-in-out',
-        'w-full'
+        'w-full',
+        'overflow-hidden'
       )}
     >
       <button
         className={clsx(
           'text-2xl w-1/2 p-2 flex flex-row justify-center items-center gap-2',
-          'h-full',
+          'h-full','overflow-hidden',
           'hover:cursor-pointer',
           selectedGameMode
             ? 'text-[var(--main-color)]'

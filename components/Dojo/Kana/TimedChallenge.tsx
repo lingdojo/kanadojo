@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+// import useKanaKanjiStore from '@/store/useKanaKanjiStore';
+import React, { useEffect, useState } from 'react';
+import useKanaStore from '@/store/useKanaStore';
 import useStatsStore from '@/store/useStatsStore';
 import { useChallengeTimer } from '@/hooks/useTimer';
 import { Button } from '@/components/ui/button';
@@ -12,18 +14,15 @@ import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import confetti from 'canvas-confetti';
 
-export type KanaCharacter = {
-  kana: string;
-  romaji: string;
-  type: string;
-  group: string;
-};
+import type { KanaCharacter } from '@/lib/generateKanaQuestions';
+import { flattenKanaGroups } from '@/lib/flattenKanaGroup';
 
 const CHALLENGE_DURATION = 60; // seconds
 
 export default function TimedChallengeKana() {
-  const selectedKana = useKanaKanjiStore((state) => state.selectedKana);
   const { playClick } = useClick();
+  const kanaGroupIndices = useKanaStore((state) => state.kanaGroupIndices);
+  const selectedKana = flattenKanaGroups(kanaGroupIndices) as unknown as KanaCharacter[];
 
   const {
     timedCorrectAnswers,

@@ -196,7 +196,7 @@ const MainMenu = () => {
         >
           {links.map((link, i) => (
             <Fragment key={i}>
-              <Link href={link.href} className={clsx('w-full')}>
+              <Link href={link.href} className={clsx('w-full overflow-hidden')}>
                 <button
                   className={clsx(
                     'flex w-full h-full text-2xl',
