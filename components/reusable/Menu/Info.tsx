@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useClick } from '@/lib/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
 import { ChevronUp } from 'lucide-react';
-import info from '@/static/info';
+import translationGen from '@/static/info';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
 const Info = () => {
-  const pathname = usePathname();
+    const pathname  = usePathname();
 
-  const { header, content } = info[pathname as keyof typeof info];
+  const { header, content } = translationGen()[pathname as keyof typeof translationGen]
 
   const { playClick } = useClick();
 
