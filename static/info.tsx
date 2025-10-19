@@ -1,11 +1,17 @@
 import DevNotice from '@/components/reusable/DevNotice';
 import Link from 'next/link';
+import {useTranslations} from "next-intl"
 
+// Wrap info constant in a function to match translation management system requirements
+export default function translationGen(){
+  // request translation for Menu Info section
+const t = useTranslations('MenuInfo')
 const info = {
   '/': {
     header: (
       <p className='flex gap-2 items-center flex-1 overflow-hidden '>
-        <span>Welcome to KanaDojo!</span>
+        {/* render localized content */}
+        <span>{t('greeting')}</span>
         <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
           v0.1.2 (alpha)
         </i>
@@ -14,11 +20,10 @@ const info = {
     content: (
       <>
         <p className='text-lg text-[var(--secondary-color)]'>
-          KanaDojo is a fun, minimalist, aesthetic platform for learning and
-          practicing Japanese online.
+          {t('description')}
         </p>
         <p className='text-lg text-[var(--secondary-color)]'>
-          To begin, select a dojo and start training now!
+          {t('instructions')}
         </p>
 {/*         <p className='text-sm text-[var(--secondary-color)]'>
           Want to support an independent project built by the community, for the
@@ -153,4 +158,5 @@ const info = {
   }
 };
 
-export default info;
+return info
+}
