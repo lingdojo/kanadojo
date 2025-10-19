@@ -1,41 +1,19 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useKanaStore from '@/store/useKanaStore';
 import useStatsStore from '@/store/useStatsStore';
 import { useChallengeTimer } from '@/hooks/useTimer';
 import { Button } from '@/components/ui/button';
 import { generateKanaQuestion } from '@/lib/generateKanaQuestions';
-import { kana as KANA_GROUPS } from '@/static/kana';
-
-export type KanaCharacter = {
-  kana: string;
-  romaji: string;
-  type: string;
-  group: string;
-};
+import type { KanaCharacter } from '@/lib/generateKanaQuestions';
+import { flattenKanaGroups } from '@/lib/flattenKanaGroup';
 
 const CHALLENGE_DURATION = 60; // seconds
 
 export default function TimedChallengeKana() {
-  const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
-  const selectedKana = useMemo(() => {
-    const list: KanaCharacter[] = [];
-    for (const idx of kanaGroupIndices) {
-      const group = KANA_GROUPS[idx];
-      if (!group) continue;
-      const type = group.groupName?.startsWith('h') ? 'hiragana' : 'katakana';
-      for (let i = 0; i < group.kana.length; i++) {
-        list.push({
-          kana: group.kana[i],
-          romaji: group.romanji[i],
-          type,
-          group: group.groupName
-        });
-      }
-    }
-    return list;
-  }, [kanaGroupIndices]);
+  const kanaGroupIndices = useKanaStore((state) => state.kanaGroupIndices);
+  const selectedKana = flattenKanaGroups(kanaGroupIndices) as unknown as KanaCharacter[];
 
   const incrementTimedCorrectAnswers = useStatsStore((s) => s.incrementTimedCorrectAnswers);
   const incrementTimedWrongAnswers = useStatsStore((s) => s.incrementTimedWrongAnswers);
