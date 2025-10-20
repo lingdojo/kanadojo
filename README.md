@@ -246,6 +246,9 @@ kanadojo/
 │   ├── interfaces.ts            # TypeScript interfaces
 │   └── utils.ts                 # Utility functions
 │
+├── i18n/                        # Translation management system
+│   └── request.ts               # Translated text retrieve helper
+│
 ├── store/                       # Zustand state management
 │   ├── useKanaKanjiStore.ts    # Kana/Kanji selection state
 │   ├── useVocabStore.ts        # Vocabulary selection state
@@ -259,6 +262,10 @@ kanadojo/
 │   ├── themes.ts               # Theme definitions
 │   ├── fonts.ts                # Font configurations
 │   └── info.tsx                # Informational content
+│
+├── translations/               # Translated text content
+│   ├── en.json                 # English text content
+│   └── es.json                 # Spanish text content
 │
 ├── public/                      # Static assets
 │   ├── sounds/                 # Audio files
