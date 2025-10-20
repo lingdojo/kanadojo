@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { IWord } from '@/lib/interfaces';
 import { cardBorderStyles } from '@/static/styles';
 import useVocabStore from '@/store/useVocabStore';
+import useThemeStore from '@/store/useThemeStore';
 
 import N5Nouns from '@/static/vocab/n5/nouns';
 import N4Nouns from '@/static/vocab/n4/nouns';
@@ -44,6 +45,8 @@ const SetDictionary = ({ set }: { set: string }) => {
   const selectedVocabCollection = useVocabStore(
     state => state.selectedVocabCollection
   );
+  const displayKana = useThemeStore(state => state.displayKana);
+  
   const displayVocabCollection = (vocabData as VocabData)['jlpt'][
     selectedVocabCollection
   ]['nouns'];
@@ -67,15 +70,17 @@ const SetDictionary = ({ set }: { set: string }) => {
               {wordObj.word}
             </p>
             <div className='flex flex-col gap-2 items-start'>
-              <span
-                className={clsx(
-                  'rounded-xl px-2 py-1 flex flex-row items-center',
-                  'bg-[var(--background-color)] text-lg',
-                  'text-[var(--secondary-color)] '
-                )}
-              >
-                {wordObj.reading}
-              </span>
+              {!displayKana && (
+                <span
+                  className={clsx(
+                    'rounded-xl px-2 py-1 flex flex-row items-center',
+                    'bg-[var(--background-color)] text-lg',
+                    'text-[var(--secondary-color)] '
+                  )}
+                >
+                  {wordObj.reading}
+                </span>
+              )}
               <p className='text-xl md:text-2xl text-[var(--secondary-color)]'>
                 {wordObj.displayMeanings.join(', ')}
               </p>

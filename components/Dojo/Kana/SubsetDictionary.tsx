@@ -3,6 +3,7 @@ import clsx from 'clsx';
 // import Banner from '@/components/reusable/Banner';
 import { kana } from '@/static/kana';
 import { useParams } from 'next/navigation';
+import useThemeStore from '@/store/useThemeStore';
 
 const sliceRanges = {
   hiraganabase: [0, 10],
@@ -18,6 +19,7 @@ const SetDictionary = () => {
   const params = useParams<{ subset: string }>();
   const { subset }: { subset: string } = params;
   const [group, subgroup] = subset.split('-');
+  const displayKana = useThemeStore(state => state.displayKana);
 
   const [startIndex, endIndex] =
     sliceRanges[(group + subgroup) as keyof typeof sliceRanges];
@@ -40,14 +42,16 @@ const SetDictionary = () => {
               {kanaSubgroup.kana.join(' ')}
             </p>
             <div className='flex flex-col gap-2 items-start'>
-              <span
-                className={clsx(
-                  'rounded-2xl px-2 py-1 flex flex-row items-center',
-                  'bg-[var(--border-color)]'
-                )}
-              >
-                {kanaSubgroup.romanji.join(' ')}
-              </span>
+              {!displayKana && (
+                <span
+                  className={clsx(
+                    'rounded-2xl px-2 py-1 flex flex-row items-center',
+                    'bg-[var(--border-color)]'
+                  )}
+                >
+                  {kanaSubgroup.romanji.join(' ')}
+                </span>
+              )}
             </div>
           </div>
         ))}
