@@ -3,6 +3,7 @@
 <div align="center">
 
 ![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
+![GitHub Stars](https://github.com/user-attachments/assets/7524bec9-5fa8-438e-8df6-ee9e3de5f2f9)
 
 **An aesthetic, minimalist, and highly customizable platform for mastering Japanese**
 
@@ -13,8 +14,6 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
 </div>
-
-
 
 ## 📖 About KanaDojo
 
@@ -60,30 +59,29 @@ Each dojo supports four engaging training modes to reinforce learning:
 - Clean, minimalist interface that keeps you focused on learning
 - Smooth animations and transitions powered by Framer Motion
 
-
-
 ## 🖼️ Screenshots
 
 <div align="center">
 
 ### Home Page
 
-![Home](https://github.com/user-attachments/assets/8a912762-f5f3-4520-a75c-d145cac0da62)
+![Home](https://github.com/user-attachments/assets/cac78e72-4d31-43e8-8160-104c431e55be)
 
-### Kana Selection
+### Kanji Selection Menu
 
-![Kana Selection](https://github.com/user-attachments/assets/294e2913-6909-4a84-8311-f934120247f2)
+![Kanji Selection Menu](https://github.com/user-attachments/assets/a3c591ca-125a-4f79-b758-fb6423f7ec12)
 
-### Training Mode
+### Training Page
 
 ![Training](https://github.com/user-attachments/assets/053020ef-77c7-492b-b8db-c381d1ec7db8)
 
 ### Customization & Themes
 
-![Preferences](https://github.com/user-attachments/assets/f664a280-0344-4ff9-8639-83f9c1c4223b)
+![Themes](https://github.com/user-attachments/assets/f664a280-0344-4ff9-8639-83f9c1c4223b)
+
+![Fonts](https://github.com/user-attachments/assets/cf0be4c6-7d43-46e4-8939-0df6c40b83d9)
 
 </div>
-
 
 ## 🎨 UI & Design Philosophy
 
@@ -116,8 +114,6 @@ KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility
 - Proper rendering of complex kanji characters
 - Clear distinction between similar-looking characters
 - Font previews with real Japanese text samples
-
-
 
 ## 🛠️ Tech Stack
 
@@ -161,8 +157,6 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analytics
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performance monitoring
 
-
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -195,6 +189,7 @@ KanaDojo is built with modern web technologies for optimal performance and devel
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Build for Production
+
 ---
 
 ```bash
@@ -206,6 +201,7 @@ npm start
 ```
 
 ### Other Commands
+
 ---
 
 ```bash
@@ -215,8 +211,6 @@ npm run lint
 # Generate sitemap (runs automatically after build)
 npm run postbuild
 ```
-
-
 
 ## 📁 Project Structure
 
@@ -277,6 +271,7 @@ kanadojo/
 ```
 
 ### Key Concepts
+
 ---
 
 #### State Management Flow
@@ -309,8 +304,6 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 3. Provides immediate feedback
 4. Tracks statistics (correct, incorrect, streak)
 
-
-
 ## 🤝 Contributing
 
 Contributions are welcome! KanaDojo is an open-source project built by the community, for the community. Check out [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
@@ -331,12 +324,9 @@ Contributions are welcome! KanaDojo is an open-source project built by the commu
 - Update documentation as needed
 - Keep components focused and reusable
 
-
 ## 📄 License
 
 This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details.
-
-
 
 ## 🙏 Acknowledgments
 
@@ -344,14 +334,14 @@ This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICEN
 - Open-source community for the amazing tools and libraries
 - All contributors who help make KanaDojo better
 
-
-
 ## Translations
+
 KanaDojo is available in multiple languages thanks to community contributions:
+
 - English (default)
 - [Español](README.es.md)
 - [Français](README.fr.md) in progress
-- [Deutsch](README.de.md) in progress
+- [Deutsch](README.de.md)
 - [Português](README.pt-br.md)
 - [中文](README.zh.md) in progress
 - [हिन्दी](README.hin.md)

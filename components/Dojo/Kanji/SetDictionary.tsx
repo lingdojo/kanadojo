@@ -6,6 +6,7 @@ import N4KanjiArray from '@/static/kanji/N4';
 import N3KanjiArray from '@/static/kanji/N3';
 import N2KanjiArray from '@/static/kanji/N2';
 import useKanjiStore from '@/store/useKanjiStore';
+import useThemeStore from '@/store/useThemeStore';
 
 const createKanjiSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
@@ -34,6 +35,8 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
 
   const sliceRange =
     kanjiSetSliceRanges[set as keyof typeof kanjiSetSliceRanges];
+
+  const showKana = useThemeStore(state => state.displayKana);
 
   return (
     <div className={clsx('flex flex-col', cardBorderStyles)}>
@@ -85,7 +88,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                           'border-r-1 border-[var(--card-color)]'
                       )}
                     >
-                      {onyomiReading}
+                      {showKana ? onyomiReading.split(' ')[1] : onyomiReading}
                     </span>
                   ))}
                 </div>
@@ -111,7 +114,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                           'border-r-1 border-[var(--card-color)]'
                       )}
                     >
-                      {kunyomiReading}
+                      {showKana ? kunyomiReading.split(' ')[1] : kunyomiReading}
                     </span>
                   ))}
                 </div>

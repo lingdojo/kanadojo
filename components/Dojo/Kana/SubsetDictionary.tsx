@@ -1,6 +1,5 @@
 'use client';
 import clsx from 'clsx';
-// import Banner from '@/components/reusable/Banner';
 import { kana } from '@/static/kana';
 import { useParams } from 'next/navigation';
 
@@ -26,7 +25,6 @@ const SetDictionary = () => {
 
   return (
     <div className='min-h-[100dvh] max-w-[100dvw] px-4 sm:px-8 md:px-20 lg:px-30 xl:px-40 2xl:px-60 flex flex-col gap-4 pb-10'>
-      {/* <Banner subheading={`${group}, ${subgroup}`} /> */}
       <div className='flex flex-col border-1 border-[var(--border-color)] rounded-2xl px-4 bg-[var(--card-color)]'>
         {kanaToDisplay.map(kanaSubgroup => (
           <div

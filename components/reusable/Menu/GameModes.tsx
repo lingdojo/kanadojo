@@ -36,10 +36,10 @@ const GameModes = () => {
     pathname === '/kana'
       ? selectedGameModeKana
       : pathname === '/kanji'
-      ? selectedGameModeKanji
-      : pathname === '/vocabulary'
-      ? selectedGameModeVocab
-      : '';
+        ? selectedGameModeKanji
+        : pathname === '/vocabulary'
+          ? selectedGameModeVocab
+          : '';
 
   const setSelectedGameModeVocab = useVocabStore(
     useShallow(state => state.setSelectedGameModeVocab)
@@ -49,10 +49,10 @@ const GameModes = () => {
     pathname === '/kana'
       ? setSelectedGameModeKana
       : pathname === '/kanji'
-      ? setSelectedGameModeKanji
-      : pathname === '/vocabulary'
-      ? setSelectedGameModeVocab
-      : () => {};
+        ? setSelectedGameModeKanji
+        : pathname === '/vocabulary'
+          ? setSelectedGameModeVocab
+          : () => { };
 
   const gameModes = ['Pick', 'Reverse-Pick', 'Input', 'Reverse-Input'];
 

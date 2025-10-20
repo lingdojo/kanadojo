@@ -16,7 +16,7 @@ const Behavior = () => {
   const silentMode = useThemeStore(state => state.silentMode);
   const setSilentMode = useThemeStore(state => state.setSilentMode);
 
-/*   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
+  /*   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
   const setHotkeys = useThemeStore(state => state.setHotkeys);
 
   const hotkeys = [
@@ -27,24 +27,25 @@ const Behavior = () => {
   ]; */
 
   return (
-    <div className="flex flex-col gap-4">
-      <h4 className="text-lg">
+    <div className='flex flex-col gap-4'>
+      <h4 className='text-lg'>
         In the character selection menu, by default, display:
       </h4>
-      <div className="flex flex-row gap-4">
+      <div className='flex flex-row gap-4'>
         <button
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
-            'text-[var(--secondary-color)]',"flex-1 overflow-hidden"
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
           )}
           onClick={() => {
             playClick();
             setDisplayKana(false);
           }}
         >
-          <span className="text-[var(--main-color)]">
+          <span className='text-[var(--main-color)]'>
             {!displayKana && '\u2B24 '}
           </span>
           Romaji, Translations&nbsp;🇺🇸
@@ -54,28 +55,30 @@ const Behavior = () => {
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
-            'text-[var(--secondary-color)]',"flex-1 overflow-hidden"
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
           )}
           onClick={() => {
             playClick();
             setDisplayKana(true);
           }}
         >
-          <span className="text-[var(--main-color)]">
+          <span className='text-[var(--main-color)]'>
             {displayKana && '\u2B24 '}
           </span>
           Kana, Kanji&nbsp;🇯🇵
         </button>
       </div>
-      <h4 className="text-lg">Play UI + feedback sound effects:</h4>
-      <div className="flex flex-row gap-4">
+      <h4 className='text-lg'>Play UI + feedback sound effects:</h4>
+      <div className='flex flex-row gap-4'>
         <button
           className={clsx(
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]'
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
           )}
           onClick={() => {
             playClick();
@@ -83,15 +86,12 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className='text-[var(--main-color)]'>
               {!silentMode && '\u2B24 '}
             </span>
             on
           </span>
-          <AudioLines
-            size={20}
-            className="mb-0.5"
-          />
+          <AudioLines size={20} className='mb-1' />
         </button>
         <button
           className={clsx(
@@ -99,7 +99,8 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]'
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
           )}
           onClick={() => {
             playClick();
@@ -107,15 +108,12 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className='text-[var(--main-color)]'>
               {silentMode && '\u2B24 '}
             </span>
             off
           </span>
-          <VolumeX
-            size={20}
-            className="mb-0.5"
-          />
+          <VolumeX size={20} className='mb-1' />
         </button>
       </div>
       {/*       <h4 className="text-lg">Enable hotkeys (desktop only):</h4>
