@@ -1,0 +1,17 @@
+ + Plan arrangement for translations to be stored in a single JSON document for each language or variant.
+
+/translation/en.json
+
+ + Move all hardcoded English (original) text content to the `English text content` file.
+
+/translations/es.json
+
+ + Begin the translation of all english text content.
+
+/i18n/{request.ts,routing.ts,navigation.ts}, /middleware.ts
+
+ + Set-up locale-based routing with next-intl
+
+For Every component and view replace harcoded text with the useTranslation('query') function accordingly in order to render the `actual and existing translated text`
+
+ + One can choose a particular view or component to replace harcoded text with its according translation function.
