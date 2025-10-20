@@ -97,7 +97,7 @@ const VocabInputGame = ({
   }, [isHidden]);
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && inputValue.trim().length) {
       if (isInputCorrect(inputValue.trim())) {
         handleCorrectAnswer(inputValue.trim());
         setDisplayAnswerSummary(true);
