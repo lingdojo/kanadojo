@@ -222,6 +222,16 @@ resetTimedStats: () => {
 
       return { allTimeStats: newAllTimeStats };
     });
+    
+    // Trigger achievement check after session save
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        const achievementStore = (window as any).__achievementStore;
+        if (achievementStore) {
+          achievementStore.getState().checkAchievements(get());
+        }
+      }, 100);
+    }
   },
 
   clearAllProgress: () => {

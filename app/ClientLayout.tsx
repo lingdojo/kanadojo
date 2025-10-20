@@ -5,6 +5,8 @@ import useThemeStore from '@/store/useThemeStore';
 import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/components/Modals/WelcomeModal';
+import { AchievementNotificationContainer } from '@/components/reusable/AchievementNotification';
+import AchievementIntegration from '@/components/reusable/AchievementIntegration';
 import { applyTheme } from '@/static/themes';
 
 export default function ClientLayout({
@@ -55,6 +57,8 @@ export default function ClientLayout({
       {children}
       <ScrollRestoration />
       <WelcomeModal />
+      <AchievementNotificationContainer />
+      <AchievementIntegration />
     </div>
   );
 }

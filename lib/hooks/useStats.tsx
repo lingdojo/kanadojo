@@ -1,13 +1,30 @@
 'use client';
+import { useCallback } from 'react';
 import useStatsStore from '@/store/useStatsStore';
+import { useAchievementTrigger } from '@/hooks/useAchievements';
 
 const useStats = () => {
-  const incrementCorrectAnswers = useStatsStore(
+  const { triggerAchievementCheck } = useAchievementTrigger();
+  
+  const baseIncrementCorrectAnswers = useStatsStore(
     state => state.incrementCorrectAnswers
   );
-  const incrementWrongAnswers = useStatsStore(
+  const baseIncrementWrongAnswers = useStatsStore(
     state => state.incrementWrongAnswers
   );
+
+  // Wrap the increment functions to trigger achievement checks
+  const incrementCorrectAnswers = useCallback(() => {
+    baseIncrementCorrectAnswers();
+    // Trigger achievement check after updating stats
+    setTimeout(() => triggerAchievementCheck(), 100);
+  }, [baseIncrementCorrectAnswers, triggerAchievementCheck]);
+
+  const incrementWrongAnswers = useCallback(() => {
+    baseIncrementWrongAnswers();
+    // Trigger achievement check after updating stats
+    setTimeout(() => triggerAchievementCheck(), 100);
+  }, [baseIncrementWrongAnswers, triggerAchievementCheck]);
   const addCharacterToHistory = useStatsStore(
     state => state.addCharacterToHistory
   );
