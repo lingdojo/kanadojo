@@ -59,6 +59,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </>
         )}
         <ClientLayout>
+          {/* next-intl translation support for client components */}
           <NextIntlClientProvider>
             {children}
           </NextIntlClientProvider>
