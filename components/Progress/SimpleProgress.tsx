@@ -1,8 +1,7 @@
 'use client';
-
 import useStatsStore from '@/store/useStatsStore';
 import { Button } from '@/components/ui/button';
-import { Trophy, Target, TrendingUp, RotateCcw } from 'lucide-react';
+import { Trophy, Target, TrendingUp,  Trash } from 'lucide-react';
 import clsx from 'clsx';
 
 // Simple Card component to replace the missing UI component
@@ -79,7 +78,7 @@ export default function SimpleProgress() {
 
   return (
     <div className='space-y-6'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-end'>
         <h1 className='text-3xl font-bold text-[var(--main-color)]'>
           Your Progress
         </h1>
@@ -87,9 +86,9 @@ export default function SimpleProgress() {
           variant='outline'
           size='sm'
           onClick={clearAllProgress}
-          className='text-red-600 hover:text-red-700'
+          className='text-[var(--secondary-color)]'
         >
-          <RotateCcw className='h-4 w-4 mr-2' />
+          <Trash className='h-4 w-4 mr-2' />
           Reset Progress
         </Button>
       </div>
@@ -158,7 +157,7 @@ export default function SimpleProgress() {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Card>
           <CardHeader>
-            <CardTitle className='text-red-600'>Need More Practice</CardTitle>
+            <CardTitle className=''>Need More Practice</CardTitle>
           </CardHeader>
           <CardContent>
             {difficultCharacters.length > 0 ? (
@@ -172,7 +171,7 @@ export default function SimpleProgress() {
                       {char.character}
                     </span>
                     <div className='text-right'>
-                      <div className='text-sm font-medium text-red-600'>
+                      <div className='text-sm font-medium text-[var(--secondary-color)]'>
                         {(char.accuracy * 100).toFixed(1)}%
                       </div>
                       <div className='text-xs text-[var(--secondary-color)]'>
@@ -192,7 +191,7 @@ export default function SimpleProgress() {
 
         <Card>
           <CardHeader>
-            <CardTitle className='text-green-600'>
+            <CardTitle className='text-[var(--main-color)]'>
               Mastered Characters
             </CardTitle>
           </CardHeader>
@@ -208,7 +207,7 @@ export default function SimpleProgress() {
                       {char.character}
                     </span>
                     <div className='text-right'>
-                      <div className='text-sm font-medium text-green-600'>
+                      <div className='text-sm font-medium text-[var(--secondary-color)]'>
                         {(char.accuracy * 100).toFixed(1)}%
                       </div>
                       <div className='text-xs text-[var(--secondary-color)]'>

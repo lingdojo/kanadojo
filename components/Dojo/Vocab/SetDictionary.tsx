@@ -42,11 +42,11 @@ const vocabData = {
 type VocabData = Record<string, Record<string, any>>;
 
 const SetDictionary = ({ set }: { set: string }) => {
+  const showKana = useThemeStore(state => state.displayKana);
+
   const selectedVocabCollection = useVocabStore(
     state => state.selectedVocabCollection
   );
-  const displayKana = useThemeStore(state => state.displayKana);
-  
   const displayVocabCollection = (vocabData as VocabData)['jlpt'][
     selectedVocabCollection
   ]['nouns'];
@@ -70,17 +70,15 @@ const SetDictionary = ({ set }: { set: string }) => {
               {wordObj.word}
             </p>
             <div className='flex flex-col gap-2 items-start'>
-              {!displayKana && (
-                <span
-                  className={clsx(
-                    'rounded-xl px-2 py-1 flex flex-row items-center',
-                    'bg-[var(--background-color)] text-lg',
-                    'text-[var(--secondary-color)] '
-                  )}
-                >
-                  {wordObj.reading}
-                </span>
-              )}
+              <span
+                className={clsx(
+                  'rounded-xl px-2 py-1 flex flex-row items-center',
+                  'bg-[var(--background-color)] text-lg',
+                  'text-[var(--secondary-color)] '
+                )}
+              >
+                {showKana ? wordObj.reading.split(' ')[1] : wordObj.reading}
+              </span>
               <p className='text-xl md:text-2xl text-[var(--secondary-color)]'>
                 {wordObj.displayMeanings.join(', ')}
               </p>

@@ -30,13 +30,13 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
   const selectedKanjiCollection = useKanjiStore(
     state => state.selectedKanjiCollection
   );
-  const displayKana = useThemeStore(state => state.displayKana);
-  
   const displayKanjiCollection =
     kanjiCollections[selectedKanjiCollection as keyof typeof kanjiCollections];
 
   const sliceRange =
     kanjiSetSliceRanges[set as keyof typeof kanjiSetSliceRanges];
+
+  const showKana = useThemeStore(state => state.displayKana);
 
   return (
     <div className={clsx('flex flex-col', cardBorderStyles)}>
@@ -66,62 +66,58 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
               </div>
 
               <div className='flex flex-col gap-2 w-full'>
-                {!displayKana && (
-                  <>
-                    <div
+                <div
+                  className={clsx(
+                    'h-1/2',
+                    'bg-[var(--background-color)] rounded-2xl',
+                    'flex flex-row gap-2',
+                    // 'border-1 border-[var(--border-color)]',
+                    (kanjiObj.onyomi[0] === '' ||
+                      kanjiObj.onyomi.length === 0) &&
+                      'hidden'
+                  )}
+                >
+                  {kanjiObj.onyomi.slice(0, 2).map((onyomiReading, i) => (
+                    <span
+                      key={onyomiReading}
                       className={clsx(
-                        'h-1/2',
-                        'bg-[var(--background-color)] rounded-2xl',
-                        'flex flex-row gap-2',
-                        // 'border-1 border-[var(--border-color)]',
-                        (kanjiObj.onyomi[0] === '' ||
-                          kanjiObj.onyomi.length === 0) &&
-                          'hidden'
+                        'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
+                        'text-[var(--secondary-color)] w-full ',
+
+                        i < kanjiObj.onyomi.slice(0, 2).length - 1 &&
+                          'border-r-1 border-[var(--card-color)]'
                       )}
                     >
-                      {kanjiObj.onyomi.slice(0, 2).map((onyomiReading, i) => (
-                        <span
-                          key={onyomiReading}
-                          className={clsx(
-                            'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
-                            'text-[var(--secondary-color)] w-full ',
+                      {showKana ? onyomiReading.split(' ')[1] : onyomiReading}
+                    </span>
+                  ))}
+                </div>
 
-                            i < kanjiObj.onyomi.slice(0, 2).length - 1 &&
-                              'border-r-1 border-[var(--card-color)]'
-                          )}
-                        >
-                          {onyomiReading}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div
+                <div
+                  className={clsx(
+                    'h-1/2',
+                    'bg-[var(--background-color)] rounded-2xl',
+                    // 'border-1 border-[var(--border-color)]',
+                    'flex flex-row gap-2',
+                    (kanjiObj.kunyomi[0] === '' ||
+                      kanjiObj.kunyomi.length === 0) &&
+                      'hidden'
+                  )}
+                >
+                  {kanjiObj.kunyomi.slice(0, 2).map((kunyomiReading, i) => (
+                    <span
+                      key={kunyomiReading}
                       className={clsx(
-                        'h-1/2',
-                        'bg-[var(--background-color)] rounded-2xl',
-                        // 'border-1 border-[var(--border-color)]',
-                        'flex flex-row gap-2',
-                        (kanjiObj.kunyomi[0] === '' ||
-                          kanjiObj.kunyomi.length === 0) &&
-                          'hidden'
+                        'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
+                        'text-[var(--secondary-color)] w-full ',
+                        i < kanjiObj.kunyomi.slice(0, 2).length - 1 &&
+                          'border-r-1 border-[var(--card-color)]'
                       )}
                     >
-                      {kanjiObj.kunyomi.slice(0, 2).map((kunyomiReading, i) => (
-                        <span
-                          key={kunyomiReading}
-                          className={clsx(
-                            'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
-                            'text-[var(--secondary-color)] w-full ',
-                            i < kanjiObj.kunyomi.slice(0, 2).length - 1 &&
-                              'border-r-1 border-[var(--card-color)]'
-                          )}
-                        >
-                          {kunyomiReading}
-                        </span>
-                      ))}
-                    </div>
-                  </>
-                )}
+                      {showKana ? kunyomiReading.split(' ')[1] : kunyomiReading}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -135,3 +131,4 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
 };
 
 export default KanjiSetDictionary;
+
