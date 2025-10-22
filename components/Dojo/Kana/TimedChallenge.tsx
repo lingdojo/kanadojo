@@ -12,6 +12,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import confetti from 'canvas-confetti';
+import SSRAudioButton from '@/components/reusable/SSRAudioButton';
 
 import type { KanaCharacter } from '@/lib/generateKanaQuestions';
 import { flattenKanaGroups } from '@/lib/flattenKanaGroup';
@@ -234,13 +235,21 @@ export default function TimedChallengeKana() {
 
         {/* Current question */}
         <div className="text-center space-y-4">
-          <div className={clsx(
-            "text-8xl font-bold transition-all duration-200",
-            lastAnswerCorrect === true && "text-green-500",
-            lastAnswerCorrect === false && "text-red-500",
-            lastAnswerCorrect === null && "text-[var(--secondary-color)]"
-          )}>
-            {currentQuestion?.kana}
+          <div className="flex flex-col items-center gap-4">
+            <div className={clsx(
+              "text-8xl font-bold transition-all duration-200",
+              lastAnswerCorrect === true && "text-green-500",
+              lastAnswerCorrect === false && "text-red-500",
+              lastAnswerCorrect === null && "text-[var(--secondary-color)]"
+            )}>
+              {currentQuestion?.kana}
+            </div>
+            <SSRAudioButton 
+              text={currentQuestion?.kana || ''} 
+              variant="icon-only" 
+              size="lg"
+              className="bg-[var(--card-color)] border-[var(--border-color)]"
+            />
           </div>
           
           {/* Feedback */}

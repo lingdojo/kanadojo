@@ -13,6 +13,7 @@ import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/lib/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
+import SSRAudioButton from '@/components/reusable/SSRAudioButton';
 
 const random = new Random();
 
@@ -249,7 +250,15 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         gameMode={gameMode}
         feedback={feedback}
       />
-      <p className="text-8xl sm:text-9xl font-medium">{displayChar}</p>
+      <div className="flex flex-col items-center gap-4">
+        <p className="text-8xl sm:text-9xl font-medium">{displayChar}</p>
+            <SSRAudioButton 
+              text={displayChar} 
+              variant="icon-only" 
+              size="lg"
+              className="bg-[var(--card-color)] border-[var(--border-color)]"
+            />
+      </div>
       <div className="flex flex-row w-full gap-5 sm:gap-0 sm:justify-evenly">
         {shuffledVariants.map((variantChar, i) => (
           <button

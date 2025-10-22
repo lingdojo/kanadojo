@@ -16,6 +16,16 @@ interface ThemeState {
 
   hotkeysOn: boolean;
   setHotkeys: (hotkeys: boolean) => void;
+
+  // Pronunciation settings
+  pronunciationEnabled: boolean;
+  setPronunciationEnabled: (enabled: boolean) => void;
+  
+  pronunciationSpeed: number;
+  setPronunciationSpeed: (speed: number) => void;
+  
+  pronunciationPitch: number;
+  setPronunciationPitch: (pitch: number) => void;
 }
 
 const useThemeStore = create<ThemeState>()(
@@ -30,7 +40,15 @@ const useThemeStore = create<ThemeState>()(
       silentMode: false,
       setSilentMode: silent => set({ silentMode: silent }),
       hotkeysOn: true,
-      setHotkeys: hotkeys => set({ hotkeysOn: hotkeys })
+      setHotkeys: hotkeys => set({ hotkeysOn: hotkeys }),
+      
+      // Pronunciation settings
+      pronunciationEnabled: true,
+      setPronunciationEnabled: enabled => set({ pronunciationEnabled: enabled }),
+      pronunciationSpeed: 0.8,
+      setPronunciationSpeed: speed => set({ pronunciationSpeed: speed }),
+      pronunciationPitch: 1.0,
+      setPronunciationPitch: pitch => set({ pronunciationPitch: pitch })
     }),
 
     {

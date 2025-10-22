@@ -13,6 +13,7 @@ import useStats from '@/lib/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
+import SSRAudioButton from '@/components/reusable/SSRAudioButton';
 
 const random = new Random();
 
@@ -43,21 +44,38 @@ const KanjiPickGame = ({
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
 
+  // Filter out any undefined or null entries
+  const validKanjiObjs = selectedKanjiObjs.filter(obj => obj && obj.kanjiChar && obj.meanings && obj.meanings.length > 0);
+  
   // State management based on mode
   const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .meanings[0]
-      : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .kanjiChar
+    validKanjiObjs.length > 0
+      ? isReverse
+        ? validKanjiObjs[random.integer(0, validKanjiObjs.length - 1)].meanings[0]
+        : validKanjiObjs[random.integer(0, validKanjiObjs.length - 1)].kanjiChar
+      : ''
   );
 
   // Find the correct object based on the current mode
   const correctKanjiObj = (
     isReverse
-      ? selectedKanjiObjs.find(obj => obj.meanings[0] === correctChar)
-      : selectedKanjiObjs.find(obj => obj.kanjiChar === correctChar)
-  )!;
+      ? validKanjiObjs.find(obj => obj && obj.meanings && obj.meanings[0] === correctChar)
+      : validKanjiObjs.find(obj => obj && obj.kanjiChar === correctChar)
+  );
+
+  // Early return if no valid kanji objects
+  if (validKanjiObjs.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
+        <p className="text-lg text-[var(--secondary-color)] mb-4">
+          No valid kanji characters found.
+        </p>
+        <p className="text-sm text-[var(--secondary-color)]">
+          Please select some kanji characters to practice.
+        </p>
+      </div>
+    );
+  }
 
   const [currentKanjiObj, setCurrentKanjiObj] = useState(correctKanjiObj);
 
@@ -211,12 +229,20 @@ const KanjiPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <p
-            className={clsx(isReverse ? 'text-6xl md:text-8xl' : 'text-9xl')}
-            lang={displayCharLang}
-          >
-            {correctChar}
-          </p>
+          <div className="flex flex-col items-center gap-4">
+            <p
+              className={clsx(isReverse ? 'text-6xl md:text-8xl' : 'text-9xl')}
+              lang={displayCharLang}
+            >
+              {correctChar}
+            </p>
+            <SSRAudioButton 
+              text={correctChar} 
+              variant="icon-only" 
+              size="lg"
+              className="bg-[var(--card-color)] border-[var(--border-color)]"
+            />
+          </div>
 
           <div
             className={clsx(
