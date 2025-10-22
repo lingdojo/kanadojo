@@ -7,7 +7,7 @@ import {
   ScrollText,
   FileLock2,
   Cookie,
-  // FileDiff,
+  FileDiff,
   Sun,
   Moon,
   Heart,
@@ -49,20 +49,20 @@ const MainMenu = () => {
       name_en: 'Kanji',
       name_ja: '字',
       href: '/kanji'
-    }
+    },
 
-    // {
-    //   name_en: 'Sentences',
-    //   name_ja: '文',
-    //   href: '/sentences'
-    // }
+    {
+      name_en: 'Sentences',
+      name_ja: '文',
+      href: '/sentences'
+    }
   ];
 
   const legalLinks = [
     { name: 'terms', href: '/terms', icon: ScrollText },
     { name: 'privacy', href: '/privacy', icon: Cookie },
     { name: 'security', href: '/security', icon: FileLock2 },
-    // { name: 'patch notes', href: '/patch-notes', icon: FileDiff }
+    { name: 'patch notes', href: '/patch-notes', icon: FileDiff }
   ];
 
   return (
