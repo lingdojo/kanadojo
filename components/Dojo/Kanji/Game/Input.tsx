@@ -13,6 +13,7 @@ import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
 const random = new Random();
 
@@ -219,9 +220,12 @@ const KanjiInputGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <p className={textSize} lang={displayCharLang}>
-              {correctChar}
-            </p>
+            <FuriganaText 
+              text={correctChar}
+              reading={!isReverse ? (correctKanjiObj?.onyomi[0] || correctKanjiObj?.kunyomi[0]) : undefined}
+              className={textSize}
+              lang={displayCharLang}
+            />
             <SSRAudioButton
               text={correctChar}
               variant='icon-only'

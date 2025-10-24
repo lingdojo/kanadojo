@@ -26,6 +26,8 @@ interface ThemeState {
   
   pronunciationPitch: number;
   setPronunciationPitch: (pitch: number) => void;
+  furiganaEnabled: boolean;
+  setFuriganaEnabled: (enabled: boolean) => void;
 }
 
 const useThemeStore = create<ThemeState>()(
@@ -48,7 +50,9 @@ const useThemeStore = create<ThemeState>()(
       pronunciationSpeed: 0.8,
       setPronunciationSpeed: speed => set({ pronunciationSpeed: speed }),
       pronunciationPitch: 1.0,
-      setPronunciationPitch: pitch => set({ pronunciationPitch: pitch })
+      setPronunciationPitch: pitch => set({ pronunciationPitch: pitch }),
+      furiganaEnabled: false,
+      setFuriganaEnabled: enabled => set({ furiganaEnabled: enabled })
     }),
 
     {

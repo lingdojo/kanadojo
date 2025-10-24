@@ -31,6 +31,8 @@ const Behavior = () => {
   const setPronunciationPitch = useThemeStore(
     state => state.setPronunciationPitch
   );
+  const furiganaEnabled = useThemeStore(state => state.furiganaEnabled);
+  const setFuriganaEnabled = useThemeStore(state => state.setFuriganaEnabled);
 
   /*   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
   const setHotkeys = useThemeStore(state => state.setHotkeys);
@@ -216,6 +218,53 @@ const Behavior = () => {
           </div>
         </>
       )}
+
+      <h4 className='text-lg'>Show furigana (reading) for kanji and vocabulary:</h4>
+      <div className='flex flex-row gap-4'>
+        <button
+          className={clsx(
+            buttonBorderStyles,
+            'text-center text-lg',
+            'w-1/2 md:w-1/4 p-4',
+            'flex flex-row gap-1.5 justify-center items-end',
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
+          )}
+          onClick={() => {
+            playClick();
+            setFuriganaEnabled(true);
+          }}
+        >
+          <span>
+            <span className='text-[var(--main-color)]'>
+              {furiganaEnabled && '\u2B24 '}
+            </span>
+            on
+          </span>
+          <span className='text-sm mb-1'>ふり</span>
+        </button>
+        <button
+          className={clsx(
+            buttonBorderStyles,
+            'text-center text-lg',
+            'w-1/2 md:w-1/4 p-4',
+            'flex flex-row gap-1.5 justify-center items-end',
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
+          )}
+          onClick={() => {
+            playClick();
+            setFuriganaEnabled(false);
+          }}
+        >
+          <span>
+            <span className='text-[var(--main-color)]'>
+              {!furiganaEnabled && '\u2B24 '}
+            </span>
+            off
+          </span>
+        </button>
+      </div>
 
       {/*       <h4 className="text-lg">Enable hotkeys (desktop only):</h4>
       <div className="flex flex-row gap-4">

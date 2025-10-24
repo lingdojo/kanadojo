@@ -5,6 +5,7 @@ import { buttonBorderStyles } from '@/static/styles';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/lib/hooks/useAudio';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
 const AnswerSummary = ({
   payload,
@@ -63,9 +64,12 @@ const AnswerSummary = ({
             <div className=''></div>
           </div>
 
-          <p lang='ja' className='text-7xl pb-2 relative z-10'>
-            {payload.kanjiChar}
-          </p>
+          <FuriganaText 
+            text={payload.kanjiChar}
+            reading={payload.onyomi[0] || payload.kunyomi[0]}
+            className='text-7xl pb-2 relative z-10'
+            lang='ja'
+          />
         </div>
 
         <div className='flex flex-col gap-2 w-full '>
@@ -150,9 +154,12 @@ const AnswerSummary = ({
         {feedback}
       </p>
 
-      <p lang='ja' className='text-6xl flex justify-center w-full'>
-        {payload.word}
-      </p>
+      <FuriganaText 
+        text={payload.word}
+        reading={payload.reading}
+        className='text-6xl flex justify-center w-full'
+        lang='ja'
+      />
       <div className='flex flex-col gap-2 items-start'>
         <span
           className={clsx(

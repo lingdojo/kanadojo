@@ -4,6 +4,7 @@ import { IWord } from '@/lib/interfaces';
 import { cardBorderStyles } from '@/static/styles';
 import useVocabStore from '@/store/useVocabStore';
 import useThemeStore from '@/store/useThemeStore';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
 import N5Nouns from '@/static/vocab/n5/nouns';
 import N4Nouns from '@/static/vocab/n4/nouns';
@@ -66,9 +67,12 @@ const SetDictionary = ({ set }: { set: string }) => {
               i !== 9 && 'border-b-1 border-[var(--border-color)]'
             )}
           >
-            <p lang='ja' className='text-6xl md:text-5xl'>
-              {wordObj.word}
-            </p>
+            <FuriganaText 
+              text={wordObj.word}
+              reading={wordObj.reading}
+              className='text-6xl md:text-5xl'
+              lang='ja'
+            />
             <div className='flex flex-col gap-2 items-start'>
               <span
                 className={clsx(

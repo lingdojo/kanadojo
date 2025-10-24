@@ -14,6 +14,7 @@ import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
 const random = new Random();
 
@@ -212,9 +213,12 @@ const VocabPickGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <p className={clsx(textSize, 'text-center')} lang={displayCharLang}>
-              {correctChar}
-            </p>
+            <FuriganaText 
+              text={correctChar}
+              reading={!isReverse ? correctWordObj?.reading : undefined}
+              className={clsx(textSize, 'text-center')}
+              lang={displayCharLang}
+            />
             <SSRAudioButton
               text={correctChar}
               variant='icon-only'
@@ -251,7 +255,10 @@ const VocabPickGame = ({
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
               >
-                <span>{option}</span>
+                <FuriganaText 
+                  text={option}
+                  reading={isReverse ? selectedWordObjs.find(obj => obj.word === option)?.reading : undefined}
+                />
                 <span
                   className={clsx(
                     'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',

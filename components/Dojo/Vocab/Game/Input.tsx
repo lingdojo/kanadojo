@@ -13,6 +13,7 @@ import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
 const random = new Random();
 
@@ -218,9 +219,12 @@ const VocabInputGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <p className={clsx(textSize, 'text-center')} lang={displayCharLang}>
-              {correctChar}
-            </p>
+            <FuriganaText 
+              text={correctChar}
+              reading={!isReverse ? correctWordObj?.reading : undefined}
+              className={clsx(textSize, 'text-center')}
+              lang={displayCharLang}
+            />
             <SSRAudioButton
               text={correctChar}
               variant='icon-only'

@@ -14,6 +14,7 @@ import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
 const random = new Random();
 
@@ -213,12 +214,12 @@ const KanjiPickGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <p
+            <FuriganaText 
+              text={correctChar}
+              reading={!isReverse ? (correctKanjiObj?.onyomi[0] || correctKanjiObj?.kunyomi[0]) : undefined}
               className={clsx(isReverse ? 'text-6xl md:text-8xl' : 'text-9xl')}
               lang={displayCharLang}
-            >
-              {correctChar}
-            </p>
+            />
             <SSRAudioButton
               text={correctChar}
               variant='icon-only'
@@ -253,7 +254,10 @@ const KanjiPickGame = ({
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
               >
-                <span>{option}</span>
+                <FuriganaText 
+                  text={option}
+                  reading={isReverse ? selectedKanjiObjs.find(obj => obj.kanjiChar === option)?.onyomi[0] || selectedKanjiObjs.find(obj => obj.kanjiChar === option)?.kunyomi[0] : undefined}
+                />
                 <span
                   className={clsx(
                     'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',
