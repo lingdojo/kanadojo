@@ -72,7 +72,7 @@ We expect all participants to:
 
 ## 4. 🚫 Unacceptable Behavior  
 
-![No Trolling GIF](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXh4cnJqYzF6aGZkZ3MxZnYwcXQzMGttb3JrNXRtNjB2ZjczYmQwMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYKDrJ2zZ5qNQuk/giphy.gif)
+![No Trolling GIF](https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NzN3OXZ6NHFtNHJkcTAya3l0Y2xhYTE2MGhvdXE2MTNvcDcwZDU1ZiZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/ielzyxiaS1BELGX69z/giphy.gif)
 
 Unacceptable behaviors include, but are not limited to:
 
