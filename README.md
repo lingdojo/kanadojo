@@ -21,6 +21,15 @@ KanaDojo is an engaging web-based Japanese learning platform that makes masterin
 
 Whether you're just starting with the basic kana syllabaries or preparing for the JLPT exams with advanced kanji and vocabulary, KanaDojo offers a streamlined, distraction-free learning experience that adapts to your preferences and learning style.
 
+### 🎥 Demo: KanaDojo Walkthrough
+
+<video controls width="640" height="360">
+  <source src="./assets/demo.mp4" type="video/mp4">
+  Your browser doesn't support the video tag.  
+  You can also [download the demo video](./assets/demo.mp4).
+</video>
+
+
 ### ✨ Key Features
 
 #### 🎯 **Three Training Dojos**
