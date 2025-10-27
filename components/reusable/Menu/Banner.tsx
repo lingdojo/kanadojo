@@ -1,18 +1,20 @@
 'use client';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const Banner = () => {
   const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const subheading =
-    pathname === '/kana'
+    pathWithoutLocale === '/kana'
       ? 'Kana あ'
-      : pathname === '/kanji'
+      : pathWithoutLocale === '/kanji'
       ? 'Kanji 字'
-      : pathname === '/vocabulary'
+      : pathWithoutLocale === '/vocabulary'
       ? 'Vocabulary 語'
-      : pathname === '/preferences'
+      : pathWithoutLocale === '/preferences'
       ? 'Preferences 設'
       : '';
   return (

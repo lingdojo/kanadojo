@@ -8,9 +8,11 @@ import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import { usePathname } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const GameModes = () => {
   const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const { playClick } = useClick();
 
@@ -33,11 +35,11 @@ const GameModes = () => {
   );
 
   const selectedGameMode =
-    pathname === '/kana'
+    pathWithoutLocale === '/kana'
       ? selectedGameModeKana
-      : pathname === '/kanji'
+      : pathWithoutLocale === '/kanji'
         ? selectedGameModeKanji
-        : pathname === '/vocabulary'
+        : pathWithoutLocale === '/vocabulary'
           ? selectedGameModeVocab
           : '';
 
@@ -46,11 +48,11 @@ const GameModes = () => {
   );
 
   const setSelectedGameMode =
-    pathname === '/kana'
+    pathWithoutLocale === '/kana'
       ? setSelectedGameModeKana
-      : pathname === '/kanji'
+      : pathWithoutLocale === '/kanji'
         ? setSelectedGameModeKanji
-        : pathname === '/vocabulary'
+        : pathWithoutLocale === '/vocabulary'
           ? setSelectedGameModeVocab
           : () => { };
 

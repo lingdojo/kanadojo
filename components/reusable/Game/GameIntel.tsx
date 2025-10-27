@@ -11,6 +11,7 @@ import { useClick } from '@/lib/hooks/useAudio';
 import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import { usePathname } from 'next/navigation';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const GameIntel = ({
   gameMode,
@@ -32,7 +33,9 @@ const GameIntel = ({
 
   const { playClick } = useClick();
 
-  const trainingDojo = usePathname().split('/')[1];
+  const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
+  const trainingDojo = pathWithoutLocale.split('/')[1];
 
   const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);

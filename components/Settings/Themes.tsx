@@ -1,5 +1,5 @@
 'use client';
-import { createElement } from 'react';
+import { createElement, useEffect } from 'react';
 import themeSets from '@/static/themes';
 import useThemeStore from '@/store/useThemeStore';
 import clsx from 'clsx';
@@ -20,9 +20,18 @@ const Themes = () => {
 
   const [isHovered, setIsHovered] = useState('');
 
-  const [randomTheme, setRandomTheme] = useState(
-    themeSets[2].themes[random.integer(0, themeSets[2].themes.length - 1)]
-  );
+  // Initialize with first theme to avoid hydration mismatch
+  const [randomTheme, setRandomTheme] = useState(themeSets[2].themes[0]);
+  
+  // Set random theme only on client side after mount
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+    setRandomTheme(
+      themeSets[2].themes[random.integer(0, themeSets[2].themes.length - 1)]
+    );
+  }, []);
 
   return (
     <div className='flex flex-col gap-6'>

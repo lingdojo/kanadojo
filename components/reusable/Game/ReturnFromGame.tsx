@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useClick } from '@/lib/hooks/useAudio';
 import { useStopwatch } from 'react-timer-hook';
 import useStatsStore from '@/store/useStatsStore';

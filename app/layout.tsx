@@ -1,22 +1,23 @@
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import ClientLayout from './ClientLayout';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MSClarity from '@/components/analytics/MSClarity';
-import { Metadata } from 'next';
-import {NextIntlClientProvider} from "next-intl"
+import { Metadata, Viewport } from 'next';
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
 const msVerificationToken = process.env.MS_VERIFICATION_TOKEN || '';
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   manifest: '/manifest.json',
-
-
-  viewport:
-    'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
   title: 'KanaDojo',
   description:
     'KanaDojo is a fun, minimalist, aesthetic platform for learning and practicing Japanese online.',
@@ -44,11 +45,10 @@ const isAnalyticsEnabled =
 interface RootLayoutProps {
   readonly children: React.ReactNode;
 }
-// next-intl support for client component requires async RootLayout
-export default async function RootLayout({ children }: RootLayoutProps) {
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      {/* It's recommended to remove the <head> tag here, as Next.js 13+ with the App Router manages it via the metadata object */}
+    <html>
       <body>
         {isAnalyticsEnabled && (
           <>
@@ -58,12 +58,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             <SpeedInsights />
           </>
         )}
-        <ClientLayout>
-          {/* next-intl translation support for client components */}
-          <NextIntlClientProvider>
-            {children}
-          </NextIntlClientProvider>
-          </ClientLayout>
+        {children}
       </body>
     </html>
   );

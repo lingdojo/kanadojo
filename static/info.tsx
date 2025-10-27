@@ -1,30 +1,27 @@
 import DevNotice from '@/components/reusable/DevNotice';
-import Link from 'next/link';
-import {useTranslations} from "next-intl"
+import { Link } from '@/i18n/routing';
 
-// Wrap info constant in a function to match translation management system requirements
-export default function translationGen(){
-  // request translation for Menu Info section
-const t = useTranslations('MenuInfo')
-const info = {
-  '/': {
-    header: (
-      <p className='flex gap-2 items-center flex-1 overflow-hidden '>
-        {/* render localized content */}
-        <span>{t('greeting')}</span>
-        <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
-          v0.1.2 (alpha)
-        </i>
-      </p>
-    ),
-    content: (
-      <>
-        <p className='text-lg text-[var(--secondary-color)]'>
-          {t('description')}
+// Updated to receive translations as a parameter instead of using hook
+export default function translationGen(t: (key: string) => string) {
+  const info = {
+    '/': {
+      header: (
+        <p className='flex gap-2 items-center flex-1 overflow-hidden '>
+          {/* render localized content */}
+          <span>{t('greeting')}</span>
+          <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
+            v0.1.2 (alpha)
+          </i>
         </p>
-        <p className='text-lg text-[var(--secondary-color)]'>
-          {t('instructions')}
-        </p>
+      ),
+      content: (
+        <>
+          <p className='text-lg text-[var(--secondary-color)]'>
+            {t('description')}
+          </p>
+          <p className='text-lg text-[var(--secondary-color)]'>
+            {t('instructions')}
+          </p>
 {/*         <p className='text-sm text-[var(--secondary-color)]'>
           Want to support an independent project built by the community, for the
           community, and help KanaDojo continue growing? Then please consider
