@@ -69,9 +69,13 @@ const VocabCards = () => {
       id: `Set ${i + 1}`
     }));
 
-  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
-
   const numColumns = useGridColumns();
+
+  const numRows = chunkArray(vocabSetsTemp, numColumns).length;
+
+  const allRowIndices = Array.from({ length: numRows }, (_, i) => i);
+
+  const [collapsedRows, setCollapsedRows] = useState<number[]>(allRowIndices);
 
   return (
     <div className='flex flex-col w-full gap-4'>
