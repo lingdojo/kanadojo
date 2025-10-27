@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import Banner from './Menu/Banner';
 import { buttonBorderStyles } from '@/static/styles';
 import { ChevronsLeft } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 const PostWrapper = ({ textContent }: { textContent: string }) => {
   return (

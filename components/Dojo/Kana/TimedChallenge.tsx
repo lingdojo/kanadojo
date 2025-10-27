@@ -8,7 +8,7 @@ import { useChallengeTimer } from '@/hooks/useTimer';
 import { Button } from '@/components/ui/button';
 import { generateKanaQuestion } from '@/lib/generateKanaQuestions';
 import { Timer, Target, TrendingUp, RotateCcw, Play, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import confetti from 'canvas-confetti';

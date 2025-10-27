@@ -1,6 +1,6 @@
 'use client';
-import { Fragment, lazy, Suspense, useState } from 'react';
-import Link from 'next/link';
+import { Fragment, lazy, Suspense, useState, useEffect } from 'react';
+import { Link } from '@/i18n/routing';
 import Banner from './Banner';
 import Info from '@/components/reusable/Menu/Info';
 import {
@@ -25,6 +25,7 @@ import { Button } from '@/components/ui/button';
 const Decorations = lazy(() => import('./Decorations'));
 
 const MainMenu = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const isLG = useMediaQuery({ minWidth: 1024 });
 
   const theme = useThemeStore(state => state.theme);
@@ -33,6 +34,10 @@ const MainMenu = () => {
   const { playClick } = useClick();
 
   const [expandDecorations, setExpandDecorations] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const links = [
     {
@@ -71,7 +76,7 @@ const MainMenu = () => {
         'flex flex-row justify-center max-w-[100dvw] min-h-[100dvh]'
       )}
     >
-      {isLG && (
+      {isMounted && isLG && (
         <Suspense fallback={<></>}>
           {process.env.NODE_ENV === 'production' && (
             <Decorations expandDecorations={expandDecorations} />

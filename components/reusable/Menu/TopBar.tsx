@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import useKanaStore from '@/store/useKanaStore';
 import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
@@ -11,6 +11,7 @@ import { ChevronUp, Play } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
 import { MousePointerClick, Keyboard } from 'lucide-react';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 interface ITopBarProps {
   showGameModes: boolean;
@@ -25,6 +26,7 @@ const TopBar: React.FC<ITopBarProps> = ({
   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
 
   const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const { playClick } = useClick();
 
@@ -45,22 +47,22 @@ const TopBar: React.FC<ITopBarProps> = ({
   );
 
   const selectedGameMode =
-    pathname === '/kana'
+    pathWithoutLocale === '/kana'
       ? selectedGameModeKana
-      : pathname === '/kanji'
+      : pathWithoutLocale === '/kanji'
       ? selectedGameModeKanji
-      : pathname === '/vocabulary'
+      : pathWithoutLocale === '/vocabulary'
       ? selectedGameModeVocab
       : '';
 
   const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
 
   const isFilled =
-    pathname === '/kana'
+    pathWithoutLocale === '/kana'
       ? kanaGroupIndices.length !== 0
-      : pathname === '/kanji'
+      : pathWithoutLocale === '/kanji'
       ? selectedKanjiObjs.length >= 10
-      : pathname === '/vocabulary'
+      : pathWithoutLocale === '/vocabulary'
       ? selectedWordObjs.length >= 10
       : false;
 
@@ -156,7 +158,7 @@ const TopBar: React.FC<ITopBarProps> = ({
       />
 
       <Link
-        href={`${pathname}/train/${selectedGameMode}`}
+        href={`${pathWithoutLocale}/train/${selectedGameMode}`}
         className='w-1/2 group'
       >
         <button

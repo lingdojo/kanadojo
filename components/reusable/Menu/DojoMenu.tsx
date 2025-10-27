@@ -11,9 +11,11 @@ import CollectionSelector from '@/components/reusable/Menu/CollectionSelector';
 import KanjiCards from '@/components/Dojo/Kanji';
 import { usePathname } from 'next/navigation';
 import VocabCards from '@/components/Dojo/Vocab';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const DojoMenu = () => {
   const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const [showGameModes, setShowGameModes] = useState(false);
 
@@ -35,7 +37,7 @@ const DojoMenu = () => {
         <Banner />
 
         <Info />
-        {(pathname === '/kanji' || pathname === '/vocabulary') && (
+        {(pathWithoutLocale === '/kanji' || pathWithoutLocale === '/vocabulary') && (
           <CollectionSelector />
         )}
         <TopBar
@@ -45,11 +47,11 @@ const DojoMenu = () => {
         />
         {showGameModes && <GameModes />}
 
-        {pathname === '/kana' ? (
+        {pathWithoutLocale === '/kana' ? (
           <KanaCards />
-        ) : pathname === '/kanji' ? (
+        ) : pathWithoutLocale === '/kanji' ? (
           <KanjiCards />
-        ) : pathname === '/vocabulary' ? (
+        ) : pathWithoutLocale === '/vocabulary' ? (
           <VocabCards />
         ) : null}
       </div>

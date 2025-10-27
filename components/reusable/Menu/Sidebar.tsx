@@ -1,15 +1,16 @@
 'use client';
-import Link from 'next/link';
+import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { House, Sparkles, TrendingUp, Trophy } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import { useEffect, useRef } from 'react';
 import useThemeStore from '@/store/useThemeStore';
-import { usePathname, useRouter } from 'next/navigation';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const Sidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
 
@@ -27,7 +28,7 @@ const Sidebar = () => {
       } else if (event.key.toLowerCase() === 'h') {
         homeButtonRef.current?.click();
       } else if (event.key.toLowerCase() === 'p') {
-        router.push('');
+        router.push('/preferences');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -35,7 +36,7 @@ const Sidebar = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [hotkeysOn]);
+  }, [hotkeysOn, router]);
 
   return (
     <div
@@ -65,7 +66,7 @@ const Sidebar = () => {
         href='/'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:p-3 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/'
+          pathWithoutLocale === '/'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -78,7 +79,7 @@ const Sidebar = () => {
         href='/kana'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/kana'
+          pathWithoutLocale === '/kana'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -91,7 +92,7 @@ const Sidebar = () => {
         href='/vocabulary'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/vocabulary'
+          pathWithoutLocale === '/vocabulary'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -103,7 +104,7 @@ const Sidebar = () => {
         href='/kanji'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/kanji'
+          pathWithoutLocale === '/kanji'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -115,7 +116,7 @@ const Sidebar = () => {
         href='/progress'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/progress'
+          pathWithoutLocale === '/progress'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -128,7 +129,7 @@ const Sidebar = () => {
         href='/achievements'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/achievements'
+          pathWithoutLocale === '/achievements'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -141,7 +142,7 @@ const Sidebar = () => {
         href='/preferences'
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathname === '/preferences'
+          pathWithoutLocale === '/preferences'
             ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
             : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
         )}
@@ -150,7 +151,7 @@ const Sidebar = () => {
         <Sparkles
           // size={32}
           className={clsx(
-            pathname !== '/preferences' && 'motion-safe:animate-bounce'
+            pathWithoutLocale !== '/preferences' && 'motion-safe:animate-bounce'
           )}
         />
         <span className='max-lg:hidden'>Preferences</span>

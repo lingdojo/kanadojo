@@ -7,9 +7,13 @@ import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
 import Stats from '@/components/reusable/Game/Stats';
 import { usePathname } from 'next/navigation';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const Game = () => {
-  const pathname = usePathname().split('/').slice(0, -2).join('/');
+  const fullPathname = usePathname();
+  // Remove locale and get back to kanji root
+  const pathWithoutLocale = removeLocaleFromPath(fullPathname);
+  const pathname = pathWithoutLocale.split('/').slice(0, -2).join('/');
 
   const showStats = useStatsStore(state => state.showStats);
 

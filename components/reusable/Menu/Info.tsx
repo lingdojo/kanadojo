@@ -7,16 +7,29 @@ import { ChevronUp } from 'lucide-react';
 import translationGen from '@/static/info';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
+import { useTranslations } from 'next-intl';
 
 const Info = () => {
-    const pathname  = usePathname();
-
-  const { header, content } = translationGen()[pathname as keyof typeof translationGen]
+  const pathname = usePathname();
+  const t = useTranslations('MenuInfo');
+  
+  // Remove locale from pathname (e.g., /en/kana -> /kana)
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
+  
+  // Get translations object, passing the translation function
+  const translations = translationGen(t);
+  
+  // Get page data with fallback to home
+  const pageData = translations[pathWithoutLocale as keyof typeof translations] || translations['/'];
+  
+  // Provide default values to avoid destructuring undefined
+  const { header, content } = pageData || { header: '', content: '' };
 
   const { playClick } = useClick();
 
   const [showInfo, setShowInfo] = useState(
-    ['/kana', '/kanji', '/vocabulary', '/', '/sentences'].includes(pathname)
+    ['/kana', '/kanji', '/vocabulary', '/', '/sentences'].includes(pathWithoutLocale)
       ? true
       : false
   );

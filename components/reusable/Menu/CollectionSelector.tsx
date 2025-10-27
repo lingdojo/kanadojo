@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import { usePathname } from 'next/navigation';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 import {
   N5KanjiLength,
   N4KanjiLength,
@@ -60,18 +61,19 @@ const CollectionSelector = () => {
   const clearVocabSets = useVocabStore(state => state.clearVocabSets);
 
   const pathname = usePathname();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const selectedCollection =
-    pathname === '/kanji'
+    pathWithoutLocale === '/kanji'
       ? selectedKanjiCollection
-      : pathname === '/vocabulary'
+      : pathWithoutLocale === '/vocabulary'
       ? selectedVocabCollection
       : null;
 
   const setSelectedCollection =
-    pathname === '/kanji'
+    pathWithoutLocale === '/kanji'
       ? setSelectedKanjiCollection
-      : pathname === '/vocabulary'
+      : pathWithoutLocale === '/vocabulary'
       ? setSelectedVocabCollection
       : () => {};
 
@@ -79,42 +81,42 @@ const CollectionSelector = () => {
     {
       name: 'n5',
       displayName: `Unit 1, Sets 1-${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5
       }`
     },
     {
       name: 'n4',
       displayName: `Unit 2, Sets ${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5 + 1
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 + 1
       }-${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n4
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4
       }`
     },
     {
       name: 'n3',
       displayName: `Unit 3, Sets ${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
         1
       }-${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n4 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n3
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n3
       }`
     },
     {
       name: 'n2',
       displayName: `Unit 4, Sets ${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n4 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n3 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n3 +
         1
       }-${
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n4 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n3 +
-        numCollectionSets[pathname as keyof typeof numCollectionSets].n2
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n3 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n2
       }`
     }
   ];
@@ -153,10 +155,10 @@ const CollectionSelector = () => {
                 playClick();
 
                 setSelectedCollection(collection.name);
-                if (pathname === '/kanji') {
+                if (pathWithoutLocale === '/kanji') {
                   clearKanjiObjs();
                   clearKanjiSets();
-                } else if (pathname === '/vocabulary') {
+                } else if (pathWithoutLocale === '/vocabulary') {
                   clearWordObjs();
                   clearVocabSets();
                 }
@@ -204,11 +206,11 @@ const CollectionSelector = () => {
             Selected Sets:
           </span>
           <span className='text-[var(--secondary-color)]'>
-            {pathname === '/kanji'
+            {pathWithoutLocale === '/kanji'
               ? selectedKanjiSets.length > 0
                 ? selectedKanjiSets.sort().join(', ')
                 : 'None'
-              : pathname === '/vocabulary'
+              : pathWithoutLocale === '/vocabulary'
               ? selectedVocabSets.length > 0
                 ? selectedVocabSets.sort().join(', ')
                 : 'None'
@@ -225,10 +227,10 @@ const CollectionSelector = () => {
           )}
           onClick={() => {
             playClick();
-            if (pathname === '/kanji') {
+            if (pathWithoutLocale === '/kanji') {
               clearKanjiSets();
               clearKanjiObjs();
-            } else if (pathname === '/vocabulary') {
+            } else if (pathWithoutLocale === '/vocabulary') {
               clearVocabSets();
               clearWordObjs();
             }
