@@ -1,3 +1,5 @@
+<div id="top"></div>
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -367,5 +369,7 @@ KanaDojo is available in multiple languages thanks to community contributions:
 **Made with ❤️ for Japanese language learners worldwide**
 
 がんばって！ (Ganbatte! - Do your best!)
+
+[⬆ Back to top](#top)
 
 </div>

@@ -1,3 +1,5 @@
+<div id="top"></div>
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -371,5 +373,7 @@ kanadojo/
 **為全世界的日語學習者用 ❤️ 打造**
 
 がんばって！ (加油! - 全力以赴!)
+
+[⬆ 返回頂部](#top)
 
 </div>

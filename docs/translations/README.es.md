@@ -1,3 +1,5 @@
+<div id="top"></div>
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -371,5 +373,7 @@ Este proyecto está bajo la Licencia AGPL 3.0 - consulta el archivo [LICENSE.md]
 **Hecho con ❤️ para los estudiantes de japonés en todo el mundo**
 
 がんばって！ (Ganbatte! - Do your best! - ¡Haz tu mejor esfuerzo!)
+
+[⬆ Volver al inicio](#top)
 
 </div>
