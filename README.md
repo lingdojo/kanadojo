@@ -368,4 +368,8 @@ KanaDojo is available in multiple languages thanks to community contributions:
 
 がんばって！ (Ganbatte! - Do your best!)
 
+<br/>
+
+<a href="#top">Back to top</a> <!-- Corrected scroll-to-top link -->
+
 </div>
