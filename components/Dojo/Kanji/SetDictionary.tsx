@@ -6,7 +6,7 @@ import N4KanjiArray from '@/static/kanji/N4';
 import N3KanjiArray from '@/static/kanji/N3';
 import N2KanjiArray from '@/static/kanji/N2';
 import useKanjiStore from '@/store/useKanjiStore';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
 const createKanjiSetRanges = (numSets: number) =>
@@ -37,7 +37,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
   const sliceRange =
     kanjiSetSliceRanges[set as keyof typeof kanjiSetSliceRanges];
 
-  const showKana = useThemeStore(state => state.displayKana);
+  const showKana = usePreferencesStore(state => state.displayKana);
 
   return (
     <div className={clsx('flex flex-col', cardBorderStyles)}>
@@ -61,7 +61,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                   <div className=''></div>
                 </div>
 
-                <FuriganaText 
+                <FuriganaText
                   text={kanjiObj.kanjiChar}
                   reading={kanjiObj.onyomi[0] || kanjiObj.kunyomi[0]}
                   className='text-7xl pb-2 relative z-10'
@@ -135,4 +135,3 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
 };
 
 export default KanjiSetDictionary;
-

@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useClick } from '@/lib/hooks/useAudio';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import { buttonBorderStyles } from '@/static/styles';
 import fonts from '@/static/fonts';
 import { Dice5 } from 'lucide-react';
@@ -13,8 +13,8 @@ const random = new Random();
 const Fonts = () => {
   const { playClick } = useClick();
 
-  const currentFont = useThemeStore(state => state.font);
-  const setFont = useThemeStore(state => state.setFont);
+  const currentFont = usePreferencesStore(state => state.font);
+  const setFont = usePreferencesStore(state => state.setFont);
 
   const [randomFont, setRandomFont] = useState(
     fonts[random.integer(0, fonts.length - 1)]
@@ -26,7 +26,8 @@ const Fonts = () => {
         className={clsx(
           'p-6 flex justify-center items-center gap-2 w-1/4',
           buttonBorderStyles,
-          'text-xl w-full','flex-1 overflow-hidden'
+          'text-xl w-full',
+          'flex-1 overflow-hidden'
         )}
         onClick={() => {
           playClick();
@@ -51,7 +52,8 @@ const Fonts = () => {
             className={clsx(
               'flex justify-center items-center',
               buttonBorderStyles,
-              'py-4 px-4','flex-1 overflow-hidden'
+              'py-4 px-4',
+              'flex-1 overflow-hidden'
             )}
             onClick={() => playClick()}
           >

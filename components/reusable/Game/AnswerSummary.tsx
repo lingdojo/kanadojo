@@ -64,7 +64,7 @@ const AnswerSummary = ({
             <div className=''></div>
           </div>
 
-          <FuriganaText 
+          <FuriganaText
             text={payload.kanjiChar}
             reading={payload.onyomi[0] || payload.kunyomi[0]}
             className='text-7xl pb-2 relative z-10'
@@ -137,7 +137,10 @@ const AnswerSummary = ({
           buttonBorderStyles,
           'flex flex-row justify-center items-end gap-2'
         )}
-        onClick={() => setDisplayAnswerSummary(false)}
+        onClick={() => {
+          setDisplayAnswerSummary(false);
+          playClick();
+        }}
       >
         <span>continue</span>
         <CircleArrowRight />
@@ -154,7 +157,7 @@ const AnswerSummary = ({
         {feedback}
       </p>
 
-      <FuriganaText 
+      <FuriganaText
         text={payload.word}
         reading={payload.reading}
         className='text-6xl flex justify-center w-full'

@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import AudioButton from './AudioButton';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 
 interface SSRAudioButtonProps {
   text: string;
@@ -13,9 +13,11 @@ interface SSRAudioButtonProps {
   onStop?: () => void;
 }
 
-const SSRAudioButton: React.FC<SSRAudioButtonProps> = (props) => {
+const SSRAudioButton: React.FC<SSRAudioButtonProps> = props => {
   const [isClient, setIsClient] = useState(false);
-  const pronunciationEnabled = useThemeStore(state => state.pronunciationEnabled);
+  const pronunciationEnabled = usePreferencesStore(
+    state => state.pronunciationEnabled
+  );
 
   useEffect(() => {
     setIsClient(true);
@@ -29,7 +31,7 @@ const SSRAudioButton: React.FC<SSRAudioButtonProps> = (props) => {
   // If pronunciation is disabled, show a placeholder
   if (!pronunciationEnabled) {
     return (
-      <div className="p-2 text-xs text-gray-400 border rounded">
+      <div className='p-2 text-xs text-gray-400 border rounded'>
         Audio disabled
       </div>
     );

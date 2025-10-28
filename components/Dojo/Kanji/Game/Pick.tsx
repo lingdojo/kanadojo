@@ -267,3 +267,4 @@ const KanjiPickGame = ({
 };
 
 export default KanjiPickGame;
+

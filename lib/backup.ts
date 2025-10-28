@@ -1,6 +1,6 @@
 // Helpers to export/import user preferences and stats (client-side only)
 
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import useStatsStore from '@/store/useStatsStore';
 
 // JSON-safe type
@@ -26,7 +26,8 @@ function isPlainObject(v: unknown): v is Record<string, unknown> {
 function toJSONValue(v: unknown): JSONValue | undefined {
   const t = typeof v;
   if (v === null) return null;
-  if (t === 'string' || t === 'number' || t === 'boolean') return v as JSONValue;
+  if (t === 'string' || t === 'number' || t === 'boolean')
+    return v as JSONValue;
   if (Array.isArray(v)) {
     const arr: JSONValue[] = [];
     for (const item of v) {
@@ -61,13 +62,15 @@ function filterToKnownKeys<T extends object>(
 }
 
 function getAppVersion(): string {
-  type G = typeof globalThis & { process?: { env?: Record<string, string | undefined> } };
+  type G = typeof globalThis & {
+    process?: { env?: Record<string, string | undefined> };
+  };
   const env = (globalThis as G).process?.env;
   return env?.NEXT_PUBLIC_APP_VERSION ?? 'dev';
 }
 
 export function createBackup(): BackupFile {
-  const themeState = useThemeStore.getState();
+  const themeState = usePreferencesStore.getState();
   const statsState = useStatsStore.getState();
 
   return {
@@ -81,9 +84,9 @@ export function createBackup(): BackupFile {
 export function applyBackup(data: BackupFile): boolean {
   try {
     if (data.theme) {
-      const current = useThemeStore.getState();
+      const current = usePreferencesStore.getState();
       const picked = filterToKnownKeys(current, data.theme);
-      useThemeStore.setState(picked);
+      usePreferencesStore.setState(picked);
     }
     if (data.stats) {
       const current = useStatsStore.getState();

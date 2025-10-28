@@ -4,7 +4,7 @@ import { House, Sparkles, TrendingUp, Trophy } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
 import { useEffect, useRef } from 'react';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const Sidebar = () => {
@@ -12,7 +12,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const pathWithoutLocale = removeLocaleFromPath(pathname);
 
-  const hotkeysOn = useThemeStore(state => state.hotkeysOn);
+  const hotkeysOn = usePreferencesStore(state => state.hotkeysOn);
 
   const { playClick } = useClick();
 

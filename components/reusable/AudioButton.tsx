@@ -1,9 +1,9 @@
 'use client';
 import { useJapaneseTTS } from '@/lib/hooks/useJapaneseTTS';
-import { Volume2,  Loader2 } from 'lucide-react';
+import { Volume2, Loader2 } from 'lucide-react';
 import clsx from 'clsx';
 import { buttonBorderStyles } from '@/static/styles';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 
 interface AudioButtonProps {
   text: string;
@@ -22,14 +22,21 @@ const AudioButton: React.FC<AudioButtonProps> = ({
   variant = 'default',
   disabled = false,
   onPlay,
-  onStop,
+  onStop
 }) => {
-  const { speak, stop, isPlaying, isSupported, refreshVoices } = useJapaneseTTS();
-  
+  const { speak, stop, isPlaying, isSupported, refreshVoices } =
+    useJapaneseTTS();
+
   // Get pronunciation settings from theme store
-  const pronunciationEnabled = useThemeStore(state => state.pronunciationEnabled);
-  const pronunciationSpeed = useThemeStore(state => state.pronunciationSpeed);
-  const pronunciationPitch = useThemeStore(state => state.pronunciationPitch);
+  const pronunciationEnabled = usePreferencesStore(
+    state => state.pronunciationEnabled
+  );
+  const pronunciationSpeed = usePreferencesStore(
+    state => state.pronunciationSpeed
+  );
+  const pronunciationPitch = usePreferencesStore(
+    state => state.pronunciationPitch
+  );
 
   const handleClick = async () => {
     if (disabled || !pronunciationEnabled) return;
@@ -39,14 +46,14 @@ const AudioButton: React.FC<AudioButtonProps> = ({
       onStop?.();
     } else {
       onPlay?.();
-      
+
       // Refresh voices before speaking
       if (typeof window !== 'undefined') {
         refreshVoices();
         // Small delay to ensure voices are loaded
         await new Promise(resolve => setTimeout(resolve, 100));
       }
-      
+
       await speak(text, {
         rate: pronunciationSpeed,
         pitch: pronunciationPitch,
@@ -58,13 +65,13 @@ const AudioButton: React.FC<AudioButtonProps> = ({
   const sizeClasses = {
     sm: 'p-2 text-sm',
     md: 'p-3 text-base',
-    lg: 'p-4 text-lg',
+    lg: 'p-4 text-lg'
   };
 
   const iconSizes = {
     sm: 16,
     md: 20,
-    lg: 24,
+    lg: 24
   };
 
   // Don't render if pronunciation is disabled
@@ -84,7 +91,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
           sizeClasses[size],
           className
         )}
-        title="Try pronunciation (may work in some browsers)"
+        title='Try pronunciation (may work in some browsers)'
       >
         <Volume2 size={iconSizes[size]} />
       </button>
@@ -93,7 +100,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
 
   const getIcon = () => {
     if (isPlaying) {
-      return <Loader2 size={iconSizes[size]} className="animate-spin" />;
+      return <Loader2 size={iconSizes[size]} className='animate-spin' />;
     }
     return <Volume2 size={iconSizes[size]} />;
   };

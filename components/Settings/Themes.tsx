@@ -1,7 +1,7 @@
 'use client';
 import { createElement, useEffect } from 'react';
 import themeSets from '@/static/themes';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import clsx from 'clsx';
 import { useClick, useLong } from '@/lib/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
@@ -15,8 +15,8 @@ const Themes = () => {
   const { playClick } = useClick();
   const { playLong } = useLong();
 
-  const selectedTheme = useThemeStore(state => state.theme);
-  const setSelectedTheme = useThemeStore(state => state.setTheme);
+  const selectedTheme = usePreferencesStore(state => state.theme);
+  const setSelectedTheme = usePreferencesStore(state => state.setTheme);
 
   const [isHovered, setIsHovered] = useState('');
 

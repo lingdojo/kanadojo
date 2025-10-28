@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import { kana } from '@/static/kana';
 import useKanaStore from '@/store/useKanaStore';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/lib/hooks/useAudio';
 import { miniButtonBorderStyles } from '@/static/styles';
 import { MousePointer } from 'lucide-react';
@@ -35,7 +35,7 @@ const Subset = ({
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
   const addKanaGroupIndex = useKanaStore(state => state.addKanaGroupIndex);
   const addKanaGroupIndices = useKanaStore(state => state.addKanaGroupIndices);
-  const displayKana = useThemeStore(state => state.displayKana);
+  const displayKana = usePreferencesStore(state => state.displayKana);
   const [focusedRow, setFocusedRow] = useState('');
 
   return (

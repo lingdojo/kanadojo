@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { IWord } from '@/lib/interfaces';
 import { cardBorderStyles } from '@/static/styles';
 import useVocabStore from '@/store/useVocabStore';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
 import N5Nouns from '@/static/vocab/n5/nouns';
@@ -43,7 +43,7 @@ const vocabData = {
 type VocabData = Record<string, Record<string, any>>;
 
 const SetDictionary = ({ set }: { set: string }) => {
-  const showKana = useThemeStore(state => state.displayKana);
+  const showKana = usePreferencesStore(state => state.displayKana);
 
   const selectedVocabCollection = useVocabStore(
     state => state.selectedVocabCollection
@@ -67,7 +67,7 @@ const SetDictionary = ({ set }: { set: string }) => {
               i !== 9 && 'border-b-1 border-[var(--border-color)]'
             )}
           >
-            <FuriganaText 
+            <FuriganaText
               text={wordObj.word}
               reading={wordObj.reading}
               className='text-6xl md:text-5xl'

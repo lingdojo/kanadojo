@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import { useEffect } from 'react';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/components/Modals/WelcomeModal';
@@ -14,8 +14,8 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { theme } = useThemeStore();
-  const font = useThemeStore(state => state.font);
+  const { theme } = usePreferencesStore();
+  const font = usePreferencesStore(state => state.font);
 
   const fontClassName = fonts.find(fontObj => font === fontObj.name)?.font
     .className;

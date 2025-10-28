@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
 import clsx from 'clsx';
 import { useClick } from '@/lib/hooks/useAudio';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import { useMediaQuery } from 'react-responsive';
 import { buttonBorderStyles } from '@/static/styles';
 import { Button } from '@/components/ui/button';
@@ -28,8 +28,8 @@ const MainMenu = () => {
   const [isMounted, setIsMounted] = useState(false);
   const isLG = useMediaQuery({ minWidth: 1024 });
 
-  const theme = useThemeStore(state => state.theme);
-  const setTheme = useThemeStore(state => state.setTheme);
+  const theme = usePreferencesStore(state => state.theme);
+  const setTheme = usePreferencesStore(state => state.setTheme);
 
   const { playClick } = useClick();
 

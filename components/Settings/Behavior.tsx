@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import { buttonBorderStyles } from '@/static/styles';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/lib/hooks/useAudio';
 import { AudioLines, VolumeX, Volume2 } from 'lucide-react';
 // import{Command, KeyboardOff} from 'lucide-react'
@@ -10,29 +10,35 @@ import { AudioLines, VolumeX, Volume2 } from 'lucide-react';
 const Behavior = () => {
   const { playClick } = useClick();
 
-  const displayKana = useThemeStore(state => state.displayKana);
-  const setDisplayKana = useThemeStore(state => state.setDisplayKana);
+  const displayKana = usePreferencesStore(state => state.displayKana);
+  const setDisplayKana = usePreferencesStore(state => state.setDisplayKana);
 
-  const silentMode = useThemeStore(state => state.silentMode);
-  const setSilentMode = useThemeStore(state => state.setSilentMode);
+  const silentMode = usePreferencesStore(state => state.silentMode);
+  const setSilentMode = usePreferencesStore(state => state.setSilentMode);
 
   // Pronunciation settings
-  const pronunciationEnabled = useThemeStore(
+  const pronunciationEnabled = usePreferencesStore(
     state => state.pronunciationEnabled
   );
-  const setPronunciationEnabled = useThemeStore(
+  const setPronunciationEnabled = usePreferencesStore(
     state => state.setPronunciationEnabled
   );
-  const pronunciationSpeed = useThemeStore(state => state.pronunciationSpeed);
-  const setPronunciationSpeed = useThemeStore(
+  const pronunciationSpeed = usePreferencesStore(
+    state => state.pronunciationSpeed
+  );
+  const setPronunciationSpeed = usePreferencesStore(
     state => state.setPronunciationSpeed
   );
-  const pronunciationPitch = useThemeStore(state => state.pronunciationPitch);
-  const setPronunciationPitch = useThemeStore(
+  const pronunciationPitch = usePreferencesStore(
+    state => state.pronunciationPitch
+  );
+  const setPronunciationPitch = usePreferencesStore(
     state => state.setPronunciationPitch
   );
-  const furiganaEnabled = useThemeStore(state => state.furiganaEnabled);
-  const setFuriganaEnabled = useThemeStore(state => state.setFuriganaEnabled);
+  const furiganaEnabled = usePreferencesStore(state => state.furiganaEnabled);
+  const setFuriganaEnabled = usePreferencesStore(
+    state => state.setFuriganaEnabled
+  );
 
   /*   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
   const setHotkeys = useThemeStore(state => state.setHotkeys);
@@ -219,7 +225,9 @@ const Behavior = () => {
         </>
       )}
 
-      <h4 className='text-lg'>Show furigana (reading) for kanji and vocabulary:</h4>
+      <h4 className='text-lg'>
+        Show furigana (reading) for kanji and vocabulary:
+      </h4>
       <div className='flex flex-row gap-4'>
         <button
           className={clsx(

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface ThemeState {
+interface PreferencesState {
   displayKana: boolean;
   setDisplayKana: (displayKana: boolean) => void;
 
@@ -20,17 +20,18 @@ interface ThemeState {
   // Pronunciation settings
   pronunciationEnabled: boolean;
   setPronunciationEnabled: (enabled: boolean) => void;
-  
+
   pronunciationSpeed: number;
   setPronunciationSpeed: (speed: number) => void;
-  
+
   pronunciationPitch: number;
   setPronunciationPitch: (pitch: number) => void;
+
   furiganaEnabled: boolean;
   setFuriganaEnabled: (enabled: boolean) => void;
 }
 
-const useThemeStore = create<ThemeState>()(
+const usePreferencesStore = create<PreferencesState>()(
   persist(
     set => ({
       displayKana: false,
@@ -43,15 +44,16 @@ const useThemeStore = create<ThemeState>()(
       setSilentMode: silent => set({ silentMode: silent }),
       hotkeysOn: true,
       setHotkeys: hotkeys => set({ hotkeysOn: hotkeys }),
-      
+
       // Pronunciation settings
       pronunciationEnabled: true,
-      setPronunciationEnabled: enabled => set({ pronunciationEnabled: enabled }),
+      setPronunciationEnabled: enabled =>
+        set({ pronunciationEnabled: enabled }),
       pronunciationSpeed: 0.8,
       setPronunciationSpeed: speed => set({ pronunciationSpeed: speed }),
       pronunciationPitch: 1.0,
       setPronunciationPitch: pitch => set({ pronunciationPitch: pitch }),
-      furiganaEnabled: false,
+      furiganaEnabled: true,
       setFuriganaEnabled: enabled => set({ furiganaEnabled: enabled })
     }),
 
@@ -61,4 +63,4 @@ const useThemeStore = create<ThemeState>()(
   )
 );
 
-export default useThemeStore;
+export default usePreferencesStore;

@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
-import useThemeStore from '@/store/useThemeStore';
+import usePreferencesStore from '@/store/usePreferencesStore';
 
 interface FuriganaTextProps {
   text: string;
@@ -24,7 +24,7 @@ const FuriganaText = ({
   lang = 'ja',
   children
 }: FuriganaTextProps) => {
-  const furiganaEnabled = useThemeStore(state => state.furiganaEnabled);
+  const furiganaEnabled = usePreferencesStore(state => state.furiganaEnabled);
 
   // If children are provided, render them with optional furigana
   if (children) {
@@ -36,12 +36,16 @@ const FuriganaText = ({
         </ruby>
       );
     }
-    return <span className={className} lang={lang}>{children}</span>;
+    return (
+      <span className={className} lang={lang}>
+        {children}
+      </span>
+    );
   }
 
   if (furiganaEnabled && reading) {
-    const hiraganaReading = reading.includes(' ') 
-      ? reading.split(' ')[1] 
+    const hiraganaReading = reading.includes(' ')
+      ? reading.split(' ')[1]
       : reading;
 
     return (
@@ -51,7 +55,11 @@ const FuriganaText = ({
       </ruby>
     );
   }
-  return <span className={className} lang={lang}>{text}</span>;
+  return (
+    <span className={className} lang={lang}>
+      {text}
+    </span>
+  );
 };
 
 export default FuriganaText;
