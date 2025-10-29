@@ -1,9 +1,11 @@
 'use client';
+
 import clsx from 'clsx';
+import { motion, easeOut, type Variants } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
-import { IWordObj } from '@/store/useVocabStore';
+import type { IWordObj } from '@/store/useVocabStore';
 import { useCorrect, useError } from '@/lib/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import GameIntel from '@/components/reusable/Game/GameIntel';
@@ -19,19 +21,18 @@ import FuriganaText from '@/components/reusable/FuriganaText';
 const random = new Random();
 
 interface VocabPickGameProps {
-  selectedWordObjs: IWordObj[];
+  selectedVocabObjs: IWordObj[];
   isHidden: boolean;
   isReverse?: boolean;
 }
 
 const VocabPickGame = ({
-  selectedWordObjs,
+  selectedVocabObjs,
   isHidden,
-  isReverse = false
+  isReverse = false,
 }: VocabPickGameProps) => {
-  const score = useStatsStore(state => state.score);
-  const setScore = useStatsStore(state => state.setScore);
-
+  const score = useStatsStore((state) => state.score);
+  const setScore = useStatsStore((state) => state.setScore);
   const speedStopwatch = useStopwatch({ autoStart: false });
 
   const {
@@ -39,76 +40,73 @@ const VocabPickGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
 
-  // State management based on mode
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)]
-          .meanings[0]
-      : selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
-  );
+  // --- Stable initial render to avoid hydration mismatch ---
+  const [isClient, setIsClient] = useState(false);
+  const [correctChar, setCorrectChar] = useState<string | null>(null);
+  const [currentVocabObj, setCurrentVocabObj] = useState<IWordObj | null>(null);
+  const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+  const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
+  const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
+  const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>([]);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Find the correct object based on the current mode
-  const correctWordObj = (
-    isReverse
-      ? selectedWordObjs.find(obj => obj.meanings[0] === correctChar)
-      : selectedWordObjs.find(obj => obj.word === correctChar)
-  )!;
-  const [currentWordObj, setCurrentWordObj] = useState(correctWordObj);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-  const targetChar = isReverse
-    ? correctWordObj?.word
-    : correctWordObj?.meanings[0];
+  // Initialize only after client hydration
+  useEffect(() => {
+    if (isClient && selectedVocabObjs.length > 0) {
+      const initChar = isReverse
+        ? selectedVocabObjs[random.integer(0, selectedVocabObjs.length - 1)].meanings[0]
+        : selectedVocabObjs[random.integer(0, selectedVocabObjs.length - 1)].word;
 
-  // Get incorrect options based on mode
+      const correctObj = isReverse
+        ? selectedVocabObjs.find((obj) => obj.meanings[0] === initChar)
+        : selectedVocabObjs.find((obj) => obj.word === initChar);
+
+      if (correctObj) {
+        setCorrectChar(initChar);
+        setCurrentVocabObj(correctObj);
+      }
+    }
+  }, [isClient, selectedVocabObjs, isReverse]);
+
   const getIncorrectOptions = () => {
+    if (!correctChar) return [];
     if (!isReverse) {
-      const incorrectWordObjs = selectedWordObjs.filter(
-        currentWordObj => currentWordObj.word !== correctChar
-      );
-      return incorrectWordObjs
-        .map(obj => obj.meanings[0])
+      const incorrect = selectedVocabObjs.filter((obj) => obj.word !== correctChar);
+      return incorrect
+        .map((obj) => obj.meanings[0])
         .sort(() => random.real(0, 1) - 0.5)
         .slice(0, 2);
     } else {
-      const incorrectWordObjs = selectedWordObjs.filter(
-        currentWordObj => currentWordObj.meanings[0] !== correctChar
-      );
-      return incorrectWordObjs
-        .map(obj => obj.word)
+      const incorrect = selectedVocabObjs.filter((obj) => obj.meanings[0] !== correctChar);
+      return incorrect
+        .map((obj) => obj.word)
         .sort(() => random.real(0, 1) - 0.5)
         .slice(0, 2);
     }
   };
 
-  const randomIncorrectOptions = getIncorrectOptions();
-
-  const [shuffledOptions, setShuffledOptions] = useState(
-    [targetChar, ...randomIncorrectOptions].sort(
-      () => random.real(0, 1) - 0.5
-    ) as string[]
-  );
-
-  const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
-  const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
-  const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
-    []
-  );
+  useEffect(() => {
+    if (correctChar && currentVocabObj) {
+      const targetChar = isReverse ? currentVocabObj.word : currentVocabObj.meanings[0];
+      setShuffledOptions(
+        [targetChar, ...getIncorrectOptions()].sort(() => random.real(0, 1) - 0.5) as string[]
+      );
+    }
+  }, [correctChar, currentVocabObj]);
 
   useEffect(() => {
-    setShuffledOptions(
-      [targetChar, ...getIncorrectOptions()].sort(
-        () => random.real(0, 1) - 0.5
-      ) as string[]
-    );
-  }, [correctChar]);
-
-  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    if (isHidden) speedStopwatch.pause();
+  }, [isHidden]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -117,36 +115,30 @@ const VocabPickGame = ({
         buttonRefs.current[index]?.click();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isHidden) speedStopwatch.pause();
-  }, [isHidden]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [shuffledOptions]);
 
   const handleOptionClick = (selectedOption: string) => {
+    if (!correctChar || !currentVocabObj) return;
+    const targetChar = isReverse ? currentVocabObj.word : currentVocabObj.meanings[0];
+
     if (selectedOption === targetChar) {
       setDisplayAnswerSummary(true);
       handleCorrectAnswer();
       generateNewCharacter();
       setFeedback(
         <>
-          <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className='inline text-[var(--main-color)]' />
+          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className="inline text-[var(--main-color)]" />
         </>
       );
-      setCurrentWordObj(correctWordObj);
     } else {
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className='inline text-[var(--main-color)]' />
+          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className="inline text-[var(--main-color)]" />
         </>
       );
     }
@@ -157,54 +149,70 @@ const VocabPickGame = ({
     addCorrectAnswerTime(speedStopwatch.totalMilliseconds / 1000);
     speedStopwatch.reset();
     playCorrect();
-    addCharacterToHistory(correctChar);
-    incrementCharacterScore(correctChar, 'correct');
+    if (correctChar) {
+      addCharacterToHistory(correctChar);
+      incrementCharacterScore(correctChar, 'correct');
+    }
     incrementCorrectAnswers();
     setScore(score + 1);
     setWrongSelectedAnswers([]);
   };
 
   const handleWrongAnswer = (selectedOption: string) => {
-    setWrongSelectedAnswers([...wrongSelectedAnswers, selectedOption]);
+    setWrongSelectedAnswers((prev) => [...prev, selectedOption]);
     playErrorTwice();
-    incrementCharacterScore(correctChar, 'wrong');
+    if (correctChar) incrementCharacterScore(correctChar, 'wrong');
     incrementWrongAnswers();
-    if (score - 1 < 0) {
-      setScore(0);
-    } else {
-      setScore(score - 1);
-    }
+    setScore(Math.max(score - 1, 0));
   };
 
   const generateNewCharacter = () => {
-    const sourceArray = isReverse
-      ? selectedWordObjs.map(obj => obj.meanings[0])
-      : selectedWordObjs.map(obj => obj.word);
+    const source = isReverse
+      ? selectedVocabObjs.map((obj) => obj.meanings[0])
+      : selectedVocabObjs.map((obj) => obj.word);
 
-    let newChar = sourceArray[random.integer(0, sourceArray.length - 1)];
+    let newChar = source[random.integer(0, source.length - 1)];
     while (newChar === correctChar) {
-      newChar = sourceArray[random.integer(0, sourceArray.length - 1)];
+      newChar = source[random.integer(0, source.length - 1)];
     }
-    setCorrectChar(newChar);
+
+    const correctObj = isReverse
+      ? selectedVocabObjs.find((obj) => obj.meanings[0] === newChar)
+      : selectedVocabObjs.find((obj) => obj.word === newChar);
+
+    if (correctObj) {
+      setCorrectChar(newChar);
+      setCurrentVocabObj(correctObj);
+    }
+  };
+
+  const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: easeOut },
+    },
   };
 
   const gameMode = isReverse ? 'reverse pick' : 'pick';
   const displayCharLang = isReverse ? undefined : 'ja';
-  const optionLang = isReverse ? 'ja' : undefined;
-  const textSize = isReverse ? 'text-4xl md:text-7xl' : 'text-6xl md:text-9xl';
+
+  if (!isClient || !correctChar || !currentVocabObj) return null;
 
   return (
     <div
       className={clsx(
-        'flex flex-col gap-6 sm:gap-10 items-center w-full sm:w-4/5',
+        'flex flex-col gap-4 sm:gap-8 items-center w-full sm:w-4/5',
         isHidden ? 'hidden' : '',
-        'max-md:mb-8'
+        !isReverse && 'max-md:pb-12'
       )}
     >
       <GameIntel gameMode={gameMode} />
+
       {displayAnswerSummary && (
         <AnswerSummary
-          payload={currentWordObj}
+          payload={currentVocabObj}
           setDisplayAnswerSummary={setDisplayAnswerSummary}
           feedback={feedback}
         />
@@ -212,52 +220,61 @@ const VocabPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <div className='flex flex-col items-center gap-4'>
-            <FuriganaText 
+          <div className="flex flex-col items-center gap-4">
+            <FuriganaText
               text={correctChar}
-              reading={!isReverse ? correctWordObj?.reading : undefined}
-              className={clsx(textSize, 'text-center')}
+              reading={!isReverse ? currentVocabObj.reading : undefined}
+              className={clsx(isReverse ? 'text-6xl md:text-8xl' : 'text-8xl')}
               lang={displayCharLang}
             />
             <SSRAudioButton
               text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
+              variant="icon-only"
+              size="lg"
+              className="bg-[var(--card-color)] border-[var(--border-color)]"
             />
           </div>
 
           <div
             className={clsx(
-              'flex flex-col w-full gap-6 lg:gap-0 lg:justify-evenly',
-              'lg:flex-row'
+              'flex w-full gap-5 md:gap-0 sm:justify-evenly',
+              isReverse ? 'flex-row' : 'flex-col md:flex-row'
             )}
           >
             {shuffledOptions.map((option, i) => (
-              <button
-                ref={elem => {
-                  buttonRefs.current[i] = elem;
-                }}
+              <motion.button
                 key={option + i}
-                type='button'
+                ref={(elem) => {
+                  if (elem) {
+                    // Do something, e.g., store it in a ref array
+                    buttonRefs.current[i] = elem;
+                  }
+                }}
+
+                type="button"
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
-                  'py-4 px-2 rounded-xl w-full lg:w-1/4 flex flex-row justify-center items-center gap-1.5',
+                  'text-3xl py-4 rounded-xl w-full md:w-1/4 xl:w-1/5 flex flex-row justify-center items-center gap-1.5',
                   buttonBorderStyles,
-                  'active:scale-95 md:active:scale-98 active:duration-200',
                   'text-[var(--border-color)]',
-                  isReverse ? 'text-4xl' : 'text-3xl',
-                  wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                  wrongSelectedAnswers.includes(option) && 'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'hover:scale-110 text-[var(--main-color)] hover:text-[var(--secondary-color)]'
+                  'hover:scale-110 text-[var(--main-color)] hover:border-[var(--secondary-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
-                lang={optionLang}
+                lang={isReverse ? 'ja' : undefined}
               >
-                <FuriganaText 
+                <FuriganaText
                   text={option}
-                  reading={isReverse ? selectedWordObjs.find(obj => obj.word === option)?.reading : undefined}
+                  reading={
+                    isReverse
+                      ? selectedVocabObjs.find((obj) => obj.word === option)?.reading
+                      : undefined
+                  }
                 />
                 <span
                   className={clsx(
@@ -265,9 +282,9 @@ const VocabPickGame = ({
                     'text-[var(--secondary-color)]'
                   )}
                 >
-                  {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}
+                  {i + 1}
                 </span>
-              </button>
+              </motion.button>
             ))}
           </div>
 
