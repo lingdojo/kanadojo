@@ -217,7 +217,106 @@ npm run lint
 npm run postbuild
 ```
 
----
+### Solução de Problemas
+
+Se você encontrar problemas durante o desenvolvimento, tente estas soluções:
+
+#### Limpar Cache do Next.js
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### Limpar Node Modules e Reinstalar
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### Limpar Todos os Caches (Opção Nuclear)
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### Porta Já em Uso
+
+Se a porta 3000 já estiver em uso:
+
+**macOS/Linux:**
+```bash
+# Encontrar processo usando a porta 3000
+lsof -i :3000
+
+# Matar o processo (substitua PID pelo ID real do processo)
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# Encontrar processo usando a porta 3000
+netstat -ano | findstr :3000
+
+# Matar o processo (substitua PID pelo ID real do processo)
+taskkill /PID PID /F
+```
+
+Ou simplesmente execute em uma porta diferente:
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
+```
 
 ## 📁 Estrutura do Projeto
 

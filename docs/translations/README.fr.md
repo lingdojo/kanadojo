@@ -201,14 +201,113 @@ npm start
 
 ### Autres Commandes
 
----
-
 ```bash
 # Lancer ESLint
 npm run lint
 
 # Générer le sitemap (s'exécute automatiquement après le build)
 npm run postbuild
+```
+
+### Dépannage
+
+Si vous rencontrez des problèmes pendant le développement, essayez ces solutions :
+
+#### Vider le Cache Next.js
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### Supprimer Node Modules et Réinstaller
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### Vider Tous les Caches (Option Nucléaire)
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### Port Déjà Utilisé
+
+Si le port 3000 est déjà utilisé :
+
+**macOS/Linux:**
+```bash
+# Trouver le processus utilisant le port 3000
+lsof -i :3000
+
+# Terminer le processus (remplacer PID par l'ID du processus)
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# Trouver le processus utilisant le port 3000
+netstat -ano | findstr :3000
+
+# Terminer le processus (remplacer PID par l'ID du processus)
+taskkill /PID PID /F
+```
+
+Ou simplement exécuter sur un port différent :
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
 ```
 
 ## 📁 Structure du Projet

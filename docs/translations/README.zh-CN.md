@@ -221,7 +221,106 @@ npm run lint
 npm run postbuild
 ```
 
----
+### 故障排除
+
+如果在开发过程中遇到问题，请尝试以下解决方案：
+
+#### 清除 Next.js 缓存
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### 清除 Node Modules 并重新安装
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### 清除所有缓存（核选项）
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### 端口已被占用
+
+如果端口 3000 已被占用：
+
+**macOS/Linux:**
+```bash
+# 查找使用端口 3000 的进程
+lsof -i :3000
+
+# 终止进程（将 PID 替换为实际进程 ID）
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# 查找使用端口 3000 的进程
+netstat -ano | findstr :3000
+
+# 终止进程（将 PID 替换为实际进程 ID）
+taskkill /PID PID /F
+```
+
+或者直接在不同端口上运行：
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
+```
 
 ## 📁 项目结构
 

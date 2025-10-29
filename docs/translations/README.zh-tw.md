@@ -217,7 +217,106 @@ npm run lint
 npm run postbuild
 ```
 
----
+### 問題排除
+
+如果您在開發過程中遇到問題，請嘗試以下解決方案：
+
+#### 清除 Next.js 快取
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### 清除 Node Modules 並重新安裝
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### 清除所有快取（最終手段）
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### 連接埠已被佔用
+
+如果連接埠 3000 已被佔用：
+
+**macOS/Linux:**
+```bash
+# 尋找使用連接埠 3000 的程序
+lsof -i :3000
+
+# 終止程序（將 PID 替換為實際程序 ID）
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# 尋找使用連接埠 3000 的程序
+netstat -ano | findstr :3000
+
+# 終止程序（將 PID 替換為實際程序 ID）
+taskkill /PID PID /F
+```
+
+或直接在不同連接埠執行：
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
+```
 
 ## 📁 專案架構
 

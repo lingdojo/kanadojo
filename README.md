@@ -192,8 +192,6 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 
 ### Build for Production
 
----
-
 ```bash
 # Create an optimized production build
 npm run build
@@ -204,14 +202,113 @@ npm start
 
 ### Other Commands
 
----
-
 ```bash
 # Run ESLint
 npm run lint
 
 # Generate sitemap (runs automatically after build)
 npm run postbuild
+```
+
+### Troubleshooting
+
+If you encounter issues during development, try these solutions:
+
+#### Clear Next.js Cache
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### Clear Node Modules and Reinstall
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### Clear All Caches (Nuclear Option)
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### Port Already in Use
+
+If port 3000 is already in use:
+
+**macOS/Linux:**
+```bash
+# Find process using port 3000
+lsof -i :3000
+
+# Kill the process (replace PID with actual process ID)
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# Find process using port 3000
+netstat -ano | findstr :3000
+
+# Kill the process (replace PID with actual process ID)
+taskkill /PID PID /F
+```
+
+Or simply run on a different port:
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
 ```
 
 ## 📁 Project Structure

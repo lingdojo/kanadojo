@@ -217,7 +217,106 @@ npm run lint
 npm run postbuild
 ```
 
----
+### समस्या निवारण
+
+यदि विकास के दौरान आपको समस्याएँ आती हैं, तो इन समाधानों को आज़माएँ:
+
+#### Next.js कैश साफ़ करें
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### Node Modules साफ़ करें और पुनः इंस्टॉल करें
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### सभी कैश साफ़ करें (न्यूक्लियर विकल्प)
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### पोर्ट पहले से उपयोग में है
+
+यदि पोर्ट 3000 पहले से उपयोग में है:
+
+**macOS/Linux:**
+```bash
+# पोर्ट 3000 का उपयोग करने वाली प्रक्रिया खोजें
+lsof -i :3000
+
+# प्रक्रिया को समाप्त करें (PID को वास्तविक प्रक्रिया ID से बदलें)
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# पोर्ट 3000 का उपयोग करने वाली प्रक्रिया खोजें
+netstat -ano | findstr :3000
+
+# प्रक्रिया को समाप्त करें (PID को वास्तविक प्रक्रिया ID से बदलें)
+taskkill /PID PID /F
+```
+
+या बस एक अलग पोर्ट पर चलाएँ:
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
+```
 
 ## 📁 Project Structure
 

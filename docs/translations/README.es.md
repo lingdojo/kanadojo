@@ -217,7 +217,106 @@ npm run lint
 npm run postbuild
 ```
 
----
+### Solución de Problemas
+
+Si encuentras problemas durante el desarrollo, prueba estas soluciones:
+
+#### Limpiar Caché de Next.js
+
+**macOS/Linux:**
+```bash
+rm -rf .next
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+npm run dev
+```
+
+#### Limpiar Node Modules y Reinstalar
+
+**macOS/Linux:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force node_modules, package-lock.json
+npm install
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+```
+
+#### Limpiar Todas las Cachés (Opción Nuclear)
+
+**macOS/Linux:**
+```bash
+rm -rf .next node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force .next, node_modules, package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+**Windows (Command Prompt):**
+```cmd
+rmdir /s /q .next
+rmdir /s /q node_modules
+del package-lock.json
+npm cache clean --force
+npm install
+npm run dev
+```
+
+#### Puerto Ya en Uso
+
+Si el puerto 3000 ya está en uso:
+
+**macOS/Linux:**
+```bash
+# Encontrar proceso usando el puerto 3000
+lsof -i :3000
+
+# Terminar el proceso (reemplaza PID con el ID del proceso)
+kill -9 PID
+```
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# Encontrar proceso usando el puerto 3000
+netstat -ano | findstr :3000
+
+# Terminar el proceso (reemplaza PID con el ID del proceso)
+taskkill /PID PID /F
+```
+
+O simplemente ejecuta en un puerto diferente:
+```bash
+# macOS/Linux/Windows
+PORT=3001 npm run dev
+```
 
 ## 📁 Estructura de proyecto
 
