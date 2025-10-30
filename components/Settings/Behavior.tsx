@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { buttonBorderStyles } from '@/static/styles';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/lib/hooks/useAudio';
-import { AudioLines, VolumeX, Volume2 } from 'lucide-react';
+import { AudioLines, VolumeX, Volume2, RefreshCw, Play } from 'lucide-react';
+import { useJapaneseTTS } from '@/lib/hooks/useJapaneseTTS';
 // import{Command, KeyboardOff} from 'lucide-react'
 // import HotkeyReference from './HotkeyReference';
 
@@ -39,6 +40,17 @@ const Behavior = () => {
   const setFuriganaEnabled = usePreferencesStore(
     state => state.setFuriganaEnabled
   );
+
+  type Prefs = ReturnType<typeof usePreferencesStore.getState>;
+  const pronunciationVoiceName = usePreferencesStore(
+    (state: Prefs) => state.pronunciationVoiceName
+  );
+  const setPronunciationVoiceName = usePreferencesStore(
+    (state: Prefs) => state.setPronunciationVoiceName
+  );
+
+  const { availableVoices, currentVoice, setVoice, speak, refreshVoices } =
+    useJapaneseTTS();
 
   /*   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
   const setHotkeys = useThemeStore(state => state.setHotkeys);
@@ -220,6 +232,52 @@ const Behavior = () => {
             />
             <div className='text-sm text-[var(--secondary-color)] text-center'>
               {pronunciationPitch}x
+            </div>
+          </div>
+
+          <h4 className='text-lg'>Pronunciation voice:</h4>
+          <div className='flex flex-col gap-2'>
+            <div className='flex gap-2 items-center'>
+              <select
+                className={clsx(buttonBorderStyles, 'p-2 flex-1')}
+                value={pronunciationVoiceName || currentVoice?.name || ''}
+                onChange={e => {
+                  const name = e.target.value || null;
+                  setPronunciationVoiceName(name);
+                  const match = availableVoices.find(v => v.name === name);
+                  if (match) setVoice(match);
+                }}
+              >
+                <option value=''>Auto (best available)</option>
+                {availableVoices.map(v => (
+                  <option key={v.name} value={v.name}>
+                    {v.name} ({v.lang})
+                  </option>
+                ))}
+              </select>
+              <button
+                className={clsx(buttonBorderStyles, 'px-3 py-2')}
+                onClick={() => {
+                  playClick();
+                  refreshVoices();
+                }}
+                title='Refresh voices'
+              >
+                <RefreshCw size={18} />
+              </button>
+              <button
+                className={clsx(buttonBorderStyles, 'px-3 py-2')}
+                onClick={async () => {
+                  playClick();
+                  await speak('こんにちは');
+                }}
+                title='Test voice'
+              >
+                <Play size={18} />
+              </button>
+            </div>
+            <div className='text-sm text-[var(--secondary-color)] text-center'>
+              {currentVoice ? `${currentVoice.name} • ${currentVoice.lang}` : 'No voice selected'}
             </div>
           </div>
         </>

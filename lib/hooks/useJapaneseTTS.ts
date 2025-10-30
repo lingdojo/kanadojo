@@ -16,7 +16,14 @@ interface TTSState {
 }
 
 export const useJapaneseTTS = () => {
-  const silentMode = usePreferencesStore(state => state.silentMode);
+  type Prefs = ReturnType<typeof usePreferencesStore.getState>;
+  const silentMode = usePreferencesStore((state: Prefs) => state.silentMode);
+  const pronunciationVoiceName = usePreferencesStore(
+    (state: Prefs) => state.pronunciationVoiceName
+  );
+  const setPronunciationVoiceName = usePreferencesStore(
+    (state: Prefs) => state.setPronunciationVoiceName
+  );
   const [state, setState] = useState<TTSState>({
     isPlaying: false,
     isSupported: false,
@@ -74,17 +81,24 @@ export const useJapaneseTTS = () => {
             return a.name.localeCompare(b.name);
           });
 
-        setState(prev => ({
+        // Choose current voice by preference if available
+        const preferred = pronunciationVoiceName
+          ? japaneseVoices.find(v => v.name === pronunciationVoiceName) || null
+          : null;
+
+        setState((prev: TTSState) => ({
           ...prev,
+          isSupported: true,
           availableVoices: japaneseVoices,
-          currentVoice: japaneseVoices[0] || null
+          currentVoice: preferred || japaneseVoices[0] || null
         }));
 
         // Fallback: If no Japanese voices, use any available voice
         if (voices.length > 0 && japaneseVoices.length === 0) {
           const fallbackVoice = voices[0];
-          setState(prev => ({
+          setState((prev: TTSState) => ({
             ...prev,
+            isSupported: true,
             availableVoices: [
               {
                 name: fallbackVoice.name,
@@ -115,7 +129,7 @@ export const useJapaneseTTS = () => {
         speechSynthesis.removeEventListener('voiceschanged', loadVoices);
       };
     }
-  }, [isClient]);
+  }, [isClient, pronunciationVoiceName]);
 
   const speak = useCallback(
     (
@@ -163,17 +177,17 @@ export const useJapaneseTTS = () => {
 
         // Event handlers for speech synthesis
         utterance.onstart = () => {
-          setState(prev => ({ ...prev, isPlaying: true }));
+          setState((prev: TTSState) => ({ ...prev, isPlaying: true }));
         };
 
         utterance.onend = () => {
-          setState(prev => ({ ...prev, isPlaying: false }));
+          setState((prev: TTSState) => ({ ...prev, isPlaying: false }));
           resolve();
         };
 
         utterance.onerror = event => {
           console.warn('TTS Error:', event.error);
-          setState(prev => ({ ...prev, isPlaying: false }));
+          setState((prev: TTSState) => ({ ...prev, isPlaying: false }));
           resolve();
         };
 
@@ -191,7 +205,7 @@ export const useJapaneseTTS = () => {
             speechSynthesis.speak(utterance);
           } catch (error) {
             console.warn('Speech synthesis error:', error);
-            setState(prev => ({ ...prev, isPlaying: false }));
+            setState((prev: TTSState) => ({ ...prev, isPlaying: false }));
             resolve();
           }
         }, 50);
@@ -203,12 +217,13 @@ export const useJapaneseTTS = () => {
   const stop = useCallback(() => {
     if (isClient && state.isSupported) {
       speechSynthesis.cancel();
-      setState(prev => ({ ...prev, isPlaying: false }));
+      setState((prev: TTSState) => ({ ...prev, isPlaying: false }));
     }
   }, [isClient, state.isSupported]);
 
   const setVoice = useCallback((voice: JapaneseVoice) => {
-    setState(prev => ({ ...prev, currentVoice: voice }));
+    setState((prev: TTSState) => ({ ...prev, currentVoice: voice }));
+    setPronunciationVoiceName(voice?.name ?? null);
   }, []);
 
   // Method to refresh voices
@@ -238,13 +253,17 @@ export const useJapaneseTTS = () => {
           return a.name.localeCompare(b.name);
         });
 
-      setState(prev => ({
+      const preferred = pronunciationVoiceName
+        ? japaneseVoices.find(v => v.name === pronunciationVoiceName) || null
+        : null;
+
+      setState((prev: TTSState) => ({
         ...prev,
         availableVoices: japaneseVoices,
-        currentVoice: japaneseVoices[0] || prev.currentVoice
+        currentVoice: preferred || japaneseVoices[0] || prev.currentVoice
       }));
     }
-  }, [isClient, state.isSupported]);
+  }, [isClient, state.isSupported, pronunciationVoiceName]);
 
   return {
     speak,
