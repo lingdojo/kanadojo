@@ -17,10 +17,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kanadojo.com'),
   manifest: '/manifest.json',
-  title: 'KanaDojo',
+  title: 'KanaDojo',    
   description:
     'KanaDojo is a fun, minimalist, aesthetic platform for learning and practicing Japanese online.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=2' },
+      { url: '/favicon.ico?v=2', sizes: '16x16', type: 'image/x-icon' },
+      { url: '/favicon.ico?v=2', sizes: '32x32', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.ico?v=2',
+    apple: '/favicon.ico?v=2',
+  },
   verification: {
     google: googleVerificationToken,
     other: { 'msvalidate.01': msVerificationToken },
@@ -48,7 +58,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html>
+    <html lang="en" suppressHydrationWarning>
       <body>
         {isAnalyticsEnabled && (
           <>

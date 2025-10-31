@@ -1,6 +1,14 @@
 import { useTimer } from 'react-timer-hook';
+import { useRef, useEffect } from 'react';
 
 export function useChallengeTimer(durationSeconds: number) {
+  const durationRef = useRef(durationSeconds);
+  
+  // Update reference when duration changes
+  useEffect(() => {
+    durationRef.current = durationSeconds;
+  }, [durationSeconds]);
+
   const expiryTimestamp = new Date();
   expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + durationSeconds);
 
@@ -16,7 +24,7 @@ export function useChallengeTimer(durationSeconds: number) {
 
   const resetTimer = () => {
     const newExpiry = new Date();
-    newExpiry.setSeconds(newExpiry.getSeconds() + durationSeconds);
+    newExpiry.setSeconds(newExpiry.getSeconds() + durationRef.current);
     restart(newExpiry, false);
   };
 
