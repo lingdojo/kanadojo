@@ -453,6 +453,7 @@ KanaDojo is available in multiple languages thanks to community contributions:
 - [中文（繁體）](docs/translations/README.zh-tw.md)
 - [हिन्दी](docs/translations/README.hin.md)
 - <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
+- Русский (docs/translations/README.ru.md)
 
 ## 📞 Contact & Links
 
