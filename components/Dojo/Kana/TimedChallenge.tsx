@@ -28,6 +28,7 @@ export default function TimedChallengeKana() {
   
   // Force Input mode by default for Timed Challenge
   const gameMode = 'Input';
+  console.log(gameMode) // fixing vercel deployment
   
   // Memoize selectedKana to prevent infinite loops
   const selectedKana = React.useMemo(
