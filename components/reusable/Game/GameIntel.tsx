@@ -1,5 +1,5 @@
 'use client';
-import { SquareCheck, SquareX, Star, Heart } from 'lucide-react';
+import { SquareCheck, SquareX, Star, Heart, Coffee } from 'lucide-react';
 import { MousePointerClick, Keyboard, MousePointer } from 'lucide-react';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
@@ -64,7 +64,7 @@ const GameIntel = ({
             'flex flex-col gap-2 items-center justify-center py-2 w-full'
           )}
         >
-          <p className='text-xl px-4 flex justify-center items-center w-full gap-2 py-2'>
+          <p className='text-xl px-4 flex justify-center items-center w-full gap-2.5 py-2'>
             {gameMode.toLowerCase() === 'pick' && (
               <MousePointerClick className='text-[var(--main-color)]' />
             )}
@@ -78,18 +78,36 @@ const GameIntel = ({
               <Keyboard className='scale-y-[-1] text-[var(--main-color)]' />
             )}
             <span>{gameMode}</span>
-            <Heart
+            {/*             <Heart
               size={24}
               className={clsx(
                 'hover:cursor-pointer duration-250 hover:scale-120',
                 'active:scale-100 active:duration-225',
                 'fill-current animate-pulse text-red-500 '
+                ,
               )}
               onClick={() => {
                 playClick();
                 window.open('https://ko-fi.com/kanadojo', '_blank');
               }}
             />
+ */}
+            <button
+              className={clsx(
+                'py-2 px-6 text-xl flex flex-row justify-center items-center gap-2',
+                miniButtonBorderStyles,
+                'group flex-1 ',
+                'text-[var(--main-color)]'
+              )}
+              onClick={() => {
+                playClick();
+                toggleStats();
+                totalTimeStopwatch.pause();
+                setNewTotalMilliseconds(totalTimeStopwatch.totalMilliseconds);
+              }}
+            >
+              <Coffee size={24} className='motion-safe:animate-pulse' />
+            </button>
           </p>
         </div>
 
@@ -133,7 +151,6 @@ const GameIntel = ({
               setNewTotalMilliseconds(totalTimeStopwatch.totalMilliseconds);
             }}
           >
-            {/* <span className='group-hover:underline'>stats</span> */}
             <ChartSpline size={24} />
           </button>
         </div>
