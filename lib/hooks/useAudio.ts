@@ -13,11 +13,11 @@ const clickSoundUrls = [
   '/sounds/click/click9/click9_4.wav',
   '/sounds/click/click9/click9_5.wav'
  */
-  'sounds/click/click4/click4_11.wav',
-  'sounds/click/click4/click4_22.wav',
-  'sounds/click/click4/click4_33.wav',
-  'sounds/click/click4/click4_44.wav',
-  'sounds/click/click4/click4_55.wav'
+  '/sounds/click/click4/click4_11.wav',
+  '/sounds/click/click4/click4_22.wav',
+  '/sounds/click/click4/click4_33.wav',
+  '/sounds/click/click4/click4_44.wav',
+  '/sounds/click/click4/click4_55.wav'
 ];
 
 export const useClick = () => {
