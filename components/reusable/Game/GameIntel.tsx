@@ -1,5 +1,5 @@
 'use client';
-import { SquareCheck, SquareX, Star, Heart, Coffee } from 'lucide-react';
+import { SquareCheck, SquareX, Star,  Coffee } from 'lucide-react';
 import { MousePointerClick, Keyboard, MousePointer } from 'lucide-react';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
@@ -94,7 +94,7 @@ const GameIntel = ({
  */}
             <button
               className={clsx(
-                'py-2 px-6 text-xl flex flex-row justify-center items-center gap-2',
+                'py-2.5 px-8 text-xl flex flex-row justify-center items-center gap-2',
                 miniButtonBorderStyles,
                 'group flex-1 ',
                 'text-[var(--main-color)]'
@@ -139,7 +139,7 @@ const GameIntel = ({
 
           <button
             className={clsx(
-              'py-2 px-6 text-xl flex flex-row justify-center items-center gap-2',
+              'py-2.5 px-8 text-xl flex flex-row justify-center items-center gap-2',
               miniButtonBorderStyles,
               'group flex-1',
               'text-[var(--main-color)]'
