@@ -9,6 +9,7 @@ import {
   N4KanjiLength,
   N3KanjiLength,
   N2KanjiLength,
+  N1KanjiLength,
   N5VocabLength,
   N4VocabLength,
   N3VocabLength,
@@ -23,7 +24,8 @@ const numCollectionSets = {
     n5: Math.ceil(N5KanjiLength / 10),
     n4: Math.ceil(N4KanjiLength / 10),
     n3: Math.ceil(N3KanjiLength / 10),
-    n2: Math.ceil(N2KanjiLength / 10)
+    n2: Math.ceil(N2KanjiLength / 10),
+    n1: Math.ceil(N1KanjiLength / 10)
   },
   '/vocabulary': {
     n5: Math.ceil(N5VocabLength / 10),
@@ -77,46 +79,92 @@ const CollectionSelector = () => {
       ? setSelectedVocabCollection
       : () => {};
 
-  const collections = [
+  const collections: {
+    name: 'n5' | 'n4' | 'n3' | 'n2' | 'n1';
+    displayName: string;
+  }[] = [
     {
       name: 'n5',
       displayName: `Unit 1, Sets 1-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5
       }`
     },
     {
       name: 'n4',
       displayName: `Unit 2, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 + 1
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 + 1
       }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4
       }`
     },
     {
       name: 'n3',
       displayName: `Unit 3, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4 +
         1
       }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n3
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n3
       }`
     },
     {
       name: 'n2',
       displayName: `Unit 4, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n3 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n3 +
         1
       }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n3 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets].n2
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n3 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n2
+      }`
+    },
+    {
+      name: 'n1',
+      displayName: `Unit 5, Sets ${
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n3 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n2 +
+        1
+      }-${
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n5 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n4 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n3 +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n2
+        /*  +
+        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          .n1
+ */
       }`
     }
   ];
@@ -134,7 +182,16 @@ const CollectionSelector = () => {
         )}
       >
         {collections.map((collection, i) => (
-          <div key={i} className={clsx('flex flex-col md:flex-row', 'w-full ')}>
+          <div
+            key={i}
+            className={clsx(
+              'flex flex-col md:flex-row',
+              'w-full ',
+              pathWithoutLocale === '/vocabulary' &&
+                collection.name === 'n1' &&
+                'hidden'
+            )}
+          >
             <button
               key={i}
               className={clsx(
@@ -167,6 +224,7 @@ const CollectionSelector = () => {
               {/* <span className='w-1/4 text-4xl flex justify-center items-center bg-[var(--secondary-color)] text-[var(--background-color)]'>
               {i+1}
             </span> */}
+
               {collection.name === selectedCollection ? (
                 <CircleCheck className='text-[var(--secondary-color)]' />
               ) : (
@@ -185,7 +243,10 @@ const CollectionSelector = () => {
                 className={clsx(
                   'md:border-l-1 md:h-auto md:w-0',
                   'border-[var(--border-color)]',
-                  'border-t-1 w-full border-[var(--border-color)]'
+                  'border-t-1 w-full border-[var(--border-color)]',
+                  pathWithoutLocale === '/vocabulary' &&
+                    collection.name === 'n1' &&
+                    'hidden'
                 )}
               />
             )}

@@ -13,6 +13,7 @@ import N5Kanji from '@/static/kanji/N5';
 import N4Kanji from '@/static/kanji/N4';
 import N3Kanji from '@/static/kanji/N3';
 import N2Kanji from '@/static/kanji/N2';
+import N1Kanji from '@/static/kanji/N1';
 import { motion } from 'framer-motion';
 import { easeOut } from 'motion'; // ✅ FIXED: Proper easing import
 
@@ -22,20 +23,27 @@ const kanjiCollections = {
   n4: {
     data: N4Kanji,
     name: 'N4',
-    prevLength: Math.ceil(N5Kanji.length / 10),
+    prevLength: Math.ceil(N5Kanji.length / 10)
   },
   n3: {
     data: N3Kanji,
     name: 'N3',
-    prevLength: Math.ceil((N5Kanji.length + N4Kanji.length) / 10),
+    prevLength: Math.ceil((N5Kanji.length + N4Kanji.length) / 10)
   },
   n2: {
     data: N2Kanji,
     name: 'N2',
     prevLength: Math.ceil(
       (N5Kanji.length + N4Kanji.length + N3Kanji.length) / 10
-    ),
+    )
   },
+  n1: {
+    data: N1Kanji,
+    name: 'N1',
+    prevLength: Math.ceil(
+      (N5Kanji.length + N4Kanji.length + N3Kanji.length + N2Kanji.length) / 10
+    )
+  }
 };
 
 // ✅ FIX: Use easing function instead of string
@@ -44,27 +52,24 @@ const fadeInUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: easeOut },
-  },
+    transition: { duration: 0.4, ease: easeOut }
+  }
 };
 
 const KanjiCards = () => {
   const selectedKanjiCollectionName = useKanjiStore(
-    (state) => state.selectedKanjiCollection
+    state => state.selectedKanjiCollection
   );
 
-  const selectedKanjiSets = useKanjiStore((state) => state.selectedKanjiSets);
+  const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
   const setSelectedKanjiSets = useKanjiStore(
-    (state) => state.setSelectedKanjiSets
+    state => state.setSelectedKanjiSets
   );
-  const addKanjiObjs = useKanjiStore((state) => state.addKanjiObjs);
+  const addKanjiObjs = useKanjiStore(state => state.addKanjiObjs);
 
   const { playClick } = useClick();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const selectedKanjiCollection = (kanjiCollections as any)[
-    selectedKanjiCollectionName
-  ];
+  const selectedKanjiCollection = kanjiCollections[selectedKanjiCollectionName];
 
   const kanjiSetsTemp = new Array(
     Math.ceil(selectedKanjiCollection.data.length / 10)
@@ -74,14 +79,14 @@ const KanjiCards = () => {
       name: `Set ${selectedKanjiCollection.prevLength + i + 1}`,
       start: i,
       end: i + 1,
-      id: `Set ${i + 1}`,
+      id: `Set ${i + 1}`
     }));
 
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
 
   return (
-    <div className="flex flex-col w-full gap-4">
+    <div className='flex flex-col w-full gap-4'>
       {chunkArray(kanjiSetsTemp, numColumns).map((rowSets, rowIndex) => {
         const firstSetInRow = rowIndex * numColumns + 1;
         const lastSetInRow = (rowIndex + 1) * numColumns;
@@ -90,17 +95,17 @@ const KanjiCards = () => {
           <motion.div
             key={`row-${rowIndex}`}
             variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
+            initial='hidden'
+            whileInView='visible'
             viewport={{ once: false, amount: 0.2 }}
             className={clsx('flex flex-col py-4 gap-4', cardBorderStyles)}
           >
             <h3
               onClick={() => {
                 playClick();
-                setCollapsedRows((prev) =>
+                setCollapsedRows(prev =>
                   prev.includes(rowIndex)
-                    ? prev.filter((i) => i !== rowIndex)
+                    ? prev.filter(i => i !== rowIndex)
                     : [...prev, rowIndex]
                 );
               }}
@@ -118,11 +123,11 @@ const KanjiCards = () => {
                 )}
                 size={28}
               />
-              <span className="max-lg:hidden">
+              <span className='max-lg:hidden'>
                 Sets {selectedKanjiCollection.prevLength + firstSetInRow}-
                 {selectedKanjiCollection.prevLength + lastSetInRow}
               </span>
-              <span className="lg:hidden">
+              <span className='lg:hidden'>
                 Set {selectedKanjiCollection.prevLength + firstSetInRow}
               </span>
             </h3>
@@ -138,8 +143,8 @@ const KanjiCards = () => {
                   <motion.div
                     key={kanjiSetTemp.id + kanjiSetTemp.name}
                     variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
+                    initial='hidden'
+                    whileInView='visible'
                     viewport={{ once: false, amount: 0.2 }}
                     className={clsx(
                       'flex flex-col md:px-4 h-full',
@@ -156,13 +161,13 @@ const KanjiCards = () => {
                         selectedKanjiSets.includes(kanjiSetTemp.name) &&
                           'bg-[var(--border-color)]'
                       )}
-                      onClick={(e) => {
+                      onClick={e => {
                         e.currentTarget.blur();
                         playClick();
                         if (selectedKanjiSets.includes(kanjiSetTemp.name)) {
                           setSelectedKanjiSets(
                             selectedKanjiSets.filter(
-                              (set) => set !== kanjiSetTemp.name
+                              set => set !== kanjiSetTemp.name
                             )
                           );
                           addKanjiObjs(
@@ -175,7 +180,7 @@ const KanjiCards = () => {
                           setSelectedKanjiSets([
                             ...new Set(
                               selectedKanjiSets.concat(kanjiSetTemp.name)
-                            ),
+                            )
                           ]);
                           addKanjiObjs(
                             selectedKanjiCollection.data.slice(
@@ -187,9 +192,9 @@ const KanjiCards = () => {
                       }}
                     >
                       {selectedKanjiSets.includes(kanjiSetTemp.name) ? (
-                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
+                        <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
                       ) : (
-                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
+                        <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
                       )}
                       {kanjiSetTemp.name}
                     </button>

@@ -1,10 +1,11 @@
 'use client';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
-import N5KanjiArray from '@/static/kanji/N5';
-import N4KanjiArray from '@/static/kanji/N4';
-import N3KanjiArray from '@/static/kanji/N3';
-import N2KanjiArray from '@/static/kanji/N2';
+import N5Kanji from '@/static/kanji/N5';
+import N4Kanji from '@/static/kanji/N4';
+import N3Kanji from '@/static/kanji/N3';
+import N2Kanji from '@/static/kanji/N2';
+import N1Kanji from '@/static/kanji/N1';
 import useKanjiStore from '@/store/useKanjiStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import FuriganaText from '@/components/reusable/FuriganaText';
@@ -21,10 +22,11 @@ const createKanjiSetRanges = (numSets: number) =>
 const kanjiSetSliceRanges = createKanjiSetRanges(200);
 
 const kanjiCollections = {
-  n5: N5KanjiArray,
-  n4: N4KanjiArray,
-  n3: N3KanjiArray,
-  n2: N2KanjiArray
+  n5: N5Kanji,
+  n4: N4Kanji,
+  n3: N3Kanji,
+  n2: N2Kanji,
+  n1: N1Kanji
 };
 
 const KanjiSetDictionary = ({ set }: { set: string }) => {

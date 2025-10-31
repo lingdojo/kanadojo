@@ -13,13 +13,13 @@ export interface IKanjiObj {
 interface IKanjiState {
   selectedGameModeKanji: string;
   selectedKanjiObjs: IKanjiObj[];
-  selectedKanjiCollection: string;
+  selectedKanjiCollection: 'n5' | 'n4' | 'n3' | 'n2' | 'n1';
   selectedKanjiSets: string[];
   setSelectedGameModeKanji: (mode: string) => void;
   addKanjiObj: (kanji: IKanjiObj) => void;
   addKanjiObjs: (kanjis: IKanjiObj[]) => void;
   clearKanjiObjs: () => void;
-  setSelectedKanjiCollection: (collection: string) => void;
+  setSelectedKanjiCollection: (collection: 'n5' | 'n4' | 'n3' | 'n2' | 'n1') => void;
   setSelectedKanjiSets: (sets: string[]) => void;
   clearKanjiSets: () => void;
 }
@@ -29,7 +29,9 @@ const sameKanjiArray = (a: IKanjiObj[], b: IKanjiObj[]) =>
 
 const toggleKanji = (array: IKanjiObj[], kanjiObj: IKanjiObj): IKanjiObj[] => {
   if (!kanjiObj || !kanjiObj.kanjiChar) return array;
-  const kanjiIndex = array.findIndex(item => item.kanjiChar === kanjiObj.kanjiChar);
+  const kanjiIndex = array.findIndex(
+    item => item.kanjiChar === kanjiObj.kanjiChar
+  );
   if (kanjiIndex >= 0) {
     if (array.length === 1) return [];
     return array.slice(0, kanjiIndex).concat(array.slice(kanjiIndex + 1));
@@ -37,7 +39,10 @@ const toggleKanji = (array: IKanjiObj[], kanjiObj: IKanjiObj): IKanjiObj[] => {
   return [...array, kanjiObj];
 };
 
-const toggleKanjis = (array: IKanjiObj[], kanjiObjects: IKanjiObj[]): IKanjiObj[] => {
+const toggleKanjis = (
+  array: IKanjiObj[],
+  kanjiObjects: IKanjiObj[]
+): IKanjiObj[] => {
   if (!kanjiObjects.length) return array;
 
   const dedupIncoming: IKanjiObj[] = [];
@@ -55,7 +60,9 @@ const toggleKanjis = (array: IKanjiObj[], kanjiObjects: IKanjiObj[]): IKanjiObj[
   const currentChars = new Set(array.map(item => item.kanjiChar));
   const incomingChars = new Set(dedupIncoming.map(item => item.kanjiChar));
 
-  const allPresent = dedupIncoming.every(obj => currentChars.has(obj.kanjiChar));
+  const allPresent = dedupIncoming.every(obj =>
+    currentChars.has(obj.kanjiChar)
+  );
   if (allPresent) {
     let changed = false;
     const next = array.filter(item => {
@@ -84,7 +91,8 @@ const useKanjiStore = create<IKanjiState>(set => ({
   selectedKanjiCollection: 'n5',
   selectedKanjiSets: [],
 
-  setSelectedGameModeKanji: gameMode => set({ selectedGameModeKanji: gameMode }),
+  setSelectedGameModeKanji: gameMode =>
+    set({ selectedGameModeKanji: gameMode }),
 
   addKanjiObj: kanjiObj =>
     set(state => {
@@ -109,7 +117,7 @@ const useKanjiStore = create<IKanjiState>(set => ({
 
   setSelectedKanjiSets: sets => set({ selectedKanjiSets: sets }),
 
-  clearKanjiSets: () => set({ selectedKanjiSets: [] }),
+  clearKanjiSets: () => set({ selectedKanjiSets: [] })
 }));
 
 export default useKanjiStore;
