@@ -57,18 +57,17 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
             )}
           >
             <div className='flex flex-row w-full gap-4'>
-              <div
-                className='relative w-full max-w-[100px] aspect-square flex items-center justify-center hover:cursor-pointer'
+              <a
+                className='relative w-full max-w-[100px] aspect-square flex items-center justify-center hover:cursor-pointer group'
+                href={`http://kanjiheatmap.com/?open=${kanjiObj.kanjiChar}`}
+                rel='noopener'
+                target='_blank'
                 onClick={() => {
                   playClick();
-                  window.open(
-                    `http://kanjiheatmap.com/?open=${kanjiObj.kanjiChar}`,
-                    '_blank'
-                  );
                 }}
               >
                 {/* 4-segment square background */}
-                <div className='absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)] hover:bg-[var(--card-color)] transition-all'>
+                <div className='absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)] group-hover:bg-[var(--card-color)] transition-all'>
                   <div className=' border-r border-b border-[var(--border-color)]'></div>
                   <div className=' border-b border-[var(--border-color)]'></div>
                   <div className=' border-r border-[var(--border-color)]'></div>
@@ -81,7 +80,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                   className='text-7xl pb-2 relative z-10 '
                   lang='ja'
                 />
-              </div>
+              </a>
 
               <div className='flex flex-col gap-2 w-full'>
                 <div

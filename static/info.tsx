@@ -69,8 +69,15 @@ export default function translationGen(t: (key: string) => string) {
           </p>
           <p className='text-lg italic'>Scroll down to discover the sets!</p>
           <p className='text-lg italic'>
-            New: click on a kanji character to find out more about it on Kanji
-            Heatmap!
+            New: click on a kanji character to find out more about it on{' '}
+            <a
+              href='http://kanjiheatmap.com/'
+              className='hover:underline'
+              rel='noopener'
+              target='_blank'
+            >
+              Kanji Heatmap!
+            </a>
           </p>
         </>
       )
