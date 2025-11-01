@@ -1,5 +1,5 @@
 'use client';
-import { SquareCheck, SquareX, Star,  Coffee } from 'lucide-react';
+import { SquareCheck, SquareX, Star, Coffee } from 'lucide-react';
 import { MousePointerClick, Keyboard, MousePointer } from 'lucide-react';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
@@ -78,20 +78,7 @@ const GameIntel = ({
               <Keyboard className='scale-y-[-1] text-[var(--main-color)]' />
             )}
             <span>{gameMode}</span>
-            {/*             <Heart
-              size={24}
-              className={clsx(
-                'hover:cursor-pointer duration-250 hover:scale-120',
-                'active:scale-100 active:duration-225',
-                'fill-current animate-pulse text-red-500 '
-                ,
-              )}
-              onClick={() => {
-                playClick();
-                window.open('https://ko-fi.com/kanadojo', '_blank');
-              }}
-            />
- */}
+
             <button
               className={clsx(
                 'py-2.5 px-8 text-xl flex flex-row justify-center items-center gap-2',
@@ -101,9 +88,7 @@ const GameIntel = ({
               )}
               onClick={() => {
                 playClick();
-                toggleStats();
-                totalTimeStopwatch.pause();
-                setNewTotalMilliseconds(totalTimeStopwatch.totalMilliseconds);
+                window.open('https://ko-fi.com/kanadojo', '_blank');
               }}
             >
               <Coffee size={24} className='motion-safe:animate-pulse' />
