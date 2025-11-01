@@ -1,13 +1,23 @@
 'use client';
 import clsx from 'clsx';
-import { useEffect } from 'react';
+// 1. Import useState to hold the dynamically imported module
+import { useEffect, useState } from 'react';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import fonts from '@/static/fonts';
+// 2. Remove the static import
+// import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/components/Modals/WelcomeModal';
 import { AchievementNotificationContainer } from '@/components/reusable/AchievementNotification';
 import AchievementIntegration from '@/components/reusable/AchievementIntegration';
 import { applyTheme } from '@/static/themes';
+
+// Define a type for the font object for clarity, adjust as needed
+type FontObject = {
+  name: string;
+  font: {
+    className: string;
+  };
+};
 
 export default function ClientLayout({
   children
@@ -17,8 +27,28 @@ export default function ClientLayout({
   const { theme } = usePreferencesStore();
   const font = usePreferencesStore(state => state.font);
 
-  const fontClassName = fonts.find(fontObj => font === fontObj.name)?.font
-    .className;
+  // 3. Create state to hold the fonts module
+  const [fontsModule, setFontsModule] = useState<FontObject[] | null>(null);
+
+  // 4. Dynamically import the fonts module only in production
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      import('@/static/fonts')
+        .then(module => {
+          // Assuming 'fonts' is a default export from that module
+          setFontsModule(module.default);
+        })
+        .catch(err => {
+          console.error('Failed to dynamically load fonts:', err);
+        });
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  // 5. Calculate fontClassName based on the stateful fontsModule
+  // This will be an empty string if fontsModule is null (i.e., in dev or before prod load)
+  const fontClassName = fontsModule
+    ? fontsModule.find(fontObj => font === fontObj.name)?.font.className
+    : '';
 
   useEffect(() => {
     applyTheme(theme); // This now sets both CSS variables AND data-theme attribute
@@ -47,7 +77,9 @@ export default function ClientLayout({
       data-scroll-restoration-id='container'
       className={clsx(
         'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
-        process.env.NODE_ENV === 'production' ? fontClassName : ''
+        // 6. Apply fontClassName. This is now implicitly conditional
+        // because fontClassName will only have a value in prod after load.
+        fontClassName
       )}
       style={{
         height: '100dvh',
