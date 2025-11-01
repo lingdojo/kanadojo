@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import useOnboardingStore from '@/store/useOnboardingStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { buttonBorderStyles, cardBorderStyles } from '@/static/styles';
 import themeSets from '@/static/themes';
 import fonts from '@/static/fonts';

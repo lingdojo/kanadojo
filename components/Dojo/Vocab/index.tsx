@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { chunkArray } from '@/lib/helperFunctions';
 import { useState } from 'react';
 import { cardBorderStyles } from '@/static/styles';
-import useGridColumns from '@/lib/hooks/useGridColumns';
-import { useClick } from '@/lib/hooks/useAudio';
+import useGridColumns from '@/hooks/useGridColumns';
+import { useClick } from '@/hooks/useAudio';
 import { ChevronUp, CircleCheck, Circle } from 'lucide-react';
 import useVocabStore from '@/store/useVocabStore';
 import VocabSetDictionary from '@/components/Dojo/Vocab/SetDictionary';
@@ -22,20 +22,20 @@ const vocabCollections = {
   n4: {
     data: N4Nouns,
     name: 'N4',
-    prevLength: Math.ceil(N5Nouns.length / 10),
+    prevLength: Math.ceil(N5Nouns.length / 10)
   },
   n3: {
     data: N3Nouns,
     name: 'N3',
-    prevLength: Math.ceil((N5Nouns.length + N4Nouns.length) / 10),
+    prevLength: Math.ceil((N5Nouns.length + N4Nouns.length) / 10)
   },
   n2: {
     data: N2Nouns,
     name: 'N2',
     prevLength: Math.ceil(
       (N5Nouns.length + N4Nouns.length + N3Nouns.length) / 10
-    ),
-  },
+    )
+  }
 };
 
 // ✅ FIX: Use proper easing function instead of string
@@ -44,20 +44,20 @@ const fadeInUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: easeOut },
-  },
+    transition: { duration: 0.4, ease: easeOut }
+  }
 };
 
 const VocabCards = () => {
   const selectedVocabCollectionName = useVocabStore(
-    (state) => state.selectedVocabCollection
+    state => state.selectedVocabCollection
   );
 
-  const selectedVocabSets = useVocabStore((state) => state.selectedVocabSets);
+  const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
   const setSelectedVocabSets = useVocabStore(
-    (state) => state.setSelectedVocabSets
+    state => state.setSelectedVocabSets
   );
-  const addWordObjs = useVocabStore((state) => state.addWordObjs);
+  const addWordObjs = useVocabStore(state => state.addWordObjs);
 
   const { playClick } = useClick();
 
@@ -74,14 +74,14 @@ const VocabCards = () => {
       name: `Set ${selectedVocabCollection.prevLength + i + 1}`,
       start: i,
       end: i + 1,
-      id: `Set ${i + 1}`,
+      id: `Set ${i + 1}`
     }));
 
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
 
   return (
-    <div className="flex flex-col w-full gap-4">
+    <div className='flex flex-col w-full gap-4'>
       {chunkArray(vocabSetsTemp, numColumns).map((rowSets, rowIndex) => {
         const firstSetInRow = rowIndex * numColumns + 1;
         const lastSetInRow = (rowIndex + 1) * numColumns;
@@ -90,17 +90,17 @@ const VocabCards = () => {
           <motion.div
             key={`row-${rowIndex}`}
             variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
+            initial='hidden'
+            whileInView='visible'
             viewport={{ once: false, amount: 0.2 }}
             className={clsx('flex flex-col py-4 gap-4', cardBorderStyles)}
           >
             <h3
               onClick={() => {
                 playClick();
-                setCollapsedRows((prev) =>
+                setCollapsedRows(prev =>
                   prev.includes(rowIndex)
-                    ? prev.filter((i) => i !== rowIndex)
+                    ? prev.filter(i => i !== rowIndex)
                     : [...prev, rowIndex]
                 );
               }}
@@ -118,11 +118,11 @@ const VocabCards = () => {
                 )}
                 size={28}
               />
-              <span className="max-lg:hidden">
+              <span className='max-lg:hidden'>
                 Sets {selectedVocabCollection.prevLength + firstSetInRow}-
                 {selectedVocabCollection.prevLength + lastSetInRow}
               </span>
-              <span className="lg:hidden">
+              <span className='lg:hidden'>
                 Set {selectedVocabCollection.prevLength + firstSetInRow}
               </span>
             </h3>
@@ -138,8 +138,8 @@ const VocabCards = () => {
                   <motion.div
                     key={vocabSetTemp.id + vocabSetTemp.name}
                     variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
+                    initial='hidden'
+                    whileInView='visible'
                     viewport={{ once: false, amount: 0.2 }}
                     className={clsx(
                       'flex flex-col md:px-4 h-full',
@@ -156,13 +156,13 @@ const VocabCards = () => {
                         selectedVocabSets.includes(vocabSetTemp.name) &&
                           'bg-[var(--border-color)]'
                       )}
-                      onClick={(e) => {
+                      onClick={e => {
                         e.currentTarget.blur();
                         playClick();
                         if (selectedVocabSets.includes(vocabSetTemp.name)) {
                           setSelectedVocabSets(
                             selectedVocabSets.filter(
-                              (set) => set !== vocabSetTemp.name
+                              set => set !== vocabSetTemp.name
                             )
                           );
                           addWordObjs(
@@ -175,7 +175,7 @@ const VocabCards = () => {
                           setSelectedVocabSets([
                             ...new Set(
                               selectedVocabSets.concat(vocabSetTemp.name)
-                            ),
+                            )
                           ]);
                           addWordObjs(
                             selectedVocabCollection.data.slice(
@@ -187,9 +187,9 @@ const VocabCards = () => {
                       }}
                     >
                       {selectedVocabSets.includes(vocabSetTemp.name) ? (
-                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
+                        <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
                       ) : (
-                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
+                        <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
                       )}
                       {vocabSetTemp.name}
                     </button>

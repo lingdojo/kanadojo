@@ -5,11 +5,11 @@ import useKanaStore from '@/store/useKanaStore';
 import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
-import { useClick, useCorrect, useError } from '@/lib/hooks/useAudio';
+import { useClick, useCorrect, useError } from '@/hooks/useAudio';
 import GameIntel from '@/components/reusable/Game/GameIntel';
 import { buttonBorderStyles } from '@/static/styles';
 import { useStopwatch } from 'react-timer-hook';
-import useStats from '@/lib/hooks/useStats';
+import useStats from '@/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
@@ -171,13 +171,13 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
       )}
     >
       <GameIntel gameMode={gameMode} feedback={feedback} />
-      <div className="flex flex-col items-center gap-4">
+      <div className='flex flex-col items-center gap-4'>
         <p className='text-8xl sm:text-9xl font-medium'>{correctChar}</p>
-        <SSRAudioButton 
-          text={correctChar} 
-          variant="icon-only" 
-          size="lg"
-          className="bg-[var(--card-color)] border-[var(--border-color)]"
+        <SSRAudioButton
+          text={correctChar}
+          variant='icon-only'
+          size='lg'
+          className='bg-[var(--card-color)] border-[var(--border-color)]'
         />
       </div>
       <input

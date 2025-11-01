@@ -2,9 +2,9 @@
 import clsx from 'clsx';
 import { buttonBorderStyles } from '@/static/styles';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { AudioLines, VolumeX, Volume2, RefreshCw, Play } from 'lucide-react';
-import { useJapaneseTTS } from '@/lib/hooks/useJapaneseTTS';
+import { useJapaneseTTS } from '@/hooks/useJapaneseTTS';
 // import{Command, KeyboardOff} from 'lucide-react'
 // import HotkeyReference from './HotkeyReference';
 
@@ -277,7 +277,9 @@ const Behavior = () => {
               </button>
             </div>
             <div className='text-sm text-[var(--secondary-color)] text-center'>
-              {currentVoice ? `${currentVoice.name} • ${currentVoice.lang}` : 'No voice selected'}
+              {currentVoice
+                ? `${currentVoice.name} • ${currentVoice.lang}`
+                : 'No voice selected'}
             </div>
           </div>
         </>

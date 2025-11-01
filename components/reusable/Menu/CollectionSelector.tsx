@@ -15,7 +15,7 @@ import {
   N3VocabLength,
   N2VocabLength
 } from '@/static/unitSets';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { CircleCheck, Circle, Trash } from 'lucide-react';
 import { miniButtonBorderStyles } from '@/static/styles';
 

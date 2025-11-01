@@ -6,7 +6,7 @@ import useKanaStore from '@/store/useKanaStore';
 import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { ChevronUp, Play, Timer } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
@@ -87,7 +87,7 @@ const TopBar: React.FC<ITopBarProps> = ({
   }, [hotkeysOn]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className='flex flex-col gap-2'>
       <div
         className={clsx(
           'flex flex-row',
@@ -206,7 +206,7 @@ const TopBar: React.FC<ITopBarProps> = ({
             onClick={() => playClick()}
           >
             <Timer size={24} />
-            <span className="font-semibold">Timed Challenge (60s)</span>
+            <span className='font-semibold'>Timed Challenge (60s)</span>
           </button>
         </Link>
       )}

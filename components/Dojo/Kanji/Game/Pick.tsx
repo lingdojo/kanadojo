@@ -4,12 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
 import { IKanjiObj } from '@/store/useKanjiStore';
-import { useCorrect, useError } from '@/lib/hooks/useAudio';
+import { useCorrect, useError } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import GameIntel from '@/components/reusable/Game/GameIntel';
 import { pickGameKeyMappings } from '@/lib/keyMappings';
 import { useStopwatch } from 'react-timer-hook';
-import useStats from '@/lib/hooks/useStats';
+import useStats from '@/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
@@ -214,9 +214,13 @@ const KanjiPickGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <FuriganaText 
+            <FuriganaText
               text={correctChar}
-              reading={!isReverse ? (correctKanjiObj?.onyomi[0] || correctKanjiObj?.kunyomi[0]) : undefined}
+              reading={
+                !isReverse
+                  ? correctKanjiObj?.onyomi[0] || correctKanjiObj?.kunyomi[0]
+                  : undefined
+              }
               className={clsx(isReverse ? 'text-6xl md:text-8xl' : 'text-9xl')}
               lang={displayCharLang}
             />
@@ -254,9 +258,16 @@ const KanjiPickGame = ({
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
               >
-                <FuriganaText 
+                <FuriganaText
                   text={option}
-                  reading={isReverse ? selectedKanjiObjs.find(obj => obj.kanjiChar === option)?.onyomi[0] || selectedKanjiObjs.find(obj => obj.kanjiChar === option)?.kunyomi[0] : undefined}
+                  reading={
+                    isReverse
+                      ? selectedKanjiObjs.find(obj => obj.kanjiChar === option)
+                          ?.onyomi[0] ||
+                        selectedKanjiObjs.find(obj => obj.kanjiChar === option)
+                          ?.kunyomi[0]
+                      : undefined
+                  }
                 />
                 <span
                   className={clsx(
@@ -278,4 +289,3 @@ const KanjiPickGame = ({
 };
 
 export default KanjiPickGame;
-

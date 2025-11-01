@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Link } from '@/i18n/routing';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { useStopwatch } from 'react-timer-hook';
 import useStatsStore from '@/store/useStatsStore';
 import { X } from 'lucide-react';
@@ -46,7 +46,7 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
     >
       <Link
         href={href}
-        className=""
+        className=''
         ref={buttonRef}
         onClick={() => {
           playClick();

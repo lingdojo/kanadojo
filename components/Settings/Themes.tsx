@@ -3,7 +3,7 @@ import { createElement, useEffect } from 'react';
 import themeSets from '@/static/themes';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import clsx from 'clsx';
-import { useClick, useLong } from '@/lib/hooks/useAudio';
+import { useClick, useLong } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import { useState } from 'react';
 import { Dice5 } from 'lucide-react';

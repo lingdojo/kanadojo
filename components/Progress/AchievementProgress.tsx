@@ -8,10 +8,10 @@ import { LucideProps } from 'lucide-react'; //
 import useAchievementStore, {
   ACHIEVEMENTS,
   type Achievement,
-  type AchievementRarity,
+  type AchievementRarity
 } from '@/store/useAchievementStore';
 import useStatsStore from '@/store/useStatsStore';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles, buttonBorderStyles } from '@/static/styles';
 
 const rarityConfig: Record<
@@ -29,36 +29,36 @@ const rarityConfig: Record<
     bgColor: '#F9FAFB',
     borderColor: '#D1D5DB',
     icon: Star,
-    label: 'Common',
+    label: 'Common'
   },
   uncommon: {
     color: '#059669',
     bgColor: '#ECFDF5',
     borderColor: '#A7F3D0',
     icon: Zap,
-    label: 'Uncommon',
+    label: 'Uncommon'
   },
   rare: {
     color: '#2563EB',
     bgColor: '#EFF6FF',
     borderColor: '#93C5FD',
     icon: Trophy,
-    label: 'Rare',
+    label: 'Rare'
   },
   epic: {
     color: '#7C3AED',
     bgColor: '#F5F3FF',
     borderColor: '#C4B5FD',
     icon: Crown,
-    label: 'Epic',
+    label: 'Epic'
   },
   legendary: {
     color: '#DC2626',
     bgColor: '#FEF2F2',
     borderColor: '#FECACA',
     icon: Gem,
-    label: 'Legendary',
-  },
+    label: 'Legendary'
+  }
 };
 
 const categories = [
@@ -66,7 +66,7 @@ const categories = [
   { id: 'milestone', label: 'Milestones', icon: Star },
   { id: 'streak', label: 'Streaks', icon: Zap },
   { id: 'consistency', label: 'Consistency', icon: Crown },
-  { id: 'mastery', label: 'Mastery', icon: Gem },
+  { id: 'mastery', label: 'Mastery', icon: Gem }
 ] as const;
 
 interface AchievementCardProps {
@@ -80,7 +80,7 @@ const AchievementCard = ({
   achievement,
   isUnlocked,
   progress,
-  onClick,
+  onClick
 }: AchievementCardProps) => {
   const config = rarityConfig[achievement.rarity];
   const RarityIcon = config.icon;
@@ -101,15 +101,15 @@ const AchievementCard = ({
       {/* Gradient overlay for unlocked achievements */}
       {isUnlocked && (
         <div
-          className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300"
+          className='absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300'
           style={{
-            background: `linear-gradient(135deg, ${config.color}20, transparent)`,
+            background: `linear-gradient(135deg, ${config.color}20, transparent)`
           }}
         />
       )}
 
       {/* Rarity badge */}
-      <div className="absolute top-3 right-3">
+      <div className='absolute top-3 right-3'>
         <div
           className={clsx(
             'flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium',
@@ -120,12 +120,12 @@ const AchievementCard = ({
               ? {
                   backgroundColor: `${config.color}15`,
                   borderColor: `${config.color}30`,
-                  color: config.color,
+                  color: config.color
                 }
               : {
                   backgroundColor: '#F3F4F620',
                   borderColor: '#D1D5DB50',
-                  color: '#9CA3AF',
+                  color: '#9CA3AF'
                 }
           }
         >
@@ -134,9 +134,9 @@ const AchievementCard = ({
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className='space-y-4'>
         {/* Achievement icon and title */}
-        <div className="flex items-center gap-4">
+        <div className='flex items-center gap-4'>
           <div
             className={clsx(
               'w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold',
@@ -147,19 +147,19 @@ const AchievementCard = ({
                 ? {
                     backgroundColor: config.bgColor,
                     borderColor: config.borderColor,
-                    color: config.color,
+                    color: config.color
                   }
                 : {
                     backgroundColor: '#F3F4F6',
                     borderColor: '#D1D5DB',
-                    color: '#9CA3AF',
+                    color: '#9CA3AF'
                   }
             }
           >
             {isUnlocked ? achievement.icon : <Lock size={24} />}
           </div>
 
-          <div className="flex-1 min-w-0">
+          <div className='flex-1 min-w-0'>
             <h3
               className={clsx(
                 'font-bold text-lg mb-1 group-hover:text-[var(--main-color)] transition-colors',
@@ -186,29 +186,29 @@ const AchievementCard = ({
 
         {/* Progress bar for locked achievements */}
         {!isUnlocked && progress > 0 && (
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium text-[var(--main-color)]">
+          <div className='space-y-2'>
+            <div className='flex justify-between items-center'>
+              <span className='text-sm font-medium text-[var(--main-color)]'>
                 Progress
               </span>
-              <span className="text-sm font-bold text-[var(--main-color)]">
+              <span className='text-sm font-bold text-[var(--main-color)]'>
                 {Math.round(progress)}%
               </span>
             </div>
-            <div className="w-full bg-[var(--border-color)] rounded-full h-2">
+            <div className='w-full bg-[var(--border-color)] rounded-full h-2'>
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
+                className='h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500'
               />
             </div>
           </div>
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-2 border-t border-[var(--border-color)]/30">
-          <div className="flex items-center gap-2">
+        <div className='flex items-center justify-between pt-2 border-t border-[var(--border-color)]/30'>
+          <div className='flex items-center gap-2'>
             <Trophy
               size={16}
               className={
@@ -228,7 +228,7 @@ const AchievementCard = ({
           </div>
 
           {isUnlocked && (
-            <div className="text-xs text-[var(--secondary-color)] bg-[var(--background-color)] px-2 py-1 rounded-full">
+            <div className='text-xs text-[var(--secondary-color)] bg-[var(--background-color)] px-2 py-1 rounded-full'>
               Unlocked ✓
             </div>
           )}
@@ -315,40 +315,37 @@ const AchievementProgress = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className='w-full'>
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="relative px-6 py-12 text-center">
+      <div className='relative overflow-hidden'>
+        <div className='relative px-6 py-12 text-center'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
+            className='space-y-4'
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Trophy
-                className="text-yellow-500"
-                size={40}
-              />
-              <h1 className="text-4xl font-bold text-[var(--main-color)]">
+            <div className='flex items-center justify-center gap-3 mb-4'>
+              <Trophy className='text-yellow-500' size={40} />
+              <h1 className='text-4xl font-bold text-[var(--main-color)]'>
                 Achievements
               </h1>
             </div>
-            <p className="text-lg text-[var(--secondary-color)] max-w-2xl mx-auto">
+            <p className='text-lg text-[var(--secondary-color)] max-w-2xl mx-auto'>
               Track your Japanese learning journey and celebrate your milestones
             </p>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-8">
+            <div className='grid grid-cols-1 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-8'>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className="text-3xl font-bold text-[var(--main-color)] mb-1">
+                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
                   {unlockedCount}
                 </div>
-                <div className="text-sm text-[var(--secondary-color)]">
+                <div className='text-sm text-[var(--secondary-color)]'>
                   Unlocked
                 </div>
               </motion.div>
@@ -359,10 +356,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.2 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className="text-3xl font-bold text-[var(--main-color)] mb-1">
+                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
                   {totalCount}
                 </div>
-                <div className="text-sm text-[var(--secondary-color)]">
+                <div className='text-sm text-[var(--secondary-color)]'>
                   Total
                 </div>
               </motion.div>
@@ -373,10 +370,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.3 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className="text-3xl font-bold text-[var(--main-color)] mb-1">
+                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
                   {totalPoints}
                 </div>
-                <div className="text-sm text-[var(--secondary-color)]">
+                <div className='text-sm text-[var(--secondary-color)]'>
                   Points
                 </div>
               </motion.div>
@@ -387,10 +384,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.4 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className="text-3xl font-bold text-[var(--main-color)] mb-1">
+                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
                   {level}
                 </div>
-                <div className="text-sm text-[var(--secondary-color)]">
+                <div className='text-sm text-[var(--secondary-color)]'>
                   Level
                 </div>
               </motion.div>
@@ -401,22 +398,22 @@ const AchievementProgress = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="max-w-md mx-auto mt-6"
+              className='max-w-md mx-auto mt-6'
             >
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium text-[var(--main-color)]">
+              <div className='flex justify-between items-center mb-2'>
+                <span className='text-sm font-medium text-[var(--main-color)]'>
                   Overall Progress
                 </span>
-                <span className="text-sm font-bold text-[var(--main-color)]">
+                <span className='text-sm font-bold text-[var(--main-color)]'>
                   {Math.round(completionPercentage)}%
                 </span>
               </div>
-              <div className="w-full bg-[var(--border-color)] rounded-full h-3">
+              <div className='w-full bg-[var(--border-color)] rounded-full h-3'>
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${completionPercentage}%` }}
                   transition={{ duration: 1.5, ease: 'easeOut' }}
-                  className="h-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
+                  className='h-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full'
                 />
               </div>
             </motion.div>
@@ -425,9 +422,9 @@ const AchievementProgress = () => {
       </div>
 
       {/* Category Tabs */}
-      <div className="px-6 py-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-2 mb-8 justify-center">
+      <div className='px-6 py-6'>
+        <div className='max-w-6xl mx-auto'>
+          <div className='flex flex-wrap gap-2 mb-8 justify-center'>
             {categories.map((category, index) => {
               const stats = getCategoryStats(category.id);
               const CategoryIcon = category.icon;
@@ -471,7 +468,7 @@ const AchievementProgress = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
           >
             {filteredAchievements.map((achievement, index) => {
               const isUnlocked = !!unlockedAchievements[achievement.id];
@@ -497,15 +494,15 @@ const AchievementProgress = () => {
 
           {/* Empty State */}
           {filteredAchievements.length === 0 && (
-            <div className="text-center py-12">
+            <div className='text-center py-12'>
               <Trophy
-                className="mx-auto text-[var(--border-color)] mb-4"
+                className='mx-auto text-[var(--border-color)] mb-4'
                 size={48}
               />
-              <h3 className="text-lg font-semibold text-[var(--main-color)] mb-2">
+              <h3 className='text-lg font-semibold text-[var(--main-color)] mb-2'>
                 No achievements in this category
               </h3>
-              <p className="text-[var(--secondary-color)]">
+              <p className='text-[var(--secondary-color)]'>
                 Try selecting a different category to see more achievements.
               </p>
             </div>
@@ -531,30 +528,27 @@ const AchievementManagement = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-12">
+    <div className='max-w-4xl mx-auto mt-12'>
       {/* Management Header */}
       <div className={clsx('p-6', cardBorderStyles)}>
-        <div className="flex items-center gap-3 mb-4">
-          <RotateCcw
-            className="text-[var(--main-color)]"
-            size={24}
-          />
-          <h2 className="text-xl font-bold text-[var(--main-color)]">
+        <div className='flex items-center gap-3 mb-4'>
+          <RotateCcw className='text-[var(--main-color)]' size={24} />
+          <h2 className='text-xl font-bold text-[var(--main-color)]'>
             Achievement Management
           </h2>
         </div>
 
-        <p className="text-[var(--secondary-color)] mb-6">
+        <p className='text-[var(--secondary-color)] mb-6'>
           Check for any missed achievements based on your current progress.
         </p>
 
         {/* Recalculate Achievements */}
-        <div className="flex items-center justify-between p-4 bg-[var(--background-color)] rounded-lg">
+        <div className='flex items-center justify-between p-4 bg-[var(--background-color)] rounded-lg'>
           <div>
-            <h4 className="font-medium text-[var(--main-color)]">
+            <h4 className='font-medium text-[var(--main-color)]'>
               Recalculate Achievements
             </h4>
-            <p className="text-sm text-[var(--secondary-color)]">
+            <p className='text-sm text-[var(--secondary-color)]'>
               Scan your progress and unlock any achievements you may have earned
             </p>
           </div>
