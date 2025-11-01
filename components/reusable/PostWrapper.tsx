@@ -11,7 +11,7 @@ const PostWrapper = ({ textContent }: { textContent: string }) => {
     <div className='min-h-[100dvh] max-w-[100dvw] px-4 pb-10 sm:px-8 md:px-20 xl:px-66'>
       <Banner />
       <Link href='/' className='w-full md:w-1/3 lg:w-1/4'>
-        <button className={clsx(buttonBorderStyles, 'py-4 px-16', 'w-full')}>
+        <button className={clsx(buttonBorderStyles, 'py-4 px-16', 'w-full flex items-center justify-center')}>
           <ChevronsLeft />
         </button>
       </Link>
