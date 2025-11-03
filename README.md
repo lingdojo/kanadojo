@@ -7,7 +7,7 @@
 ![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
 ![GitHub Stars](https://github.com/user-attachments/assets/de26975d-ce19-4a56-be00-84470d4607e2)
 
-**An aesthetic, minimalist, and highly customizable platform for mastering Japanese**
+**An aesthetic, minimalist, and highly customizable platform for mastering Japanese inspired by Monkeytype**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
 [![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
