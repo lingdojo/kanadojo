@@ -53,7 +53,7 @@ const usePreferencesStore = create<PreferencesState>()(
       pronunciationEnabled: true,
       setPronunciationEnabled: enabled =>
         set({ pronunciationEnabled: enabled }),
-      pronunciationSpeed: 0.8,
+      pronunciationSpeed: 1.0,
       setPronunciationSpeed: speed => set({ pronunciationSpeed: speed }),
       pronunciationPitch: 1.0,
       setPronunciationPitch: pitch => set({ pronunciationPitch: pitch }),
