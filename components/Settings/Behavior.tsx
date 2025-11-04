@@ -224,7 +224,7 @@ const Behavior = () => {
             <input
               type='range'
               min='0.5'
-              max='2.0'
+              max='1.5'
               step='0.1'
               value={pronunciationPitch}
               onChange={e => setPronunciationPitch(parseFloat(e.target.value))}

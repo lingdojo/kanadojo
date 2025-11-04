@@ -209,12 +209,12 @@ export const useJapaneseTTS = () => {
             utterance.lang = 'ja-JP';
             
             // Validate and apply rate (0.5-1.5)
-            const rate = options?.rate ?? 0.8;
+            const rate = options?.rate ?? 1.0;
             utterance.rate = Math.max(0.5, Math.min(1.5, rate));
             
-            // Validate and apply pitch (0.5-2.0)
+            // Validate and apply pitch (0.5-1.5)
             const pitch = options?.pitch ?? 1.0;
-            utterance.pitch = Math.max(0.5, Math.min(2.0, pitch));
+            utterance.pitch = Math.max(0.5, Math.min(1.5, pitch));
             
             // Validate and apply volume (0-1)
             const volume = options?.volume ?? 0.8;
