@@ -1,53 +1,22 @@
+// app/layout.tsx
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MSClarity from '@/components/analytics/MSClarity';
-import { Metadata, Viewport } from 'next';
+import BackToTopButton from '@/components/BackToTopButton';
 
-const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
-const msVerificationToken = process.env.MS_VERIFICATION_TOKEN || '';
+// ✅ Important: do NOT add 'use client' here — layouts must be server components.
+// We'll handle client logic safely inside BackToTopButton instead.
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1.0,
-  maximumScale: 1.0,
-  userScalable: false
-};
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://kanadojo.com'),
-  manifest: '/manifest.json',
-  title: 'KanaDojo',
-  description:
-    'KanaDojo is a fun, aesthetic, minimalist platform for learning and practicing Japanese online.',
-  icons: {
-    icon: [
-      { url: '/favicon.ico?v=2' },
-      { url: '/favicon.ico?v=2', sizes: '16x16', type: 'image/x-icon' },
-      { url: '/favicon.ico?v=2', sizes: '32x32', type: 'image/x-icon' }
-    ],
-    shortcut: '/favicon.ico?v=2',
-    apple: '/favicon.ico?v=2'
-  },
-  verification: {
-    google: googleVerificationToken,
-    other: { 'msvalidate.01': msVerificationToken }
-  },
-  keywords:
-    'learn japanese, learn hiragana, learn katakana, learn kana, learn japanese kana, hiragana practice, katakana practice, learn kanji, kanji practice online, kana learning, japanese online lessons, japanese writing system',
-  openGraph: {
-    title: 'KanaDojo',
-    description:
-      'KanaDojo is a fun, aesthetic, minimalist platform for learning and practicing Japanese online.',
-    url: 'https://kanadojo.com',
-    type: 'website',
-    locale: 'en_US'
-  }
-};
 
-// Move analytics condition to a constant to avoid repeated evaluation
+// Optional: define metadata and viewport here if used in your project
+// export const metadata: Metadata = { title: 'LingDojo', description: '...' };
+// export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
+
 const isAnalyticsEnabled =
   process.env.NODE_ENV === 'production' &&
   process.env.ANALYTICS_DISABLED !== 'true';
@@ -58,8 +27,9 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-background text-foreground">
+        {/* ✅ Analytics and speed insights */}
         {isAnalyticsEnabled && (
           <>
             <GoogleAnalytics />
@@ -68,7 +38,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <SpeedInsights />
           </>
         )}
+
+        {/* ✅ Render main page content */}
         {children}
+
+        {/* ✅ BackToTopButton only for non-home routes (logic inside component) */}
+        <BackToTopButton />
       </body>
     </html>
   );
