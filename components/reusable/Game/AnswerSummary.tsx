@@ -4,7 +4,7 @@ import { IWordObj } from '@/store/useVocabStore';
 import { buttonBorderStyles } from '@/static/styles';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
 const AnswerSummary = ({

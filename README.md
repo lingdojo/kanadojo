@@ -5,9 +5,9 @@
 <div align="center">
 
 ![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
-![GitHub Stars](https://github.com/user-attachments/assets/7524bec9-5fa8-438e-8df6-ee9e3de5f2f9)
+![GitHub Stars](https://github.com/user-attachments/assets/de26975d-ce19-4a56-be00-84470d4607e2)
 
-**An aesthetic, minimalist, and highly customizable platform for mastering Japanese**
+**An aesthetic, minimalist, and highly customizable platform for mastering Japanese inspired by Monkeytype**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
 [![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
@@ -449,9 +449,11 @@ KanaDojo is available in multiple languages thanks to community contributions:
 - [Français](docs/translations/README.fr.md) in progress
 - [Deutsch](docs/translations/README.de.md)
 - [Português](docs/translations/README.pt-br.md)
+- [Türkçe](docs/translations/README.tr.md)
 - [中文（简体）](docs/translations/README.zh-CN.md)
 - [中文（繁體）](docs/translations/README.zh-tw.md)
 - [हिन्दी](docs/translations/README.hin.md)
+- <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
 
 ## 📞 Contact & Links
 

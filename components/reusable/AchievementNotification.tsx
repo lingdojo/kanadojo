@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 import { Trophy, X } from 'lucide-react';
 import useAchievementStore, {
-  type AchievementNotification as NotificationType,
+  type AchievementNotification as NotificationType
 } from '@/store/useAchievementStore';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
 
 interface AchievementNotificationProps {
@@ -19,7 +19,7 @@ interface AchievementNotificationProps {
 const AchievementNotification = ({
   notification,
   onDismiss,
-  onViewDetails,
+  onViewDetails
 }: AchievementNotificationProps) => {
   const { playClick } = useClick();
   const [isVisible, setIsVisible] = useState(true);
@@ -81,9 +81,9 @@ const AchievementNotification = ({
             <X size={14} />
           </button>
 
-          <div className="flex items-start gap-3 pr-6">
+          <div className='flex items-start gap-3 pr-6'>
             {/* Achievement Icon */}
-            <div className="flex-shrink-0">
+            <div className='flex-shrink-0'>
               <div
                 className={clsx(
                   'w-10 h-10 rounded-full flex items-center justify-center',
@@ -95,30 +95,27 @@ const AchievementNotification = ({
             </div>
 
             {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <Trophy
-                  size={14}
-                  className="text-yellow-500"
-                />
-                <span className="text-xs font-semibold text-yellow-600 uppercase tracking-wide">
+            <div className='flex-1 min-w-0'>
+              <div className='flex items-center gap-2 mb-1'>
+                <Trophy size={14} className='text-yellow-500' />
+                <span className='text-xs font-semibold text-yellow-600 uppercase tracking-wide'>
                   Achievement Unlocked
                 </span>
               </div>
 
-              <h4 className="font-semibold text-[var(--main-color)] text-sm mb-1 truncate">
+              <h4 className='font-semibold text-[var(--main-color)] text-sm mb-1 truncate'>
                 {notification.achievement.title}
               </h4>
 
-              <p className="text-xs text-[var(--secondary-color)] line-clamp-2">
+              <p className='text-xs text-[var(--secondary-color)] line-clamp-2'>
                 {notification.achievement.description}
               </p>
 
-              <div className="flex items-center justify-between mt-2">
-                <span className="text-xs text-yellow-600 font-medium">
+              <div className='flex items-center justify-between mt-2'>
+                <span className='text-xs text-yellow-600 font-medium'>
                   +{notification.achievement.points} points
                 </span>
-                <span className="text-xs text-[var(--secondary-color)]">
+                <span className='text-xs text-[var(--secondary-color)]'>
                   Click to view
                 </span>
               </div>
@@ -130,7 +127,7 @@ const AchievementNotification = ({
             initial={{ width: '100%' }}
             animate={{ width: '0%' }}
             transition={{ duration: 8, ease: 'linear' }}
-            className="absolute bottom-0 left-0 h-1 bg-yellow-500 rounded-b-lg"
+            className='absolute bottom-0 left-0 h-1 bg-yellow-500 rounded-b-lg'
           />
         </motion.div>
       )}
@@ -178,7 +175,7 @@ export const AchievementNotificationContainer = () => {
   return (
     <>
       {/* Notification Stack */}
-      <div className="fixed top-4 right-4 z-50 space-y-2">
+      <div className='fixed top-4 right-4 z-50 space-y-2'>
         {notifications.slice(0, 3).map((notification, index) => (
           <motion.div
             key={notification.id}
@@ -200,7 +197,7 @@ export const AchievementNotificationContainer = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-[9999]"
+          className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-[9999]'
           onClick={handleCloseModal}
         >
           <motion.div
@@ -213,14 +210,14 @@ export const AchievementNotificationContainer = () => {
             )}
             onClick={e => e.stopPropagation()}
           >
-            <div className="text-4xl mb-4">{selectedAchievement.icon}</div>
-            <h3 className="text-xl font-bold text-[var(--main-color)] mb-2">
+            <div className='text-4xl mb-4'>{selectedAchievement.icon}</div>
+            <h3 className='text-xl font-bold text-[var(--main-color)] mb-2'>
               {selectedAchievement.title}
             </h3>
-            <p className="text-[var(--secondary-color)] mb-4">
+            <p className='text-[var(--secondary-color)] mb-4'>
               {selectedAchievement.description}
             </p>
-            <div className="text-sm text-yellow-600 font-medium mb-4">
+            <div className='text-sm text-yellow-600 font-medium mb-4'>
               +{selectedAchievement.points} Achievement Points
             </div>
             <button

@@ -4,12 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
 import { IWordObj } from '@/store/useVocabStore';
-import { useCorrect, useError } from '@/lib/hooks/useAudio';
+import { useCorrect, useError } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import GameIntel from '@/components/reusable/Game/GameIntel';
 import { pickGameKeyMappings } from '@/lib/keyMappings';
 import { useStopwatch } from 'react-timer-hook';
-import useStats from '@/lib/hooks/useStats';
+import useStats from '@/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
@@ -213,7 +213,7 @@ const VocabPickGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <FuriganaText 
+            <FuriganaText
               text={correctChar}
               reading={!isReverse ? correctWordObj?.reading : undefined}
               className={clsx(textSize, 'text-center')}
@@ -255,9 +255,14 @@ const VocabPickGame = ({
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
               >
-                <FuriganaText 
+                <FuriganaText
                   text={option}
-                  reading={isReverse ? selectedWordObjs.find(obj => obj.word === option)?.reading : undefined}
+                  reading={
+                    isReverse
+                      ? selectedWordObjs.find(obj => obj.word === option)
+                          ?.reading
+                      : undefined
+                  }
                 />
                 <span
                   className={clsx(

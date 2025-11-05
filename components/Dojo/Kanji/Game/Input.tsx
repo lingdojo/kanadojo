@@ -4,11 +4,11 @@ import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
 import { IKanjiObj } from '@/store/useKanjiStore';
-import { useClick, useCorrect, useError } from '@/lib/hooks/useAudio';
+import { useClick, useCorrect, useError } from '@/hooks/useAudio';
 import GameIntel from '@/components/reusable/Game/GameIntel';
 import { buttonBorderStyles } from '@/static/styles';
 import { useStopwatch } from 'react-timer-hook';
-import useStats from '@/lib/hooks/useStats';
+import useStats from '@/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
@@ -220,9 +220,13 @@ const KanjiInputGame = ({
       {!displayAnswerSummary && (
         <>
           <div className='flex flex-col items-center gap-4'>
-            <FuriganaText 
+            <FuriganaText
               text={correctChar}
-              reading={!isReverse ? (correctKanjiObj?.onyomi[0] || correctKanjiObj?.kunyomi[0]) : undefined}
+              reading={
+                !isReverse
+                  ? correctKanjiObj?.onyomi[0] || correctKanjiObj?.kunyomi[0]
+                  : undefined
+              }
               className={textSize}
               lang={displayCharLang}
             />

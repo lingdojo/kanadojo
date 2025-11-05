@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import clsx from 'clsx';
 import { useState } from 'react';
 import Subset from './Subset';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
 import { ChevronUp } from 'lucide-react';
 

@@ -13,12 +13,12 @@ import {
   CircleDivide,
   Flame,
   Shapes,
-  Sigma,
+  Sigma
 } from 'lucide-react';
 import useStatsStore from '@/store/useStatsStore';
 import { ChevronsLeft } from 'lucide-react';
 import { findHighestCounts } from '@/lib/helperFunctions';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 
 const Stats = () => {
   const { playClick } = useClick();
@@ -47,7 +47,7 @@ const Stats = () => {
     highestCorrectChars,
     highestCorrectCharsValue,
     highestWrongChars,
-    highestWrongCharsValue,
+    highestWrongCharsValue
   } = findHighestCounts(characterScores);
 
   const statsFields = [
@@ -56,22 +56,22 @@ const Stats = () => {
       value: `${totalMinutes} minute${
         totalMinutes === 1 ? '' : 's'
       }, ${seconds} seconds (paused)`,
-      icons: [Hourglass],
+      icons: [Hourglass]
     },
     {
       field: 'correct answers',
       value: `${numCorrectAnswers}`,
-      icons: [SquareCheck],
+      icons: [SquareCheck]
     },
     {
       field: 'wrong answers',
       value: `${numWrongAnswers}`,
-      icons: [SquareX],
+      icons: [SquareX]
     },
     {
       field: 'accuracy',
       value: `${Number.isNaN(accuracy) ? '~' : accuracy.toFixed(1) + '%'}`,
-      icons: [Target],
+      icons: [Target]
     },
     {
       field: 'average time per correct answer',
@@ -80,7 +80,7 @@ const Stats = () => {
           ? averageCorrectAnswerTime.toFixed(2) + 's'
           : '~'
       }`,
-      icons: [Timer],
+      icons: [Timer]
     },
 
     {
@@ -88,14 +88,14 @@ const Stats = () => {
       value: `${
         fastestCorrectAnswer !== 'Infinity' ? fastestCorrectAnswer + 's' : '~'
       }`,
-      icons: [Flame],
+      icons: [Flame]
     },
     {
       field: 'slowest correct answer',
       value: `${
         slowestCorrectAnswer !== '-Infinity' ? slowestCorrectAnswer + 's' : '~'
       }`,
-      icons: [ClockFading],
+      icons: [ClockFading]
     },
     {
       field: 'correct / incorrect answers ratio',
@@ -106,17 +106,17 @@ const Stats = () => {
           ? '∞'
           : ciRatio.toFixed(2)
       }`,
-      icons: [CircleDivide],
+      icons: [CircleDivide]
     },
     {
       field: 'characters played',
       value: `${characterHistory.length}`,
-      icons: [Sigma],
+      icons: [Sigma]
     },
     {
       field: 'unique characters played',
       value: `${[...new Set(characterHistory)].length}`,
-      icons: [Shapes],
+      icons: [Shapes]
     },
     {
       field: 'easiest characters',
@@ -128,7 +128,7 @@ const Stats = () => {
             ' correct answers'
           : '~'
       }`,
-      icons: [Clover],
+      icons: [Clover]
     },
     {
       field: 'hardest characters',
@@ -140,12 +140,12 @@ const Stats = () => {
             ' wrong answers'
           : '~'
       }`,
-      icons: [HeartCrack],
-    },
+      icons: [HeartCrack]
+    }
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 max-w-[100dvw] min-h-[100dvh] py-4">
+    <div className='flex flex-col items-center justify-center gap-4 max-w-[100dvw] min-h-[100dvh] py-4'>
       <h2
         className={clsx(
           'group text-4xl flex flex-row items-center gap-2.5 hover:cursor-pointer'
@@ -163,10 +163,7 @@ const Stats = () => {
           size={32}
         />
         <span>Statistics</span>
-        <ChartSpline
-          size={30}
-          className="mt-1.5"
-        />
+        <ChartSpline size={30} className='mt-1.5' />
       </h2>
       <div
         className={clsx('flex flex-col items-start', 'md:flex-row md:gap-10')}
@@ -182,15 +179,12 @@ const Stats = () => {
                 )}
                 key={statsField.field}
               >
-                <span className="text-[var(--secondary-color)]">
+                <span className='text-[var(--secondary-color)]'>
                   {statsField.field + ': '}
                 </span>
                 <span>{statsField.value}</span>
                 {statsField.icons.map((Icon, i) => (
-                  <Icon
-                    size={24}
-                    key={i}
-                  />
+                  <Icon size={24} key={i} />
                 ))}
               </p>
             ))}
@@ -208,15 +202,12 @@ const Stats = () => {
                 )}
                 key={statsField.field}
               >
-                <span className="text-[var(--secondary-color)]">
+                <span className='text-[var(--secondary-color)]'>
                   {statsField.field + ': '}
                 </span>
                 <span>{statsField.value}</span>
                 {statsField.icons.map((Icon, i) => (
-                  <Icon
-                    size={24}
-                    key={i}
-                  />
+                  <Icon size={24} key={i} />
                 ))}
               </p>
             ))}
@@ -233,15 +224,12 @@ const Stats = () => {
                 )}
                 key={statsField.field}
               >
-                <span className="text-[var(--secondary-color)]">
+                <span className='text-[var(--secondary-color)]'>
                   {statsField.field + ': '}
                 </span>
                 <span>{statsField.value}</span>
                 {statsField.icons.map((Icon, i) => (
-                  <Icon
-                    size={24}
-                    key={i}
-                  />
+                  <Icon size={24} key={i} />
                 ))}
               </p>
             ))}

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { kana } from '@/static/kana';
 import useKanaStore from '@/store/useKanaStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { miniButtonBorderStyles } from '@/static/styles';
 import { MousePointer } from 'lucide-react';
 import { useState } from 'react';

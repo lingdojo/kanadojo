@@ -1,13 +1,15 @@
 'use client';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
-import N5KanjiArray from '@/static/kanji/N5';
-import N4KanjiArray from '@/static/kanji/N4';
-import N3KanjiArray from '@/static/kanji/N3';
-import N2KanjiArray from '@/static/kanji/N2';
+import N5Kanji from '@/static/kanji/N5';
+import N4Kanji from '@/static/kanji/N4';
+import N3Kanji from '@/static/kanji/N3';
+import N2Kanji from '@/static/kanji/N2';
+import N1Kanji from '@/static/kanji/N1';
 import useKanjiStore from '@/store/useKanjiStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import FuriganaText from '@/components/reusable/FuriganaText';
+import { useClick } from '@/hooks/useAudio';
 
 const createKanjiSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
@@ -21,13 +23,16 @@ const createKanjiSetRanges = (numSets: number) =>
 const kanjiSetSliceRanges = createKanjiSetRanges(200);
 
 const kanjiCollections = {
-  n5: N5KanjiArray,
-  n4: N4KanjiArray,
-  n3: N3KanjiArray,
-  n2: N2KanjiArray
+  n5: N5Kanji,
+  n4: N4Kanji,
+  n3: N3Kanji,
+  n2: N2Kanji,
+  n1: N1Kanji
 };
 
 const KanjiSetDictionary = ({ set }: { set: string }) => {
+  const { playClick } = useClick();
+
   const selectedKanjiCollection = useKanjiStore(
     state => state.selectedKanjiCollection
   );
@@ -52,9 +57,17 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
             )}
           >
             <div className='flex flex-row w-full gap-4'>
-              <div className='relative w-full max-w-[100px] aspect-square flex items-center justify-center '>
+              <a
+                className='relative w-full max-w-[100px] aspect-square flex items-center justify-center hover:cursor-pointer group'
+                href={`http://kanjiheatmap.com/?open=${kanjiObj.kanjiChar}`}
+                rel='noopener'
+                target='_blank'
+                onClick={() => {
+                  playClick();
+                }}
+              >
                 {/* 4-segment square background */}
-                <div className='absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)]'>
+                <div className='absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)] group-hover:bg-[var(--card-color)] transition-all'>
                   <div className=' border-r border-b border-[var(--border-color)]'></div>
                   <div className=' border-b border-[var(--border-color)]'></div>
                   <div className=' border-r border-[var(--border-color)]'></div>
@@ -64,10 +77,10 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                 <FuriganaText
                   text={kanjiObj.kanjiChar}
                   reading={kanjiObj.onyomi[0] || kanjiObj.kunyomi[0]}
-                  className='text-7xl pb-2 relative z-10'
+                  className='text-7xl pb-2 relative z-10 '
                   lang='ja'
                 />
-              </div>
+              </a>
 
               <div className='flex flex-col gap-2 w-full'>
                 <div

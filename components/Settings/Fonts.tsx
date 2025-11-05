@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { buttonBorderStyles } from '@/static/styles';
 import fonts from '@/static/fonts';

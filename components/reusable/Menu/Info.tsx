@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
 import { ChevronUp } from 'lucide-react';
 import translationGen from '@/static/info';
@@ -13,23 +13,27 @@ import { useTranslations } from 'next-intl';
 const Info = () => {
   const pathname = usePathname();
   const t = useTranslations('MenuInfo');
-  
+
   // Remove locale from pathname (e.g., /en/kana -> /kana)
   const pathWithoutLocale = removeLocaleFromPath(pathname);
-  
+
   // Get translations object, passing the translation function
   const translations = translationGen(t);
-  
+
   // Get page data with fallback to home
-  const pageData = translations[pathWithoutLocale as keyof typeof translations] || translations['/'];
-  
+  const pageData =
+    translations[pathWithoutLocale as keyof typeof translations] ||
+    translations['/'];
+
   // Provide default values to avoid destructuring undefined
   const { header, content } = pageData || { header: '', content: '' };
 
   const { playClick } = useClick();
 
   const [showInfo, setShowInfo] = useState(
-    ['/kana', '/kanji', '/vocabulary', '/', '/sentences'].includes(pathWithoutLocale)
+    ['/kana', '/kanji', '/vocabulary', '/', '/sentences'].includes(
+      pathWithoutLocale
+    )
       ? true
       : false
   );

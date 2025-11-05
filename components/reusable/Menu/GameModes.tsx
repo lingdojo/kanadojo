@@ -5,7 +5,7 @@ import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import { MousePointerClick, Keyboard, CircleCheck, Circle } from 'lucide-react';
 import clsx from 'clsx';
-import { useClick } from '@/lib/hooks/useAudio';
+import { useClick } from '@/hooks/useAudio';
 import { usePathname } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
 import { removeLocaleFromPath } from '@/lib/pathUtils';
@@ -38,10 +38,10 @@ const GameModes = () => {
     pathWithoutLocale === '/kana'
       ? selectedGameModeKana
       : pathWithoutLocale === '/kanji'
-        ? selectedGameModeKanji
-        : pathWithoutLocale === '/vocabulary'
-          ? selectedGameModeVocab
-          : '';
+      ? selectedGameModeKanji
+      : pathWithoutLocale === '/vocabulary'
+      ? selectedGameModeVocab
+      : '';
 
   const setSelectedGameModeVocab = useVocabStore(
     useShallow(state => state.setSelectedGameModeVocab)
@@ -51,10 +51,10 @@ const GameModes = () => {
     pathWithoutLocale === '/kana'
       ? setSelectedGameModeKana
       : pathWithoutLocale === '/kanji'
-        ? setSelectedGameModeKanji
-        : pathWithoutLocale === '/vocabulary'
-          ? setSelectedGameModeVocab
-          : () => { };
+      ? setSelectedGameModeKanji
+      : pathWithoutLocale === '/vocabulary'
+      ? setSelectedGameModeVocab
+      : () => {};
 
   const gameModes = ['Pick', 'Reverse-Pick', 'Input', 'Reverse-Input'];
 
