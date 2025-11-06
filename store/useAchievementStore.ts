@@ -15,7 +15,7 @@ export interface Achievement {
   requirements: {
     type: 'streak' | 'total_correct' | 'sessions' | 'accuracy' | 'character_mastery' | 'dojo_completion';
     value: number;
-    additional?: Record<string, any>;
+    additional?: Record<string, unknown>;
   };
   rewards?: {
     themes?: string[];
@@ -48,7 +48,7 @@ interface AchievementState {
   unlockAchievement: (achievement: Achievement) => void;
   markNotificationSeen: (notificationId: string) => void;
   clearAllNotifications: () => void;
-  checkAchievements: (stats: any) => Achievement[];
+  checkAchievements: (stats: unknown) => Achievement[];
   
   // Internal method to update computed properties
   updateComputedProperties: () => void;
@@ -307,9 +307,15 @@ const useAchievementStore = create<AchievementState>()(
         get().updateComputedProperties();
       },
 
-      checkAchievements: (stats: any) => {
+      checkAchievements: (stats: unknown) => {
         const state = get();
         const newlyUnlocked: Achievement[] = [];
+        
+        // Type guard for stats object
+        const typedStats = stats as { allTimeStats?: { totalCorrect?: number; totalIncorrect?: number; bestStreak?: number; totalSessions?: number; characterMastery?: Record<string, { correct: number; incorrect: number }> } };
+        if (!typedStats.allTimeStats) return newlyUnlocked;
+        
+        const allTimeStats = typedStats.allTimeStats;
 
         ACHIEVEMENTS.forEach(achievement => {
           if (state.unlockedAchievements[achievement.id]) return;
@@ -318,18 +324,18 @@ const useAchievementStore = create<AchievementState>()(
 
           switch (achievement.requirements.type) {
             case 'total_correct':
-              isUnlocked = stats.allTimeStats.totalCorrect >= achievement.requirements.value;
+              isUnlocked = (allTimeStats.totalCorrect ?? 0) >= achievement.requirements.value;
               break;
             case 'streak':
-              isUnlocked = stats.allTimeStats.bestStreak >= achievement.requirements.value;
+              isUnlocked = (allTimeStats.bestStreak ?? 0) >= achievement.requirements.value;
               break;
             case 'sessions':
-              isUnlocked = stats.allTimeStats.totalSessions >= achievement.requirements.value;
+              isUnlocked = (allTimeStats.totalSessions ?? 0) >= achievement.requirements.value;
               break;
             case 'accuracy':
-              const totalAnswers = stats.allTimeStats.totalCorrect + stats.allTimeStats.totalIncorrect;
-              const accuracy = totalAnswers > 0 ? (stats.allTimeStats.totalCorrect / totalAnswers) * 100 : 0;
-              const minAnswers = achievement.requirements.additional?.minAnswers || 0;
+              const totalAnswers = (allTimeStats.totalCorrect ?? 0) + (allTimeStats.totalIncorrect ?? 0);
+              const accuracy = totalAnswers > 0 ? ((allTimeStats.totalCorrect ?? 0) / totalAnswers) * 100 : 0;
+              const minAnswers = (achievement.requirements.additional?.minAnswers as number | undefined) ?? 0;
               isUnlocked = totalAnswers >= minAnswers && accuracy >= achievement.requirements.value;
               break;
           }

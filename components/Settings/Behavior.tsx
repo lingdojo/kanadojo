@@ -307,7 +307,7 @@ const Behavior = () => {
                     )}
                     {isChrome && (
                       <>
-                        Chrome usually includes Japanese voices by default. If you're not seeing them, try refreshing voices or check chrome://flags.
+                        Chrome usually includes Japanese voices by default. If you&apos;re not seeing them, try refreshing voices or check chrome://flags.
                       </>
                     )}
                   </p>
@@ -318,15 +318,15 @@ const Behavior = () => {
                     <div className='mt-2 pl-4 space-y-2 text-xs'>
                       {isFirefox && (
                         <div className='mb-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800'>
-                          <strong>⚠️ Firefox-specific:</strong> Firefox relies on your operating system's voices. 
+                          <strong>⚠️ Firefox-specific:</strong> Firefox relies on your operating system&apos;s voices. 
                           You must install Japanese language packs in your OS, then restart Firefox.
                         </div>
                       )}
                       <div>
                         <strong>Windows:</strong>
                         <ol className='list-decimal list-inside ml-2 space-y-1'>
-                          <li>Open Settings → Time & Language → Language</li>
-                          <li>Click "Add a language" → Search for "Japanese"</li>
+                          <li>Open Settings → Time &amp; Language → Language</li>
+                          <li>Click &quot;Add a language&quot; → Search for &quot;Japanese&quot;</li>
                           <li>Install Japanese language pack</li>
                           <li>Restart your browser</li>
                         </ol>
@@ -334,8 +334,8 @@ const Behavior = () => {
                       <div>
                         <strong>macOS:</strong>
                         <ol className='list-decimal list-inside ml-2 space-y-1'>
-                          <li>Open System Settings → General → Language & Region</li>
-                          <li>Click "+" to add Japanese</li>
+                          <li>Open System Settings → General → Language &amp; Region</li>
+                          <li>Click &quot;+&quot; to add Japanese</li>
                           <li>System will download Japanese voices automatically</li>
                           <li>Restart your browser</li>
                         </ol>
@@ -353,8 +353,8 @@ const Behavior = () => {
                         <strong>Chrome/Edge:</strong>
                         <ol className='list-decimal list-inside ml-2 space-y-1'>
                           <li>Chrome includes built-in Google TTS voices (including Japanese) - no installation needed</li>
-                          <li>If voices don't appear, go to chrome://flags and search for "Web Speech API"</li>
-                          <li>Ensure it's enabled, then restart Chrome</li>
+                          <li>If voices don&apos;t appear, go to chrome://flags and search for &quot;Web Speech API&quot;</li>
+                          <li>Ensure it&apos;s enabled, then restart Chrome</li>
                         </ol>
                       </div>
                       <div>
@@ -362,7 +362,7 @@ const Behavior = () => {
                         <ol className='list-decimal list-inside ml-2 space-y-1'>
                           <li>Type <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>about:config</code> in address bar</li>
                           <li>Search for <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>media.webspeech.synth.enabled</code></li>
-                          <li>Ensure it's set to <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>true</code></li>
+                          <li>Ensure it&apos;s set to <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>true</code></li>
                           <li><strong>Install Japanese voices in your OS first</strong> (Firefox uses system voices)</li>
                           <li>Restart Firefox</li>
                         </ol>
@@ -374,7 +374,7 @@ const Behavior = () => {
             })()}
             {availableVoices.length === 0 && (
               <div className='text-sm text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-200 dark:border-orange-800'>
-                <strong>⚠️ Notice:</strong> No voices are available. Please refresh voices or check your browser's speech synthesis settings. 
+                <strong>⚠️ Notice:</strong> No voices are available. Please refresh voices or check your browser&apos;s speech synthesis settings. 
                 This is not a system issue - your browser may need additional language packs.
               </div>
             )}

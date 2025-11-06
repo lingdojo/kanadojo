@@ -11,7 +11,7 @@ interface ErrorLog {
   userAgent: string;
   url: string;
   locale: string;
-  additionalInfo?: Record<string, any>;
+  additionalInfo?: Record<string, unknown>;
 }
 
 /**
@@ -21,7 +21,7 @@ interface ErrorLog {
 export function logError(
   error: Error,
   errorInfo?: ErrorInfo,
-  additionalInfo?: Record<string, any>
+  additionalInfo?: Record<string, unknown>
 ) {
   const errorLog: ErrorLog = {
     timestamp: new Date(),

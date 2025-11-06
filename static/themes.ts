@@ -1,4 +1,4 @@
-import { Atom, Sun, Moon } from 'lucide-react';
+import { Atom, Sun, Moon, LucideIcon } from 'lucide-react';
 
 interface Theme {
   id: string;
@@ -11,7 +11,7 @@ interface Theme {
 
 interface ThemeGroup {
   name: string;
-  icon: any;
+  icon: LucideIcon;
   themes: Theme[];
 }
 
