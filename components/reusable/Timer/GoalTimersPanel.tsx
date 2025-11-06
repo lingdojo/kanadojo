@@ -31,7 +31,6 @@ export default function GoalTimersPanel({
   const [newGoalLabel, setNewGoalLabel] = useState('');
   const [newGoalMinutes, setNewGoalMinutes] = useState(5);
   const [newGoalSeconds, setNewGoalSeconds] = useState(0);
-  const [showSaveTemplate, setShowSaveTemplate] = useState(false);
 
   // Format seconds into MM:SS
   const formatTime = (seconds: number) => {
