@@ -91,9 +91,11 @@ export default function TimedChallengeKana() {
   // Calculate elapsed time for goal timers
   const elapsedTime = challengeDuration - timeLeft;
 
-  // Goal Timers
+  // Goal Timers with history saving enabled
   const goalTimers = useGoalTimers(elapsedTime, {
     enabled: showGoalTimers,
+    saveToHistory: true,
+    context: 'Kana Timed Challenge',
     onGoalReached: goal => {
       console.log(`🎯 Goal reached: ${goal.label} at ${elapsedTime}s`);
     }

@@ -7,7 +7,6 @@ import { useClick } from '@/hooks/useAudio';
 import { miniButtonBorderStyles } from '@/static/styles';
 import { MousePointer } from 'lucide-react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 
 const finalCharactersInEachGroup = [
   'h.b.w',
@@ -60,12 +59,9 @@ const Subset = ({
                 addKanaGroupIndex(i + sliceRange[0]);
               }}
             />
-            <motion.div
+            <div
               className='group relative grid w-full font-normal min-h-auto place-items-start hover:cursor-pointer'
               onTouchStart={() => setFocusedRow(group.groupName)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, ease: 'linear' }}
             >
               <span
                 className={clsx(
@@ -103,7 +99,7 @@ const Subset = ({
               >
                 {group.romanji.join('・')}
               </span>
-            </motion.div>
+            </div>
           </label>
           {!finalCharactersInEachGroup.includes(group.groupName) && (
             <hr className='border-t-1 w-full border-[var(--border-color)]' />
@@ -129,13 +125,9 @@ const Subset = ({
             );
           }}
         >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: 'linear' }}
-          >
+          <span>
             select all {subgroup.slice(1).toLowerCase()}
-          </motion.span>
+          </span>
           <MousePointer size={22} />
         </button>
         {/* <Link href={`/kana/${group}-${subgroup}`} className='w-1/2'>

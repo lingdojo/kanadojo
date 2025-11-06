@@ -13,8 +13,6 @@ import N5Nouns from '@/static/vocab/n5/nouns';
 import N4Nouns from '@/static/vocab/n4/nouns';
 import N3Nouns from '@/static/vocab/n3/nouns';
 import N2Nouns from '@/static/vocab/n2/nouns';
-import { motion } from 'framer-motion';
-import { easeOut } from 'motion'; // ✅ FIX: import easing function properly
 
 // Vocabulary collections setup
 const vocabCollections = {
@@ -38,15 +36,7 @@ const vocabCollections = {
   }
 };
 
-// ✅ FIX: Use proper easing function instead of string
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: easeOut }
-  }
-};
+// ✅ REMOVED: Intersection Observer animation variants to fix bug where users need to scroll to see first sets
 
 const VocabCards = () => {
   const selectedVocabCollectionName = useVocabStore(
@@ -87,12 +77,8 @@ const VocabCards = () => {
         const lastSetInRow = (rowIndex + 1) * numColumns;
 
         return (
-          <motion.div
+          <div
             key={`row-${rowIndex}`}
-            variants={fadeInUp}
-            initial='hidden'
-            whileInView='visible'
-            viewport={{ once: false, amount: 0.2 }}
             className={clsx('flex flex-col py-4 gap-4', cardBorderStyles)}
           >
             <h3
@@ -135,12 +121,8 @@ const VocabCards = () => {
                 )}
               >
                 {rowSets.map((vocabSetTemp, i) => (
-                  <motion.div
+                  <div
                     key={vocabSetTemp.id + vocabSetTemp.name}
-                    variants={fadeInUp}
-                    initial='hidden'
-                    whileInView='visible'
-                    viewport={{ once: false, amount: 0.2 }}
                     className={clsx(
                       'flex flex-col md:px-4 h-full',
                       'border-[var(--border-color)]',
@@ -194,11 +176,11 @@ const VocabCards = () => {
                       {vocabSetTemp.name}
                     </button>
                     <VocabSetDictionary set={vocabSetTemp.id} />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             )}
-          </motion.div>
+          </div>
         );
       })}
     </div>

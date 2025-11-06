@@ -5,12 +5,14 @@ import Themes from './Themes';
 import Fonts from './Fonts';
 import Behavior from './Behavior';
 import Backup from './Backup';
+import GoalTimers from './GoalTimers';
 import {
   Joystick,
   Sparkles,
   CaseSensitive,
   Blocks,
-  Palette
+  Palette,
+  Target
 } from 'lucide-react';
 import Sidebar from '@/components/reusable/Menu/Sidebar';
 
@@ -57,6 +59,13 @@ const Settings = () => {
               <span>Backup</span>
             </h3>
             <Backup />
+          </div>
+          <div className='flex flex-col gap-4'>
+            <h3 className='flex flex-row text-2xl gap-2 items-center pb-2 border-b-1 border-[var(--border-color)]'>
+              <Target size={28} />
+              <span>Goal Timers</span>
+            </h3>
+            <GoalTimers />
           </div>
           <div className='flex flex-col gap-4 mb-12'>
             <h3

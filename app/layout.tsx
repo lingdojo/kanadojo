@@ -4,6 +4,7 @@ import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MSClarity from '@/components/analytics/MSClarity';
+import { GlobalErrorBoundary } from '@/components/ErrorBoundary';
 import { Metadata, Viewport } from 'next';
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
@@ -60,15 +61,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body>
-        {isAnalyticsEnabled && (
-          <>
-            <GoogleAnalytics />
-            <MSClarity />
-            <Analytics />
-            <SpeedInsights />
-          </>
-        )}
-        {children}
+        <GlobalErrorBoundary>
+          {isAnalyticsEnabled && (
+            <>
+              <GoogleAnalytics />
+              <MSClarity />
+              <Analytics />
+              <SpeedInsights />
+            </>
+          )}
+          {children}
+        </GlobalErrorBoundary>
       </body>
     </html>
   );
