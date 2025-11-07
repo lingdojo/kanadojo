@@ -24,6 +24,25 @@ const DojoMenu = () => {
     // clearWords();
   }, []);
 
+  // Hotkey support: Enter or Space to toggle GameModes
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only trigger on Kanji/Vocab pages
+      if (pathWithoutLocale !== '/kanji' && pathWithoutLocale !== '/vocabulary') return;
+      
+      // Ignore if user is typing in an input field
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setShowGameModes(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pathWithoutLocale]);
+
   return (
     <div className='min-h-[100dvh] max-w-[100dvw] lg:pr-20 flex gap-4'>
       <Sidebar />
