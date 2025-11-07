@@ -10,6 +10,7 @@ import WelcomeModal from '@/components/Modals/WelcomeModal';
 import { AchievementNotificationContainer } from '@/components/reusable/AchievementNotification';
 import AchievementIntegration from '@/components/reusable/AchievementIntegration';
 import { applyTheme } from '@/static/themes';
+import BackToTop from '@/components/reusable/BackToTop';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {
@@ -91,6 +92,7 @@ export default function ClientLayout({
       <WelcomeModal />
       <AchievementNotificationContainer />
       <AchievementIntegration />
+      <BackToTop />
     </div>
   );
 }
