@@ -50,8 +50,10 @@ const AudioButton: React.FC<AudioButtonProps> = ({
       // Refresh voices before speaking
       if (typeof window !== 'undefined') {
         refreshVoices();
-        // Small delay to ensure voices are loaded
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // Firefox needs longer delay to ensure voices are loaded
+        const isFirefox = /Firefox/i.test(navigator.userAgent);
+        const delay = isFirefox ? 300 : 100;
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
 
       await speak(text, {

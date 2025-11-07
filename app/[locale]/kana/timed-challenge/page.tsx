@@ -1,4 +1,5 @@
 import TimedChallengeKana from '@/components/Dojo/Kana/TimedChallenge';
+import { GameErrorBoundary } from '@/components/ErrorBoundary';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,5 +17,9 @@ export const metadata: Metadata = {
 };
 
 export default function TimedChallengePage() {
-  return <TimedChallengeKana />;
+  return (
+    <GameErrorBoundary gameName="Kana Timed Challenge">
+      <TimedChallengeKana />
+    </GameErrorBoundary>
+  );
 }

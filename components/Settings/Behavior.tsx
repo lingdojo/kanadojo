@@ -49,7 +49,7 @@ const Behavior = () => {
     (state: Prefs) => state.setPronunciationVoiceName
   );
 
-  const { availableVoices, currentVoice, setVoice, speak, refreshVoices } =
+  const { availableVoices, currentVoice, setVoice, speak, refreshVoices, hasJapaneseVoices } =
     useJapaneseTTS();
 
   /*   const hotkeysOn = useThemeStore(state => state.hotkeysOn);
@@ -224,7 +224,7 @@ const Behavior = () => {
             <input
               type='range'
               min='0.5'
-              max='2.0'
+              max='1.5'
               step='0.1'
               value={pronunciationPitch}
               onChange={e => setPronunciationPitch(parseFloat(e.target.value))}
@@ -269,7 +269,11 @@ const Behavior = () => {
                 className={clsx(buttonBorderStyles, 'px-3 py-2')}
                 onClick={async () => {
                   playClick();
-                  await speak('こんにちは');
+                  await speak('こんにちは', {
+                    rate: pronunciationSpeed,
+                    pitch: pronunciationPitch,
+                    volume: 0.8
+                  });
                 }}
                 title='Test voice'
               >
@@ -281,6 +285,99 @@ const Behavior = () => {
                 ? `${currentVoice.name} • ${currentVoice.lang}`
                 : 'No voice selected'}
             </div>
+            {!hasJapaneseVoices && availableVoices.length > 0 && (() => {
+              const isFirefox = typeof window !== 'undefined' && /Firefox/i.test(navigator.userAgent);
+              const isChrome = typeof window !== 'undefined' && /Chrome/i.test(navigator.userAgent) && !/Edge/i.test(navigator.userAgent);
+              
+              return (
+                <div className='text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-800'>
+                  <strong className='block mb-2'>⚠️ Notice: No Japanese voices found</strong>
+                  <p className='mb-2'>
+                    {isFirefox && (
+                      <>
+                        <strong>Firefox uses system voices</strong> - it requires Japanese language packs installed on your operating system. 
+                        Chrome/Edge come with built-in Google TTS voices (including Japanese), which is why you might see Japanese voices in Chrome but not Firefox.
+                      </>
+                    )}
+                    {!isFirefox && !isChrome && (
+                      <>
+                        A fallback voice is being used, but pronunciation may not be accurate. 
+                        This is not a system issue - please install Japanese language packs for your operating system.
+                      </>
+                    )}
+                    {isChrome && (
+                      <>
+                        Chrome usually includes Japanese voices by default. If you&apos;re not seeing them, try refreshing voices or check chrome://flags.
+                      </>
+                    )}
+                  </p>
+                  <details className='mt-2'>
+                    <summary className='cursor-pointer font-semibold hover:underline'>
+                      How to install Japanese voices:
+                    </summary>
+                    <div className='mt-2 pl-4 space-y-2 text-xs'>
+                      {isFirefox && (
+                        <div className='mb-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800'>
+                          <strong>⚠️ Firefox-specific:</strong> Firefox relies on your operating system&apos;s voices. 
+                          You must install Japanese language packs in your OS, then restart Firefox.
+                        </div>
+                      )}
+                      <div>
+                        <strong>Windows:</strong>
+                        <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <li>Open Settings → Time &amp; Language → Language</li>
+                          <li>Click &quot;Add a language&quot; → Search for &quot;Japanese&quot;</li>
+                          <li>Install Japanese language pack</li>
+                          <li>Restart your browser</li>
+                        </ol>
+                      </div>
+                      <div>
+                        <strong>macOS:</strong>
+                        <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <li>Open System Settings → General → Language &amp; Region</li>
+                          <li>Click &quot;+&quot; to add Japanese</li>
+                          <li>System will download Japanese voices automatically</li>
+                          <li>Restart your browser</li>
+                        </ol>
+                      </div>
+                      <div>
+                        <strong>Linux (Ubuntu/Debian):</strong>
+                        <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <li>Install speech-dispatcher: <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>sudo apt install speech-dispatcher</code></li>
+                          <li>Install espeak with Japanese: <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>sudo apt install espeak espeak-data</code></li>
+                          <li>Or install festival: <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>sudo apt install festival festvox-ja</code></li>
+                          <li>Restart your browser</li>
+                        </ol>
+                      </div>
+                      <div>
+                        <strong>Chrome/Edge:</strong>
+                        <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <li>Chrome includes built-in Google TTS voices (including Japanese) - no installation needed</li>
+                          <li>If voices don&apos;t appear, go to chrome://flags and search for &quot;Web Speech API&quot;</li>
+                          <li>Ensure it&apos;s enabled, then restart Chrome</li>
+                        </ol>
+                      </div>
+                      <div>
+                        <strong>Firefox:</strong>
+                        <ol className='list-decimal list-inside ml-2 space-y-1'>
+                          <li>Type <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>about:config</code> in address bar</li>
+                          <li>Search for <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>media.webspeech.synth.enabled</code></li>
+                          <li>Ensure it&apos;s set to <code className='bg-gray-100 dark:bg-gray-800 px-1 rounded'>true</code></li>
+                          <li><strong>Install Japanese voices in your OS first</strong> (Firefox uses system voices)</li>
+                          <li>Restart Firefox</li>
+                        </ol>
+                      </div>
+                    </div>
+                  </details>
+                </div>
+              );
+            })()}
+            {availableVoices.length === 0 && (
+              <div className='text-sm text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-200 dark:border-orange-800'>
+                <strong>⚠️ Notice:</strong> No voices are available. Please refresh voices or check your browser&apos;s speech synthesis settings. 
+                This is not a system issue - your browser may need additional language packs.
+              </div>
+            )}
           </div>
         </>
       )}

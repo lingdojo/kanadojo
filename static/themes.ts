@@ -1,4 +1,4 @@
-import { Atom, Sun, Moon } from 'lucide-react';
+import { Atom, Sun, Moon, LucideIcon } from 'lucide-react';
 
 interface Theme {
   id: string;
@@ -11,7 +11,7 @@ interface Theme {
 
 interface ThemeGroup {
   name: string;
-  icon: any;
+  icon: LucideIcon;
   themes: Theme[];
 }
 
@@ -708,6 +708,36 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(176, 20%, 33%, 1)',
         mainColor: 'hsla(317, 98%, 81%, 1)',
         secondaryColor: 'hsla(61, 100%, 62%, 1)'
+      }
+    ]
+  },
+
+  // 🎃 NEW HALLOWEEN THEME GROUP 🎃
+  {
+    name: 'Halloween',
+    icon: Moon, // Using Moon, as suggested, but could be a custom icon
+    themes: [
+      {
+        id: 'pumpkin-spice-night',
+        // Dark, deep purple/black background
+        backgroundColor: 'hsla(280, 20%, 8%, 1)', 
+        cardColor: 'hsla(280, 25%, 15%, 1)',
+        borderColor: 'hsla(25, 90%, 40%, 1)', // Dark orange border
+        // Bright orange for main focus
+        mainColor: 'hsla(25, 100%, 60%, 1)', 
+        // Spooky accent color (magenta/purple)
+        secondaryColor: 'hsla(315, 70%, 55%, 1)' 
+      },
+      {
+        id: 'spooky-ghost-glow',
+        // Very dark background
+        backgroundColor: 'hsla(210, 10%, 5%, 1)', 
+        cardColor: 'hsla(210, 15%, 12%, 1)',
+        borderColor: 'hsla(90, 80%, 30%, 1)', // Dark lime/acid green border
+        // Neon green/slime color for main focus
+        mainColor: 'hsla(90, 85%, 65%, 1)', 
+        // Bright purple for contrast
+        secondaryColor: 'hsla(270, 90%, 70%, 1)' 
       }
     ]
   }

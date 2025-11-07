@@ -7,10 +7,9 @@
 ![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
 ![GitHub Stars](https://github.com/user-attachments/assets/de26975d-ce19-4a56-be00-84470d4607e2)
 
-**An aesthetic, minimalist, and highly customizable platform for mastering Japanese inspired by Monkeytype**
+**An aesthetic, minimalist, and highly customizable platform for mastering Japanese**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
-[![DeepWiki](https://img.shields.io/badge/docs-DeepWiki-purple?style=for-the-badge)](https://deepwiki.com/lingdojo/kana-dojo)
 [![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)

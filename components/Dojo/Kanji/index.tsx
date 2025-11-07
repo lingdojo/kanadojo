@@ -14,8 +14,6 @@ import N4Kanji from '@/static/kanji/N4';
 import N3Kanji from '@/static/kanji/N3';
 import N2Kanji from '@/static/kanji/N2';
 import N1Kanji from '@/static/kanji/N1';
-import { motion } from 'framer-motion';
-import { easeOut } from 'motion'; // ✅ FIXED: Proper easing import
 
 // ✅ Setup Kanji collections
 const kanjiCollections = {
@@ -46,15 +44,7 @@ const kanjiCollections = {
   }
 };
 
-// ✅ FIX: Use easing function instead of string
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: easeOut }
-  }
-};
+// ✅ REMOVED: Intersection Observer animation variants to fix bug where users need to scroll to see first sets
 
 const KanjiCards = () => {
   const selectedKanjiCollectionName = useKanjiStore(
@@ -92,12 +82,8 @@ const KanjiCards = () => {
         const lastSetInRow = (rowIndex + 1) * numColumns;
 
         return (
-          <motion.div
+          <div
             key={`row-${rowIndex}`}
-            variants={fadeInUp}
-            initial='hidden'
-            whileInView='visible'
-            viewport={{ once: false, amount: 0.2 }}
             className={clsx('flex flex-col py-4 gap-4', cardBorderStyles)}
           >
             <h3
@@ -140,12 +126,8 @@ const KanjiCards = () => {
                 )}
               >
                 {rowSets.map((kanjiSetTemp, i) => (
-                  <motion.div
+                  <div
                     key={kanjiSetTemp.id + kanjiSetTemp.name}
-                    variants={fadeInUp}
-                    initial='hidden'
-                    whileInView='visible'
-                    viewport={{ once: false, amount: 0.2 }}
                     className={clsx(
                       'flex flex-col md:px-4 h-full',
                       'border-[var(--border-color)]',
@@ -199,11 +181,11 @@ const KanjiCards = () => {
                       {kanjiSetTemp.name}
                     </button>
                     <KanjiSetDictionary set={kanjiSetTemp.id} />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             )}
-          </motion.div>
+          </div>
         );
       })}
     </div>
