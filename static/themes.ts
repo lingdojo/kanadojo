@@ -1,4 +1,4 @@
-import { Atom, Sun, Moon, LucideIcon } from 'lucide-react';
+import { Atom, Sun, Moon, Sparkles, LucideIcon } from 'lucide-react';
 
 interface Theme {
   id: string;
@@ -738,6 +738,102 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(90, 85%, 65%, 1)', 
         // Bright purple for contrast
         secondaryColor: 'hsla(270, 90%, 70%, 1)' 
+      }
+    ]
+  },
+
+  // 🎄 CHRISTMAS THEME GROUP 🎄
+  {
+    name: 'Christmas',
+    icon: Sparkles,
+    themes: [
+      {
+        id: 'winter-wonderland',
+        // Soft snowy white background
+        backgroundColor: 'hsla(200, 40%, 96%, 1)',
+        cardColor: 'hsla(200, 45%, 92%, 1)',
+        borderColor: 'hsla(200, 50%, 75%, 1)', // Icy blue border
+        // Classic Christmas red
+        mainColor: 'hsla(355, 80%, 45%, 1)',
+        // Forest green accent
+        secondaryColor: 'hsla(145, 60%, 35%, 1)'
+      },
+      {
+        id: 'santa-night',
+        // Deep night blue background
+        backgroundColor: 'hsla(220, 50%, 12%, 1)',
+        cardColor: 'hsla(220, 55%, 18%, 1)',
+        borderColor: 'hsla(355, 75%, 50%, 1)', // Bright red border
+        // Bright festive red
+        mainColor: 'hsla(355, 85%, 55%, 1)',
+        // Golden star accent
+        secondaryColor: 'hsla(45, 100%, 55%, 1)'
+      },
+      {
+        id: 'peppermint-frost',
+        // Cool mint background
+        backgroundColor: 'hsla(170, 30%, 92%, 1)',
+        cardColor: 'hsla(170, 35%, 88%, 1)',
+        borderColor: 'hsla(355, 70%, 60%, 1)', // Candy cane red border
+        // Peppermint red
+        mainColor: 'hsla(355, 75%, 50%, 1)',
+        // Fresh mint green
+        secondaryColor: 'hsla(165, 60%, 45%, 1)'
+      },
+      {
+        id: 'christmas-eve',
+        // Midnight blue background
+        backgroundColor: 'hsla(230, 45%, 15%, 1)',
+        cardColor: 'hsla(230, 50%, 22%, 1)',
+        borderColor: 'hsla(145, 60%, 45%, 1)', // Pine green border
+        // Warm golden light
+        mainColor: 'hsla(45, 95%, 60%, 1)',
+        // Holly green
+        secondaryColor: 'hsla(140, 55%, 40%, 1)'
+      },
+      {
+        id: 'gingerbread-house',
+        // Warm brown background
+        backgroundColor: 'hsla(25, 35%, 88%, 1)',
+        cardColor: 'hsla(25, 40%, 82%, 1)',
+        borderColor: 'hsla(20, 60%, 50%, 1)', // Gingerbread brown border
+        // Rich chocolate brown
+        mainColor: 'hsla(20, 55%, 35%, 1)',
+        // Frosting white with pink tint
+        secondaryColor: 'hsla(350, 45%, 55%, 1)'
+      },
+      {
+        id: 'northern-lights',
+        // Dark arctic night
+        backgroundColor: 'hsla(200, 30%, 10%, 1)',
+        cardColor: 'hsla(200, 35%, 16%, 1)',
+        borderColor: 'hsla(170, 80%, 50%, 1)', // Aurora green border
+        // Bright aurora green
+        mainColor: 'hsla(165, 90%, 55%, 1)',
+        // Aurora purple/pink
+        secondaryColor: 'hsla(280, 85%, 65%, 1)'
+      },
+      {
+        id: 'cozy-fireplace',
+        // Warm dark red background
+        backgroundColor: 'hsla(10, 35%, 18%, 1)',
+        cardColor: 'hsla(10, 40%, 25%, 1)',
+        borderColor: 'hsla(30, 80%, 55%, 1)', // Glowing ember border
+        // Bright fire orange
+        mainColor: 'hsla(25, 95%, 60%, 1)',
+        // Deep crimson
+        secondaryColor: 'hsla(355, 70%, 45%, 1)'
+      },
+      {
+        id: 'snowy-pine',
+        // Cool forest background
+        backgroundColor: 'hsla(155, 20%, 88%, 1)',
+        cardColor: 'hsla(155, 25%, 82%, 1)',
+        borderColor: 'hsla(150, 50%, 35%, 1)', // Pine green border
+        // Deep forest green
+        mainColor: 'hsla(145, 55%, 30%, 1)',
+        // Silver/white snow
+        secondaryColor: 'hsla(200, 15%, 65%, 1)'
       }
     ]
   }

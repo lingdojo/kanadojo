@@ -2,12 +2,13 @@
 
 import clsx from 'clsx';
 import { chunkArray } from '@/lib/helperFunctions';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { cardBorderStyles } from '@/static/styles';
 import useGridColumns from '@/hooks/useGridColumns';
 import { useClick } from '@/hooks/useAudio';
-import { ChevronUp, CircleCheck, Circle } from 'lucide-react';
+import { ChevronUp, CircleCheck, Circle, Filter, FilterX } from 'lucide-react';
 import useKanjiStore from '@/store/useKanjiStore';
+import useStatsStore from '@/store/useStatsStore';
 import KanjiSetDictionary from '@/components/Dojo/Kanji/SetDictionary';
 import N5Kanji from '@/static/kanji/N5';
 import N4Kanji from '@/static/kanji/N4';
@@ -56,10 +57,33 @@ const KanjiCards = () => {
     state => state.setSelectedKanjiSets
   );
   const addKanjiObjs = useKanjiStore(state => state.addKanjiObjs);
+  const allTimeStats = useStatsStore(state => state.allTimeStats);
 
   const { playClick } = useClick();
 
   const selectedKanjiCollection = kanjiCollections[selectedKanjiCollectionName];
+  
+  // Filter state for hiding mastered cards
+  const [hideMastered, setHideMastered] = useState(false);
+  
+  // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
+  const masteredCharacters = useMemo(() => {
+    const mastered = new Set<string>();
+    Object.entries(allTimeStats.characterMastery).forEach(([char, stats]) => {
+      const total = stats.correct + stats.incorrect;
+      const accuracy = total > 0 ? stats.correct / total : 0;
+      if (total >= 10 && accuracy >= 0.9) {
+        mastered.add(char);
+      }
+    });
+    return mastered;
+  }, [allTimeStats.characterMastery]);
+  
+  // Check if a set contains only mastered kanji
+  const isSetMastered = (setStart: number, setEnd: number) => {
+    const kanjiInSet = selectedKanjiCollection.data.slice(setStart * 10, setEnd * 10);
+    return kanjiInSet.every(kanji => masteredCharacters.has(kanji.kanjiChar));
+  };
 
   const kanjiSetsTemp = new Array(
     Math.ceil(selectedKanjiCollection.data.length / 10)
@@ -69,15 +93,56 @@ const KanjiCards = () => {
       name: `Set ${selectedKanjiCollection.prevLength + i + 1}`,
       start: i,
       end: i + 1,
-      id: `Set ${i + 1}`
+      id: `Set ${i + 1}`,
+      isMastered: isSetMastered(i, i + 1)
     }));
+  
+  // Filter out mastered sets if hideMastered is true
+  const filteredKanjiSets = hideMastered 
+    ? kanjiSetsTemp.filter(set => !set.isMastered)
+    : kanjiSetsTemp;
+  
+  const masteredCount = kanjiSetsTemp.filter(set => set.isMastered).length;
 
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
 
   return (
     <div className='flex flex-col w-full gap-4'>
-      {chunkArray(kanjiSetsTemp, numColumns).map((rowSets, rowIndex) => {
+      {/* Filter Toggle Button */}
+      <div className='flex justify-end px-4'>
+        <button
+          onClick={() => {
+            playClick();
+            setHideMastered(prev => !prev);
+          }}
+          className={clsx(
+            'flex items-center gap-2 px-4 py-2 rounded-xl',
+            'duration-250 transition-all ease-in-out',
+            'border-2 border-[var(--border-color)]',
+            'hover:bg-[var(--card-color)]',
+            hideMastered && 'bg-[var(--card-color)] border-[var(--main-color)]'
+          )}
+        >
+          {hideMastered ? (
+            <>
+              <FilterX size={20} className='text-[var(--main-color)]' />
+              <span className='text-[var(--main-color)]'>
+                Show All Sets ({masteredCount} mastered hidden)
+              </span>
+            </>
+          ) : (
+            <>
+              <Filter size={20} className='text-[var(--secondary-color)]' />
+              <span className='text-[var(--secondary-color)]'>
+                Hide Mastered Sets {masteredCount > 0 && `(${masteredCount})`}
+              </span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {chunkArray(filteredKanjiSets, numColumns).map((rowSets, rowIndex) => {
         const firstSetInRow = rowIndex * numColumns + 1;
         const lastSetInRow = (rowIndex + 1) * numColumns;
 

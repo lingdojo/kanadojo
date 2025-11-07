@@ -108,7 +108,8 @@ const TopBar: React.FC<ITopBarProps> = ({
               ? 'text-[var(--main-color)]'
               : 'text-[var(--secondary-color)]',
             'hover:bg-[var(--border-color)] rounded-tl-2xl rounded-bl-2xl',
-            'duration-250'
+            'duration-250',
+            'relative'
           )}
           onClick={e => {
             playClick();
@@ -117,6 +118,7 @@ const TopBar: React.FC<ITopBarProps> = ({
           }}
           onMouseEnter={() => setFocus('gameModes')}
           onMouseLeave={() => setFocus('')}
+          title="Press Enter or Space to toggle (Kanji/Vocab)"
         >
           <ChevronUp
             className={clsx(
