@@ -5,7 +5,6 @@
 <div align="center">
 
 ![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
-![GitHub Stars](https://github.com/user-attachments/assets/de26975d-ce19-4a56-be00-84470d4607e2)
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=lingdojo/kana-dojo&type=date&legend=top-left)](https://www.star-history.com/#lingdojo/kana-dojo&type=date&legend=top-left)
 
