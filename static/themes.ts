@@ -718,12 +718,12 @@ const themes: ThemeGroup[] = [
         secondaryColor: "hsla(344, 34%, 61%, 1)",
       },
       {
-        id: "Darkne",
-        backgroundColor: "hsla(0, 0%, 13%, 1)",
-        cardColor: "hsla(0, 0%, 6%, 1.00)",
-        borderColor: "hsla(39, 25%, 63%, 1)",
-        mainColor: "hsla(120, 14%, 52%, 1)",
-        secondaryColor: "hsla(39, 25%, 63%, 1)",
+        id: "Darkness",
+        backgroundColor: "hsla(264, 26%, 4%, 1.00)",
+        cardColor: "hsla(240, 14%, 14%, 1.00)",
+        borderColor: "hsla(0, 0%, 90%, 1.00)",
+        mainColor: "hsla(28, 82%, 47%, 1.00)",
+        secondaryColor: "hsla(272, 84%, 60%, 1.00)",
       }
     ],
   },
