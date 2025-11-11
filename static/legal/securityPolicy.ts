@@ -71,9 +71,7 @@ We may update this Security Policy from time to time. Any changes will be **publ
 
 For any questions or concerns about this Security Policy, you can reach us at:
 
-📧 **Email:** *langdojo.dev@outlook.com* 
-
-🌍 **Website:** kanadojo.com/contact  
+📧 **Email:** *lingdojo.dev@gmail.com* 
 
 ---
 
