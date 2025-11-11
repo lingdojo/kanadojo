@@ -33,14 +33,14 @@ const ContinueButton = ({
     className={clsx(
       'text-xl font-medium py-4 px-16 rounded-3xl duration-150 w-full',
       buttonBorderStyles,
-      'flex flex-row justify-center items-end gap-2',
-      'bg-[var(--main-color)] text-[var(--background-color)] hover:bg-[var(--main-color)]'
+      'flex flex-row justify-center items-end gap-2 ',
+      'bg-[var(--card-color)] hover:text-[var(--background-color)] hover:bg-[var(--main-color)]'
     )}
     onClick={onClick}
     disabled={disabled}
   >
     <span>continue</span>
-    <CircleArrowRight className="text-[var(--background-color)]" />
+    <CircleArrowRight className="" />
   </button>
 );
 
