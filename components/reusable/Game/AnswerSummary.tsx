@@ -186,9 +186,10 @@ const AnswerSummary = ({
       <button
         ref={buttonRef}
         className={clsx(
-          'text-xl font-medium py-4 px-16 rounded-3xl duration-150  hover:cursor-pointer w-full ',
+          'text-xl py-4 px-16 rounded-3xl duration-150  hover:cursor-pointer w-full ',
           buttonBorderStyles,
-          'flex flex-row justify-center items-end gap-2'
+          'flex flex-row justify-center items-end gap-2',
+          'bg-[var(--main-color)] text-[var(--background-color)]  hover:bg-[var(--main-color)]'
         )}
         onClick={() => {
           playClick();
