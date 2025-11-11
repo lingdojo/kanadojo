@@ -67,7 +67,6 @@ export default function translationGen(t: (key: string) => string) {
             To begin, select at least 1 set, select or change the training mode,
             then hit <b>Go!</b> below and start training now!
           </p>
-          <p className='text-lg italic'>Scroll down to discover the sets!</p>
           <p className='text-lg italic'>
             New: click on a kanji character to find out more about it on{' '}
             <a
@@ -94,7 +93,6 @@ export default function translationGen(t: (key: string) => string) {
             To begin, select at least 1 set, select or change the training mode,
             then hit <b>Go!</b> below and start training now!
           </p>
-          <p className='text-lg italic'>Scroll down to discover the sets!</p>
         </>
       )
     },
