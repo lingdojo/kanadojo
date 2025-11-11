@@ -89,7 +89,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                     'h-1/2',
                     'bg-[var(--background-color)] rounded-2xl',
                     'flex flex-row gap-2',
-                    'border-1 border-[var(--border-color)]',
+                    // 'border-1 border-[var(--border-color)]',
                     (kanjiObj.onyomi[0] === '' ||
                       kanjiObj.onyomi.length === 0) &&
                       'hidden'
@@ -118,7 +118,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                     'bg-[var(--background-color)] rounded-2xl',
                     'flex flex-row gap-2',
 
-                    'border-1 border-[var(--border-color)]',
+                    // 'border-1 border-[var(--border-color)]',
                     (kanjiObj.kunyomi[0] === '' ||
                       kanjiObj.kunyomi.length === 0) &&
                       'hidden'
