@@ -40,7 +40,7 @@ const ContinueButton = ({
     disabled={disabled}
   >
     <span>continue</span>
-    <CircleArrowRight />
+    <CircleArrowRight className="text-[var(--background-color)]" />
   </button>
 );
 
