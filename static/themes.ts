@@ -717,6 +717,14 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(28, 82%, 47%, 1)',
         secondaryColor: 'hsla(272, 84%, 60%, 1)',
       },
+      {
+        id: 'sakura-mist',
+        backgroundColor: 'hsla(340, 24%, 13%, 1)',
+        cardColor: 'hsla(340, 23%, 17%, 1)',
+        borderColor: 'hsla(340, 21%, 25%, 1)',
+        mainColor: 'hsla(225, 68%, 74%, 1)',
+        secondaryColor: 'hsla(105, 37%, 69%, 1)',
+      },
     ],
   },
 
@@ -849,8 +857,8 @@ const themes: ThemeGroup[] = [
 
 // Flatten all themes into a map for easy lookup
 const themeMap = new Map<string, Theme>();
-themes.forEach(group => {
-  group.themes.forEach(theme => {
+themes.forEach((group) => {
+  group.themes.forEach((theme) => {
     themeMap.set(theme.id, theme);
   });
 });

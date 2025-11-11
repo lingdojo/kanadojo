@@ -30,7 +30,7 @@ export default function GoalTimers() {
 
   // Calculate count for most used template
   const mostUsedCount = mostUsedTemplate
-    ? history.filter(h => h.goalId === mostUsedTemplate.id).length
+    ? history.filter((h) => h.goalId === mostUsedTemplate.id).length
     : 0;
 
   // Handle volume change (0-100)
@@ -75,7 +75,7 @@ export default function GoalTimers() {
       // Remove from defaults
       updateSettings({
         defaultTemplates: settings.defaultTemplates.filter(
-          id => id !== templateId
+          (id) => id !== templateId
         ),
       });
     } else {
@@ -87,10 +87,10 @@ export default function GoalTimers() {
   };
 
   // Custom templates only (can be deleted)
-  const customTemplates = templates.filter(t => t.category === 'custom');
+  const customTemplates = templates.filter((t) => t.category === 'custom');
 
   // Built-in templates (cannot be deleted)
-  const builtInTemplates = templates.filter(t => t.category !== 'custom');
+  const builtInTemplates = templates.filter((t) => t.category !== 'custom');
 
   return (
     <div className="flex flex-col gap-6">
@@ -169,6 +169,7 @@ export default function GoalTimers() {
             <label className="text-sm">Play sound when goal reached</label>
             <button
               onClick={toggleSound}
+              aria-label="Toggle play sound"
               className={clsx(
                 'w-12 h-6 rounded-full transition-colors',
                 settings.defaultPlaySound
@@ -236,6 +237,7 @@ export default function GoalTimers() {
           </div>
           <button
             onClick={toggleAnimation}
+            aria-label="Toggle confetti animation"
             className={clsx(
               'w-12 h-6 rounded-full transition-colors',
               settings.defaultShowAnimation
@@ -263,7 +265,7 @@ export default function GoalTimers() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {builtInTemplates.map(template => {
+          {builtInTemplates.map((template) => {
             const isDefault = settings.defaultTemplates.includes(template.id);
 
             return (
@@ -304,7 +306,7 @@ export default function GoalTimers() {
                     </div>
                   </div>
                   {isDefault && (
-                    <span className="text-xs text-[var(--main-color)] font-medium">
+                    <span className="text-xs text-[var(--card-color)] font-medium">
                       Default
                     </span>
                   )}
@@ -349,7 +351,7 @@ export default function GoalTimers() {
                   type="text"
                   placeholder="Emoji icon (e.g., 📚)"
                   value={newIcon}
-                  onChange={e => setNewIcon(e.target.value)}
+                  onChange={(e) => setNewIcon(e.target.value)}
                   maxLength={2}
                   className={clsx(
                     'w-20 px-3 py-2 rounded-lg border-2 text-center text-2xl',
@@ -360,7 +362,7 @@ export default function GoalTimers() {
                   type="text"
                   placeholder="Template name"
                   value={newLabel}
-                  onChange={e => setNewLabel(e.target.value)}
+                  onChange={(e) => setNewLabel(e.target.value)}
                   className={clsx(
                     'flex-1 px-3 py-2 rounded-lg border-2',
                     'bg-[var(--card-color)] border-[var(--border-color)]',
@@ -376,7 +378,7 @@ export default function GoalTimers() {
                   min="1"
                   max="120"
                   value={newMinutes}
-                  onChange={e => setNewMinutes(parseInt(e.target.value) || 1)}
+                  onChange={(e) => setNewMinutes(parseInt(e.target.value) || 1)}
                   className={clsx(
                     'w-24 px-3 py-2 rounded-lg border-2',
                     'bg-[var(--card-color)] border-[var(--border-color)]',
@@ -393,7 +395,7 @@ export default function GoalTimers() {
                   onClick={handleAddTemplate}
                   className={clsx(
                     'flex-1 px-4 py-2 rounded-lg transition-opacity',
-                    'bg-[var(--main-color)] text-[var(--bg-color)]',
+                    'bg-[var(--main-color)] text-[var(--background-color)]',
                     'hover:opacity-90'
                   )}
                 >
@@ -417,7 +419,7 @@ export default function GoalTimers() {
         {/* Custom templates list */}
         {customTemplates.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {customTemplates.map(template => {
+            {customTemplates.map((template) => {
               const isDefault = settings.defaultTemplates.includes(template.id);
 
               return (
@@ -437,8 +439,24 @@ export default function GoalTimers() {
                     >
                       <span className="text-2xl">{template.icon}</span>
                       <div>
-                        <p className="font-medium">{template.label}</p>
-                        <p className="text-xs text-[var(--secondary-color)]">
+                        <p
+                          className={clsx(
+                            'font-medium ',
+                            isDefault
+                              ? 'text-[var(--background-color)]'
+                              : 'text-[var(--main-color)]'
+                          )}
+                        >
+                          {template.label}
+                        </p>
+                        <p
+                          className={clsx(
+                            'text-xs',
+                            isDefault
+                              ? 'text-[var(--card-color)]'
+                              : 'text-[var(--secondary-color)]'
+                          )}
+                        >
                           {Math.floor(template.targetSeconds / 60)} minutes
                           {isDefault && ' • Default'}
                         </p>
@@ -446,7 +464,7 @@ export default function GoalTimers() {
                     </button>
                     <button
                       onClick={() => removeTemplate(template.id)}
-                      className="p-2 text-red-500 hover:bg-red-500 hover:bg-opacity-10 rounded transition-colors"
+                      className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card-color)] hover:bg-opacity-10 rounded transition-colors"
                       title="Delete template"
                     >
                       <Trash2 className="w-4 h-4" />
