@@ -33,7 +33,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -167,7 +167,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctKanaChar} = ${correctRomajiChar} `}</span>
-            <CircleCheck className='inline text-[var(--main-color)]' />
+            <CircleCheck className="inline text-[var(--main-color)]" />
           </>
         );
       } else {
@@ -175,7 +175,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctKanaChar} ≠ ${selectedChar} `}</span>
-            <CircleX className='inline text-[var(--main-color)]' />
+            <CircleX className="inline text-[var(--main-color)]" />
           </>
         );
       }
@@ -196,7 +196,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctRomajiCharReverse} = ${correctKanaCharReverse} `}</span>
-            <CircleCheck className='inline text-[var(--main-color)]' />
+            <CircleCheck className="inline text-[var(--main-color)]" />
           </>
         );
       } else {
@@ -204,7 +204,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctRomajiCharReverse} ≠ ${selectedChar} `}</span>
-            <CircleX className='inline text-[var(--main-color)]' />
+            <CircleX className="inline text-[var(--main-color)]" />
           </>
         );
       }
@@ -248,24 +248,27 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         isHidden ? 'hidden' : ''
       )}
     >
-      <GameIntel gameMode={gameMode} feedback={feedback} />
-      <div className='flex flex-col items-center gap-4'>
-        <p className='text-8xl sm:text-9xl font-medium'>{displayChar}</p>
+      <GameIntel
+        gameMode={gameMode}
+        feedback={feedback}
+      />
+      <div className="flex flex-col items-center gap-4">
+        <p className="text-8xl sm:text-9xl font-medium">{displayChar}</p>
         <SSRAudioButton
           text={displayChar}
-          variant='icon-only'
-          size='lg'
-          className='bg-[var(--card-color)] border-[var(--border-color)]'
+          variant="icon-only"
+          size="lg"
+          className="bg-[var(--card-color)] text-[var(--secondary-color)]"
         />
       </div>
-      <div className='flex flex-row w-full gap-5 sm:gap-0 sm:justify-evenly'>
+      <div className="flex flex-row w-full gap-5 sm:gap-0 sm:justify-evenly">
         {shuffledVariants.map((variantChar, i) => (
           <button
             ref={elem => {
               buttonRefs.current[i] = elem;
             }}
             key={variantChar + i}
-            type='button'
+            type="button"
             disabled={wrongSelectedAnswers.includes(variantChar)}
             className={clsx(
               'text-5xl font-semibold pb-6 pt-3 w-full sm:w-1/5 flex flex-row justify-center items-center gap-1',
@@ -278,7 +281,14 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
             onClick={() => handleOptionClick(variantChar)}
           >
             <span>{variantChar}</span>
-            <span className='hidden lg:inline text-xs rounded-full bg-[var(--border-color)] text-[var(--secondary-color)] px-1'>
+            <span
+              className={clsx(
+                'hidden lg:inline text-xs rounded-full bg-[var(--border-color)]  px-1',
+                wrongSelectedAnswers.includes(variantChar)
+                  ? 'text-[var(--border-color)]'
+                  : 'text-[var(--secondary-color)]'
+              )}
+            >
               {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}
             </span>
           </button>
