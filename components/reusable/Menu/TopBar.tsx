@@ -21,7 +21,7 @@ interface ITopBarProps {
 
 const TopBar: React.FC<ITopBarProps> = ({
   showGameModes,
-  setShowGameModes
+  setShowGameModes,
 }) => {
   const hotkeysOn = usePreferencesStore(state => state.hotkeysOn);
 
@@ -87,7 +87,7 @@ const TopBar: React.FC<ITopBarProps> = ({
   }, [hotkeysOn]);
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className="flex flex-col gap-2">
       <div
         className={clsx(
           'flex flex-row',
@@ -134,22 +134,25 @@ const TopBar: React.FC<ITopBarProps> = ({
           {selectedGameMode.toLowerCase() === 'pick' && (
             <MousePointerClick
               size={22}
-              className='text-[var(--secondary-color)]'
+              className="text-[var(--secondary-color)]"
             />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-pick' && (
             <MousePointerClick
               size={22}
-              className=' scale-x-[-1] text-[var(--secondary-color)]'
+              className=" scale-x-[-1] text-[var(--secondary-color)]"
             />
           )}
           {selectedGameMode.toLowerCase() === 'input' && (
-            <Keyboard size={22} className='text-[var(--secondary-color)]' />
+            <Keyboard
+              size={22}
+              className="text-[var(--secondary-color)]"
+            />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-input' && (
             <Keyboard
               size={22}
-              className='scale-y-[-1] text-[var(--secondary-color)]'
+              className="scale-y-[-1] text-[var(--secondary-color)]"
             />
           )}
         </button>
@@ -163,7 +166,7 @@ const TopBar: React.FC<ITopBarProps> = ({
 
         <Link
           href={`${pathWithoutLocale}/train/${selectedGameMode}`}
-          className='w-1/2 group'
+          className="w-1/2 group"
         >
           <button
             disabled={!selectedGameMode || !isFilled}
@@ -194,21 +197,23 @@ const TopBar: React.FC<ITopBarProps> = ({
 
       {/* Timed Challenge Button - Only for Kana */}
       {pathWithoutLocale === '/kana' && (
-        <Link href={`${pathWithoutLocale}/timed-challenge`} className='w-full'>
+        <Link
+          href={`${pathWithoutLocale}/timed-challenge`}
+          className="w-full"
+        >
           <button
             className={clsx(
               'w-full text-xl p-3 flex flex-row justify-center items-center gap-2',
-              'rounded-2xl bg-[var(--card-color)]',
-              'text-[var(--main-color)]',
-              'hover:bg-[var(--border-color)] hover:cursor-pointer',
-              'transition-all duration-250',
-              'border-2 border-[var(--main-color)]/20',
-              'hover:border-[var(--main-color)]/40'
+              'rounded-2xl bg-[var(--card-color)] hover:bg-[var(--main-color)]',
+              'text-[var(--main-color)] hover:text-[var(--background-color)]',
+              'hover:cursor-pointer',
+              'transition-all duration-275'
+              // 'border-0 border-[var(--main-color)]/20',
             )}
             onClick={() => playClick()}
           >
             <Timer size={24} />
-            <span className='font-semibold'>Timed Challenge (60s)</span>
+            <span className="font-semibold">Timed Challenge (60s)</span>
           </button>
         </Link>
       )}
