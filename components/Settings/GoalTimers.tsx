@@ -293,7 +293,7 @@ export default function GoalTimers() {
                       </p>
                       <p
                         className={clsx(
-                          'text-xs text-[var(--secondary-color)]',
+                          'text-xs',
                           isDefault
                             ? 'text-[var(--card-color)]'
                             : 'text-[var(--secondary-color)]'
