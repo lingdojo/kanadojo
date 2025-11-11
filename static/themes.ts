@@ -438,14 +438,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(321, 99%, 78%, 1)',
       },
       {
-        id: 'epsilon-halo',
-        backgroundColor: 'hsla(69, 60%, 8%, 1)',
-        cardColor: 'hsla(102, 59%, 17%, 1)',
-        borderColor: 'hsla(102, 59%, 27%, 1)',
-        mainColor: 'hsla(200, 80%, 73%, 1)',
-        secondaryColor: 'hsla(94, 97%, 60%, 1)',
-      },
-      {
         id: 'vortex-requiem',
         backgroundColor: 'hsla(290, 51%, 10%, 1)',
         cardColor: 'hsla(227, 41%, 18%, 1)',
@@ -516,14 +508,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(202, 68%, 27%, 1)',
         mainColor: 'hsla(123, 84%, 59%, 1)',
         secondaryColor: 'hsla(319, 91%, 78%, 1)',
-      },
-      {
-        id: 'verdant-comet',
-        backgroundColor: 'hsla(123, 35%, 8%, 1)',
-        cardColor: 'hsla(83, 62%, 15%, 1)',
-        borderColor: 'hsla(83, 62%, 27%, 1)',
-        mainColor: 'hsla(127, 100%, 62%, 1)',
-        secondaryColor: 'hsla(364, 98%, 74%, 1)',
       },
       {
         id: 'magenta-tundra',
