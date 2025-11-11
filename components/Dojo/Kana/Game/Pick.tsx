@@ -273,12 +273,12 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
               wrongSelectedAnswers.includes(variantChar) &&
                 'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
               !wrongSelectedAnswers.includes(variantChar) &&
-                'hover:scale-110 text-[var(--main-color)] hover:border-[var(--main-color)]'
+                'text-[var(--main-color)] hover:border-[var(--main-color)]'
             )}
             onClick={() => handleOptionClick(variantChar)}
           >
             <span>{variantChar}</span>
-            <span className='hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1'>
+            <span className='hidden lg:inline text-xs rounded-full bg-[var(--border-color)] text-[var(--secondary-color)] px-1'>
               {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}
             </span>
           </button>
