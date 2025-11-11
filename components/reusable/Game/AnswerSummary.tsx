@@ -179,12 +179,10 @@ const WordSummary = ({
 // Main component
 const AnswerSummary = ({
   payload,
-  displayAnswerSummary,
   setDisplayAnswerSummary,
   feedback,
 }: {
   payload: IKanjiObj | IWordObj;
-  displayAnswerSummary?: boolean;
   setDisplayAnswerSummary: Dispatch<SetStateAction<boolean>>;
   feedback: React.ReactElement;
 }) => {
