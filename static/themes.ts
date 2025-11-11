@@ -4,7 +4,7 @@ import {
   Moon,
   // Sparkles,
   LucideIcon,
-  CloudHail,
+  CloudLightning,
   TreePine,
 } from 'lucide-react';
 
@@ -702,20 +702,20 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(61, 100%, 62%, 1)',
       },
       {
-        id: 'Jhiza',
+        id: 'gruvbox',
         backgroundColor: 'hsla(0, 0%, 13%, 1)',
-        cardColor: 'hsla(0, 0%, 18%, 1.00)',
+        cardColor: 'hsla(0, 0%, 18%, 1)',
         borderColor: 'hsla(39, 25%, 63%, 1)',
         mainColor: 'hsla(120, 14%, 52%, 1)',
         secondaryColor: 'hsla(344, 34%, 61%, 1)',
       },
       {
-        id: 'Darkness',
-        backgroundColor: 'hsla(264, 26%, 4%, 1.00)',
-        cardColor: 'hsla(240, 14%, 14%, 1.00)',
-        borderColor: 'hsla(0, 0%, 90%, 1.00)',
-        mainColor: 'hsla(28, 82%, 47%, 1.00)',
-        secondaryColor: 'hsla(272, 84%, 60%, 1.00)',
+        id: 'absolute-darkness',
+        backgroundColor: 'hsla(264, 26%, 4%, 1)',
+        cardColor: 'hsla(240, 14%, 14%, 1)',
+        borderColor: 'hsla(240, 14%, 22%, 1)',
+        mainColor: 'hsla(28, 82%, 47%, 1)',
+        secondaryColor: 'hsla(272, 84%, 60%, 1)',
       },
     ],
   },
@@ -723,7 +723,7 @@ const themes: ThemeGroup[] = [
   // 🎃 NEW HALLOWEEN THEME GROUP 🎃
   {
     name: 'Halloween',
-    icon: CloudHail, // Using Moon, as suggested, but could be a custom icon
+    icon: CloudLightning, // Using Moon, as suggested, but could be a custom icon
     themes: [
       {
         id: 'pumpkin-spice-night',
