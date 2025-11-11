@@ -111,7 +111,7 @@ const VocabCards = () => {
       {!hasProgressData && (
         <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
           <p className='text-sm text-[var(--secondary-color)]'>
-            💡 <strong>Tip:</strong> Complete some practice sessions to unlock the "Hide Mastered Sets" filter. 
+            💡 <strong>Tip:</strong> Complete some practice sessions to unlock the &apos;Hide Mastered Sets&apos; filter. 
             Sets become mastered when you achieve 90%+ accuracy with 10+ attempts per word.
           </p>
         </div>
