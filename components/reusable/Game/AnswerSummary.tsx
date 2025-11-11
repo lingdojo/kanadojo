@@ -11,7 +11,7 @@ const AnswerSummary = ({
   payload,
   displayAnswerSummary,
   setDisplayAnswerSummary,
-  feedback
+  feedback,
 }: {
   payload: IKanjiObj | IWordObj;
   displayAnswerSummary?: boolean;
@@ -51,28 +51,28 @@ const AnswerSummary = ({
         'flex flex-col justify-start items-center gap-4 py-4 w-full md:w-3/4 lg:w-1/2 '
       )}
     >
-      <p className='text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-b-1 border-t-1 w-full  border-[var(--border-color)] '>
+      <p className="text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-b-1 border-t-1 w-full  border-[var(--border-color)] ">
         {feedback}
       </p>
-      <div className='flex flex-row w-full gap-4'>
-        <div className='relative w-full max-w-[100px] aspect-square flex items-center justify-center '>
+      <div className="flex flex-row w-full gap-4">
+        <div className="relative w-full max-w-[100px] aspect-square flex items-center justify-center ">
           {/* 4-segment square background */}
-          <div className='absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)]'>
-            <div className=' border-r border-b border-[var(--border-color)]'></div>
-            <div className=' border-b border-[var(--border-color)]'></div>
-            <div className=' border-r border-[var(--border-color)]'></div>
-            <div className=''></div>
+          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)]">
+            <div className=" border-r border-b border-[var(--border-color)]"></div>
+            <div className=" border-b border-[var(--border-color)]"></div>
+            <div className=" border-r border-[var(--border-color)]"></div>
+            <div className=""></div>
           </div>
 
           <FuriganaText
             text={payload.kanjiChar}
             reading={payload.onyomi[0] || payload.kunyomi[0]}
-            className='text-7xl pb-2 relative z-10'
-            lang='ja'
+            className="text-7xl pb-2 relative z-10"
+            lang="ja"
           />
         </div>
 
-        <div className='flex flex-col gap-2 w-full '>
+        <div className="flex flex-col gap-2 w-full ">
           <div
             className={clsx(
               'h-1/2',
@@ -126,21 +126,27 @@ const AnswerSummary = ({
         </div>
       </div>
 
-      <p className='text-xl md:text-2xl w-full text-[var(--secondary-color)]'>
+      <p className="text-xl md:text-2xl w-full text-[var(--secondary-color)]">
         {payload.fullDisplayMeanings.join(', ')}
       </p>
 
       <button
-        ref={displayAnswerSummary ? buttonRef : null}
+        ref={buttonRef}
         className={clsx(
-          'text-xl font-medium py-4 px-16 rounded-3xl duration-150  hover:cursor-pointer w-full ',
+          'text-xl font-medium py-4 px-16 rounded-3xl duration-150 w-full',
           buttonBorderStyles,
-          'flex flex-row justify-center items-end gap-2'
+          'flex flex-row justify-center items-end gap-2',
+          displayAnswerSummary
+            ? 'hover:cursor-pointer'
+            : 'opacity-50 cursor-not-allowed'
         )}
         onClick={() => {
-          setDisplayAnswerSummary(false);
-          playClick();
+          if (displayAnswerSummary) {
+            setDisplayAnswerSummary(false);
+            playClick();
+          }
         }}
+        disabled={!displayAnswerSummary}
       >
         <span>continue</span>
         <CircleArrowRight />
@@ -153,17 +159,17 @@ const AnswerSummary = ({
         'flex flex-col justify-start items-start gap-4 py-4 w-full md:w-3/4 lg:w-1/2 '
       )}
     >
-      <p className='text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-b-1 border-t-1 w-full  border-[var(--border-color)] '>
+      <p className="text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-b-1 border-t-1 w-full  border-[var(--border-color)] ">
         {feedback}
       </p>
 
       <FuriganaText
         text={payload.word}
         reading={payload.reading}
-        className='text-6xl flex justify-center w-full'
-        lang='ja'
+        className="text-6xl flex justify-center w-full"
+        lang="ja"
       />
-      <div className='flex flex-col gap-2 items-start'>
+      <div className="flex flex-col gap-2 items-start">
         <span
           className={clsx(
             'rounded-xl px-2 py-1 flex flex-row items-center',
@@ -173,12 +179,12 @@ const AnswerSummary = ({
         >
           {payload.reading}
         </span>
-        <p className='text-xl md:text-2xl text-[var(--secondary-color)]'>
+        <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
           {payload.displayMeanings.join(', ')}
         </p>
       </div>
       <button
-        ref={displayAnswerSummary ? buttonRef : null}
+        ref={buttonRef}
         className={clsx(
           'text-xl font-medium py-4 px-16 rounded-3xl duration-150  hover:cursor-pointer w-full ',
           buttonBorderStyles,
