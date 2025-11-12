@@ -1328,7 +1328,7 @@ const N5Nouns = [
   },
   {
     word: '毎年',
-    reading: 'maitoshi / mainen まいとし / まいねん',
+    reading: ['maitoshi / mainen まいとし / まいねん'],
     displayMeanings: ['every year', 'yearly', 'annually'],
     meanings: ['every year', 'yearly', 'annually']
   },
