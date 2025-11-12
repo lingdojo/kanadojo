@@ -50,11 +50,46 @@ export const useJapaneseTTS = () => {
 
   // Detect Firefox for special handling
   const isFirefox = useRef(false);
+  // Detect Android for gesture-based unlock
+  const isAndroid = useRef(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       isFirefox.current = /Firefox/i.test(navigator.userAgent);
+      isAndroid.current = /Android/i.test(navigator.userAgent);
     }
   }, []);
+  
+  // One-time "unlock" for mobile TTS: run on first user gesture to populate voices / resume audio
+  useEffect(() => {
+    if (!isClient) return;
+
+    const initTTS = () => {
+      try {
+        // force-get voices and attempt a silent utterance to unlock audio on mobile
+        speechSynthesis.getVoices();
+        // some Android browsers require resume()
+        if (typeof (speechSynthesis as any).resume === 'function') {
+          (speechSynthesis as any).resume();
+        }
+        const silent = new SpeechSynthesisUtterance('');
+        silent.volume = 0;
+        // speak+cancel quickly — this runs during a user gesture
+        speechSynthesis.speak(silent);
+        speechSynthesis.cancel();
+      } catch (e) {
+        // ignore
+      }
+    };
+
+    // attach once to user interaction events
+    document.addEventListener('touchstart', initTTS, { once: true, passive: true });
+    document.addEventListener('click', initTTS, { once: true, passive: true });
+
+    return () => {
+      document.removeEventListener('touchstart', initTTS);
+      document.removeEventListener('click', initTTS);
+    };
+  }, [isClient]);
 
   // Check browser support and load voices
   useEffect(() => {
@@ -206,7 +241,13 @@ export const useJapaneseTTS = () => {
 
             // Create utterance fresh each time (Firefox requirement)
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ja-JP';
+            // Prefer the language of the selected/matched voice when present (fixes Android mismatches)
+            const preferredLang = options?.voice?.lang || currentVoiceRef.current?.lang || 'ja-JP';
+            utterance.lang = preferredLang;
+            // On Android, ensure speechSynthesis is resumed before speaking
+            if (typeof (speechSynthesis as any).resume === 'function') {
+              (speechSynthesis as any).resume();
+            }
             
             // Validate and apply rate (0.5-1.5)
             const rate = options?.rate ?? 1.0;
