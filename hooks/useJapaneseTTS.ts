@@ -50,12 +50,9 @@ export const useJapaneseTTS = () => {
 
   // Detect Firefox for special handling
   const isFirefox = useRef(false);
-  // Detect Android for gesture-based unlock
-  const isAndroid = useRef(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       isFirefox.current = /Firefox/i.test(navigator.userAgent);
-      isAndroid.current = /Android/i.test(navigator.userAgent);
     }
   }, []);
   
