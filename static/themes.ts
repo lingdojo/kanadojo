@@ -60,6 +60,14 @@ const themes: ThemeGroup[] = [
         mainColor: "hsl(270, 100%, 65%)",
         secondaryColor: "hsl(270, 100%, 70%)",
       },
+      {
+        id: "pink paradise",
+        backgroundColor: "#FFF0F5",
+        cardColor: "#EEB6C8",
+        borderColor: "#9F7AE9",
+        mainColor: "#9F7AE9",
+        secondaryColor: "#8D659F6",
+      },
     ],
   },
 
@@ -710,7 +718,7 @@ const themes: ThemeGroup[] = [
         secondaryColor: "hsla(61, 100%, 62%, 1)",
       },
       {
-        id: "Jhiza",
+        id: "gruvbox",
         backgroundColor: "hsla(0, 0%, 13%, 1)",
         cardColor: "hsla(0, 0%, 18%, 1.00)",
         borderColor: "hsla(39, 25%, 63%, 1)",
@@ -718,7 +726,7 @@ const themes: ThemeGroup[] = [
         secondaryColor: "hsla(344, 34%, 61%, 1)",
       },
       {
-        id: "Darkness",
+        id: "absolute darkness",
         backgroundColor: "hsla(264, 26%, 4%, 1.00)",
         cardColor: "hsla(240, 14%, 14%, 1.00)",
         borderColor: "hsla(0, 0%, 90%, 1.00)",
