@@ -84,7 +84,7 @@ export default function SimpleProgress() {
         <h1 className="text-3xl font-bold text-[var(--main-color)]">
           Your Progress
         </h1>
-        <div alt="the Cage" className="theCage" />
+      //  <div alt="the Cage" className="theCage" />
         <Button
           variant="outline"
           size="sm"
