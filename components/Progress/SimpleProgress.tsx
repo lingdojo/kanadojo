@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Trophy, Target, TrendingUp, Trash } from "lucide-react";
 import clsx from "clsx";
 import yodaCage from "./yodaCage.png";
+console.log(yodaCage); // temporary Vercel deployment fix
 
 // Simple Card component to replace the missing UI component
 const Card = ({
