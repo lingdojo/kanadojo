@@ -3,8 +3,7 @@ import useStatsStore from "@/store/useStatsStore";
 import { Button } from "@/components/ui/button";
 import { Trophy, Target, TrendingUp, Trash } from "lucide-react";
 import clsx from "clsx";
-import yodaCage from "./yodaCage.png";
-console.log(yodaCage); // temporary Vercel deployment fix
+// import yodaCage from "./yodaCage.png";
 
 // Simple Card component to replace the missing UI component
 const Card = ({
@@ -84,7 +83,7 @@ export default function SimpleProgress() {
         <h1 className="text-3xl font-bold text-[var(--main-color)]">
           Your Progress
         </h1>
-      //  <div alt="the Cage" className="theCage" />
+        
         <Button
           variant="outline"
           size="sm"
