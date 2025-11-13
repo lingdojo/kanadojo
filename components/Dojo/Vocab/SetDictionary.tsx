@@ -15,7 +15,7 @@ const createVocabSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
     (acc, curr) => ({
       ...acc,
-      [`Set ${curr}`]: [(curr - 1) * 10, curr * 10]
+      [`Set ${curr}`]: [(curr - 1) * 10, curr * 10],
     }),
     {}
   );
@@ -25,28 +25,28 @@ const vocabSetSliceRanges = createVocabSetRanges(200);
 const vocabData = {
   jlpt: {
     n5: {
-      nouns: N5Nouns
+      nouns: N5Nouns,
     },
     n4: {
-      nouns: N4Nouns
+      nouns: N4Nouns,
     },
     n3: {
-      nouns: N3Nouns
+      nouns: N3Nouns,
     },
     n2: {
-      nouns: N2Nouns
-    }
-  }
+      nouns: N2Nouns,
+    },
+  },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type VocabData = Record<string, Record<string, any>>;
 
 const SetDictionary = ({ set }: { set: string }) => {
-  const showKana = usePreferencesStore(state => state.displayKana);
+  const showKana = usePreferencesStore((state) => state.displayKana);
 
   const selectedVocabCollection = useVocabStore(
-    state => state.selectedVocabCollection
+    (state) => state.selectedVocabCollection
   );
   const displayVocabCollection = (vocabData as VocabData)['jlpt'][
     selectedVocabCollection
@@ -70,10 +70,10 @@ const SetDictionary = ({ set }: { set: string }) => {
             <FuriganaText
               text={wordObj.word}
               reading={wordObj.reading}
-              className='text-6xl md:text-5xl'
-              lang='ja'
+              className="text-6xl md:text-5xl"
+              lang="ja"
             />
-            <div className='flex flex-col gap-2 items-start'>
+            <div className="flex flex-col gap-2 items-start">
               <span
                 className={clsx(
                   'rounded-xl px-2 py-1 flex flex-row items-center',
@@ -81,9 +81,13 @@ const SetDictionary = ({ set }: { set: string }) => {
                   'text-[var(--secondary-color)] '
                 )}
               >
-                {showKana ? wordObj.reading.split(' ')[1] : wordObj.reading}
+                {typeof wordObj.reading === 'string'
+                  ? showKana
+                    ? wordObj.reading.split(' ')[1] || wordObj.reading
+                    : wordObj.reading
+                  : ''}
               </span>
-              <p className='text-xl md:text-2xl text-[var(--secondary-color)]'>
+              <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
                 {wordObj.displayMeanings.join(', ')}
               </p>
             </div>
