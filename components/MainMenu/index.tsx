@@ -11,7 +11,7 @@ import {
   Sun,
   Moon,
   Heart,
-  Sparkle
+  Sparkle,
 } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -43,18 +43,18 @@ const MainMenu = () => {
     {
       name_en: 'Kana',
       name_ja: 'あ',
-      href: '/kana'
+      href: '/kana',
     },
     {
       name_en: 'Vocabulary',
       name_ja: '語',
-      href: '/vocabulary'
+      href: '/vocabulary',
     },
     {
       name_en: 'Kanji',
       name_ja: '字',
-      href: '/kanji'
-    }
+      href: '/kanji',
+    },
 
     // {
     //   name_en: 'Sentences',
@@ -66,7 +66,7 @@ const MainMenu = () => {
   const legalLinks = [
     { name: 'terms', href: '/terms', icon: ScrollText },
     { name: 'privacy', href: '/privacy', icon: Cookie },
-    { name: 'security', href: '/security', icon: FileLock2 }
+    { name: 'security', href: '/security', icon: FileLock2 },
     // { name: 'patch notes', href: '/patch-notes', icon: FileDiff }
   ];
 
@@ -82,8 +82,8 @@ const MainMenu = () => {
             <Decorations expandDecorations={expandDecorations} />
           )}
           <Button
-            variant='secondary'
-            size='icon'
+            variant="secondary"
+            size="icon"
             className={clsx(
               'fixed top-4 right-8 z-50 opacity-90',
               buttonBorderStyles,
@@ -105,9 +105,9 @@ const MainMenu = () => {
           expandDecorations && 'hidden'
         )}
       >
-        <div className='flex flex-row justify-between items-center w-full px-1 gap-2'>
+        <div className="flex flex-row justify-between items-center w-full px-1 gap-2">
           <Banner />
-          <div className='flex flex-row justify-end gap-2 w-1/2 md:w-1/3'>
+          <div className="flex flex-row justify-end gap-2 w-1/2 md:w-1/3">
             {theme === 'dark' ? (
               <Moon
                 size={32}
@@ -149,7 +149,7 @@ const MainMenu = () => {
 
             <FontAwesomeIcon
               icon={faDiscord}
-              size='2x'
+              size="2x"
               className={clsx(
                 'hover:cursor-pointer duration-250 hover:scale-120',
                 'active:scale-100 active:duration-225',
@@ -163,7 +163,7 @@ const MainMenu = () => {
             />
             <FontAwesomeIcon
               icon={faGithub}
-              size='2x'
+              size="2x"
               className={clsx(
                 'hover:cursor-pointer duration-250 hover:scale-120',
                 'active:scale-100 active:duration-225',
@@ -200,7 +200,10 @@ const MainMenu = () => {
         >
           {links.map((link, i) => (
             <Fragment key={i}>
-              <Link href={link.href} className={clsx('w-full overflow-hidden')}>
+              <Link
+                href={link.href}
+                className={clsx('w-full overflow-hidden')}
+              >
                 <button
                   className={clsx(
                     'flex w-full h-full text-2xl',
@@ -216,12 +219,15 @@ const MainMenu = () => {
                   onClick={() => playClick()}
                 >
                   <span
-                    lang='ja'
-                    className='font-normal text-[var(--secondary-color)]'
+                    lang="ja"
+                    className="font-normal text-[var(--secondary-color)]"
                   >
                     {link.name_ja}
                   </span>
-                  <span lang='en' className=''>
+                  <span
+                    lang="en"
+                    className=""
+                  >
                     {link.name_en}
                   </span>
                 </button>
@@ -243,7 +249,7 @@ const MainMenu = () => {
       <div
         className={clsx(
           'fixed bottom-3 flex flex-row gap-2',
-          'bg-[var(--card-color)] rounded-xl z-50',
+          'max-md:bg-[var(--card-color)] rounded-xl z-50',
           'opacity-90',
           expandDecorations && 'hidden'
         )}
@@ -252,10 +258,10 @@ const MainMenu = () => {
           <Link
             href={link.href}
             key={i}
-            className='p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+            className="p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)]"
             onClick={() => playClick()}
           >
-            <link.icon className='size-4' />
+            <link.icon className="size-4" />
             <span>{link.name}</span>
           </Link>
         ))}

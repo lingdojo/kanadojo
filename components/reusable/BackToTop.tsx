@@ -44,11 +44,16 @@ export default function BackToTop() {
       title="Back to top"
       onClick={handleClick}
       className={
-        'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 inline-flex items-center justify-center rounded-full p-2 shadow-md transition-opacity duration-200 ' +
-        'bg-[var(--card)] text-[var(--main-color)] hover:bg-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-ring'
+        'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ' +
+        'inline-flex items-center justify-center rounded-full ' +
+        'p-3 shadow-lg transition-all duration-200 ' +
+        'bg-[var(--card-color)] text-[var(--main-color)] ' +
+        'hover:bg-[var(--border-color)] hover:scale-110 ' +
+        'focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 ' +
+        'border-2 border-[var(--border-color)]'
       }
     >
-      <ChevronUp size={18} />
+      <ChevronUp size={24} strokeWidth={2.5} />
     </button>
   );
 }

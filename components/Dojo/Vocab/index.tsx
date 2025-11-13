@@ -101,45 +101,71 @@ const VocabCards = () => {
 
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
+  
+  // Check if user has any progress data
+  const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
 
   return (
     <div className='flex flex-col w-full gap-4'>
-      {/* Filter Toggle Button */}
-      <div className='flex justify-end px-4'>
-        <button
-          onClick={() => {
-            playClick();
-            setHideMastered(prev => !prev);
-          }}
-          className={clsx(
-            'flex items-center gap-2 px-4 py-2 rounded-xl',
-            'duration-250 transition-all ease-in-out',
-            'border-2 border-[var(--border-color)]',
-            'hover:bg-[var(--card-color)]',
-            hideMastered && 'bg-[var(--card-color)] border-[var(--main-color)]'
-          )}
-        >
-          {hideMastered ? (
-            <>
-              <FilterX size={20} className='text-[var(--main-color)]' />
-              <span className='text-[var(--main-color)]'>
-                Show All Sets ({masteredCount} mastered hidden)
-              </span>
-            </>
-          ) : (
-            <>
-              <Filter size={20} className='text-[var(--secondary-color)]' />
-              <span className='text-[var(--secondary-color)]'>
-                Hide Mastered Sets {masteredCount > 0 && `(${masteredCount})`}
-              </span>
-            </>
-          )}
-        </button>
-      </div>
+      {/* Info message when no progress data exists */}
+      {!hasProgressData && (
+        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
+          <p className='text-sm text-[var(--secondary-color)]'>
+            💡 <strong>Tip:</strong> Complete some practice sessions to unlock the &apos;Hide Mastered Sets&apos; filter. 
+            Sets become mastered when you achieve 90%+ accuracy with 10+ attempts per word.
+          </p>
+        </div>
+      )}
+      
+      {/* Filter Toggle Button - Only show if there are mastered sets */}
+      {masteredCount > 0 && (
+        <div className='flex justify-end px-4'>
+          <button
+            onClick={() => {
+              playClick();
+              setHideMastered(prev => !prev);
+            }}
+            className={clsx(
+              'flex items-center gap-2 px-4 py-2 rounded-xl',
+              'duration-250 transition-all ease-in-out',
+              'border-2 border-[var(--border-color)]',
+              'hover:bg-[var(--card-color)]',
+              hideMastered && 'bg-[var(--card-color)] border-[var(--main-color)]'
+            )}
+          >
+            {hideMastered ? (
+              <>
+                <FilterX size={20} className='text-[var(--main-color)]' />
+                <span className='text-[var(--main-color)]'>
+                  Show All Sets ({masteredCount} mastered hidden)
+                </span>
+              </>
+            ) : (
+              <>
+                <Filter size={20} className='text-[var(--secondary-color)]' />
+                <span className='text-[var(--secondary-color)]'>
+                  Hide Mastered Sets ({masteredCount})
+                </span>
+              </>
+            )}
+          </button>
+        </div>
+      )}
+      
+      {/* Show progress indicator if user has data but no mastered sets yet */}
+      {hasProgressData && masteredCount === 0 && (
+        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
+          <p className='text-sm text-[var(--secondary-color)]'>
+            📊 You have progress data for {Object.keys(allTimeStats.characterMastery).length} words. 
+            Keep practicing to master complete sets! (90%+ accuracy, 10+ attempts per word)
+          </p>
+        </div>
+      )}
 
       {chunkArray(filteredVocabSets, numColumns).map((rowSets, rowIndex) => {
-        const firstSetInRow = rowIndex * numColumns + 1;
-        const lastSetInRow = (rowIndex + 1) * numColumns;
+        // Get the actual set numbers from the filtered sets
+        const firstSetNumber = rowSets[0]?.name.match(/\d+/)?.[0] || '1';
+        const lastSetNumber = rowSets[rowSets.length - 1]?.name.match(/\d+/)?.[0] || firstSetNumber;
 
         return (
           <div
@@ -170,11 +196,10 @@ const VocabCards = () => {
                 size={28}
               />
               <span className='max-lg:hidden'>
-                Sets {selectedVocabCollection.prevLength + firstSetInRow}-
-                {selectedVocabCollection.prevLength + lastSetInRow}
+                Sets {firstSetNumber}{firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
               <span className='lg:hidden'>
-                Set {selectedVocabCollection.prevLength + firstSetInRow}
+                Set {firstSetNumber}
               </span>
             </h3>
 

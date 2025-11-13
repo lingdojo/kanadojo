@@ -1328,7 +1328,7 @@ const N5Nouns = [
   },
   {
     word: '毎年',
-    reading: 'maitoshi / mainen まいとし / まいねん',
+    reading: ['maitoshi / mainen まいとし / まいねん'],
     displayMeanings: ['every year', 'yearly', 'annually'],
     meanings: ['every year', 'yearly', 'annually']
   },
@@ -1911,8 +1911,8 @@ const N5Nouns = [
   {
     word: '留学生',
     reading: 'ryuugakusei りゅうがくせい',
-    displayMeanings: ['overseas student', 'exchange student'],
-    meanings: ['overseas student', 'exchange student']
+    displayMeanings: ['overseas student', 'exchange student', 'international student'],
+    meanings: ['overseas student', 'exchange student', 'international student']
   },
   {
     word: '財布',

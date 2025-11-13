@@ -67,7 +67,7 @@ We may update this Privacy Policy periodically. Changes will be posted on this p
 ## 9. Contact Information
 If you have any questions about this Privacy Policy, you can contact us at:
 
-langdojo.dev@outlook.com
+lingdojo.dev@gmail.com
 
 
 **Thank you for using KanaDojo!** 🚀  

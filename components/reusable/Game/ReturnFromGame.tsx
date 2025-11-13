@@ -46,7 +46,7 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
     >
       <Link
         href={href}
-        className=''
+        className=""
         ref={buttonRef}
         onClick={() => {
           playClick();
@@ -56,7 +56,7 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
         <X
           size={32}
           className={clsx(
-            'hover:cursor-pointer duration-250 hover:scale-125 text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+            'hover:cursor-pointer duration-250 hover:scale-125 text-[var(--border-color)] hover:text-[var(--secondary-color)]'
           )}
         />
       </Link>
