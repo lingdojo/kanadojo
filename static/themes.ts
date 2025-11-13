@@ -68,6 +68,14 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsl(270, 100%, 65%)',
         secondaryColor: 'hsl(270, 100%, 70%)',
       },
+      {
+        id: "pink paradise",
+        backgroundColor: "#FFF0F5",
+        cardColor: "#EEB6C8",
+        borderColor: "#9F7AE9",
+        mainColor: "#9F7AE9",
+        secondaryColor: "#8D659F6",
+      },
     ],
   },
 
