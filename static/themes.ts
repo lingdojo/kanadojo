@@ -92,6 +92,14 @@ const themes: ThemeGroup[] = [
         secondaryColor: "hsla(45, 35%, 88%, 1)",
       },
       {
+        id: "yukata",
+        backgroundColor: "hsla(220, 50%, 10%, 1)",
+        cardColor: "hsla(220, 48%, 14%, 1)",
+        borderColor: "hsla(220, 45%, 22%, 1)",
+        mainColor: "hsla(350, 82%, 62%, 1)",
+        secondaryColor: "hsla(280, 65%, 68%, 1)",
+      },
+      {
         id: 'matrix',
         backgroundColor: 'hsl(0, 0%, 0%)',
         cardColor: 'hsl(0, 0%, 2.5%)',
