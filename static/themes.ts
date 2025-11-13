@@ -68,6 +68,14 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsl(270, 100%, 65%)',
         secondaryColor: 'hsl(270, 100%, 70%)',
       },
+      {
+        id: "pink paradise",
+        backgroundColor: "#FFF0F5",
+        cardColor: "#EEB6C8",
+        borderColor: "#9F7AE9",
+        mainColor: "#9F7AE9",
+        secondaryColor: "#8D659F6",
+      },
     ],
   },
 
@@ -740,6 +748,24 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(225, 68%, 74%, 1)',
         secondaryColor: 'hsla(105, 37%, 69%, 1)',
       },
+      {
+        id: 'serika-dark',
+        backgroundColor: 'hsla(210, 5%, 22%, 1)',
+        cardColor: 'hsla(220, 2%, 40%, 1)',
+        borderColor: 'hsla(220, 2%, 40%, 1)',
+        mainColor: 'hsla(49, 82%, 49%, 1)',
+        secondaryColor: 'hsla(49, 14%, 81%, 1)',
+      },
+      {
+        id: 'catppuccin',
+        backgroundColor: 'hsl(240, 21%, 15%)',
+        cardColor: 'hsl(237deg, 16%, 23%)',
+        borderColor: 'hsl(230, 13%, 55%)',
+        mainColor: 'hsl(267deg, 84%, 81%)',
+        secondaryColor: 'hsl(226, 64%, 88%)',
+      }
+
+
     ],
   },
 
