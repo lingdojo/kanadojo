@@ -733,6 +733,15 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(225, 68%, 74%, 1)',
         secondaryColor: 'hsla(105, 37%, 69%, 1)',
       },
+      {
+        id: 'serika-dark',
+        backgroundColor: 'hsla(210, 5%, 22%, 1)',
+        cardColor: 'hsla(220, 2%, 40%, 1)',
+        borderColor: 'hsla(220, 2%, 40%, 1)',
+        mainColor: 'hsla(49, 82%, 49%, 1)',
+        secondaryColor: 'hsla(49, 14%, 81%, 1)',
+      },
+
     ],
   },
 
