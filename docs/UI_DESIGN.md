@@ -205,6 +205,51 @@ To add a new theme:
 2. **Test contrast ratios** (see Accessibility section)
 3. **Add to appropriate theme group** (Base, Light, or Dark)
 
+#### Sumi Theme (Dark — Ink-inspired)
+
+The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added in `static/themes.ts`. It's designed for low visual distraction, high focus, and a neutral, high-clarity UI where content stands out against an almost-black page background.
+
+- **Palette (from `static/themes.ts`)**: 
+```ts
+{
+  id: 'sumi',
+  backgroundColor: 'hsla(0, 0%, 10%, 1)',   // deep charcoal / paper black
+  cardColor: 'hsla(0, 0%, 14%, 1)',         // slightly lighter surface
+  borderColor: 'hsla(0, 0%, 22%, 1)',       // subtle divider / hover
+  mainColor: 'hsla(0, 0%, 72%, 1)',         // warm off-white for primary text
+  secondaryColor: 'hsla(45, 35%, 88%, 1)',  // soft warm accent (paper/cream)
+}
+```
+
+- **Usage guidance**:
+  - Use `--background-color` for large page surfaces and overlays.
+  - Use `--card-color` for cards, panels, and elevated UI pieces.
+  - Use `--border-color` for separators, subtle hover/backdrop outlines and focus rings when appropriate.
+  - Use `--main-color` for primary text, icons, and CTAs that need high readability.
+  - Use `--secondary-color` for subtle accents, tertiary text, dividers or decorative strokes.
+
+- **Tailwind example (recommended pattern)**:
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">Sumi — Focus Mode</h1>
+    <p className="text-sm text-[var(--secondary-color)]">Subtle helper text and accents</p>
+  </div>
+</div>
+```
+
+- **Accessibility / contrast notes**:
+  - The `sumi` theme is intentionally high-contrast for primary content: `--main-color` (near-white) on `--background-color` (very dark charcoal) is appropriate for body text and passes typical AA thresholds for normal text in most sizes — still run specific checks for bright UI elements and CTA buttons.
+  - For smaller UI chrome (icons, borders), ensure `--border-color` on `--card-color` meets at least a 3:1 ratio for interactive affordances, or increase border opacity when used as the primary focus indicator.
+  - When using `--secondary-color` for secondary text, verify it maintains adequate contrast on both `--background-color` and `--card-color` for the sizes you use (tooling: WebAIM, axe, Lighthouse).
+
+- **Developer checklist when adding/using `sumi`**:
+  - Copy the theme object into `static/themes.ts` exactly (IDs must be kebab-case).
+  - Verify `applyTheme('sumi')` updates CSS variables and `data-theme` attribute correctly.
+  - Test interactive components (buttons, inputs, dialogs) visually and via automated contrast checks.
+  - Consider providing a slightly lighter variant of `--main-color` for disabled/low-emphasis states to avoid blending with `--card-color`.
+
+
 ### Theme Color Guidelines
 
 #### Color Format
