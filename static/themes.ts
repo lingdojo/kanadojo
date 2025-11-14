@@ -116,6 +116,14 @@ const themes: ThemeGroup[] = [
         secondaryColor: "hsla(45, 88%, 62%, 1)",
       },
       {
+        id: "aizome",
+        backgroundColor: "hsla(215, 48%, 11%, 1)",
+        cardColor: "hsla(215, 46%, 15%, 1)",
+        borderColor: "hsla(215, 43%, 23%, 1)",
+        mainColor: "hsla(210, 75%, 58%, 1)",
+        secondaryColor: "hsla(35, 35%, 72%, 1)",
+      },
+      {
         id: 'matrix',
         backgroundColor: 'hsl(0, 0%, 0%)',
         cardColor: 'hsl(0, 0%, 2.5%)',

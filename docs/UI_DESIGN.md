@@ -293,6 +293,50 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
     - Run automated contrast checks (axe, Lighthouse) and manual spot checks for CTAs and small text.
     - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
 
+#### Aizome Theme (Dark — Indigo Dye)
+
+The `aizome` theme is inspired by traditional Japanese indigo dyeing (`aizome`) — a deep, cool, sophisticated palette with serene blue tones. It combines a cool dark background with bright cyan and warm sand accents for a balance of depth and clarity. Use this theme for a calm, focus-oriented experience with a distinctly Japanese aesthetic.
+
+  - **Palette (from `static/themes.ts`):**
+  ```ts
+  {
+    id: 'aizome',
+    backgroundColor: 'hsla(215, 48%, 11%, 1)',
+    cardColor: 'hsla(215, 46%, 15%, 1)',
+    borderColor: 'hsla(215, 43%, 23%, 1)',
+    mainColor: 'hsla(210, 75%, 58%, 1)',
+    secondaryColor: 'hsla(35, 35%, 72%, 1)',
+  }
+  ```
+
+  - **Usage guidance:**
+    - Use `--background-color` for full-page backgrounds and large overlays to establish the cool, indigo base tone.
+    - Use `--card-color` for cards, panels, and elevated UI surfaces for subtle depth within the cool palette.
+    - Use `--border-color` for separators, interactive affordances, and subtle hover outlines.
+    - Use `--main-color` for primary text, icons, and CTAs that need strong visibility and contrast.
+    - Use `--secondary-color` for accent highlights, badges, and supplementary text that complements the cool indigo base.
+
+  - **Tailwind example:**
+  ```tsx
+  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+      <h1 className="text-2xl font-bold text-[var(--main-color)]">Aizome — Indigo Serenity</h1>
+      <p className="text-sm text-[var(--secondary-color)]">Cool tones and warm accents</p>
+    </div>
+  </div>
+  ```
+
+  - **Accessibility / contrast notes:**
+    - `--main-color` (bright cyan) on `--background-color` (deep indigo) provides excellent contrast for body text and passes typical AA thresholds; verify with WebAIM or axe for edge cases.
+    - `--secondary-color` (warm sand) is an accent color — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; increase saturation if below AA.
+    - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; test focus indicators and hover states carefully.
+
+  - **Developer checklist when adding/using `aizome`:**
+    - Add the theme object to `static/themes.ts` under the `Dark` theme group.
+    - Verify `applyTheme('aizome')` updates CSS variables and `data-theme` attribute correctly.
+    - Run automated contrast checks (axe, Lighthouse) on bright cyan text and warm sand accents.
+    - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
+
 
   ### Theme Color Guidelines
 
