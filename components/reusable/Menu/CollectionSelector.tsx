@@ -69,105 +69,96 @@ const CollectionSelector = () => {
     pathWithoutLocale === '/kanji'
       ? selectedKanjiCollection
       : pathWithoutLocale === '/vocabulary'
-      ? selectedVocabCollection
-      : null;
+        ? selectedVocabCollection
+        : null;
 
   const setSelectedCollection =
     pathWithoutLocale === '/kanji'
       ? setSelectedKanjiCollection
       : pathWithoutLocale === '/vocabulary'
-      ? setSelectedVocabCollection
-      : () => {};
+        ? setSelectedVocabCollection
+        : () => { };
 
   const collections: {
     name: 'n5' | 'n4' | 'n3' | 'n2' | 'n1';
     displayName: string;
   }[] = [
-    {
-      name: 'n5',
-      displayName: `Unit 1, Sets 1-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+      {
+        name: 'n5',
+        displayName: `Unit 1, Sets 1-${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n5
-      }`
-    },
-    {
-      name: 'n4',
-      displayName: `Unit 2, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          }`
+      },
+      {
+        name: 'n4',
+        displayName: `Unit 2, Sets ${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n5 + 1
-      }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          }-${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n5 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4
+          }`
+      },
+      {
+        name: 'n3',
+        displayName: `Unit 3, Sets ${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4
-      }`
-    },
-    {
-      name: 'n3',
-      displayName: `Unit 3, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4 +
+          1
+          }-${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n5 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n3
+          }`
+      },
+      {
+        name: 'n2',
+        displayName: `Unit 4, Sets ${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4 +
-        1
-      }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n3 +
+          1
+          }-${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n5 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n3 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n2
+          }`
+      },
+      {
+        name: 'n1',
+        displayName: `Unit 5, Sets ${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n3
-      }`
-    },
-    {
-      name: 'n2',
-      displayName: `Unit 4, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n3 +
-        1
-      }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n3 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n2
-      }`
-    },
-    {
-      name: 'n1',
-      displayName: `Unit 5, Sets ${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n3 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n2 +
-        1
-      }-${
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n5 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n4 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n3 +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n2
-        /*  +
-        numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
-          .n1
- */
-      }`
-    }
-  ];
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n3 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n2 +
+          1
+          }-${numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n5 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n4 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n3 +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n2
+          /*  +
+          numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
+            .n1
+   */
+          }`
+      }
+    ];
 
   return (
     <div className='flex flex-col'>
@@ -188,8 +179,8 @@ const CollectionSelector = () => {
               'flex flex-col md:flex-row',
               'w-full ',
               pathWithoutLocale === '/vocabulary' &&
-                collection.name === 'n1' &&
-                'hidden'
+              collection.name === 'n1' &&
+              'hidden'
             )}
           >
             <button
@@ -201,9 +192,9 @@ const CollectionSelector = () => {
                 'hover:cursor-pointer',
                 // 'hover:bg-[var(--border-color)]',
                 i === 0 &&
-                  'max-md:rounded-tl-2xl max-md:rounded-tr-2xl md:rounded-tl-2xl md:rounded-bl-2xl',
+                'max-md:rounded-tl-2xl max-md:rounded-tr-2xl md:rounded-tl-2xl md:rounded-bl-2xl',
                 i === collections.length - 1 &&
-                  'max-md:rounded-bl-2xl max-md:rounded-br-2xl md:rounded-tr-2xl md:rounded-br-2xl',
+                'max-md:rounded-bl-2xl max-md:rounded-br-2xl md:rounded-tr-2xl md:rounded-br-2xl',
                 'duration-250'
                 /* collection.name === selectedCollection &&
                 'bg-[var(--border-color)]' */
@@ -245,8 +236,8 @@ const CollectionSelector = () => {
                   'border-[var(--border-color)]',
                   'border-t-1 w-full border-[var(--border-color)]',
                   pathWithoutLocale === '/vocabulary' &&
-                    collection.name === 'n1' &&
-                    'hidden'
+                  collection.name === 'n1' &&
+                  'hidden'
                 )}
               />
             )}
@@ -272,33 +263,36 @@ const CollectionSelector = () => {
                 ? selectedKanjiSets.sort().join(', ')
                 : 'None'
               : pathWithoutLocale === '/vocabulary'
-              ? selectedVocabSets.length > 0
-                ? selectedVocabSets.sort().join(', ')
-                : 'None'
-              : null}
+                ? selectedVocabSets.length > 0
+                  ? selectedVocabSets.sort().join(', ')
+                  : 'None'
+                : null}
           </span>
         </p>
-        <button
-          className={clsx(
-            'py-3 px-16',
-            miniButtonBorderStyles,
-            'text-[var(--main-color)]',
-            'w-full',
-            'flex justify-center'
-          )}
-          onClick={() => {
-            playClick();
-            if (pathWithoutLocale === '/kanji') {
-              clearKanjiSets();
-              clearKanjiObjs();
-            } else if (pathWithoutLocale === '/vocabulary') {
-              clearVocabSets();
-              clearWordObjs();
-            }
-          }}
-        >
-          <Trash size={32} />
-        </button>
+        {(pathWithoutLocale === '/vocabulary' && selectedVocabSets.length > 0) || (pathWithoutLocale === '/kanji' && selectedKanjiSets.length > 0) ?
+          <button
+            className={clsx(
+              'py-3 px-16',
+              miniButtonBorderStyles,
+              'text-[var(--main-color)]',
+              'w-full',
+              'flex justify-center'
+            )}
+            onClick={() => {
+              playClick();
+              if (pathWithoutLocale === '/kanji') {
+                clearKanjiSets();
+                clearKanjiObjs();
+              } else if (pathWithoutLocale === '/vocabulary') {
+                clearVocabSets();
+                clearWordObjs();
+              }
+            }}
+          >
+            <Trash size={32} />
+          </button>
+          :
+          null}
       </div>
     </div>
   );
