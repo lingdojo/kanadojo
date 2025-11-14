@@ -91,7 +91,22 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsl(92, 28%, 65%)',
         secondaryColor: 'rgb(200, 157, 191)',
       },
-
+      {
+        id: "sumi",
+        backgroundColor: "hsla(0, 0%, 10%, 1)",
+        cardColor: "hsla(0, 0%, 14%, 1)",
+        borderColor: "hsla(0, 0%, 22%, 1)",
+        mainColor: "hsla(0, 0%, 72%, 1)",
+        secondaryColor: "hsla(45, 35%, 88%, 1)",
+      },
+      {
+        id: "yukata",
+        backgroundColor: "hsla(220, 50%, 10%, 1)",
+        cardColor: "hsla(220, 48%, 14%, 1)",
+        borderColor: "hsla(220, 45%, 22%, 1)",
+        mainColor: "hsla(350, 82%, 62%, 1)",
+        secondaryColor: "hsla(280, 65%, 68%, 1)",
+      },
       {
         id: 'matrix',
         backgroundColor: 'hsl(0, 0%, 0%)',
