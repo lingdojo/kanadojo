@@ -61,6 +61,18 @@ rm -rf .next node_modules && npm install
 
 That usually does the trick.
 
+### 🪟 Windows Users: Common Issues
+
+If you're on **Windows 11** and the dev server won't start, this is often due to firewall or network restrictions blocking Google Fonts downloads. See our [**Troubleshooting Guide**](./TROUBLESHOOTING.md#-windows-specific-issues) for detailed solutions.
+
+**Quick fixes to try:**
+1. Allow Node.js through Windows Firewall
+2. Temporarily disable antivirus during `npm install` and `npm run dev`
+3. Use [GitHub Codespaces](https://github.com/codespaces) (works out of the box)
+4. Use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) for a Linux environment on Windows
+
+For complete troubleshooting steps, see [**TROUBLESHOOTING.md**](./TROUBLESHOOTING.md).
+
 ---
 
 ## 🧭 How the Project Is Structured
