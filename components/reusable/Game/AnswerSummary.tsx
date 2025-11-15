@@ -154,7 +154,7 @@ const WordSummary = ({
   onContinue: () => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
 }) => (
-  <div className="flex flex-col justify-start items-start gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
+  <div className="flex flex-col justify-start items-center gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
     <FeedbackHeader feedback={feedback} />
 
     <FuriganaText
