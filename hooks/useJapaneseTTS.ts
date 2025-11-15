@@ -58,7 +58,7 @@ export const useJapaneseTTS = () => {
 
   // Check browser support and load voices
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient || !('speechSynthesis' in window)) return;
 
     // Assume TTS is supported in modern browsers
     const isSupported = true;
