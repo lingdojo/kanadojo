@@ -389,14 +389,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(182, 100%, 68%, 1)',
       },
       {
-        id: 'lotus-specter',
-        backgroundColor: 'hsla(322, 48%, 11%, 1)',
-        cardColor: 'hsla(322, 53%, 16%, 1)',
-        borderColor: 'hsla(322, 53%, 29%, 1)',
-        mainColor: 'hsla(291, 99%, 72%, 1)',
-        secondaryColor: 'hsla(53, 100%, 67%, 1)',
-      },
-      {
         id: 'sapphire-bloom',
         backgroundColor: 'hsla(224, 41%, 14%, 1)',
         cardColor: 'hsla(224, 47%, 19%, 1)',
@@ -649,8 +641,8 @@ const themes: ThemeGroup[] = [
         backgroundColor: 'hsla(34, 18%, 12%, 1)',
         cardColor: 'hsla(34, 18%, 19%, 1)',
         borderColor: 'hsla(34, 18%, 30%, 1)',
-        mainColor: 'hsla(30, 41%, 60%, 1)',
-        secondaryColor: 'hsla(48, 92%, 58%, 1)',
+        secondaryColor: 'hsla(30, 41%, 60%, 1)',
+        mainColor: 'hsla(48, 92%, 58%, 1)',
       },
       {
         id: 'vaporpop',
