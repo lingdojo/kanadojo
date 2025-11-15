@@ -1,289 +1,258 @@
 'use client';
-import { Fragment, lazy, Suspense, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from '@/i18n/routing';
-import Banner from './Banner';
-import Info from '@/components/reusable/Menu/Info';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { FileScriptIcon as ScrollTextIcon, FileLockedIcon as FileLock2Icon, CookieIcon, SunIcon, Moon01Icon, FavouriteIcon as HeartIcon, SparklesIcon as SparkleIcon, KeyboardIcon as KeyboardIcon } from '@hugeicons/core-free-icons';
+import {
+  ChartIncreaseIcon as ProgressIcon,
+  Award01Icon as TrophyIcon,
+  Settings02Icon as SettingsIcon,
+  FavouriteIcon as HeartIcon,
+  PaintBoardIcon as ThemeIcon,
+  InformationCircleIcon as InfoIcon,
+  Coffee01Icon as CoffeeIcon,
+} from '@hugeicons/core-free-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
-import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import { useMediaQuery } from 'react-responsive';
-import { buttonBorderStyles } from '@/static/styles';
+import { LanguageSelector } from '@/components/reusable/LanguageSelector';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { Button } from '@/components/ui/button';
-
-const Decorations = lazy(() => import('./Decorations'));
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import themeSets, { getTheme, applyTheme } from '@/static/themes';
+import KanaCards from '@/components/Dojo/Kana/KanaCards';
+import KanjiCards from '@/components/Dojo/Kanji';
+import VocabCards from '@/components/Dojo/Vocab';
 
 const MainMenu = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const isLG = useMediaQuery({ minWidth: 1024 });
+  const [themeDialogOpen, setThemeDialogOpen] = useState(false);
 
   const theme = usePreferencesStore(state => state.theme);
   const setTheme = usePreferencesStore(state => state.setTheme);
-
   const { playClick } = useClick();
-
-  const [expandDecorations, setExpandDecorations] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const links = [
-    {
-      name_en: 'Kana',
-      name_ja: 'あ',
-      href: '/kana',
-    },
-    {
-      name_en: 'Vocabulary',
-      name_ja: '語',
-      href: '/vocabulary',
-    },
-    {
-      name_en: 'Kanji',
-      name_ja: '字',
-      href: '/kanji',
-    },
+  const version = '0.1.1';
 
-    // {
-    //   name_en: 'Sentences',
-    //   name_ja: '文',
-    //   href: '/sentences'
-    // }
-  ];
+  const handleThemeChange = (themeId: string) => {
+    playClick();
+    setTheme(themeId);
+    applyTheme(themeId);
+    setThemeDialogOpen(false);
+  };
 
-  const legalLinks = [
-    { name: 'terms', href: '/terms', icon: ScrollTextIcon },
-    { name: 'privacy', href: '/privacy', icon: CookieIcon },
-    { name: 'security', href: '/security', icon: FileLock2Icon },
-    // { name: 'patch notes', href: '/patch-notes', icon: FileDiff }
-  ];
+  const currentTheme = getTheme(theme);
+  const themeName = currentTheme?.name || theme;
 
   return (
-    <div
-      className={clsx(
-        'flex flex-row justify-center max-w-[100dvw] min-h-[100dvh]'
-      )}
-    >
-      {isMounted && isLG && (
-        <Suspense fallback={<></>}>
-          {process.env.NODE_ENV === 'production' && (
-            <Decorations expandDecorations={expandDecorations} />
-          )}
-          <Button
-            variant="secondary"
-            size="icon"
-            className={clsx(
-              'fixed top-4 right-8 z-50 opacity-90',
-              buttonBorderStyles,
-              'transition-transform duration-250 active:scale-95'
-            )}
-            onClick={() => {
-              playClick();
-              setExpandDecorations(expandDecorations => !expandDecorations);
-            }}
-          >
-            <HugeiconsIcon icon={SparkleIcon} color="currentColor" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
-            className={clsx(
-              'fixed top-4 left-4 z-50 opacity-90',
-              buttonBorderStyles,
-              'transition-transform duration-250 active:scale-95'
-            )}
-            onClick={() => {
-              playClick();
-            }}
-          >
-            <a
-              href="https://monkeytype.com/"
-              rel='noopener'
-              target="_blank"
-            >
-              <HugeiconsIcon icon={KeyboardIcon} color="currentColor" />
-            </a>
-          </Button>
-        </Suspense>
-      )}
-      <div
-        className={clsx(
-          'max-md:pt-4 pb-16 flex flex-col items-center md:justify-center gap-4 px-4 w-full sm:w-3/4 lg:w-1/2 3xl:w-2/5 ',
-          'opacity-90 z-50',
-          expandDecorations && 'hidden'
-        )}
-      >
-        <div className="flex flex-row justify-between items-center w-full px-1 gap-2">
-          <Banner />
-          <div className="flex flex-row justify-end gap-2 w-1/2 md:w-1/3">
-            {theme === 'dark' ? (
-              <HugeiconsIcon
-                icon={Moon01Icon}
-                size={32}
-                color="currentColor"
-                onClick={() => {
-                  playClick();
-                  setTheme('light');
-                }}
-                className={clsx(
-                  'hover:cursor-pointer duration-250 hover:scale-120',
-                  'active:scale-100 active:duration-225',
-                  'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
-                )}
-              />
-            ) : (
-              <HugeiconsIcon
-                icon={SunIcon}
-                size={32}
-                color="currentColor"
-                onClick={() => {
-                  playClick();
-                  setTheme('dark');
-                }}
-                className={clsx(
-                  'hover:cursor-pointer duration-250 hover:scale-120',
-                  'active:scale-100 active:duration-225',
-                  'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
-                )}
-              />
-            )}
-            {/* <Settings
-              size={32}
-              className={clsx(
-                'hover:cursor-pointer duration-250 hover:scale-120',
-                'active:scale-100 active:duration-225'
-              )}
-              onClick={() => {
-                playClick();
-                window.open('/settings', '_self');
-              }}
-            /> */}
-
-            <FontAwesomeIcon
-              icon={faDiscord}
-              size="2x"
-              className={clsx(
-                'hover:cursor-pointer duration-250 hover:scale-120',
-                'active:scale-100 active:duration-225',
-                'md:hidden',
-                'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
-              )}
-              onClick={() => {
-                playClick();
-                window.open('https://discord.gg/CyvBNNrSmb', '_blank');
-              }}
-            />
-            <FontAwesomeIcon
-              icon={faGithub}
-              size="2x"
-              className={clsx(
-                'hover:cursor-pointer duration-250 hover:scale-120',
-                'active:scale-100 active:duration-225',
-                'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
-              )}
-              onClick={() => {
-                playClick();
-                window.open('https://github.com/lingdojo/kana-dojo', '_blank');
-              }}
-            />
+    <div className="flex flex-col min-h-[100dvh] max-w-[100dvw] relative">
+      {/* Top Left - Logo and Icons */}
+      <div className="fixed top-4 left-4 z-50 flex items-center gap-3">
+        <Link href="/" className="flex flex-col hover:opacity-80 transition-opacity">
+          <span className="text-lg font-semibold">KanaDojo</span>
+          <span className="text-sm text-[var(--muted-foreground)]" lang="ja">かな道場</span>
+        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/progress">
             <HugeiconsIcon
-              icon={HeartIcon}
-              size={32}
-              color="currentColor"
-              className={clsx(
-                'hover:cursor-pointer duration-250 hover:scale-120',
-                'active:scale-100 active:duration-225',
-                'fill-current animate-bounce text-red-500'
-              )}
-              onClick={() => {
-                playClick();
-                window.open('https://ko-fi.com/kanadojo', '_blank');
-              }}
+              icon={ProgressIcon}
+              size={20}
+              className="hover:text-[var(--foreground)] text-[var(--muted-foreground)] hover:cursor-pointer transition-colors"
+              onClick={playClick}
             />
-          </div>
-        </div>
-        <Info />
-        <div
-          className={clsx(
-            'rounded-2xl bg-[var(--card)]',
-            'duration-250',
-            'transition-all ease-in-out',
-            'flex flex-col md:flex-row',
-            'w-full'
-          )}
-        >
-          {links.map((link, i) => (
-            <Fragment key={i}>
-              <Link
-                href={link.href}
-                className={clsx('w-full overflow-hidden')}
-              >
-                <button
-                  className={clsx(
-                    'flex w-full h-full text-2xl',
-                    ' justify-center items-center gap-1.5',
-                    'py-8',
-                    'group',
-                    i === 0 && 'rounded-tl-2xl rounded-bl-2xl',
-                    i === links.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
-                    'hover:cursor-pointer',
-                    'hover:bg-[var(--border)]'
-                    // 'duration-100'
-                  )}
-                  onClick={() => playClick()}
-                >
-                  <span
-                    lang="ja"
-                    className="font-normal text-[var(--muted-foreground)]"
-                  >
-                    {link.name_ja}
-                  </span>
-                  <span
-                    lang="en"
-                    className=""
-                  >
-                    {link.name_en}
-                  </span>
-                </button>
-              </Link>
-
-              {i < links.length - 1 && (
-                <div
-                  className={clsx(
-                    'md:border-l-1 md:h-auto md:w-0',
-                    'border-[var(--border)]',
-                    'border-t-1 w-full border-[var(--border)]'
-                  )}
-                />
-              )}
-            </Fragment>
-          ))}
-        </div>
-      </div>
-      <div
-        className={clsx(
-          'fixed bottom-3 flex flex-row gap-2',
-          'max-md:bg-[var(--card)] rounded-xl z-50',
-          'opacity-90',
-          expandDecorations && 'hidden'
-        )}
-      >
-        {legalLinks.map((link, i) => (
-          <Link
-            href={link.href}
-            key={i}
-            className="p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-            onClick={() => playClick()}
-          >
-            <HugeiconsIcon icon={link.icon} size={16} color="currentColor" className="size-4" />
-            <span>{link.name}</span>
           </Link>
-        ))}
+          <Link href="/achievements">
+            <HugeiconsIcon
+              icon={TrophyIcon}
+              size={20}
+              className="hover:text-[var(--foreground)] text-[var(--muted-foreground)] hover:cursor-pointer transition-colors"
+              onClick={playClick}
+            />
+          </Link>
+          <Link href="/preferences">
+            <HugeiconsIcon
+              icon={SettingsIcon}
+              size={20}
+              className="hover:text-[var(--foreground)] text-[var(--muted-foreground)] hover:cursor-pointer transition-colors"
+              onClick={playClick}
+            />
+          </Link>
+        </div>
       </div>
+
+      {/* Top Right - Language Selector and Support Buttons */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <LanguageSelector />
+        <Button
+          size="sm"
+          onClick={() => {
+            playClick();
+            window.open('https://ko-fi.com/kanadojo', '_blank');
+          }}
+        >
+          <HugeiconsIcon icon={CoffeeIcon} size={16} />
+          Ko-fi
+        </Button>
+        <Button
+          size="sm"
+          onClick={() => {
+            playClick();
+            window.open('https://www.patreon.com/kanadojo', '_blank');
+          }}
+        >
+          <HugeiconsIcon icon={HeartIcon} size={16} className="fill-current" />
+          Patreon
+        </Button>
+      </div>
+
+      {/* Content Area with Tabs */}
+      <div className="w-full pt-20 pb-20">
+        <Tabs defaultValue="kana" className="w-full">
+          {/* Navigation Tabs */}
+          <div className="flex justify-center mb-8">
+            <TabsList>
+              <TabsTrigger
+                value="kana"
+                onClick={() => playClick()}
+              >
+                <span lang="ja" className="mr-1.5">かな</span>
+                Kana
+              </TabsTrigger>
+              <TabsTrigger
+                value="kanji"
+                onClick={() => playClick()}
+              >
+                <span lang="ja" className="mr-1.5">漢字</span>
+                Kanji
+              </TabsTrigger>
+              <TabsTrigger
+                value="vocabulary"
+                onClick={() => playClick()}
+              >
+                <span lang="ja" className="mr-1.5">語彙</span>
+                Vocabulary
+              </TabsTrigger>
+            </TabsList>
+          </div>
+
+          {/* Tab Content */}
+          <TabsContent value="kana" className="mt-0">
+            <KanaCards />
+          </TabsContent>
+
+          <TabsContent value="kanji" className="mt-0">
+            <KanjiCards />
+          </TabsContent>
+
+          <TabsContent value="vocabulary" className="mt-0">
+            <VocabCards />
+          </TabsContent>
+        </Tabs>
+      </div>
+
+      {/* Bottom Left - Social and Legal Links */}
+      <div className="fixed bottom-4 left-4 z-50 flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
+        <FontAwesomeIcon
+          icon={faDiscord}
+          className="hover:text-[var(--foreground)] hover:cursor-pointer transition-colors"
+          onClick={() => {
+            playClick();
+            window.open('https://discord.gg/CyvBNNrSmb', '_blank');
+          }}
+        />
+        <FontAwesomeIcon
+          icon={faGithub}
+          className="hover:text-[var(--foreground)] hover:cursor-pointer transition-colors"
+          onClick={() => {
+            playClick();
+            window.open('https://github.com/lingdojo/kana-dojo', '_blank');
+          }}
+        />
+        <Link href="/terms" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
+          Terms
+        </Link>
+        <Link href="/privacy" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
+          Privacy
+        </Link>
+        <Link href="/security" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
+          Security
+        </Link>
+      </div>
+
+      {/* Bottom Right - Theme Switcher and Version */}
+      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
+        <button
+          className="flex items-center gap-1.5 hover:text-[var(--foreground)] transition-colors hover:cursor-pointer"
+          onClick={() => {
+            playClick();
+            setThemeDialogOpen(true);
+          }}
+        >
+          <HugeiconsIcon icon={ThemeIcon} size={14} />
+          {themeName}
+        </button>
+        <span className="flex items-center gap-1.5">
+          <HugeiconsIcon icon={InfoIcon} size={14} />
+          v{version}
+        </span>
+      </div>
+
+      {/* Theme Switcher Dialog */}
+      <Dialog open={themeDialogOpen} onOpenChange={setThemeDialogOpen}>
+        <DialogContent className="p-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+          <VisuallyHidden>
+            <DialogTitle>Select Theme</DialogTitle>
+          </VisuallyHidden>
+          <Command className="animate-none">
+            <CommandInput placeholder="Search themes..." />
+            <CommandList>
+              <CommandEmpty>No themes found.</CommandEmpty>
+              {themeSets.map((group) => (
+                <CommandGroup key={group.name} heading={group.name}>
+                  {group.themes.map((themeItem) => (
+                    <CommandItem
+                      key={themeItem.id}
+                      value={`${themeItem.name} ${themeItem.tags?.join(' ') || ''}`}
+                      onSelect={() => handleThemeChange(themeItem.id)}
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        <span>{themeItem.name}</span>
+                        <div className="flex gap-1 ml-4">
+                          <div
+                            className="w-3 h-3 rounded-full border border-[var(--border)]"
+                            style={{ background: themeItem.foreground }}
+                          />
+                          <div
+                            className="w-3 h-3 rounded-full border border-[var(--border)]"
+                            style={{ background: themeItem.primary }}
+                          />
+                          <div
+                            className="w-3 h-3 rounded-full border border-[var(--border)]"
+                            style={{ background: themeItem.chart1 || themeItem.destructive }}
+                          />
+                        </div>
+                      </div>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
+            </CommandList>
+          </Command>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

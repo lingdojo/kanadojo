@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Never use dropshadows
 - Only use colors defined in styles
 - Don't use opacity
+- Use shadcn components by default. Only when it doesn't have a component, should you create a custom component.
+- Don't add additional styles on shadcn components
 
 ## Project Overview
 

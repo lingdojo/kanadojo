@@ -1,6 +1,4 @@
 'use client';
-import clsx from 'clsx';
-import { cardBorderStyles } from '@/static/styles';
 import N5Kanji from '@/static/kanji/N5';
 import N4Kanji from '@/static/kanji/N4';
 import N3Kanji from '@/static/kanji/N3';
@@ -8,8 +6,7 @@ import N2Kanji from '@/static/kanji/N2';
 import N1Kanji from '@/static/kanji/N1';
 import useKanjiStore from '@/store/useKanjiStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
-import FuriganaText from '@/components/reusable/FuriganaText';
-import { useClick } from '@/hooks/useAudio';
+import KanjiCard from '@/components/Dojo/Kanji/KanjiCard';
 
 const createKanjiSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
@@ -31,8 +28,6 @@ const kanjiCollections = {
 };
 
 const KanjiSetDictionary = ({ set }: { set: string }) => {
-  const { playClick } = useClick();
-
   const selectedKanjiCollection = useKanjiStore(
     state => state.selectedKanjiCollection
   );
@@ -44,132 +39,39 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
 
   const showKana = usePreferencesStore(state => state.displayKana);
 
+  const kanjiInSet = displayKanjiCollection.slice(sliceRange[0], sliceRange[1]);
+
   return (
-    <div className={clsx('flex flex-col', cardBorderStyles)}>
-      {displayKanjiCollection
-        .slice(sliceRange[0], sliceRange[1])
-        .map((kanjiObj, i) => (
-          <div
+    <div className="grid gap-4 py-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))' }}>
+      {kanjiInSet.map((kanjiObj) => {
+        // Get the primary reading (prefer on'yomi, fallback to kun'yomi)
+        const primaryReading =
+          (kanjiObj.onyomi[0] && kanjiObj.onyomi[0] !== '')
+            ? showKana
+              ? kanjiObj.onyomi[0].split(' ')[1]
+              : kanjiObj.onyomi[0].split(' ')[0]
+            : (kanjiObj.kunyomi[0] && kanjiObj.kunyomi[0] !== '')
+              ? showKana
+                ? kanjiObj.kunyomi[0].split(' ')[1]
+                : kanjiObj.kunyomi[0].split(' ')[0]
+              : '';
+
+        // Get the primary meaning (first 2-3 meanings)
+        const primaryMeaning = kanjiObj.fullDisplayMeanings.slice(0, 2).join(', ');
+
+        return (
+          <KanjiCard
             key={kanjiObj.id}
-            className={clsx(
-              'flex flex-col justify-start items-center gap-2 py-4 max-md:px-4',
-              i !== 9 && 'border-b-1 border-[var(--border)]'
-            )}
-          >
-            <div className="flex flex-row w-full gap-4">
-              <a
-                className="relative w-full max-w-[100px] aspect-square flex items-center justify-center hover:cursor-pointer group"
-                href={`http://kanjiheatmap.com/?open=${kanjiObj.kanjiChar}`}
-                rel="noopener"
-                target="_blank"
-                onClick={() => {
-                  playClick();
-                }}
-              >
-                {/* 4-segment square background */}
-                <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border)] rounded-xl bg-[var(--background)] group-hover:bg-[var(--card)] transition-all">
-                  <div className=" border-r border-b border-[var(--border)]"></div>
-                  <div className=" border-b border-[var(--border)]"></div>
-                  <div className=" border-r border-[var(--border)]"></div>
-                  <div className=""></div>
-                </div>
-
-                <FuriganaText
-                  text={kanjiObj.kanjiChar}
-                  reading={kanjiObj.onyomi[0] || kanjiObj.kunyomi[0]}
-                  className="text-7xl pb-2 relative z-10 "
-                  lang="ja"
-                />
-              </a>
-
-              <div className="flex flex-col gap-1 w-full">
-                <a
-                  className="w-full text-[var(--foreground)]/80 text-xs hover:text-[var(--foreground)] hover:text-underline"
-                  href="https://lingopie.com/blog/onyomi-vs-kunyomi/"
-                  target="_blank"
-                  rel="noopener"
-                  onClick={() => {
-                    playClick();
-                  }}
-                >
-                  On&apos;yomi
-                </a>
-                <div
-                  className={clsx(
-                    'h-1/2 ',
-                    'bg-[var(--background)] rounded-2xl',
-                    'flex flex-row gap-2',
-                    // 'border-1 border-[var(--border)]',
-                    (kanjiObj.onyomi[0] === '' ||
-                      kanjiObj.onyomi.length === 0) &&
-                      'hidden'
-                  )}
-                >
-                  {kanjiObj.onyomi.slice(0, 2).map((onyomiReading, i) => (
-                    <span
-                      key={onyomiReading}
-                      className={clsx(
-                        'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
-                        'text-[var(--muted-foreground)] w-full ',
-
-                        i < kanjiObj.onyomi.slice(0, 2).length - 1 &&
-                          'border-r-1 border-[var(--border)]'
-                      )}
-                    >
-                      {showKana
-                        ? onyomiReading.split(' ')[1]
-                        : onyomiReading.split(' ')[0]}
-                    </span>
-                  ))}
-                </div>
-                <a
-                  className="w-full text-[var(--foreground)]/80 text-xs hover:text-underline hover:text-[var(--foreground)]"
-                  href="https://lingopie.com/blog/onyomi-vs-kunyomi/"
-                  target="_blank"
-                  rel="noopener"
-                  onClick={() => {
-                    playClick();
-                  }}
-                >
-                  Kun&apos;yomi
-                </a>
-
-                <div
-                  className={clsx(
-                    'h-1/2',
-                    'bg-[var(--background)] rounded-2xl',
-                    'flex flex-row gap-2',
-
-                    // 'border-1 border-[var(--border)]',
-                    (kanjiObj.kunyomi[0] === '' ||
-                      kanjiObj.kunyomi.length === 0) &&
-                      'hidden'
-                  )}
-                >
-                  {kanjiObj.kunyomi.slice(0, 2).map((kunyomiReading, i) => (
-                    <span
-                      key={kunyomiReading}
-                      className={clsx(
-                        'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
-                        'text-[var(--muted-foreground)] w-full ',
-                        i < kanjiObj.kunyomi.slice(0, 2).length - 1 &&
-                          'border-r-1 border-[var(--border)]'
-                      )}
-                    >
-                      {showKana
-                        ? kunyomiReading.split(' ')[1]
-                        : kunyomiReading.split(' ')[0]}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <p className="text-xl md:text-2xl w-full text-[var(--muted-foreground)]">
-              {kanjiObj.fullDisplayMeanings.join(', ')}
-            </p>
-          </div>
-        ))}
+            kanji={kanjiObj.kanjiChar}
+            reading={primaryReading}
+            meaning={primaryMeaning}
+            onClick={() => {
+              // Open kanji heatmap in new tab
+              window.open(`http://kanjiheatmap.com/?open=${kanjiObj.kanjiChar}`, '_blank');
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
