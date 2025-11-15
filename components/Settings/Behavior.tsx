@@ -112,7 +112,7 @@ const Behavior = () => {
         </button>
       </div>
       <h4 className="text-lg">
-        Show furigana (reading) for kanji and vocabulary (above):
+        Show furigana (reading) above the character/word for kanji/vocabulary:
       </h4>
       <div className="flex flex-row gap-4">
         <button
