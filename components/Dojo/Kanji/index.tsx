@@ -22,27 +22,27 @@ const kanjiCollections = {
   n4: {
     data: N4Kanji,
     name: 'N4',
-    prevLength: Math.ceil(N5Kanji.length / 10)
+    prevLength: Math.ceil(N5Kanji.length / 10),
   },
   n3: {
     data: N3Kanji,
     name: 'N3',
-    prevLength: Math.ceil((N5Kanji.length + N4Kanji.length) / 10)
+    prevLength: Math.ceil((N5Kanji.length + N4Kanji.length) / 10),
   },
   n2: {
     data: N2Kanji,
     name: 'N2',
     prevLength: Math.ceil(
       (N5Kanji.length + N4Kanji.length + N3Kanji.length) / 10
-    )
+    ),
   },
   n1: {
     data: N1Kanji,
     name: 'N1',
     prevLength: Math.ceil(
       (N5Kanji.length + N4Kanji.length + N3Kanji.length + N2Kanji.length) / 10
-    )
-  }
+    ),
+  },
 };
 
 // ✅ REMOVED: Intersection Observer animation variants to fix bug where users need to scroll to see first sets
@@ -62,10 +62,10 @@ const KanjiCards = () => {
   const { playClick } = useClick();
 
   const selectedKanjiCollection = kanjiCollections[selectedKanjiCollectionName];
-  
+
   // Filter state for hiding mastered cards
   const [hideMastered, setHideMastered] = useState(false);
-  
+
   // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
   const masteredCharacters = useMemo(() => {
     const mastered = new Set<string>();
@@ -76,20 +76,29 @@ const KanjiCards = () => {
         mastered.add(char);
       }
     });
-    
+
     // Debug log to see mastery data
     if (typeof window !== 'undefined') {
-      console.log('[Kanji Filter] Total characters tracked:', Object.keys(allTimeStats.characterMastery).length);
+      console.log(
+        '[Kanji Filter] Total characters tracked:',
+        Object.keys(allTimeStats.characterMastery).length
+      );
       console.log('[Kanji Filter] Mastered characters:', mastered.size);
-      console.log('[Kanji Filter] Sample mastered:', Array.from(mastered).slice(0, 5));
+      console.log(
+        '[Kanji Filter] Sample mastered:',
+        Array.from(mastered).slice(0, 5)
+      );
     }
-    
+
     return mastered;
   }, [allTimeStats.characterMastery]);
-  
+
   // Check if a set contains only mastered kanji
   const isSetMastered = (setStart: number, setEnd: number) => {
-    const kanjiInSet = selectedKanjiCollection.data.slice(setStart * 10, setEnd * 10);
+    const kanjiInSet = selectedKanjiCollection.data.slice(
+      setStart * 10,
+      setEnd * 10
+    );
     return kanjiInSet.every(kanji => masteredCharacters.has(kanji.kanjiChar));
   };
 
@@ -102,37 +111,38 @@ const KanjiCards = () => {
       start: i,
       end: i + 1,
       id: `Set ${i + 1}`,
-      isMastered: isSetMastered(i, i + 1)
+      isMastered: isSetMastered(i, i + 1),
     }));
-  
+
   // Filter out mastered sets if hideMastered is true
-  const filteredKanjiSets = hideMastered 
+  const filteredKanjiSets = hideMastered
     ? kanjiSetsTemp.filter(set => !set.isMastered)
     : kanjiSetsTemp;
-  
+
   const masteredCount = kanjiSetsTemp.filter(set => set.isMastered).length;
 
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
-  
+
   // Check if user has any progress data
   const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
 
   return (
-    <div className='flex flex-col w-full gap-4'>
+    <div className="flex flex-col w-full gap-4">
       {/* Info message when no progress data exists */}
       {!hasProgressData && (
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
-            💡 <strong>Tip:</strong> Complete some practice sessions to unlock the &ldquo;Hide Mastered Sets&rdquo; filter. 
-            Sets become mastered when you achieve 90%+ accuracy with 10+ attempts per character.
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
+            💡 <strong>Tip:</strong> Complete some practice sessions to unlock
+            the &ldquo;Hide Mastered Sets&rdquo; filter. Sets become mastered
+            when you achieve 90%+ accuracy with 10+ attempts per character.
           </p>
         </div>
       )}
-      
+
       {/* Filter Toggle Button - Only show if there are mastered sets */}
       {masteredCount > 0 && (
-        <div className='flex justify-end px-4'>
+        <div className="flex justify-end px-4">
           <button
             onClick={() => {
               playClick();
@@ -143,20 +153,27 @@ const KanjiCards = () => {
               'duration-250 transition-all ease-in-out',
               'border-2 border-[var(--border-color)]',
               'hover:bg-[var(--card-color)]',
-              hideMastered && 'bg-[var(--card-color)] border-[var(--main-color)]'
+              hideMastered &&
+                'bg-[var(--card-color)] border-[var(--main-color)]'
             )}
           >
             {hideMastered ? (
               <>
-                <FilterX size={20} className='text-[var(--main-color)]' />
-                <span className='text-[var(--main-color)]'>
+                <FilterX
+                  size={20}
+                  className="text-[var(--main-color)]"
+                />
+                <span className="text-[var(--main-color)]">
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
             ) : (
               <>
-                <Filter size={20} className='text-[var(--secondary-color)]' />
-                <span className='text-[var(--secondary-color)]'>
+                <Filter
+                  size={20}
+                  className="text-[var(--secondary-color)]"
+                />
+                <span className="text-[var(--secondary-color)]">
                   Hide Mastered Sets ({masteredCount})
                 </span>
               </>
@@ -164,13 +181,15 @@ const KanjiCards = () => {
           </button>
         </div>
       )}
-      
+
       {/* Show progress indicator if user has data but no mastered sets yet */}
       {hasProgressData && masteredCount === 0 && (
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
-            📊 You have progress data for {Object.keys(allTimeStats.characterMastery).length} characters. 
-            Keep practicing to master complete sets! (90%+ accuracy, 10+ attempts per character)
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)] ">
+          <p className="text-sm text-[var(--secondary-color)]">
+            You have progress data for{' '}
+            {Object.keys(allTimeStats.characterMastery).length} characters. Keep
+            practicing to master complete sets! (90%+ accuracy, 10+ attempts per
+            character)
           </p>
         </div>
       )}
@@ -178,7 +197,8 @@ const KanjiCards = () => {
       {chunkArray(filteredKanjiSets, numColumns).map((rowSets, rowIndex) => {
         // Get the actual set numbers from the filtered sets
         const firstSetNumber = rowSets[0]?.name.match(/\d+/)?.[0] || '1';
-        const lastSetNumber = rowSets[rowSets.length - 1]?.name.match(/\d+/)?.[0] || firstSetNumber;
+        const lastSetNumber =
+          rowSets[rowSets.length - 1]?.name.match(/\d+/)?.[0] || firstSetNumber;
 
         return (
           <div
@@ -208,12 +228,11 @@ const KanjiCards = () => {
                 )}
                 size={28}
               />
-              <span className='max-lg:hidden'>
-                Sets {firstSetNumber}{firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
+              <span className="max-lg:hidden">
+                Sets {firstSetNumber}
+                {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
-              <span className='lg:hidden'>
-                Set {firstSetNumber}
-              </span>
+              <span className="lg:hidden">Set {firstSetNumber}</span>
             </h3>
 
             {!collapsedRows.includes(rowIndex) && (
@@ -260,7 +279,7 @@ const KanjiCards = () => {
                           setSelectedKanjiSets([
                             ...new Set(
                               selectedKanjiSets.concat(kanjiSetTemp.name)
-                            )
+                            ),
                           ]);
                           addKanjiObjs(
                             selectedKanjiCollection.data.slice(
@@ -272,9 +291,9 @@ const KanjiCards = () => {
                       }}
                     >
                       {selectedKanjiSets.includes(kanjiSetTemp.name) ? (
-                        <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
+                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
                       ) : (
-                        <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
+                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
                       )}
                       {kanjiSetTemp.name}
                     </button>

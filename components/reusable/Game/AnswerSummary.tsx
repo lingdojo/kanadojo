@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { IKanjiObj } from '@/store/useKanjiStore';
 import { IWordObj } from '@/store/useVocabStore';
-import { buttonBorderStyles } from '@/static/styles';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/hooks/useAudio';
@@ -28,20 +27,32 @@ const ContinueButton = ({
   onClick: () => void;
   disabled: boolean;
 }) => (
-  <button
-    ref={buttonRef}
+  <div
     className={clsx(
-      'text-xl font-medium py-4 px-16 rounded-3xl duration-150 w-full',
-      buttonBorderStyles,
-      'flex flex-row justify-center items-end gap-2 ',
-      'bg-[var(--card-color)] hover:text-[var(--background-color)] hover:bg-[var(--main-color)]'
+      'w-[99vw]',
+      'border-t-1 border-[var(--border-color)] bg-[var(--card-color)]',
+      'absolute bottom-0 z-10 py-4 px-4',
+      'flex justify-center items-center'
     )}
-    onClick={onClick}
-    disabled={disabled}
   >
-    <span>continue</span>
-    <CircleArrowRight className="" />
-  </button>
+    <button
+      ref={buttonRef}
+      className={clsx(
+        'text-xl font-medium py-4 px-16 rounded-3xl duration-250 hover:cursor-pointer',
+
+        'w-full md:w-1/2',
+
+        // buttonBorderStyles,
+        'flex flex-row justify-center items-end gap-2 ',
+        'text-[var(--background-color)] bg-[var(--secondary-color)] hover:bg-[var(--main-color)]'
+      )}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <span>continue</span>
+      <CircleArrowRight className="" />
+    </button>
+  </div>
 );
 
 const KanjiDisplay = ({ payload }: { payload: IKanjiObj }) => (
@@ -143,7 +154,7 @@ const WordSummary = ({
   onContinue: () => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
 }) => (
-  <div className="flex flex-col justify-start items-start gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
+  <div className="flex flex-col justify-start items-center gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
     <FeedbackHeader feedback={feedback} />
 
     <FuriganaText
@@ -153,7 +164,7 @@ const WordSummary = ({
       lang="ja"
     />
 
-    <div className="flex flex-col gap-2 items-start">
+    <div className="flex flex-col gap-2 items-start w-full">
       <span
         className={clsx(
           'rounded-xl px-2 py-1 flex flex-row items-center',

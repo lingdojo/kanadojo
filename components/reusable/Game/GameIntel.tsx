@@ -93,6 +93,7 @@ const GameIntel = ({
             >
               <Coffee size={24} className='motion-safe:animate-pulse' />
             </button>
+
           </p>
         </div>
 

@@ -231,6 +231,8 @@ npm run postbuild
 
 If you encounter issues during development, try these solutions:
 
+> **📘 For detailed troubleshooting, especially for Windows setup issues, see our [Troubleshooting Guide](./TROUBLESHOOTING.md)**
+
 #### Clear Next.js Cache
 
 **macOS/Linux:**

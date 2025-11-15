@@ -99,7 +99,7 @@ const Themes = () => {
                       ? currentTheme.borderColor
                       : currentTheme.backgroundColor,
                   borderWidth:
-                    process.env.NODE_ENV === 'development' ? '2px' : undefined,
+                    process.env.NODE_ENV === 'development' ? '4px' : undefined,
                   borderColor: currentTheme.borderColor,
                 }}
                 onMouseEnter={() => setIsHovered(currentTheme.id)}
@@ -139,7 +139,7 @@ const Themes = () => {
                   className="hidden"
                 />
                 <span className="text-center text-lg flex items-center gap-1.5">
-                  <span>
+                  <span className='text-[var(--secondary-color)]'>
                     {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                   </span>
                   {currentTheme.id === 'long'

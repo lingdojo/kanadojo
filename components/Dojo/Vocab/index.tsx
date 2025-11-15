@@ -21,20 +21,20 @@ const vocabCollections = {
   n4: {
     data: N4Nouns,
     name: 'N4',
-    prevLength: Math.ceil(N5Nouns.length / 10)
+    prevLength: Math.ceil(N5Nouns.length / 10),
   },
   n3: {
     data: N3Nouns,
     name: 'N3',
-    prevLength: Math.ceil((N5Nouns.length + N4Nouns.length) / 10)
+    prevLength: Math.ceil((N5Nouns.length + N4Nouns.length) / 10),
   },
   n2: {
     data: N2Nouns,
     name: 'N2',
     prevLength: Math.ceil(
       (N5Nouns.length + N4Nouns.length + N3Nouns.length) / 10
-    )
-  }
+    ),
+  },
 };
 
 // ✅ REMOVED: Intersection Observer animation variants to fix bug where users need to scroll to see first sets
@@ -57,10 +57,10 @@ const VocabCards = () => {
   const selectedVocabCollection = (vocabCollections as any)[
     selectedVocabCollectionName
   ];
-  
+
   // Filter state for hiding mastered cards
   const [hideMastered, setHideMastered] = useState(false);
-  
+
   // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
   const masteredWords = useMemo(() => {
     const mastered = new Set<string>();
@@ -73,11 +73,16 @@ const VocabCards = () => {
     });
     return mastered;
   }, [allTimeStats.characterMastery]);
-  
+
   // Check if a set contains only mastered vocab
   const isSetMastered = (setStart: number, setEnd: number) => {
-    const wordsInSet = selectedVocabCollection.data.slice(setStart * 10, setEnd * 10);
-    return wordsInSet.every((vocab: { word: string }) => masteredWords.has(vocab.word));
+    const wordsInSet = selectedVocabCollection.data.slice(
+      setStart * 10,
+      setEnd * 10
+    );
+    return wordsInSet.every((vocab: { word: string }) =>
+      masteredWords.has(vocab.word)
+    );
   };
 
   const vocabSetsTemp = new Array(
@@ -89,37 +94,38 @@ const VocabCards = () => {
       start: i,
       end: i + 1,
       id: `Set ${i + 1}`,
-      isMastered: isSetMastered(i, i + 1)
+      isMastered: isSetMastered(i, i + 1),
     }));
-  
+
   // Filter out mastered sets if hideMastered is true
-  const filteredVocabSets = hideMastered 
+  const filteredVocabSets = hideMastered
     ? vocabSetsTemp.filter(set => !set.isMastered)
     : vocabSetsTemp;
-  
+
   const masteredCount = vocabSetsTemp.filter(set => set.isMastered).length;
 
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
-  
+
   // Check if user has any progress data
   const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
 
   return (
-    <div className='flex flex-col w-full gap-4'>
+    <div className="flex flex-col w-full gap-4">
       {/* Info message when no progress data exists */}
       {!hasProgressData && (
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
-            💡 <strong>Tip:</strong> Complete some practice sessions to unlock the &apos;Hide Mastered Sets&apos; filter. 
-            Sets become mastered when you achieve 90%+ accuracy with 10+ attempts per word.
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
+            💡 <strong>Tip:</strong> Complete some practice sessions to unlock
+            the &apos;Hide Mastered Sets&apos; filter. Sets become mastered when
+            you achieve 90%+ accuracy with 10+ attempts per word.
           </p>
         </div>
       )}
-      
+
       {/* Filter Toggle Button - Only show if there are mastered sets */}
       {masteredCount > 0 && (
-        <div className='flex justify-end px-4'>
+        <div className="flex justify-end px-4">
           <button
             onClick={() => {
               playClick();
@@ -130,20 +136,27 @@ const VocabCards = () => {
               'duration-250 transition-all ease-in-out',
               'border-2 border-[var(--border-color)]',
               'hover:bg-[var(--card-color)]',
-              hideMastered && 'bg-[var(--card-color)] border-[var(--main-color)]'
+              hideMastered &&
+                'bg-[var(--card-color)] border-[var(--main-color)]'
             )}
           >
             {hideMastered ? (
               <>
-                <FilterX size={20} className='text-[var(--main-color)]' />
-                <span className='text-[var(--main-color)]'>
+                <FilterX
+                  size={20}
+                  className="text-[var(--main-color)]"
+                />
+                <span className="text-[var(--main-color)]">
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
             ) : (
               <>
-                <Filter size={20} className='text-[var(--secondary-color)]' />
-                <span className='text-[var(--secondary-color)]'>
+                <Filter
+                  size={20}
+                  className="text-[var(--secondary-color)]"
+                />
+                <span className="text-[var(--secondary-color)]">
                   Hide Mastered Sets ({masteredCount})
                 </span>
               </>
@@ -151,13 +164,15 @@ const VocabCards = () => {
           </button>
         </div>
       )}
-      
+
       {/* Show progress indicator if user has data but no mastered sets yet */}
       {hasProgressData && masteredCount === 0 && (
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
-            📊 You have progress data for {Object.keys(allTimeStats.characterMastery).length} words. 
-            Keep practicing to master complete sets! (90%+ accuracy, 10+ attempts per word)
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
+            You have progress data for{' '}
+            {Object.keys(allTimeStats.characterMastery).length} words. Keep
+            practicing to master complete sets! (90%+ accuracy, 10+ attempts per
+            word)
           </p>
         </div>
       )}
@@ -165,7 +180,8 @@ const VocabCards = () => {
       {chunkArray(filteredVocabSets, numColumns).map((rowSets, rowIndex) => {
         // Get the actual set numbers from the filtered sets
         const firstSetNumber = rowSets[0]?.name.match(/\d+/)?.[0] || '1';
-        const lastSetNumber = rowSets[rowSets.length - 1]?.name.match(/\d+/)?.[0] || firstSetNumber;
+        const lastSetNumber =
+          rowSets[rowSets.length - 1]?.name.match(/\d+/)?.[0] || firstSetNumber;
 
         return (
           <div
@@ -195,12 +211,11 @@ const VocabCards = () => {
                 )}
                 size={28}
               />
-              <span className='max-lg:hidden'>
-                Sets {firstSetNumber}{firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
+              <span className="max-lg:hidden">
+                Sets {firstSetNumber}
+                {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
-              <span className='lg:hidden'>
-                Set {firstSetNumber}
-              </span>
+              <span className="lg:hidden">Set {firstSetNumber}</span>
             </h3>
 
             {!collapsedRows.includes(rowIndex) && (
@@ -247,7 +262,7 @@ const VocabCards = () => {
                           setSelectedVocabSets([
                             ...new Set(
                               selectedVocabSets.concat(vocabSetTemp.name)
-                            )
+                            ),
                           ]);
                           addWordObjs(
                             selectedVocabCollection.data.slice(
@@ -259,9 +274,9 @@ const VocabCards = () => {
                       }}
                     >
                       {selectedVocabSets.includes(vocabSetTemp.name) ? (
-                        <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
+                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
                       ) : (
-                        <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
+                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
                       )}
                       {vocabSetTemp.name}
                     </button>
