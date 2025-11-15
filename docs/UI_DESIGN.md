@@ -437,16 +437,6 @@ The `Cosmic Dream` theme brings an aurora/nebula-inspired dark palette to KanaDo
   * Test buttons, dialogs, inputs, modals, and other interactive components across breakpoints and accessibility modes.
   * Consider providing a slightly lighter variant of `--main-color` or `--secondary-color` for disabled/low-emphasis states if needed to avoid blending with `--card-color`.
 
-**Accessibility / contrast notes:**
-- Verify `--main-color` and `--secondary-color` against `--background-color` and `--card-color` meet WCAG 2.1 AA for normal text (>= 4.5:1). Use WebAIM, axe, or Lighthouse to confirm.
-- If a contrast check fails, adjust the lightness (L) in the HSLA values and re-test, keeping the color values in HSLA format.
-
-**Developer checklist when adding `Cosmic Dream`:**
-1. Ensure the theme object is added in `static/themes.ts` under the `Dark` group (IDs must be kebab-case).
-2. Run `applyTheme('cosmic-dream')` locally and visually inspect key UI surfaces (page background, cards, borders, headings, icons).
-3. Run automated contrast checks and include contrast ratios in the PR description.
-4. Add at least one screenshot (card + page + controls) to the PR for visual review.
-
 
 
   ### Theme Color Guidelines
