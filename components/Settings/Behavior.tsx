@@ -71,7 +71,7 @@ const Behavior = () => {
   return (
     <div className="flex flex-col gap-4">
       <h4 className="text-lg">
-        In the character selection menu, by default, display:
+        In the character selection menu, for readings, display:
       </h4>
       <div className="flex flex-row gap-4">
         <button
