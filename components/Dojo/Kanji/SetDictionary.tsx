@@ -92,7 +92,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                     playClick();
                   }}
                 >
-                  On&apos;yomi
+                  On{/* &apos;yomi */}
                 </a>
                 <div
                   className={clsx(
@@ -131,7 +131,7 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                     playClick();
                   }}
                 >
-                  Kun&apos;yomi
+                  Kun{/* &apos;yomi */}
                 </a>
 
                 <div

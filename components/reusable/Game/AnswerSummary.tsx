@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { IKanjiObj } from '@/store/useKanjiStore';
-import { IWordObj } from '@/store/useVocabStore';
+import { IVocabObj } from '@/store/useVocabStore';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/hooks/useAudio';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
 // Type guard
-const isKanjiObj = (obj: IKanjiObj | IWordObj): obj is IKanjiObj => {
+const isKanjiObj = (obj: IKanjiObj | IVocabObj): obj is IKanjiObj => {
   return (obj as IKanjiObj).kanjiChar !== undefined;
 };
 
@@ -149,7 +149,7 @@ const WordSummary = ({
   onContinue,
   buttonRef,
 }: {
-  payload: IWordObj;
+  payload: IVocabObj;
   feedback: React.ReactElement;
   onContinue: () => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
@@ -193,7 +193,7 @@ const AnswerSummary = ({
   setDisplayAnswerSummary,
   feedback,
 }: {
-  payload: IKanjiObj | IWordObj;
+  payload: IKanjiObj | IVocabObj;
   setDisplayAnswerSummary: Dispatch<SetStateAction<boolean>>;
   feedback: React.ReactElement;
 }) => {

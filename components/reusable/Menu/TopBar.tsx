@@ -55,7 +55,7 @@ const TopBar: React.FC<ITopBarProps> = ({
       ? selectedGameModeVocab
       : '';
 
-  const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
+  const selectedWordObjs = useVocabStore(state => state.selectedVocabObjs);
 
   const isFilled =
     pathWithoutLocale === '/kana'

@@ -48,7 +48,7 @@ const VocabCards = () => {
   const setSelectedVocabSets = useVocabStore(
     state => state.setSelectedVocabSets
   );
-  const addWordObjs = useVocabStore(state => state.addWordObjs);
+  const addWordObjs = useVocabStore(state => state.addVocabObjs);
   const allTimeStats = useStatsStore(state => state.allTimeStats);
 
   const { playClick } = useClick();

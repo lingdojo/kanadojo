@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
-import { IWordObj } from '@/store/useVocabStore';
+import { IVocabObj } from '@/store/useVocabStore';
 import { useCorrect, useError } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import GameIntel from '@/components/reusable/Game/GameIntel';
@@ -19,7 +19,7 @@ import FuriganaText from '@/components/reusable/FuriganaText';
 const random = new Random();
 
 interface VocabPickGameProps {
-  selectedWordObjs: IWordObj[];
+  selectedWordObjs: IVocabObj[];
   isHidden: boolean;
   isReverse?: boolean;
 }
