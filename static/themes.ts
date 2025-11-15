@@ -68,14 +68,6 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsl(270, 100%, 65%)',
         secondaryColor: 'hsl(270, 100%, 70%)',
       },
-      {
-        id: 'pink paradise',
-        backgroundColor: '#FFF0F5',
-        cardColor: '#EEB6C8',
-        borderColor: '#9F7AE9',
-        mainColor: '#9F7AE9',
-        secondaryColor: '#8D659F6',
-      },
     ],
   },
 
@@ -106,14 +98,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(220, 45%, 22%, 1)',
         mainColor: 'hsla(350, 82%, 62%, 1)',
         secondaryColor: 'hsla(280, 65%, 68%, 1)',
-      },
-      {
-        id: 'momiji',
-        backgroundColor: 'hsla(15, 35%, 11%, 1)',
-        cardColor: 'hsla(15, 33%, 15%, 1)',
-        borderColor: 'hsla(15, 30%, 23%, 1)',
-        mainColor: 'hsla(5, 85%, 58%, 1)',
-        secondaryColor: 'hsla(45, 88%, 62%, 1)',
       },
       {
         id: 'aizome',
@@ -203,14 +187,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(166, 25%, 27%, 1)',
         mainColor: 'hsla(150, 66%, 54%, 1)',
         secondaryColor: 'hsla(170, 64%, 54%, 1)',
-      },
-      {
-        id: 'rosewood-nightfall',
-        backgroundColor: 'hsla(345, 31%, 13%, 1)',
-        cardColor: 'hsla(345, 38%, 18%, 1)',
-        borderColor: 'hsla(356, 30%, 27%, 1)',
-        mainColor: 'hsla(340, 78%, 60%, 1)',
-        secondaryColor: 'hsla(10, 60%, 60%, 1)',
       },
       {
         id: 'nebula-veil',
@@ -319,8 +295,8 @@ const themes: ThemeGroup[] = [
       {
         id: 'velvet-abyss',
         backgroundColor: 'hsla(258, 60%, 8%, 1)',
-        cardColor: 'hsla(305, 32%, 16%, 1)',
-        borderColor: 'hsla(305, 32%, 27%, 1)',
+        cardColor: 'hsla(258, 60%, 12%, 1)',
+        borderColor: 'hsla(258, 60%, 24%, 1)',
         mainColor: 'hsla(12, 83%, 55%, 1)',
         secondaryColor: 'hsla(172, 86%, 65%, 1)',
       },
@@ -355,14 +331,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(263, 57%, 29%, 1)',
         mainColor: 'hsla(41, 98%, 67%, 1)',
         secondaryColor: 'hsla(172, 78%, 65%, 1)',
-      },
-      {
-        id: 'halcyon-garden',
-        backgroundColor: 'hsla(151, 35%, 11%, 1)',
-        cardColor: 'hsla(151, 37%, 17%, 1)',
-        borderColor: 'hsla(151, 37%, 28%, 1)',
-        mainColor: 'hsla(109, 83%, 57%, 1)',
-        secondaryColor: 'hsla(219, 91%, 67%, 1)',
       },
       {
         id: 'hyperion-skies',
@@ -487,8 +455,8 @@ const themes: ThemeGroup[] = [
       {
         id: 'nautilus-star',
         backgroundColor: 'hsla(205, 47%, 8%, 1)',
-        cardColor: 'hsla(187, 83%, 19%, 1)',
-        borderColor: 'hsla(187, 83%, 30%, 1)',
+        cardColor: 'hsla(205, 47%, 16%, 1)',
+        borderColor: 'hsla(205, 47%, 29%, 1)',
         mainColor: 'hsla(207, 95%, 65%, 1)',
         secondaryColor: 'hsla(30, 92%, 72%, 1)',
       },
@@ -707,14 +675,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(240, 14%, 22%, 1)',
         mainColor: 'hsla(28, 82%, 47%, 1)',
         secondaryColor: 'hsla(272, 84%, 60%, 1)',
-      },
-      {
-        id: 'sakura-mist',
-        backgroundColor: 'hsla(340, 24%, 13%, 1)',
-        cardColor: 'hsla(340, 23%, 17%, 1)',
-        borderColor: 'hsla(340, 21%, 25%, 1)',
-        mainColor: 'hsla(225, 68%, 74%, 1)',
-        secondaryColor: 'hsla(105, 37%, 69%, 1)',
       },
 
       {
