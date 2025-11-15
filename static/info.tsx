@@ -1,7 +1,7 @@
 import DevNotice from '@/components/reusable/DevNotice';
 // import { Link } from '@/i18n/routing';
 
-testing vercel deployment watcher webhook furhter
+testing vercel deployment watcher webhook again
 
 // Updated to receive translations as a parameter instead of using hook
 export default function translationGen(t: (key: string) => string) {

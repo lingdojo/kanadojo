@@ -1,29 +1,36 @@
-name: Vercel Deployment with Logs
+name: Vercel Deployment Notifications
 
 on:
   deployment_status:
 
 jobs:
-  notify-with-logs:
+  notify-discord:
     runs-on: ubuntu-latest
     if: github.event.deployment_status.state == 'failure'
     
     steps:
-      - name: Get Vercel Deployment Logs
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Get Deployment Logs
         id: logs
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          # Extract deployment ID from URL
-          DEPLOYMENT_URL="${{ github.event.deployment_status.target_url }}"
-          # Get logs from Vercel API (requires VERCEL_TOKEN)
-          # This is optional and requires additional setup
-          echo "logs=Check Vercel dashboard for detailed logs" >> $GITHUB_OUTPUT
+          # Get the latest deployment logs
+          LOGS=$(vercel logs ${{ github.event.repository.name }} --token $VERCEL_TOKEN 2>&1 | tail -n 100)
+          
+          # Truncate and escape for JSON
+          LOGS=$(echo "$LOGS" | head -c 3900 | jq -Rs .)
+          echo "deployment_logs=$LOGS" >> $GITHUB_OUTPUT
 
-      - name: Send Notification
+      - name: Send to Discord
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          LOGS: ${{ steps.logs.outputs.deployment_logs }}
         run: |
+          LOGS_FORMATTED=$(echo "$LOGS" | sed 's/^"//;s/"$//' | sed 's/\\n/\n/g')
+          
           curl -H "Content-Type: application/json" \
           -X POST \
           -d "{
@@ -36,14 +43,15 @@ jobs:
                   \"value\": \"${{ github.repository }}\"
                 },
                 {
-                  \"name\": \"Logs\",
-                  \"value\": \"${{ steps.logs.outputs.logs }}\"
-                },
-                {
-                  \"name\": \"View Details\",
-                  \"value\": \"[Vercel Dashboard](${{ github.event.deployment_status.target_url }})\"
+                  \"name\": \"Branch\",
+                  \"value\": \"${{ github.ref_name }}\"
                 }
               ]
+            },
+            {
+              \"title\": \"📋 Build Logs\",
+              \"description\": \"\`\`\`\n${LOGS_FORMATTED}\n\`\`\`\",
+              \"color\": 15158332
             }]
           }" \
           $DISCORD_WEBHOOK
