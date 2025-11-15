@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import themeSets from '../../static/themes';
+import themeSets from '@/static/themes';
 import fonts from '@/static/fonts';
 import clsx from 'clsx';
 import N5Kanji from '@/static/kanji/N5';

@@ -1,0 +1,230 @@
+import {
+  Atom,
+  Sun,
+  Moon,
+  CloudLightning,
+  TreePine,
+} from 'lucide-react';
+import { ThemeDefinition, ThemeGroup, Theme } from './types';
+
+// Import all themes
+import * as base from './base';
+import * as light from './light';
+import * as dark from './dark';
+import * as seasonal from './seasonal';
+
+/**
+ * Organized theme groups for UI display
+ */
+export const themes: ThemeGroup[] = [
+  {
+    name: 'Base',
+    icon: Atom,
+    themes: [
+      base.lightTheme,
+      base.darkTheme,
+    ],
+  },
+  {
+    name: 'Light',
+    icon: Sun,
+    themes: [
+      light.longTheme,
+      light.amethystTheme,
+    ],
+  },
+  {
+    name: 'Dark',
+    icon: Moon,
+    themes: [
+      dark.absoluteDarknessTheme,
+      dark.aeroBlossomTheme,
+      dark.aizomeTheme,
+      dark.amethystNightfallTheme,
+      dark.andromedaDreamTheme,
+      dark.arcaneFathomsTheme,
+      dark.arcticInfernoTheme,
+      dark.astralMirageTheme,
+      dark.azureMirageTheme,
+      dark.azureTwilightTheme,
+      dark.blueEmberveilTheme,
+      dark.catppuccinTheme,
+      dark.celestialGroveTheme,
+      dark.celestiteFrostTheme,
+      dark.cobaltLumenTheme,
+      dark.cosmicCharcoalTheme,
+      dark.cosmicPrismTheme,
+      dark.cyanicWisdomTheme,
+      dark.cyberpunkTheme,
+      dark.digitalBloomTheme,
+      dark.etherealDawnTheme,
+      dark.fathomFrostTheme,
+      dark.fujiTheme,
+      dark.galaxyOracleTheme,
+      dark.gruvboxTheme,
+      dark.hauntedLagoonTheme,
+      dark.hyperionSkiesTheme,
+      dark.incognitoTheme,
+      dark.jadeMirageTheme,
+      dark.jungleTwilightTheme,
+      dark.lapisCascadeTheme,
+      dark.lapisSolaraTheme,
+      dark.liquidGraphiteTheme,
+      dark.londonFogTheme,
+      dark.lotusSpecterTheme,
+      dark.lucidDuskTheme,
+      dark.luminousNebulaTheme,
+      dark.luminousTideTheme,
+      dark.matrixTheme,
+      dark.melancholyHaloTheme,
+      dark.midnightBlossomTheme,
+      dark.midnightFjordTheme,
+      dark.monkeytypeTheme,
+      dark.mysticForestTheme,
+      dark.nautilusStarTheme,
+      dark.nebulaVeilTheme,
+      dark.nebulousMawTheme,
+      dark.neonDuskTheme,
+      dark.neonTokyoTheme,
+      dark.noirTheme,
+      dark.nordTheme,
+      dark.nycMidnightTheme,
+      dark.oceanicAuroraTheme,
+      dark.oldLibraryTheme,
+      dark.opalineZodiacTheme,
+      dark.orchidEclipseTheme,
+      dark.parisMetroTheme,
+      dark.polarisVeilTheme,
+      dark.prairieStarTheme,
+      dark.rainforestMistTheme,
+      dark.roseNebulaTheme,
+      dark.sapphireBloomTheme,
+      dark.sapphireFrostTheme,
+      dark.seraphicAuroraTheme,
+      dark.silicaDuskTheme,
+      dark.synthwaveNightTheme,
+      dark.topazDriftTheme,
+      dark.twilightOracleTheme,
+      dark.ultravioletOracleTheme,
+      dark.vaporpopTheme,
+      dark.velvetAbyssTheme,
+      dark.velvetCitrusDreamTheme,
+      dark.velvetNightTheme,
+      dark.velvetNightshadeTheme,
+      dark.velvetStarlightTheme,
+      dark.vortexRequiemTheme,
+      dark.yukataTheme,
+      dark.zephyriteDreamTheme,
+    ],
+  },
+  {
+    name: 'Halloween',
+    icon: CloudLightning,
+    themes: [
+      seasonal.pumpkinNightTheme,
+      seasonal.spookyGlowTheme,
+    ],
+  },
+  {
+    name: 'Christmas',
+    icon: TreePine,
+    themes: [
+      seasonal.santaNightTheme,
+      seasonal.winterWonderlandTheme,
+      seasonal.christmasEveTheme,
+      seasonal.northernLightsTheme,
+    ],
+  },
+];
+
+/**
+ * Flatten all themes into a map for easy lookup
+ */
+const themeMap = new Map<string, ThemeDefinition>();
+themes.forEach(group => {
+  group.themes.forEach(theme => {
+    themeMap.set(theme.id, theme);
+  });
+});
+
+/**
+ * Apply a theme to the document root
+ */
+export function applyTheme(themeId: string) {
+  const themeDefinition = themeMap.get(themeId);
+
+  if (!themeDefinition) {
+    console.error(`Theme "${themeId}" not found`);
+    return;
+  }
+
+  const root = document.documentElement;
+
+  root.style.setProperty('--background-color', themeDefinition.backgroundColor);
+  root.style.setProperty('--card-color', themeDefinition.cardColor);
+  root.style.setProperty('--border-color', themeDefinition.borderColor);
+  root.style.setProperty('--main-color', themeDefinition.mainColor);
+
+  if (themeDefinition.secondaryColor) {
+    root.style.setProperty('--secondary-color', themeDefinition.secondaryColor);
+  }
+
+  root.setAttribute('data-theme', themeDefinition.id);
+}
+
+/**
+ * Get a specific theme by ID
+ */
+export function getTheme(themeId: string): ThemeDefinition | undefined {
+  return themeMap.get(themeId);
+}
+
+/**
+ * Get all available theme IDs
+ */
+export function getAllThemeIds(): string[] {
+  return Array.from(themeMap.keys());
+}
+
+/**
+ * Get themes by tag
+ */
+export function getThemesByTag(tag: string): ThemeDefinition[] {
+  const allThemes: ThemeDefinition[] = [];
+  themes.forEach(group => {
+    group.themes.forEach(theme => {
+      if (theme.tags?.includes(tag)) {
+        allThemes.push(theme);
+      }
+    });
+  });
+  return allThemes;
+}
+
+/**
+ * Search themes by name or description
+ */
+export function searchThemes(query: string): ThemeDefinition[] {
+  const lowerQuery = query.toLowerCase();
+  const allThemes: ThemeDefinition[] = [];
+
+  themes.forEach(group => {
+    group.themes.forEach(theme => {
+      const matchesName = theme.name.toLowerCase().includes(lowerQuery);
+      const matchesDescription = theme.description?.toLowerCase().includes(lowerQuery);
+      const matchesTags = theme.tags?.some(tag => tag.toLowerCase().includes(lowerQuery));
+
+      if (matchesName || matchesDescription || matchesTags) {
+        allThemes.push(theme);
+      }
+    });
+  });
+
+  return allThemes;
+}
+
+// Export types
+export type { Theme, ThemeDefinition, ThemeGroup, ThemeCreator } from './types';
+
+// Export default for backward compatibility
+export default themes;
