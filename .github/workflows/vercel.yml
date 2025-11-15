@@ -1,0 +1,96 @@
+name: Vercel Deployment Notifications
+
+on:
+  deployment_status:
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'failure' || github.event.deployment_status.state == 'error'
+    
+    steps:
+      - name: Send Failure Notification to Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{
+            \"embeds\": [{
+              \"title\": \"🚨 Vercel Deployment Failed\",
+              \"description\": \"A deployment to Vercel has failed.\",
+              \"color\": 15158332,
+              \"fields\": [
+                {
+                  \"name\": \"Repository\",
+                  \"value\": \"${{ github.repository }}\",
+                  \"inline\": true
+                },
+                {
+                  \"name\": \"Branch\",
+                  \"value\": \"${{ github.ref_name }}\",
+                  \"inline\": true
+                },
+                {
+                  \"name\": \"Environment\",
+                  \"value\": \"${{ github.event.deployment.environment }}\",
+                  \"inline\": true
+                },
+                {
+                  \"name\": \"Commit\",
+                  \"value\": \"[\`${{ github.sha }}\`](${{ github.event.repository.html_url }}/commit/${{ github.sha }})\",
+                  \"inline\": false
+                },
+                {
+                  \"name\": \"Deployment URL\",
+                  \"value\": \"${{ github.event.deployment_status.target_url }}\",
+                  \"inline\": false
+                },
+                {
+                  \"name\": \"Triggered by\",
+                  \"value\": \"${{ github.actor }}\",
+                  \"inline\": true
+                }
+              ],
+              \"timestamp\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"
+            }]
+          }" \
+          $DISCORD_WEBHOOK
+
+  notify-success:
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'production'
+    
+    steps:
+      - name: Send Success Notification to Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{
+            \"embeds\": [{
+              \"title\": \"✅ Vercel Deployment Succeeded\",
+              \"description\": \"Production deployment completed successfully.\",
+              \"color\": 3066993,
+              \"fields\": [
+                {
+                  \"name\": \"Repository\",
+                  \"value\": \"${{ github.repository }}\",
+                  \"inline\": true
+                },
+                {
+                  \"name\": \"Branch\",
+                  \"value\": \"${{ github.ref_name }}\",
+                  \"inline\": true
+                },
+                {
+                  \"name\": \"Deployment URL\",
+                  \"value\": \"${{ github.event.deployment_status.target_url }}\",
+                  \"inline\": false
+                }
+              ],
+              \"timestamp\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"
+            }]
+          }" \
+          $DISCORD_WEBHOOK
