@@ -1,22 +1,36 @@
 'use client';
 
 import clsx from 'clsx';
-import { chunkArray } from '@/lib/helperFunctions';
 import { useState, useMemo } from 'react';
-import { cardBorderStyles } from '@/static/styles';
-import useGridColumns from '@/hooks/useGridColumns';
 import { useClick } from '@/hooks/useAudio';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowUpIcon, CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon } from '@hugeicons/core-free-icons';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon, PlayIcon, ArrowDown01Icon, ArrowRight01Icon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon } from '@hugeicons/core-free-icons';
 import useVocabStore from '@/store/useVocabStore';
 import useStatsStore from '@/store/useStatsStore';
-import VocabSetDictionary from '@/components/Dojo/Vocab/SetDictionary';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 import N5Nouns from '@/static/vocab/n5/nouns';
 import N4Nouns from '@/static/vocab/n4/nouns';
 import N3Nouns from '@/static/vocab/n3/nouns';
 import N2Nouns from '@/static/vocab/n2/nouns';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import usePreferencesStore from '@/store/usePreferencesStore';
 
-// Vocabulary collections setup
+// ✅ Setup Vocab collections
 const vocabCollections = {
   n5: { data: N5Nouns, name: 'N5', prevLength: 0 },
   n4: {
@@ -38,9 +52,8 @@ const vocabCollections = {
   },
 };
 
-// ✅ REMOVED: Intersection Observer animation variants to fix bug where users need to scroll to see first sets
-
 const VocabCards = () => {
+  const router = useRouter();
   const selectedVocabCollectionName = useVocabStore(
     state => state.selectedVocabCollection
   );
@@ -50,19 +63,18 @@ const VocabCards = () => {
     state => state.setSelectedVocabSets
   );
   const addWordObjs = useVocabStore(state => state.addWordObjs);
+  const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
+  const selectedGameModeVocab = useVocabStore(state => state.selectedGameModeVocab);
   const allTimeStats = useStatsStore(state => state.allTimeStats);
 
   const { playClick } = useClick();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const selectedVocabCollection = (vocabCollections as any)[
-    selectedVocabCollectionName
-  ];
+  const selectedVocabCollection = vocabCollections[selectedVocabCollectionName as keyof typeof vocabCollections];
 
   // Filter state for hiding mastered cards
   const [hideMastered, setHideMastered] = useState(false);
 
-  // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
+  // Calculate mastered words (accuracy >= 90%, attempts >= 10)
   const masteredWords = useMemo(() => {
     const mastered = new Set<string>();
     Object.entries(allTimeStats.characterMastery).forEach(([word, stats]) => {
@@ -72,6 +84,20 @@ const VocabCards = () => {
         mastered.add(word);
       }
     });
+
+    // Debug log to see mastery data
+    if (typeof window !== 'undefined') {
+      console.log(
+        '[Vocab Filter] Total words tracked:',
+        Object.keys(allTimeStats.characterMastery).length
+      );
+      console.log('[Vocab Filter] Mastered words:', mastered.size);
+      console.log(
+        '[Vocab Filter] Sample mastered:',
+        Array.from(mastered).slice(0, 5)
+      );
+    }
+
     return mastered;
   }, [allTimeStats.characterMastery]);
 
@@ -81,9 +107,7 @@ const VocabCards = () => {
       setStart * 10,
       setEnd * 10
     );
-    return wordsInSet.every((vocab: { word: string }) =>
-      masteredWords.has(vocab.word)
-    );
+    return wordsInSet.every(vocab => masteredWords.has(vocab.word));
   };
 
   const vocabSetsTemp = new Array(
@@ -105,24 +129,108 @@ const VocabCards = () => {
 
   const masteredCount = vocabSetsTemp.filter(set => set.isMastered).length;
 
-  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
-  const numColumns = useGridColumns();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [selectedSetForView, setSelectedSetForView] = useState<{ start: number; end: number; name: string } | null>(null);
 
-  // Check if user has any progress data
-  const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
+  const setSelectedVocabCollection = useVocabStore(
+    state => state.setSelectedVocabCollection
+  );
+  const setSelectedGameModeVocab = useVocabStore(
+    state => state.setSelectedGameModeVocab
+  );
+  const clearVocabSets = useVocabStore(state => state.clearVocabSets);
+  const clearWordObjs = useVocabStore(state => state.clearWordObjs);
+  const showKana = usePreferencesStore(state => state.displayKana);
+
+  const allUnits = [
+    { id: 'n5', name: 'N5', description: 'Beginner', count: N5Nouns.length },
+    { id: 'n4', name: 'N4', description: 'Elementary', count: N4Nouns.length },
+    { id: 'n3', name: 'N3', description: 'Intermediate', count: N3Nouns.length },
+    { id: 'n2', name: 'N2', description: 'Advanced', count: N2Nouns.length },
+  ];
+
+  const handleUnitChange = (unitId: string) => {
+    playClick();
+    setSelectedVocabCollection(unitId);
+    clearVocabSets();
+    clearWordObjs();
+    setDrawerOpen(false);
+  };
 
   return (
     <div className="flex flex-col w-full gap-4">
-      {/* Info message when no progress data exists */}
-      {!hasProgressData && (
-        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card)] border-2 border-[var(--border)]">
-          <p className="text-sm text-[var(--muted-foreground)]">
-            💡 <strong>Tip:</strong> Complete some practice sessions to unlock
-            the &apos;Hide Mastered Sets&apos; filter. Sets become mastered when
-            you achieve 90%+ accuracy with 10+ attempts per word.
-          </p>
-        </div>
-      )}
+      {/* Unit Selector Card */}
+      <div className="flex justify-center px-4 pt-4">
+        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+          <DrawerTrigger asChild>
+            <button
+              onClick={() => playClick()}
+              className={clsx(
+                'flex items-center justify-between gap-4 px-6 py-4 rounded-2xl',
+                'w-full max-w-2xl',
+                'border-2 border-[var(--border)]',
+                'bg-[var(--card)]',
+                'hover:bg-[var(--muted)]',
+                'transition-all duration-250 ease-in-out'
+              )}
+            >
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-sm font-light text-[var(--muted-foreground)]">
+                  Current Unit
+                </span>
+                <span className="text-2xl font-light text-[var(--foreground)]">
+                  JLPT {selectedVocabCollection.name}
+                </span>
+              </div>
+              <HugeiconsIcon
+                icon={ArrowDown01Icon}
+                size={24}
+                className="text-[var(--muted-foreground)]"
+              />
+            </button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Select JLPT Level</DrawerTitle>
+              <DrawerDescription>
+                Choose a level to practice vocabulary
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="flex flex-col gap-2 p-4 pb-8">
+              {allUnits.map((unit) => (
+                <button
+                  key={unit.id}
+                  onClick={() => handleUnitChange(unit.id)}
+                  className={clsx(
+                    'flex items-center justify-between p-4 rounded-xl',
+                    'border-2 transition-all duration-250',
+                    selectedVocabCollectionName === unit.id
+                      ? 'border-[var(--foreground)] bg-[var(--card)]'
+                      : 'border-[var(--border)] bg-[var(--background)] hover:bg-[var(--muted)]'
+                  )}
+                >
+                  <div className="flex flex-col items-start gap-1">
+                    <span className="text-xl font-light text-[var(--foreground)]">
+                      JLPT {unit.name}
+                    </span>
+                    <span className="text-sm text-[var(--muted-foreground)]">
+                      {unit.description} • {unit.count} words
+                    </span>
+                  </div>
+                  {selectedVocabCollectionName === unit.id && (
+                    <HugeiconsIcon
+                      icon={CircleCheckIcon}
+                      size={24}
+                      className="text-[var(--foreground)]"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
 
       {/* Filter Toggle Button - Only show if there are mastered sets */}
       {masteredCount > 0 && (
@@ -160,126 +268,248 @@ const VocabCards = () => {
         </div>
       )}
 
-      {/* Show progress indicator if user has data but no mastered sets yet */}
-      {hasProgressData && masteredCount === 0 && (
-        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card)] border-2 border-[var(--border)]">
-          <p className="text-sm text-[var(--muted-foreground)]">
-            You have progress data for{' '}
-            {Object.keys(allTimeStats.characterMastery).length} words. Keep
-            practicing to master complete sets! (90%+ accuracy, 10+ attempts per
-            word)
-          </p>
+      {/* Straight column layout */}
+      <div className="flex flex-col items-center w-full gap-4 px-4">
+        {filteredVocabSets.map((vocabSetTemp, i) => {
+            const wordsInSet = selectedVocabCollection.data.slice(
+              vocabSetTemp.start * 10,
+              vocabSetTemp.end * 10
+            );
+            const isSelected = selectedVocabSets.includes(vocabSetTemp.name);
+
+            return (
+              <div
+                key={vocabSetTemp.id + vocabSetTemp.name}
+                className={clsx(
+                  'relative w-full max-w-2xl flex flex-col items-start gap-4',
+                  'p-6 rounded-2xl border',
+                  'transition-all duration-250 ease-in-out',
+                  isSelected
+                    ? 'bg-[var(--card)] border-[var(--foreground)]'
+                    : 'bg-[var(--background)] border-[var(--border)]'
+                )}
+              >
+                {/* Set title and status */}
+                <div className="flex items-center justify-between gap-3 w-full">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl font-light">
+                      {vocabSetTemp.name}
+                    </span>
+                    {vocabSetTemp.isMastered && (
+                      <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                        Mastered
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Expand button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      playClick();
+                      setSelectedSetForView({
+                        start: vocabSetTemp.start,
+                        end: vocabSetTemp.end,
+                        name: vocabSetTemp.name
+                      });
+                      setSheetOpen(true);
+                    }}
+                    className={clsx(
+                      'flex items-center justify-center',
+                      'p-2 rounded-lg',
+                      'hover:bg-[var(--muted)]',
+                      'transition-colors duration-150'
+                    )}
+                  >
+                    <HugeiconsIcon
+                      icon={ArrowRight01Icon}
+                      size={20}
+                      className="text-[var(--muted-foreground)]"
+                    />
+                  </button>
+                </div>
+
+                {/* Vocab list - clickable */}
+                <button
+                  onClick={e => {
+                    e.currentTarget.blur();
+                    playClick();
+                    if (selectedVocabSets.includes(vocabSetTemp.name)) {
+                      setSelectedVocabSets(
+                        selectedVocabSets.filter(
+                          set => set !== vocabSetTemp.name
+                        )
+                      );
+                      addWordObjs(
+                        selectedVocabCollection.data.slice(
+                          vocabSetTemp.start * 10,
+                          vocabSetTemp.end * 10
+                        )
+                      );
+                    } else {
+                      setSelectedVocabSets([
+                        ...new Set(
+                          selectedVocabSets.concat(vocabSetTemp.name)
+                        ),
+                      ]);
+                      addWordObjs(
+                        selectedVocabCollection.data.slice(
+                          vocabSetTemp.start * 10,
+                          vocabSetTemp.end * 10
+                        )
+                      );
+                    }
+                  }}
+                  className="flex flex-wrap gap-2 text-2xl text-[var(--muted-foreground)] hover:bg-[var(--muted)] rounded-lg p-2 -m-2 w-full transition-colors"
+                >
+                  {wordsInSet.map((wordObj, idx) => (
+                    <span
+                      key={wordObj.word + idx}
+                      className="hover:text-[var(--foreground)] transition-colors"
+                    >
+                      {wordObj.word}
+                    </span>
+                  ))}
+                </button>
+              </div>
+            );
+          })}
+      </div>
+
+      {/* Footer - Game Mode Picker & Practice Button */}
+      {selectedWordObjs.length > 0 && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+          <div className="flex flex-col gap-4 bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4">
+            {/* Game Mode Picker */}
+            <div className="flex flex-col gap-2">
+              <p className="text-xs font-light text-[var(--muted-foreground)] opacity-60">
+                Select Mode
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {['Pick', 'Reverse-Pick', 'Input', 'Reverse-Input'].map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() => {
+                      playClick();
+                      setSelectedGameModeVocab(mode);
+                    }}
+                    className={clsx(
+                      'flex items-center justify-center gap-2 px-4 py-3 rounded-lg',
+                      'border transition-all duration-150',
+                      'text-sm font-light',
+                      selectedGameModeVocab === mode
+                        ? 'border-[var(--foreground)] bg-[var(--muted)] text-[var(--foreground)]'
+                        : 'border-[var(--border)] hover:bg-[var(--muted)] text-[var(--muted-foreground)]'
+                    )}
+                  >
+                    {selectedGameModeVocab === mode ? (
+                      <HugeiconsIcon icon={CircleCheckIcon} size={16} className="text-[var(--foreground)]" />
+                    ) : (
+                      <HugeiconsIcon icon={CircleIcon} size={16} className="text-[var(--border)]" />
+                    )}
+                    <span>{mode.split('-').join(' ')}</span>
+                    {mode.toLowerCase() === 'pick' && (
+                      <HugeiconsIcon icon={MousePointerClickIcon} size={18} className="text-[var(--foreground)]" />
+                    )}
+                    {mode.toLowerCase() === 'reverse-pick' && (
+                      <HugeiconsIcon icon={MousePointerClickIcon} size={18} className="scale-x-[-1] text-[var(--foreground)]" />
+                    )}
+                    {mode.toLowerCase() === 'input' && (
+                      <HugeiconsIcon icon={KeyboardIcon} size={18} className="text-[var(--foreground)]" />
+                    )}
+                    {mode.toLowerCase() === 'reverse-input' && (
+                      <HugeiconsIcon icon={KeyboardIcon} size={18} className="scale-y-[-1] text-[var(--foreground)]" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Practice Button */}
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-light text-[var(--foreground)]">
+                  {selectedWordObjs.length} words selected
+                </p>
+                <p className="text-xs font-light text-[var(--muted-foreground)] opacity-60">
+                  Ready to practice
+                </p>
+              </div>
+              {selectedGameModeVocab && (
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    playClick();
+                    router.push(`/vocabulary/train/${selectedGameModeVocab}`);
+                  }}
+                >
+                  <HugeiconsIcon icon={PlayIcon} size={20} />
+                  Start Practice
+                </Button>
+              )}
+            </div>
+          </div>
         </div>
       )}
 
-      {chunkArray(filteredVocabSets, numColumns).map((rowSets, rowIndex) => {
-        // Get the actual set numbers from the filtered sets
-        const firstSetNumber = rowSets[0]?.name.match(/\d+/)?.[0] || '1';
-        const lastSetNumber =
-          rowSets[rowSets.length - 1]?.name.match(/\d+/)?.[0] || firstSetNumber;
+      {/* Right Sheet - Vocab Details */}
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>{selectedSetForView?.name}</SheetTitle>
+            <SheetDescription>
+              Vocabulary details from this set
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6">
+            {selectedSetForView && (
+              <div className="flex flex-col divide-y divide-[var(--border)]">
+                {selectedVocabCollection.data
+                  .slice(selectedSetForView.start * 10, selectedSetForView.end * 10)
+                  .map((wordObj, index) => {
+                    return (
+                      <div
+                        key={wordObj.word + index}
+                        className={clsx(
+                          'flex items-start gap-4 py-4',
+                          'text-left'
+                        )}
+                      >
+                        {/* Word */}
+                        <span className="text-5xl font-light text-[var(--foreground)] min-w-[60px] flex items-center justify-center">
+                          {wordObj.word}
+                        </span>
 
-        return (
-          <div
-            key={`row-${rowIndex}`}
-            className={clsx('flex flex-col py-4 gap-4', cardBorderStyles)}
-          >
-            <h3
-              onClick={() => {
-                playClick();
-                setCollapsedRows(prev =>
-                  prev.includes(rowIndex)
-                    ? prev.filter(i => i !== rowIndex)
-                    : [...prev, rowIndex]
-                );
-              }}
-              className={clsx(
-                'group text-3xl ml-4 flex flex-row items-center gap-2 rounded-xl hover:cursor-pointer',
-                collapsedRows.includes(rowIndex) && 'mb-1.5'
-              )}
-            >
-              <HugeiconsIcon icon={ArrowUpIcon} size={28} color="currentColor" className={clsx(
-                  'duration-250 text-[var(--border)]',
-                  'max-md:group-active:text-[var(--muted-foreground)]',
-                  'md:group-hover:text-[var(--muted-foreground)]',
-                  collapsedRows.includes(rowIndex) && 'rotate-180'
-                )} />
-              <span className="max-lg:hidden">
-                Sets {firstSetNumber}
-                {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
-              </span>
-              <span className="lg:hidden">Set {firstSetNumber}</span>
-            </h3>
+                        {/* Details */}
+                        <div className="flex flex-col gap-2 flex-1">
+                          {/* Reading */}
+                          <div className="flex flex-col gap-1">
+                            <span className="text-xs font-light text-[var(--muted-foreground)] opacity-60">
+                              Reading
+                            </span>
+                            <span className="text-sm font-light text-[var(--foreground)]">
+                              {wordObj.reading}
+                            </span>
+                          </div>
 
-            {!collapsedRows.includes(rowIndex) && (
-              <div
-                className={clsx(
-                  'flex flex-col w-full',
-                  'md:items-start md:grid lg:grid-cols-2 2xl:grid-cols-3'
-                )}
-              >
-                {rowSets.map((vocabSetTemp, i) => (
-                  <div
-                    key={vocabSetTemp.id + vocabSetTemp.name}
-                    className={clsx(
-                      'flex flex-col md:px-4 h-full',
-                      'border-[var(--border)]',
-                      i < rowSets.length - 1 && 'md:border-r-1'
-                    )}
-                  >
-                    <button
-                      className={clsx(
-                        'text-2xl flex justify-center items-center gap-2 group',
-                        'rounded-xl bg-[var(--background)] hover:cursor-pointer',
-                        'duration-250 transition-all ease-in-out',
-                        'px-2 py-3 max-md:mx-4',
-                        selectedVocabSets.includes(vocabSetTemp.name) &&
-                          'bg-[var(--border)]'
-                      )}
-                      onClick={e => {
-                        e.currentTarget.blur();
-                        playClick();
-                        if (selectedVocabSets.includes(vocabSetTemp.name)) {
-                          setSelectedVocabSets(
-                            selectedVocabSets.filter(
-                              set => set !== vocabSetTemp.name
-                            )
-                          );
-                          addWordObjs(
-                            selectedVocabCollection.data.slice(
-                              vocabSetTemp.start * 10,
-                              vocabSetTemp.end * 10
-                            )
-                          );
-                        } else {
-                          setSelectedVocabSets([
-                            ...new Set(
-                              selectedVocabSets.concat(vocabSetTemp.name)
-                            ),
-                          ]);
-                          addWordObjs(
-                            selectedVocabCollection.data.slice(
-                              vocabSetTemp.start * 10,
-                              vocabSetTemp.end * 10
-                            )
-                          );
-                        }
-                      }}
-                    >
-                      {selectedVocabSets.includes(vocabSetTemp.name) ? (
-                        <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="mt-0.5 text-[var(--muted-foreground)] duration-250" />
-                      ) : (
-                        <HugeiconsIcon icon={CircleIcon} color="currentColor" className="mt-0.5 text-[var(--border)] duration-250" />
-                      )}
-                      {vocabSetTemp.name}
-                    </button>
-                    <VocabSetDictionary set={vocabSetTemp.id} />
-                  </div>
-                ))}
+                          {/* Meanings */}
+                          <div className="flex flex-col gap-1">
+                            <span className="text-xs font-light text-[var(--muted-foreground)] opacity-60">
+                              Meaning
+                            </span>
+                            <span className="text-sm font-light text-[var(--foreground)]">
+                              {wordObj.displayMeanings.join(', ')}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             )}
           </div>
-        );
-      })}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };

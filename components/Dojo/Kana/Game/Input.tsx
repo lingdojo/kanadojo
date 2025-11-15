@@ -1,21 +1,9 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useMemo } from 'react';
 import { kana } from '@/static/kana';
 import useKanaStore from '@/store/useKanaStore';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { CheckmarkCircle02Icon as CircleCheckIcon, CancelCircleIcon as CircleXIcon, ArrowRight01Icon as CircleArrowRightIcon } from '@hugeicons/core-free-icons';;
-import { Random } from 'random-js';
-import clsx from 'clsx';
-import { useClick, useCorrect, useError } from '@/hooks/useAudio';
-import GameIntel from '@/components/reusable/Game/GameIntel';
-import { buttonBorderStyles } from '@/static/styles';
-import { useStopwatch } from 'react-timer-hook';
-import useStats from '@/hooks/useStats';
-import useStatsStore from '@/store/useStatsStore';
-import Stars from '@/components/reusable/Game/Stars';
-import SSRAudioButton from '@/components/reusable/SSRAudioButton';
-
-const random = new Random();
+import BaseInputGame from '@/components/Dojo/Base/BaseInputGame';
+import { kanaGameConfig, KanaPair } from '@/components/Dojo/Base/kanaConfig';
 
 interface InputGameProps {
   isHidden: boolean;
@@ -23,191 +11,27 @@ interface InputGameProps {
 }
 
 const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
-  const score = useStatsStore(state => state.score);
-  const setScore = useStatsStore(state => state.setScore);
-
-  const speedStopwatch = useStopwatch({ autoStart: false });
-
-  const {
-    incrementCorrectAnswers,
-    incrementWrongAnswers,
-    addCharacterToHistory,
-    addCorrectAnswerTime,
-    incrementCharacterScore
-  } = useStats();
-
-  const { playClick } = useClick();
-  const { playCorrect } = useCorrect();
-  const { playErrorTwice } = useError();
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-
-  const [inputValue, setInputValue] = useState('');
-
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
 
-  const selectedKana = kanaGroupIndices.map(i => kana[i].kana).flat();
-  const selectedRomaji = kanaGroupIndices.map(i => kana[i].romanji).flat();
+  const kanaPairs = useMemo(() => {
+    const selectedKana = kanaGroupIndices.map(i => kana[i].kana).flat();
+    const selectedRomaji = kanaGroupIndices.map(i => kana[i].romanji).flat();
 
-  // Create mapping pairs based on mode
-  const selectedPairs = Object.fromEntries(
-    isReverse
-      ? selectedRomaji.map((key, i) => [key, selectedKana[i]])
-      : selectedKana.map((key, i) => [key, selectedRomaji[i]])
-  );
+    const pairs: KanaPair[] = selectedKana.map((kanaChar, i) => ({
+      kana: kanaChar,
+      romaji: selectedRomaji[i],
+    }));
 
-  // State for characters
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedRomaji[random.integer(0, selectedRomaji.length - 1)]
-      : selectedKana[random.integer(0, selectedKana.length - 1)]
-  );
-
-  const targetChar = selectedPairs[correctChar];
-
-  const [feedback, setFeedback] = useState(<>{'feeback ~'}</>);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const skipKey = isReverse ? ' ' : '/';
-      if (event.key === skipKey) {
-        buttonRef.current?.click();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isReverse]);
-
-  useEffect(() => {
-    if (isHidden) speedStopwatch.pause();
-  }, [isHidden]);
-
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && inputValue.trim().length) {
-      if (
-        (isReverse && inputValue.trim() === targetChar) ||
-        (!isReverse && inputValue.trim().toLowerCase() === targetChar)
-      ) {
-        handleCorrectAnswer();
-      } else {
-        handleWrongAnswer();
-      }
-    }
-  };
-
-  const handleCorrectAnswer = () => {
-    speedStopwatch.pause();
-    addCorrectAnswerTime(speedStopwatch.totalMilliseconds / 1000);
-    speedStopwatch.reset();
-    playCorrect();
-    addCharacterToHistory(correctChar);
-    incrementCharacterScore(correctChar, 'correct');
-    incrementCorrectAnswers();
-    setScore(score + 1);
-
-    setInputValue('');
-    generateNewCharacter();
-    setFeedback(
-      <>
-        <span>{`${correctChar} = ${targetChar} `}</span>
-        <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="inline text-[var(--foreground)]" />
-      </>
-    );
-  };
-
-  const handleWrongAnswer = () => {
-    setInputValue('');
-    setFeedback(
-      <>
-        <span>{`${correctChar} ≠ ${inputValue} `}</span>
-        <HugeiconsIcon icon={CircleXIcon} color="currentColor" className="inline text-[var(--foreground)]" />
-      </>
-    );
-    playErrorTwice();
-
-    incrementCharacterScore(correctChar, 'wrong');
-    incrementWrongAnswers();
-    if (score - 1 < 0) {
-      setScore(0);
-    } else {
-      setScore(score - 1);
-    }
-  };
-
-  const generateNewCharacter = () => {
-    const sourceArray = isReverse ? selectedRomaji : selectedKana;
-    let newChar = sourceArray[random.integer(0, sourceArray.length - 1)];
-    while (newChar === correctChar) {
-      newChar = sourceArray[random.integer(0, sourceArray.length - 1)];
-    }
-    setCorrectChar(newChar);
-  };
-
-  const handleSkip = (e: React.MouseEvent<HTMLButtonElement>) => {
-    playClick();
-    e.currentTarget.blur();
-    setInputValue('');
-    generateNewCharacter();
-    setFeedback(<>{`skipped ~ ${correctChar} = ${targetChar}`}</>);
-  };
-
-  const gameMode = isReverse ? 'reverse input' : 'input';
+    return pairs;
+  }, [kanaGroupIndices]);
 
   return (
-    <div
-      className={clsx(
-        'flex flex-col gap-4 sm:gap-10 items-center w-full sm:w-4/5',
-        isHidden ? 'hidden' : ''
-      )}
-    >
-      <GameIntel gameMode={gameMode} feedback={feedback} />
-      <div className='flex flex-col items-center gap-4'>
-        <p className='text-8xl sm:text-9xl font-medium'>{correctChar}</p>
-        <SSRAudioButton
-          text={correctChar}
-          variant='icon-only'
-          size='lg'
-          className='bg-[var(--card)] border-[var(--border)]'
-        />
-      </div>
-      <input
-        ref={inputRef}
-        type='text'
-        value={inputValue}
-        className={clsx(
-          'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',
-          'border-[var(--card)] focus:border-[var(--border)]'
-        )}
-        onChange={e => setInputValue(e.target.value)}
-        onKeyDown={handleEnter}
-      />
-      <button
-        ref={buttonRef}
-        className={clsx(
-          'text-xl font-medium py-4 px-16 rounded-3xl',
-          'flex flex-row items-end gap-2',
-          buttonBorderStyles,
-          'active:scale-95 md:active:scale-98 active:duration-200',
-          'text-[var(--muted-foreground)]'
-        )}
-        onClick={handleSkip}
-      >
-        <span>skip</span>
-        <HugeiconsIcon icon={CircleArrowRightIcon} color="currentColor" />
-      </button>
-      <Stars />
-    </div>
+    <BaseInputGame
+      items={kanaPairs}
+      config={kanaGameConfig}
+      isHidden={isHidden}
+      isReverse={isReverse}
+    />
   );
 };
 
