@@ -1,80 +1,30 @@
-name: Vercel Deployment Notifications
+name: Vercel Deployment with Logs
 
 on:
   deployment_status:
-  push:
-    branches:
-      - main
-      - master
-  workflow_dispatch:  # Allows manual triggering for testing
 
 jobs:
-  notify-discord:
+  notify-with-logs:
     runs-on: ubuntu-latest
-    # Remove the if condition temporarily for testing
-    # if: github.event.deployment_status.state == 'failure'
+    if: github.event.deployment_status.state == 'failure'
     
     steps:
-      - name: Debug - Print Event Info
-        run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Deployment status: ${{ github.event.deployment_status.state }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref_name }}"
-
-      - name: Check if this is a failed deployment
-        id: check
-        run: |
-          if [ "${{ github.event_name }}" = "deployment_status" ]; then
-            if [ "${{ github.event.deployment_status.state }}" = "failure" ] || [ "${{ github.event.deployment_status.state }}" = "error" ]; then
-              echo "should_notify=true" >> $GITHUB_OUTPUT
-            else
-              echo "should_notify=false" >> $GITHUB_OUTPUT
-            fi
-          else
-            # For testing with push events
-            echo "should_notify=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Install Vercel CLI
-        if: steps.check.outputs.should_notify == 'true'
-        run: npm install -g vercel
-
-      - name: Get Deployment Logs
-        if: steps.check.outputs.should_notify == 'true'
+      - name: Get Vercel Deployment Logs
         id: logs
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        continue-on-error: true
         run: |
-          # Try to get logs
-          LOGS=$(vercel logs ${{ github.event.repository.name }} --token $VERCEL_TOKEN 2>&1 | tail -n 100 || echo "Could not fetch logs from Vercel CLI")
-          
-          # If logs are empty or error, use a placeholder
-          if [ -z "$LOGS" ]; then
-            LOGS="No logs available. Check Vercel dashboard for details."
-          fi
-          
-          # Escape and truncate for JSON
-          LOGS=$(echo "$LOGS" | head -c 3900 | jq -Rs . || echo "\"Log parsing error\"")
-          echo "deployment_logs=$LOGS" >> $GITHUB_OUTPUT
+          # Extract deployment ID from URL
+          DEPLOYMENT_URL="${{ github.event.deployment_status.target_url }}"
+          # Get logs from Vercel API (requires VERCEL_TOKEN)
+          # This is optional and requires additional setup
+          echo "logs=Check Vercel dashboard for detailed logs" >> $GITHUB_OUTPUT
 
-      - name: Send to Discord
-        if: steps.check.outputs.should_notify == 'true'
+      - name: Send Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          LOGS: ${{ steps.logs.outputs.deployment_logs }}
         run: |
-          # Format logs
-          LOGS_FORMATTED=$(echo "$LOGS" | sed 's/^"//;s/"$//' | sed 's/\\n/\n/g')
-          
-          # If logs are too long, truncate
-          if [ ${#LOGS_FORMATTED} -gt 3900 ]; then
-            LOGS_FORMATTED="${LOGS_FORMATTED:0:3900}...\n[Logs truncated]"
-          fi
-          
-          # Send notification
-          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Content-Type: application/json" \
+          curl -H "Content-Type: application/json" \
           -X POST \
           -d "{
             \"embeds\": [{
@@ -82,36 +32,18 @@ jobs:
               \"color\": 15158332,
               \"fields\": [
                 {
-                  \"name\": \"📦 Repository\",
-                  \"value\": \"${{ github.repository }}\",
-                  \"inline\": true
+                  \"name\": \"Repository\",
+                  \"value\": \"${{ github.repository }}\"
                 },
                 {
-                  \"name\": \"🌿 Branch\",
-                  \"value\": \"${{ github.ref_name }}\",
-                  \"inline\": true
+                  \"name\": \"Logs\",
+                  \"value\": \"${{ steps.logs.outputs.logs }}\"
                 },
                 {
-                  \"name\": \"🔗 View Details\",
-                  \"value\": \"[Vercel Dashboard](https://vercel.com/${{ github.repository }})\",
-                  \"inline\": false
+                  \"name\": \"View Details\",
+                  \"value\": \"[Vercel Dashboard](${{ github.event.deployment_status.target_url }})\"
                 }
-              ],
-              \"timestamp\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"
-            },
-            {
-              \"title\": \"📋 Build Logs\",
-              \"description\": \"\`\`\`\n${LOGS_FORMATTED}\n\`\`\`\",
-              \"color\": 15158332
+              ]
             }]
           }" \
-          $DISCORD_WEBHOOK)
-          
-          HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n 1)
-          echo "Discord webhook response code: $HTTP_CODE"
-          
-          if [ "$HTTP_CODE" -ne 204 ] && [ "$HTTP_CODE" -ne 200 ]; then
-            echo "Failed to send Discord notification"
-            echo "$HTTP_RESPONSE"
-            exit 1
-          fi
+          $DISCORD_WEBHOOK
