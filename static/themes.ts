@@ -108,6 +108,14 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(280, 65%, 68%, 1)',
       },
       {
+        id: "dusk-voyager",
+        backgroundColor: "hsla(216, 32%, 11%, 1)",
+        cardColor: "hsla(216, 29%, 16%, 1)",
+        borderColor: "hsla(216, 26%, 24%, 1)",
+        mainColor: "hsla(198, 78%, 71%, 1)",
+        secondaryColor: "hsla(49, 94%, 57%, 1)",
+      },
+      {
         id: 'aizome',
         backgroundColor: 'hsla(215, 48%, 11%, 1)',
         cardColor: 'hsla(215, 46%, 15%, 1)',
