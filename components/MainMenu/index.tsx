@@ -110,6 +110,7 @@ const MainMenu = () => {
           >
             <a
               href="https://monkeytype.com/"
+              rel='noopener'
               target="_blank"
             >
               <Keyboard />
