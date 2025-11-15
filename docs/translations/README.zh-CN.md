@@ -1,5 +1,9 @@
 <div id="top"></div>
 
+**KanaDojo 支持多语言，感谢社区贡献：**
+
+[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/**  中文（简体）**/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -454,21 +458,6 @@ kanadojo/
 - 日语语言数据与字符信息
 - 开源社区提供的优秀工具与库
 - 所有为 KanaDojo 贡献的伙伴
-
----
-
-## 翻译
-
-KanaDojo 因社区贡献而支持多语言：
-
-- [English（默认）](../../README.md)
-- [Español](README.es.md)
-- [Français](README.fr.md)（进行中）
-- [Deutsch](README.de.md)
-- [Português](README.pt-br.md)
-- 中文（简体，当前文档）
-- [中文（繁體）](README.zh-tw.md)
-- [हिन्दी](README.hin.md)
 
 ---
 

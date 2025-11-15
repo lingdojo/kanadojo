@@ -1,5 +1,9 @@
 <div id="top"></div>
 
+**KanaDojo متاح بعدة لغات بفضل مساهمات المجتمع:**
+
+[English](../../README.md) **/** [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md) **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/** [हिन्दी](docs/translations/README.hin.md) **/** العربية  **/** [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -205,7 +209,7 @@ npm run lint
 # توليد خريطة الموقع (يتم تلقائيًا بعد البناء)
 npm run postbuild
 ```
- 
+
 ###استكشاف الأخطاء
 وإصلاحهاإذا واجهت مشكلات أثناء التطوير، جرب هذه الحلول:
 
@@ -304,7 +308,7 @@ taskkill /PID PID /F
 PORT=3001 npm run dev
 ```
  ## 📁 هيكل المشروع
- 
+
 ```
 kanadojo/
 ├── app/                          # صفحات Next.js App Router
@@ -402,7 +406,7 @@ ___
 4. يتتبع الإحصائيات (صحيح، خاطئ، سلسلة)
 
  ## 🤝 المساهمة
- 
+
  لمساهمات مرحب بها! KanaDojo هو مشروع مفتوح المصدر يبنيه المجتمع، من أجل المجتمع. اطلع على [CONTRIBUTING.md](CONTRIBUTING.md) للحصول على معلومات مفصلة 
  حول كيفية المساهمة.كيفية المساهمةفرّع المستودع
 
@@ -421,29 +425,15 @@ ___
 - حافظ على تركيز المكونات وقابليتها لإعادة الاستخدام
 
  ## 📄 رخصة 
- 
+
  المشروع مرخص بموجب ترخيص AGPL 3.0 - اطلع على ملف LICENSE.md للتفاصيل.
- 
+
  ## 🙏 الشكر
- 
+
  - بيانات اللغة اليابانية ومعلومات الأحرف
  - مجتمع المصادر المفتوحة على الأدوات والمكتبات الرائعة
  - جميع المساهمين الذين ساعدوا في تحسين KanaDojo
    
-## الترجمات
-
-KanaDojo متاح بعدة لغات بفضل مساهمات المجتمع:
-
-- English (default)
-- Español (docs/translations/README.es.md)
-- Français (docs/translations/README.fr.md) قيد التقدم
-- Deutsch (docs/translations/README.de.md)
-- Português (docs/translations/README.pt-br.md)
-- 中文（简体） (docs/translations/README.zh-CN.md)
-- 中文（繁體） (docs/translations/README.zh-tw.md)
-- हिन्दी (docs/translations/README.hin.md)
-- <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
-
 ## 📞 الاتصال والروابط
 
 الاتصال والروابطالموقع الإلكتروني: [kanadojo.com](https://kanadojo.com)
