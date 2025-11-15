@@ -69,12 +69,12 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsl(270, 100%, 70%)',
       },
       {
-        id: "pink paradise",
-        backgroundColor: "#FFF0F5",
-        cardColor: "#EEB6C8",
-        borderColor: "#9F7AE9",
-        mainColor: "#9F7AE9",
-        secondaryColor: "#8D659F6",
+        id: 'pink paradise',
+        backgroundColor: '#FFF0F5',
+        cardColor: '#EEB6C8',
+        borderColor: '#9F7AE9',
+        mainColor: '#9F7AE9',
+        secondaryColor: '#8D659F6',
       },
     ],
   },
@@ -84,6 +84,14 @@ const themes: ThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: 'monkeytype',
+        backgroundColor: 'hsla(210, 5%, 22%, 1)',
+        cardColor: 'hsla(220, 5%, 28%, 1)',
+        borderColor: 'hsla(220, 5%, 35%, 1)',
+        mainColor: 'hsla(49, 82%, 49%, 1)',
+        secondaryColor: 'hsla(49, 14%, 81%, 1)',
+      },
+      {
         id: 'nord',
         backgroundColor: 'hsl(220, 16%, 23%)',
         cardColor: 'hsl(220, 16%, 30%)',
@@ -92,36 +100,28 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'rgb(200, 157, 191)',
       },
       {
-        id: "sumi",
-        backgroundColor: "hsla(0, 0%, 10%, 1)",
-        cardColor: "hsla(0, 0%, 14%, 1)",
-        borderColor: "hsla(0, 0%, 22%, 1)",
-        mainColor: "hsla(0, 0%, 72%, 1)",
-        secondaryColor: "hsla(45, 35%, 88%, 1)",
+        id: 'yukata',
+        backgroundColor: 'hsla(220, 50%, 10%, 1)',
+        cardColor: 'hsla(220, 48%, 14%, 1)',
+        borderColor: 'hsla(220, 45%, 22%, 1)',
+        mainColor: 'hsla(350, 82%, 62%, 1)',
+        secondaryColor: 'hsla(280, 65%, 68%, 1)',
       },
       {
-        id: "yukata",
-        backgroundColor: "hsla(220, 50%, 10%, 1)",
-        cardColor: "hsla(220, 48%, 14%, 1)",
-        borderColor: "hsla(220, 45%, 22%, 1)",
-        mainColor: "hsla(350, 82%, 62%, 1)",
-        secondaryColor: "hsla(280, 65%, 68%, 1)",
+        id: 'momiji',
+        backgroundColor: 'hsla(15, 35%, 11%, 1)',
+        cardColor: 'hsla(15, 33%, 15%, 1)',
+        borderColor: 'hsla(15, 30%, 23%, 1)',
+        mainColor: 'hsla(5, 85%, 58%, 1)',
+        secondaryColor: 'hsla(45, 88%, 62%, 1)',
       },
       {
-        id: "momiji",
-        backgroundColor: "hsla(15, 35%, 11%, 1)",
-        cardColor: "hsla(15, 33%, 15%, 1)",
-        borderColor: "hsla(15, 30%, 23%, 1)",
-        mainColor: "hsla(5, 85%, 58%, 1)",
-        secondaryColor: "hsla(45, 88%, 62%, 1)",
-      },
-      {
-        id: "aizome",
-        backgroundColor: "hsla(215, 48%, 11%, 1)",
-        cardColor: "hsla(215, 46%, 15%, 1)",
-        borderColor: "hsla(215, 43%, 23%, 1)",
-        mainColor: "hsla(210, 75%, 58%, 1)",
-        secondaryColor: "hsla(35, 35%, 72%, 1)",
+        id: 'aizome',
+        backgroundColor: 'hsla(215, 48%, 11%, 1)',
+        cardColor: 'hsla(215, 46%, 15%, 1)',
+        borderColor: 'hsla(215, 43%, 23%, 1)',
+        mainColor: 'hsla(210, 75%, 58%, 1)',
+        secondaryColor: 'hsla(35, 35%, 72%, 1)',
       },
       {
         id: 'matrix',
@@ -189,14 +189,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(29, 100%, 55%, 1)',
       },
       {
-        id: 'moonlit-sakura',
-        backgroundColor: 'hsla(255, 32%, 13%, 1)',
-        cardColor: 'hsla(255, 36%, 17%, 1)',
-        borderColor: 'hsla(340, 38%, 30%, 1)',
-        mainColor: 'hsla(328, 70%, 73%, 1)',
-        secondaryColor: 'hsla(340, 100%, 80%, 1)',
-      },
-      {
         id: 'sapphire-frost',
         backgroundColor: 'hsla(209, 60%, 10%, 1)',
         cardColor: 'hsla(209, 60%, 14%, 1)',
@@ -232,7 +224,7 @@ const themes: ThemeGroup[] = [
         id: 'velvet-citrus-dream',
         backgroundColor: 'hsla(274, 33%, 13%, 1)',
         cardColor: 'hsla(274, 36%, 17%, 1)',
-        borderColor: 'hsla(47, 90%, 60%, 1)',
+        borderColor: 'hsla(274, 36%, 27%, 1)',
         mainColor: 'hsla(48, 100%, 67%, 1)',
         secondaryColor: 'hsla(17, 98%, 64%, 1)',
       },
@@ -240,7 +232,7 @@ const themes: ThemeGroup[] = [
         id: 'arctic-inferno',
         backgroundColor: 'hsla(217, 44%, 14%, 1)',
         cardColor: 'hsla(220, 60%, 17%, 1)',
-        borderColor: 'hsla(8, 86%, 54%, 1)',
+        borderColor: 'hsla(220, 60%, 27%, 1)',
         mainColor: 'hsla(6, 96%, 66%, 1)',
         secondaryColor: 'hsla(181, 100%, 65%, 1)',
       },
@@ -248,7 +240,7 @@ const themes: ThemeGroup[] = [
         id: 'haunted-lagoon',
         backgroundColor: 'hsla(194, 80%, 9%, 1)',
         cardColor: 'hsla(177, 47%, 14%, 1)',
-        borderColor: 'hsla(170, 63%, 30%, 1)',
+        borderColor: 'hsla(177, 47%, 27%, 1)',
         mainColor: 'hsla(168, 81%, 56%, 1)',
         secondaryColor: 'hsla(117, 39%, 64%, 1)',
       },
@@ -273,8 +265,8 @@ const themes: ThemeGroup[] = [
         backgroundColor: 'hsla(209, 49%, 11%, 1)',
         cardColor: 'hsla(209, 54%, 16%, 1)',
         borderColor: 'hsla(209, 54%, 26%, 1)',
-        mainColor: 'hsla(188, 85%, 50%, 1)',
-        secondaryColor: 'hsla(45, 96%, 62%, 1)',
+        mainColor: 'hsla(45, 96%, 62%, 1)',
+        secondaryColor: 'hsla(188, 85%, 50%, 1)',
       },
       {
         id: 'orchid-eclipse',
@@ -429,7 +421,7 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(182, 100%, 68%, 1)',
       },
       {
-        id: 'fuchsia-solstice',
+        id: 'lotus-specter',
         backgroundColor: 'hsla(322, 48%, 11%, 1)',
         cardColor: 'hsla(322, 53%, 16%, 1)',
         borderColor: 'hsla(322, 53%, 29%, 1)',
@@ -459,14 +451,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(172, 37%, 29%, 1)',
         mainColor: 'hsla(45, 98%, 71%, 1)',
         secondaryColor: 'hsla(18, 88%, 64%, 1)',
-      },
-      {
-        id: 'emberlit-cloud',
-        backgroundColor: 'hsla(10, 40%, 12%, 1)',
-        cardColor: 'hsla(10, 45%, 19%, 1)',
-        borderColor: 'hsla(10, 45%, 29%, 1)',
-        mainColor: 'hsla(16, 100%, 70%, 1)',
-        secondaryColor: 'hsla(181, 92%, 67%, 1)',
       },
       {
         id: 'nebulous-maw',
@@ -519,8 +503,8 @@ const themes: ThemeGroup[] = [
       {
         id: 'twilight-oracle',
         backgroundColor: 'hsla(256, 42%, 12%, 1)',
-        cardColor: 'hsla(333, 61%, 18%, 1)',
-        borderColor: 'hsla(333, 61%, 29%, 1)',
+        cardColor: 'hsla(256, 42%, 16%, 1)',
+        borderColor: 'hsla(256, 42%, 25%, 1)',
         mainColor: 'hsla(5, 92%, 66%, 1)',
         secondaryColor: 'hsla(208, 70%, 70%, 1)',
       },
@@ -549,14 +533,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(319, 91%, 78%, 1)',
       },
       {
-        id: 'magenta-tundra',
-        backgroundColor: 'hsla(333, 61%, 9%, 1)',
-        cardColor: 'hsla(314, 89%, 21%, 1)',
-        borderColor: 'hsla(314, 89%, 32%, 1)',
-        mainColor: 'hsla(53, 93%, 69%, 1)',
-        secondaryColor: 'hsla(194, 92%, 79%, 1)',
-      },
-      {
         id: 'lapis-solara',
         backgroundColor: 'hsla(226, 63%, 9%, 1)',
         cardColor: 'hsla(208, 69%, 18%, 1)',
@@ -565,18 +541,10 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(259, 97%, 82%, 1)',
       },
       {
-        id: 'lyra-cascade',
-        backgroundColor: 'hsla(144, 41%, 9%, 1)',
-        cardColor: 'hsla(221, 62%, 18%, 1)',
-        borderColor: 'hsla(221, 62%, 31%, 1)',
-        mainColor: 'hsla(195, 97%, 69%, 1)',
-        secondaryColor: 'hsla(325, 85%, 73%, 1)',
-      },
-      {
         id: 'arcane-fathoms',
         backgroundColor: 'hsla(207, 74%, 10%, 1)',
-        cardColor: 'hsla(272, 80%, 22%, 1)',
-        borderColor: 'hsla(272, 80%, 34%, 1)',
+        cardColor: 'hsla(207, 74%, 13%, 1)',
+        borderColor: 'hsla(207, 74%, 20%, 1)',
         mainColor: 'hsla(97, 76%, 66%, 1)',
         secondaryColor: 'hsla(281, 93%, 80%, 1)',
       },
@@ -589,24 +557,8 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(159, 96%, 66%, 1)',
       },
       {
-        id: 'prism-snowfall',
-        backgroundColor: 'hsla(301, 15%, 8%, 1)',
-        cardColor: 'hsla(185, 16%, 20%, 1)',
-        borderColor: 'hsla(185, 16%, 32%, 1)',
-        mainColor: 'hsla(190, 92%, 75%, 1)',
-        secondaryColor: 'hsla(41, 98%, 81%, 1)',
-      },
-      {
-        id: 'lotus-specter',
-        backgroundColor: 'hsla(324, 27%, 8%, 1)',
-        cardColor: 'hsla(345, 64%, 17%, 1)',
-        borderColor: 'hsla(345, 64%, 30%, 1)',
-        mainColor: 'hsla(319, 96%, 76%, 1)',
-        secondaryColor: 'hsla(66, 100%, 73%, 1)',
-      },
-      {
         id: 'azure-mirage',
-        backgroundColor: 'hsla(190, 100%, 7%, 1)',
+        backgroundColor: 'hsla(191, 100%, 7%, 1)',
         cardColor: 'hsla(191, 93%, 16%, 1)',
         borderColor: 'hsla(191, 93%, 27%, 1)',
         mainColor: 'hsla(271, 99%, 72%, 1)',
@@ -744,7 +696,7 @@ const themes: ThemeGroup[] = [
         id: 'gruvbox',
         backgroundColor: 'hsla(0, 0%, 13%, 1)',
         cardColor: 'hsla(0, 0%, 18%, 1)',
-        borderColor: 'hsla(39, 25%, 63%, 1)',
+        borderColor: 'hsla(0, 0%, 25%, 1)',
         mainColor: 'hsla(120, 14%, 52%, 1)',
         secondaryColor: 'hsla(344, 34%, 61%, 1)',
       },
@@ -764,14 +716,7 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(225, 68%, 74%, 1)',
         secondaryColor: 'hsla(105, 37%, 69%, 1)',
       },
-      {
-        id: 'serika-dark',
-        backgroundColor: 'hsla(210, 5%, 22%, 1)',
-        cardColor: 'hsla(220, 2%, 40%, 1)',
-        borderColor: 'hsla(220, 2%, 40%, 1)',
-        mainColor: 'hsla(49, 82%, 49%, 1)',
-        secondaryColor: 'hsla(49, 14%, 81%, 1)',
-      },
+
       {
         id: 'catppuccin',
         backgroundColor: 'hsl(240, 21%, 15%)',
@@ -779,9 +724,7 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsl(230, 13%, 55%)',
         mainColor: 'hsl(267deg, 84%, 81%)',
         secondaryColor: 'hsl(226, 64%, 88%)',
-      }
-
-
+      },
     ],
   },
 
@@ -791,22 +734,22 @@ const themes: ThemeGroup[] = [
     icon: CloudLightning, // Using Moon, as suggested, but could be a custom icon
     themes: [
       {
-        id: 'pumpkin-spice-night',
+        id: 'pumpkin-night',
         // Dark, deep purple/black background
         backgroundColor: 'hsla(280, 20%, 8%, 1)',
         cardColor: 'hsla(280, 25%, 15%, 1)',
-        borderColor: 'hsla(25, 90%, 40%, 1)', // Dark orange border
+        borderColor: 'hsla(280, 25%, 22%, 1)',
         // Bright orange for main focus
         mainColor: 'hsla(25, 100%, 60%, 1)',
         // Spooky accent color (magenta/purple)
         secondaryColor: 'hsla(315, 70%, 55%, 1)',
       },
       {
-        id: 'spooky-ghost-glow',
+        id: 'spooky-glow',
         // Very dark background
         backgroundColor: 'hsla(210, 10%, 5%, 1)',
         cardColor: 'hsla(210, 15%, 12%, 1)',
-        borderColor: 'hsla(90, 80%, 30%, 1)', // Dark lime/acid green border
+        borderColor: 'hsla(210, 15%, 22%, 1)',
         // Neon green/slime color for main focus
         mainColor: 'hsla(90, 85%, 65%, 1)',
         // Bright purple for contrast
@@ -836,7 +779,7 @@ const themes: ThemeGroup[] = [
         // Deep night blue background
         backgroundColor: 'hsla(220, 50%, 12%, 1)',
         cardColor: 'hsla(220, 55%, 18%, 1)',
-        borderColor: 'hsla(355, 75%, 50%, 1)', // Bright red border
+        borderColor: 'hsla(220, 55%, 25%, 1)',
         // Bright festive red
         mainColor: 'hsla(355, 85%, 55%, 1)',
         // Golden star accent
@@ -847,7 +790,7 @@ const themes: ThemeGroup[] = [
         // Cool mint background
         backgroundColor: 'hsla(170, 30%, 92%, 1)',
         cardColor: 'hsla(170, 35%, 88%, 1)',
-        borderColor: 'hsla(355, 70%, 60%, 1)', // Candy cane red border
+        borderColor: 'hsla(170, 35%, 75%, 1)',
         // Peppermint red
         mainColor: 'hsla(355, 75%, 50%, 1)',
         // Fresh mint green
@@ -858,7 +801,7 @@ const themes: ThemeGroup[] = [
         // Midnight blue background
         backgroundColor: 'hsla(230, 45%, 15%, 1)',
         cardColor: 'hsla(230, 50%, 22%, 1)',
-        borderColor: 'hsla(145, 60%, 45%, 1)', // Pine green border
+        borderColor: 'hsla(230, 50%, 30%, 1)',
         // Warm golden light
         mainColor: 'hsla(45, 95%, 60%, 1)',
         // Holly green
@@ -869,7 +812,7 @@ const themes: ThemeGroup[] = [
         // Warm brown background
         backgroundColor: 'hsla(25, 35%, 88%, 1)',
         cardColor: 'hsla(25, 40%, 82%, 1)',
-        borderColor: 'hsla(20, 60%, 50%, 1)', // Gingerbread brown border
+        borderColor: 'hsla(25, 40%, 75%, 1)',
         // Rich chocolate brown
         mainColor: 'hsla(20, 55%, 35%, 1)',
         // Frosting white with pink tint
@@ -880,7 +823,7 @@ const themes: ThemeGroup[] = [
         // Dark arctic night
         backgroundColor: 'hsla(200, 30%, 10%, 1)',
         cardColor: 'hsla(200, 35%, 16%, 1)',
-        borderColor: 'hsla(170, 80%, 50%, 1)', // Aurora green border
+        borderColor: 'hsla(200, 35%, 25%, 1)',
         // Bright aurora green
         mainColor: 'hsla(165, 90%, 55%, 1)',
         // Aurora purple/pink
@@ -891,7 +834,7 @@ const themes: ThemeGroup[] = [
         // Warm dark red background
         backgroundColor: 'hsla(10, 35%, 18%, 1)',
         cardColor: 'hsla(10, 40%, 25%, 1)',
-        borderColor: 'hsla(30, 80%, 55%, 1)', // Glowing ember border
+        borderColor: 'hsla(10, 40%, 35%, 1)',
         // Bright fire orange
         mainColor: 'hsla(25, 95%, 60%, 1)',
         // Deep crimson
@@ -902,11 +845,11 @@ const themes: ThemeGroup[] = [
         // Cool forest background
         backgroundColor: 'hsla(155, 20%, 88%, 1)',
         cardColor: 'hsla(155, 25%, 82%, 1)',
-        borderColor: 'hsla(150, 50%, 35%, 1)', // Pine green border
+        borderColor: 'hsla(155, 25%, 75%, 1)',
         // Deep forest green
         mainColor: 'hsla(145, 55%, 30%, 1)',
         // Silver/white snow
-        secondaryColor: 'hsla(200, 15%, 65%, 1)',
+        secondaryColor: 'hsla(200, 95%, 5%, 1)',
       },
     ],
   },
@@ -914,8 +857,8 @@ const themes: ThemeGroup[] = [
 
 // Flatten all themes into a map for easy lookup
 const themeMap = new Map<string, Theme>();
-themes.forEach((group) => {
-  group.themes.forEach((theme) => {
+themes.forEach(group => {
+  group.themes.forEach(theme => {
     themeMap.set(theme.id, theme);
   });
 });
