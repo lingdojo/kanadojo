@@ -723,18 +723,7 @@ const themes: ThemeGroup[] = [
     name: 'Christmas',
     icon: TreePine,
     themes: [
-      {
-        id: 'winter-wonderland',
-        // Soft snowy white background
-        backgroundColor: 'hsla(200, 40%, 96%, 1)',
-        cardColor: 'hsla(200, 45%, 92%, 1)',
-        borderColor: 'hsla(200, 50%, 75%, 1)', // Icy blue border
-        // Classic Christmas red
-        mainColor: 'hsla(355, 80%, 45%, 1)',
-        // Forest green accent
-        secondaryColor: 'hsla(145, 60%, 35%, 1)',
-      },
-      {
+            {
         id: 'santa-night',
         // Deep night blue background
         backgroundColor: 'hsla(220, 50%, 12%, 1)',
@@ -746,7 +735,7 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(45, 100%, 55%, 1)',
       },
       {
-        id: 'peppermint-frost',
+        id: 'winter-wonderland',
         // Cool mint background
         backgroundColor: 'hsla(170, 30%, 92%, 1)',
         cardColor: 'hsla(170, 35%, 88%, 1)',
@@ -767,17 +756,7 @@ const themes: ThemeGroup[] = [
         // Holly green
         secondaryColor: 'hsla(140, 55%, 40%, 1)',
       },
-      {
-        id: 'gingerbread-house',
-        // Warm brown background
-        backgroundColor: 'hsla(25, 35%, 88%, 1)',
-        cardColor: 'hsla(25, 40%, 82%, 1)',
-        borderColor: 'hsla(25, 40%, 75%, 1)',
-        // Rich chocolate brown
-        mainColor: 'hsla(20, 55%, 35%, 1)',
-        // Frosting white with pink tint
-        secondaryColor: 'hsla(350, 45%, 55%, 1)',
-      },
+      
       {
         id: 'northern-lights',
         // Dark arctic night
@@ -789,28 +768,8 @@ const themes: ThemeGroup[] = [
         // Aurora purple/pink
         secondaryColor: 'hsla(280, 85%, 65%, 1)',
       },
-      {
-        id: 'cozy-fireplace',
-        // Warm dark red background
-        backgroundColor: 'hsla(10, 35%, 18%, 1)',
-        cardColor: 'hsla(10, 40%, 25%, 1)',
-        borderColor: 'hsla(10, 40%, 35%, 1)',
-        // Bright fire orange
-        mainColor: 'hsla(25, 95%, 60%, 1)',
-        // Deep crimson
-        secondaryColor: 'hsla(355, 70%, 45%, 1)',
-      },
-      {
-        id: 'snowy-pine',
-        // Cool forest background
-        backgroundColor: 'hsla(155, 20%, 88%, 1)',
-        cardColor: 'hsla(155, 25%, 82%, 1)',
-        borderColor: 'hsla(155, 25%, 75%, 1)',
-        // Deep forest green
-        mainColor: 'hsla(145, 55%, 30%, 1)',
-        // Silver/white snow
-        secondaryColor: 'hsla(200, 95%, 5%, 1)',
-      },
+
+      
     ],
   },
 ];
