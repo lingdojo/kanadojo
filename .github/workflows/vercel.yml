@@ -1,15 +1,26 @@
-name: Vercel Deployment Notifications
+name: Vercel Deployment with Logs
 
 on:
   deployment_status:
 
 jobs:
-  notify-discord:
+  notify-with-logs:
     runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'failure' || github.event.deployment_status.state == 'error'
+    if: github.event.deployment_status.state == 'failure'
     
     steps:
-      - name: Send Failure Notification to Discord
+      - name: Get Vercel Deployment Logs
+        id: logs
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          # Extract deployment ID from URL
+          DEPLOYMENT_URL="${{ github.event.deployment_status.target_url }}"
+          # Get logs from Vercel API (requires VERCEL_TOKEN)
+          # This is optional and requires additional setup
+          echo "logs=Check Vercel dashboard for detailed logs" >> $GITHUB_OUTPUT
+
+      - name: Send Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -18,79 +29,21 @@ jobs:
           -d "{
             \"embeds\": [{
               \"title\": \"🚨 Vercel Deployment Failed\",
-              \"description\": \"A deployment to Vercel has failed.\",
               \"color\": 15158332,
               \"fields\": [
                 {
                   \"name\": \"Repository\",
-                  \"value\": \"${{ github.repository }}\",
-                  \"inline\": true
+                  \"value\": \"${{ github.repository }}\"
                 },
                 {
-                  \"name\": \"Branch\",
-                  \"value\": \"${{ github.ref_name }}\",
-                  \"inline\": true
+                  \"name\": \"Logs\",
+                  \"value\": \"${{ steps.logs.outputs.logs }}\"
                 },
                 {
-                  \"name\": \"Environment\",
-                  \"value\": \"${{ github.event.deployment.environment }}\",
-                  \"inline\": true
-                },
-                {
-                  \"name\": \"Commit\",
-                  \"value\": \"[\`${{ github.sha }}\`](${{ github.event.repository.html_url }}/commit/${{ github.sha }})\",
-                  \"inline\": false
-                },
-                {
-                  \"name\": \"Deployment URL\",
-                  \"value\": \"${{ github.event.deployment_status.target_url }}\",
-                  \"inline\": false
-                },
-                {
-                  \"name\": \"Triggered by\",
-                  \"value\": \"${{ github.actor }}\",
-                  \"inline\": true
+                  \"name\": \"View Details\",
+                  \"value\": \"[Vercel Dashboard](${{ github.event.deployment_status.target_url }})\"
                 }
-              ],
-              \"timestamp\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"
-            }]
-          }" \
-          $DISCORD_WEBHOOK
-
-  notify-success:
-    runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'production'
-    
-    steps:
-      - name: Send Success Notification to Discord
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"embeds\": [{
-              \"title\": \"✅ Vercel Deployment Succeeded\",
-              \"description\": \"Production deployment completed successfully.\",
-              \"color\": 3066993,
-              \"fields\": [
-                {
-                  \"name\": \"Repository\",
-                  \"value\": \"${{ github.repository }}\",
-                  \"inline\": true
-                },
-                {
-                  \"name\": \"Branch\",
-                  \"value\": \"${{ github.ref_name }}\",
-                  \"inline\": true
-                },
-                {
-                  \"name\": \"Deployment URL\",
-                  \"value\": \"${{ github.event.deployment_status.target_url }}\",
-                  \"inline\": false
-                }
-              ],
-              \"timestamp\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"
+              ]
             }]
           }" \
           $DISCORD_WEBHOOK
