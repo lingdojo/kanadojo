@@ -84,7 +84,7 @@ const SetDictionary = ({ set }: { set: string }) => {
                 {typeof wordObj.reading === 'string'
                   ? showKana
                     ? wordObj.reading.split(' ')[1] || wordObj.reading
-                    : wordObj.reading
+                    : wordObj.reading.split(' ')[0]
                   : ''}
               </span>
               <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
