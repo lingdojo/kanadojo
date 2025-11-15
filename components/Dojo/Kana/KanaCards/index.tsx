@@ -62,15 +62,15 @@ const KanaCards = () => {
   return (
     <div
       className={clsx(
-        'flex flex-col gap-2 sm:flex-row w-full ',
-        cardBorderStyles
+        'flex flex-col gap-2 sm:flex-row w-full sm:items-start'
       )}
     >
-      {kanaGroups.map((kanaGroup, i) => (
+      {kanaGroups.map((kanaGroup) => (
         <Fragment key={kanaGroup.name}>
           <form
             className={clsx(
-              'flex flex-col w-full gap-2 sm:w-1/2 p-4 rounded-2xl'
+              'flex flex-col w-full gap-2 sm:w-1/2 p-4',
+              cardBorderStyles
             )}
           >
             <legend
@@ -165,16 +165,7 @@ const KanaCards = () => {
                 </div>
               ))}
           </form>
-
-          {i < kanaGroups.length - 1 && (
-            <div
-              className={clsx(
-                'sm:border-l-1 sm:h-auto sm:w-0',
-                'border-[var(--border-color)]',
-                'border-t-1 w-full border-[var(--border-color)]'
-              )}
-            />
-          )}
+          
         </Fragment>
       ))}
     </div>
