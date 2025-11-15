@@ -31,6 +31,7 @@ export const themes: ThemeGroup[] = [
     themes: [
       light.longTheme,
       light.amethystTheme,
+      light.nekokotoLightTheme,
     ],
   },
   {
@@ -84,6 +85,7 @@ export const themes: ThemeGroup[] = [
       dark.nautilusStarTheme,
       dark.nebulaVeilTheme,
       dark.nebulousMawTheme,
+      dark.nekokotoDarkTheme,
       dark.neonDuskTheme,
       dark.neonTokyoTheme,
       dark.noirTheme,

@@ -46,6 +46,7 @@ export { mysticForestTheme } from './mystic-forest';
 export { nautilusStarTheme } from './nautilus-star';
 export { nebulaVeilTheme } from './nebula-veil';
 export { nebulousMawTheme } from './nebulous-maw';
+export { nekokotoDarkTheme } from './nekokoto';
 export { neonDuskTheme } from './neon-dusk';
 export { neonTokyoTheme } from './neon-tokyo';
 export { noirTheme } from './noir';

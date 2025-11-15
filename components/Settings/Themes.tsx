@@ -45,14 +45,14 @@ const Themes = () => {
           onMouseEnter={() => setIsHovered(randomTheme.id)}
           onMouseLeave={() => setIsHovered('')}
           style={{
-            color: randomTheme.mainColor,
+            color: randomTheme.foreground,
             backgroundColor:
               isHovered === randomTheme.id
-                ? randomTheme.borderColor
-                : randomTheme.cardColor,
+                ? randomTheme.border
+                : randomTheme.card,
             borderWidth:
               process.env.NODE_ENV === 'development' ? '2px' : undefined,
-            borderColor: randomTheme.borderColor,
+            borderColor: randomTheme.border,
           }}
           onClick={() => {
             playClick();
@@ -69,7 +69,7 @@ const Themes = () => {
           </span>
           <Dice5
             style={{
-              color: randomTheme.secondaryColor,
+              color: randomTheme.mutedForeground,
             }}
           />
           Random Theme
@@ -93,14 +93,14 @@ const Themes = () => {
               <label
                 key={currentTheme.id}
                 style={{
-                  color: currentTheme.mainColor,
+                  color: currentTheme.foreground,
                   backgroundColor:
                     isHovered === currentTheme.id
-                      ? currentTheme.borderColor
-                      : currentTheme.backgroundColor,
+                      ? currentTheme.border
+                      : currentTheme.background,
                   borderWidth:
                     process.env.NODE_ENV === 'development' ? '4px' : undefined,
-                  borderColor: currentTheme.borderColor,
+                  borderColor: currentTheme.border,
                 }}
                 onMouseEnter={() => setIsHovered(currentTheme.id)}
                 onMouseLeave={() => setIsHovered('')}
@@ -151,8 +151,8 @@ const Themes = () => {
                             color:
                               process.env.NODE_ENV !== 'production'
                                 ? i === 0
-                                  ? currentTheme.mainColor
-                                  : currentTheme.secondaryColor
+                                  ? currentTheme.foreground
+                                  : currentTheme.mutedForeground
                                 : undefined,
                           }}
                         >

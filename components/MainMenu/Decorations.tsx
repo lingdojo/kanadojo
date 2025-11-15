@@ -26,18 +26,10 @@ const animations = [
 // Get all available main colors from themes
 const getAllMainColors = () => {
   const colors = new Set<string>();
-  /* themeSets.forEach(themeGroup => {
-    themeGroup.themes.forEach(theme => {
-      colors.add(theme.mainColor);
-      if (theme.secondaryColor) colors.add(theme.secondaryColor);
-    });
-  }); */
   themeSets[2].themes.forEach(theme => {
-    // Use foreground for primary color, fallback to mainColor for backwards compatibility
-    const primaryColor = theme.foreground || theme.mainColor;
-    const secondaryColorValue = theme.mutedForeground || theme.secondaryColor;
-    if (primaryColor) colors.add(primaryColor);
-    if (secondaryColorValue) colors.add(secondaryColorValue);
+    // Use new shadcn color properties
+    if (theme.foreground) colors.add(theme.foreground);
+    if (theme.mutedForeground) colors.add(theme.mutedForeground);
   });
   return Array.from(colors);
 };
