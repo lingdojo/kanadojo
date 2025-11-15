@@ -116,6 +116,14 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(35, 35%, 72%, 1)',
       },
       {
+        id: "arashiyama",
+        backgroundColor: "hsla(150, 32%, 10%, 1)",
+        cardColor: "hsla(150, 30%, 14%, 1)",
+        borderColor: "hsla(150, 28%, 22%, 1)",
+        mainColor: "hsla(125, 65%, 52%, 1)",
+        secondaryColor: "hsla(85, 40%, 65%, 1)",
+      },
+      {
         id: 'matrix',
         backgroundColor: 'hsl(0, 0%, 0%)',
         cardColor: 'hsl(0, 0%, 2.5%)',
