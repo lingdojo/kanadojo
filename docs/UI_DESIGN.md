@@ -338,6 +338,57 @@ The `aizome` theme is inspired by traditional Japanese indigo dyeing (`aizome`) 
     - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
 
 
+#### Wabi Theme (Dark — Minimalist Dawn)
+
+The `wabi` theme is inspired by traditional Japanese minimalism — the calm clarity of temple stone at dawn, the softness of shoji-paper light, and the dignified optimism of a rising sun. It uses restrained tonal steps and meaningful accents to create a focused, meditative dark mode experience.
+
+  - **Palette (from `static/themes.ts`):**
+  ```ts
+  {
+    id: 'wabi',
+    backgroundColor: 'hsla(3, 20%, 11%, 1)',
+    cardColor: 'hsla(3, 18%, 15%, 1)',
+    borderColor: 'hsla(3, 17%, 22%, 1)',
+    mainColor: 'hsla(8, 85%, 59%, 1)',
+    secondaryColor: 'hsla(32, 25%, 70%, 1)',
+  }
+  ```
+
+* **Usage guidance:**
+
+  * Use `--background-color` for full-page surfaces to establish the muted oxblood-charcoal base.
+  * Use `--card-color` for panels, cards, and elevated surfaces with subtle separation from the background.
+  * Use `--border-color` for dividers, hover states, focus rings, and interactive affordances.
+  * Use `--main-color` (sunrise orange-red) for primary text, icons, CTAs, and key highlights.
+  * Use `--secondary-color` (washi-paper off-white) for soft contrast text, supportive UI elements, and accents.
+
+* **Tailwind example:**
+
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">Wabi — Minimalist Dawn</h1>
+    <p className="text-sm text-[var(--secondary-color)]">Soft, disciplined contrast</p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+
+  * `--main-color` (hinode orange-red) on `--background-color` provides strong contrast and meets AA for normal text.
+  * `--secondary-color` maintains readable contrast on both background and card surfaces; validate with WebAIM or axe.
+  * `--border-color` on `--card-color` maintains a minimum 3:1 ratio for interactive affordances; increase emphasis if used for critical focus states.
+  * Avoid dense small text in `--main-color` as its saturation is intended for focal elements.
+
+* **Developer checklist when adding/using `wabi`:**
+
+  * Add the theme object to `static/themes.ts` under the `Dark` theme group.
+  * Verify `applyTheme('wabi')` correctly updates CSS variables and the `data-theme` attribute.
+  * Run automated contrast tests (axe, Lighthouse) on both accent colors.
+  * Test buttons, dialogs, inputs, and other interactive components across breakpoints and accessibility modes.
+
+
+
   ### Theme Color Guidelines
 
 #### Color Format
