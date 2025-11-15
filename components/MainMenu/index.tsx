@@ -7,11 +7,11 @@ import {
   ScrollText,
   FileLock2,
   Cookie,
-  // FileDiff,
   Sun,
   Moon,
   Heart,
   Sparkle,
+  Keyboard,
 } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -95,6 +95,25 @@ const MainMenu = () => {
             }}
           >
             <Sparkle />
+          </Button>
+          <Button
+            variant="secondary"
+            size="icon"
+            className={clsx(
+              'fixed top-4 left-4 z-50 opacity-90',
+              buttonBorderStyles,
+              'transition-transform duration-250 active:scale-95'
+            )}
+            onClick={() => {
+              playClick();
+            }}
+          >
+            <a
+              href="https://monkeytype.com/"
+              target="_blank"
+            >
+              <Keyboard />
+            </a>
           </Button>
         </Suspense>
       )}

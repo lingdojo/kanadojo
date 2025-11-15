@@ -15,7 +15,7 @@ body {
 }
 
 .theCage {
-  background-image: url(../components/Progress/yodaCage.png);
+  /* background-image: url(../components/Progress/yodaCage.png); */
   background-repeat: no-repeat;
   object-fit: contain;
   height: 150px;
