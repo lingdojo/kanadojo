@@ -57,7 +57,7 @@ const CollectionSelector = () => {
   const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
 
   const clearKanjiObjs = useKanjiStore(state => state.clearKanjiObjs);
-  const clearWordObjs = useVocabStore(state => state.clearWordObjs);
+  const clearVocabObjs = useVocabStore(state => state.clearVocabObjs);
 
   const clearKanjiSets = useKanjiStore(state => state.clearKanjiSets);
   const clearVocabSets = useVocabStore(state => state.clearVocabSets);
@@ -216,7 +216,7 @@ const CollectionSelector = () => {
                   clearKanjiObjs();
                   clearKanjiSets();
                 } else if (pathWithoutLocale === '/vocabulary') {
-                  clearWordObjs();
+                  clearVocabObjs();
                   clearVocabSets();
                 }
               }}
@@ -293,7 +293,7 @@ const CollectionSelector = () => {
               clearKanjiObjs();
             } else if (pathWithoutLocale === '/vocabulary') {
               clearVocabSets();
-              clearWordObjs();
+              clearVocabObjs();
             }
           }}
         >
