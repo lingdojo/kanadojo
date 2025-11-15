@@ -16,52 +16,52 @@ const KanaCards = () => {
       subsets: [
         {
           name: 'HBase',
-          sliceRange: [0, 10]
+          sliceRange: [0, 10],
         },
         {
           name: 'HDakuon',
-          sliceRange: [10, 15]
+          sliceRange: [10, 15],
         },
         {
           name: 'HYoon',
-          sliceRange: [15, 26]
-        }
-      ]
+          sliceRange: [15, 26],
+        },
+      ],
     },
     {
       name: 'Katakana カタカナ',
       subsets: [
         {
           name: 'KBase',
-          sliceRange: [26, 36]
+          sliceRange: [26, 36],
         },
         {
           name: 'KDakuon',
-          sliceRange: [36, 41]
+          sliceRange: [36, 41],
         },
         {
           name: 'KYoon',
-          sliceRange: [41, 52]
+          sliceRange: [41, 52],
         },
         {
           name: 'KForeign Sounds',
-          sliceRange: [52, 60]
-        }
-      ]
+          sliceRange: [52, 60],
+        },
+      ],
     },
     {
       name: 'Challenge チャレンジ',
       subsets: [
         {
           name: 'CSimilar Hiragana',
-          sliceRange: [60, 66]
+          sliceRange: [60, 65],
         },
         {
           name: 'CConfusing Katakana',
-          sliceRange: [66, 69]
-        }
-      ]
-    }
+          sliceRange: [65, 69],
+        },
+      ],
+    },
   ];
 
   const [hiddenSubsets, setHiddenSubsets] = useState<string[]>([
@@ -71,16 +71,14 @@ const KanaCards = () => {
     'kyoon',
     'kforeign sounds',
     'csimilar hiragana',
-    'cconfusing katakana'
+    'cconfusing katakana',
   ]);
 
   return (
     <div
-      className={clsx(
-        'flex flex-col gap-2 sm:flex-row w-full sm:items-start'
-      )}
+      className={clsx('flex flex-col gap-2 sm:flex-row w-full sm:items-start')}
     >
-      {kanaGroups.map((kanaGroup) => (
+      {kanaGroups.map(kanaGroup => (
         <Fragment key={kanaGroup.name}>
           <form
             className={clsx(
@@ -104,7 +102,7 @@ const KanaCards = () => {
                 }
                 setHiddenSubsets([
                   ...hiddenSubsets,
-                  kanaGroup.name.toLowerCase()
+                  kanaGroup.name.toLowerCase(),
                 ]);
               }}
             >
@@ -118,16 +116,19 @@ const KanaCards = () => {
                     'rotate-180'
                 )}
               />
-              <h3 className='flex items-center gap-2'>
+              <h3 className="flex items-center gap-2">
                 <span>{kanaGroup.name.split(' ')[0]}</span>
-                <span className='text-[var(--secondary-color)]'>
+                <span className="text-[var(--secondary-color)]">
                   {kanaGroup.name.split(' ')[1]}
                 </span>
               </h3>
             </legend>
             {!hiddenSubsets.includes(kanaGroup.name.toLowerCase()) &&
               kanaGroup.subsets.map((subset, i) => (
-                <div key={i} className='flex flex-col w-full gap-2'>
+                <div
+                  key={i}
+                  className="flex flex-col w-full gap-2"
+                >
                   <div>
                     <h4
                       className={clsx(
@@ -147,7 +148,7 @@ const KanaCards = () => {
                         }
                         setHiddenSubsets([
                           ...hiddenSubsets,
-                          subset.name.toLowerCase()
+                          subset.name.toLowerCase(),
                         ]);
                       }}
                     >
@@ -175,12 +176,11 @@ const KanaCards = () => {
 
                   {i < kanaGroup.subsets.length - 1 &&
                     !hiddenSubsets.includes(kanaGroup.name.toLowerCase()) && (
-                      <hr className='border-t-1 border-[var(--border-color)]' />
+                      <hr className="border-t-1 border-[var(--border-color)]" />
                     )}
                 </div>
               ))}
           </form>
-          
         </Fragment>
       ))}
     </div>

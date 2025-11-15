@@ -132,216 +132,206 @@ export const kana = [
   {
     kana: ['ア', 'イ', 'ウ', 'エ', 'オ'],
     romanji: ['a', 'i', 'u', 'e', 'o'],
-    groupName: 'k.b.a'
+    groupName: 'k.b.a',
   },
   {
     kana: ['カ', 'キ', 'ク', 'ケ', 'コ'],
     romanji: ['ka', 'ki', 'ku', 'ke', 'ko'],
-    groupName: 'k.b.k'
+    groupName: 'k.b.k',
   },
   {
     kana: ['サ', 'シ', 'ス', 'セ', 'ソ'],
     romanji: ['sa', 'shi', 'su', 'se', 'so'],
-    groupName: 'k.b.s'
+    groupName: 'k.b.s',
   },
   {
     kana: ['タ', 'チ', 'ツ', 'テ', 'ト'],
     romanji: ['ta', 'chi', 'tsu', 'te', 'to'],
-    groupName: 'k.b.t'
+    groupName: 'k.b.t',
   },
   {
     kana: ['ナ', 'ニ', 'ヌ', 'ネ', 'ノ'],
     romanji: ['na', 'ni', 'nu', 'ne', 'no'],
-    groupName: 'k.b.n'
+    groupName: 'k.b.n',
   },
   {
     kana: ['ハ', 'ヒ', 'フ', 'ヘ', 'ホ'],
     romanji: ['ha', 'hi', 'fu', 'he', 'ho'],
-    groupName: 'k.b.h'
+    groupName: 'k.b.h',
   },
   {
     kana: ['マ', 'ミ', 'ム', 'メ', 'モ'],
     romanji: ['ma', 'mi', 'mu', 'me', 'mo'],
-    groupName: 'k.b.m'
+    groupName: 'k.b.m',
   },
   {
     kana: ['ヤ', 'ユ', 'ヨ'],
     romanji: ['ya', 'yu', 'yo'],
-    groupName: 'k.b.y'
+    groupName: 'k.b.y',
   },
   {
     kana: ['ラ', 'リ', 'ル', 'レ', 'ロ'],
     romanji: ['ra', 'ri', 'ru', 're', 'ro'],
-    groupName: 'k.b.r'
+    groupName: 'k.b.r',
   },
   {
     kana: ['ワ', 'ヲ', 'ン'],
     romanji: ['wa', 'wo', 'n'],
-    groupName: 'k.b.w'
+    groupName: 'k.b.w',
   },
   {
     kana: ['ガ', 'ギ', 'グ', 'ゲ', 'ゴ'],
     romanji: ['ga', 'gi', 'gu', 'ge', 'go'],
-    groupName: 'k.d.g'
+    groupName: 'k.d.g',
   },
   {
     kana: ['ザ', 'ジ', 'ズ', 'ゼ', 'ゾ'],
     romanji: ['za', 'ji', 'zu', 'ze', 'zo'],
-    groupName: 'k.d.z'
+    groupName: 'k.d.z',
   },
   {
     kana: ['ダ', 'ヂ', 'ヅ', 'デ', 'ド'],
     romanji: ['da', 'ji', 'zu', 'de', 'do'],
-    groupName: 'k.d.d'
+    groupName: 'k.d.d',
   },
   {
     kana: ['バ', 'ビ', 'ブ', 'ベ', 'ボ'],
     romanji: ['ba', 'bi', 'bu', 'be', 'bo'],
-    groupName: 'k.d.b'
+    groupName: 'k.d.b',
   },
   {
     kana: ['パ', 'ピ', 'プ', 'ペ', 'ポ'],
     romanji: ['pa', 'pi', 'pu', 'pe', 'po'],
-    groupName: 'k.d.p'
+    groupName: 'k.d.p',
   },
   {
     kana: ['キャ', 'キュ', 'キョ'],
     romanji: ['kya', 'kyu', 'kyo'],
-    groupName: 'k.y.ky'
+    groupName: 'k.y.ky',
   },
   {
     kana: ['ギャ', 'ギュ', 'ギョ'],
     romanji: ['gya', 'gyu', 'gyo'],
-    groupName: 'k.y.gy'
+    groupName: 'k.y.gy',
   },
   {
     kana: ['シャ', 'シュ', 'ショ'],
     romanji: ['sha', 'shu', 'sho'],
-    groupName: 'k.y.shy'
+    groupName: 'k.y.shy',
   },
   {
     kana: ['ジャ', 'ジュ', 'ジョ'],
     romanji: ['ja', 'ju', 'jo'],
-    groupName: 'k.y.jy'
+    groupName: 'k.y.jy',
   },
   {
     kana: ['チャ', 'チュ', 'チョ'],
     romanji: ['cha', 'chu', 'cho'],
-    groupName: 'k.y.chy'
+    groupName: 'k.y.chy',
   },
   {
     kana: ['ニャ', 'ニュ', 'ニョ'],
     romanji: ['nya', 'nyu', 'nyo'],
-    groupName: 'k.y.ny'
+    groupName: 'k.y.ny',
   },
   {
     kana: ['ミャ', 'ミュ', 'ミョ'],
     romanji: ['mya', 'myu', 'myo'],
-    groupName: 'k.y.my'
+    groupName: 'k.y.my',
   },
   {
     kana: ['リャ', 'リュ', 'リョ'],
     romanji: ['rya', 'ryu', 'ryo'],
-    groupName: 'k.y.ry'
+    groupName: 'k.y.ry',
   },
   {
     kana: ['ヒャ', 'ヒュ', 'ヒョ'],
     romanji: ['hya', 'hyu', 'hyo'],
-    groupName: 'k.y.hy'
+    groupName: 'k.y.hy',
   },
   {
     kana: ['ビャ', 'ビュ', 'ビョ'],
     romanji: ['bya', 'byu', 'byo'],
-    groupName: 'k.y.by'
+    groupName: 'k.y.by',
   },
   {
     kana: ['ピャ', 'ピュ', 'ピョ'],
     romanji: ['pya', 'pyu', 'pyo'],
-    groupName: 'k.y.py'
+    groupName: 'k.y.py',
   },
   {
     romanji: ['fa', 'fi', 'fe', 'fo', 'fyu'],
     kana: ['ファ', 'フィ', 'フェ', 'フォ', 'フュ'],
-    groupName: 'k.f.f'
+    groupName: 'k.f.f',
   },
   {
     romanji: ['wi', 'we', 'wo'],
     kana: ['ウィ', 'ウェ', 'ウォ'],
-    groupName: 'k.f.w'
+    groupName: 'k.f.w',
   },
   {
     romanji: ['va', 'vi', 'vu', 've', 'vo'],
     kana: ['ヴァ', 'ヴィ', 'ヴ', 'ヴェ', 'ヴォ'],
-    groupName: 'k.f.v'
+    groupName: 'k.f.v',
   },
   {
     romanji: ['ti', 'tu'],
     kana: ['ティ', 'トゥ'],
-    groupName: 'k.f.t'
+    groupName: 'k.f.t',
   },
   {
     romanji: ['di', 'du'],
     kana: ['ディ', 'ドゥ'],
-    groupName: 'k.f.d'
+    groupName: 'k.f.d',
   },
   {
     romanji: ['she', 'si'],
     kana: ['シェ', 'スィ'],
-    groupName: 'k.f.s'
+    groupName: 'k.f.s',
   },
   {
     romanji: ['che', 'je'],
     kana: ['チェ', 'ジェ'],
-    groupName: 'k.f.c'
+    groupName: 'k.f.c',
   },
   {
     romanji: ['tsa', 'tsi', 'tse', 'tso'],
     kana: ['ツァ', 'ツィ', 'ツェ', 'ツォ'],
-    groupName: 'k.f.ts'
+    groupName: 'k.f.ts',
   },
   {
-    kana: ['さ', 'ち'],
-    romanji: ['sa', 'chi'],
-    groupName: 'challenge.similar.sachi'
-  },
-  {
-    kana: ['き', 'さ'],
-    romanji: ['ki', 'sa'],
-    groupName: 'challenge.similar.kisa'
+    kana: ['さ', 'ち', 'き'],
+    romanji: ['sa', 'chi', 'ki'],
+    groupName: 'challenge.similar.sachiki',
   },
   {
     kana: ['ね', 'わ'],
     romanji: ['ne', 'wa'],
-    groupName: 'challenge.similar.newa'
+    groupName: 'challenge.similar.newa',
   },
   {
     kana: ['る', 'ろ'],
     romanji: ['ru', 'ro'],
-    groupName: 'challenge.similar.ruro'
+    groupName: 'challenge.similar.ruro',
   },
   {
     kana: ['ぬ', 'め'],
     romanji: ['nu', 'me'],
-    groupName: 'challenge.similar.nume'
+    groupName: 'challenge.similar.nume',
   },
   {
     kana: ['は', 'ほ'],
     romanji: ['ha', 'ho'],
-    groupName: 'challenge.similar.haho'
+    groupName: 'challenge.similar.haho',
   },
   {
     kana: ['ソ', 'ン', 'シ', 'ツ'],
     romanji: ['so', 'n', 'shi', 'tsu'],
-    groupName: 'challenge.katakana.confusing'
+    groupName: 'challenge.katakana.sonshitsu',
   },
   {
-    kana: ['ク', 'ワ'],
-    romanji: ['ku', 'wa'],
-    groupName: 'challenge.katakana.kuwa'
+    kana: ['ク', 'ワ', 'ウ', 'ラ'],
+    romanji: ['ku', 'wa', 'u', 'ra'],
+    groupName: 'challenge.katakana.kuwaura',
   },
-  {
-    kana: ['ウ', 'ラ'],
-    romanji: ['u', 'ra'],
-    groupName: 'challenge.katakana.ura'
-  }
 ];
