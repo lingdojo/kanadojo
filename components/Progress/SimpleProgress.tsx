@@ -1,52 +1,9 @@
 "use client";
 import useStatsStore from "@/store/useStatsStore";
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { AwardIcon as TrophyIcon, Target01Icon as TargetIcon, ChartIncreaseIcon as ChartIncreaseIcon, Delete01Icon as TrashIcon } from '@hugeicons/core-free-icons';
-import clsx from "clsx";
-// import yodaCage from "./yodaCage.png";
-
-// Simple Card component to replace the missing UI component
-const Card = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div
-    className={clsx(
-      "rounded-2xl bg-[var(--card)] border border-[var(--border)] p-4",
-      className
-    )}
-  >
-    {children}
-  </div>
-);
-
-const CardHeader = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => <div className={clsx("pb-2", className)}>{children}</div>;
-
-const CardTitle = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <h3 className={clsx("font-semibold text-[var(--foreground)]", className)}>
-    {children}
-  </h3>
-);
-
-const CardContent = ({ children }: { children: React.ReactNode }) => (
-  <div className="pt-2">{children}</div>
-);
 
 export default function SimpleProgress() {
   const { allTimeStats, clearAllProgress } = useStatsStore();
@@ -98,9 +55,9 @@ export default function SimpleProgress() {
 
       {/* Overview Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
+        <Card className="bg-[var(--card)] border-[var(--border)]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-[var(--foreground)]">
               Total Sessions
             </CardTitle>
             <HugeiconsIcon icon={ChartIncreaseIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
@@ -112,9 +69,9 @@ export default function SimpleProgress() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[var(--card)] border-[var(--border)]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-[var(--foreground)]">
               Overall Accuracy
             </CardTitle>
             <HugeiconsIcon icon={TargetIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
@@ -129,9 +86,9 @@ export default function SimpleProgress() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[var(--card)] border-[var(--border)]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Best Streak</CardTitle>
+            <CardTitle className="text-sm font-medium text-[var(--foreground)]">Best Streak</CardTitle>
             <HugeiconsIcon icon={TrophyIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
@@ -141,9 +98,9 @@ export default function SimpleProgress() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[var(--card)] border-[var(--border)]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-[var(--foreground)]">
               Characters Learned
             </CardTitle>
             <HugeiconsIcon icon={TrophyIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
@@ -158,9 +115,9 @@ export default function SimpleProgress() {
 
       {/* Character Analysis */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card>
+        <Card className="bg-[var(--card)] border-[var(--border)]">
           <CardHeader>
-            <CardTitle className="">Need More Practice</CardTitle>
+            <CardTitle className="text-[var(--foreground)]">Need More Practice</CardTitle>
           </CardHeader>
           <CardContent>
             {difficultCharacters.length > 0 ? (
@@ -192,7 +149,7 @@ export default function SimpleProgress() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[var(--card)] border-[var(--border)]">
           <CardHeader>
             <CardTitle className="text-[var(--foreground)]">
               Mastered Characters
@@ -230,9 +187,9 @@ export default function SimpleProgress() {
       </div>
 
       {/* Instructions */}
-      <Card>
+      <Card className="bg-[var(--card)] border-[var(--border)]">
         <CardHeader>
-          <CardTitle>How Progress Tracking Works</CardTitle>
+          <CardTitle className="text-[var(--foreground)]">How Progress Tracking Works</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2 text-sm text-[var(--muted-foreground)]">

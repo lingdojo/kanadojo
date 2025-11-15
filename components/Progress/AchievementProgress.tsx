@@ -5,6 +5,8 @@ import { motion } from 'motion/react';
 import clsx from 'clsx';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { AwardIcon as TrophyIcon, StarIcon, ZapIcon, CrownIcon, DiamondIcon as GemIcon, LockIcon as LockIcon, RotateLeft01Icon as RotateCcwIcon } from '@hugeicons/core-free-icons';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import useAchievementStore, {
   ACHIEVEMENTS,
   type Achievement,
@@ -12,7 +14,6 @@ import useAchievementStore, {
 } from '@/store/useAchievementStore';
 import useStatsStore from '@/store/useStatsStore';
 import { useClick } from '@/hooks/useAudio';
-import { cardBorderStyles, buttonBorderStyles } from '@/static/styles';
 
 const rarityConfig: Record<
   AchievementRarity,
@@ -20,7 +21,7 @@ const rarityConfig: Record<
     color: string;
     bgColor: string;
     borderColor: string;
-    icon: React.FC<LucideProps>;
+    icon: typeof StarIcon;
     label: string;
   }
 > = {
@@ -28,46 +29,46 @@ const rarityConfig: Record<
     color: '#6B7280',
     bgColor: '#F9FAFB',
     borderColor: '#D1D5DB',
-    icon: Star,
+    icon: StarIcon,
     label: 'Common'
   },
   uncommon: {
     color: '#059669',
     bgColor: '#ECFDF5',
     borderColor: '#A7F3D0',
-    icon: Zap,
+    icon: ZapIcon,
     label: 'Uncommon'
   },
   rare: {
     color: '#2563EB',
     bgColor: '#EFF6FF',
     borderColor: '#93C5FD',
-    icon: Trophy,
+    icon: TrophyIcon,
     label: 'Rare'
   },
   epic: {
     color: '#7C3AED',
     bgColor: '#F5F3FF',
     borderColor: '#C4B5FD',
-    icon: Crown,
+    icon: CrownIcon,
     label: 'Epic'
   },
   legendary: {
     color: '#DC2626',
     bgColor: '#FEF2F2',
     borderColor: '#FECACA',
-    icon: Gem,
+    icon: GemIcon,
     label: 'Legendary'
   }
 };
 
 const categories = [
-  { id: 'all', label: 'All Achievements', icon: Trophy },
-  { id: 'milestone', label: 'Milestones', icon: Star },
-  { id: 'streak', label: 'Streaks', icon: Zap },
-  { id: 'consistency', label: 'Consistency', icon: Crown },
-  { id: 'mastery', label: 'Mastery', icon: Gem }
-] as const;
+  { id: 'all', label: 'All Achievements', icon: TrophyIcon },
+  { id: 'milestone', label: 'Milestones', icon: StarIcon },
+  { id: 'streak', label: 'Streaks', icon: ZapIcon },
+  { id: 'consistency', label: 'Consistency', icon: CrownIcon },
+  { id: 'mastery', label: 'Mastery', icon: GemIcon }
+];
 
 interface AchievementCardProps {
   achievement: Achievement;
@@ -83,7 +84,6 @@ const AchievementCard = ({
   onClick
 }: AchievementCardProps) => {
   const config = rarityConfig[achievement.rarity];
-  const RarityIcon = config.icon;
 
   return (
     <motion.div
@@ -129,7 +129,7 @@ const AchievementCard = ({
                 }
           }
         >
-          <RarityIcon size={12} />
+          <HugeiconsIcon icon={config.icon} size={12} color="currentColor" />
           {config.label}
         </div>
       </div>
@@ -337,56 +337,60 @@ const AchievementProgress = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
-                  {unlockedCount}
-                </div>
-                <div className='text-sm text-[var(--muted-foreground)]'>
-                  Unlocked
-                </div>
+                <Card className='bg-[var(--card)] border-[var(--border)] p-6 text-center'>
+                  <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
+                    {unlockedCount}
+                  </div>
+                  <div className='text-sm text-[var(--muted-foreground)]'>
+                    Unlocked
+                  </div>
+                </Card>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
-                  {totalCount}
-                </div>
-                <div className='text-sm text-[var(--muted-foreground)]'>
-                  Total
-                </div>
+                <Card className='bg-[var(--card)] border-[var(--border)] p-6 text-center'>
+                  <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
+                    {totalCount}
+                  </div>
+                  <div className='text-sm text-[var(--muted-foreground)]'>
+                    Total
+                  </div>
+                </Card>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
-                  {totalPoints}
-                </div>
-                <div className='text-sm text-[var(--muted-foreground)]'>
-                  Points
-                </div>
+                <Card className='bg-[var(--card)] border-[var(--border)] p-6 text-center'>
+                  <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
+                    {totalPoints}
+                  </div>
+                  <div className='text-sm text-[var(--muted-foreground)]'>
+                    Points
+                  </div>
+                </Card>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
-                  {level}
-                </div>
-                <div className='text-sm text-[var(--muted-foreground)]'>
-                  Level
-                </div>
+                <Card className='bg-[var(--card)] border-[var(--border)] p-6 text-center'>
+                  <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
+                    {level}
+                  </div>
+                  <div className='text-sm text-[var(--muted-foreground)]'>
+                    Level
+                  </div>
+                </Card>
               </motion.div>
             </div>
 
@@ -424,7 +428,6 @@ const AchievementProgress = () => {
           <div className='flex flex-wrap gap-2 mb-8 justify-center'>
             {categories.map((category, index) => {
               const stats = getCategoryStats(category.id);
-              const CategoryIcon = category.icon;
               const isSelected = selectedCategory === category.id;
 
               return (
@@ -442,7 +445,7 @@ const AchievementProgress = () => {
                       : 'bg-[var(--card)] text-[var(--foreground)] border-[var(--border)] hover:border-[var(--foreground)]'
                   )}
                 >
-                  <CategoryIcon size={18} />
+                  <HugeiconsIcon icon={category.icon} size={18} color="currentColor" />
                   <span>{category.label}</span>
                   <span
                     className={clsx(
@@ -524,41 +527,41 @@ const AchievementManagement = () => {
   return (
     <div className='max-w-4xl mx-auto mt-12'>
       {/* Management Header */}
-      <div className={clsx('p-6', cardBorderStyles)}>
-        <div className='flex items-center gap-3 mb-4'>
-          <HugeiconsIcon icon={RotateCcwIcon} size={24} color="currentColor" className="text-[var(--foreground)]" />
-          <h2 className='text-xl font-bold text-[var(--foreground)]'>
-            Achievement Management
-          </h2>
-        </div>
-
-        <p className='text-[var(--muted-foreground)] mb-6'>
-          Check for any missed achievements based on your current progress.
-        </p>
-
-        {/* Recalculate Achievements */}
-        <div className='flex items-center justify-between p-4 bg-[var(--background)] rounded-lg'>
-          <div>
-            <h4 className='font-medium text-[var(--foreground)]'>
-              Recalculate Achievements
-            </h4>
-            <p className='text-sm text-[var(--muted-foreground)]'>
-              Scan your progress and unlock any achievements you may have earned
-            </p>
+      <Card className='bg-[var(--card)] border-[var(--border)]'>
+        <CardHeader>
+          <div className='flex items-center gap-3'>
+            <HugeiconsIcon icon={RotateCcwIcon} size={24} color="currentColor" className="text-[var(--foreground)]" />
+            <CardTitle className='text-xl font-bold text-[var(--foreground)]'>
+              Achievement Management
+            </CardTitle>
           </div>
-          <button
-            onClick={handleRecalculateAchievements}
-            className={clsx(
-              'px-4 py-2 rounded-lg flex items-center gap-2',
-              buttonBorderStyles,
-              'text-[var(--foreground)] hover:bg-[var(--border)]'
-            )}
-          >
-            <HugeiconsIcon icon={RotateCcwIcon} size={16} color="currentColor" />
-            Recalculate
-          </button>
-        </div>
-      </div>
+        </CardHeader>
+        <CardContent>
+          <p className='text-[var(--muted-foreground)] mb-6'>
+            Check for any missed achievements based on your current progress.
+          </p>
+
+          {/* Recalculate Achievements */}
+          <div className='flex items-center justify-between p-4 bg-[var(--background)] rounded-lg border border-[var(--border)]'>
+            <div>
+              <h4 className='font-medium text-[var(--foreground)]'>
+                Recalculate Achievements
+              </h4>
+              <p className='text-sm text-[var(--muted-foreground)]'>
+                Scan your progress and unlock any achievements you may have earned
+              </p>
+            </div>
+            <Button
+              onClick={handleRecalculateAchievements}
+              variant="outline"
+              className='flex items-center gap-2'
+            >
+              <HugeiconsIcon icon={RotateCcwIcon} size={16} color="currentColor" />
+              Recalculate
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

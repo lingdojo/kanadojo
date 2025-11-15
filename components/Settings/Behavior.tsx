@@ -1,13 +1,12 @@
 'use client';
-import clsx from 'clsx';
-import { buttonBorderStyles } from '@/static/styles';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/hooks/useAudio';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { AudioBook01Icon as AudioLinesIcon, VolumeMute01Icon as VolumeXIcon, VolumeHighIcon as Volume2Icon, Loading01Icon as RefreshCwIcon, PlayIcon } from '@hugeicons/core-free-icons';;
+import { AudioBook01Icon as AudioLinesIcon, VolumeMute01Icon as VolumeXIcon, VolumeHighIcon as Volume2Icon, Loading01Icon as RefreshCwIcon, PlayIcon } from '@hugeicons/core-free-icons';
 import { useJapaneseTTS } from '@/hooks/useJapaneseTTS';
-// import{Command, KeyboardOff} from 'lucide-react'
-// import HotkeyReference from './HotkeyReference';
+import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const Behavior = () => {
   const { playClick } = useClick();
@@ -75,247 +74,176 @@ const Behavior = () => {
         In the character selection menu, for readings, display:
       </h4>
       <div className="flex flex-row gap-4">
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        <Button
+          variant={!displayKana ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4"
           onClick={() => {
             playClick();
             setDisplayKana(false);
           }}
         >
-          <span className="text-[var(--foreground)]">
-            {!displayKana && '\u2B24 '}
-          </span>
+          {!displayKana && '\u2B24 '}
           Romaji&nbsp;🇺🇸
-        </button>
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        </Button>
+        <Button
+          variant={displayKana ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4"
           onClick={() => {
             playClick();
             setDisplayKana(true);
           }}
         >
-          <span className="text-[var(--foreground)]">
-            {displayKana && '\u2B24 '}
-          </span>
+          {displayKana && '\u2B24 '}
           Kana&nbsp;🇯🇵
-        </button>
+        </Button>
       </div>
       <h4 className="text-lg">
         Show furigana (reading) above the character/word for kanji/vocabulary:
       </h4>
       <div className="flex flex-row gap-4">
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        <Button
+          variant={furiganaEnabled ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4 flex-row gap-1.5 items-end"
           onClick={() => {
             playClick();
             setFuriganaEnabled(true);
           }}
         >
-          <span>
-            <span className="text-[var(--foreground)]">
-              {furiganaEnabled && '\u2B24 '}
-            </span>
-            on
-          </span>
+          {furiganaEnabled && '\u2B24 '}
+          on
           <span className="text-sm mb-0.5">ふり</span>
-        </button>
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        </Button>
+        <Button
+          variant={!furiganaEnabled ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4"
           onClick={() => {
             playClick();
             setFuriganaEnabled(false);
           }}
         >
-          <span>
-            <span className="text-[var(--foreground)]">
-              {!furiganaEnabled && '\u2B24 '}
-            </span>
-            off
-          </span>
-        </button>
+          {!furiganaEnabled && '\u2B24 '}
+          off
+        </Button>
       </div>
 
       <h4 className="text-lg">Play UI + feedback sound effects:</h4>
       <div className="flex flex-row gap-4">
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        <Button
+          variant={!silentMode ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4 flex-row gap-1.5 items-end"
           onClick={() => {
             playClick();
             setSilentMode(false);
           }}
         >
-          <span>
-            <span className="text-[var(--foreground)]">
-              {!silentMode && '\u2B24 '}
-            </span>
-            on
-          </span>
+          {!silentMode && '\u2B24 '}
+          on
           <HugeiconsIcon icon={AudioLinesIcon} size={20} color="currentColor" className="mb-0.5" />
-        </button>
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        </Button>
+        <Button
+          variant={silentMode ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4 flex-row gap-1.5 items-end"
           onClick={() => {
             playClick();
             setSilentMode(true);
           }}
         >
-          <span>
-            <span className="text-[var(--foreground)]">
-              {silentMode && '\u2B24 '}
-            </span>
-            off
-          </span>
+          {silentMode && '\u2B24 '}
+          off
           <HugeiconsIcon icon={VolumeXIcon} size={20} color="currentColor" className="mb-0.5" />
-        </button>
+        </Button>
       </div>
 
       <h4 className="text-lg">Enable pronunciation audio:</h4>
       <div className="flex flex-row gap-4">
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        <Button
+          variant={pronunciationEnabled ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4 flex-row gap-1.5 items-end"
           onClick={() => {
             playClick();
             setPronunciationEnabled(true);
           }}
         >
-          <span>
-            <span className="text-[var(--foreground)]">
-              {pronunciationEnabled && '\u2B24 '}
-            </span>
-            on
-          </span>
+          {pronunciationEnabled && '\u2B24 '}
+          on
           <HugeiconsIcon icon={Volume2Icon} size={20} color="currentColor" className="mb-0.5" />
-        </button>
-        <button
-          className={clsx(
-            buttonBorderStyles,
-            'text-center text-lg',
-            'w-1/2 md:w-1/4 p-4',
-            'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--muted-foreground)]',
-            'flex-1 overflow-hidden'
-          )}
+        </Button>
+        <Button
+          variant={!pronunciationEnabled ? "default" : "outline"}
+          className="flex-1 text-lg h-auto py-4 flex-row gap-1.5 items-end"
           onClick={() => {
             playClick();
             setPronunciationEnabled(false);
           }}
         >
-          <span>
-            <span className="text-[var(--foreground)]">
-              {!pronunciationEnabled && '\u2B24 '}
-            </span>
-            off
-          </span>
+          {!pronunciationEnabled && '\u2B24 '}
+          off
           <HugeiconsIcon icon={VolumeXIcon} size={20} color="currentColor" className="mb-0.5" />
-        </button>
+        </Button>
       </div>
 
       {pronunciationEnabled && (
         <>
           <h4 className="text-lg">Pronunciation speed:</h4>
           <div className="flex flex-col gap-2">
-            <input
-              type="range"
-              min="0.5"
-              max="1.5"
-              step="0.1"
-              value={pronunciationSpeed}
-              onChange={e => setPronunciationSpeed(parseFloat(e.target.value))}
+            <Slider
+              min={0.5}
+              max={1.5}
+              step={0.1}
+              value={[pronunciationSpeed]}
+              onValueChange={(values) => setPronunciationSpeed(values[0])}
               className="w-full"
             />
             <div className="text-sm text-[var(--muted-foreground)] text-center">
-              {pronunciationSpeed}x
+              {pronunciationSpeed.toFixed(1)}x
             </div>
           </div>
 
           <h4 className="text-lg">Pronunciation pitch:</h4>
           <div className="flex flex-col gap-2">
-            <input
-              type="range"
-              min="0.5"
-              max="1.5"
-              step="0.1"
-              value={pronunciationPitch}
-              onChange={e => setPronunciationPitch(parseFloat(e.target.value))}
+            <Slider
+              min={0.5}
+              max={1.5}
+              step={0.1}
+              value={[pronunciationPitch]}
+              onValueChange={(values) => setPronunciationPitch(values[0])}
               className="w-full"
             />
             <div className="text-sm text-[var(--muted-foreground)] text-center">
-              {pronunciationPitch}x
+              {pronunciationPitch.toFixed(1)}x
             </div>
           </div>
 
           <h4 className="text-lg">Pronunciation voice:</h4>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2 items-center">
-              <select
-                className={clsx(buttonBorderStyles, 'p-2 flex-1')}
-                value={pronunciationVoiceName || currentVoice?.name || ''}
-                onChange={e => {
-                  const name = e.target.value || null;
-                  setPronunciationVoiceName(name);
-                  const match = availableVoices.find(v => v.name === name);
-                  if (match) setVoice(match);
+              <Select
+                value={pronunciationVoiceName || currentVoice?.name || '__auto__'}
+                onValueChange={(name) => {
+                  playClick();
+                  const voiceName = name === '__auto__' ? null : name;
+                  setPronunciationVoiceName(voiceName);
+                  if (name !== '__auto__') {
+                    const match = availableVoices.find(v => v.name === name);
+                    if (match) setVoice(match);
+                  }
                 }}
               >
-                <option value="">Auto (best available)</option>
-                {availableVoices.map(v => (
-                  <option
-                    key={v.name}
-                    value={v.name}
-                  >
-                    {v.name} ({v.lang})
-                  </option>
-                ))}
-              </select>
-              <button
-                className={clsx(buttonBorderStyles, 'px-3 py-2')}
+                <SelectTrigger className="flex-1">
+                  <SelectValue placeholder="Auto (best available)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__auto__">Auto (best available)</SelectItem>
+                  {availableVoices.map(v => (
+                    <SelectItem key={v.name} value={v.name}>
+                      {v.name} ({v.lang})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button
+                variant="outline"
+                size="icon"
                 onClick={() => {
                   playClick();
                   refreshVoices();
@@ -323,9 +251,10 @@ const Behavior = () => {
                 title="Refresh voices"
               >
                 <HugeiconsIcon icon={RefreshCwIcon} size={18} color="currentColor" />
-              </button>
-              <button
-                className={clsx(buttonBorderStyles, 'px-3 py-2')}
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
                 onClick={async () => {
                   playClick();
                   await speak('こんにちは', {
@@ -337,7 +266,7 @@ const Behavior = () => {
                 title="Test voice"
               >
                 <HugeiconsIcon icon={PlayIcon} size={18} color="currentColor" />
-              </button>
+              </Button>
             </div>
             <div className="text-sm text-[var(--muted-foreground)] text-center">
               {currentVoice

@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { IKanjiObj } from '@/store/useKanjiStore';
+import { IWordObj } from '@/store/useVocabStore';
 
 export interface GameConfig<T> {
   getDisplayChar: (item: T, isReverse: boolean) => string;
@@ -30,7 +32,7 @@ export interface GameConfig<T> {
 
   shouldShowAnswerSummary?: boolean;
 
-  getAnswerSummaryPayload?: (item: T) => any;
+  getAnswerSummaryPayload?: (item: T) => IKanjiObj | IWordObj;
 
   getSkipKey?: (isReverse: boolean) => string;
 

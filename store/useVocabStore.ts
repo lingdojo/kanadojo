@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 export interface IWordObj {
   word: string;
-  reading: string;
+  reading: string | string[];
   displayMeanings: string[];
   meanings: string[];
 }

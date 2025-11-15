@@ -160,7 +160,7 @@ const WordSummary = ({
 
     <FuriganaText
       text={payload.word}
-      reading={payload.reading}
+      reading={Array.isArray(payload.reading) ? payload.reading[0] : payload.reading}
       className="text-6xl flex justify-center w-full"
       lang="ja"
     />

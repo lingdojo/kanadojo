@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import clsx from 'clsx';
 import { Random } from 'random-js';
 import { IKanjiObj } from '@/store/useKanjiStore';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';

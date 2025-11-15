@@ -60,7 +60,7 @@ export const vocabGameConfig: GameConfig<IWordObj> = {
       <>
         <FuriganaText
           text={displayChar}
-          reading={!isReverse ? item.reading : undefined}
+          reading={!isReverse ? (Array.isArray(item.reading) ? item.reading[0] : item.reading) : undefined}
           className={textSize}
           lang={displayCharLang}
         />
@@ -80,7 +80,7 @@ export const vocabGameConfig: GameConfig<IWordObj> = {
       return (
         <FuriganaText
           text={option}
-          reading={wordObj?.reading}
+          reading={wordObj?.reading ? (Array.isArray(wordObj.reading) ? wordObj.reading[0] : wordObj.reading) : undefined}
         />
       );
     }

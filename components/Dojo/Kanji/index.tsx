@@ -1,18 +1,15 @@
 'use client';
 
 import clsx from 'clsx';
-import { chunkArray } from '@/lib/helperFunctions';
 import { useState, useMemo } from 'react';
-import { cardBorderStyles } from '@/static/styles';
-import useGridColumns from '@/hooks/useGridColumns';
 import { useClick } from '@/hooks/useAudio';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowUpIcon, CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon, PlayIcon, ArrowDown01Icon, ArrowRight01Icon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon } from '@hugeicons/core-free-icons';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon, PlayIcon, ArrowDown01Icon, ArrowRight01Icon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon, BookOpen01Icon as BookOpenIcon } from '@hugeicons/core-free-icons';
 import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import { useRouter } from 'next/navigation';
-import KanjiSetDictionary from '@/components/Dojo/Kanji/SetDictionary';
 import N5Kanji from '@/static/kanji/N5';
 import N4Kanji from '@/static/kanji/N4';
 import N3Kanji from '@/static/kanji/N3';
@@ -20,7 +17,6 @@ import N2Kanji from '@/static/kanji/N2';
 import N1Kanji from '@/static/kanji/N1';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
@@ -89,6 +85,9 @@ const KanjiCards = () => {
 
   // Filter state for hiding mastered cards
   const [hideMastered, setHideMastered] = useState(false);
+
+  // Learn mode state
+  const [learnMode, setLearnMode] = useState(false);
 
   // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
   const masteredCharacters = useMemo(() => {
@@ -177,8 +176,70 @@ const KanjiCards = () => {
 
   return (
     <div className="flex flex-col w-full gap-4">
-      {/* Unit Selector Card */}
-      <div className="flex justify-center px-4 pt-4">
+      {/* Toggle Controls and Unit Selector */}
+      <div className="flex flex-col items-center px-4 pt-4 gap-3">
+        {/* Toggle Controls */}
+        <div className="flex justify-center items-center w-full max-w-2xl gap-6">
+          {/* Learn Mode Toggle */}
+          <div className="flex items-center gap-3">
+            <Switch
+              checked={learnMode}
+              onCheckedChange={(checked) => {
+                playClick();
+                setLearnMode(checked);
+              }}
+            />
+            <label
+              className={clsx(
+                'flex items-center gap-2 cursor-pointer text-sm',
+                learnMode ? 'text-[var(--foreground)]' : 'text-[var(--muted-foreground)]'
+              )}
+              onClick={() => {
+                playClick();
+                setLearnMode(prev => !prev);
+              }}
+            >
+              <HugeiconsIcon icon={BookOpenIcon} size={18} />
+              <span>Learn Mode</span>
+            </label>
+          </div>
+
+          {/* Filter Toggle Button - Only show if there are mastered sets and not in learn mode */}
+          {masteredCount > 0 && !learnMode && (
+            <button
+              onClick={() => {
+                playClick();
+                setHideMastered(prev => !prev);
+              }}
+              className={clsx(
+                'flex items-center gap-2 px-4 py-2 rounded-xl',
+                'duration-250 transition-all ease-in-out',
+                'border-2 border-[var(--border)]',
+                'hover:bg-[var(--card)]',
+                hideMastered &&
+                  'bg-[var(--card)] border-[var(--foreground)]'
+              )}
+            >
+              {hideMastered ? (
+                <>
+                  <HugeiconsIcon icon={FilterXIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
+                  <span className="text-[var(--foreground)]">
+                    Show All Sets ({masteredCount} mastered hidden)
+                  </span>
+                </>
+              ) : (
+                <>
+                  <HugeiconsIcon icon={FilterIcon} size={20} color="currentColor" className="text-[var(--muted-foreground)]" />
+                  <span className="text-[var(--muted-foreground)]">
+                    Hide Mastered Sets ({masteredCount})
+                  </span>
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
+        {/* Unit Selector Card */}
         <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
           <DrawerTrigger asChild>
             <button
@@ -249,149 +310,148 @@ const KanjiCards = () => {
         </Drawer>
       </div>
 
-      {/* Filter Toggle Button - Only show if there are mastered sets */}
-      {masteredCount > 0 && (
-        <div className="flex justify-end px-4">
-          <button
-            onClick={() => {
-              playClick();
-              setHideMastered(prev => !prev);
-            }}
-            className={clsx(
-              'flex items-center gap-2 px-4 py-2 rounded-xl',
-              'duration-250 transition-all ease-in-out',
-              'border-2 border-[var(--border)]',
-              'hover:bg-[var(--card)]',
-              hideMastered &&
-                'bg-[var(--card)] border-[var(--foreground)]'
-            )}
-          >
-            {hideMastered ? (
-              <>
-                <HugeiconsIcon icon={FilterXIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
-                <span className="text-[var(--foreground)]">
-                  Show All Sets ({masteredCount} mastered hidden)
-                </span>
-              </>
-            ) : (
-              <>
-                <HugeiconsIcon icon={FilterIcon} size={20} color="currentColor" className="text-[var(--muted-foreground)]" />
-                <span className="text-[var(--muted-foreground)]">
-                  Hide Mastered Sets ({masteredCount})
-                </span>
-              </>
-            )}
-          </button>
+      {/* Learn Mode: Grid of Kanji Cards */}
+      {learnMode ? (
+        <div className="w-full px-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {selectedKanjiCollection.data.map((kanjiObj) => {
+              // Format readings
+              const onyomiReading = kanjiObj.onyomi
+                .filter(reading => reading && reading !== '')
+                .map(reading => showKana ? reading.split(' ')[1] : reading.split(' ')[0])
+                .join(', ');
+
+              const kunyomiReading = kanjiObj.kunyomi
+                .filter(reading => reading && reading !== '')
+                .map(reading => showKana ? reading.split(' ')[1] : reading.split(' ')[0])
+                .join(', ');
+
+              const reading = [onyomiReading, kunyomiReading].filter(r => r).join(' • ') || 'N/A';
+              const meaning = kanjiObj.fullDisplayMeanings.join(', ');
+
+              return (
+                <KanjiCard
+                  key={kanjiObj.id}
+                  kanji={kanjiObj.kanjiChar}
+                  reading={reading}
+                  meaning={meaning}
+                  onClick={() => {
+                    window.open(`http://kanjiheatmap.com/?open=${kanjiObj.kanjiChar}`, '_blank');
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
-      )}
+      ) : (
+        /* Straight column layout */
+        <div className="flex flex-col items-center w-full gap-4 px-4">
+          {filteredKanjiSets.map((kanjiSetTemp) => {
+              const kanjiInSet = selectedKanjiCollection.data.slice(
+                kanjiSetTemp.start * 10,
+                kanjiSetTemp.end * 10
+              );
+              const isSelected = selectedKanjiSets.includes(kanjiSetTemp.name);
 
-      {/* Straight column layout */}
-      <div className="flex flex-col items-center w-full gap-4 px-4">
-        {filteredKanjiSets.map((kanjiSetTemp, i) => {
-            const kanjiInSet = selectedKanjiCollection.data.slice(
-              kanjiSetTemp.start * 10,
-              kanjiSetTemp.end * 10
-            );
-            const isSelected = selectedKanjiSets.includes(kanjiSetTemp.name);
-
-            return (
-              <div
-                key={kanjiSetTemp.id + kanjiSetTemp.name}
-                className={clsx(
-                  'relative w-full max-w-2xl flex flex-col items-start gap-4',
-                  'p-6 rounded-2xl border',
-                  'transition-all duration-250 ease-in-out',
-                  isSelected
-                    ? 'bg-[var(--card)] border-[var(--foreground)]'
-                    : 'bg-[var(--background)] border-[var(--border)]'
-                )}
-              >
-                {/* Set title and status */}
-                <div className="flex items-center justify-between gap-3 w-full">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl font-light">
-                      {kanjiSetTemp.name}
-                    </span>
-                    {kanjiSetTemp.isMastered && (
-                      <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
-                        Mastered
+              return (
+                <div
+                  key={kanjiSetTemp.id + kanjiSetTemp.name}
+                  className={clsx(
+                    'relative w-full max-w-2xl flex flex-col items-start gap-4',
+                    'p-6 rounded-2xl border',
+                    'transition-all duration-250 ease-in-out',
+                    isSelected
+                      ? 'bg-[var(--card)] border-[var(--foreground)]'
+                      : 'bg-[var(--background)] border-[var(--border)]'
+                  )}
+                >
+                  {/* Set title and status */}
+                  <div className="flex items-center justify-between gap-3 w-full">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-light">
+                        {kanjiSetTemp.name}
                       </span>
-                    )}
+                      {kanjiSetTemp.isMastered && (
+                        <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                          Mastered
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Expand button */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playClick();
+                        setSelectedSetForView({
+                          start: kanjiSetTemp.start,
+                          end: kanjiSetTemp.end,
+                          name: kanjiSetTemp.name
+                        });
+                        setSheetOpen(true);
+                      }}
+                      className={clsx(
+                        'flex items-center justify-center',
+                        'p-2 rounded-lg',
+                        'hover:bg-[var(--muted)]',
+                        'transition-colors duration-150'
+                      )}
+                    >
+                      <HugeiconsIcon
+                        icon={ArrowRight01Icon}
+                        size={20}
+                        className="text-[var(--muted-foreground)]"
+                      />
+                    </button>
                   </div>
 
-                  {/* Expand button */}
+                  {/* Kanji list - clickable */}
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
+                    onClick={e => {
+                      e.currentTarget.blur();
                       playClick();
-                      setSelectedSetForView({
-                        start: kanjiSetTemp.start,
-                        end: kanjiSetTemp.end,
-                        name: kanjiSetTemp.name
-                      });
-                      setSheetOpen(true);
+                      if (selectedKanjiSets.includes(kanjiSetTemp.name)) {
+                        setSelectedKanjiSets(
+                          selectedKanjiSets.filter(
+                            set => set !== kanjiSetTemp.name
+                          )
+                        );
+                        addKanjiObjs(
+                          selectedKanjiCollection.data.slice(
+                            kanjiSetTemp.start * 10,
+                            kanjiSetTemp.end * 10
+                          )
+                        );
+                      } else {
+                        setSelectedKanjiSets([
+                          ...new Set(
+                            selectedKanjiSets.concat(kanjiSetTemp.name)
+                          ),
+                        ]);
+                        addKanjiObjs(
+                          selectedKanjiCollection.data.slice(
+                            kanjiSetTemp.start * 10,
+                            kanjiSetTemp.end * 10
+                          )
+                        );
+                      }
                     }}
-                    className={clsx(
-                      'flex items-center justify-center',
-                      'p-2 rounded-lg',
-                      'hover:bg-[var(--muted)]',
-                      'transition-colors duration-150'
-                    )}
+                    className="flex flex-wrap gap-2 text-2xl text-[var(--muted-foreground)] hover:bg-[var(--muted)] rounded-lg p-2 -m-2 w-full transition-colors"
                   >
-                    <HugeiconsIcon
-                      icon={ArrowRight01Icon}
-                      size={20}
-                      className="text-[var(--muted-foreground)]"
-                    />
+                    {kanjiInSet.map((kanjiObj) => (
+                      <span
+                        key={kanjiObj.id}
+                        className="hover:text-[var(--foreground)] transition-colors"
+                      >
+                        {kanjiObj.kanjiChar}
+                      </span>
+                    ))}
                   </button>
                 </div>
-
-                {/* Kanji list - clickable */}
-                <button
-                  onClick={e => {
-                    e.currentTarget.blur();
-                    playClick();
-                    if (selectedKanjiSets.includes(kanjiSetTemp.name)) {
-                      setSelectedKanjiSets(
-                        selectedKanjiSets.filter(
-                          set => set !== kanjiSetTemp.name
-                        )
-                      );
-                      addKanjiObjs(
-                        selectedKanjiCollection.data.slice(
-                          kanjiSetTemp.start * 10,
-                          kanjiSetTemp.end * 10
-                        )
-                      );
-                    } else {
-                      setSelectedKanjiSets([
-                        ...new Set(
-                          selectedKanjiSets.concat(kanjiSetTemp.name)
-                        ),
-                      ]);
-                      addKanjiObjs(
-                        selectedKanjiCollection.data.slice(
-                          kanjiSetTemp.start * 10,
-                          kanjiSetTemp.end * 10
-                        )
-                      );
-                    }
-                  }}
-                  className="flex flex-wrap gap-2 text-2xl text-[var(--muted-foreground)] hover:bg-[var(--muted)] rounded-lg p-2 -m-2 w-full transition-colors"
-                >
-                  {kanjiInSet.map((kanjiObj) => (
-                    <span
-                      key={kanjiObj.id}
-                      className="hover:text-[var(--foreground)] transition-colors"
-                    >
-                      {kanjiObj.kanjiChar}
-                    </span>
-                  ))}
-                </button>
-              </div>
-            );
-          })}
-      </div>
+              );
+            })}
+        </div>
+      )}
 
       {/* Footer - Game Mode Picker & Practice Button */}
       {selectedKanjiObjs.length > 0 && (
@@ -483,7 +543,7 @@ const KanjiCards = () => {
               <div className="flex flex-col divide-y divide-[var(--border)]">
                 {selectedKanjiCollection.data
                   .slice(selectedSetForView.start * 10, selectedSetForView.end * 10)
-                  .map((kanjiObj, index) => {
+                  .map((kanjiObj) => {
                     // Format onyomi readings
                     const onyomiReadings = kanjiObj.onyomi
                       .filter(reading => reading && reading !== '')
@@ -531,7 +591,7 @@ const KanjiCards = () => {
                           {onyomiReadings && (
                             <div className="flex flex-col gap-1">
                               <span className="text-xs font-light text-[var(--muted-foreground)] opacity-60">
-                                On'yomi
+                                On&apos;yomi
                               </span>
                               <span className="text-sm font-light text-[var(--foreground)]">
                                 {onyomiReadings}
@@ -543,7 +603,7 @@ const KanjiCards = () => {
                           {kunyomiReadings && (
                             <div className="flex flex-col gap-1">
                               <span className="text-xs font-light text-[var(--muted-foreground)] opacity-60">
-                                Kun'yomi
+                                Kun&apos;yomi
                               </span>
                               <span className="text-sm font-light text-[var(--foreground)]">
                                 {kunyomiReadings}

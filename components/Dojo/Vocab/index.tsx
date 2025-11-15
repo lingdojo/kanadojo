@@ -28,7 +28,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet';
-import usePreferencesStore from '@/store/usePreferencesStore';
 
 // ✅ Setup Vocab collections
 const vocabCollections = {
@@ -141,7 +140,6 @@ const VocabCards = () => {
   );
   const clearVocabSets = useVocabStore(state => state.clearVocabSets);
   const clearWordObjs = useVocabStore(state => state.clearWordObjs);
-  const showKana = usePreferencesStore(state => state.displayKana);
 
   const allUnits = [
     { id: 'n5', name: 'N5', description: 'Beginner', count: N5Nouns.length },
@@ -270,7 +268,7 @@ const VocabCards = () => {
 
       {/* Straight column layout */}
       <div className="flex flex-col items-center w-full gap-4 px-4">
-        {filteredVocabSets.map((vocabSetTemp, i) => {
+        {filteredVocabSets.map((vocabSetTemp) => {
             const wordsInSet = selectedVocabCollection.data.slice(
               vocabSetTemp.start * 10,
               vocabSetTemp.end * 10

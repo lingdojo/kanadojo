@@ -1,9 +1,16 @@
 'use client';
+
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   ChartIncreaseIcon as ProgressIcon,
+  AwardIcon as TrophyIcon,
   Settings02Icon as SettingsIcon,
   FavouriteIcon as HeartIcon,
   PaintBoardIcon as ThemeIcon,
@@ -15,29 +22,16 @@ import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { useClick } from '@/hooks/useAudio';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { LanguageSelector } from '@/components/reusable/LanguageSelector';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { VisuallyHidden } from '@/components/ui/visually-hidden';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import themeSets, { getTheme, applyTheme } from '@/static/themes';
-import KanaCards from '@/components/Dojo/Kana/KanaCards';
-import KanjiCards from '@/components/Dojo/Kanji';
-import VocabCards from '@/components/Dojo/Vocab';
+import SimpleProgress from './SimpleProgress';
+import AchievementProgress from './AchievementProgress';
 
-const MainMenu = () => {
+const ProgressAndAchievements = () => {
   const [themeDialogOpen, setThemeDialogOpen] = useState(false);
+  const { playClick } = useClick();
 
   const theme = usePreferencesStore(state => state.theme);
   const setTheme = usePreferencesStore(state => state.setTheme);
-  const { playClick } = useClick();
 
   const version = '0.1.1';
 
@@ -52,7 +46,7 @@ const MainMenu = () => {
   const themeName = currentTheme?.name || theme;
 
   return (
-    <div className="flex flex-col min-h-[100dvh] max-w-[100dvw] relative">
+    <div className="min-h-[100dvh] max-w-[100dvw] flex flex-col relative">
       {/* Top Left - Logo and Icons */}
       <div className="fixed top-4 left-4 z-50 flex items-center gap-3">
         <Link href="/" className="flex flex-col hover:opacity-80 transition-opacity">
@@ -104,49 +98,49 @@ const MainMenu = () => {
         </Button>
       </div>
 
-      {/* Content Area with Tabs */}
-      <div className="w-full pt-20 pb-20">
-        <Tabs defaultValue="kana" className="w-full">
-          {/* Navigation Tabs */}
-          <div className="flex justify-center mb-8">
-            <TabsList>
-              <TabsTrigger
-                value="kana"
-                onClick={() => playClick()}
-              >
-                <span lang="ja" className="mr-1.5">かな</span>
-                Kana
-              </TabsTrigger>
-              <TabsTrigger
-                value="kanji"
-                onClick={() => playClick()}
-              >
-                <span lang="ja" className="mr-1.5">漢字</span>
-                Kanji
-              </TabsTrigger>
-              <TabsTrigger
-                value="vocabulary"
-                onClick={() => playClick()}
-              >
-                <span lang="ja" className="mr-1.5">語彙</span>
-                Vocabulary
-              </TabsTrigger>
-            </TabsList>
+      {/* Content */}
+      <div className="flex flex-col items-center w-full pt-20 pb-20">
+        <div className="flex flex-col gap-4 w-full max-w-7xl px-4 md:px-8">
+          {/* Header */}
+          <div className="pt-6">
+            <h1 className="text-4xl font-bold text-[var(--foreground)] mb-2">
+              Progress & Achievements
+            </h1>
+            <p className="text-lg text-[var(--muted-foreground)]">
+              Track your learning journey and celebrate your milestones
+            </p>
           </div>
 
-          {/* Tab Content */}
-          <TabsContent value="kana" className="mt-0">
-            <KanaCards />
-          </TabsContent>
+          {/* Tabs */}
+          <Tabs defaultValue="progress" className="w-full mt-4">
+            <TabsList className="bg-[var(--card)] border border-[var(--border)]">
+              <TabsTrigger
+                value="progress"
+                onClick={() => playClick()}
+                className="flex items-center gap-2"
+              >
+                <HugeiconsIcon icon={ProgressIcon} size={16} />
+                Progress
+              </TabsTrigger>
+              <TabsTrigger
+                value="achievements"
+                onClick={() => playClick()}
+                className="flex items-center gap-2"
+              >
+                <HugeiconsIcon icon={TrophyIcon} size={16} />
+                Achievements
+              </TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="kanji" className="mt-0">
-            <KanjiCards />
-          </TabsContent>
+            <TabsContent value="progress" className="mt-6">
+              <SimpleProgress />
+            </TabsContent>
 
-          <TabsContent value="vocabulary" className="mt-0">
-            <VocabCards />
-          </TabsContent>
-        </Tabs>
+            <TabsContent value="achievements" className="mt-6">
+              <AchievementProgress />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
 
       {/* Bottom Left - Social and Legal Links */}
@@ -243,4 +237,4 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;
+export default ProgressAndAchievements;

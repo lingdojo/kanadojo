@@ -9,7 +9,7 @@ import { useGoalTimers } from '@/hooks/useGoalTimers';
 import { Button } from '@/components/ui/button';
 import { generateKanaQuestion } from '@/lib/generateKanaQuestions';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Timer01Icon as TimerIcon, Target01Icon as TargetIcon, ChartIncreaseIcon as ChartIncreaseIcon, RotateLeft01Icon as RotateCcwIcon, PlayIcon, ArrowLeft01Icon, CheckmarkCircle02Icon as CheckCircle2Icon, CancelCircleIcon as XCircleIcon, Cancel01Icon as XIcon } from '@hugeicons/core-free-icons';
+import { Timer01Icon as TimerIcon, Target01Icon as TargetIcon, ChartIncreaseIcon as ChartIncreaseIcon, RotateLeft01Icon as RotateCcwIcon, PlayIcon, CheckmarkCircle02Icon as CheckCircle2Icon, CancelCircleIcon as XCircleIcon, Cancel01Icon as XIcon, ArrowLeft01Icon as ArrowLeftIcon } from '@hugeicons/core-free-icons';
 import { Link } from '@/i18n/routing';
 import clsx from 'clsx';
 import { useClick, useCorrect, useError } from '@/hooks/useAudio';

@@ -91,7 +91,7 @@ const KanaCards = () => {
       characterIndex += kana[i].kana.length;
     }
 
-    groups.forEach((group, groupOffset) => {
+    groups.forEach((group) => {
       group.kana.forEach((k, i) => {
         allKana.push({
           kana: k,

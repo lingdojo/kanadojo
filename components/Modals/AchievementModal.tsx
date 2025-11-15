@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Cancel01Icon as XIcon, AwardIcon as TrophyIcon, StarIcon, ZapIcon, CrownIcon, DiamondIcon as GemIcon } from '@hugeicons/core-free-icons';
+import { Cancel01Icon as XIcon, AwardIcon as TrophyIcon, StarIcon as Star, ZapIcon as Zap, CrownIcon as Crown, DiamondIcon as Gem } from '@hugeicons/core-free-icons';
 import confetti from 'canvas-confetti';
 import {
   type Achievement,
@@ -19,7 +19,7 @@ const rarityConfig: Record<
     color: string;
     bgColor: string;
     borderColor: string;
-    icon: React.FC<LucideProps>;
+    icon: typeof Star;
     label: string;
     confettiColors: string[];
   }
@@ -44,7 +44,7 @@ const rarityConfig: Record<
     color: '#2563EB',
     bgColor: '#EFF6FF',
     borderColor: '#93C5FD',
-    icon: Trophy,
+    icon: TrophyIcon,
     label: 'Rare',
     confettiColors: ['#3B82F6', '#60A5FA']
   },
@@ -224,7 +224,7 @@ const AchievementModal = ({
 
                 {/* Rarity Badge */}
                 <div className='flex items-center justify-center gap-2'>
-                  <RarityIcon size={16} style={{ color: config.color }} />
+                  <HugeiconsIcon icon={RarityIcon} size={16} color={config.color} />
                   <span
                     className='text-sm font-medium uppercase tracking-wider'
                     style={{ color: config.color }}

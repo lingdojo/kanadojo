@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowDownIcon as ChevronDownIcon, ArrowLeftIcon as ChevronLeftIcon, ArrowRightIcon as ChevronRightIcon } from '@hugeicons/core-free-icons';
+import { ArrowDownIcon as ChevronDownIconIcon, ArrowLeftIcon as ChevronLeftIconIcon, ArrowRightIcon as ChevronRightIconIcon } from '@hugeicons/core-free-icons';
 import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
 
 import { cn } from "@/lib/utils"

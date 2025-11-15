@@ -1,11 +1,11 @@
-import ProgressWithSidebar from '@/components/Progress/ProgressWithSidebar';
+import ProgressAndAchievements from '@/components/Progress/ProgressAndAchievements';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KanaDojo: Progress',
-  description: 'Track your Japanese learning progress and see detailed statistics.',
+  title: 'Progress & Achievements - KanaDojo',
+  description: 'Track your Japanese learning progress and unlock achievements.',
 };
 
 export default function ProgressPage() {
-  return <ProgressWithSidebar />;
+  return <ProgressAndAchievements />;
 }

@@ -53,9 +53,7 @@ export const kanaGameConfig: GameConfig<KanaPair> = {
   },
 
   renderDisplayChar: (
-    displayChar: string,
-    item: KanaPair,
-    isReverse: boolean
+    displayChar: string
   ): ReactNode => {
     return (
       <>

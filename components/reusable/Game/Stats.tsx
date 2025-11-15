@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { HourglassIcon, SquareLock01Icon as SquareCheckIcon, Cancel01Icon as SquareXIcon, ChartIncreaseIcon as ChartSplineIcon, Target01Icon as TargetIcon, Timer01Icon as TimerIcon, Clock01Icon as ClockFadingIcon, CircleIcon as CloverIcon, HeartbreakIcon as HeartCrackIcon, CircleIcon as CircleDivideIcon, FireIcon as FlameIcon, LayerIcon as ShapesIcon, SummationIcon as SigmaIcon, ArrowLeftDoubleIcon as ChevronsLeftIcon } from '@hugeicons/core-free-icons';
+import { ArrowLeftDoubleIcon as ChevronsLeftIcon, HourglassIcon as Hourglass, SquareLock01Icon as SquareCheck, Cancel01Icon as SquareX, FireIcon as Flame, TargetIcon as Target, Timer01Icon as Timer, Clock01Icon as ClockFading, CircleIcon as CircleDivide, SummationIcon as Sigma, LayerIcon as Shapes, CircleIcon as Clover, HeartbreakIcon as HeartCrack, ChartIncreaseIcon as ChartSplineIcon } from '@hugeicons/core-free-icons';
 import useStatsStore from '@/store/useStatsStore';
 import { findHighestCounts } from '@/lib/helperFunctions';
 import { useClick } from '@/hooks/useAudio';
@@ -167,7 +167,7 @@ const Stats = () => {
                 </span>
                 <span>{statsField.value}</span>
                 {statsField.icons.map((Icon, i) => (
-                  <Icon size={24} key={i} />
+                  <HugeiconsIcon icon={Icon} size={24} key={i} color="currentColor" />
                 ))}
               </p>
             ))}
@@ -190,7 +190,7 @@ const Stats = () => {
                 </span>
                 <span>{statsField.value}</span>
                 {statsField.icons.map((Icon, i) => (
-                  <Icon size={24} key={i} />
+                  <HugeiconsIcon icon={Icon} size={24} key={i} color="currentColor" />
                 ))}
               </p>
             ))}
@@ -212,7 +212,7 @@ const Stats = () => {
                 </span>
                 <span>{statsField.value}</span>
                 {statsField.icons.map((Icon, i) => (
-                  <Icon size={24} key={i} />
+                  <HugeiconsIcon icon={Icon} size={24} key={i} color="currentColor" />
                 ))}
               </p>
             ))}

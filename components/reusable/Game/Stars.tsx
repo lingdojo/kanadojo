@@ -1,7 +1,7 @@
 'use client';
 import useStatsStore from '@/store/useStatsStore';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { StarIcon } from '@hugeicons/core-free-icons';;
+import { StarIcon } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 
 const Stars = () => {
@@ -11,8 +11,9 @@ const Stars = () => {
     <div className='flex gap-2 mt-4'>
       <div className='grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 xl:grid-cols-20 gap-2'>
         {Array.from({ length: stars }, (_, index) => (
-          <Star
+          <HugeiconsIcon
             key={index}
+            icon={StarIcon}
             size={50}
             className={clsx(
               stars >= 15
