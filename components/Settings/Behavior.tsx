@@ -517,10 +517,7 @@ const Behavior = () => {
               })()}
             {availableVoices.length === 0 && (
               <div className="text-sm text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-200 dark:border-orange-800">
-                <strong>⚠️ Notice:</strong> No voices are available. Please
-                refresh voices or check your browser&apos;s speech synthesis
-                settings. This is not a system issue - your browser may need
-                additional language packs.
+                <strong>⚠️ Notice:</strong> No voices are available. Please refresh voices or check your system and browser speech synthesis settings. This may be due to the operating system (e.g., privacy-oriented OS without a default TTS engine) or an unsupported API (e.g., Opera Mobile does not support speech synthesis).
               </div>
             )}
           </div>
