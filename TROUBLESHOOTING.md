@@ -101,7 +101,44 @@ npm config get proxy
 npm config get https-proxy
 ```
 
-#### Solution 7: Use GitHub Codespaces or WSL2
+#### Solution 7: Bypass Font Loading (Advanced)
+
+If all else fails and you just need to start developing, you can temporarily disable font loading:
+
+1. **Comment out font imports in `static/fonts.ts`:**
+
+Open `static/fonts.ts` and comment out the problematic font imports at the top:
+
+```typescript
+// Temporarily comment out all imports
+/*
+import {
+  Noto_Sans_JP,
+  Zen_Maru_Gothic,
+  // ... rest of imports
+} from 'next/font/google';
+*/
+```
+
+2. **Create a fallback export:**
+
+At the end of `static/fonts.ts`, replace the export with:
+
+```typescript
+// Temporary fallback for development
+const fonts: any[] = [];
+export default fonts;
+```
+
+3. **Run dev server:**
+
+```bash
+npm run dev
+```
+
+**⚠️ Important:** Remember to restore the original `static/fonts.ts` file before committing changes. This is only a temporary workaround for local development.
+
+#### Solution 8: Use GitHub Codespaces or WSL2
 
 If issues persist, consider these alternatives:
 
