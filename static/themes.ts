@@ -685,6 +685,14 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsl(267deg, 84%, 81%)',
         secondaryColor: 'hsl(226, 64%, 88%)',
       },
+      {
+        id: "fuji",
+        backgroundColor: "hsla(210, 28%, 11%, 1)",
+        cardColor: "hsla(210, 26%, 15%, 1)",
+        borderColor: "hsla(210, 24%, 23%, 1)",
+        mainColor: "hsla(200, 55%, 75%, 1)",
+        secondaryColor: "hsla(0, 0%, 92%, 1)",
+      }
     ],
   },
 
