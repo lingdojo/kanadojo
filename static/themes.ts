@@ -700,6 +700,14 @@ const themes: ThemeGroup[] = [
         borderColor: "hsla(210, 24%, 23%, 1)",
         mainColor: "hsla(200, 55%, 75%, 1)",
         secondaryColor: "hsla(0, 0%, 92%, 1)",
+      },
+      {
+        id: 'cosmic-dream',
+        backgroundColor: 'hsla(260, 62%, 11%, 1)',
+        cardColor: 'hsla(255, 58%, 16%, 1)',
+        borderColor: 'hsla(190, 98%, 58%, 1)',
+        mainColor: 'hsla(294, 100%, 67%, 1)',
+        secondaryColor: 'hsla(192, 100%, 86%, 1)',
       }
     ],
   },
