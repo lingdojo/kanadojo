@@ -387,6 +387,40 @@ The `wabi` theme is inspired by traditional Japanese minimalism — the calm cla
   * Run automated contrast tests (axe, Lighthouse) on both accent colors.
   * Test buttons, dialogs, inputs, and other interactive components across breakpoints and accessibility modes.
 
+#### Cosmic Dream Theme (Dark — Nebula Aurora)
+
+The `Cosmic Dream` theme brings an aurora/nebula-inspired dark palette to KanaDojo. It uses only HSLA values and follows the 5-variable color model used across the project.
+
+- **id:** `cosmic-dream`
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: 'cosmic-dream',
+  backgroundColor: 'hsla(260, 62%, 11%, 1)', // deep cosmic purple/navy
+  cardColor:       'hsla(255, 58%, 16%, 1)', // slightly lighter starfield purple
+  borderColor:     'hsla(190, 98%, 58%, 1)', // luminous teal/cyan (nebula outline)
+  mainColor:       'hsla(294, 100%, 67%, 1)', // vibrant cosmic magenta (headline/primary)
+  secondaryColor:  'hsla(192, 100%, 86%, 1)', // soft light blue (subtle UI text/icons)
+}
+```
+
+**Usage guidance:**
+- Use `--background-color` for the large page background and overlays to establish the deep cosmic base.
+- Use `--card-color` for panels and cards to create subtle separation from the page background.
+- Use `--border-color` for borders, highlights, and luminous accents that suggest nebula edges.
+- Use `--main-color` for headings, CTAs, and high-emphasis text.
+- Use `--secondary-color` for secondary text, icons, and supportive UI elements.
+
+**Accessibility / contrast notes:**
+- Verify `--main-color` and `--secondary-color` against `--background-color` and `--card-color` meet WCAG 2.1 AA for normal text (>= 4.5:1). Use WebAIM, axe, or Lighthouse to confirm.
+- If a contrast check fails, adjust the lightness (L) in the HSLA values and re-test, keeping the color values in HSLA format.
+
+**Developer checklist when adding `Cosmic Dream`:**
+1. Ensure the theme object is added in `static/themes.ts` under the `Dark` group (IDs must be kebab-case).
+2. Run `applyTheme('cosmic-dream')` locally and visually inspect key UI surfaces (page background, cards, borders, headings, icons).
+3. Run automated contrast checks and include contrast ratios in the PR description.
+4. Add at least one screenshot (card + page + controls) to the PR for visual review.
+
 
 
   ### Theme Color Guidelines
