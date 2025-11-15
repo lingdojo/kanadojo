@@ -167,7 +167,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctKanaChar} = ${correctRomajiChar} `}</span>
-            <CircleCheck className="inline text-[var(--main-color)]" />
+            <CircleCheck className="inline text-[var(--foreground)]" />
           </>
         );
       } else {
@@ -175,7 +175,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctKanaChar} ≠ ${selectedChar} `}</span>
-            <CircleX className="inline text-[var(--main-color)]" />
+            <CircleX className="inline text-[var(--foreground)]" />
           </>
         );
       }
@@ -196,7 +196,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctRomajiCharReverse} = ${correctKanaCharReverse} `}</span>
-            <CircleCheck className="inline text-[var(--main-color)]" />
+            <CircleCheck className="inline text-[var(--foreground)]" />
           </>
         );
       } else {
@@ -204,7 +204,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctRomajiCharReverse} ≠ ${selectedChar} `}</span>
-            <CircleX className="inline text-[var(--main-color)]" />
+            <CircleX className="inline text-[var(--foreground)]" />
           </>
         );
       }
@@ -258,7 +258,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
           text={displayChar}
           variant="icon-only"
           size="lg"
-          className="bg-[var(--card-color)] text-[var(--secondary-color)]"
+          className="bg-[var(--card)] text-[var(--muted-foreground)]"
         />
       </div>
       <div className="flex flex-row w-full gap-5 sm:gap-0 sm:justify-evenly">
@@ -274,19 +274,19 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
               'text-5xl font-semibold pb-6 pt-3 w-full sm:w-1/5 flex flex-row justify-center items-center gap-1',
               buttonBorderStyles,
               wrongSelectedAnswers.includes(variantChar) &&
-                'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
+                'hover:bg-[var(--card)] hover:border-[var(--border)] text-[var(--border)]',
               !wrongSelectedAnswers.includes(variantChar) &&
-                'text-[var(--main-color)] hover:border-[var(--main-color)]'
+                'text-[var(--foreground)] hover:border-[var(--foreground)]'
             )}
             onClick={() => handleOptionClick(variantChar)}
           >
             <span>{variantChar}</span>
             <span
               className={clsx(
-                'hidden lg:inline text-xs rounded-full bg-[var(--border-color)]  px-1',
+                'hidden lg:inline text-xs rounded-full bg-[var(--border)]  px-1',
                 wrongSelectedAnswers.includes(variantChar)
-                  ? 'text-[var(--border-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  ? 'text-[var(--border)]'
+                  : 'text-[var(--muted-foreground)]'
               )}
             >
               {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}

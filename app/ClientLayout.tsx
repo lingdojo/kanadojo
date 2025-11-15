@@ -77,7 +77,7 @@ export default function ClientLayout({
     <div
       data-scroll-restoration-id='container'
       className={clsx(
-        'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
+        'bg-[var(--background)] text-[var(--foreground)] min-h-[100dvh] max-w-[100dvw]',
         // 6. Apply fontClassName. This is now implicitly conditional
         // because fontClassName will only have a value in prod after load.
         fontClassName

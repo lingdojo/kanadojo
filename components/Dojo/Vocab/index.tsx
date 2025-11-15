@@ -114,8 +114,8 @@ const VocabCards = () => {
     <div className="flex flex-col w-full gap-4">
       {/* Info message when no progress data exists */}
       {!hasProgressData && (
-        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
-          <p className="text-sm text-[var(--secondary-color)]">
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card)] border-2 border-[var(--border)]">
+          <p className="text-sm text-[var(--muted-foreground)]">
             💡 <strong>Tip:</strong> Complete some practice sessions to unlock
             the &apos;Hide Mastered Sets&apos; filter. Sets become mastered when
             you achieve 90%+ accuracy with 10+ attempts per word.
@@ -134,19 +134,19 @@ const VocabCards = () => {
             className={clsx(
               'flex items-center gap-2 px-4 py-2 rounded-xl',
               'duration-250 transition-all ease-in-out',
-              'border-2 border-[var(--border-color)]',
-              'hover:bg-[var(--card-color)]',
+              'border-2 border-[var(--border)]',
+              'hover:bg-[var(--card)]',
               hideMastered &&
-                'bg-[var(--card-color)] border-[var(--main-color)]'
+                'bg-[var(--card)] border-[var(--foreground)]'
             )}
           >
             {hideMastered ? (
               <>
                 <FilterX
                   size={20}
-                  className="text-[var(--main-color)]"
+                  className="text-[var(--foreground)]"
                 />
-                <span className="text-[var(--main-color)]">
+                <span className="text-[var(--foreground)]">
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
@@ -154,9 +154,9 @@ const VocabCards = () => {
               <>
                 <Filter
                   size={20}
-                  className="text-[var(--secondary-color)]"
+                  className="text-[var(--muted-foreground)]"
                 />
-                <span className="text-[var(--secondary-color)]">
+                <span className="text-[var(--muted-foreground)]">
                   Hide Mastered Sets ({masteredCount})
                 </span>
               </>
@@ -167,8 +167,8 @@ const VocabCards = () => {
 
       {/* Show progress indicator if user has data but no mastered sets yet */}
       {hasProgressData && masteredCount === 0 && (
-        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
-          <p className="text-sm text-[var(--secondary-color)]">
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card)] border-2 border-[var(--border)]">
+          <p className="text-sm text-[var(--muted-foreground)]">
             You have progress data for{' '}
             {Object.keys(allTimeStats.characterMastery).length} words. Keep
             practicing to master complete sets! (90%+ accuracy, 10+ attempts per
@@ -204,9 +204,9 @@ const VocabCards = () => {
             >
               <ChevronUp
                 className={clsx(
-                  'duration-250 text-[var(--border-color)]',
-                  'max-md:group-active:text-[var(--secondary-color)]',
-                  'md:group-hover:text-[var(--secondary-color)]',
+                  'duration-250 text-[var(--border)]',
+                  'max-md:group-active:text-[var(--muted-foreground)]',
+                  'md:group-hover:text-[var(--muted-foreground)]',
                   collapsedRows.includes(rowIndex) && 'rotate-180'
                 )}
                 size={28}
@@ -230,18 +230,18 @@ const VocabCards = () => {
                     key={vocabSetTemp.id + vocabSetTemp.name}
                     className={clsx(
                       'flex flex-col md:px-4 h-full',
-                      'border-[var(--border-color)]',
+                      'border-[var(--border)]',
                       i < rowSets.length - 1 && 'md:border-r-1'
                     )}
                   >
                     <button
                       className={clsx(
                         'text-2xl flex justify-center items-center gap-2 group',
-                        'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
+                        'rounded-xl bg-[var(--background)] hover:cursor-pointer',
                         'duration-250 transition-all ease-in-out',
                         'px-2 py-3 max-md:mx-4',
                         selectedVocabSets.includes(vocabSetTemp.name) &&
-                          'bg-[var(--border-color)]'
+                          'bg-[var(--border)]'
                       )}
                       onClick={e => {
                         e.currentTarget.blur();
@@ -274,9 +274,9 @@ const VocabCards = () => {
                       }}
                     >
                       {selectedVocabSets.includes(vocabSetTemp.name) ? (
-                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
+                        <CircleCheck className="mt-0.5 text-[var(--muted-foreground)] duration-250" />
                       ) : (
-                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
+                        <Circle className="mt-0.5 text-[var(--border)] duration-250" />
                       )}
                       {vocabSetTemp.name}
                     </button>

@@ -79,7 +79,7 @@ const Behavior = () => {
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -87,7 +87,7 @@ const Behavior = () => {
             setDisplayKana(false);
           }}
         >
-          <span className="text-[var(--main-color)]">
+          <span className="text-[var(--foreground)]">
             {!displayKana && '\u2B24 '}
           </span>
           Romaji&nbsp;🇺🇸
@@ -97,7 +97,7 @@ const Behavior = () => {
             buttonBorderStyles,
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -105,7 +105,7 @@ const Behavior = () => {
             setDisplayKana(true);
           }}
         >
-          <span className="text-[var(--main-color)]">
+          <span className="text-[var(--foreground)]">
             {displayKana && '\u2B24 '}
           </span>
           Kana&nbsp;🇯🇵
@@ -121,7 +121,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -130,7 +130,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {furiganaEnabled && '\u2B24 '}
             </span>
             on
@@ -143,7 +143,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -152,7 +152,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {!furiganaEnabled && '\u2B24 '}
             </span>
             off
@@ -168,7 +168,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -177,7 +177,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {!silentMode && '\u2B24 '}
             </span>
             on
@@ -193,7 +193,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -202,7 +202,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {silentMode && '\u2B24 '}
             </span>
             off
@@ -222,7 +222,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -231,7 +231,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {pronunciationEnabled && '\u2B24 '}
             </span>
             on
@@ -247,7 +247,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]',
+            'text-[var(--muted-foreground)]',
             'flex-1 overflow-hidden'
           )}
           onClick={() => {
@@ -256,7 +256,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {!pronunciationEnabled && '\u2B24 '}
             </span>
             off
@@ -281,7 +281,7 @@ const Behavior = () => {
               onChange={e => setPronunciationSpeed(parseFloat(e.target.value))}
               className="w-full"
             />
-            <div className="text-sm text-[var(--secondary-color)] text-center">
+            <div className="text-sm text-[var(--muted-foreground)] text-center">
               {pronunciationSpeed}x
             </div>
           </div>
@@ -297,7 +297,7 @@ const Behavior = () => {
               onChange={e => setPronunciationPitch(parseFloat(e.target.value))}
               className="w-full"
             />
-            <div className="text-sm text-[var(--secondary-color)] text-center">
+            <div className="text-sm text-[var(--muted-foreground)] text-center">
               {pronunciationPitch}x
             </div>
           </div>
@@ -350,7 +350,7 @@ const Behavior = () => {
                 <Play size={18} />
               </button>
             </div>
-            <div className="text-sm text-[var(--secondary-color)] text-center">
+            <div className="text-sm text-[var(--muted-foreground)] text-center">
               {currentVoice
                 ? `${currentVoice.name} • ${currentVoice.lang}`
                 : 'No voice selected'}
@@ -532,7 +532,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]'
+            'text-[var(--muted-foreground)]'
           )}
           onClick={() => {
             playClick();
@@ -540,7 +540,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {hotkeysOn && '\u2B24 '}
             </span>
             on
@@ -556,7 +556,7 @@ const Behavior = () => {
             'text-center text-lg',
             'w-1/2 md:w-1/4 p-4',
             'flex flex-row gap-1.5 justify-center items-end',
-            'text-[var(--secondary-color)]'
+            'text-[var(--muted-foreground)]'
           )}
           onClick={() => {
             playClick();
@@ -564,7 +564,7 @@ const Behavior = () => {
           }}
         >
           <span>
-            <span className="text-[var(--main-color)]">
+            <span className="text-[var(--foreground)]">
               {!hotkeysOn && '\u2B24 '}
             </span>
             off

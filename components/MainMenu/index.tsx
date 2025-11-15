@@ -138,7 +138,7 @@ const MainMenu = () => {
                 className={clsx(
                   'hover:cursor-pointer duration-250 hover:scale-120',
                   'active:scale-100 active:duration-225',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
                 )}
               />
             ) : (
@@ -151,7 +151,7 @@ const MainMenu = () => {
                 className={clsx(
                   'hover:cursor-pointer duration-250 hover:scale-120',
                   'active:scale-100 active:duration-225',
-                  'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                  'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
                 )}
               />
             )}
@@ -174,7 +174,7 @@ const MainMenu = () => {
                 'hover:cursor-pointer duration-250 hover:scale-120',
                 'active:scale-100 active:duration-225',
                 'md:hidden',
-                'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
               )}
               onClick={() => {
                 playClick();
@@ -187,7 +187,7 @@ const MainMenu = () => {
               className={clsx(
                 'hover:cursor-pointer duration-250 hover:scale-120',
                 'active:scale-100 active:duration-225',
-                'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
+                'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
               )}
               onClick={() => {
                 playClick();
@@ -211,7 +211,7 @@ const MainMenu = () => {
         <Info />
         <div
           className={clsx(
-            'rounded-2xl bg-[var(--card-color)]',
+            'rounded-2xl bg-[var(--card)]',
             'duration-250',
             'transition-all ease-in-out',
             'flex flex-col md:flex-row',
@@ -233,14 +233,14 @@ const MainMenu = () => {
                     i === 0 && 'rounded-tl-2xl rounded-bl-2xl',
                     i === links.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
                     'hover:cursor-pointer',
-                    'hover:bg-[var(--border-color)]'
+                    'hover:bg-[var(--border)]'
                     // 'duration-100'
                   )}
                   onClick={() => playClick()}
                 >
                   <span
                     lang="ja"
-                    className="font-normal text-[var(--secondary-color)]"
+                    className="font-normal text-[var(--muted-foreground)]"
                   >
                     {link.name_ja}
                   </span>
@@ -257,8 +257,8 @@ const MainMenu = () => {
                 <div
                   className={clsx(
                     'md:border-l-1 md:h-auto md:w-0',
-                    'border-[var(--border-color)]',
-                    'border-t-1 w-full border-[var(--border-color)]'
+                    'border-[var(--border)]',
+                    'border-t-1 w-full border-[var(--border)]'
                   )}
                 />
               )}
@@ -269,7 +269,7 @@ const MainMenu = () => {
       <div
         className={clsx(
           'fixed bottom-3 flex flex-row gap-2',
-          'max-md:bg-[var(--card-color)] rounded-xl z-50',
+          'max-md:bg-[var(--card)] rounded-xl z-50',
           'opacity-90',
           expandDecorations && 'hidden'
         )}
@@ -278,7 +278,7 @@ const MainMenu = () => {
           <Link
             href={link.href}
             key={i}
-            className="p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)]"
+            className="p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
             onClick={() => playClick()}
           >
             <link.icon className="size-4" />

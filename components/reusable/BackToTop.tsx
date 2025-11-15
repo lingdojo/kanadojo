@@ -47,10 +47,10 @@ export default function BackToTop() {
         'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ' +
         'inline-flex items-center justify-center rounded-full ' +
         'p-3 shadow-lg transition-all duration-200 ' +
-        'bg-[var(--card-color)] text-[var(--main-color)] ' +
-        'hover:bg-[var(--border-color)] hover:scale-110 ' +
-        'focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 ' +
-        'border-2 border-[var(--border-color)]'
+        'bg-[var(--card)] text-[var(--foreground)] ' +
+        'hover:bg-[var(--border)] hover:scale-110 ' +
+        'focus:outline-none focus:ring-2 focus:ring-[var(--foreground)] focus:ring-offset-2 ' +
+        'border-2 border-[var(--border)]'
       }
     >
       <ChevronUp size={24} strokeWidth={2.5} />

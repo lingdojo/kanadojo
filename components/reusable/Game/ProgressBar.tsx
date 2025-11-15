@@ -54,17 +54,17 @@ ProgressBarProps) => {
   return (
     <div className='relative w-full flex flex-col items-center'>
       {/* Progress Bar Background */}
-      <div className='w-full bg-[var(--card-color)] rounded-full h-4 overflow-hidden relative'>
+      <div className='w-full bg-[var(--card)] rounded-full h-4 overflow-hidden relative'>
         {/* Progress Indicator */}
         <div
-          className='bg-[var(--secondary-color)] h-4 rounded-full transition-all duration-500 z-10 relative'
+          className='bg-[var(--muted-foreground)] h-4 rounded-full transition-all duration-500 z-10 relative'
           style={{ width: `${percentage}%` }}
         />
         {/* Checkpoints */}
         {[25, 50, 75].map(cp => (
           <div
             key={cp}
-            className='absolute top-0 h-4 w-0 bg-[var(--border-color)] z-0'
+            className='absolute top-0 h-4 w-0 bg-[var(--border)] z-0'
             style={{
               left: `calc(${cp}% - 2px)` // Adjust for marker width
             }}

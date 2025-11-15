@@ -57,7 +57,7 @@ export default function GoalTimers() {
       targetSeconds: newMinutes * 60,
       category: 'custom',
       icon: newIcon,
-      color: 'var(--main-color)',
+      color: 'var(--foreground)',
     });
 
     // Reset form
@@ -99,13 +99,13 @@ export default function GoalTimers() {
         <div
           className={clsx(
             'p-4 rounded-xl border-2',
-            'bg-[var(--card-color)] border-[var(--border-color)]'
+            'bg-[var(--card)] border-[var(--border)]'
           )}
         >
-          <p className="text-sm text-[var(--secondary-color)] mb-1">
+          <p className="text-sm text-[var(--muted-foreground)] mb-1">
             Total Achievements
           </p>
-          <p className="text-3xl font-bold text-[var(--main-color)]">
+          <p className="text-3xl font-bold text-[var(--foreground)]">
             {totalAchievements}
           </p>
         </div>
@@ -113,13 +113,13 @@ export default function GoalTimers() {
         <div
           className={clsx(
             'p-4 rounded-xl border-2',
-            'bg-[var(--card-color)] border-[var(--border-color)]'
+            'bg-[var(--card)] border-[var(--border)]'
           )}
         >
-          <p className="text-sm text-[var(--secondary-color)] mb-1">
+          <p className="text-sm text-[var(--muted-foreground)] mb-1">
             Most Used Template
           </p>
-          <p className="text-xl font-bold text-[var(--main-color)]">
+          <p className="text-xl font-bold text-[var(--foreground)]">
             {mostUsedTemplate ? (
               <span>
                 {mostUsedTemplate.icon} {mostUsedTemplate.label}
@@ -129,7 +129,7 @@ export default function GoalTimers() {
             )}
           </p>
           {mostUsedTemplate && (
-            <p className="text-xs text-[var(--secondary-color)] mt-1">
+            <p className="text-xs text-[var(--muted-foreground)] mt-1">
               {mostUsedCount} times
             </p>
           )}
@@ -138,13 +138,13 @@ export default function GoalTimers() {
         <div
           className={clsx(
             'p-4 rounded-xl border-2',
-            'bg-[var(--card-color)] border-[var(--border-color)]'
+            'bg-[var(--card)] border-[var(--border)]'
           )}
         >
-          <p className="text-sm text-[var(--secondary-color)] mb-1">
+          <p className="text-sm text-[var(--muted-foreground)] mb-1">
             Recent Activity
           </p>
-          <p className="text-xl font-bold text-[var(--main-color)]">
+          <p className="text-xl font-bold text-[var(--foreground)]">
             {history.length > 0 ? (
               <>Last {Math.min(10, history.length)} achievements</>
             ) : (
@@ -158,7 +158,7 @@ export default function GoalTimers() {
       <div
         className={clsx(
           'p-4 rounded-xl border-2',
-          'bg-[var(--card-color)] border-[var(--border-color)]'
+          'bg-[var(--card)] border-[var(--border)]'
         )}
       >
         <h4 className="text-lg font-semibold mb-4">Audio Settings</h4>
@@ -173,8 +173,8 @@ export default function GoalTimers() {
               className={clsx(
                 'w-12 h-6 rounded-full transition-colors',
                 settings.defaultPlaySound
-                  ? 'bg-[var(--main-color)]'
-                  : 'bg-[var(--border-color)]'
+                  ? 'bg-[var(--foreground)]'
+                  : 'bg-[var(--border)]'
               )}
             >
               <div
@@ -190,14 +190,14 @@ export default function GoalTimers() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-sm">Volume</label>
-              <span className="text-sm text-[var(--secondary-color)]">
+              <span className="text-sm text-[var(--muted-foreground)]">
                 {settings.soundVolume}%
               </span>
             </div>
             <div className="flex items-center gap-3">
               <button
                 onClick={toggleSound}
-                className="text-[var(--secondary-color)] hover:text-[var(--main-color)]"
+                className="text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
               >
                 {settings.defaultPlaySound ? (
                   <Volume2 className="w-5 h-5" />
@@ -223,15 +223,15 @@ export default function GoalTimers() {
       <div
         className={clsx(
           'p-4 rounded-xl border-2',
-          'bg-[var(--card-color)] border-[var(--border-color)]'
+          'bg-[var(--card)] border-[var(--border)]'
         )}
       >
         <h4 className="text-lg font-semibold mb-4">Visual Settings</h4>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[var(--main-color)]" />
-            <label className="text-sm text-[var(--secondary-color)]">
+            <Sparkles className="w-5 h-5 text-[var(--foreground)]" />
+            <label className="text-sm text-[var(--muted-foreground)]">
               Show confetti animation when goal reached
             </label>
           </div>
@@ -241,8 +241,8 @@ export default function GoalTimers() {
             className={clsx(
               'w-12 h-6 rounded-full transition-colors hover:cursor-pointer',
               settings.defaultShowAnimation
-                ? 'bg-[var(--secondary-color)]'
-                : 'bg-[var(--border-color)]'
+                ? 'bg-[var(--muted-foreground)]'
+                : 'bg-[var(--border)]'
             )}
           >
             <div
@@ -260,7 +260,7 @@ export default function GoalTimers() {
       {/* Built-in Templates */}
       <div>
         <h4 className="text-lg font-semibold mb-3">Built-in Templates</h4>
-        <p className="text-sm text-[var(--secondary-color)] mb-4">
+        <p className="text-sm text-[var(--muted-foreground)] mb-4">
           Select which templates appear in quick-add
         </p>
 
@@ -275,8 +275,8 @@ export default function GoalTimers() {
                 className={clsx(
                   'p-3 rounded-lg border-2 transition-colors text-left hover:cursor-pointer',
                   isDefault
-                    ? 'border-[var(--main-color)] bg-[var(--main-color)] bg-opacity-10'
-                    : 'border-[var(--border-color)] hover:bg-[var(--card-color)]'
+                    ? 'border-[var(--foreground)] bg-[var(--foreground)] bg-opacity-10'
+                    : 'border-[var(--border)] hover:bg-[var(--card)]'
                 )}
               >
                 <div className="flex items-center justify-between">
@@ -287,8 +287,8 @@ export default function GoalTimers() {
                         className={clsx(
                           'font-medium ',
                           isDefault
-                            ? 'text-[var(--background-color)]'
-                            : 'text-[var(--main-color)]'
+                            ? 'text-[var(--background)]'
+                            : 'text-[var(--foreground)]'
                         )}
                       >
                         {template.label}
@@ -297,8 +297,8 @@ export default function GoalTimers() {
                         className={clsx(
                           'text-xs',
                           isDefault
-                            ? 'text-[var(--card-color)]'
-                            : 'text-[var(--secondary-color)]'
+                            ? 'text-[var(--card)]'
+                            : 'text-[var(--muted-foreground)]'
                         )}
                       >
                         {Math.floor(template.targetSeconds / 60)} minutes
@@ -306,7 +306,7 @@ export default function GoalTimers() {
                     </div>
                   </div>
                   {isDefault && (
-                    <span className="text-xs text-[var(--card-color)] font-medium">
+                    <span className="text-xs text-[var(--card)] font-medium">
                       Default
                     </span>
                   )}
@@ -326,8 +326,8 @@ export default function GoalTimers() {
               onClick={() => setIsAdding(true)}
               className={clsx(
                 'px-3 py-1.5 rounded-lg border-2 transition-colors hover:cursor-pointer',
-                'border-[var(--border-color)]',
-                'hover:bg-[var(--border-color)]',
+                'border-[var(--border)]',
+                'hover:bg-[var(--border)]',
                 'flex items-center gap-2'
               )}
             >
@@ -342,7 +342,7 @@ export default function GoalTimers() {
           <div
             className={clsx(
               'mb-4 p-4 rounded-xl border-2',
-              'bg-[var(--card-color)] border-[var(--border-color)]'
+              'bg-[var(--card)] border-[var(--border)]'
             )}
           >
             <div className="space-y-3">
@@ -355,7 +355,7 @@ export default function GoalTimers() {
                   maxLength={2}
                   className={clsx(
                     'w-20 px-3 py-2 rounded-lg border-2 text-center text-2xl',
-                    'bg-[var(--card-color)] border-[var(--border-color)]'
+                    'bg-[var(--card)] border-[var(--border)]'
                   )}
                 />
                 <input
@@ -365,8 +365,8 @@ export default function GoalTimers() {
                   onChange={(e) => setNewLabel(e.target.value)}
                   className={clsx(
                     'flex-1 px-3 py-2 rounded-lg border-2',
-                    'bg-[var(--card-color)] border-[var(--border-color)]',
-                    'text-[var(--main-color)]'
+                    'bg-[var(--card)] border-[var(--border)]',
+                    'text-[var(--foreground)]'
                   )}
                   autoFocus
                 />
@@ -381,11 +381,11 @@ export default function GoalTimers() {
                   onChange={(e) => setNewMinutes(parseInt(e.target.value) || 1)}
                   className={clsx(
                     'w-24 px-3 py-2 rounded-lg border-2',
-                    'bg-[var(--card-color)] border-[var(--border-color)]',
-                    'text-[var(--main-color)]'
+                    'bg-[var(--card)] border-[var(--border)]',
+                    'text-[var(--foreground)]'
                   )}
                 />
-                <span className="text-sm text-[var(--secondary-color)]">
+                <span className="text-sm text-[var(--muted-foreground)]">
                   minutes
                 </span>
               </div>
@@ -395,7 +395,7 @@ export default function GoalTimers() {
                   onClick={handleAddTemplate}
                   className={clsx(
                     'flex-1 px-4 py-2 rounded-lg transition-opacity hover:cursor-pointer',
-                    'bg-[var(--main-color)] text-[var(--background-color)]',
+                    'bg-[var(--foreground)] text-[var(--background)]',
                     'hover:opacity-90'
                   )}
                 >
@@ -405,8 +405,8 @@ export default function GoalTimers() {
                   onClick={() => setIsAdding(false)}
                   className={clsx(
                     'px-4 py-2 border-2 rounded-lg transition-colors hover:cursor-pointer',
-                    'border-[var(--border-color)]',
-                    'hover:bg-[var(--border-color)]'
+                    'border-[var(--border)]',
+                    'hover:bg-[var(--border)]'
                   )}
                 >
                   Cancel
@@ -428,8 +428,8 @@ export default function GoalTimers() {
                   className={clsx(
                     'p-3 rounded-lg border-2',
                     isDefault
-                      ? 'border-[var(--main-color)] bg-[var(--main-color)] bg-opacity-10'
-                      : 'border-[var(--border-color)]'
+                      ? 'border-[var(--foreground)] bg-[var(--foreground)] bg-opacity-10'
+                      : 'border-[var(--border)]'
                   )}
                 >
                   <div className="flex items-center justify-between">
@@ -443,8 +443,8 @@ export default function GoalTimers() {
                           className={clsx(
                             'font-medium ',
                             isDefault
-                              ? 'text-[var(--background-color)]'
-                              : 'text-[var(--main-color)]'
+                              ? 'text-[var(--background)]'
+                              : 'text-[var(--foreground)]'
                           )}
                         >
                           {template.label}
@@ -453,8 +453,8 @@ export default function GoalTimers() {
                           className={clsx(
                             'text-xs',
                             isDefault
-                              ? 'text-[var(--card-color)]'
-                              : 'text-[var(--secondary-color)]'
+                              ? 'text-[var(--card)]'
+                              : 'text-[var(--muted-foreground)]'
                           )}
                         >
                           {Math.floor(template.targetSeconds / 60)} minutes
@@ -464,7 +464,7 @@ export default function GoalTimers() {
                     </button>
                     <button
                       onClick={() => removeTemplate(template.id)}
-                      className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card-color)] hover:bg-opacity-10 rounded transition-colors hover:cursor-pointer"
+                      className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card)] hover:bg-opacity-10 rounded transition-colors hover:cursor-pointer"
                       title="Delete template"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -475,7 +475,7 @@ export default function GoalTimers() {
             })}
           </div>
         ) : (
-          <p className="text-sm text-[var(--secondary-color)] text-center py-8">
+          <p className="text-sm text-[var(--muted-foreground)] text-center py-8">
             No custom templates yet. Create one to get started!
           </p>
         )}

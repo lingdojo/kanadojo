@@ -42,19 +42,19 @@ const PostWrapper = ({ textContent }: { textContent: string }) => {
           ),
           p: (props) => (
             <p
-              className="my-1  leading-relaxed text-[var(--secondary-color)]"
+              className="my-1  leading-relaxed text-[var(--muted-foreground)]"
               {...props}
             />
           ),
           ul: (props) => (
             <ul
-              className="list-disc list-inside pb-2 text-[var(--secondary-color)]"
+              className="list-disc list-inside pb-2 text-[var(--muted-foreground)]"
               {...props}
             />
           ),
           ol: (props) => (
             <ol
-              className="list-decimal list-inside pb-4 text-[var(--secondary-color)]"
+              className="list-decimal list-inside pb-4 text-[var(--muted-foreground)]"
               {...props}
             />
           ),
@@ -63,24 +63,24 @@ const PostWrapper = ({ textContent }: { textContent: string }) => {
 
           table: (props) => (
             <table
-              className="border-collapse border border-[var(--border-color)] w-full"
+              className="border-collapse border border-[var(--border)] w-full"
               {...props}
             />
           ),
           th: (props) => (
             <th
-              className="border border-[var(--border-color)] px-2 py-1"
+              className="border border-[var(--border)] px-2 py-1"
               {...props}
             />
           ),
           td: (props) => (
             <td
-              className="border border-[var(--border-color)] px-2 py-1"
+              className="border border-[var(--border)] px-2 py-1"
               {...props}
             />
           ),
           hr: (props) => (
-            <hr className="border-[var(--border-color)]" {...props} />
+            <hr className="border-[var(--border)]" {...props} />
           ),
         }}
       >

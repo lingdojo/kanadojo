@@ -9,20 +9,20 @@ export default function translationGen(t: (key: string) => string) {
         <p className='flex gap-2 items-center flex-1 overflow-hidden '>
           {/* render localized content */}
           <span>{t('greeting')}</span>
-          <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
+          <i className='text-[var(--muted-foreground)] text-xs mt-1.5 max-md:hidden'>
             v0.1.4 (alpha)
           </i>
         </p>
       ),
       content: (
         <>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             {t('description')}
           </p>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             {t('instructions')}
           </p>
-          {/*         <p className='text-sm text-[var(--secondary-color)]'>
+          {/*         <p className='text-sm text-[var(--muted-foreground)]'>
           Want to support an independent project built by the community, for the
           community, and help KanaDojo continue growing? Then please consider
           donating{' '}
@@ -43,11 +43,11 @@ export default function translationGen(t: (key: string) => string) {
       header: <span>Welcome to the kana (hiragana and katakana) dojo!</span>,
       content: (
         <>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             This is the place where you can learn and practice the two core
             syllabaries of Japanese - Hiragana and Katakana.
           </p>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             To begin, select at least 1 group of characters, select or change
             the training mode, then hit <b>Go!</b> below and start training now!
           </p>
@@ -59,11 +59,11 @@ export default function translationGen(t: (key: string) => string) {
       header: <span>Welcome to the kanji dojo!</span>,
       content: (
         <>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             This is the place where you can learn and practice the main
             component of the Japanese writing system - the kanji characters.
           </p>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             To begin, select at least 1 set, select or change the training mode,
             then hit <b>Go!</b> below and start training now!
           </p>
@@ -85,11 +85,11 @@ export default function translationGen(t: (key: string) => string) {
       header: <span>Welcome to the vocabulary dojo!</span>,
       content: (
         <>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             This is the place where you can learn and practice the most common
             words used in day-to-day Japanese.
           </p>
-          <p className='text-lg text-[var(--secondary-color)]'>
+          <p className='text-lg text-[var(--muted-foreground)]'>
             To begin, select at least 1 set, select or change the training mode,
             then hit <b>Go!</b> below and start training now!
           </p>
@@ -100,7 +100,7 @@ export default function translationGen(t: (key: string) => string) {
     jlptMenu: {
       header: <span>About the JLPT kanji/vocabulary groups</span>,
       content: (
-        <p className='text-lg text-[var(--secondary-color)]'>
+        <p className='text-lg text-[var(--muted-foreground)]'>
           The test consists of five levels, with N1 being the highest level and
           N5 the lowest. N1 covers kanji characters and vocabulary that allow
           the user to understand Japanese used in business, academia and other
@@ -118,7 +118,7 @@ export default function translationGen(t: (key: string) => string) {
     groupMenu: {
       header: <span>About the Japanese Language Proficiency Test (JLPT)</span>,
       content: (
-        <p className='text-lg text-[var(--secondary-color)]'>
+        <p className='text-lg text-[var(--muted-foreground)]'>
           JLPT (short for Japanese-Language Proficiency Test) is a standardized
           criterion-referenced test to evaluate and certify Japanese language
           proficiency for non-native speakers.
@@ -138,7 +138,7 @@ export default function translationGen(t: (key: string) => string) {
     wordClassMenu: {
       header: <span>About word types</span>,
       content: (
-        <p className='text-lg text-[var(--secondary-color)]'>
+        <p className='text-lg text-[var(--muted-foreground)]'>
           Word types categorize words based on their function and meaning in a
           sentence. Nouns name people, places, things, or ideas - like
           &quot;dog&quot;, &quot;city&quot;, &quot;happiness&quot;, and so on.

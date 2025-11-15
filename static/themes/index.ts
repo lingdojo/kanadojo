@@ -149,6 +149,7 @@ themes.forEach(group => {
 
 /**
  * Apply a theme to the document root
+ * Uses shadcn/ui CSS custom properties
  */
 export function applyTheme(themeId: string) {
   const themeDefinition = themeMap.get(themeId);
@@ -160,11 +161,51 @@ export function applyTheme(themeId: string) {
 
   const root = document.documentElement;
 
-  root.style.setProperty('--background-color', themeDefinition.backgroundColor);
-  root.style.setProperty('--card-color', themeDefinition.cardColor);
-  root.style.setProperty('--border-color', themeDefinition.borderColor);
-  root.style.setProperty('--main-color', themeDefinition.mainColor);
+  // Apply shadcn/ui color properties
+  root.style.setProperty('--background', themeDefinition.background);
+  root.style.setProperty('--foreground', themeDefinition.foreground);
+  root.style.setProperty('--card', themeDefinition.card);
+  root.style.setProperty('--card-foreground', themeDefinition.cardForeground);
+  root.style.setProperty('--popover', themeDefinition.popover);
+  root.style.setProperty('--popover-foreground', themeDefinition.popoverForeground);
+  root.style.setProperty('--primary', themeDefinition.primary);
+  root.style.setProperty('--primary-foreground', themeDefinition.primaryForeground);
+  root.style.setProperty('--secondary', themeDefinition.secondary);
+  root.style.setProperty('--secondary-foreground', themeDefinition.secondaryForeground);
+  root.style.setProperty('--muted', themeDefinition.muted);
+  root.style.setProperty('--muted-foreground', themeDefinition.mutedForeground);
+  root.style.setProperty('--accent', themeDefinition.accent);
+  root.style.setProperty('--accent-foreground', themeDefinition.accentForeground);
+  root.style.setProperty('--destructive', themeDefinition.destructive);
+  root.style.setProperty('--border', themeDefinition.border);
+  root.style.setProperty('--input', themeDefinition.input);
+  root.style.setProperty('--ring', themeDefinition.ring);
 
+  // Apply chart colors if defined
+  if (themeDefinition.chart1) root.style.setProperty('--chart-1', themeDefinition.chart1);
+  if (themeDefinition.chart2) root.style.setProperty('--chart-2', themeDefinition.chart2);
+  if (themeDefinition.chart3) root.style.setProperty('--chart-3', themeDefinition.chart3);
+  if (themeDefinition.chart4) root.style.setProperty('--chart-4', themeDefinition.chart4);
+  if (themeDefinition.chart5) root.style.setProperty('--chart-5', themeDefinition.chart5);
+
+  // Apply radius if defined
+  if (themeDefinition.radius) {
+    root.style.setProperty('--radius', themeDefinition.radius);
+  }
+
+  // Legacy: Apply old properties for backwards compatibility if they exist
+  if (themeDefinition.backgroundColor) {
+    root.style.setProperty('--background-color', themeDefinition.backgroundColor);
+  }
+  if (themeDefinition.cardColor) {
+    root.style.setProperty('--card-color', themeDefinition.cardColor);
+  }
+  if (themeDefinition.borderColor) {
+    root.style.setProperty('--border-color', themeDefinition.borderColor);
+  }
+  if (themeDefinition.mainColor) {
+    root.style.setProperty('--main-color', themeDefinition.mainColor);
+  }
   if (themeDefinition.secondaryColor) {
     root.style.setProperty('--secondary-color', themeDefinition.secondaryColor);
   }

@@ -109,7 +109,7 @@ const KanaCards = () => {
               <ChevronUp
                 className={clsx(
                   'duration-300',
-                  'text-[var(--border-color)]',
+                  'text-[var(--border)]',
                   'max-md:group-active:text-[var(--text-color)]',
                   'md:group-hover:text-[var(--text-color)]',
                   hiddenSubsets.includes(kanaGroup.name.toLowerCase()) &&
@@ -118,7 +118,7 @@ const KanaCards = () => {
               />
               <h3 className="flex items-center gap-2">
                 <span>{kanaGroup.name.split(' ')[0]}</span>
-                <span className="text-[var(--secondary-color)]">
+                <span className="text-[var(--muted-foreground)]">
                   {kanaGroup.name.split(' ')[1]}
                 </span>
               </h3>
@@ -155,7 +155,7 @@ const KanaCards = () => {
                       <ChevronUp
                         className={clsx(
                           'duration-300',
-                          'text-[var(--border-color)]',
+                          'text-[var(--border)]',
                           'max-md:group-active:text-[var(--text-color)]',
                           'md:group-hover:text-[var(--text-color)]',
                           hiddenSubsets.includes(subset.name.toLowerCase()) &&
@@ -176,7 +176,7 @@ const KanaCards = () => {
 
                   {i < kanaGroup.subsets.length - 1 &&
                     !hiddenSubsets.includes(kanaGroup.name.toLowerCase()) && (
-                      <hr className="border-t-1 border-[var(--border-color)]" />
+                      <hr className="border-t-1 border-[var(--border)]" />
                     )}
                 </div>
               ))}

@@ -62,7 +62,7 @@ const AchievementNotification = ({
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className={clsx(
             'relative w-80 p-4 cursor-pointer',
-            'bg-[var(--card-color)] shadow-lg',
+            'bg-[var(--card)] shadow-lg',
             cardBorderStyles,
             'border-l-4 border-l-yellow-500',
             'hover:shadow-xl transition-shadow duration-200'
@@ -74,8 +74,8 @@ const AchievementNotification = ({
             onClick={handleClose}
             className={clsx(
               'absolute top-2 right-2 p-1 rounded',
-              'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-              'hover:bg-[var(--background-color)] transition-colors duration-200'
+              'text-[var(--muted-foreground)] hover:text-[var(--foreground)]',
+              'hover:bg-[var(--background)] transition-colors duration-200'
             )}
           >
             <X size={14} />
@@ -103,11 +103,11 @@ const AchievementNotification = ({
                 </span>
               </div>
 
-              <h4 className='font-semibold text-[var(--main-color)] text-sm mb-1 truncate'>
+              <h4 className='font-semibold text-[var(--foreground)] text-sm mb-1 truncate'>
                 {notification.achievement.title}
               </h4>
 
-              <p className='text-xs text-[var(--secondary-color)] line-clamp-2'>
+              <p className='text-xs text-[var(--muted-foreground)] line-clamp-2'>
                 {notification.achievement.description}
               </p>
 
@@ -115,7 +115,7 @@ const AchievementNotification = ({
                 <span className='text-xs text-yellow-600 font-medium'>
                   +{notification.achievement.points} points
                 </span>
-                <span className='text-xs text-[var(--secondary-color)]'>
+                <span className='text-xs text-[var(--muted-foreground)]'>
                   Click to view
                 </span>
               </div>
@@ -205,16 +205,16 @@ export const AchievementNotificationContainer = () => {
             animate={{ scale: 1, opacity: 1 }}
             className={clsx(
               'w-full max-w-md p-6 text-center',
-              'bg-[var(--card-color)]',
+              'bg-[var(--card)]',
               cardBorderStyles
             )}
             onClick={e => e.stopPropagation()}
           >
             <div className='text-4xl mb-4'>{selectedAchievement.icon}</div>
-            <h3 className='text-xl font-bold text-[var(--main-color)] mb-2'>
+            <h3 className='text-xl font-bold text-[var(--foreground)] mb-2'>
               {selectedAchievement.title}
             </h3>
-            <p className='text-[var(--secondary-color)] mb-4'>
+            <p className='text-[var(--muted-foreground)] mb-4'>
               {selectedAchievement.description}
             </p>
             <div className='text-sm text-yellow-600 font-medium mb-4'>
@@ -224,8 +224,8 @@ export const AchievementNotificationContainer = () => {
               onClick={handleCloseModal}
               className={clsx(
                 'px-6 py-2 rounded-lg',
-                'bg-[var(--background-color)] text-[var(--main-color)]',
-                'hover:bg-[var(--border-color)] transition-colors duration-200'
+                'bg-[var(--background)] text-[var(--foreground)]',
+                'hover:bg-[var(--border)] transition-colors duration-200'
               )}
             >
               Continue Learning

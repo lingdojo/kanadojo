@@ -50,7 +50,7 @@ const GameIntel = ({
         'flex flex-col',
 
         cardBorderStyles,
-        'text-[var(--secondary-color)]'
+        'text-[var(--muted-foreground)]'
       )}
     >
       <div
@@ -66,16 +66,16 @@ const GameIntel = ({
         >
           <p className='text-xl px-4 flex justify-center items-center w-full gap-2.5 py-2'>
             {gameMode.toLowerCase() === 'pick' && (
-              <MousePointerClick className='text-[var(--main-color)]' />
+              <MousePointerClick className='text-[var(--foreground)]' />
             )}
             {gameMode.toLowerCase() === 'reverse pick' && (
-              <MousePointerClick className=' scale-x-[-1] text-[var(--main-color)]' />
+              <MousePointerClick className=' scale-x-[-1] text-[var(--foreground)]' />
             )}
             {gameMode.toLowerCase() === 'input' && (
-              <Keyboard className='text-[var(--main-color)]' />
+              <Keyboard className='text-[var(--foreground)]' />
             )}
             {gameMode.toLowerCase() === 'reverse input' && (
-              <Keyboard className='scale-y-[-1] text-[var(--main-color)]' />
+              <Keyboard className='scale-y-[-1] text-[var(--foreground)]' />
             )}
             <span>{gameMode}</span>
 
@@ -84,7 +84,7 @@ const GameIntel = ({
                 'py-2.5 px-8 text-xl flex flex-row justify-center items-center gap-2',
                 miniButtonBorderStyles,
                 'group flex-1 ',
-                'text-[var(--main-color)]'
+                'text-[var(--foreground)]'
               )}
               onClick={() => {
                 playClick();
@@ -101,7 +101,7 @@ const GameIntel = ({
           className={clsx(
             'border-t-1 w-full',
             'md:border-l-1 md:h-auto md:self-stretch md:border-t-0 md:w-0',
-            'border-[var(--border-color)]'
+            'border-[var(--border)]'
           )}
         />
 
@@ -128,7 +128,7 @@ const GameIntel = ({
               'py-2.5 px-8 text-xl flex flex-row justify-center items-center gap-2',
               miniButtonBorderStyles,
               'group flex-1',
-              'text-[var(--main-color)]'
+              'text-[var(--foreground)]'
             )}
             onClick={() => {
               playClick();
@@ -143,22 +143,22 @@ const GameIntel = ({
       </div>
 
       {feedback && (
-        <p className='text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-t-1 w-full  border-[var(--border-color)]'>
+        <p className='text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-t-1 w-full  border-[var(--border)]'>
           {feedback}
         </p>
       )}
 
       <p
         className={clsx(
-          'p-4 border-t-1 w-full border-[var(--border-color)] flex gap-2  items-center',
+          'p-4 border-t-1 w-full border-[var(--border)] flex gap-2  items-center',
           trainingDojo === 'kana' && 'hidden'
         )}
       >
         <span className='flex gap-2 items-center'>
-          <MousePointer size={20} className='text-[var(--main-color)]' />
+          <MousePointer size={20} className='text-[var(--foreground)]' />
           selected sets:
         </span>
-        <span className='text-[var(--secondary-color)]'>
+        <span className='text-[var(--muted-foreground)]'>
           {trainingDojo === 'kanji'
             ? selectedKanjiSets.sort().join(', ').toLowerCase()
             : trainingDojo === 'vocabulary'

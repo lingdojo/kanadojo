@@ -15,7 +15,7 @@ const Card = ({
 }) => (
   <div
     className={clsx(
-      "rounded-2xl bg-[var(--card-color)] border border-[var(--border-color)] p-4",
+      "rounded-2xl bg-[var(--card)] border border-[var(--border)] p-4",
       className
     )}
   >
@@ -38,7 +38,7 @@ const CardTitle = ({
   children: React.ReactNode;
   className?: string;
 }) => (
-  <h3 className={clsx("font-semibold text-[var(--main-color)]", className)}>
+  <h3 className={clsx("font-semibold text-[var(--foreground)]", className)}>
     {children}
   </h3>
 );
@@ -80,7 +80,7 @@ export default function SimpleProgress() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-end">
-        <h1 className="text-3xl font-bold text-[var(--main-color)]">
+        <h1 className="text-3xl font-bold text-[var(--foreground)]">
           Your Progress
         </h1>
         
@@ -88,7 +88,7 @@ export default function SimpleProgress() {
           variant="outline"
           size="sm"
           onClick={clearAllProgress}
-          className="text-[var(--secondary-color)]"
+          className="text-[var(--muted-foreground)]"
         >
           <Trash className="h-4 w-4 mr-2" />
           Reset Progress
@@ -102,10 +102,10 @@ export default function SimpleProgress() {
             <CardTitle className="text-sm font-medium">
               Total Sessions
             </CardTitle>
-            <TrendingUp className="h-4 w-4 text-[var(--secondary-color)]" />
+            <TrendingUp className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-[var(--main-color)]">
+            <div className="text-2xl font-bold text-[var(--foreground)]">
               {allTimeStats.totalSessions}
             </div>
           </CardContent>
@@ -116,13 +116,13 @@ export default function SimpleProgress() {
             <CardTitle className="text-sm font-medium">
               Overall Accuracy
             </CardTitle>
-            <Target className="h-4 w-4 text-[var(--secondary-color)]" />
+            <Target className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-[var(--main-color)]">
+            <div className="text-2xl font-bold text-[var(--foreground)]">
               {overallAccuracy.toFixed(1)}%
             </div>
-            <p className="text-xs text-[var(--secondary-color)]">
+            <p className="text-xs text-[var(--muted-foreground)]">
               {allTimeStats.totalCorrect} / {totalQuestions} correct
             </p>
           </CardContent>
@@ -131,10 +131,10 @@ export default function SimpleProgress() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Best Streak</CardTitle>
-            <Trophy className="h-4 w-4 text-[var(--secondary-color)]" />
+            <Trophy className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-[var(--main-color)]">
+            <div className="text-2xl font-bold text-[var(--foreground)]">
               {allTimeStats.bestStreak}
             </div>
           </CardContent>
@@ -145,10 +145,10 @@ export default function SimpleProgress() {
             <CardTitle className="text-sm font-medium">
               Characters Learned
             </CardTitle>
-            <Trophy className="h-4 w-4 text-[var(--secondary-color)]" />
+            <Trophy className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-[var(--main-color)]">
+            <div className="text-2xl font-bold text-[var(--foreground)]">
               {Object.keys(allTimeStats.characterMastery).length}
             </div>
           </CardContent>
@@ -169,14 +169,14 @@ export default function SimpleProgress() {
                     key={char.character}
                     className="flex justify-between items-center"
                   >
-                    <span className="text-2xl font-medium text-[var(--main-color)]">
+                    <span className="text-2xl font-medium text-[var(--foreground)]">
                       {char.character}
                     </span>
                     <div className="text-right">
-                      <div className="text-sm font-medium text-[var(--secondary-color)]">
+                      <div className="text-sm font-medium text-[var(--muted-foreground)]">
                         {(char.accuracy * 100).toFixed(1)}%
                       </div>
-                      <div className="text-xs text-[var(--secondary-color)]">
+                      <div className="text-xs text-[var(--muted-foreground)]">
                         {char.total} attempts
                       </div>
                     </div>
@@ -184,7 +184,7 @@ export default function SimpleProgress() {
                 ))}
               </div>
             ) : (
-              <p className="text-[var(--secondary-color)]">
+              <p className="text-[var(--muted-foreground)]">
                 Keep practicing to see analysis!
               </p>
             )}
@@ -193,7 +193,7 @@ export default function SimpleProgress() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-[var(--main-color)]">
+            <CardTitle className="text-[var(--foreground)]">
               Mastered Characters
             </CardTitle>
           </CardHeader>
@@ -205,14 +205,14 @@ export default function SimpleProgress() {
                     key={char.character}
                     className="flex justify-between items-center"
                   >
-                    <span className="text-2xl font-medium text-[var(--main-color)]">
+                    <span className="text-2xl font-medium text-[var(--foreground)]">
                       {char.character}
                     </span>
                     <div className="text-right">
-                      <div className="text-sm font-medium text-[var(--secondary-color)]">
+                      <div className="text-sm font-medium text-[var(--muted-foreground)]">
                         {(char.accuracy * 100).toFixed(1)}%
                       </div>
-                      <div className="text-xs text-[var(--secondary-color)]">
+                      <div className="text-xs text-[var(--muted-foreground)]">
                         {char.total} attempts
                       </div>
                     </div>
@@ -220,7 +220,7 @@ export default function SimpleProgress() {
                 ))}
               </div>
             ) : (
-              <p className="text-[var(--secondary-color)]">
+              <p className="text-[var(--muted-foreground)]">
                 Master characters to see them here!
               </p>
             )}
@@ -234,7 +234,7 @@ export default function SimpleProgress() {
           <CardTitle>How Progress Tracking Works</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2 text-sm text-[var(--secondary-color)]">
+          <div className="space-y-2 text-sm text-[var(--muted-foreground)]">
             <p>
               • Your progress is automatically saved to your browser&apos;s
               local storage

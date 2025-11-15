@@ -158,7 +158,7 @@ const Stats = () => {
       >
         <ChevronsLeft
           className={clsx(
-            'text-[var(--secondary-color)] md:text-[var(--border-color)] group-hover:text-[var(--secondary-color)] mt-1 duration-250'
+            'text-[var(--muted-foreground)] md:text-[var(--border)] group-hover:text-[var(--muted-foreground)] mt-1 duration-250'
           )}
           size={32}
         />
@@ -175,11 +175,11 @@ const Stats = () => {
               <p
                 className={clsx(
                   'flex flex-row items-center justify-start gap-1.5',
-                  i < 3 && 'border-b-1 border-[var(--border-color)] pb-4'
+                  i < 3 && 'border-b-1 border-[var(--border)] pb-4'
                 )}
                 key={statsField.field}
               >
-                <span className='text-[var(--secondary-color)]'>
+                <span className='text-[var(--muted-foreground)]'>
                   {statsField.field + ': '}
                 </span>
                 <span>{statsField.value}</span>
@@ -198,11 +198,11 @@ const Stats = () => {
               <p
                 className={clsx(
                   'flex flex-row items-center justify-start gap-1.5',
-                  i < 3 && 'border-b-1 border-[var(--border-color)] pb-4'
+                  i < 3 && 'border-b-1 border-[var(--border)] pb-4'
                 )}
                 key={statsField.field}
               >
-                <span className='text-[var(--secondary-color)]'>
+                <span className='text-[var(--muted-foreground)]'>
                   {statsField.field + ': '}
                 </span>
                 <span>{statsField.value}</span>
@@ -220,11 +220,11 @@ const Stats = () => {
               <p
                 className={clsx(
                   'flex flex-row items-center justify-start gap-1.5 ',
-                  i < 3 && 'border-b-1 border-[var(--border-color)] pb-4'
+                  i < 3 && 'border-b-1 border-[var(--border)] pb-4'
                 )}
                 key={statsField.field}
               >
-                <span className='text-[var(--secondary-color)]'>
+                <span className='text-[var(--muted-foreground)]'>
                   {statsField.field + ': '}
                 </span>
                 <span>{statsField.value}</span>

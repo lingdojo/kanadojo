@@ -33,8 +33,11 @@ const getAllMainColors = () => {
     });
   }); */
   themeSets[2].themes.forEach(theme => {
-    colors.add(theme.mainColor);
-    if (theme.secondaryColor) colors.add(theme.secondaryColor);
+    // Use foreground for primary color, fallback to mainColor for backwards compatibility
+    const primaryColor = theme.foreground || theme.mainColor;
+    const secondaryColorValue = theme.mutedForeground || theme.secondaryColor;
+    if (primaryColor) colors.add(primaryColor);
+    if (secondaryColorValue) colors.add(secondaryColorValue);
   });
   return Array.from(colors);
 };

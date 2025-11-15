@@ -61,7 +61,7 @@ const Info = () => {
         <ChevronUp
           className={clsx(
             'duration-250',
-            'text-[var(--border-color)]',
+            'text-[var(--border)]',
             'max-md:group-active:text-[var(--text-color)]',
             'md:group-hover:text-[var(--text-color)]',
             !showInfo && 'rotate-180'
@@ -74,7 +74,7 @@ const Info = () => {
         className={clsx(
           'overflow-hidden duration-300',
           showInfo ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-          // 'text-[var(--secondary-color)]'
+          // 'text-[var(--muted-foreground)]'
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

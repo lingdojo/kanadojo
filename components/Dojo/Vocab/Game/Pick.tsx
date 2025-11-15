@@ -136,8 +136,8 @@ const VocabPickGame = ({
       generateNewCharacter();
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className="inline text-[var(--main-color)]" />
+          <span className="text-[var(--muted-foreground)]">{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className="inline text-[var(--foreground)]" />
         </>
       );
       setCurrentWordObj(correctWordObj);
@@ -145,8 +145,8 @@ const VocabPickGame = ({
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className="inline text-[var(--main-color)]" />
+          <span className="text-[var(--muted-foreground)]">{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className="inline text-[var(--foreground)]" />
         </>
       );
     }
@@ -223,7 +223,7 @@ const VocabPickGame = ({
               text={correctChar}
               variant="icon-only"
               size="lg"
-              className="bg-[var(--card-color)] text-[var(--secondary-color)]"
+              className="bg-[var(--card)] text-[var(--muted-foreground)]"
             />
           </div>
 
@@ -245,12 +245,12 @@ const VocabPickGame = ({
                   'py-4 px-2 rounded-xl w-full lg:w-1/4 flex flex-row justify-center items-center gap-1.5',
                   buttonBorderStyles,
                   'active:scale-95 md:active:scale-98 active:duration-200',
-                  'text-[var(--border-color)]',
+                  'text-[var(--border)]',
                   isReverse ? 'text-4xl' : 'text-3xl',
                   wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                    'hover:bg-[var(--card)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--main-color)]'
+                    'text-[var(--foreground)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
@@ -266,10 +266,10 @@ const VocabPickGame = ({
                 />
                 <span
                   className={clsx(
-                    'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',
+                    'hidden lg:inline text-xs rounded-full bg-[var(--border)] px-1',
                     wrongSelectedAnswers.includes(option)
-                      ? 'text-[var(--border-color)]'
-                      : 'text-[var(--secondary-color)]'
+                      ? 'text-[var(--border)]'
+                      : 'text-[var(--muted-foreground)]'
                   )}
                 >
                   {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}

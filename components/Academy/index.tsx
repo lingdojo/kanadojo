@@ -41,7 +41,7 @@ const Academy = () => {
           >
             <button
               className={clsx(
-                'w-full h-full text-2xl font-semibold border-2 py-6  rounded-2xl transform transition duration-200 hover:scale-y-108 hover:scale-x-102 hover:cursor-pointer items-center justify-center bg-[var(--card-color)] border-[var(--border-color)]',
+                'w-full h-full text-2xl font-semibold border-2 py-6  rounded-2xl transform transition duration-200 hover:scale-y-108 hover:scale-x-102 hover:cursor-pointer items-center justify-center bg-[var(--card)] border-[var(--border)]',
                 'flex flex-col'
               )}
             >

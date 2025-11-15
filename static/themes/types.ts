@@ -12,7 +12,7 @@ export interface ThemeCreator {
 
 /**
  * Complete theme definition with metadata
- * Note: Colors are flattened to maintain backwards compatibility
+ * Uses shadcn/ui color architecture with CSS custom properties
  */
 export interface ThemeDefinition {
   id: string;
@@ -21,13 +21,51 @@ export interface ThemeDefinition {
   creator?: ThemeCreator;
   tags?: string[];
   createdAt?: string;
-  // Color properties (flattened for backwards compatibility)
-  backgroundColor: string;
-  cardColor: string;
-  borderColor: string;
-  mainColor: string;
-  secondaryColor: string;
+
+  // shadcn/ui color properties (using oklch format)
+  background: string;
+  foreground: string;
+  card: string;
+  cardForeground: string;
+  popover: string;
+  popoverForeground: string;
+  primary: string;
+  primaryForeground: string;
+  secondary: string;
+  secondaryForeground: string;
+  muted: string;
+  mutedForeground: string;
+  accent: string;
+  accentForeground: string;
+  destructive: string;
+  border: string;
+  input: string;
+  ring: string;
+
+  // Chart colors (optional)
+  chart1?: string;
+  chart2?: string;
+  chart3?: string;
+  chart4?: string;
+  chart5?: string;
+
+  // Border radius
+  radius?: string;
+
+  // Preview image
   preview?: string;
+
+  // Legacy properties for backwards compatibility (deprecated)
+  /** @deprecated Use background instead */
+  backgroundColor?: string;
+  /** @deprecated Use card instead */
+  cardColor?: string;
+  /** @deprecated Use border instead */
+  borderColor?: string;
+  /** @deprecated Use foreground instead */
+  mainColor?: string;
+  /** @deprecated Use secondaryForeground instead */
+  secondaryColor?: string;
 }
 
 /**

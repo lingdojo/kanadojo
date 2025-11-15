@@ -73,7 +73,7 @@ export default function GoalTimersPanel({
       targetSeconds: totalSeconds,
       category: 'custom',
       icon: '⏱️',
-      color: 'var(--main-color)',
+      color: 'var(--foreground)',
     });
 
     // Also add as active goal
@@ -101,12 +101,12 @@ export default function GoalTimersPanel({
   return (
     <div className={clsx(
       'border-2 rounded-2xl p-4',
-      'bg-[var(--card-color)] border-[var(--border-color)]'
+      'bg-[var(--card)] border-[var(--border)]'
     )}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-[var(--main-color)]" />
-          <h3 className="font-semibold text-[var(--main-color)]">Goal Timers</h3>
+          <Target className="w-5 h-5 text-[var(--foreground)]" />
+          <h3 className="font-semibold text-[var(--foreground)]">Goal Timers</h3>
         </div>
         {goals.length > 0 && (
           <button
@@ -114,7 +114,7 @@ export default function GoalTimersPanel({
             disabled={disabled}
             className={clsx(
               'text-xs transition-colors',
-              'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
+              'text-[var(--muted-foreground)] hover:text-[var(--foreground)]',
               disabled && 'opacity-50 cursor-not-allowed'
             )}
           >
@@ -126,7 +126,7 @@ export default function GoalTimersPanel({
       {/* Goals List */}
       <div className="space-y-2 mb-4">
         {goals.length === 0 && !isAdding && (
-          <p className="text-sm text-[var(--secondary-color)] text-center py-4">
+          <p className="text-sm text-[var(--muted-foreground)] text-center py-4">
             No goals set. Add one to get started!
           </p>
         )}
@@ -142,7 +142,7 @@ export default function GoalTimersPanel({
                 'p-3 rounded-xl border-2 transition-all',
                 isReached 
                   ? 'border-green-500 bg-green-500/10' 
-                  : 'border-[var(--border-color)] bg-[var(--card-color)]'
+                  : 'border-[var(--border)] bg-[var(--card)]'
               )}
             >
               <div className="flex items-center justify-between mb-2">
@@ -150,17 +150,17 @@ export default function GoalTimersPanel({
                   {isReached ? (
                     <CheckCircle2 className="w-4 h-4 text-green-500" />
                   ) : (
-                    <Clock className="w-4 h-4 text-[var(--main-color)]" />
+                    <Clock className="w-4 h-4 text-[var(--foreground)]" />
                   )}
                   <span className={clsx(
                     'font-medium',
-                    isReached ? 'text-green-500' : 'text-[var(--main-color)]'
+                    isReached ? 'text-green-500' : 'text-[var(--foreground)]'
                   )}>
                     {goal.label}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-[var(--secondary-color)]">
+                  <span className="text-sm text-[var(--muted-foreground)]">
                     {formatTime(goal.targetSeconds)}
                   </span>
                   <button
@@ -168,7 +168,7 @@ export default function GoalTimersPanel({
                     disabled={disabled}
                     className={clsx(
                       'transition-colors',
-                      'text-[var(--secondary-color)] hover:text-red-500',
+                      'text-[var(--muted-foreground)] hover:text-red-500',
                       disabled && 'opacity-50 cursor-not-allowed'
                     )}
                   >
@@ -179,9 +179,9 @@ export default function GoalTimersPanel({
               
               {/* Progress Bar */}
               {!isReached && (
-                <div className="w-full bg-[var(--border-color)] rounded-full h-1.5">
+                <div className="w-full bg-[var(--border)] rounded-full h-1.5">
                   <div
-                    className="bg-[var(--main-color)] h-1.5 rounded-full transition-all duration-300"
+                    className="bg-[var(--foreground)] h-1.5 rounded-full transition-all duration-300"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -195,7 +195,7 @@ export default function GoalTimersPanel({
       {isAdding ? (
         <div className={clsx(
           'space-y-3 p-3 border-2 rounded-xl',
-          'border-[var(--border-color)] bg-[var(--card-color)]'
+          'border-[var(--border)] bg-[var(--card)]'
         )}>
           <input
             type="text"
@@ -204,15 +204,15 @@ export default function GoalTimersPanel({
             onChange={(e) => setNewGoalLabel(e.target.value)}
             className={clsx(
               'w-full px-3 py-2 rounded-lg border-2',
-              'bg-[var(--card-color)] border-[var(--border-color)]',
-              'text-[var(--main-color)] placeholder:text-[var(--secondary-color)]'
+              'bg-[var(--card)] border-[var(--border)]',
+              'text-[var(--foreground)] placeholder:text-[var(--muted-foreground)]'
             )}
             autoFocus
           />
           
           <div className="flex gap-2">
             <div className="flex-1">
-              <label className="text-xs text-[var(--secondary-color)] mb-1 block">
+              <label className="text-xs text-[var(--muted-foreground)] mb-1 block">
                 Minutes
               </label>
               <input
@@ -223,13 +223,13 @@ export default function GoalTimersPanel({
                 onChange={(e) => setNewGoalMinutes(parseInt(e.target.value) || 0)}
                 className={clsx(
                   'w-full px-3 py-2 rounded-lg border-2',
-                  'bg-[var(--card-color)] border-[var(--border-color)]',
-                  'text-[var(--main-color)]'
+                  'bg-[var(--card)] border-[var(--border)]',
+                  'text-[var(--foreground)]'
                 )}
               />
             </div>
             <div className="flex-1">
-              <label className="text-xs text-[var(--secondary-color)] mb-1 block">
+              <label className="text-xs text-[var(--muted-foreground)] mb-1 block">
                 Seconds
               </label>
               <input
@@ -240,8 +240,8 @@ export default function GoalTimersPanel({
                 onChange={(e) => setNewGoalSeconds(parseInt(e.target.value) || 0)}
                 className={clsx(
                   'w-full px-3 py-2 rounded-lg border-2',
-                  'bg-[var(--card-color)] border-[var(--border-color)]',
-                  'text-[var(--main-color)]'
+                  'bg-[var(--card)] border-[var(--border)]',
+                  'text-[var(--foreground)]'
                 )}
               />
             </div>
@@ -252,7 +252,7 @@ export default function GoalTimersPanel({
               onClick={handleAddGoal}
               className={clsx(
                 'flex-1 px-4 py-2 rounded-lg transition-opacity',
-                'bg-[var(--main-color)] text-[var(--bg-color)]',
+                'bg-[var(--foreground)] text-[var(--bg-color)]',
                 'hover:opacity-90'
               )}
             >
@@ -262,8 +262,8 @@ export default function GoalTimersPanel({
               onClick={handleSaveAsTemplate}
               className={clsx(
                 'px-4 py-2 border-2 rounded-lg transition-colors',
-                'border-[var(--border-color)]',
-                'hover:bg-[var(--border-color)]',
+                'border-[var(--border)]',
+                'hover:bg-[var(--border)]',
                 'flex items-center gap-2'
               )}
               title="Save as template and add goal"
@@ -275,8 +275,8 @@ export default function GoalTimersPanel({
               onClick={() => setIsAdding(false)}
               className={clsx(
                 'px-4 py-2 border-2 rounded-lg transition-colors',
-                'border-[var(--border-color)]',
-                'hover:bg-[var(--border-color)]'
+                'border-[var(--border)]',
+                'hover:bg-[var(--border)]'
               )}
             >
               Cancel
@@ -288,7 +288,7 @@ export default function GoalTimersPanel({
           {/* Quick Add from Default Templates */}
           {goals.length === 0 && defaultTemplates.length > 0 && (
             <div className="mb-3">
-              <p className="text-xs text-[var(--secondary-color)] mb-2">Quick add:</p>
+              <p className="text-xs text-[var(--muted-foreground)] mb-2">Quick add:</p>
               <div className="flex flex-wrap gap-2">
                 {defaultTemplates.map(template => (
                   <button
@@ -297,14 +297,14 @@ export default function GoalTimersPanel({
                     disabled={disabled}
                     className={clsx(
                       'px-3 py-2 text-sm border-2 rounded-lg transition-colors',
-                      'border-[var(--border-color)]',
-                      'hover:bg-[var(--border-color)]',
+                      'border-[var(--border)]',
+                      'hover:bg-[var(--border)]',
                       disabled && 'opacity-50 cursor-not-allowed'
                     )}
                   >
                     <span className="mr-1">{template.icon}</span>
                     {template.label}
-                    <span className="text-xs text-[var(--secondary-color)] ml-1">
+                    <span className="text-xs text-[var(--muted-foreground)] ml-1">
                       ({Math.floor(template.targetSeconds / 60)}m)
                     </span>
                   </button>
@@ -316,7 +316,7 @@ export default function GoalTimersPanel({
           {/* Custom Templates */}
           {customTemplates.length > 0 && (
             <div className="mb-3">
-              <p className="text-xs text-[var(--secondary-color)] mb-2">Your templates:</p>
+              <p className="text-xs text-[var(--muted-foreground)] mb-2">Your templates:</p>
               <div className="flex flex-wrap gap-2">
                 {customTemplates.map(template => (
                   <button
@@ -325,14 +325,14 @@ export default function GoalTimersPanel({
                     disabled={disabled}
                     className={clsx(
                       'px-3 py-2 text-sm border-2 rounded-lg transition-colors',
-                      'border-[var(--border-color)]',
-                      'hover:bg-[var(--border-color)]',
+                      'border-[var(--border)]',
+                      'hover:bg-[var(--border)]',
                       disabled && 'opacity-50 cursor-not-allowed'
                     )}
                   >
                     <span className="mr-1">{template.icon}</span>
                     {template.label}
-                    <span className="text-xs text-[var(--secondary-color)] ml-1">
+                    <span className="text-xs text-[var(--muted-foreground)] ml-1">
                       ({Math.floor(template.targetSeconds / 60)}m)
                     </span>
                   </button>
@@ -346,8 +346,8 @@ export default function GoalTimersPanel({
             disabled={disabled}
             className={clsx(
               'w-full px-4 py-2 border-2 border-dashed rounded-lg transition-colors',
-              'border-[var(--border-color)]',
-              'hover:bg-[var(--border-color)]',
+              'border-[var(--border)]',
+              'hover:bg-[var(--border)]',
               'flex items-center justify-center gap-2',
               disabled && 'opacity-50 cursor-not-allowed'
             )}

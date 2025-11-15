@@ -173,12 +173,12 @@ const CollectionSelector = () => {
     <div className='flex flex-col'>
       <div
         className={clsx(
-          'rounded-tl-2xl rounded-tr-2xl bg-[var(--card-color)]',
+          'rounded-tl-2xl rounded-tr-2xl bg-[var(--card)]',
           'duration-250',
           'transition-all ease-in-out',
           'flex flex-col md:flex-row',
           'w-full ',
-          'border-b-1 border-[var(--border-color)]'
+          'border-b-1 border-[var(--border)]'
         )}
       >
         {collections.map((collection, i) => (
@@ -196,17 +196,17 @@ const CollectionSelector = () => {
               key={i}
               className={clsx(
                 'flex justify-center items-center gap-2.5 py-6',
-                'text-[var(--main-color)] text-xl',
+                'text-[var(--foreground)] text-xl',
                 'w-full',
                 'hover:cursor-pointer',
-                // 'hover:bg-[var(--border-color)]',
+                // 'hover:bg-[var(--border)]',
                 i === 0 &&
                   'max-md:rounded-tl-2xl max-md:rounded-tr-2xl md:rounded-tl-2xl md:rounded-bl-2xl',
                 i === collections.length - 1 &&
                   'max-md:rounded-bl-2xl max-md:rounded-br-2xl md:rounded-tr-2xl md:rounded-br-2xl',
                 'duration-250'
                 /* collection.name === selectedCollection &&
-                'bg-[var(--border-color)]' */
+                'bg-[var(--border)]' */
               )}
               onClick={() => {
                 playClick();
@@ -221,19 +221,19 @@ const CollectionSelector = () => {
                 }
               }}
             >
-              {/* <span className='w-1/4 text-4xl flex justify-center items-center bg-[var(--secondary-color)] text-[var(--background-color)]'>
+              {/* <span className='w-1/4 text-4xl flex justify-center items-center bg-[var(--muted-foreground)] text-[var(--background)]'>
               {i+1}
             </span> */}
 
               {collection.name === selectedCollection ? (
-                <CircleCheck className='text-[var(--secondary-color)]' />
+                <CircleCheck className='text-[var(--muted-foreground)]' />
               ) : (
-                <Circle className='text-[var(--border-color)]' />
+                <Circle className='text-[var(--border)]' />
               )}
               <span className='text-2xl'>
                 {collection.displayName.split(', ')[0]}
               </span>
-              {/* <span className='text-sm text-[var(--secondary-color)] pt-2'>
+              {/* <span className='text-sm text-[var(--muted-foreground)] pt-2'>
               {collection.displayName.split(', ')[1]}
             </span> */}
             </button>
@@ -242,8 +242,8 @@ const CollectionSelector = () => {
               <div
                 className={clsx(
                   'md:border-l-1 md:h-auto md:w-0',
-                  'border-[var(--border-color)]',
-                  'border-t-1 w-full border-[var(--border-color)]',
+                  'border-[var(--border)]',
+                  'border-t-1 w-full border-[var(--border)]',
                   pathWithoutLocale === '/vocabulary' &&
                     collection.name === 'n1' &&
                     'hidden'
@@ -255,7 +255,7 @@ const CollectionSelector = () => {
       </div>
       <div
         className={clsx(
-          'rounded-bl-2xl rounded-br-2xl bg-[var(--card-color)] p-4',
+          'rounded-bl-2xl rounded-br-2xl bg-[var(--card)] p-4',
           'w-full',
           'text-lg',
           'flex flex-col gap-2 items-start '
@@ -263,10 +263,10 @@ const CollectionSelector = () => {
       >
         <p className='flex flex-col'>
           <span className='flex gap-2 items-center'>
-            <CircleCheck className='text-[var(--secondary-color)]' />
+            <CircleCheck className='text-[var(--muted-foreground)]' />
             Selected Sets:
           </span>
-          <span className='text-[var(--secondary-color)]'>
+          <span className='text-[var(--muted-foreground)]'>
             {pathWithoutLocale === '/kanji'
               ? selectedKanjiSets.length > 0
                 ? selectedKanjiSets.sort().join(', ')
@@ -282,7 +282,7 @@ const CollectionSelector = () => {
           className={clsx(
             'py-3 px-16',
             miniButtonBorderStyles,
-            'text-[var(--main-color)]',
+            'text-[var(--foreground)]',
             'w-full',
             'flex justify-center'
           )}

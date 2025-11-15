@@ -45,9 +45,9 @@ const Sidebar = () => {
         'lg:w-1/5 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto',
         'lg:pt-6',
         'max-lg:fixed max-lg:bottom-0 max-lg:w-full',
-        'max-lg:bg-[var(--card-color)]',
+        'max-lg:bg-[var(--card)]',
         'z-50',
-        'max-lg:border-t-2 border-[var(--border-color)] max-lg:py-2 max-lg:justify-evenly max-lg:items-center',
+        'max-lg:border-t-2 border-[var(--border)] max-lg:py-2 max-lg:justify-evenly max-lg:items-center',
         'lg:border-r-1 lg:h-auto lg:w-0 lg:px-3'
       )}
     >
@@ -58,7 +58,7 @@ const Sidebar = () => {
         )}
       >
         <span className='font-bold'>KanaDojo</span>
-        <span className={clsx('font-normal text-[var(--secondary-color)]')}>
+        <span className={clsx('font-normal text-[var(--muted-foreground)]')}>
           かな道場️
         </span>
       </h1>
@@ -67,8 +67,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:p-3 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >
@@ -80,8 +80,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/kana'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >
@@ -93,8 +93,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/vocabulary'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >
@@ -105,8 +105,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/kanji'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >
@@ -117,8 +117,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/progress'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >
@@ -130,8 +130,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/achievements'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >
@@ -143,8 +143,8 @@ const Sidebar = () => {
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/preferences'
-            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
-            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
+            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}
         onClick={playClick}
       >

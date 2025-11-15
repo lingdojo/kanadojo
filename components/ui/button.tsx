@@ -5,22 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)] disabled:pointer-events-none disabled:opacity-60 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--foreground)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-60 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-[var(--main-color)] text-[var(--background-color)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] hover:brightness-110 hover:shadow-[0_12px_36px_-16px_rgba(0,0,0,0.55)] active:brightness-95",
+          "bg-[var(--foreground)] text-[var(--background)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] hover:brightness-110 hover:shadow-[0_12px_36px_-16px_rgba(0,0,0,0.55)] active:brightness-95",
         destructive:
           "bg-red-500 text-white shadow-sm hover:bg-red-600 focus-visible:ring-red-500",
         outline:
-          "border border-[var(--border-color)] bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)] hover:text-[var(--main-color)]",
+          "border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--card)] hover:text-[var(--foreground)]",
         secondary:
-          "border border-[var(--border-color)] bg-[var(--card-color)] text-[var(--main-color)] shadow-sm hover:bg-[var(--border-color)]",
+          "border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] shadow-sm hover:bg-[var(--border)]",
         ghost:
-          "bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]",
+          "bg-transparent text-[var(--foreground)] hover:bg-[var(--card)]",
         link:
-          "text-[var(--main-color)] underline-offset-4 hover:text-[var(--secondary-color)] hover:underline",
+          "text-[var(--foreground)] underline-offset-4 hover:text-[var(--muted-foreground)] hover:underline",
       },
       size: {
         default: "h-10 px-5",

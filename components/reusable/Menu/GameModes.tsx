@@ -61,7 +61,7 @@ const GameModes = () => {
   return (
     <fieldset
       className={clsx(
-        'rounded-2xl bg-[var(--card-color)]',
+        'rounded-2xl bg-[var(--card)]',
         'duration-250',
         'transition-all ease-in-out',
         'flex flex-col md:flex-row',
@@ -73,10 +73,10 @@ const GameModes = () => {
           <label
             className={clsx(
               'flex justify-center items-center',
-              'text-[var(--secondary-color)]',
+              'text-[var(--muted-foreground)]',
               'w-full py-2',
               'hover:cursor-pointer',
-              // 'hover:bg-[var(--border-color)]',
+              // 'hover:bg-[var(--border)]',
               i === 0 && 'rounded-tl-2xl rounded-bl-2xl',
               i === gameModes.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
               'duration-250'
@@ -91,30 +91,30 @@ const GameModes = () => {
             />
             <span className='text-lg font-medium py-2 px-1 sm:px-2 text-center flex flex-row justify-center items-center gap-2'>
               {gameMode === selectedGameMode ? (
-                <CircleCheck className='text-[var(--main-color)]' />
+                <CircleCheck className='text-[var(--foreground)]' />
               ) : (
-                <Circle className='text-[var(--border-color)]' />
+                <Circle className='text-[var(--border)]' />
               )}
               <span>{gameMode.split('-').join(' ')}</span>
               {gameMode.toLowerCase() === 'pick' && (
                 <MousePointerClick
                   size={22}
-                  className='text-[var(--main-color)]'
+                  className='text-[var(--foreground)]'
                 />
               )}
               {gameMode.toLowerCase() === 'reverse-pick' && (
                 <MousePointerClick
                   size={22}
-                  className=' scale-x-[-1] text-[var(--main-color)]'
+                  className=' scale-x-[-1] text-[var(--foreground)]'
                 />
               )}
               {gameMode.toLowerCase() === 'input' && (
-                <Keyboard size={22} className='text-[var(--main-color)]' />
+                <Keyboard size={22} className='text-[var(--foreground)]' />
               )}
               {gameMode.toLowerCase() === 'reverse-input' && (
                 <Keyboard
                   size={22}
-                  className='scale-y-[-1] text-[var(--main-color)]'
+                  className='scale-y-[-1] text-[var(--foreground)]'
                 />
               )}
             </span>
@@ -124,8 +124,8 @@ const GameModes = () => {
             <div
               className={clsx(
                 'md:border-l-1 md:h-auto md:w-0',
-                'border-[var(--border-color)]',
-                'border-t-1 w-full border-[var(--border-color)]'
+                'border-[var(--border)]',
+                'border-t-1 w-full border-[var(--border)]'
               )}
             />
           )}

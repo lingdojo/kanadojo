@@ -13,7 +13,7 @@ const isKanjiObj = (obj: IKanjiObj | IWordObj): obj is IKanjiObj => {
 
 // Sub-components
 const FeedbackHeader = ({ feedback }: { feedback: React.ReactElement }) => (
-  <p className="text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-b-1 border-t-1 w-full border-[var(--border-color)]">
+  <p className="text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-b-1 border-t-1 w-full border-[var(--border)]">
     {feedback}
   </p>
 );
@@ -30,7 +30,7 @@ const ContinueButton = ({
   <div
     className={clsx(
       'w-[99vw]',
-      'border-t-1 border-[var(--border-color)] bg-[var(--card-color)]',
+      'border-t-1 border-[var(--border)] bg-[var(--card)]',
       'absolute bottom-0 z-10 py-4 px-4',
       'flex justify-center items-center'
     )}
@@ -44,7 +44,7 @@ const ContinueButton = ({
 
         // buttonBorderStyles,
         'flex flex-row justify-center items-end gap-2 ',
-        'text-[var(--background-color)] bg-[var(--secondary-color)] hover:bg-[var(--main-color)]'
+        'text-[var(--background)] bg-[var(--muted-foreground)] hover:bg-[var(--foreground)]'
       )}
       onClick={onClick}
       disabled={disabled}
@@ -58,10 +58,10 @@ const ContinueButton = ({
 const KanjiDisplay = ({ payload }: { payload: IKanjiObj }) => (
   <div className="relative w-full max-w-[100px] aspect-square flex items-center justify-center">
     {/* 4-segment square background */}
-    <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border-color)] rounded-xl bg-[var(--background-color)]">
-      <div className="border-r border-b border-[var(--border-color)]" />
-      <div className="border-b border-[var(--border-color)]" />
-      <div className="border-r border-[var(--border-color)]" />
+    <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 border-1 border-[var(--border)] rounded-xl bg-[var(--background)]">
+      <div className="border-r border-b border-[var(--border)]" />
+      <div className="border-b border-[var(--border)]" />
+      <div className="border-r border-[var(--border)]" />
       <div />
     </div>
 
@@ -84,15 +84,15 @@ const ReadingsList = ({
   if (isHidden) return null;
 
   return (
-    <div className="h-1/2 rounded-2xl flex flex-row gap-2 bg-[var(--card-color)]">
+    <div className="h-1/2 rounded-2xl flex flex-row gap-2 bg-[var(--card)]">
       {readings.slice(0, 2).map((reading, i) => (
         <span
           key={reading}
           className={clsx(
             'px-2 py-1 flex flex-row justify-center items-center text-sm md:text-base',
-            'text-[var(--secondary-color)] w-full',
+            'text-[var(--muted-foreground)] w-full',
             i < readings.slice(0, 2).length - 1 &&
-              'border-r-1 border-[var(--border-color)]'
+              'border-r-1 border-[var(--border)]'
           )}
         >
           {reading}
@@ -131,7 +131,7 @@ const KanjiSummary = ({
       </div>
     </div>
 
-    <p className="text-xl md:text-2xl w-full text-[var(--secondary-color)]">
+    <p className="text-xl md:text-2xl w-full text-[var(--muted-foreground)]">
       {payload.fullDisplayMeanings.join(', ')}
     </p>
 
@@ -168,13 +168,13 @@ const WordSummary = ({
       <span
         className={clsx(
           'rounded-xl px-2 py-1 flex flex-row items-center',
-          'bg-[var(--card-color)] text-lg',
-          'text-[var(--secondary-color)]'
+          'bg-[var(--card)] text-lg',
+          'text-[var(--muted-foreground)]'
         )}
       >
         {payload.reading}
       </span>
-      <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
+      <p className="text-xl md:text-2xl text-[var(--muted-foreground)]">
         {payload.displayMeanings.join(', ')}
       </p>
     </div>

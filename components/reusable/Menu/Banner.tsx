@@ -19,7 +19,7 @@ const Banner = () => {
       : '';
   return (
     <h2 className={clsx('text-3xl pt-3 lg:pt-6', 'flex items-center gap-2 overflow-hidden')}>
-      <span className="text-[var(--secondary-color)]">
+      <span className="text-[var(--muted-foreground)]">
         {subheading.split(' ')[1]}
       </span>
       <span>{subheading.split(' ')[0]}</span>

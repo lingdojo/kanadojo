@@ -64,7 +64,7 @@ const SetDictionary = ({ set }: { set: string }) => {
             key={wordObj.word}
             className={clsx(
               'flex flex-col justify-start items-start gap-4 py-4 max-md:px-4',
-              i !== 9 && 'border-b-1 border-[var(--border-color)]'
+              i !== 9 && 'border-b-1 border-[var(--border)]'
             )}
           >
             <FuriganaText
@@ -77,8 +77,8 @@ const SetDictionary = ({ set }: { set: string }) => {
               <span
                 className={clsx(
                   'rounded-xl px-2 py-1 flex flex-row items-center',
-                  'bg-[var(--background-color)] text-lg',
-                  'text-[var(--secondary-color)] '
+                  'bg-[var(--background)] text-lg',
+                  'text-[var(--muted-foreground)] '
                 )}
               >
                 {typeof wordObj.reading === 'string'
@@ -87,7 +87,7 @@ const SetDictionary = ({ set }: { set: string }) => {
                     : wordObj.reading.split(' ')[0]
                   : ''}
               </span>
-              <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
+              <p className="text-xl md:text-2xl text-[var(--muted-foreground)]">
                 {wordObj.displayMeanings.join(', ')}
               </p>
             </div>

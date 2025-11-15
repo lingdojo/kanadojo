@@ -91,7 +91,7 @@ const TopBar: React.FC<ITopBarProps> = ({
       <div
         className={clsx(
           'flex flex-row',
-          'rounded-2xl bg-[var(--card-color)]',
+          'rounded-2xl bg-[var(--card)]',
           'duration-250',
           'transition-all ease-in-out',
           'w-full',
@@ -105,9 +105,9 @@ const TopBar: React.FC<ITopBarProps> = ({
             'overflow-hidden',
             'hover:cursor-pointer',
             selectedGameMode
-              ? 'text-[var(--main-color)]'
-              : 'text-[var(--secondary-color)]',
-            'hover:bg-[var(--border-color)] rounded-tl-2xl rounded-bl-2xl',
+              ? 'text-[var(--foreground)]'
+              : 'text-[var(--muted-foreground)]',
+            'hover:bg-[var(--border)] rounded-tl-2xl rounded-bl-2xl',
             'duration-250',
             'relative'
           )}
@@ -124,8 +124,8 @@ const TopBar: React.FC<ITopBarProps> = ({
             className={clsx(
               'duration-250',
               focus === 'gameModes'
-                ? 'text-[var(--secondary-color)]'
-                : 'text-[var(--border-color)]',
+                ? 'text-[var(--muted-foreground)]'
+                : 'text-[var(--border)]',
               !showGameModes && 'rotate-180'
             )}
             size={24}
@@ -134,25 +134,25 @@ const TopBar: React.FC<ITopBarProps> = ({
           {selectedGameMode.toLowerCase() === 'pick' && (
             <MousePointerClick
               size={22}
-              className="text-[var(--secondary-color)]"
+              className="text-[var(--muted-foreground)]"
             />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-pick' && (
             <MousePointerClick
               size={22}
-              className=" scale-x-[-1] text-[var(--secondary-color)]"
+              className=" scale-x-[-1] text-[var(--muted-foreground)]"
             />
           )}
           {selectedGameMode.toLowerCase() === 'input' && (
             <Keyboard
               size={22}
-              className="text-[var(--secondary-color)]"
+              className="text-[var(--muted-foreground)]"
             />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-input' && (
             <Keyboard
               size={22}
-              className="scale-y-[-1] text-[var(--secondary-color)]"
+              className="scale-y-[-1] text-[var(--muted-foreground)]"
             />
           )}
         </button>
@@ -160,7 +160,7 @@ const TopBar: React.FC<ITopBarProps> = ({
         <div
           className={clsx(
             'border-l-1 h-auto w-0',
-            'border-[var(--border-color)]'
+            'border-[var(--border)]'
           )}
         />
 
@@ -173,11 +173,11 @@ const TopBar: React.FC<ITopBarProps> = ({
             ref={buttonRef}
             className={clsx(
               'w-full h-full text-2xl px-2 flex flex-row justify-center items-center gap-1 py-4',
-              'text-[var(--border-color)]',
+              'text-[var(--border)]',
               selectedGameMode &&
                 isFilled &&
-                'text-[var(--main-color)] hover:bg-[var(--border-color)] hover:cursor-pointer',
-              'text-[var(--border-color)]',
+                'text-[var(--foreground)] hover:bg-[var(--border)] hover:cursor-pointer',
+              'text-[var(--border)]',
               'rounded-tr-2xl rounded-br-2xl',
               'duration-250'
             )}
@@ -204,11 +204,11 @@ const TopBar: React.FC<ITopBarProps> = ({
           <button
             className={clsx(
               'w-full text-xl p-3 flex flex-row justify-center items-center gap-2',
-              'rounded-2xl bg-[var(--card-color)] hover:bg-[var(--main-color)]',
-              'text-[var(--main-color)] hover:text-[var(--background-color)]',
+              'rounded-2xl bg-[var(--card)] hover:bg-[var(--foreground)]',
+              'text-[var(--foreground)] hover:text-[var(--background)]',
               'hover:cursor-pointer',
               'transition-all duration-275'
-              // 'border-0 border-[var(--main-color)]/20',
+              // 'border-0 border-[var(--foreground)]/20',
             )}
             onClick={() => playClick()}
           >

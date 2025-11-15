@@ -138,16 +138,16 @@ const KanjiPickGame = ({
       generateNewCharacter();
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className="inline text-[var(--main-color)]" />
+          <span className="text-[var(--muted-foreground)]">{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className="inline text-[var(--foreground)]" />
         </>
       );
     } else {
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className="inline text-[var(--main-color)]" />
+          <span className="text-[var(--muted-foreground)]">{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className="inline text-[var(--foreground)]" />
         </>
       );
     }
@@ -228,7 +228,7 @@ const KanjiPickGame = ({
               text={correctChar}
               variant="icon-only"
               size="lg"
-              className="bg-[var(--card-color)] text-[var(--secondary-color)]"
+              className="bg-[var(--card)] text-[var(--muted-foreground)]"
             />
           </div>
 
@@ -249,11 +249,11 @@ const KanjiPickGame = ({
                 className={clsx(
                   'text-4xl py-4 rounded-xl w-full md:w-1/4 xl:w-1/5 flex flex-row justify-center items-center gap-1.5',
                   buttonBorderStyles,
-                  'text-[var(--border-color)]',
+                  'text-[var(--border)]',
                   wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                    'hover:bg-[var(--card)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--main-color)]'
+                    'text-[var(--foreground)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
@@ -271,10 +271,10 @@ const KanjiPickGame = ({
                 />
                 <span
                   className={clsx(
-                    'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',
+                    'hidden lg:inline text-xs rounded-full bg-[var(--border)] px-1',
                     wrongSelectedAnswers.includes(option)
-                      ? 'text-[var(--border-color)]'
-                      : 'text-[var(--secondary-color)]'
+                      ? 'text-[var(--border)]'
+                      : 'text-[var(--muted-foreground)]'
                   )}
                 >
                   {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}

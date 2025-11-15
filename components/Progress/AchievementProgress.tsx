@@ -93,8 +93,8 @@ const AchievementCard = ({
         'relative p-6 cursor-pointer transition-all duration-300',
         'rounded-2xl border-2 overflow-hidden group',
         isUnlocked
-          ? 'bg-[var(--card-color)] border-[var(--border-color)] hover:shadow-xl hover:border-[var(--main-color)]/30'
-          : 'bg-[var(--background-color)] border-[var(--border-color)]/50 opacity-80 hover:opacity-100'
+          ? 'bg-[var(--card)] border-[var(--border)] hover:shadow-xl hover:border-[var(--foreground)]/30'
+          : 'bg-[var(--background)] border-[var(--border)]/50 opacity-80 hover:opacity-100'
       )}
       onClick={onClick}
     >
@@ -162,10 +162,10 @@ const AchievementCard = ({
           <div className='flex-1 min-w-0'>
             <h3
               className={clsx(
-                'font-bold text-lg mb-1 group-hover:text-[var(--main-color)] transition-colors',
+                'font-bold text-lg mb-1 group-hover:text-[var(--foreground)] transition-colors',
                 isUnlocked
-                  ? 'text-[var(--main-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  ? 'text-[var(--foreground)]'
+                  : 'text-[var(--muted-foreground)]'
               )}
             >
               {achievement.title}
@@ -175,8 +175,8 @@ const AchievementCard = ({
               className={clsx(
                 'text-sm leading-relaxed',
                 isUnlocked
-                  ? 'text-[var(--secondary-color)]'
-                  : 'text-[var(--secondary-color)]/70'
+                  ? 'text-[var(--muted-foreground)]'
+                  : 'text-[var(--muted-foreground)]/70'
               )}
             >
               {achievement.description}
@@ -188,14 +188,14 @@ const AchievementCard = ({
         {!isUnlocked && progress > 0 && (
           <div className='space-y-2'>
             <div className='flex justify-between items-center'>
-              <span className='text-sm font-medium text-[var(--main-color)]'>
+              <span className='text-sm font-medium text-[var(--foreground)]'>
                 Progress
               </span>
-              <span className='text-sm font-bold text-[var(--main-color)]'>
+              <span className='text-sm font-bold text-[var(--foreground)]'>
                 {Math.round(progress)}%
               </span>
             </div>
-            <div className='w-full bg-[var(--border-color)] rounded-full h-2'>
+            <div className='w-full bg-[var(--border)] rounded-full h-2'>
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
@@ -207,20 +207,20 @@ const AchievementCard = ({
         )}
 
         {/* Footer */}
-        <div className='flex items-center justify-between pt-2 border-t border-[var(--border-color)]/30'>
+        <div className='flex items-center justify-between pt-2 border-t border-[var(--border)]/30'>
           <div className='flex items-center gap-2'>
             <Trophy
               size={16}
               className={
-                isUnlocked ? 'text-yellow-500' : 'text-[var(--border-color)]'
+                isUnlocked ? 'text-yellow-500' : 'text-[var(--border)]'
               }
             />
             <span
               className={clsx(
                 'text-sm font-bold',
                 isUnlocked
-                  ? 'text-[var(--main-color)]'
-                  : 'text-[var(--secondary-color)]'
+                  ? 'text-[var(--foreground)]'
+                  : 'text-[var(--muted-foreground)]'
               )}
             >
               {achievement.points} points
@@ -228,7 +228,7 @@ const AchievementCard = ({
           </div>
 
           {isUnlocked && (
-            <div className='text-xs text-[var(--secondary-color)] bg-[var(--background-color)] px-2 py-1 rounded-full'>
+            <div className='text-xs text-[var(--muted-foreground)] bg-[var(--background)] px-2 py-1 rounded-full'>
               Unlocked ✓
             </div>
           )}
@@ -326,11 +326,11 @@ const AchievementProgress = () => {
           >
             <div className='flex items-center justify-center gap-3 mb-4'>
               <Trophy className='text-yellow-500' size={40} />
-              <h1 className='text-4xl font-bold text-[var(--main-color)]'>
+              <h1 className='text-4xl font-bold text-[var(--foreground)]'>
                 Achievements
               </h1>
             </div>
-            <p className='text-lg text-[var(--secondary-color)] max-w-2xl mx-auto'>
+            <p className='text-lg text-[var(--muted-foreground)] max-w-2xl mx-auto'>
               Track your Japanese learning journey and celebrate your milestones
             </p>
 
@@ -342,10 +342,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.1 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
+                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
                   {unlockedCount}
                 </div>
-                <div className='text-sm text-[var(--secondary-color)]'>
+                <div className='text-sm text-[var(--muted-foreground)]'>
                   Unlocked
                 </div>
               </motion.div>
@@ -356,10 +356,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.2 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
+                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
                   {totalCount}
                 </div>
-                <div className='text-sm text-[var(--secondary-color)]'>
+                <div className='text-sm text-[var(--muted-foreground)]'>
                   Total
                 </div>
               </motion.div>
@@ -370,10 +370,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.3 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
+                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
                   {totalPoints}
                 </div>
-                <div className='text-sm text-[var(--secondary-color)]'>
+                <div className='text-sm text-[var(--muted-foreground)]'>
                   Points
                 </div>
               </motion.div>
@@ -384,10 +384,10 @@ const AchievementProgress = () => {
                 transition={{ delay: 0.4 }}
                 className={clsx('p-6 text-center', cardBorderStyles)}
               >
-                <div className='text-3xl font-bold text-[var(--main-color)] mb-1'>
+                <div className='text-3xl font-bold text-[var(--foreground)] mb-1'>
                   {level}
                 </div>
-                <div className='text-sm text-[var(--secondary-color)]'>
+                <div className='text-sm text-[var(--muted-foreground)]'>
                   Level
                 </div>
               </motion.div>
@@ -401,14 +401,14 @@ const AchievementProgress = () => {
               className='max-w-md mx-auto mt-6'
             >
               <div className='flex justify-between items-center mb-2'>
-                <span className='text-sm font-medium text-[var(--main-color)]'>
+                <span className='text-sm font-medium text-[var(--foreground)]'>
                   Overall Progress
                 </span>
-                <span className='text-sm font-bold text-[var(--main-color)]'>
+                <span className='text-sm font-bold text-[var(--foreground)]'>
                   {Math.round(completionPercentage)}%
                 </span>
               </div>
-              <div className='w-full bg-[var(--border-color)] rounded-full h-3'>
+              <div className='w-full bg-[var(--border)] rounded-full h-3'>
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${completionPercentage}%` }}
@@ -441,8 +441,8 @@ const AchievementProgress = () => {
                     'flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-200',
                     'border-2 font-medium',
                     isSelected
-                      ? 'bg-[var(--main-color)] text-[var(--background-color)] border-[var(--main-color)]'
-                      : 'bg-[var(--card-color)] text-[var(--main-color)] border-[var(--border-color)] hover:border-[var(--main-color)]'
+                      ? 'bg-[var(--foreground)] text-[var(--background)] border-[var(--foreground)]'
+                      : 'bg-[var(--card)] text-[var(--foreground)] border-[var(--border)] hover:border-[var(--foreground)]'
                   )}
                 >
                   <CategoryIcon size={18} />
@@ -451,8 +451,8 @@ const AchievementProgress = () => {
                     className={clsx(
                       'text-xs px-2 py-1 rounded-full',
                       isSelected
-                        ? 'bg-[var(--background-color)]/20 text-[var(--background-color)]'
-                        : 'bg-[var(--background-color)] text-[var(--secondary-color)]'
+                        ? 'bg-[var(--background)]/20 text-[var(--background)]'
+                        : 'bg-[var(--background)] text-[var(--muted-foreground)]'
                     )}
                   >
                     {stats.unlocked}/{stats.total}
@@ -496,13 +496,13 @@ const AchievementProgress = () => {
           {filteredAchievements.length === 0 && (
             <div className='text-center py-12'>
               <Trophy
-                className='mx-auto text-[var(--border-color)] mb-4'
+                className='mx-auto text-[var(--border)] mb-4'
                 size={48}
               />
-              <h3 className='text-lg font-semibold text-[var(--main-color)] mb-2'>
+              <h3 className='text-lg font-semibold text-[var(--foreground)] mb-2'>
                 No achievements in this category
               </h3>
-              <p className='text-[var(--secondary-color)]'>
+              <p className='text-[var(--muted-foreground)]'>
                 Try selecting a different category to see more achievements.
               </p>
             </div>
@@ -532,23 +532,23 @@ const AchievementManagement = () => {
       {/* Management Header */}
       <div className={clsx('p-6', cardBorderStyles)}>
         <div className='flex items-center gap-3 mb-4'>
-          <RotateCcw className='text-[var(--main-color)]' size={24} />
-          <h2 className='text-xl font-bold text-[var(--main-color)]'>
+          <RotateCcw className='text-[var(--foreground)]' size={24} />
+          <h2 className='text-xl font-bold text-[var(--foreground)]'>
             Achievement Management
           </h2>
         </div>
 
-        <p className='text-[var(--secondary-color)] mb-6'>
+        <p className='text-[var(--muted-foreground)] mb-6'>
           Check for any missed achievements based on your current progress.
         </p>
 
         {/* Recalculate Achievements */}
-        <div className='flex items-center justify-between p-4 bg-[var(--background-color)] rounded-lg'>
+        <div className='flex items-center justify-between p-4 bg-[var(--background)] rounded-lg'>
           <div>
-            <h4 className='font-medium text-[var(--main-color)]'>
+            <h4 className='font-medium text-[var(--foreground)]'>
               Recalculate Achievements
             </h4>
-            <p className='text-sm text-[var(--secondary-color)]'>
+            <p className='text-sm text-[var(--muted-foreground)]'>
               Scan your progress and unlock any achievements you may have earned
             </p>
           </div>
@@ -557,7 +557,7 @@ const AchievementManagement = () => {
             className={clsx(
               'px-4 py-2 rounded-lg flex items-center gap-2',
               buttonBorderStyles,
-              'text-[var(--main-color)] hover:bg-[var(--border-color)]'
+              'text-[var(--foreground)] hover:bg-[var(--border)]'
             )}
           >
             <RotateCcw size={16} />

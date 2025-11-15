@@ -137,10 +137,10 @@ const VocabInputGame = ({
     generateNewCharacter();
     setFeedback(
       <>
-        <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${userInput
+        <span className='text-[var(--muted-foreground)]'>{`${correctChar} = ${userInput
           .trim()
           .toLowerCase()} `}</span>
-        <CircleCheck className='inline text-[var(--main-color)]' />
+        <CircleCheck className='inline text-[var(--foreground)]' />
       </>
     );
   };
@@ -149,10 +149,10 @@ const VocabInputGame = ({
     setInputValue('');
     setFeedback(
       <>
-        <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${inputValue
+        <span className='text-[var(--muted-foreground)]'>{`${correctChar} ≠ ${inputValue
           .trim()
           .toLowerCase()} `}</span>
-        <CircleX className='inline text-[var(--main-color)]' />
+        <CircleX className='inline text-[var(--foreground)]' />
       </>
     );
     playErrorTwice();
@@ -229,7 +229,7 @@ const VocabInputGame = ({
               text={correctChar}
               variant='icon-only'
               size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
+              className='bg-[var(--card)] border-[var(--border)]'
             />
           </div>
 
@@ -239,7 +239,7 @@ const VocabInputGame = ({
             value={inputValue}
             className={clsx(
               'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',
-              'border-[var(--card-color)] focus:border-[var(--border-color)]'
+              'border-[var(--card)] focus:border-[var(--border)]'
             )}
             onChange={e => setInputValue(e.target.value)}
             onKeyDown={handleEnter}
@@ -253,7 +253,7 @@ const VocabInputGame = ({
               buttonBorderStyles,
               'flex flex-row items-end gap-2',
               'active:scale-95 md:active:scale-98 active:duration-225',
-              'text-[var(--secondary-color)]'
+              'text-[var(--muted-foreground)]'
             )}
             onClick={handleSkip}
           >

@@ -54,7 +54,7 @@ KanaDojo leverages Tailwind CSS as the primary styling solution with a heavy emp
 
 **✅ DO:**
 ```tsx
-<div className="bg-[var(--card-color)] text-[var(--main-color)]">
+<div className="bg-[var(--card)] text-[var(--foreground)]">
   Content
 </div>
 ```
@@ -75,7 +75,7 @@ import { cn } from '@/lib/utils';
 
 <button className={cn(
   "px-4 py-2 rounded-lg",
-  isActive && "bg-[var(--main-color)]",
+  isActive && "bg-[var(--foreground)]",
   disabled && "opacity-50 cursor-not-allowed"
 )}>
   Click me
@@ -91,13 +91,13 @@ Common patterns are extracted to `static/styles.ts`:
 import clsx from 'clsx';
 
 export const cardBorderStyles = clsx(
-  'rounded-xl bg-[var(--card-color)]'
+  'rounded-xl bg-[var(--card)]'
 );
 
 export const buttonBorderStyles = clsx(
-  'rounded-xl bg-[var(--card-color)] hover:cursor-pointer',
+  'rounded-xl bg-[var(--card)] hover:cursor-pointer',
   'duration-250 transition-all ease-in-out',
-  'hover:bg-[var(--border-color)]'
+  'hover:bg-[var(--border)]'
 );
 ```
 
@@ -140,13 +140,13 @@ KanaDojo uses a **5-variable color system** defined in `app/globals.css`:
 ```css
 :root {
   /* Layout Colors */
-  --background-color: hsla(210, 17%, 100%, 1);  /* Page background */
-  --card-color: hsla(210, 17%, 91%, 1);         /* Card/elevated surfaces */
-  --border-color: hsla(210, 17%, 76%, 1);       /* Borders and dividers */
+  --background: hsla(210, 17%, 100%, 1);  /* Page background */
+  --card: hsla(210, 17%, 91%, 1);         /* Card/elevated surfaces */
+  --border: hsla(210, 17%, 76%, 1);       /* Borders and dividers */
   
   /* Content Colors */
-  --main-color: hsl(0, 0%, 0%);                 /* Primary text and actions */
-  --secondary-color: hsl(0, 0%, 35%);           /* Secondary text and icons */
+  --foreground: hsl(0, 0%, 0%);                 /* Primary text and actions */
+  --muted-foreground: hsl(0, 0%, 35%);           /* Secondary text and icons */
 }
 ```
 
@@ -177,11 +177,11 @@ export function applyTheme(themeId: string) {
   if (!theme) return;
 
   const root = document.documentElement;
-  root.style.setProperty('--background-color', theme.backgroundColor);
-  root.style.setProperty('--card-color', theme.cardColor);
-  root.style.setProperty('--border-color', theme.borderColor);
-  root.style.setProperty('--main-color', theme.mainColor);
-  root.style.setProperty('--secondary-color', theme.secondaryColor);
+  root.style.setProperty('--background', theme.backgroundColor);
+  root.style.setProperty('--card', theme.cardColor);
+  root.style.setProperty('--border', theme.borderColor);
+  root.style.setProperty('--foreground', theme.mainColor);
+  root.style.setProperty('--muted-foreground', theme.secondaryColor);
   root.setAttribute('data-theme', theme.id);
 }
 ```
@@ -222,32 +222,32 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
 ```
 
 - **Usage guidance**:
-  - Use `--background-color` for large page surfaces and overlays.
-  - Use `--card-color` for cards, panels, and elevated UI pieces.
-  - Use `--border-color` for separators, subtle hover/backdrop outlines and focus rings when appropriate.
-  - Use `--main-color` for primary text, icons, and CTAs that need high readability.
-  - Use `--secondary-color` for subtle accents, tertiary text, dividers or decorative strokes.
+  - Use `--background` for large page surfaces and overlays.
+  - Use `--card` for cards, panels, and elevated UI pieces.
+  - Use `--border` for separators, subtle hover/backdrop outlines and focus rings when appropriate.
+  - Use `--foreground` for primary text, icons, and CTAs that need high readability.
+  - Use `--muted-foreground` for subtle accents, tertiary text, dividers or decorative strokes.
 
 - **Tailwind example (recommended pattern)**:
 ```tsx
-<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-    <h1 className="text-2xl font-bold text-[var(--main-color)]">Sumi — Focus Mode</h1>
-    <p className="text-sm text-[var(--secondary-color)]">Subtle helper text and accents</p>
+<div className="bg-[var(--background)] min-h-screen text-[var(--foreground)]">
+  <div className="rounded-xl bg-[var(--card)] border border-[var(--border)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--foreground)]">Sumi — Focus Mode</h1>
+    <p className="text-sm text-[var(--muted-foreground)]">Subtle helper text and accents</p>
   </div>
 </div>
 ```
 
 - **Accessibility / contrast notes**:
-  - The `sumi` theme is intentionally high-contrast for primary content: `--main-color` (near-white) on `--background-color` (very dark charcoal) is appropriate for body text and passes typical AA thresholds for normal text in most sizes — still run specific checks for bright UI elements and CTA buttons.
-  - For smaller UI chrome (icons, borders), ensure `--border-color` on `--card-color` meets at least a 3:1 ratio for interactive affordances, or increase border opacity when used as the primary focus indicator.
-  - When using `--secondary-color` for secondary text, verify it maintains adequate contrast on both `--background-color` and `--card-color` for the sizes you use (tooling: WebAIM, axe, Lighthouse).
+  - The `sumi` theme is intentionally high-contrast for primary content: `--foreground` (near-white) on `--background` (very dark charcoal) is appropriate for body text and passes typical AA thresholds for normal text in most sizes — still run specific checks for bright UI elements and CTA buttons.
+  - For smaller UI chrome (icons, borders), ensure `--border` on `--card` meets at least a 3:1 ratio for interactive affordances, or increase border opacity when used as the primary focus indicator.
+  - When using `--muted-foreground` for secondary text, verify it maintains adequate contrast on both `--background` and `--card` for the sizes you use (tooling: WebAIM, axe, Lighthouse).
 
 - **Developer checklist when adding/using `sumi`**:
   - Copy the theme object into `static/themes.ts` exactly (IDs must be kebab-case).
   - Verify `applyTheme('sumi')` updates CSS variables and `data-theme` attribute correctly.
   - Test interactive components (buttons, inputs, dialogs) visually and via automated contrast checks.
-  - Consider providing a slightly lighter variant of `--main-color` for disabled/low-emphasis states to avoid blending with `--card-color`.
+  - Consider providing a slightly lighter variant of `--foreground` for disabled/low-emphasis states to avoid blending with `--card`.
 
   #### Momiji Theme (Dark — Autumn Maple)
 
@@ -266,26 +266,26 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   ```
 
   - **Usage guidance:**
-    - Use `--background-color` for full-page backgrounds and large overlays.
-    - Use `--card-color` for cards, panels, and elevated UI surfaces to create subtle separation from the page background.
-    - Use `--border-color` for separators, subtle hover outlines, and focus affordances.
-    - Use `--main-color` for primary text, icons, and CTAs that need emphasis.
-    - Use `--secondary-color` for accent highlights, badges, and secondary CTAs.
+    - Use `--background` for full-page backgrounds and large overlays.
+    - Use `--card` for cards, panels, and elevated UI surfaces to create subtle separation from the page background.
+    - Use `--border` for separators, subtle hover outlines, and focus affordances.
+    - Use `--foreground` for primary text, icons, and CTAs that need emphasis.
+    - Use `--muted-foreground` for accent highlights, badges, and secondary CTAs.
 
   - **Tailwind example:**
   ```tsx
-  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-      <h1 className="text-2xl font-bold text-[var(--main-color)]">Momiji — Autumn Warmth</h1>
-      <p className="text-sm text-[var(--secondary-color)]">Accent and supportive text</p>
+  <div className="bg-[var(--background)] min-h-screen text-[var(--foreground)]">
+    <div className="rounded-xl bg-[var(--card)] border border-[var(--border)] p-6">
+      <h1 className="text-2xl font-bold text-[var(--foreground)]">Momiji — Autumn Warmth</h1>
+      <p className="text-sm text-[var(--muted-foreground)]">Accent and supportive text</p>
     </div>
   </div>
   ```
 
   - **Accessibility / contrast notes:**
-    - `--main-color` (warm amber) on `--background-color` (deep charcoal) should provide strong contrast for body text; still validate with WebAIM, axe, or Lighthouse.
-    - `--secondary-color` (yellow-green) is an accent — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; reduce saturation or increase lightness if below AA.
-    - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; increase opacity if necessary when used as a primary focus indicator.
+    - `--foreground` (warm amber) on `--background` (deep charcoal) should provide strong contrast for body text; still validate with WebAIM, axe, or Lighthouse.
+    - `--muted-foreground` (yellow-green) is an accent — confirm contrast on both `--background` and `--card` when used for small or secondary text; reduce saturation or increase lightness if below AA.
+    - Ensure `--border` on `--card` meets at least a 3:1 contrast ratio for interactive affordances; increase opacity if necessary when used as a primary focus indicator.
 
   - **Developer checklist when adding/using `momiji`:**
     - Add the theme object to `static/themes.ts` under the `Dark` theme group.
@@ -310,26 +310,26 @@ The `aizome` theme is inspired by traditional Japanese indigo dyeing (`aizome`) 
   ```
 
   - **Usage guidance:**
-    - Use `--background-color` for full-page backgrounds and large overlays to establish the cool, indigo base tone.
-    - Use `--card-color` for cards, panels, and elevated UI surfaces for subtle depth within the cool palette.
-    - Use `--border-color` for separators, interactive affordances, and subtle hover outlines.
-    - Use `--main-color` for primary text, icons, and CTAs that need strong visibility and contrast.
-    - Use `--secondary-color` for accent highlights, badges, and supplementary text that complements the cool indigo base.
+    - Use `--background` for full-page backgrounds and large overlays to establish the cool, indigo base tone.
+    - Use `--card` for cards, panels, and elevated UI surfaces for subtle depth within the cool palette.
+    - Use `--border` for separators, interactive affordances, and subtle hover outlines.
+    - Use `--foreground` for primary text, icons, and CTAs that need strong visibility and contrast.
+    - Use `--muted-foreground` for accent highlights, badges, and supplementary text that complements the cool indigo base.
 
   - **Tailwind example:**
   ```tsx
-  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-      <h1 className="text-2xl font-bold text-[var(--main-color)]">Aizome — Indigo Serenity</h1>
-      <p className="text-sm text-[var(--secondary-color)]">Cool tones and warm accents</p>
+  <div className="bg-[var(--background)] min-h-screen text-[var(--foreground)]">
+    <div className="rounded-xl bg-[var(--card)] border border-[var(--border)] p-6">
+      <h1 className="text-2xl font-bold text-[var(--foreground)]">Aizome — Indigo Serenity</h1>
+      <p className="text-sm text-[var(--muted-foreground)]">Cool tones and warm accents</p>
     </div>
   </div>
   ```
 
   - **Accessibility / contrast notes:**
-    - `--main-color` (bright cyan) on `--background-color` (deep indigo) provides excellent contrast for body text and passes typical AA thresholds; verify with WebAIM or axe for edge cases.
-    - `--secondary-color` (warm sand) is an accent color — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; increase saturation if below AA.
-    - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; test focus indicators and hover states carefully.
+    - `--foreground` (bright cyan) on `--background` (deep indigo) provides excellent contrast for body text and passes typical AA thresholds; verify with WebAIM or axe for edge cases.
+    - `--muted-foreground` (warm sand) is an accent color — confirm contrast on both `--background` and `--card` when used for small or secondary text; increase saturation if below AA.
+    - Ensure `--border` on `--card` meets at least a 3:1 contrast ratio for interactive affordances; test focus indicators and hover states carefully.
 
   - **Developer checklist when adding/using `aizome`:**
     - Add the theme object to `static/themes.ts` under the `Dark` theme group.
@@ -399,16 +399,16 @@ secondaryColor (hsl(180, 60%, 60%)) on backgroundColor (hsl(220, 15%, 10%))
 ```tsx
 // Example from components/ui/button.tsx
 const buttonVariants = cva(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)]",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--foreground)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]",
   // ... other styles
 );
 ```
 
 **Focus Ring Guidelines:**
 - Use `focus-visible:ring-2` for keyboard navigation
-- Ring color: `ring-[var(--main-color)]`
+- Ring color: `ring-[var(--foreground)]`
 - Ring offset: `ring-offset-2` for separation
-- Ring offset color: `ring-offset-[var(--background-color)]`
+- Ring offset color: `ring-offset-[var(--background)]`
 
 ### Semantic HTML
 
@@ -476,8 +476,8 @@ const MyComponent = ({ title, isActive = false, onClick }: MyComponentProps) => 
   return (
     <div className={cn(
       "rounded-xl p-4",
-      "bg-[var(--card-color)] text-[var(--main-color)]",
-      isActive && "border-2 border-[var(--main-color)]"
+      "bg-[var(--card)] text-[var(--foreground)]",
+      isActive && "border-2 border-[var(--foreground)]"
     )}>
       <h3 className="text-xl font-semibold">{title}</h3>
       {/* ... */}
@@ -499,7 +499,7 @@ export default MyComponent;
 
 #### 2. Card Components
 ```tsx
-<div className="rounded-xl bg-[var(--card-color)] p-6 shadow-sm">
+<div className="rounded-xl bg-[var(--card)] p-6 shadow-sm">
   {/* Card content */}
 </div>
 ```
@@ -508,10 +508,10 @@ export default MyComponent;
 ```tsx
 <button className={cn(
   "px-6 py-3 rounded-lg",
-  "bg-[var(--main-color)] text-[var(--background-color)]",
+  "bg-[var(--foreground)] text-[var(--background)]",
   "hover:brightness-110 active:brightness-95",
   "transition-all duration-200",
-  "focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2"
+  "focus-visible:ring-2 focus-visible:ring-[var(--foreground)] focus-visible:ring-offset-2"
 )}>
   Action
 </button>
@@ -519,13 +519,13 @@ export default MyComponent;
 
 #### 4. Text Hierarchy
 ```tsx
-<h1 className="text-4xl md:text-5xl font-bold text-[var(--main-color)]">
+<h1 className="text-4xl md:text-5xl font-bold text-[var(--foreground)]">
   Main Heading
 </h1>
-<h2 className="text-2xl md:text-3xl font-semibold text-[var(--main-color)]">
+<h2 className="text-2xl md:text-3xl font-semibold text-[var(--foreground)]">
   Subheading
 </h2>
-<p className="text-base text-[var(--secondary-color)]">
+<p className="text-base text-[var(--muted-foreground)]">
   Body text with secondary color
 </p>
 ```
@@ -534,8 +534,8 @@ export default MyComponent;
 ```tsx
 <div className={cn(
   "p-4 rounded-lg",
-  "bg-[var(--card-color)]",
-  "hover:bg-[var(--border-color)] hover:cursor-pointer",
+  "bg-[var(--card)]",
+  "hover:bg-[var(--border)] hover:cursor-pointer",
   "transition-all duration-200"
 )}>
   {/* Hoverable content */}
@@ -586,7 +586,7 @@ shadcn/ui components are customized to use our CSS variable system:
 ```tsx
 // components/ui/button.tsx
 const buttonVariants = cva(
-  "bg-[var(--main-color)] text-[var(--background-color)]", // Uses our theme
+  "bg-[var(--foreground)] text-[var(--background)]", // Uses our theme
   // ...
 );
 ```
@@ -602,9 +602,9 @@ npx shadcn@latest add [component-name]
 **After installation:**
 1. Review the generated component
 2. Replace hardcoded colors with CSS variables:
-   - `bg-primary` → `bg-[var(--main-color)]`
-   - `text-primary-foreground` → `text-[var(--background-color)]`
-   - `border` → `border-[var(--border-color)]`
+   - `bg-primary` → `bg-[var(--foreground)]`
+   - `text-primary-foreground` → `text-[var(--background)]`
+   - `border` → `border-[var(--border)]`
 3. Test with multiple themes to ensure compatibility
 
 #### 3. Component Customization
@@ -614,16 +614,16 @@ npx shadcn@latest add [component-name]
 ```tsx
 // components/ui/button.tsx
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)] disabled:pointer-events-none disabled:opacity-60",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--foreground)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-60",
   {
     variants: {
       variant: {
         default:
-          "bg-[var(--main-color)] text-[var(--background-color)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] hover:brightness-110",
+          "bg-[var(--foreground)] text-[var(--background)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] hover:brightness-110",
         outline:
-          "border border-[var(--border-color)] bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]",
+          "border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--card)]",
         ghost:
-          "bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]",
+          "bg-transparent text-[var(--foreground)] hover:bg-[var(--card)]",
         // Add custom variants as needed
       },
       size: {
@@ -686,12 +686,12 @@ const buttonVariants = cva(
 **✅ DO:**
 ```tsx
 // Use CSS variables for dynamic theming
-<div className="bg-[var(--card-color)] text-[var(--main-color)]" />
+<div className="bg-[var(--card)] text-[var(--foreground)]" />
 
 // Use cn() for conditional classes
 <button className={cn(
   "px-4 py-2",
-  isActive && "bg-[var(--main-color)]"
+  isActive && "bg-[var(--foreground)]"
 )} />
 
 // Extract repeated patterns to static/styles.ts
@@ -710,8 +710,8 @@ import { buttonBorderStyles } from '@/static/styles';
 <button className={"px-4 py-2 " + (isActive ? "bg-blue-500" : "")} />
 
 // Don't repeat complex class strings
-<button className="rounded-xl bg-[var(--card-color)] hover:bg-[var(--border-color)] transition-all duration-200" />
-<div className="rounded-xl bg-[var(--card-color)] hover:bg-[var(--border-color)] transition-all duration-200" />
+<button className="rounded-xl bg-[var(--card)] hover:bg-[var(--border)] transition-all duration-200" />
+<div className="rounded-xl bg-[var(--card)] hover:bg-[var(--border)] transition-all duration-200" />
 
 // Don't use arbitrary breakpoint values
 <div className="flex flex-col min-[850px]:flex-row" /> // Use md: instead
@@ -726,7 +726,7 @@ import { buttonBorderStyles } from '@/static/styles';
 <h2 className="text-2xl font-semibold">Section Title</h2>
 
 // Use secondary color for less prominent text
-<p className="text-[var(--secondary-color)]">Helper text</p>
+<p className="text-[var(--muted-foreground)]">Helper text</p>
 
 // Use responsive text sizes
 <h1 className="text-3xl md:text-4xl lg:text-5xl">Responsive Title</h1>
@@ -775,7 +775,7 @@ const spacing = "p-6 space-y-4";
 <button className="hover:brightness-110 transition-duration-200" />
 
 // Use focus-visible for keyboard navigation
-<button className="focus-visible:ring-2 focus-visible:ring-[var(--main-color)]" />
+<button className="focus-visible:ring-2 focus-visible:ring-[var(--foreground)]" />
 
 // Provide feedback on active/pressed states
 <button className="active:brightness-95" />
@@ -866,11 +866,11 @@ const Card = ({ title, description, children, className }: CardProps) => {
       className
     )}>
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold text-[var(--main-color)]">
+        <h3 className="text-xl font-semibold text-[var(--foreground)]">
           {title}
         </h3>
         {description && (
-          <p className="text-sm text-[var(--secondary-color)]">
+          <p className="text-sm text-[var(--muted-foreground)]">
             {description}
           </p>
         )}
@@ -914,15 +914,15 @@ const SelectionButton = ({ label, isSelected, onToggle }: SelectionButtonProps) 
         buttonBorderStyles,
         "p-4 flex items-center justify-between gap-3",
         "transition-all duration-200",
-        isSelected && "border-2 border-[var(--main-color)]"
+        isSelected && "border-2 border-[var(--foreground)]"
       )}
       aria-pressed={isSelected}
     >
-      <span className="text-[var(--main-color)] font-medium">
+      <span className="text-[var(--foreground)] font-medium">
         {label}
       </span>
       {isSelected && (
-        <Check className="text-[var(--secondary-color)]" size={20} />
+        <Check className="text-[var(--muted-foreground)]" size={20} />
       )}
     </button>
   );
@@ -935,7 +935,7 @@ export default SelectionButton;
 
 ```tsx
 <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
-  <h1 className="text-3xl md:text-4xl font-bold text-[var(--main-color)] mb-8">
+  <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-8">
     Character Selection
   </h1>
   
@@ -985,26 +985,26 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             className={cn(
               "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50",
               "w-full max-w-md max-h-[85vh] overflow-y-auto",
-              "bg-[var(--background-color)] rounded-2xl shadow-2xl",
+              "bg-[var(--background)] rounded-2xl shadow-2xl",
               "p-6"
             )}
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-[var(--main-color)]">
+              <h2 className="text-2xl font-bold text-[var(--foreground)]">
                 {title}
               </h2>
               <button
                 onClick={onClose}
                 className={cn(
                   "rounded-lg p-2",
-                  "hover:bg-[var(--card-color)]",
+                  "hover:bg-[var(--card)]",
                   "transition-colors duration-200",
-                  "focus-visible:ring-2 focus-visible:ring-[var(--main-color)]"
+                  "focus-visible:ring-2 focus-visible:ring-[var(--foreground)]"
                 )}
                 aria-label="Close modal"
               >
-                <X className="text-[var(--secondary-color)]" size={24} />
+                <X className="text-[var(--muted-foreground)]" size={24} />
               </button>
             </div>
             
@@ -1031,8 +1031,8 @@ The project uses custom checkbox styling in `app/globals.css`:
 input[type='checkbox'] {
   appearance: none;
   -webkit-appearance: none;
-  background-color: var(--card-color);
-  border: 2px solid var(--border-color);
+  background-color: var(--card);
+  border: 2px solid var(--border);
   width: 1.1em;
   height: 1.1em;
   border-radius: 0.25em;
@@ -1044,8 +1044,8 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox']:checked {
-  background-color: var(--main-color);
-  border-color: var(--main-color);
+  background-color: var(--foreground);
+  border-color: var(--foreground);
 }
 
 input[type='checkbox']:checked::after {
@@ -1056,7 +1056,7 @@ input[type='checkbox']:checked::after {
   top: 0.05em;
   width: 0.3em;
   height: 0.6em;
-  border: solid var(--background-color);
+  border: solid var(--background);
   border-width: 0 0.18em 0.18em 0;
   transform: rotate(45deg);
 }
@@ -1069,9 +1069,9 @@ input[type='checkbox']:checked::after {
     type="checkbox"
     checked={isSelected}
     onChange={(e) => setIsSelected(e.target.checked)}
-    className="focus-visible:ring-2 focus-visible:ring-[var(--main-color)]"
+    className="focus-visible:ring-2 focus-visible:ring-[var(--foreground)]"
   />
-  <span className="text-[var(--main-color)]">Option label</span>
+  <span className="text-[var(--foreground)]">Option label</span>
 </label>
 ```
 

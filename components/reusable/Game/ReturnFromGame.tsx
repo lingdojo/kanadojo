@@ -56,7 +56,7 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
         <X
           size={32}
           className={clsx(
-            'hover:cursor-pointer duration-250 hover:scale-125 text-[var(--border-color)] hover:text-[var(--secondary-color)]'
+            'hover:cursor-pointer duration-250 hover:scale-125 text-[var(--border)] hover:text-[var(--muted-foreground)]'
           )}
         />
       </Link>

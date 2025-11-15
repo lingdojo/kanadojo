@@ -204,8 +204,8 @@ export default function TimedChallengeKana() {
     return (
       <div className='min-h-[100dvh] flex flex-col items-center justify-center p-4'>
         <div className='max-w-md text-center space-y-6'>
-          <Timer size={64} className='mx-auto text-[var(--main-color)]' />
-          <h1 className='text-2xl font-bold text-[var(--secondary-color)]'>
+          <Timer size={64} className='mx-auto text-[var(--foreground)]' />
+          <h1 className='text-2xl font-bold text-[var(--muted-foreground)]'>
             Timed Challenge
           </h1>
           <p className='text-[var(--muted-color)]'>
@@ -213,7 +213,7 @@ export default function TimedChallengeKana() {
             challenge.
           </p>
           <Link href='/kana'>
-            <Button className='bg-[var(--main-color)] hover:bg-[var(--main-color)]/90'>
+            <Button className='bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'>
               <ArrowLeft size={16} className='mr-2' />
               Select Kana
             </Button>
@@ -227,8 +227,8 @@ export default function TimedChallengeKana() {
     return (
       <div className='min-h-[100dvh] flex flex-col lg:flex-row items-start justify-center p-4 gap-6'>
         <div className='max-w-md w-full lg:max-w-lg text-center space-y-6'>
-          <Timer size={64} className='mx-auto text-[var(--main-color)]' />
-          <h1 className='text-2xl font-bold text-[var(--secondary-color)]'>
+          <Timer size={64} className='mx-auto text-[var(--foreground)]' />
+          <h1 className='text-2xl font-bold text-[var(--muted-foreground)]'>
             Timed Challenge
           </h1>
           <p className='text-[var(--muted-color)]'>
@@ -236,24 +236,24 @@ export default function TimedChallengeKana() {
             possible before time runs out.
           </p>
 
-          <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2'>
+          <div className='bg-[var(--card)] rounded-lg p-4 space-y-2'>
             <p className='text-sm text-[var(--muted-color)]'>
               Selected Characters:
             </p>
-            <p className='font-medium text-[var(--secondary-color)]'>
+            <p className='font-medium text-[var(--muted-foreground)]'>
               {selectedKana.length} kana
             </p>
           </div>
 
-          <div className='bg-[var(--card-color)] rounded-lg p-3'>
-            <p className='text-sm text-[var(--main-color)] font-medium'>
+          <div className='bg-[var(--card)] rounded-lg p-3'>
+            <p className='text-sm text-[var(--foreground)] font-medium'>
               ℹ️ Mode: Input (See kana → Type romaji)
             </p>
           </div>
 
           {/* Duration Selector - Moved up */}
-          <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-3'>
-            <p className='text-sm font-medium text-[var(--secondary-color)]'>
+          <div className='bg-[var(--card)] rounded-lg p-4 space-y-3'>
+            <p className='text-sm font-medium text-[var(--muted-foreground)]'>
               Challenge Duration:
             </p>
             <div className='flex gap-2 justify-center flex-wrap'>
@@ -267,8 +267,8 @@ export default function TimedChallengeKana() {
                   className={clsx(
                     'px-4 py-2 rounded-lg border-2 transition-all',
                     challengeDuration === duration
-                      ? 'border-[var(--main-color)] bg-[var(--main-color)]/10 text-[var(--main-color)] font-bold'
-                      : 'border-[var(--border-color)] hover:bg-[var(--border-color)]'
+                      ? 'border-[var(--foreground)] bg-[var(--foreground)]/10 text-[var(--foreground)] font-bold'
+                      : 'border-[var(--border)] hover:bg-[var(--border)]'
                   )}
                 >
                   {duration < 60 ? `${duration}s` : `${duration / 60}m`}
@@ -279,7 +279,7 @@ export default function TimedChallengeKana() {
 
           <Button
             onClick={handleStart}
-            className='w-full bg-[var(--main-color)] hover:bg-[var(--main-color)]/90'
+            className='w-full bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'
           >
             <Play size={16} className='mr-2' />
             Start Challenge
@@ -298,8 +298,8 @@ export default function TimedChallengeKana() {
             onClick={() => setShowGoalTimers(!showGoalTimers)}
             className={clsx(
               'w-full px-4 py-2 border-2 rounded-xl transition-colors',
-              'border-[var(--border-color)]',
-              'hover:bg-[var(--border-color)]',
+              'border-[var(--border)]',
+              'hover:bg-[var(--border)]',
               'flex items-center justify-center gap-2'
             )}
           >
@@ -342,10 +342,10 @@ export default function TimedChallengeKana() {
           <div className='p-6 space-y-6'>
             {/* Header */}
             <div className='text-center space-y-2'>
-              <div className='inline-flex items-center justify-center w-20 h-20 rounded-full bg-[var(--main-color)]/10 mb-4'>
-                <Timer size={48} className='text-[var(--main-color)]' />
+              <div className='inline-flex items-center justify-center w-20 h-20 rounded-full bg-[var(--foreground)]/10 mb-4'>
+                <Timer size={48} className='text-[var(--foreground)]' />
               </div>
-              <h1 className='text-3xl font-bold text-[var(--secondary-color)]'>
+              <h1 className='text-3xl font-bold text-[var(--muted-foreground)]'>
                 Challenge Complete!
               </h1>
               <p className='text-[var(--muted-color)]'>
@@ -360,7 +360,7 @@ export default function TimedChallengeKana() {
 
             {/* Main Stats Grid */}
             <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-              <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
                 <Target className='mx-auto text-green-500' size={28} />
                 <p className='text-3xl font-bold text-green-500'>
                   {timedCorrectAnswers}
@@ -368,7 +368,7 @@ export default function TimedChallengeKana() {
                 <p className='text-sm text-[var(--muted-color)]'>Correct</p>
               </div>
 
-              <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
                 <XCircle className='mx-auto text-red-500' size={28} />
                 <p className='text-3xl font-bold text-red-500'>
                   {timedWrongAnswers}
@@ -376,18 +376,18 @@ export default function TimedChallengeKana() {
                 <p className='text-sm text-[var(--muted-color)]'>Wrong</p>
               </div>
 
-              <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
                 <TrendingUp
-                  className='mx-auto text-[var(--main-color)]'
+                  className='mx-auto text-[var(--foreground)]'
                   size={28}
                 />
-                <p className='text-3xl font-bold text-[var(--main-color)]'>
+                <p className='text-3xl font-bold text-[var(--foreground)]'>
                   {accuracy}%
                 </p>
                 <p className='text-sm text-[var(--muted-color)]'>Accuracy</p>
               </div>
 
-              <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
                 <Timer className='mx-auto text-blue-500' size={28} />
                 <p className='text-3xl font-bold text-blue-500'>
                   {questionsPerMinute}
@@ -398,18 +398,18 @@ export default function TimedChallengeKana() {
 
             {/* Secondary Stats */}
             <div className='grid grid-cols-2 gap-4'>
-              <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2 border border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-lg p-4 space-y-2 border border-[var(--border)]'>
                 <p className='text-sm text-[var(--muted-color)]'>Best Streak</p>
-                <p className='text-2xl font-bold text-[var(--secondary-color)]'>
+                <p className='text-2xl font-bold text-[var(--muted-foreground)]'>
                   🔥 {timedStreak}
                 </p>
               </div>
 
-              <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2 border border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-lg p-4 space-y-2 border border-[var(--border)]'>
                 <p className='text-sm text-[var(--muted-color)]'>
                   Total Answers
                 </p>
-                <p className='text-2xl font-bold text-[var(--secondary-color)]'>
+                <p className='text-2xl font-bold text-[var(--muted-foreground)]'>
                   {totalQuestions}
                 </p>
               </div>
@@ -417,10 +417,10 @@ export default function TimedChallengeKana() {
 
             {/* Goal Timers Statistics */}
             {showGoalTimers && goalTimers.goals.length > 0 && (
-              <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-3 text-left border border-[var(--border-color)]'>
+              <div className='bg-[var(--card)] rounded-lg p-4 space-y-3 text-left border border-[var(--border)]'>
                 <div className='flex items-center gap-2 justify-center'>
-                  <Target className='text-[var(--main-color)]' size={20} />
-                  <h3 className='text-lg font-semibold text-[var(--secondary-color)]'>
+                  <Target className='text-[var(--foreground)]' size={20} />
+                  <h3 className='text-lg font-semibold text-[var(--muted-foreground)]'>
                     Goal Timers Results
                   </h3>
                 </div>
@@ -438,7 +438,7 @@ export default function TimedChallengeKana() {
                           key={goal.id}
                           className='flex items-center justify-between text-sm p-2 rounded bg-green-500/10 border border-green-500/20'
                         >
-                          <span className='text-[var(--secondary-color)]'>
+                          <span className='text-[var(--muted-foreground)]'>
                             {goal.label}
                           </span>
                           <span className='text-green-500 font-mono'>
@@ -464,7 +464,7 @@ export default function TimedChallengeKana() {
                       {missedGoals.map(goal => (
                         <div
                           key={goal.id}
-                          className='flex items-center justify-between text-sm p-2 rounded bg-[var(--border-color)] opacity-60'
+                          className='flex items-center justify-between text-sm p-2 rounded bg-[var(--border)] opacity-60'
                         >
                           <span className='text-[var(--muted-color)]'>
                             {goal.label}
@@ -486,7 +486,7 @@ export default function TimedChallengeKana() {
             <div className='space-y-3'>
               <Button
                 onClick={handleStart}
-                className='w-full bg-[var(--main-color)] hover:bg-[var(--main-color)]/90'
+                className='w-full bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'
               >
                 <RotateCcw size={16} className='mr-2' />
                 Try Again
@@ -510,13 +510,13 @@ export default function TimedChallengeKana() {
         {/* Header with timer, stats, and cancel button */}
         <div className='flex justify-between items-center'>
           <div className='flex items-center gap-2'>
-            <Timer className='text-[var(--main-color)]' size={20} />
+            <Timer className='text-[var(--foreground)]' size={20} />
             <span
               className={clsx(
                 'text-lg font-bold',
                 timeLeft <= 10
                   ? 'text-red-500 animate-pulse'
-                  : 'text-[var(--secondary-color)]'
+                  : 'text-[var(--muted-foreground)]'
               )}
             >
               {minutes}:{seconds.toString().padStart(2, '0')}
@@ -543,9 +543,9 @@ export default function TimedChallengeKana() {
         </div>
 
         {/* Progress bar */}
-        <div className='w-full bg-[var(--border-color)] rounded-full h-2'>
+        <div className='w-full bg-[var(--border)] rounded-full h-2'>
           <div
-            className='bg-[var(--main-color)] h-2 rounded-full transition-all duration-1000'
+            className='bg-[var(--foreground)] h-2 rounded-full transition-all duration-1000'
             style={{
               width: `${
                 ((challengeDuration - timeLeft) / challengeDuration) * 100
@@ -562,7 +562,7 @@ export default function TimedChallengeKana() {
                 'text-8xl font-bold transition-all duration-200',
                 lastAnswerCorrect === true && 'text-green-500',
                 lastAnswerCorrect === false && 'text-red-500',
-                lastAnswerCorrect === null && 'text-[var(--secondary-color)]'
+                lastAnswerCorrect === null && 'text-[var(--muted-foreground)]'
               )}
             >
               {currentQuestion?.kana}
@@ -571,7 +571,7 @@ export default function TimedChallengeKana() {
               text={currentQuestion?.kana || ''}
               variant='icon-only'
               size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
+              className='bg-[var(--card)] border-[var(--border)]'
             />
           </div>
 
@@ -598,14 +598,14 @@ export default function TimedChallengeKana() {
             value={userAnswer}
             onChange={e => setUserAnswer(e.target.value)}
             onKeyPress={handleKeyPress}
-            className='w-full p-4 text-lg text-center border-2 border-[var(--border-color)] rounded-lg bg-[var(--card-color)] text-[var(--secondary-color)] focus:border-[var(--main-color)] focus:outline-none'
+            className='w-full p-4 text-lg text-center border-2 border-[var(--border)] rounded-lg bg-[var(--card)] text-[var(--muted-foreground)] focus:border-[var(--foreground)] focus:outline-none'
             placeholder='Type the romaji...'
             autoComplete='off'
             autoFocus
           />
           <Button
             type='submit'
-            className='w-full bg-[var(--main-color)] hover:bg-[var(--main-color)]/90'
+            className='w-full bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'
             disabled={!userAnswer.trim()}
           >
             Submit
@@ -614,18 +614,18 @@ export default function TimedChallengeKana() {
 
         {/* Real-time stats */}
         <div className='grid grid-cols-3 gap-2 text-center text-sm'>
-          <div className='bg-[var(--card-color)] rounded p-2'>
+          <div className='bg-[var(--card)] rounded p-2'>
             <div className='text-green-500 font-bold'>
               {timedCorrectAnswers}
             </div>
             <div className='text-[var(--muted-color)]'>Correct</div>
           </div>
-          <div className='bg-[var(--card-color)] rounded p-2'>
+          <div className='bg-[var(--card)] rounded p-2'>
             <div className='text-red-500 font-bold'>{timedWrongAnswers}</div>
             <div className='text-[var(--muted-color)]'>Wrong</div>
           </div>
-          <div className='bg-[var(--card-color)] rounded p-2'>
-            <div className='text-[var(--main-color)] font-bold'>
+          <div className='bg-[var(--card)] rounded p-2'>
+            <div className='text-[var(--foreground)] font-bold'>
               {accuracy}%
             </div>
             <div className='text-[var(--muted-color)]'>Accuracy</div>
@@ -650,25 +650,25 @@ export default function TimedChallengeKana() {
             <div
               className={clsx(
                 'p-4 border-2 rounded-xl',
-                'border-[var(--main-color)] bg-[var(--main-color)]/5'
+                'border-[var(--foreground)] bg-[var(--foreground)]/5'
               )}
             >
               <div className='flex items-center gap-2 mb-2'>
-                <Target size={16} className='text-[var(--main-color)]' />
-                <p className='text-sm text-[var(--secondary-color)] font-medium'>
+                <Target size={16} className='text-[var(--foreground)]' />
+                <p className='text-sm text-[var(--muted-foreground)] font-medium'>
                   Next Goal
                 </p>
               </div>
-              <p className='font-bold text-[var(--main-color)] mb-2'>
+              <p className='font-bold text-[var(--foreground)] mb-2'>
                 {goalTimers.nextGoal.label}
               </p>
-              <div className='w-full bg-[var(--border-color)] rounded-full h-2'>
+              <div className='w-full bg-[var(--border)] rounded-full h-2'>
                 <div
-                  className='bg-[var(--main-color)] h-2 rounded-full transition-all'
+                  className='bg-[var(--foreground)] h-2 rounded-full transition-all'
                   style={{ width: `${goalTimers.progressToNextGoal}%` }}
                 />
               </div>
-              <p className='text-xs text-[var(--secondary-color)] mt-1 text-center'>
+              <p className='text-xs text-[var(--muted-foreground)] mt-1 text-center'>
                 {Math.floor(goalTimers.nextGoal.targetSeconds / 60)}:
                 {(goalTimers.nextGoal.targetSeconds % 60)
                   .toString()

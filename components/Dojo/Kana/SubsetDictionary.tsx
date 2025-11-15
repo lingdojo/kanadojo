@@ -27,13 +27,13 @@ const SetDictionary = () => {
 
   return (
     <div className='min-h-[100dvh] max-w-[100dvw] px-4 sm:px-8 md:px-20 lg:px-30 xl:px-40 2xl:px-60 flex flex-col gap-4 pb-10'>
-      <div className='flex flex-col border-1 border-[var(--border-color)] rounded-2xl px-4 bg-[var(--card-color)]'>
+      <div className='flex flex-col border-1 border-[var(--border)] rounded-2xl px-4 bg-[var(--card)]'>
         {kanaToDisplay.map(kanaSubgroup => (
           <div
             key={kanaSubgroup.groupName}
             className={clsx(
               'flex flex-col md:flex-row justify-start items-start gap-6 md:gap-4 p-4 ',
-              'border-b-2 border-[var(--border-color)]'
+              'border-b-2 border-[var(--border)]'
             )}
           >
             <p lang='ja' className='text-6xl'>
@@ -44,7 +44,7 @@ const SetDictionary = () => {
                 <span
                   className={clsx(
                     'rounded-2xl px-2 py-1 flex flex-row items-center',
-                    'bg-[var(--border-color)]'
+                    'bg-[var(--border)]'
                   )}
                 >
                   {kanaSubgroup.romanji.join(' ')}

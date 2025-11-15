@@ -22,7 +22,7 @@ const Stars = () => {
                 ? 'motion-safe:animate-pulse'
                 : '',
 
-              'text-[var(--secondary-color)]'
+              'text-[var(--muted-foreground)]'
             )}
             style={{
               animationDelay: `${index * 100}ms`

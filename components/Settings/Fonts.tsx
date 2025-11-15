@@ -39,7 +39,7 @@ const Fonts = () => {
         <span className="mb-0.5">
           {randomFont.name === currentFont ? '\u2B24 ' : ''}
         </span>
-        <Dice5 className="text-[var(--secondary-color)]" />
+        <Dice5 className="text-[var(--muted-foreground)]" />
         Random Font
       </button>
 
@@ -66,14 +66,14 @@ const Fonts = () => {
               className="hidden"
             />
             <p className={clsx('text-center text-xl', fontObj.font.className)}>
-              <span className="text-[var(--secondary-color)]">
+              <span className="text-[var(--muted-foreground)]">
                 {fontObj.name === currentFont ? '\u2B24 ' : ''}
               </span>
               <span className="">
                 {fontObj.name}
               </span>
               {fontObj.name === 'Zen Maru Gothic' && ' (default)'}
-              <span className="ml-2 text-[var(--secondary-color)]">
+              <span className="ml-2 text-[var(--muted-foreground)]">
                 かな道場
               </span>
             </p>
@@ -83,7 +83,7 @@ const Fonts = () => {
       <div className="flex flex-col gap-2">
         <h4 className="text-xl">Hiragana:</h4>
         <p
-          className="text-3xl text-[var(--secondary-color)]"
+          className="text-3xl text-[var(--muted-foreground)]"
           lang="ja"
         >
           {'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'.slice(
@@ -93,7 +93,7 @@ const Fonts = () => {
         </p>
         <h4 className="text-xl">Katakana:</h4>
         <p
-          className="text-3xl text-[var(--secondary-color)]"
+          className="text-3xl text-[var(--muted-foreground)]"
           lang="ja"
         >
           {'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメもヤユヨラリルレロワヲン'.slice(
@@ -103,14 +103,14 @@ const Fonts = () => {
         </p>
         <h4 className="text-xl">Kanji:</h4>
         <p
-          className="text-3xl text-[var(--secondary-color)]"
+          className="text-3xl text-[var(--muted-foreground)]"
           lang="ja"
         >
           人日大小学 校生先円上下中外右左名前時分国
         </p>
         <h4 className="text-xl">Sample sentence:</h4>
         <p
-          className="text-3xl text-[var(--secondary-color)]"
+          className="text-3xl text-[var(--muted-foreground)]"
           lang="ja"
         >
           人類社会のすべての構成員の固有の尊厳と平等で譲ることのできない権利とを承認することは

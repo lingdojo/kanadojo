@@ -31,7 +31,7 @@ const SSRAudioButton: React.FC<SSRAudioButtonProps> = props => {
   // If pronunciation is disabled, show a placeholder
   if (!pronunciationEnabled) {
     return (
-      <div className='p-2 text-xs text-[var(--border-color)] border rounded'>
+      <div className='p-2 text-xs text-[var(--border)] border rounded'>
         Audio disabled
       </div>
     );
