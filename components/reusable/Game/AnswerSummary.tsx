@@ -164,7 +164,7 @@ const WordSummary = ({
       lang="ja"
     />
 
-    <div className="flex flex-col gap-2 items-start">
+    <div className="flex flex-col gap-2 items-start w-full">
       <span
         className={clsx(
           'rounded-xl px-2 py-1 flex flex-row items-center',
