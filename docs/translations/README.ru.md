@@ -1,5 +1,5 @@
-<div id="top" style="display:flex;gap:0.75rem;flex-direction:row;flex-wrap:wrap;justify-content:center;text-decoration: none;outline: none;border: none;">
-<details style="color:#1c3f77;"> 
+<div id="top">
+<details> 
 <summary>Выбрать язык README</summary>
 
 - 🇬🇧 [English](../../README.md)
@@ -14,17 +14,19 @@
 - 🇹🇼 [中文（繁體）](README.zh-tw.md)
 
 </details>
-<a href="#-о-kanadojo">О KanaDojo</a> 
-<a href="#️-скриншоты">Скриншоты</a>  
-<a href="#-UI-и-философия-дизайна">UI и философия дизайна</a>  
-<a href="#-технический-стек">Технический стек</a>  
-<a href="#-начало-работы">Начало работы</a> 
-<a href="#-структура-проекта">Структура проекта</a>  
-<a href="#-вклад-в-проект">Вклад в проект</a>  
-<a href="#-лицензия">Лицензия</a>  
-<a href="#-благодарности">Благодарности</a>  
-<a href="#-переводы">Переводы</a>  
-<a href="#-контакты-и-ссылки">Контакты и ссылки</a>
+<div style="display:flex;gap:0.75rem;flex-direction:row;flex-wrap:wrap;justify-content:center;">
+<a href="#-о-kanadojo" style="text-decoration: none;outline: none;border: none;">О KanaDojo</a>
+<a href="#️-скриншоты" style="text-decoration: none;outline: none;border: none;">Скриншоты</a> 
+<a href="#-UI-и-философия-дизайна" style="text-decoration: none;outline: none;border: none;">UI и философия дизайна</a>
+<a href="#-технический-стек" style="text-decoration: none;outline: none;border: none;">Технический стек</a> 
+<a href="#-начало-работы" style="text-decoration: none;outline: none;border: none;">Начало работы</a> 
+<a href="#-структура-проекта" style="text-decoration: none;outline: none;border: none;">Структура проекта</a> 
+<a href="#-вклад-в-проект" style="text-decoration: none;outline: none;border: none;">Вклад в проект</a> 
+<a href="#-лицензия" style="text-decoration: none;outline: none;border: none;">Лицензия</a> 
+<a href="#-благодарности" style="text-decoration: none;outline: none;border: none;">Благодарности</a> 
+<a href="#-переводы" style="text-decoration: none;outline: none;border: none;">Переводы</a> 
+<a href="#-контакты-и-ссылки" style="text-decoration: none;outline: none;border: none;">Контакты и ссылки</a>
+</div>
 </div>
 
 # KanaDojo かな道場
