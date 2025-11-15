@@ -76,6 +76,14 @@ const themes: ThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: "wabi",
+        backgroundColor: "hsla(3, 20%, 11%, 1)",
+        cardColor: "hsla(3, 18%, 15%, 1)",
+        borderColor: "hsla(3, 17%, 22%, 1)",
+        mainColor: "hsla(8, 85%, 59%, 1)",
+        secondaryColor: "hsla(32, 25%, 70%, 1)",
+      },
+      {
         id: 'monkeytype',
         backgroundColor: 'hsla(210, 5%, 22%, 1)',
         cardColor: 'hsla(220, 5%, 28%, 1)',
