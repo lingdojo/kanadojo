@@ -213,7 +213,7 @@ export default function TimedChallengeKana() {
             challenge.
           </p>
           <Link href='/kana'>
-            <Button className='bg-[var(--main-color)] hover:bg-[var(--main-color)]/90'>
+            <Button className='bg-[var(--secondary-color)] hover:bg-[var(--main-color)] duration-250'>
               <ArrowLeft size={16} className='mr-2' />
               Select Kana
             </Button>
