@@ -2,7 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { kana } from '@/static/kana';
 import useKanaStore from '@/store/useKanaStore';
-import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CancelCircleIcon as CircleXIcon, ArrowRight01Icon as CircleArrowRightIcon } from '@hugeicons/core-free-icons';;
 import { Random } from 'random-js';
 import clsx from 'clsx';
 import { useClick, useCorrect, useError } from '@/hooks/useAudio';
@@ -120,7 +121,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     setFeedback(
       <>
         <span>{`${correctChar} = ${targetChar} `}</span>
-        <CircleCheck className='inline text-[var(--foreground)]' />
+        <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="inline text-[var(--foreground)]" />
       </>
     );
   };
@@ -130,7 +131,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     setFeedback(
       <>
         <span>{`${correctChar} ≠ ${inputValue} `}</span>
-        <CircleX className='inline text-[var(--foreground)]' />
+        <HugeiconsIcon icon={CircleXIcon} color="currentColor" className="inline text-[var(--foreground)]" />
       </>
     );
     playErrorTwice();
@@ -203,7 +204,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
         onClick={handleSkip}
       >
         <span>skip</span>
-        <CircleArrowRight />
+        <HugeiconsIcon icon={CircleArrowRightIcon} color="currentColor" />
       </button>
       <Stars />
     </div>

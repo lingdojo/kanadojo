@@ -7,10 +7,10 @@ import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/hooks/useAudio';
-import { ChevronUp, Play, Timer } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowUpIcon, PlayIcon, Timer01Icon as TimerIcon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon as KeyboardIcon } from '@hugeicons/core-free-icons';;
 import { usePathname } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
-import { MousePointerClick, Keyboard } from 'lucide-react';
 import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 interface ITopBarProps {
@@ -120,40 +120,25 @@ const TopBar: React.FC<ITopBarProps> = ({
           onMouseLeave={() => setFocus('')}
           title="Press Enter or Space to toggle (Kanji/Vocab)"
         >
-          <ChevronUp
-            className={clsx(
+          <HugeiconsIcon icon={ArrowUpIcon} size={24} color="currentColor" className={clsx(
               'duration-250',
               focus === 'gameModes'
                 ? 'text-[var(--muted-foreground)]'
                 : 'text-[var(--border)]',
               !showGameModes && 'rotate-180'
-            )}
-            size={24}
-          />
+            )} />
           {selectedGameMode ? selectedGameMode.split('-').join(' ') : 'not set'}
           {selectedGameMode.toLowerCase() === 'pick' && (
-            <MousePointerClick
-              size={22}
-              className="text-[var(--muted-foreground)]"
-            />
+            <HugeiconsIcon icon={MousePointerClickIcon} size={22} color="currentColor" className="text-[var(--muted-foreground)]" />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-pick' && (
-            <MousePointerClick
-              size={22}
-              className=" scale-x-[-1] text-[var(--muted-foreground)]"
-            />
+            <HugeiconsIcon icon={MousePointerClickIcon} size={22} color="currentColor" className=" scale-x-[-1] text-[var(--muted-foreground)]" />
           )}
           {selectedGameMode.toLowerCase() === 'input' && (
-            <Keyboard
-              size={22}
-              className="text-[var(--muted-foreground)]"
-            />
+            <HugeiconsIcon icon={KeyboardIcon} size={22} color="currentColor" className="text-[var(--muted-foreground)]" />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-input' && (
-            <Keyboard
-              size={22}
-              className="scale-y-[-1] text-[var(--muted-foreground)]"
-            />
+            <HugeiconsIcon icon={KeyboardIcon} size={22} color="currentColor" className="scale-y-[-1] text-[var(--muted-foreground)]" />
           )}
         </button>
 
@@ -187,10 +172,7 @@ const TopBar: React.FC<ITopBarProps> = ({
             }}
           >
             {/* <span className='group-hover:underline'>Go!</span> */}
-            <Play
-              // className={clsx(selectedGameMode && isFilled && 'animate-pulse')}
-              size={32}
-            />
+            <HugeiconsIcon icon={PlayIcon} size={32} color="currentColor" className={clsx(selectedGameMode && isFilled && 'animate-pulse')} />
           </button>
         </Link>
       </div>
@@ -212,7 +194,7 @@ const TopBar: React.FC<ITopBarProps> = ({
             )}
             onClick={() => playClick()}
           >
-            <Timer size={24} />
+            <HugeiconsIcon icon={TimerIcon} size={24} color="currentColor" />
             <span className="font-semibold">Timed Challenge (60s)</span>
           </button>
         </Link>

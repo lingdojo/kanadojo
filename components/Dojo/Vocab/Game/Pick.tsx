@@ -1,7 +1,8 @@
 'use client';
 import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
-import { CircleCheck, CircleX } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CancelCircleIcon as CircleXIcon } from '@hugeicons/core-free-icons';;
 import { Random } from 'random-js';
 import { IWordObj } from '@/store/useVocabStore';
 import { useCorrect, useError } from '@/hooks/useAudio';
@@ -137,7 +138,7 @@ const VocabPickGame = ({
       setFeedback(
         <>
           <span className="text-[var(--muted-foreground)]">{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className="inline text-[var(--foreground)]" />
+          <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="inline text-[var(--foreground)]" />
         </>
       );
       setCurrentWordObj(correctWordObj);
@@ -146,7 +147,7 @@ const VocabPickGame = ({
       setFeedback(
         <>
           <span className="text-[var(--muted-foreground)]">{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className="inline text-[var(--foreground)]" />
+          <HugeiconsIcon icon={CircleXIcon} color="currentColor" className="inline text-[var(--foreground)]" />
         </>
       );
     }

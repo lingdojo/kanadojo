@@ -3,7 +3,8 @@ import { Fragment } from 'react';
 import useKanaStore from '@/store/useKanaStore';
 import useKanjiStore from '@/store/useKanjiStore';
 import useVocabStore from '@/store/useVocabStore';
-import { MousePointerClick, Keyboard, CircleCheck, Circle } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Cursor01Icon as MousePointerClickIcon, KeyboardIcon as KeyboardIcon, CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon } from '@hugeicons/core-free-icons';;
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
 import { usePathname } from 'next/navigation';
@@ -91,31 +92,22 @@ const GameModes = () => {
             />
             <span className='text-lg font-medium py-2 px-1 sm:px-2 text-center flex flex-row justify-center items-center gap-2'>
               {gameMode === selectedGameMode ? (
-                <CircleCheck className='text-[var(--foreground)]' />
+                <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="text-[var(--foreground)]" />
               ) : (
-                <Circle className='text-[var(--border)]' />
+                <HugeiconsIcon icon={CircleIcon} color="currentColor" className="text-[var(--border)]" />
               )}
               <span>{gameMode.split('-').join(' ')}</span>
               {gameMode.toLowerCase() === 'pick' && (
-                <MousePointerClick
-                  size={22}
-                  className='text-[var(--foreground)]'
-                />
+                <HugeiconsIcon icon={MousePointerClickIcon} size={22} color="currentColor" className="text-[var(--foreground)]" />
               )}
               {gameMode.toLowerCase() === 'reverse-pick' && (
-                <MousePointerClick
-                  size={22}
-                  className=' scale-x-[-1] text-[var(--foreground)]'
-                />
+                <HugeiconsIcon icon={MousePointerClickIcon} size={22} color="currentColor" className=" scale-x-[-1] text-[var(--foreground)]" />
               )}
               {gameMode.toLowerCase() === 'input' && (
-                <Keyboard size={22} className='text-[var(--foreground)]' />
+                <HugeiconsIcon icon={KeyboardIcon} size={22} color="currentColor" className="text-[var(--foreground)]" />
               )}
               {gameMode.toLowerCase() === 'reverse-input' && (
-                <Keyboard
-                  size={22}
-                  className='scale-y-[-1] text-[var(--foreground)]'
-                />
+                <HugeiconsIcon icon={KeyboardIcon} size={22} color="currentColor" className="scale-y-[-1] text-[var(--foreground)]" />
               )}
             </span>
           </label>

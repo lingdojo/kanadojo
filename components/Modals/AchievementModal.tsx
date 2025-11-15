@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
-import { X, Trophy, Star, Zap, Crown, Gem } from 'lucide-react';
-import { LucideProps } from 'lucide-react'; //
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Cancel01Icon as XIcon, AwardIcon as TrophyIcon, StarIcon, ZapIcon, CrownIcon, DiamondIcon as GemIcon } from '@hugeicons/core-free-icons';
 import confetti from 'canvas-confetti';
 import {
   type Achievement,
@@ -202,7 +202,7 @@ const AchievementModal = ({
                   'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
                 )}
               >
-                <X size={20} />
+                <HugeiconsIcon icon={XIcon} size={20} color="currentColor" />
               </button>
             </div>
 
@@ -306,7 +306,7 @@ const AchievementModal = ({
                   border: `2px solid ${config.borderColor}`
                 }}
               >
-                <Trophy size={16} />+{achievement.points} Points
+                <HugeiconsIcon icon={TrophyIcon} size={16} color="currentColor" />+{achievement.points} Points
               </motion.div>
 
               {/* Rewards (if any) */}

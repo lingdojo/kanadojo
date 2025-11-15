@@ -6,14 +6,8 @@ import Fonts from './Fonts';
 import Behavior from './Behavior';
 import Backup from './Backup';
 import GoalTimers from './GoalTimers';
-import {
-  Joystick,
-  Sparkles,
-  CaseSensitive,
-  Blocks,
-  Palette,
-  Target,
-} from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Joystick01Icon as JoystickIcon, SparklesIcon, TextIcon as CaseSensitiveIcon, GridIcon as BlocksIcon, ColorPickerIcon as PaletteIcon, Target01Icon as TargetIcon } from '@hugeicons/core-free-icons';
 import Sidebar from '@/components/reusable/Menu/Sidebar';
 
 const Settings = () => {
@@ -31,32 +25,32 @@ const Settings = () => {
         <div className="flex flex-col gap-8 ">
           <div className="flex flex-col gap-4 ">
             <h3 className="flex flex-row text-3xl gap-2 items-center border-b-2  py-6 border-[var(--border)]">
-              <Joystick />
+              <HugeiconsIcon icon={JoystickIcon} color="currentColor" />
               <span>Behavior</span>
             </h3>
             <Behavior />
           </div>
           <div className="flex flex-col gap-4">
             <h3 className="flex flex-row text-3xl gap-2 items-center border-b-2 py-6 border-[var(--border)]">
-              <Palette size={28} />
+              <HugeiconsIcon icon={PaletteIcon} size={28} color="currentColor" />
               <span>Display</span>
             </h3>
             <h3 className="flex flex-row text-2xl gap-2 items-center pb-2 border-b-1 border-[var(--border)] ">
-              <Sparkles />
+              <HugeiconsIcon icon={SparklesIcon} color="currentColor" />
               <span>Themes</span>
             </h3>
             <Themes />
           </div>
           <div className="flex flex-col gap-4">
             <h3 className="flex flex-row text-2xl gap-2 items-end pb-2 border-b-1 border-[var(--border)]">
-              <CaseSensitive size={32} />
+              <HugeiconsIcon icon={CaseSensitiveIcon} size={32} color="currentColor" />
               <span>Fonts</span>
             </h3>
             <Fonts />
           </div>
           <div className="flex flex-col gap-4">
             <h3 className="flex flex-row text-2xl gap-2 items-center pb-2 border-b-1 border-[var(--border)]">
-              <Target size={28} />
+              <HugeiconsIcon icon={TargetIcon} size={28} color="currentColor" />
               <span>Goal Timers</span>
             </h3>
             <GoalTimers />
@@ -75,7 +69,7 @@ const Settings = () => {
                 'border-b-0  py-6 border-[var(--border)]'
               )}
             >
-              <Blocks size={32} />
+              <HugeiconsIcon icon={BlocksIcon} size={32} color="currentColor" />
               <span>Coming Soon...</span>
             </h3>
           </div>

@@ -16,7 +16,8 @@ import {
   N2VocabLength
 } from '@/static/unitSets';
 import { useClick } from '@/hooks/useAudio';
-import { CircleCheck, Circle, Trash } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, Delete02Icon as TrashIcon } from '@hugeicons/core-free-icons';;
 import { miniButtonBorderStyles } from '@/static/styles';
 
 const numCollectionSets = {
@@ -226,9 +227,9 @@ const CollectionSelector = () => {
             </span> */}
 
               {collection.name === selectedCollection ? (
-                <CircleCheck className='text-[var(--muted-foreground)]' />
+                <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="text-[var(--muted-foreground)]" />
               ) : (
-                <Circle className='text-[var(--border)]' />
+                <HugeiconsIcon icon={CircleIcon} color="currentColor" className="text-[var(--border)]" />
               )}
               <span className='text-2xl'>
                 {collection.displayName.split(', ')[0]}
@@ -263,7 +264,7 @@ const CollectionSelector = () => {
       >
         <p className='flex flex-col'>
           <span className='flex gap-2 items-center'>
-            <CircleCheck className='text-[var(--muted-foreground)]' />
+            <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="text-[var(--muted-foreground)]" />
             Selected Sets:
           </span>
           <span className='text-[var(--muted-foreground)]'>
@@ -297,7 +298,7 @@ const CollectionSelector = () => {
             }
           }}
         >
-          <Trash size={32} />
+          <HugeiconsIcon icon={TrashIcon} size={32} color="currentColor" />
         </button>
       </div>
     </div>

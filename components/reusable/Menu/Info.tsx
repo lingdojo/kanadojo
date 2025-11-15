@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
-import { ChevronUp } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowUpIcon } from '@hugeicons/core-free-icons';;
 import translationGen from '@/static/info';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -58,16 +59,13 @@ const Info = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, ease: 'linear' }}
       >
-        <ChevronUp
-          className={clsx(
+        <HugeiconsIcon icon={ArrowUpIcon} size={24} color="currentColor" className={clsx(
             'duration-250',
             'text-[var(--border)]',
             'max-md:group-active:text-[var(--text-color)]',
             'md:group-hover:text-[var(--text-color)]',
             !showInfo && 'rotate-180'
-          )}
-          size={24}
-        />
+          )} />
         {header}
       </motion.h3>
       <motion.div

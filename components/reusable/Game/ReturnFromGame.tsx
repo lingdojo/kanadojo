@@ -5,7 +5,8 @@ import { Link } from '@/i18n/routing';
 import { useClick } from '@/hooks/useAudio';
 import { useStopwatch } from 'react-timer-hook';
 import useStatsStore from '@/store/useStatsStore';
-import { X } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Cancel01Icon as XIcon } from '@hugeicons/core-free-icons';;
 import ProgressBar from './ProgressBar';
 
 const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
@@ -53,12 +54,9 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
           saveSession();
         }}
       >
-        <X
-          size={32}
-          className={clsx(
+        <HugeiconsIcon icon={XIcon} size={32} color="currentColor" className={clsx(
             'hover:cursor-pointer duration-250 hover:scale-125 text-[var(--border)] hover:text-[var(--muted-foreground)]'
-          )}
-        />
+          )} />
       </Link>
       <ProgressBar />
     </div>

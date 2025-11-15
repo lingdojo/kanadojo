@@ -6,7 +6,8 @@ import { useState, useMemo } from 'react';
 import { cardBorderStyles } from '@/static/styles';
 import useGridColumns from '@/hooks/useGridColumns';
 import { useClick } from '@/hooks/useAudio';
-import { ChevronUp, CircleCheck, Circle, Filter, FilterX } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowUpIcon, CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon } from '@hugeicons/core-free-icons';
 import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
 import KanjiSetDictionary from '@/components/Dojo/Kanji/SetDictionary';
@@ -159,20 +160,14 @@ const KanjiCards = () => {
           >
             {hideMastered ? (
               <>
-                <FilterX
-                  size={20}
-                  className="text-[var(--foreground)]"
-                />
+                <HugeiconsIcon icon={FilterXIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
                 <span className="text-[var(--foreground)]">
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
             ) : (
               <>
-                <Filter
-                  size={20}
-                  className="text-[var(--muted-foreground)]"
-                />
+                <HugeiconsIcon icon={FilterIcon} size={20} color="currentColor" className="text-[var(--muted-foreground)]" />
                 <span className="text-[var(--muted-foreground)]">
                   Hide Mastered Sets ({masteredCount})
                 </span>
@@ -219,15 +214,12 @@ const KanjiCards = () => {
                 collapsedRows.includes(rowIndex) && 'mb-1.5'
               )}
             >
-              <ChevronUp
-                className={clsx(
+              <HugeiconsIcon icon={ArrowUpIcon} size={28} color="currentColor" className={clsx(
                   'duration-250 text-[var(--border)]',
                   'max-md:group-active:text-[var(--muted-foreground)]',
                   'md:group-hover:text-[var(--muted-foreground)]',
                   collapsedRows.includes(rowIndex) && 'rotate-180'
-                )}
-                size={28}
-              />
+                )} />
               <span className="max-lg:hidden">
                 Sets {firstSetNumber}
                 {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
@@ -291,9 +283,9 @@ const KanjiCards = () => {
                       }}
                     >
                       {selectedKanjiSets.includes(kanjiSetTemp.name) ? (
-                        <CircleCheck className="mt-0.5 text-[var(--muted-foreground)] duration-250" />
+                        <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="mt-0.5 text-[var(--muted-foreground)] duration-250" />
                       ) : (
-                        <Circle className="mt-0.5 text-[var(--border)] duration-250" />
+                        <HugeiconsIcon icon={CircleIcon} color="currentColor" className="mt-0.5 text-[var(--border)] duration-250" />
                       )}
                       {kanjiSetTemp.name}
                     </button>

@@ -1,22 +1,8 @@
 'use client';
 import clsx from 'clsx';
-import {
-  Hourglass,
-  SquareCheck,
-  SquareX,
-  ChartSpline,
-  Target,
-  Timer,
-  ClockFading,
-  Clover,
-  HeartCrack,
-  CircleDivide,
-  Flame,
-  Shapes,
-  Sigma
-} from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { HourglassIcon, SquareLock01Icon as SquareCheckIcon, Cancel01Icon as SquareXIcon, ChartIncreaseIcon as ChartSplineIcon, Target01Icon as TargetIcon, Timer01Icon as TimerIcon, Clock01Icon as ClockFadingIcon, CircleIcon as CloverIcon, HeartbreakIcon as HeartCrackIcon, CircleIcon as CircleDivideIcon, FireIcon as FlameIcon, LayerIcon as ShapesIcon, SummationIcon as SigmaIcon, ArrowLeftDoubleIcon as ChevronsLeftIcon } from '@hugeicons/core-free-icons';
 import useStatsStore from '@/store/useStatsStore';
-import { ChevronsLeft } from 'lucide-react';
 import { findHighestCounts } from '@/lib/helperFunctions';
 import { useClick } from '@/hooks/useAudio';
 
@@ -156,14 +142,11 @@ const Stats = () => {
           toggleStats();
         }}
       >
-        <ChevronsLeft
-          className={clsx(
+        <HugeiconsIcon icon={ChevronsLeftIcon} size={32} color="currentColor" className={clsx(
             'text-[var(--muted-foreground)] md:text-[var(--border)] group-hover:text-[var(--muted-foreground)] mt-1 duration-250'
-          )}
-          size={32}
-        />
+          )} />
         <span>Statistics</span>
-        <ChartSpline size={30} className='mt-1.5' />
+        <HugeiconsIcon icon={ChartSplineIcon} size={30} color="currentColor" className="mt-1.5" />
       </h2>
       <div
         className={clsx('flex flex-col items-start', 'md:flex-row md:gap-10')}

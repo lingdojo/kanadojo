@@ -1,6 +1,7 @@
 'use client';
 import useStatsStore from '@/store/useStatsStore';
-import { Star } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { StarIcon } from '@hugeicons/core-free-icons';;
 import clsx from 'clsx';
 
 const Stars = () => {

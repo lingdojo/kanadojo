@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { ChevronUp } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowUpIcon } from '@hugeicons/core-free-icons';
 import { usePathname } from 'next/navigation';
 
 export default function BackToTop() {
@@ -53,7 +54,7 @@ export default function BackToTop() {
         'border-2 border-[var(--border)]'
       }
     >
-      <ChevronUp size={24} strokeWidth={2.5} />
+      <HugeiconsIcon icon={ArrowUpIcon} size={24} color="currentColor" strokeWidth={2.5} />
     </button>
   );
 }

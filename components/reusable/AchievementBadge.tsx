@@ -2,7 +2,8 @@
 
 import { motion } from 'motion/react';
 import clsx from 'clsx';
-import { Trophy } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AwardIcon as TrophyIcon } from '@hugeicons/core-free-icons';
 import useAchievements from '@/hooks/useAchievements';
 import { useClick } from '@/hooks/useAudio';
 
@@ -55,7 +56,7 @@ const AchievementBadge = ({
         )}
       >
         <div className='relative'>
-          <Trophy size={iconSizes[size]} className='text-yellow-500' />
+          <HugeiconsIcon icon={TrophyIcon} size={iconSizes[size]} color="currentColor" className="text-yellow-500" />
           {showNotificationDot && hasUnseenNotifications && (
             <motion.div
               initial={{ scale: 0 }}
@@ -95,7 +96,7 @@ const AchievementBadge = ({
         sizeClasses[size]
       )}
     >
-      <Trophy size={iconSizes[size]} className='text-yellow-500' />
+      <HugeiconsIcon icon={TrophyIcon} size={iconSizes[size]} color="currentColor" className="text-yellow-500" />
 
       {/* Notification dot */}
       {showNotificationDot && hasUnseenNotifications && (

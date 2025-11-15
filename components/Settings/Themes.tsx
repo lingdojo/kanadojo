@@ -1,12 +1,13 @@
 'use client';
-import { createElement, useEffect } from 'react';
+import { useEffect } from 'react';
 import themeSets from '@/static/themes';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import clsx from 'clsx';
 import { useClick, useLong } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import { useState } from 'react';
-import { Dice5 } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { DiceIcon as Dice5Icon } from '@hugeicons/core-free-icons';;
 import { Random } from 'random-js';
 
 const random = new Random();
@@ -67,11 +68,9 @@ const Themes = () => {
           <span className="mb-0.5">
             {randomTheme.id === selectedTheme ? '\u2B24 ' : ''}
           </span>
-          <Dice5
-            style={{
+          <HugeiconsIcon icon={Dice5Icon} color="currentColor" style={{
               color: randomTheme.mutedForeground,
-            }}
-          />
+            }} />
           Random Theme
         </button>
       </div>
@@ -81,7 +80,7 @@ const Themes = () => {
           className="flex flex-col gap-3"
         >
           <h4 className="text-xl flex flex-row items-center gap-1.5">
-            {createElement(themeSet.icon)}
+            <HugeiconsIcon icon={themeSet.icon} color="currentColor" />
             <span>{themeSet.name}</span>
           </h4>
           <fieldset

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, X, Target, Clock, CheckCircle2, Save } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Add01Icon as PlusIcon, Cancel01Icon as XIcon, Target01Icon as TargetIcon, Clock01Icon as ClockIcon, CheckmarkCircle02Icon as CheckCircle2Icon, CheckmarkCircle02Icon as SaveIcon } from '@hugeicons/core-free-icons';;
 import clsx from 'clsx';
 import type { GoalTimer } from '@/hooks/useGoalTimers';
 import { useGoalTimersStore } from '@/store/useGoalTimersStore';
@@ -105,7 +106,7 @@ export default function GoalTimersPanel({
     )}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-[var(--foreground)]" />
+          <HugeiconsIcon icon={TargetIcon} color="currentColor" className="w-5 h-5 text-[var(--foreground)]" />
           <h3 className="font-semibold text-[var(--foreground)]">Goal Timers</h3>
         </div>
         {goals.length > 0 && (
@@ -148,9 +149,9 @@ export default function GoalTimersPanel({
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   {isReached ? (
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
+                    <HugeiconsIcon icon={CheckCircle2Icon} color="currentColor" className="w-4 h-4 text-green-500" />
                   ) : (
-                    <Clock className="w-4 h-4 text-[var(--foreground)]" />
+                    <HugeiconsIcon icon={ClockIcon} color="currentColor" className="w-4 h-4 text-[var(--foreground)]" />
                   )}
                   <span className={clsx(
                     'font-medium',
@@ -172,7 +173,7 @@ export default function GoalTimersPanel({
                       disabled && 'opacity-50 cursor-not-allowed'
                     )}
                   >
-                    <X className="w-4 h-4" />
+                    <HugeiconsIcon icon={XIcon} color="currentColor" className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -268,7 +269,7 @@ export default function GoalTimersPanel({
               )}
               title="Save as template and add goal"
             >
-              <Save className="w-4 h-4" />
+              <HugeiconsIcon icon={SaveIcon} color="currentColor" className="w-4 h-4" />
               Save
             </button>
             <button
@@ -352,7 +353,7 @@ export default function GoalTimersPanel({
               disabled && 'opacity-50 cursor-not-allowed'
             )}
           >
-            <Plus className="w-4 h-4" />
+            <HugeiconsIcon icon={PlusIcon} color="currentColor" className="w-4 h-4" />
             <span>Add Goal Timer</span>
           </button>
         </>

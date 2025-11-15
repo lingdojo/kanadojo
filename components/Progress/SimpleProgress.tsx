@@ -1,7 +1,8 @@
 "use client";
 import useStatsStore from "@/store/useStatsStore";
 import { Button } from "@/components/ui/button";
-import { Trophy, Target, TrendingUp, Trash } from "lucide-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AwardIcon as TrophyIcon, Target01Icon as TargetIcon, ChartIncreaseIcon as ChartIncreaseIcon, Delete01Icon as TrashIcon } from '@hugeicons/core-free-icons';
 import clsx from "clsx";
 // import yodaCage from "./yodaCage.png";
 
@@ -90,7 +91,7 @@ export default function SimpleProgress() {
           onClick={clearAllProgress}
           className="text-[var(--muted-foreground)]"
         >
-          <Trash className="h-4 w-4 mr-2" />
+          <HugeiconsIcon icon={TrashIcon} color="currentColor" className="h-4 w-4 mr-2" />
           Reset Progress
         </Button>
       </div>
@@ -102,7 +103,7 @@ export default function SimpleProgress() {
             <CardTitle className="text-sm font-medium">
               Total Sessions
             </CardTitle>
-            <TrendingUp className="h-4 w-4 text-[var(--muted-foreground)]" />
+            <HugeiconsIcon icon={ChartIncreaseIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-[var(--foreground)]">
@@ -116,7 +117,7 @@ export default function SimpleProgress() {
             <CardTitle className="text-sm font-medium">
               Overall Accuracy
             </CardTitle>
-            <Target className="h-4 w-4 text-[var(--muted-foreground)]" />
+            <HugeiconsIcon icon={TargetIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-[var(--foreground)]">
@@ -131,7 +132,7 @@ export default function SimpleProgress() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Best Streak</CardTitle>
-            <Trophy className="h-4 w-4 text-[var(--muted-foreground)]" />
+            <HugeiconsIcon icon={TrophyIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-[var(--foreground)]">
@@ -145,7 +146,7 @@ export default function SimpleProgress() {
             <CardTitle className="text-sm font-medium">
               Characters Learned
             </CardTitle>
-            <Trophy className="h-4 w-4 text-[var(--muted-foreground)]" />
+            <HugeiconsIcon icon={TrophyIcon} color="currentColor" className="h-4 w-4 text-[var(--muted-foreground)]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-[var(--foreground)]">

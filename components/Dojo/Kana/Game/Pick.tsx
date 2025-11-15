@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { kana } from '@/static/kana';
 import useKanaStore from '@/store/useKanaStore';
-import { CircleCheck, CircleX } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CancelCircleIcon as CircleXIcon } from '@hugeicons/core-free-icons';;
 import { Random } from 'random-js';
 import { useCorrect, useError } from '@/hooks/useAudio';
 import GameIntel from '@/components/reusable/Game/GameIntel';
@@ -167,7 +168,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctKanaChar} = ${correctRomajiChar} `}</span>
-            <CircleCheck className="inline text-[var(--foreground)]" />
+            <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="inline text-[var(--foreground)]" />
           </>
         );
       } else {
@@ -175,7 +176,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctKanaChar} ≠ ${selectedChar} `}</span>
-            <CircleX className="inline text-[var(--foreground)]" />
+            <HugeiconsIcon icon={CircleXIcon} color="currentColor" className="inline text-[var(--foreground)]" />
           </>
         );
       }
@@ -196,7 +197,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctRomajiCharReverse} = ${correctKanaCharReverse} `}</span>
-            <CircleCheck className="inline text-[var(--foreground)]" />
+            <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="inline text-[var(--foreground)]" />
           </>
         );
       } else {
@@ -204,7 +205,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
         setFeedback(
           <>
             <span>{`${correctRomajiCharReverse} ≠ ${selectedChar} `}</span>
-            <CircleX className="inline text-[var(--foreground)]" />
+            <HugeiconsIcon icon={CircleXIcon} color="currentColor" className="inline text-[var(--foreground)]" />
           </>
         );
       }

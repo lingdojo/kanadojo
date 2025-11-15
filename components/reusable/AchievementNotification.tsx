@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
-import { Trophy, X } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AwardIcon as TrophyIcon, Cancel01Icon as XIcon } from '@hugeicons/core-free-icons';
 import useAchievementStore, {
   type AchievementNotification as NotificationType
 } from '@/store/useAchievementStore';
@@ -78,7 +79,7 @@ const AchievementNotification = ({
               'hover:bg-[var(--background)] transition-colors duration-200'
             )}
           >
-            <X size={14} />
+            <HugeiconsIcon icon={XIcon} size={14} color="currentColor" />
           </button>
 
           <div className='flex items-start gap-3 pr-6'>
@@ -97,7 +98,7 @@ const AchievementNotification = ({
             {/* Content */}
             <div className='flex-1 min-w-0'>
               <div className='flex items-center gap-2 mb-1'>
-                <Trophy size={14} className='text-yellow-500' />
+                <HugeiconsIcon icon={TrophyIcon} size={14} color="currentColor" className="text-yellow-500" />
                 <span className='text-xs font-semibold text-yellow-600 uppercase tracking-wide'>
                   Achievement Unlocked
                 </span>

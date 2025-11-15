@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Very Important 
+- Never use dropshadows
+- Only use colors defined in styles
+- Don't use opacity
+
 ## Project Overview
 
 KanaDojo is a Next.js-based Japanese learning application focused on training Kana (Hiragana/Katakana), Kanji, and Vocabulary. The app provides multiple game modes and customizable practice sessions.

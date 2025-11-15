@@ -5,7 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Banner from './Menu/Banner';
 import { buttonBorderStyles } from '@/static/styles';
-import { ChevronsLeft } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowLeftDoubleIcon as ChevronsLeftIcon } from '@hugeicons/core-free-icons';;
 import { Link } from '@/i18n/routing';
 import { useClick } from '@/hooks/useAudio';
 
@@ -25,7 +26,7 @@ const PostWrapper = ({ textContent }: { textContent: string }) => {
             'flex items-center justify-center'
           )}
         >
-          <ChevronsLeft />
+          <HugeiconsIcon icon={ChevronsLeftIcon} color="currentColor" />
         </button>
       </Link>
       <ReactMarkdown

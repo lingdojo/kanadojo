@@ -1,6 +1,7 @@
 'use client';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
-import { House, Sparkles, TrendingUp, Trophy } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Home01Icon as HouseIcon, SparklesIcon, ChartIncreaseIcon, AwardIcon as TrophyIcon } from '@hugeicons/core-free-icons';;
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
 import { useEffect, useRef } from 'react';
@@ -72,7 +73,7 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        <House className='' />
+        <HugeiconsIcon icon={HouseIcon} color="currentColor" />
         <span className='max-lg:hidden'>Home</span>
       </Link>
       <Link
@@ -122,7 +123,7 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        <TrendingUp />
+        <HugeiconsIcon icon={ChartIncreaseIcon} color="currentColor" />
         <span className='max-lg:hidden'>Progress</span>
       </Link>
       <Link
@@ -135,7 +136,7 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        <Trophy />
+        <HugeiconsIcon icon={TrophyIcon} color="currentColor" />
         <span className='max-lg:hidden'>Achievements</span>
       </Link>
       <Link
@@ -148,12 +149,10 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        <Sparkles
-          // size={32}
+        <HugeiconsIcon icon={SparklesIcon} size={32} color="currentColor" // 
           className={clsx(
             pathWithoutLocale !== '/preferences' && 'motion-safe:animate-bounce'
-          )}
-        />
+          )} />
         <span className='max-lg:hidden'>Preferences</span>
       </Link>
     </div>

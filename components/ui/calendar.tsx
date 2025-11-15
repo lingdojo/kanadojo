@@ -1,11 +1,8 @@
 "use client"
 
 import * as React from "react"
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "lucide-react"
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowDownIcon as ChevronDownIcon, ArrowLeftIcon as ChevronLeftIcon, ArrowRightIcon as ChevronRightIcon } from '@hugeicons/core-free-icons';
 import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
@@ -138,21 +135,19 @@ function Calendar({
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === "left") {
             return (
-              <ChevronLeftIcon className={cn("size-4", className)} {...props} />
+              <HugeiconsIcon icon={ChevronLeftIconIcon} color="currentColor" className={cn("size-4", className)} {...props} />
             )
           }
 
           if (orientation === "right") {
             return (
-              <ChevronRightIcon
-                className={cn("size-4", className)}
-                {...props}
-              />
+              <HugeiconsIcon icon={ChevronRightIconIcon} color="currentColor" className={cn("size-4", className)}
+                {...props} />
             )
           }
 
           return (
-            <ChevronDownIcon className={cn("size-4", className)} {...props} />
+            <HugeiconsIcon icon={ChevronDownIconIcon} color="currentColor" className={cn("size-4", className)} {...props} />
           )
         },
         DayButton: CalendarDayButton,

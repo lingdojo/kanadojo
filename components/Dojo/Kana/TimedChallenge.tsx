@@ -8,17 +8,8 @@ import { useChallengeTimer } from '@/hooks/useTimer';
 import { useGoalTimers } from '@/hooks/useGoalTimers';
 import { Button } from '@/components/ui/button';
 import { generateKanaQuestion } from '@/lib/generateKanaQuestions';
-import {
-  Timer,
-  Target,
-  TrendingUp,
-  RotateCcw,
-  Play,
-  ArrowLeft,
-  CheckCircle2,
-  XCircle,
-  X
-} from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Timer01Icon as TimerIcon, Target01Icon as TargetIcon, ChartIncreaseIcon as ChartIncreaseIcon, RotateLeft01Icon as RotateCcwIcon, PlayIcon, ArrowLeft01Icon, CheckmarkCircle02Icon as CheckCircle2Icon, CancelCircleIcon as XCircleIcon, Cancel01Icon as XIcon } from '@hugeicons/core-free-icons';
 import { Link } from '@/i18n/routing';
 import clsx from 'clsx';
 import { useClick, useCorrect, useError } from '@/hooks/useAudio';
@@ -204,7 +195,7 @@ export default function TimedChallengeKana() {
     return (
       <div className='min-h-[100dvh] flex flex-col items-center justify-center p-4'>
         <div className='max-w-md text-center space-y-6'>
-          <Timer size={64} className='mx-auto text-[var(--foreground)]' />
+          <HugeiconsIcon icon={TimerIcon} size={64} color="currentColor" className="mx-auto text-[var(--foreground)]" />
           <h1 className='text-2xl font-bold text-[var(--muted-foreground)]'>
             Timed Challenge
           </h1>
@@ -214,7 +205,7 @@ export default function TimedChallengeKana() {
           </p>
           <Link href='/kana'>
             <Button className='bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'>
-              <ArrowLeft size={16} className='mr-2' />
+              <HugeiconsIcon icon={ArrowLeftIcon} size={16} color="currentColor" className="mr-2" />
               Select Kana
             </Button>
           </Link>
@@ -227,7 +218,7 @@ export default function TimedChallengeKana() {
     return (
       <div className='min-h-[100dvh] flex flex-col lg:flex-row items-start justify-center p-4 gap-6'>
         <div className='max-w-md w-full lg:max-w-lg text-center space-y-6'>
-          <Timer size={64} className='mx-auto text-[var(--foreground)]' />
+          <HugeiconsIcon icon={TimerIcon} size={64} color="currentColor" className="mx-auto text-[var(--foreground)]" />
           <h1 className='text-2xl font-bold text-[var(--muted-foreground)]'>
             Timed Challenge
           </h1>
@@ -281,12 +272,12 @@ export default function TimedChallengeKana() {
             onClick={handleStart}
             className='w-full bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'
           >
-            <Play size={16} className='mr-2' />
+            <HugeiconsIcon icon={PlayIcon} size={16} color="currentColor" className="mr-2" />
             Start Challenge
           </Button>
           <Link href='/kana' className='block'>
             <Button variant='outline' className='w-full'>
-              <ArrowLeft size={16} className='mr-2' />
+              <HugeiconsIcon icon={ArrowLeftIcon} size={16} color="currentColor" className="mr-2" />
               Back to Selection
             </Button>
           </Link>
@@ -303,7 +294,7 @@ export default function TimedChallengeKana() {
               'flex items-center justify-center gap-2'
             )}
           >
-            <Target size={20} />
+            <HugeiconsIcon icon={TargetIcon} size={20} color="currentColor" />
             <span>{showGoalTimers ? 'Hide' : 'Show'} Goal Timers</span>
           </button>
 
@@ -343,7 +334,7 @@ export default function TimedChallengeKana() {
             {/* Header */}
             <div className='text-center space-y-2'>
               <div className='inline-flex items-center justify-center w-20 h-20 rounded-full bg-[var(--foreground)]/10 mb-4'>
-                <Timer size={48} className='text-[var(--foreground)]' />
+                <HugeiconsIcon icon={TimerIcon} size={48} color="currentColor" className="text-[var(--foreground)]" />
               </div>
               <h1 className='text-3xl font-bold text-[var(--muted-foreground)]'>
                 Challenge Complete!
@@ -361,7 +352,7 @@ export default function TimedChallengeKana() {
             {/* Main Stats Grid */}
             <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
               <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
-                <Target className='mx-auto text-green-500' size={28} />
+                <HugeiconsIcon icon={TargetIcon} size={28} color="currentColor" className="mx-auto text-green-500" />
                 <p className='text-3xl font-bold text-green-500'>
                   {timedCorrectAnswers}
                 </p>
@@ -369,7 +360,7 @@ export default function TimedChallengeKana() {
               </div>
 
               <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
-                <XCircle className='mx-auto text-red-500' size={28} />
+                <HugeiconsIcon icon={XCircleIcon} size={28} color="currentColor" className="mx-auto text-red-500" />
                 <p className='text-3xl font-bold text-red-500'>
                   {timedWrongAnswers}
                 </p>
@@ -377,10 +368,7 @@ export default function TimedChallengeKana() {
               </div>
 
               <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
-                <TrendingUp
-                  className='mx-auto text-[var(--foreground)]'
-                  size={28}
-                />
+                <HugeiconsIcon icon={ChartIncreaseIcon} size={28} color="currentColor" className="mx-auto text-[var(--foreground)]" />
                 <p className='text-3xl font-bold text-[var(--foreground)]'>
                   {accuracy}%
                 </p>
@@ -388,7 +376,7 @@ export default function TimedChallengeKana() {
               </div>
 
               <div className='bg-[var(--card)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border)]'>
-                <Timer className='mx-auto text-blue-500' size={28} />
+                <HugeiconsIcon icon={TimerIcon} size={28} color="currentColor" className="mx-auto text-blue-500" />
                 <p className='text-3xl font-bold text-blue-500'>
                   {questionsPerMinute}
                 </p>
@@ -419,7 +407,7 @@ export default function TimedChallengeKana() {
             {showGoalTimers && goalTimers.goals.length > 0 && (
               <div className='bg-[var(--card)] rounded-lg p-4 space-y-3 text-left border border-[var(--border)]'>
                 <div className='flex items-center gap-2 justify-center'>
-                  <Target className='text-[var(--foreground)]' size={20} />
+                  <HugeiconsIcon icon={TargetIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
                   <h3 className='text-lg font-semibold text-[var(--muted-foreground)]'>
                     Goal Timers Results
                   </h3>
@@ -429,7 +417,7 @@ export default function TimedChallengeKana() {
                 {reachedGoals.length > 0 && (
                   <div className='space-y-2'>
                     <p className='text-sm font-medium text-green-500 flex items-center gap-2'>
-                      <CheckCircle2 size={16} />
+                      <HugeiconsIcon icon={CheckCircle2Icon} size={16} color="currentColor" />
                       Reached ({reachedGoals.length})
                     </p>
                     <div className='space-y-1.5'>
@@ -457,7 +445,7 @@ export default function TimedChallengeKana() {
                 {missedGoals.length > 0 && (
                   <div className='space-y-2'>
                     <p className='text-sm font-medium text-[var(--muted-color)] flex items-center gap-2'>
-                      <XCircle size={16} />
+                      <HugeiconsIcon icon={XCircleIcon} size={16} color="currentColor" />
                       Not Reached ({missedGoals.length})
                     </p>
                     <div className='space-y-1.5'>
@@ -488,12 +476,12 @@ export default function TimedChallengeKana() {
                 onClick={handleStart}
                 className='w-full bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'
               >
-                <RotateCcw size={16} className='mr-2' />
+                <HugeiconsIcon icon={RotateCcwIcon} size={16} color="currentColor" className="mr-2" />
                 Try Again
               </Button>
               <Link href='/kana' className='block'>
                 <Button variant='outline' className='w-full'>
-                  <ArrowLeft size={16} className='mr-2' />
+                  <HugeiconsIcon icon={ArrowLeftIcon} size={16} color="currentColor" className="mr-2" />
                   Back to Selection
                 </Button>
               </Link>
@@ -510,7 +498,7 @@ export default function TimedChallengeKana() {
         {/* Header with timer, stats, and cancel button */}
         <div className='flex justify-between items-center'>
           <div className='flex items-center gap-2'>
-            <Timer className='text-[var(--foreground)]' size={20} />
+            <HugeiconsIcon icon={TimerIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
             <span
               className={clsx(
                 'text-lg font-bold',
@@ -537,7 +525,7 @@ export default function TimedChallengeKana() {
               )}
               title='Cancel challenge'
             >
-              <X size={20} className='text-red-500' />
+              <HugeiconsIcon icon={XIcon} size={20} color="currentColor" className="text-red-500" />
             </button>
           </div>
         </div>
@@ -654,7 +642,7 @@ export default function TimedChallengeKana() {
               )}
             >
               <div className='flex items-center gap-2 mb-2'>
-                <Target size={16} className='text-[var(--foreground)]' />
+                <HugeiconsIcon icon={TargetIcon} size={16} color="currentColor" className="text-[var(--foreground)]" />
                 <p className='text-sm text-[var(--muted-foreground)] font-medium'>
                   Next Goal
                 </p>

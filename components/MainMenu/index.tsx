@@ -3,16 +3,8 @@ import { Fragment, lazy, Suspense, useState, useEffect } from 'react';
 import { Link } from '@/i18n/routing';
 import Banner from './Banner';
 import Info from '@/components/reusable/Menu/Info';
-import {
-  ScrollText,
-  FileLock2,
-  Cookie,
-  Sun,
-  Moon,
-  Heart,
-  Sparkle,
-  Keyboard,
-} from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { FileScriptIcon as ScrollTextIcon, FileLockedIcon as FileLock2Icon, CookieIcon, SunIcon, Moon01Icon, FavouriteIcon as HeartIcon, SparklesIcon as SparkleIcon, KeyboardIcon as KeyboardIcon } from '@hugeicons/core-free-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
 import clsx from 'clsx';
@@ -64,9 +56,9 @@ const MainMenu = () => {
   ];
 
   const legalLinks = [
-    { name: 'terms', href: '/terms', icon: ScrollText },
-    { name: 'privacy', href: '/privacy', icon: Cookie },
-    { name: 'security', href: '/security', icon: FileLock2 },
+    { name: 'terms', href: '/terms', icon: ScrollTextIcon },
+    { name: 'privacy', href: '/privacy', icon: CookieIcon },
+    { name: 'security', href: '/security', icon: FileLock2Icon },
     // { name: 'patch notes', href: '/patch-notes', icon: FileDiff }
   ];
 
@@ -94,7 +86,7 @@ const MainMenu = () => {
               setExpandDecorations(expandDecorations => !expandDecorations);
             }}
           >
-            <Sparkle />
+            <HugeiconsIcon icon={SparkleIcon} color="currentColor" />
           </Button>
           <Button
             variant="secondary"
@@ -113,7 +105,7 @@ const MainMenu = () => {
               rel='noopener'
               target="_blank"
             >
-              <Keyboard />
+              <HugeiconsIcon icon={KeyboardIcon} color="currentColor" />
             </a>
           </Button>
         </Suspense>
@@ -129,8 +121,10 @@ const MainMenu = () => {
           <Banner />
           <div className="flex flex-row justify-end gap-2 w-1/2 md:w-1/3">
             {theme === 'dark' ? (
-              <Moon
+              <HugeiconsIcon
+                icon={Moon01Icon}
                 size={32}
+                color="currentColor"
                 onClick={() => {
                   playClick();
                   setTheme('light');
@@ -142,8 +136,10 @@ const MainMenu = () => {
                 )}
               />
             ) : (
-              <Sun
+              <HugeiconsIcon
+                icon={SunIcon}
                 size={32}
+                color="currentColor"
                 onClick={() => {
                   playClick();
                   setTheme('dark');
@@ -194,8 +190,10 @@ const MainMenu = () => {
                 window.open('https://github.com/lingdojo/kana-dojo', '_blank');
               }}
             />
-            <Heart
+            <HugeiconsIcon
+              icon={HeartIcon}
               size={32}
+              color="currentColor"
               className={clsx(
                 'hover:cursor-pointer duration-250 hover:scale-120',
                 'active:scale-100 active:duration-225',
@@ -281,7 +279,7 @@ const MainMenu = () => {
             className="p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
             onClick={() => playClick()}
           >
-            <link.icon className="size-4" />
+            <HugeiconsIcon icon={link.icon} size={16} color="currentColor" className="size-4" />
             <span>{link.name}</span>
           </Link>
         ))}

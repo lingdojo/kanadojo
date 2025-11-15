@@ -5,7 +5,8 @@ import { useClick } from '@/hooks/useAudio';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { buttonBorderStyles } from '@/static/styles';
 import fonts from '@/static/fonts';
-import { Dice5 } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { DiceIcon as Dice5Icon } from '@hugeicons/core-free-icons';;
 import { Random } from 'random-js';
 
 const random = new Random();
@@ -39,7 +40,7 @@ const Fonts = () => {
         <span className="mb-0.5">
           {randomFont.name === currentFont ? '\u2B24 ' : ''}
         </span>
-        <Dice5 className="text-[var(--muted-foreground)]" />
+        <HugeiconsIcon icon={Dice5Icon} color="currentColor" className="text-[var(--muted-foreground)]" />
         Random Font
       </button>
 

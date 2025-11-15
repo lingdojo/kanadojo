@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Alert01Icon as AlertTriangleIcon, Loading01Icon as RefreshCwIcon, Home01Icon as HomeIcon } from '@hugeicons/core-free-icons';
 
 interface ErrorFallbackProps {
   error: Error;
@@ -48,7 +48,7 @@ export function ErrorFallback({
         {/* Error Icon */}
         <div className="flex justify-center">
           <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center">
-            <AlertTriangle size={48} className="text-red-500" />
+            <HugeiconsIcon icon={AlertTriangleIcon} size={48} color="currentColor" className="text-red-500" />
           </div>
         </div>
 
@@ -89,7 +89,7 @@ export function ErrorFallback({
                 onClick={resetErrorBoundary}
                 className="w-full bg-[var(--foreground)] hover:bg-[var(--foreground)]/90"
               >
-                <RefreshCw size={16} className="mr-2" />
+                <HugeiconsIcon icon={RefreshCwIcon} size={16} color="currentColor" className="mr-2" />
                 {type === 'game' ? 'Restart Game' : 'Try Again'}
               </Button>
             )}
@@ -101,16 +101,18 @@ export function ErrorFallback({
                   variant="outline"
                   className="w-full"
                 >
-                  <RefreshCw size={16} className="mr-2" />
+                  <HugeiconsIcon icon={RefreshCwIcon} size={16} color="currentColor" className="mr-2" />
                   Reload Page
                 </Button>
-                
-                <Link href="/" className="block">
-                  <Button variant="outline" className="w-full">
-                    <Home size={16} className="mr-2" />
-                    Go to Home
-                  </Button>
-                </Link>
+
+                <Button
+                  onClick={() => window.location.href = '/'}
+                  variant="outline"
+                  className="w-full"
+                >
+                  <HugeiconsIcon icon={HomeIcon} size={16} color="currentColor" className="mr-2" />
+                  Go to Home
+                </Button>
               </>
             )}
           </div>

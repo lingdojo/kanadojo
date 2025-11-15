@@ -5,7 +5,8 @@ import useKanaStore from '@/store/useKanaStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/hooks/useAudio';
 import { miniButtonBorderStyles } from '@/static/styles';
-import { MousePointer } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Cursor01Icon as MousePointerIcon } from '@hugeicons/core-free-icons';;
 import { useState } from 'react';
 
 const finalCharactersInEachGroup = [
@@ -132,7 +133,7 @@ const Subset = ({
           }}
         >
           <span>select all {subgroup.slice(1).toLowerCase()}</span>
-          <MousePointer size={22} />
+          <HugeiconsIcon icon={MousePointerIcon} size={22} color="currentColor" />
         </button>
         {/* <Link href={`/kana/${group}-${subgroup}`} className='w-1/2'>
           <button

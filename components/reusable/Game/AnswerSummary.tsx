@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { IKanjiObj } from '@/store/useKanjiStore';
 import { IWordObj } from '@/store/useVocabStore';
-import { CircleArrowRight } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowRight01Icon as CircleArrowRightIcon } from '@hugeicons/core-free-icons';;
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/hooks/useAudio';
 import FuriganaText from '@/components/reusable/FuriganaText';
@@ -50,7 +51,7 @@ const ContinueButton = ({
       disabled={disabled}
     >
       <span>continue</span>
-      <CircleArrowRight className="" />
+      <HugeiconsIcon icon={CircleArrowRightIcon} color="currentColor" />
     </button>
   </div>
 );

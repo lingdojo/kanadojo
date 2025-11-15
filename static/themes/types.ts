@@ -1,5 +1,3 @@
-import { LucideIcon } from 'lucide-react';
-
 /**
  * Creator/contributor information
  */
@@ -73,7 +71,7 @@ export interface ThemeDefinition {
  */
 export interface ThemeGroup {
   name: string;
-  icon: LucideIcon;
+  icon: any; // Icon data from @hugeicons/core-free-icons
   themes: ThemeDefinition[];
 }
 

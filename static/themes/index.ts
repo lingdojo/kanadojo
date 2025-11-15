@@ -1,10 +1,5 @@
-import {
-  Atom,
-  Sun,
-  Moon,
-  CloudLightning,
-  TreePine,
-} from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Atom01Icon as AtomIcon, SunIcon, Moon01Icon, CloudIcon as CloudLightningIcon, PineTreeIcon } from '@hugeicons/core-free-icons';
 import { ThemeDefinition, ThemeGroup, Theme } from './types';
 
 // Import all themes
@@ -19,7 +14,7 @@ import * as seasonal from './seasonal';
 export const themes: ThemeGroup[] = [
   {
     name: 'Base',
-    icon: Atom,
+    icon: AtomIcon,
     themes: [
       base.lightTheme,
       base.darkTheme,
@@ -27,7 +22,7 @@ export const themes: ThemeGroup[] = [
   },
   {
     name: 'Light',
-    icon: Sun,
+    icon: SunIcon,
     themes: [
       light.longTheme,
       light.amethystTheme,
@@ -36,7 +31,7 @@ export const themes: ThemeGroup[] = [
   },
   {
     name: 'Dark',
-    icon: Moon,
+    icon: Moon01Icon,
     themes: [
       dark.absoluteDarknessTheme,
       dark.aeroBlossomTheme,
@@ -121,7 +116,7 @@ export const themes: ThemeGroup[] = [
   },
   {
     name: 'Halloween',
-    icon: CloudLightning,
+    icon: CloudLightningIcon,
     themes: [
       seasonal.pumpkinNightTheme,
       seasonal.spookyGlowTheme,
@@ -129,7 +124,7 @@ export const themes: ThemeGroup[] = [
   },
   {
     name: 'Christmas',
-    icon: TreePine,
+    icon: PineTreeIcon,
     themes: [
       seasonal.santaNightTheme,
       seasonal.winterWonderlandTheme,

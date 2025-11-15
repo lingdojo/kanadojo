@@ -1,6 +1,7 @@
 'use client';
 import { useJapaneseTTS } from '@/hooks/useJapaneseTTS';
-import { Volume2, Loader2 } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { VolumeHighIcon as Volume2Icon, Loading01Icon as Loader2Icon } from '@hugeicons/core-free-icons';;
 import clsx from 'clsx';
 import { buttonBorderStyles } from '@/static/styles';
 import usePreferencesStore from '@/store/usePreferencesStore';
@@ -95,16 +96,16 @@ const AudioButton: React.FC<AudioButtonProps> = ({
         )}
         title='Try pronunciation (may work in some browsers)'
       >
-        <Volume2 size={iconSizes[size]} />
+        <HugeiconsIcon icon={Volume2Icon} size={iconSizes[size]} color="currentColor" />
       </button>
     );
   }
 
   const getIcon = () => {
     if (isPlaying) {
-      return <Loader2 size={iconSizes[size]} className='animate-spin' />;
+      return <HugeiconsIcon icon={Loader2Icon} size={iconSizes[size]} color="currentColor" className="animate-spin" />;
     }
-    return <Volume2 size={iconSizes[size]} />;
+    return <HugeiconsIcon icon={Volume2Icon} size={iconSizes[size]} color="currentColor" />;
   };
 
   if (variant === 'icon-only') {

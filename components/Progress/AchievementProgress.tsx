@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import clsx from 'clsx';
-import { Trophy, Star, Zap, Crown, Gem, Lock, RotateCcw } from 'lucide-react';
-import { LucideProps } from 'lucide-react'; //
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AwardIcon as TrophyIcon, StarIcon, ZapIcon, CrownIcon, DiamondIcon as GemIcon, LockIcon as LockIcon, RotateLeft01Icon as RotateCcwIcon } from '@hugeicons/core-free-icons';
 import useAchievementStore, {
   ACHIEVEMENTS,
   type Achievement,
@@ -156,7 +156,7 @@ const AchievementCard = ({
                   }
             }
           >
-            {isUnlocked ? achievement.icon : <Lock size={24} />}
+            {isUnlocked ? achievement.icon : <HugeiconsIcon icon={LockIcon} size={24} color="currentColor" />}
           </div>
 
           <div className='flex-1 min-w-0'>
@@ -209,12 +209,9 @@ const AchievementCard = ({
         {/* Footer */}
         <div className='flex items-center justify-between pt-2 border-t border-[var(--border)]/30'>
           <div className='flex items-center gap-2'>
-            <Trophy
-              size={16}
-              className={
+            <HugeiconsIcon icon={TrophyIcon} size={16} color="currentColor" className={
                 isUnlocked ? 'text-yellow-500' : 'text-[var(--border)]'
-              }
-            />
+              } />
             <span
               className={clsx(
                 'text-sm font-bold',
@@ -325,7 +322,7 @@ const AchievementProgress = () => {
             className='space-y-4'
           >
             <div className='flex items-center justify-center gap-3 mb-4'>
-              <Trophy className='text-yellow-500' size={40} />
+              <HugeiconsIcon icon={TrophyIcon} size={40} color="currentColor" className="text-yellow-500" />
               <h1 className='text-4xl font-bold text-[var(--foreground)]'>
                 Achievements
               </h1>
@@ -495,10 +492,7 @@ const AchievementProgress = () => {
           {/* Empty State */}
           {filteredAchievements.length === 0 && (
             <div className='text-center py-12'>
-              <Trophy
-                className='mx-auto text-[var(--border)] mb-4'
-                size={48}
-              />
+              <HugeiconsIcon icon={TrophyIcon} size={48} color="currentColor" className="mx-auto text-[var(--border)] mb-4" />
               <h3 className='text-lg font-semibold text-[var(--foreground)] mb-2'>
                 No achievements in this category
               </h3>
@@ -532,7 +526,7 @@ const AchievementManagement = () => {
       {/* Management Header */}
       <div className={clsx('p-6', cardBorderStyles)}>
         <div className='flex items-center gap-3 mb-4'>
-          <RotateCcw className='text-[var(--foreground)]' size={24} />
+          <HugeiconsIcon icon={RotateCcwIcon} size={24} color="currentColor" className="text-[var(--foreground)]" />
           <h2 className='text-xl font-bold text-[var(--foreground)]'>
             Achievement Management
           </h2>
@@ -560,7 +554,7 @@ const AchievementManagement = () => {
               'text-[var(--foreground)] hover:bg-[var(--border)]'
             )}
           >
-            <RotateCcw size={16} />
+            <HugeiconsIcon icon={RotateCcwIcon} size={16} color="currentColor" />
             Recalculate
           </button>
         </div>

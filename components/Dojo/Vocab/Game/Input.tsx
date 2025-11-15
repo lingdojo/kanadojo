@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { CheckmarkCircle02Icon as CircleCheckIcon, CancelCircleIcon as CircleXIcon, ArrowRight01Icon as CircleArrowRightIcon } from '@hugeicons/core-free-icons';;
 import { Random } from 'random-js';
 import clsx from 'clsx';
 import { IWordObj } from '@/store/useVocabStore';
@@ -140,7 +141,7 @@ const VocabInputGame = ({
         <span className='text-[var(--muted-foreground)]'>{`${correctChar} = ${userInput
           .trim()
           .toLowerCase()} `}</span>
-        <CircleCheck className='inline text-[var(--foreground)]' />
+        <HugeiconsIcon icon={CircleCheckIcon} color="currentColor" className="inline text-[var(--foreground)]" />
       </>
     );
   };
@@ -152,7 +153,7 @@ const VocabInputGame = ({
         <span className='text-[var(--muted-foreground)]'>{`${correctChar} ≠ ${inputValue
           .trim()
           .toLowerCase()} `}</span>
-        <CircleX className='inline text-[var(--foreground)]' />
+        <HugeiconsIcon icon={CircleXIcon} color="currentColor" className="inline text-[var(--foreground)]" />
       </>
     );
     playErrorTwice();
@@ -258,7 +259,7 @@ const VocabInputGame = ({
             onClick={handleSkip}
           >
             <span>skip</span>
-            <CircleArrowRight />
+            <HugeiconsIcon icon={CircleArrowRightIcon} color="currentColor" />
           </button>
 
           <Stars />

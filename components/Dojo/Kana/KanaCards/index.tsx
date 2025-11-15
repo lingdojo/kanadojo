@@ -5,7 +5,8 @@ import { useState } from 'react';
 import Subset from './Subset';
 import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
-import { ChevronUp } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowUpIcon } from '@hugeicons/core-free-icons';
 
 const KanaCards = () => {
   const { playClick } = useClick();
@@ -106,16 +107,14 @@ const KanaCards = () => {
                 ]);
               }}
             >
-              <ChevronUp
-                className={clsx(
+              <HugeiconsIcon icon={ArrowUpIcon} color="currentColor" className={clsx(
                   'duration-300',
                   'text-[var(--border)]',
                   'max-md:group-active:text-[var(--text-color)]',
                   'md:group-hover:text-[var(--text-color)]',
                   hiddenSubsets.includes(kanaGroup.name.toLowerCase()) &&
                     'rotate-180'
-                )}
-              />
+                )} />
               <h3 className="flex items-center gap-2">
                 <span>{kanaGroup.name.split(' ')[0]}</span>
                 <span className="text-[var(--muted-foreground)]">
@@ -152,17 +151,14 @@ const KanaCards = () => {
                         ]);
                       }}
                     >
-                      <ChevronUp
-                        className={clsx(
+                      <HugeiconsIcon icon={ArrowUpIcon} size={24} color="currentColor" className={clsx(
                           'duration-300',
                           'text-[var(--border)]',
                           'max-md:group-active:text-[var(--text-color)]',
                           'md:group-hover:text-[var(--text-color)]',
                           hiddenSubsets.includes(subset.name.toLowerCase()) &&
                             'rotate-180'
-                        )}
-                        size={24}
-                      />
+                        )} />
                       <span>{subset.name.slice(1)}</span>
                     </h4>
                     {!hiddenSubsets.includes(subset.name.toLowerCase()) && (

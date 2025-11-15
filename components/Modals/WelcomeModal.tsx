@@ -3,17 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
-import {
-  X,
-  Palette,
-  Type,
-  ChevronRight,
-  ChevronLeft,
-  AudioLines,
-  VolumeX,
-  Joystick,
-  Dice5
-} from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Cancel01Icon as XIcon, ColorPickerIcon as PaletteIcon, TextIcon as TypeIcon, ArrowRightIcon as ChevronRightIcon, ArrowLeftIcon as ChevronLeftIcon, AudioBook01Icon as AudioLinesIcon, VolumeMute01Icon as VolumeXIcon, Joystick01Icon as JoystickIcon, DiceIcon as Dice5Icon } from '@hugeicons/core-free-icons';
 import useOnboardingStore from '@/store/useOnboardingStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/hooks/useAudio';
@@ -118,10 +109,7 @@ const WelcomeModal = () => {
 
             <div className='space-y-4 text-left'>
               <div className='flex items-center gap-3 p-3 rounded-lg bg-[var(--background)]'>
-                <Joystick
-                  className='text-[var(--foreground)] flex-shrink-0'
-                  size={24}
-                />
+                <HugeiconsIcon icon={JoystickIcon} size={24} color="currentColor" className="text-[var(--foreground)] flex-shrink-0" />
                 <div>
                   <h3 className='font-semibold text-[var(--foreground)]'>
                     Configure Behavior
@@ -133,10 +121,7 @@ const WelcomeModal = () => {
               </div>
 
               <div className='flex items-center gap-3 p-3 rounded-lg bg-[var(--background)]'>
-                <Palette
-                  className='text-[var(--foreground)] flex-shrink-0'
-                  size={24}
-                />
+                <HugeiconsIcon icon={PaletteIcon} size={24} color="currentColor" className="text-[var(--foreground)] flex-shrink-0" />
                 <div>
                   <h3 className='font-semibold text-[var(--foreground)]'>
                     Choose Your Theme
@@ -148,10 +133,7 @@ const WelcomeModal = () => {
               </div>
 
               <div className='flex items-center gap-3 p-3 rounded-lg bg-[var(--background)]'>
-                <Type
-                  className='text-[var(--foreground)] flex-shrink-0'
-                  size={24}
-                />
+                <HugeiconsIcon icon={TypeIcon} size={24} color="currentColor" className="text-[var(--foreground)] flex-shrink-0" />
                 <div>
                   <h3 className='font-semibold text-[var(--foreground)]'>
                     Select Your Font
@@ -170,7 +152,7 @@ const WelcomeModal = () => {
           <div className='space-y-6'>
             <div className='text-center space-y-2'>
               <h2 className='text-2xl font-bold text-[var(--foreground)] flex items-center justify-center gap-2'>
-                <Joystick size={28} />
+                <HugeiconsIcon icon={JoystickIcon} size={28} color="currentColor" />
                 Configure Behavior
               </h2>
               <p className='text-[var(--muted-foreground)]'>
@@ -262,7 +244,7 @@ const WelcomeModal = () => {
                         {!localSilentMode && '● '}
                       </span>
                       <span className='font-medium'>On</span>
-                      <AudioLines size={20} />
+                      <HugeiconsIcon icon={AudioLinesIcon} size={20} color="currentColor" />
                     </div>
                   </button>
 
@@ -285,7 +267,7 @@ const WelcomeModal = () => {
                         {localSilentMode && '● '}
                       </span>
                       <span className='font-medium'>Off</span>
-                      <VolumeX size={20} />
+                      <HugeiconsIcon icon={VolumeXIcon} size={20} color="currentColor" />
                     </div>
                   </button>
                 </div>
@@ -299,7 +281,7 @@ const WelcomeModal = () => {
           <div className='space-y-6'>
             <div className='text-center space-y-2'>
               <h2 className='text-2xl font-bold text-[var(--foreground)] flex items-center justify-center gap-2'>
-                <Palette size={28} />
+                <HugeiconsIcon icon={PaletteIcon} size={28} color="currentColor" />
                 Choose Your Theme
               </h2>
               <p className='text-[var(--muted-foreground)]'>
@@ -327,7 +309,7 @@ const WelcomeModal = () => {
                   }
                 }}
               >
-                <Dice5 className='text-[var(--muted-foreground)]' />
+                <HugeiconsIcon icon={Dice5Icon} color="currentColor" className="text-[var(--muted-foreground)]" />
                 Random Theme
               </button>
             </div>
@@ -336,7 +318,7 @@ const WelcomeModal = () => {
               {themeSets.map(themeSet => (
                 <div key={themeSet.name} className='space-y-3'>
                   <h3 className='text-lg font-semibold text-[var(--foreground)] flex items-center gap-2'>
-                    <themeSet.icon size={20} />
+                    <HugeiconsIcon icon={themeSet.icon} size={20} color="currentColor" />
                     {themeSet.name}
                   </h3>
                   <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2'>
@@ -385,7 +367,7 @@ const WelcomeModal = () => {
           <div className='space-y-6'>
             <div className='text-center space-y-2'>
               <h2 className='text-2xl font-bold text-[var(--foreground)] flex items-center justify-center gap-2'>
-                <Type size={28} />
+                <HugeiconsIcon icon={TypeIcon} size={28} color="currentColor" />
                 Choose Your Font
               </h2>
               <p className='text-[var(--muted-foreground)]'>
@@ -409,7 +391,7 @@ const WelcomeModal = () => {
                   setFont(randomFont.name);
                 }}
               >
-                <Dice5 className='text-[var(--muted-foreground)]' />
+                <HugeiconsIcon icon={Dice5Icon} color="currentColor" className="text-[var(--muted-foreground)]" />
                 Random Font
               </button>
             </div>
@@ -560,7 +542,7 @@ const WelcomeModal = () => {
                   'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
                 )}
               >
-                <X size={20} />
+                <HugeiconsIcon icon={XIcon} size={20} color="currentColor" />
               </button>
             </div>
           </div>
@@ -582,10 +564,7 @@ const WelcomeModal = () => {
                       'text-sm sm:text-base'
                     )}
                   >
-                    <ChevronLeft
-                      size={16}
-                      className='sm:w-[18px] sm:h-[18px]'
-                    />
+                    <HugeiconsIcon icon={ChevronLeftIcon} size={16} color="currentColor" className="sm:w-[18px] sm:h-[18px]" />
                     <span className='hidden sm:inline'>Previous</span>
                     <span className='sm:hidden'>Back</span>
                   </button>
@@ -609,7 +588,7 @@ const WelcomeModal = () => {
                       ? 'Finish Setup'
                       : 'Next'}
                   </span>
-                  <ChevronRight size={16} className='sm:w-[18px] sm:h-[18px]' />
+                  <HugeiconsIcon icon={ChevronRightIcon} size={16} color="currentColor" className="sm:w-[18px] sm:h-[18px]" />
                 </button>
               </div>
             </div>

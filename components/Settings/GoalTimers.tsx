@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Trash2, Plus, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Delete02Icon as Trash2Icon, Add01Icon as PlusIcon, VolumeHighIcon as Volume2Icon, VolumeMute01Icon as VolumeXIcon, SparklesIcon } from '@hugeicons/core-free-icons';;
 import clsx from 'clsx';
 import { useGoalTimersStore } from '@/store/useGoalTimersStore';
 
@@ -200,9 +201,9 @@ export default function GoalTimers() {
                 className="text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
               >
                 {settings.defaultPlaySound ? (
-                  <Volume2 className="w-5 h-5" />
+                  <HugeiconsIcon icon={Volume2Icon} color="currentColor" className="w-5 h-5" />
                 ) : (
-                  <VolumeX className="w-5 h-5" />
+                  <HugeiconsIcon icon={VolumeXIcon} color="currentColor" className="w-5 h-5" />
                 )}
               </button>
               <input
@@ -230,7 +231,7 @@ export default function GoalTimers() {
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[var(--foreground)]" />
+            <HugeiconsIcon icon={SparklesIcon} color="currentColor" className="w-5 h-5 text-[var(--foreground)]" />
             <label className="text-sm text-[var(--muted-foreground)]">
               Show confetti animation when goal reached
             </label>
@@ -331,7 +332,7 @@ export default function GoalTimers() {
                 'flex items-center gap-2'
               )}
             >
-              <Plus className="w-4 h-4" />
+              <HugeiconsIcon icon={PlusIcon} color="currentColor" className="w-4 h-4" />
               New Template
             </button>
           )}
@@ -467,7 +468,7 @@ export default function GoalTimers() {
                       className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card)] hover:bg-opacity-10 rounded transition-colors hover:cursor-pointer"
                       title="Delete template"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <HugeiconsIcon icon={Trash2Icon} color="currentColor" className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

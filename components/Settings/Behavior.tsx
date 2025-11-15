@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { buttonBorderStyles } from '@/static/styles';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { useClick } from '@/hooks/useAudio';
-import { AudioLines, VolumeX, Volume2, RefreshCw, Play } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AudioBook01Icon as AudioLinesIcon, VolumeMute01Icon as VolumeXIcon, VolumeHighIcon as Volume2Icon, Loading01Icon as RefreshCwIcon, PlayIcon } from '@hugeicons/core-free-icons';;
 import { useJapaneseTTS } from '@/hooks/useJapaneseTTS';
 // import{Command, KeyboardOff} from 'lucide-react'
 // import HotkeyReference from './HotkeyReference';
@@ -182,10 +183,7 @@ const Behavior = () => {
             </span>
             on
           </span>
-          <AudioLines
-            size={20}
-            className="mb-0.5"
-          />
+          <HugeiconsIcon icon={AudioLinesIcon} size={20} color="currentColor" className="mb-0.5" />
         </button>
         <button
           className={clsx(
@@ -207,10 +205,7 @@ const Behavior = () => {
             </span>
             off
           </span>
-          <VolumeX
-            size={20}
-            className="mb-0.5"
-          />
+          <HugeiconsIcon icon={VolumeXIcon} size={20} color="currentColor" className="mb-0.5" />
         </button>
       </div>
 
@@ -236,10 +231,7 @@ const Behavior = () => {
             </span>
             on
           </span>
-          <Volume2
-            size={20}
-            className="mb-0.5"
-          />
+          <HugeiconsIcon icon={Volume2Icon} size={20} color="currentColor" className="mb-0.5" />
         </button>
         <button
           className={clsx(
@@ -261,10 +253,7 @@ const Behavior = () => {
             </span>
             off
           </span>
-          <VolumeX
-            size={20}
-            className="mb-0.5"
-          />
+          <HugeiconsIcon icon={VolumeXIcon} size={20} color="currentColor" className="mb-0.5" />
         </button>
       </div>
 
@@ -333,7 +322,7 @@ const Behavior = () => {
                 }}
                 title="Refresh voices"
               >
-                <RefreshCw size={18} />
+                <HugeiconsIcon icon={RefreshCwIcon} size={18} color="currentColor" />
               </button>
               <button
                 className={clsx(buttonBorderStyles, 'px-3 py-2')}
@@ -347,7 +336,7 @@ const Behavior = () => {
                 }}
                 title="Test voice"
               >
-                <Play size={18} />
+                <HugeiconsIcon icon={PlayIcon} size={18} color="currentColor" />
               </button>
             </div>
             <div className="text-sm text-[var(--muted-foreground)] text-center">

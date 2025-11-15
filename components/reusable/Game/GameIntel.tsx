@@ -1,11 +1,10 @@
 'use client';
-import { SquareCheck, SquareX, Star, Coffee } from 'lucide-react';
-import { MousePointerClick, Keyboard, MousePointer } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { SquareLock01Icon as SquareCheckIcon, Cancel01Icon as SquareXIcon, StarIcon, Coffee01Icon as CoffeeIcon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon as KeyboardIcon, Cursor01Icon as MousePointerIcon, ChartIncreaseIcon as ChartSplineIcon } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
 import useStatsStore from '@/store/useStatsStore';
 import { miniButtonBorderStyles } from '@/static/styles';
-import { ChartSpline } from 'lucide-react';
 import { useStopwatch } from 'react-timer-hook';
 import { useClick } from '@/hooks/useAudio';
 import useKanjiStore from '@/store/useKanjiStore';
@@ -66,16 +65,16 @@ const GameIntel = ({
         >
           <p className='text-xl px-4 flex justify-center items-center w-full gap-2.5 py-2'>
             {gameMode.toLowerCase() === 'pick' && (
-              <MousePointerClick className='text-[var(--foreground)]' />
+              <HugeiconsIcon icon={MousePointerClickIcon} color="currentColor" className="text-[var(--foreground)]" />
             )}
             {gameMode.toLowerCase() === 'reverse pick' && (
-              <MousePointerClick className=' scale-x-[-1] text-[var(--foreground)]' />
+              <HugeiconsIcon icon={MousePointerClickIcon} color="currentColor" className=" scale-x-[-1] text-[var(--foreground)]" />
             )}
             {gameMode.toLowerCase() === 'input' && (
-              <Keyboard className='text-[var(--foreground)]' />
+              <HugeiconsIcon icon={KeyboardIcon} color="currentColor" className="text-[var(--foreground)]" />
             )}
             {gameMode.toLowerCase() === 'reverse input' && (
-              <Keyboard className='scale-y-[-1] text-[var(--foreground)]' />
+              <HugeiconsIcon icon={KeyboardIcon} color="currentColor" className="scale-y-[-1] text-[var(--foreground)]" />
             )}
             <span>{gameMode}</span>
 
@@ -91,7 +90,7 @@ const GameIntel = ({
                 window.open('https://ko-fi.com/kanadojo', '_blank');
               }}
             >
-              <Coffee size={24} className='motion-safe:animate-pulse' />
+              <HugeiconsIcon icon={CoffeeIcon} size={24} color="currentColor" className="motion-safe:animate-pulse" />
             </button>
 
           </p>
@@ -111,15 +110,15 @@ const GameIntel = ({
           )}
         >
           <p className='text-xl flex flex-row items-center gap-1'>
-            <SquareCheck />
+            <HugeiconsIcon icon={SquareCheckIcon} color="currentColor" />
             <span>{numCorrectAnswers}</span>
           </p>
           <p className='text-xl flex flex-row items-center gap-1'>
-            <SquareX />
+            <HugeiconsIcon icon={SquareXIcon} color="currentColor" />
             <span>{numWrongAnswers}</span>
           </p>
           <p className='text-xl flex flex-row items-center gap-1'>
-            <Star />
+            <HugeiconsIcon icon={StarIcon} color="currentColor" />
             <span>{numStars}</span>
           </p>
 
@@ -137,7 +136,7 @@ const GameIntel = ({
               setNewTotalMilliseconds(totalTimeStopwatch.totalMilliseconds);
             }}
           >
-            <ChartSpline size={24} />
+            <HugeiconsIcon icon={ChartSplineIcon} size={24} color="currentColor" />
           </button>
         </div>
       </div>
@@ -155,7 +154,7 @@ const GameIntel = ({
         )}
       >
         <span className='flex gap-2 items-center'>
-          <MousePointer size={20} className='text-[var(--foreground)]' />
+          <HugeiconsIcon icon={MousePointerIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
           selected sets:
         </span>
         <span className='text-[var(--muted-foreground)]'>
