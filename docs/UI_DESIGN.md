@@ -411,6 +411,32 @@ The `Cosmic Dream` theme brings an aurora/nebula-inspired dark palette to KanaDo
 - Use `--main-color` for headings, CTAs, and high-emphasis text.
 - Use `--secondary-color` for secondary text, icons, and supportive UI elements.
 
+* **Tailwind example:**
+
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">Cosmic Dream — Nebula Aurora</h1>
+    <p className="text-sm text-[var(--secondary-color)]">Soft, ethereal helper text and accents</p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+
+  * `--main-color` (vibrant magenta) on `--background-color` should provide strong contrast for primary content; still validate with WebAIM, axe, or Lighthouse for edge cases.
+  * `--secondary-color` (soft light blue) is intended for secondary text and icons — confirm it maintains adequate contrast on both `--background-color` and `--card-color` for the sizes you use.
+  * `--border-color` on `--card-color` should meet at least a 3:1 ratio for interactive affordances; increase opacity if used as the primary focus indicator or for small UI chrome.
+  * If any contrast checks fail, adjust the lightness (L) value of the HSLA color(s) while keeping HSLA format and re-run checks.
+
+* **Developer checklist when adding/using `Cosmic Dream`:**
+
+  * Add the theme object to `static/themes.ts` under the `Dark` theme group (IDs must be kebab-case).
+  * Verify `applyTheme('cosmic-dream')` correctly updates CSS variables and the `data-theme` attribute.
+  * Run automated contrast tests (axe, Lighthouse) on both accent colors and document ratios in the PR.
+  * Test buttons, dialogs, inputs, modals, and other interactive components across breakpoints and accessibility modes.
+  * Consider providing a slightly lighter variant of `--main-color` or `--secondary-color` for disabled/low-emphasis states if needed to avoid blending with `--card-color`.
+
 **Accessibility / contrast notes:**
 - Verify `--main-color` and `--secondary-color` against `--background-color` and `--card-color` meet WCAG 2.1 AA for normal text (>= 4.5:1). Use WebAIM, axe, or Lighthouse to confirm.
 - If a contrast check fails, adjust the lightness (L) in the HSLA values and re-test, keeping the color values in HSLA format.
