@@ -76,6 +76,14 @@ const themes: ThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: "wasabi-garden",
+        backgroundColor: "hsla(100, 42%, 12%, 1)",
+        cardColor: "hsla(100, 40%, 16%, 1)",
+        borderColor: "hsla(100, 36%, 24%, 1)",
+        mainColor: "hsla(115, 85%, 60%, 1)",
+        secondaryColor: "hsla(33, 80%, 60%, 1)",
+      },
+      {
         id: "wabi",
         backgroundColor: "hsla(3, 20%, 11%, 1)",
         cardColor: "hsla(3, 18%, 15%, 1)",

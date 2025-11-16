@@ -438,6 +438,60 @@ The `Cosmic Dream` theme brings an aurora/nebula-inspired dark palette to KanaDo
   * Consider providing a slightly lighter variant of `--main-color` or `--secondary-color` for disabled/low-emphasis states if needed to avoid blending with `--card-color`.
 
 
+#### Wasabi Garden Theme (Dark — Botanical Pop Energy)
+
+The `wasabi-garden` theme brings a vibrant, botanical, pop-art twist inspired by fresh-grated wasabi and lush Japanese summer gardens. It blends wasabi-green intensity with jade water tones, koi-gold accents, and the cool depth of nighttime bamboo. This theme is bold, energetic, and culturally expressive while remaining comfortable for long study sessions.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "wasabi-garden",
+  backgroundColor: "hsla(100, 42%, 12%, 1)",   // Wasabi green-black, deep garden shadow
+  cardColor: "hsla(100, 40%, 16%, 1)",         // Elevated wasabi leaf (+4% lightness)
+  borderColor: "hsla(100, 36%, 24%, 1)",       // Garden edge / strong separation
+  mainColor: "hsla(115, 85%, 60%, 1)",         // Bright lily-pad / electric wasabi green
+  secondaryColor: "hsla(33, 80%, 60%, 1)",     // Gold koi highlight — warm accent
+}
+ ```
+
+* **Usage guidance:**
+
+  * Use `--background-color` for dark garden foundations and full-page surfaces.
+  * Use `--card-color` for cards, panels, menus, and elevated UI surfaces.
+  * Use `--border-color` for dividers, focus rings, hover outlines, and interactive affordances.
+  * Use `--main-color` for primary text, icons, and actions needing maximum visibility.
+  * Use `--secondary-color` for warm koi-inspired highlights, metadata, and soft accent text.
+
+* **Tailwind example:**
+
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Wasabi Garden — Botanical Pop Energy
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Vivid greens, koi-gold highlights, lush Japanese garden tones
+    </p>
+  </div>
+</div>
+ ```
+
+* **Accessibility / contrast notes:**
+
+  * `--main-color` provides strong contrast against the deep green-black background and passes AA for normal text.
+  * `--secondary-color` maintains readable contrast on both card and background surfaces; confirm via WebAIM or axe for very small text.
+  * `--border-color` on `--card-color` meets the 3:1 requirement for interactive affordances; adjust if used for critical focus states.
+  * Limit very small UI elements in high-saturation green to preserve clarity.
+
+* **Developer checklist when adding/using `wasabi-garden`:**
+
+  * Add the theme to `static/themes.ts` under the Dark group.
+  * Ensure `applyTheme("wasabi-garden")` correctly updates all CSS variables.
+  * Run contrast tests (axe, Lighthouse) to validate both accent colors.
+  * Test buttons, inputs, modals, and menus across breakpoints and dark environments.
+  * Confirm theme picker preview and label rendering.
+
 
   ### Theme Color Guidelines
 
