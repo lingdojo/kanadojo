@@ -53,17 +53,15 @@ KanaDojo leverages Tailwind CSS as the primary styling solution with a heavy emp
 #### 1. CSS Variables Over Hardcoded Colors
 
 **✅ DO:**
+
 ```tsx
-<div className="bg-[var(--card-color)] text-[var(--main-color)]">
-  Content
-</div>
+<div className="bg-[var(--card-color)] text-[var(--main-color)]">Content</div>
 ```
 
 **❌ DON'T:**
+
 ```tsx
-<div className="bg-gray-100 text-black">
-  Content
-</div>
+<div className="bg-gray-100 text-black">Content</div>
 ```
 
 #### 2. Utility Classes with `cn()` Helper
@@ -73,13 +71,15 @@ We use the `cn()` utility from `lib/utils.ts` to merge Tailwind classes intellig
 ```tsx
 import { cn } from '@/lib/utils';
 
-<button className={cn(
-  "px-4 py-2 rounded-lg",
-  isActive && "bg-[var(--main-color)]",
-  disabled && "opacity-50 cursor-not-allowed"
-)}>
+<button
+  className={cn(
+    'px-4 py-2 rounded-lg',
+    isActive && 'bg-[var(--main-color)]',
+    disabled && 'opacity-50 cursor-not-allowed'
+  )}
+>
   Click me
-</button>
+</button>;
 ```
 
 #### 3. Reusable Style Constants
@@ -90,9 +90,7 @@ Common patterns are extracted to `static/styles.ts`:
 // static/styles.ts
 import clsx from 'clsx';
 
-export const cardBorderStyles = clsx(
-  'rounded-xl bg-[var(--card-color)]'
-);
+export const cardBorderStyles = clsx('rounded-xl bg-[var(--card-color)]');
 
 export const buttonBorderStyles = clsx(
   'rounded-xl bg-[var(--card-color)] hover:cursor-pointer',
@@ -102,12 +100,11 @@ export const buttonBorderStyles = clsx(
 ```
 
 **Usage:**
+
 ```tsx
 import { buttonBorderStyles } from '@/static/styles';
 
-<button className={buttonBorderStyles}>
-  Click me
-</button>
+<button className={buttonBorderStyles}>Click me</button>;
 ```
 
 #### 4. Responsive Design
@@ -121,6 +118,7 @@ Use Tailwind's responsive prefixes consistently:
 ```
 
 **Breakpoints:**
+
 - `sm`: 640px
 - `md`: 768px
 - `lg`: 1024px
@@ -140,13 +138,13 @@ KanaDojo uses a **5-variable color system** defined in `app/globals.css`:
 ```css
 :root {
   /* Layout Colors */
-  --background-color: hsla(210, 17%, 100%, 1);  /* Page background */
-  --card-color: hsla(210, 17%, 91%, 1);         /* Card/elevated surfaces */
-  --border-color: hsla(210, 17%, 76%, 1);       /* Borders and dividers */
-  
+  --background-color: hsla(210, 17%, 100%, 1); /* Page background */
+  --card-color: hsla(210, 17%, 91%, 1); /* Card/elevated surfaces */
+  --border-color: hsla(210, 17%, 76%, 1); /* Borders and dividers */
+
   /* Content Colors */
-  --main-color: hsl(0, 0%, 0%);                 /* Primary text and actions */
-  --secondary-color: hsl(0, 0%, 35%);           /* Secondary text and icons */
+  --main-color: hsl(0, 0%, 0%); /* Primary text and actions */
+  --secondary-color: hsl(0, 0%, 35%); /* Secondary text and icons */
 }
 ```
 
@@ -157,11 +155,11 @@ Themes are defined in `static/themes.ts` with TypeScript interfaces:
 ```typescript
 interface Theme {
   id: string;
-  backgroundColor: string;  // Page background
-  cardColor: string;        // Cards, modals, elevated surfaces
-  borderColor: string;      // Borders, dividers, hover states
-  mainColor: string;        // Primary text, icons, CTAs
-  secondaryColor: string;   // Secondary text, subtle elements
+  backgroundColor: string; // Page background
+  cardColor: string; // Cards, modals, elevated surfaces
+  borderColor: string; // Borders, dividers, hover states
+  mainColor: string; // Primary text, icons, CTAs
+  secondaryColor: string; // Secondary text, subtle elements
 }
 ```
 
@@ -191,6 +189,7 @@ export function applyTheme(themeId: string) {
 To add a new theme:
 
 1. **Define the theme** in `static/themes.ts`:
+
 ```typescript
 {
   id: 'my-custom-theme',
@@ -205,11 +204,12 @@ To add a new theme:
 2. **Test contrast ratios** (see Accessibility section)
 3. **Add to appropriate theme group** (Base, Light, or Dark)
 
-#### Sumi Theme (Dark — Ink-inspired)
+#### Sumi Theme (Example)
 
 The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added in `static/themes.ts`. It's designed for low visual distraction, high focus, and a neutral, high-clarity UI where content stands out against an almost-black page background.
 
-- **Palette (from `static/themes.ts`)**: 
+- **Palette (from `static/themes.ts`)**:
+
 ```ts
 {
   id: 'sumi',
@@ -222,6 +222,7 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
 ```
 
 - **Usage guidance**:
+
   - Use `--background-color` for large page surfaces and overlays.
   - Use `--card-color` for cards, panels, and elevated UI pieces.
   - Use `--border-color` for separators, subtle hover/backdrop outlines and focus rings when appropriate.
@@ -229,227 +230,47 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   - Use `--secondary-color` for subtle accents, tertiary text, dividers or decorative strokes.
 
 - **Tailwind example (recommended pattern)**:
+
 ```tsx
 <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
   <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-    <h1 className="text-2xl font-bold text-[var(--main-color)]">Sumi — Focus Mode</h1>
-    <p className="text-sm text-[var(--secondary-color)]">Subtle helper text and accents</p>
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Sumi — Focus Mode
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Subtle helper text and accents
+    </p>
   </div>
 </div>
 ```
 
 - **Accessibility / contrast notes**:
+
   - The `sumi` theme is intentionally high-contrast for primary content: `--main-color` (near-white) on `--background-color` (very dark charcoal) is appropriate for body text and passes typical AA thresholds for normal text in most sizes — still run specific checks for bright UI elements and CTA buttons.
   - For smaller UI chrome (icons, borders), ensure `--border-color` on `--card-color` meets at least a 3:1 ratio for interactive affordances, or increase border opacity when used as the primary focus indicator.
   - When using `--secondary-color` for secondary text, verify it maintains adequate contrast on both `--background-color` and `--card-color` for the sizes you use (tooling: WebAIM, axe, Lighthouse).
 
 - **Developer checklist when adding/using `sumi`**:
+
   - Copy the theme object into `static/themes.ts` exactly (IDs must be kebab-case).
   - Verify `applyTheme('sumi')` updates CSS variables and `data-theme` attribute correctly.
   - Test interactive components (buttons, inputs, dialogs) visually and via automated contrast checks.
   - Consider providing a slightly lighter variant of `--main-color` for disabled/low-emphasis states to avoid blending with `--card-color`.
 
-  #### Momiji Theme (Dark — Autumn Maple)
-
-  The `momiji` theme is inspired by autumn maple leaves — warm, cozy, and subtly vibrant. It pairs a deep, neutral page background with amber and yellow-green accents for highlights and CTAs. Use this theme when you want a seasonal, warm-dark aesthetic that still prioritizes readability and clear affordances.
-
-  - **Palette (from `static/themes.ts`):**
-  ```ts
-  {
-    id: 'momiji',
-    backgroundColor: 'hsla(15, 35%, 11%, 1)',
-    cardColor: 'hsla(15, 33%, 15%, 1)',
-    borderColor: 'hsla(15, 30%, 23%, 1)',
-    mainColor: 'hsla(5, 85%, 58%, 1)',
-    secondaryColor: 'hsla(45, 88%, 62%, 1)',
-  }
-  ```
-
-  - **Usage guidance:**
-    - Use `--background-color` for full-page backgrounds and large overlays.
-    - Use `--card-color` for cards, panels, and elevated UI surfaces to create subtle separation from the page background.
-    - Use `--border-color` for separators, subtle hover outlines, and focus affordances.
-    - Use `--main-color` for primary text, icons, and CTAs that need emphasis.
-    - Use `--secondary-color` for accent highlights, badges, and secondary CTAs.
-
-  - **Tailwind example:**
-  ```tsx
-  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-      <h1 className="text-2xl font-bold text-[var(--main-color)]">Momiji — Autumn Warmth</h1>
-      <p className="text-sm text-[var(--secondary-color)]">Accent and supportive text</p>
-    </div>
-  </div>
-  ```
-
-  - **Accessibility / contrast notes:**
-    - `--main-color` (warm amber) on `--background-color` (deep charcoal) should provide strong contrast for body text; still validate with WebAIM, axe, or Lighthouse.
-    - `--secondary-color` (yellow-green) is an accent — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; reduce saturation or increase lightness if below AA.
-    - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; increase opacity if necessary when used as a primary focus indicator.
-
-  - **Developer checklist when adding/using `momiji`:**
-    - Add the theme object to `static/themes.ts` under the `Dark` theme group.
-    - Verify `applyTheme('momiji')` updates CSS variables and `data-theme` attribute correctly.
-    - Run automated contrast checks (axe, Lighthouse) and manual spot checks for CTAs and small text.
-    - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
-
-#### Aizome Theme (Dark — Indigo Dye)
-
-The `aizome` theme is inspired by traditional Japanese indigo dyeing (`aizome`) — a deep, cool, sophisticated palette with serene blue tones. It combines a cool dark background with bright cyan and warm sand accents for a balance of depth and clarity. Use this theme for a calm, focus-oriented experience with a distinctly Japanese aesthetic.
-
-  - **Palette (from `static/themes.ts`):**
-  ```ts
-  {
-    id: 'aizome',
-    backgroundColor: 'hsla(215, 48%, 11%, 1)',
-    cardColor: 'hsla(215, 46%, 15%, 1)',
-    borderColor: 'hsla(215, 43%, 23%, 1)',
-    mainColor: 'hsla(210, 75%, 58%, 1)',
-    secondaryColor: 'hsla(35, 35%, 72%, 1)',
-  }
-  ```
-
-  - **Usage guidance:**
-    - Use `--background-color` for full-page backgrounds and large overlays to establish the cool, indigo base tone.
-    - Use `--card-color` for cards, panels, and elevated UI surfaces for subtle depth within the cool palette.
-    - Use `--border-color` for separators, interactive affordances, and subtle hover outlines.
-    - Use `--main-color` for primary text, icons, and CTAs that need strong visibility and contrast.
-    - Use `--secondary-color` for accent highlights, badges, and supplementary text that complements the cool indigo base.
-
-  - **Tailwind example:**
-  ```tsx
-  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-      <h1 className="text-2xl font-bold text-[var(--main-color)]">Aizome — Indigo Serenity</h1>
-      <p className="text-sm text-[var(--secondary-color)]">Cool tones and warm accents</p>
-    </div>
-  </div>
-  ```
-
-  - **Accessibility / contrast notes:**
-    - `--main-color` (bright cyan) on `--background-color` (deep indigo) provides excellent contrast for body text and passes typical AA thresholds; verify with WebAIM or axe for edge cases.
-    - `--secondary-color` (warm sand) is an accent color — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; increase saturation if below AA.
-    - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; test focus indicators and hover states carefully.
-
-  - **Developer checklist when adding/using `aizome`:**
-    - Add the theme object to `static/themes.ts` under the `Dark` theme group.
-    - Verify `applyTheme('aizome')` updates CSS variables and `data-theme` attribute correctly.
-    - Run automated contrast checks (axe, Lighthouse) on bright cyan text and warm sand accents.
-    - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
-
-
-#### Wabi Theme (Dark — Minimalist Dawn)
-
-The `wabi` theme is inspired by traditional Japanese minimalism — the calm clarity of temple stone at dawn, the softness of shoji-paper light, and the dignified optimism of a rising sun. It uses restrained tonal steps and meaningful accents to create a focused, meditative dark mode experience.
-
-  - **Palette (from `static/themes.ts`):**
-  ```ts
-  {
-    id: 'wabi',
-    backgroundColor: 'hsla(3, 20%, 11%, 1)',
-    cardColor: 'hsla(3, 18%, 15%, 1)',
-    borderColor: 'hsla(3, 17%, 22%, 1)',
-    mainColor: 'hsla(8, 85%, 59%, 1)',
-    secondaryColor: 'hsla(32, 25%, 70%, 1)',
-  }
-  ```
-
-* **Usage guidance:**
-
-  * Use `--background-color` for full-page surfaces to establish the muted oxblood-charcoal base.
-  * Use `--card-color` for panels, cards, and elevated surfaces with subtle separation from the background.
-  * Use `--border-color` for dividers, hover states, focus rings, and interactive affordances.
-  * Use `--main-color` (sunrise orange-red) for primary text, icons, CTAs, and key highlights.
-  * Use `--secondary-color` (washi-paper off-white) for soft contrast text, supportive UI elements, and accents.
-
-* **Tailwind example:**
-
-```tsx
-<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-    <h1 className="text-2xl font-bold text-[var(--main-color)]">Wabi — Minimalist Dawn</h1>
-    <p className="text-sm text-[var(--secondary-color)]">Soft, disciplined contrast</p>
-  </div>
-</div>
-```
-
-* **Accessibility / contrast notes:**
-
-  * `--main-color` (hinode orange-red) on `--background-color` provides strong contrast and meets AA for normal text.
-  * `--secondary-color` maintains readable contrast on both background and card surfaces; validate with WebAIM or axe.
-  * `--border-color` on `--card-color` maintains a minimum 3:1 ratio for interactive affordances; increase emphasis if used for critical focus states.
-  * Avoid dense small text in `--main-color` as its saturation is intended for focal elements.
-
-* **Developer checklist when adding/using `wabi`:**
-
-  * Add the theme object to `static/themes.ts` under the `Dark` theme group.
-  * Verify `applyTheme('wabi')` correctly updates CSS variables and the `data-theme` attribute.
-  * Run automated contrast tests (axe, Lighthouse) on both accent colors.
-  * Test buttons, dialogs, inputs, and other interactive components across breakpoints and accessibility modes.
-
-#### Cosmic Dream Theme (Dark — Nebula Aurora)
-
-The `Cosmic Dream` theme brings an aurora/nebula-inspired dark palette to KanaDojo. It uses only HSLA values and follows the 5-variable color model used across the project.
-
-- **id:** `cosmic-dream`
-- **Palette (from `static/themes.ts`):**
-```ts
-{
-  id: 'cosmic-dream',
-  backgroundColor: 'hsla(260, 62%, 11%, 1)', // deep cosmic purple/navy
-  cardColor:       'hsla(255, 58%, 16%, 1)', // slightly lighter starfield purple
-  borderColor:     'hsla(190, 98%, 58%, 1)', // luminous teal/cyan (nebula outline)
-  mainColor:       'hsla(294, 100%, 67%, 1)', // vibrant cosmic magenta (headline/primary)
-  secondaryColor:  'hsla(192, 100%, 86%, 1)', // soft light blue (subtle UI text/icons)
-}
-```
-
-**Usage guidance:**
-- Use `--background-color` for the large page background and overlays to establish the deep cosmic base.
-- Use `--card-color` for panels and cards to create subtle separation from the page background.
-- Use `--border-color` for borders, highlights, and luminous accents that suggest nebula edges.
-- Use `--main-color` for headings, CTAs, and high-emphasis text.
-- Use `--secondary-color` for secondary text, icons, and supportive UI elements.
-
-* **Tailwind example:**
-
-```tsx
-<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
-  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
-    <h1 className="text-2xl font-bold text-[var(--main-color)]">Cosmic Dream — Nebula Aurora</h1>
-    <p className="text-sm text-[var(--secondary-color)]">Soft, ethereal helper text and accents</p>
-  </div>
-</div>
-```
-
-* **Accessibility / contrast notes:**
-
-  * `--main-color` (vibrant magenta) on `--background-color` should provide strong contrast for primary content; still validate with WebAIM, axe, or Lighthouse for edge cases.
-  * `--secondary-color` (soft light blue) is intended for secondary text and icons — confirm it maintains adequate contrast on both `--background-color` and `--card-color` for the sizes you use.
-  * `--border-color` on `--card-color` should meet at least a 3:1 ratio for interactive affordances; increase opacity if used as the primary focus indicator or for small UI chrome.
-  * If any contrast checks fail, adjust the lightness (L) value of the HSLA color(s) while keeping HSLA format and re-run checks.
-
-* **Developer checklist when adding/using `Cosmic Dream`:**
-
-  * Add the theme object to `static/themes.ts` under the `Dark` theme group (IDs must be kebab-case).
-  * Verify `applyTheme('cosmic-dream')` correctly updates CSS variables and the `data-theme` attribute.
-  * Run automated contrast tests (axe, Lighthouse) on both accent colors and document ratios in the PR.
-  * Test buttons, dialogs, inputs, modals, and other interactive components across breakpoints and accessibility modes.
-  * Consider providing a slightly lighter variant of `--main-color` or `--secondary-color` for disabled/low-emphasis states if needed to avoid blending with `--card-color`.
-
-
-
   ### Theme Color Guidelines
 
 #### Color Format
+
 - Use **HSLA** for flexibility: `hsla(hue, saturation%, lightness%, alpha)`
 - HSL makes it easier to create harmonious color schemes
 
 #### Naming Convention
+
 - Theme IDs should be descriptive: `'midnight-purple'`, `'sunset-orange'`
 - Use kebab-case for consistency
 
 #### Color Relationships
+
 - `backgroundColor` → Lightest/darkest (depending on light/dark theme)
 - `cardColor` → Slightly elevated from background
 - `borderColor` → More prominent than card, used for hover states
@@ -457,6 +278,7 @@ The `Cosmic Dream` theme brings an aurora/nebula-inspired dark palette to KanaDo
 - `secondaryColor` → Medium contrast, complementary to main
 
 **Example Hierarchy (Dark Theme):**
+
 ```
 backgroundColor: hsl(220, 15%, 10%)  ← Darkest
 cardColor:       hsl(220, 15%, 15%)  ← Slightly lighter
@@ -478,11 +300,13 @@ secondaryColor:  hsl(180, 60%, 60%)  ← Complementary accent
 - **UI components** (buttons, borders): Contrast ratio ≥ 3:1
 
 **Tools for Testing:**
+
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - Chrome DevTools Lighthouse
 - Browser extension: WAVE or axe DevTools
 
 **Example Validation:**
+
 ```typescript
 // Test main text readability
 mainColor (hsl(280, 80%, 70%)) on backgroundColor (hsl(220, 15%, 10%))
@@ -500,12 +324,13 @@ secondaryColor (hsl(180, 60%, 60%)) on backgroundColor (hsl(220, 15%, 10%))
 ```tsx
 // Example from components/ui/button.tsx
 const buttonVariants = cva(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)]",
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)]'
   // ... other styles
 );
 ```
 
 **Focus Ring Guidelines:**
+
 - Use `focus-visible:ring-2` for keyboard navigation
 - Ring color: `ring-[var(--main-color)]`
 - Ring offset: `ring-offset-2` for separation
@@ -516,12 +341,14 @@ const buttonVariants = cva(
 Use proper HTML elements for their intended purpose:
 
 **✅ DO:**
+
 ```tsx
 <button onClick={handleClick}>Submit</button>
 <a href="/about">Learn More</a>
 ```
 
 **❌ DON'T:**
+
 ```tsx
 <div onClick={handleClick}>Submit</div>
 <span onClick={navigate}>Learn More</span>
@@ -570,16 +397,22 @@ interface MyComponentProps {
   onClick?: () => void;
 }
 
-const MyComponent = ({ title, isActive = false, onClick }: MyComponentProps) => {
+const MyComponent = ({
+  title,
+  isActive = false,
+  onClick,
+}: MyComponentProps) => {
   const [state, setState] = useState('');
   const theme = useThemeStore(state => state.theme);
 
   return (
-    <div className={cn(
-      "rounded-xl p-4",
-      "bg-[var(--card-color)] text-[var(--main-color)]",
-      isActive && "border-2 border-[var(--main-color)]"
-    )}>
+    <div
+      className={cn(
+        'rounded-xl p-4',
+        'bg-[var(--card-color)] text-[var(--main-color)]',
+        isActive && 'border-2 border-[var(--main-color)]'
+      )}
+    >
       <h3 className="text-xl font-semibold">{title}</h3>
       {/* ... */}
     </div>
@@ -592,6 +425,7 @@ export default MyComponent;
 ### Styling Patterns
 
 #### 1. Container Layouts
+
 ```tsx
 <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
   {/* Responsive container with proper padding */}
@@ -599,6 +433,7 @@ export default MyComponent;
 ```
 
 #### 2. Card Components
+
 ```tsx
 <div className="rounded-xl bg-[var(--card-color)] p-6 shadow-sm">
   {/* Card content */}
@@ -606,19 +441,23 @@ export default MyComponent;
 ```
 
 #### 3. Buttons (Custom Styles)
+
 ```tsx
-<button className={cn(
-  "px-6 py-3 rounded-lg",
-  "bg-[var(--main-color)] text-[var(--background-color)]",
-  "hover:brightness-110 active:brightness-95",
-  "transition-all duration-200",
-  "focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2"
-)}>
+<button
+  className={cn(
+    'px-6 py-3 rounded-lg',
+    'bg-[var(--main-color)] text-[var(--background-color)]',
+    'hover:brightness-110 active:brightness-95',
+    'transition-all duration-200',
+    'focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2'
+  )}
+>
   Action
 </button>
 ```
 
 #### 4. Text Hierarchy
+
 ```tsx
 <h1 className="text-4xl md:text-5xl font-bold text-[var(--main-color)]">
   Main Heading
@@ -632,13 +471,16 @@ export default MyComponent;
 ```
 
 #### 5. Hover States
+
 ```tsx
-<div className={cn(
-  "p-4 rounded-lg",
-  "bg-[var(--card-color)]",
-  "hover:bg-[var(--border-color)] hover:cursor-pointer",
-  "transition-all duration-200"
-)}>
+<div
+  className={cn(
+    'p-4 rounded-lg',
+    'bg-[var(--card-color)]',
+    'hover:bg-[var(--border-color)] hover:cursor-pointer',
+    'transition-all duration-200'
+  )}
+>
   {/* Hoverable content */}
 </div>
 ```
@@ -656,7 +498,7 @@ import { motion } from 'motion/react';
   transition={{ duration: 0.3 }}
 >
   {/* Animated content */}
-</motion.div>
+</motion.div>;
 ```
 
 Use Tailwind transitions for simple interactions:
@@ -687,7 +529,7 @@ shadcn/ui components are customized to use our CSS variable system:
 ```tsx
 // components/ui/button.tsx
 const buttonVariants = cva(
-  "bg-[var(--main-color)] text-[var(--background-color)]", // Uses our theme
+  'bg-[var(--main-color)] text-[var(--background-color)]' // Uses our theme
   // ...
 );
 ```
@@ -701,6 +543,7 @@ npx shadcn@latest add [component-name]
 ```
 
 **After installation:**
+
 1. Review the generated component
 2. Replace hardcoded colors with CSS variables:
    - `bg-primary` → `bg-[var(--main-color)]`
@@ -715,23 +558,23 @@ npx shadcn@latest add [component-name]
 ```tsx
 // components/ui/button.tsx
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)] disabled:pointer-events-none disabled:opacity-60",
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--main-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-color)] disabled:pointer-events-none disabled:opacity-60',
   {
     variants: {
       variant: {
         default:
-          "bg-[var(--main-color)] text-[var(--background-color)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] hover:brightness-110",
+          'bg-[var(--main-color)] text-[var(--background-color)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] hover:brightness-110',
         outline:
-          "border border-[var(--border-color)] bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]",
+          'border border-[var(--border-color)] bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]',
         ghost:
-          "bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]",
+          'bg-transparent text-[var(--main-color)] hover:bg-[var(--card-color)]',
         // Add custom variants as needed
       },
       size: {
-        default: "h-10 px-5",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-12 rounded-xl px-8 text-base",
-        icon: "h-10 w-10",
+        default: 'h-10 px-5',
+        sm: 'h-8 rounded-md px-3 text-xs',
+        lg: 'h-12 rounded-xl px-8 text-base',
+        icon: 'h-10 w-10',
       },
     },
   }
@@ -741,23 +584,27 @@ const buttonVariants = cva(
 #### 4. Migration Strategy
 
 **Phase 1: High-Priority Components (Current)**
+
 - ✅ Button
 - ✅ Select
 - 🔄 Input (next)
 - 🔄 Checkbox (next)
 
 **Phase 2: Form Components**
+
 - 🔜 Form wrapper
 - 🔜 Label
 - 🔜 Textarea
 - 🔜 Switch
 
 **Phase 3: Overlay Components**
+
 - 🔜 Dialog/Modal
 - 🔜 Dropdown Menu
 - 🔜 Tooltip
 
 **Migration Guidelines:**
+
 1. **Don't break existing UI** - Migrate incrementally, one component at a time
 2. **Test thoroughly** - Verify all game modes and features still work
 3. **Maintain theme compatibility** - Always use CSS variables
@@ -766,12 +613,14 @@ const buttonVariants = cva(
 ### Future-Proofing for shadcn
 
 **DO:**
+
 - ✅ Use CSS variables consistently
 - ✅ Follow Radix UI patterns (shadcn is built on Radix)
 - ✅ Use the `cn()` utility for class management
 - ✅ Maintain semantic HTML structure
 
 **DON'T:**
+
 - ❌ Hardcode colors or theme values
 - ❌ Create custom components that duplicate shadcn functionality
 - ❌ Override Radix UI accessibility features
@@ -785,6 +634,7 @@ const buttonVariants = cva(
 #### Styling
 
 **✅ DO:**
+
 ```tsx
 // Use CSS variables for dynamic theming
 <div className="bg-[var(--card-color)] text-[var(--main-color)]" />
@@ -803,6 +653,7 @@ import { buttonBorderStyles } from '@/static/styles';
 ```
 
 **❌ DON'T:**
+
 ```tsx
 // Don't hardcode colors
 <div className="bg-gray-100 text-black" />
@@ -821,6 +672,7 @@ import { buttonBorderStyles } from '@/static/styles';
 #### Typography
 
 **✅ DO:**
+
 ```tsx
 // Use semantic heading levels
 <h1 className="text-4xl font-bold">Main Title</h1>
@@ -834,6 +686,7 @@ import { buttonBorderStyles } from '@/static/styles';
 ```
 
 **❌ DON'T:**
+
 ```tsx
 // Don't skip heading levels
 <h1>Title</h1>
@@ -849,6 +702,7 @@ import { buttonBorderStyles } from '@/static/styles';
 #### Spacing
 
 **✅ DO:**
+
 ```tsx
 // Use Tailwind spacing scale
 <div className="p-4 md:p-6 lg:p-8" />
@@ -860,6 +714,7 @@ const spacing = "p-6 space-y-4";
 ```
 
 **❌ DON'T:**
+
 ```tsx
 // Don't use arbitrary values unnecessarily
 <div className="p-[17px] space-y-[23px]" />
@@ -871,6 +726,7 @@ const spacing = "p-6 space-y-4";
 #### Interactions
 
 **✅ DO:**
+
 ```tsx
 // Add hover states for interactive elements
 <button className="hover:brightness-110 transition-duration-200" />
@@ -886,6 +742,7 @@ const spacing = "p-6 space-y-4";
 ```
 
 **❌ DON'T:**
+
 ```tsx
 // Don't forget hover states
 <button onClick={handler}>No hover feedback</button>
@@ -900,6 +757,7 @@ const spacing = "p-6 space-y-4";
 #### Component Organization
 
 **✅ DO:**
+
 ```tsx
 // Group related components
 components/
@@ -919,17 +777,13 @@ import { useClick } from '@/lib/hooks/useAudio';
 ```
 
 **❌ DON'T:**
+
 ```tsx
 // Don't create deeply nested component structures
-components/
-  Settings/
-    ThemeSection/
-      ThemesList/
-        ThemeItem/
-          index.tsx // Too deep
+components / Settings / ThemeSection / ThemesList / ThemeItem / index.tsx; // Too deep
 
 // Don't duplicate interface definitions
-interface KanaCharacter { } // Already in lib/interfaces.ts
+interface KanaCharacter {} // Already in lib/interfaces.ts
 ```
 
 ### Performance Considerations
@@ -961,19 +815,13 @@ interface CardProps {
 
 const Card = ({ title, description, children, className }: CardProps) => {
   return (
-    <div className={cn(
-      cardBorderStyles,
-      "p-6 space-y-4",
-      className
-    )}>
+    <div className={cn(cardBorderStyles, 'p-6 space-y-4', className)}>
       <div className="space-y-2">
         <h3 className="text-xl font-semibold text-[var(--main-color)]">
           {title}
         </h3>
         {description && (
-          <p className="text-sm text-[var(--secondary-color)]">
-            {description}
-          </p>
+          <p className="text-sm text-[var(--secondary-color)]">{description}</p>
         )}
       </div>
       {children}
@@ -1000,7 +848,11 @@ interface SelectionButtonProps {
   onToggle: () => void;
 }
 
-const SelectionButton = ({ label, isSelected, onToggle }: SelectionButtonProps) => {
+const SelectionButton = ({
+  label,
+  isSelected,
+  onToggle,
+}: SelectionButtonProps) => {
   const { playClick } = useClick();
 
   const handleClick = () => {
@@ -1013,17 +865,18 @@ const SelectionButton = ({ label, isSelected, onToggle }: SelectionButtonProps) 
       onClick={handleClick}
       className={cn(
         buttonBorderStyles,
-        "p-4 flex items-center justify-between gap-3",
-        "transition-all duration-200",
-        isSelected && "border-2 border-[var(--main-color)]"
+        'p-4 flex items-center justify-between gap-3',
+        'transition-all duration-200',
+        isSelected && 'border-2 border-[var(--main-color)]'
       )}
       aria-pressed={isSelected}
     >
-      <span className="text-[var(--main-color)] font-medium">
-        {label}
-      </span>
+      <span className="text-[var(--main-color)] font-medium">{label}</span>
       {isSelected && (
-        <Check className="text-[var(--secondary-color)]" size={20} />
+        <Check
+          className="text-[var(--secondary-color)]"
+          size={20}
+        />
       )}
     </button>
   );
@@ -1039,10 +892,13 @@ export default SelectionButton;
   <h1 className="text-3xl md:text-4xl font-bold text-[var(--main-color)] mb-8">
     Character Selection
   </h1>
-  
+
   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-    {characters.map((char) => (
-      <CharacterCard key={char.id} character={char} />
+    {characters.map(char => (
+      <CharacterCard
+        key={char.id}
+        character={char}
+      />
     ))}
   </div>
 </div>
@@ -1077,17 +933,17 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             onClick={onClose}
             className="fixed inset-0 bg-black/50 z-40"
           />
-          
+
           {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className={cn(
-              "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50",
-              "w-full max-w-md max-h-[85vh] overflow-y-auto",
-              "bg-[var(--background-color)] rounded-2xl shadow-2xl",
-              "p-6"
+              'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50',
+              'w-full max-w-md max-h-[85vh] overflow-y-auto',
+              'bg-[var(--background-color)] rounded-2xl shadow-2xl',
+              'p-6'
             )}
           >
             {/* Header */}
@@ -1098,21 +954,22 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
               <button
                 onClick={onClose}
                 className={cn(
-                  "rounded-lg p-2",
-                  "hover:bg-[var(--card-color)]",
-                  "transition-colors duration-200",
-                  "focus-visible:ring-2 focus-visible:ring-[var(--main-color)]"
+                  'rounded-lg p-2',
+                  'hover:bg-[var(--card-color)]',
+                  'transition-colors duration-200',
+                  'focus-visible:ring-2 focus-visible:ring-[var(--main-color)]'
                 )}
                 aria-label="Close modal"
               >
-                <X className="text-[var(--secondary-color)]" size={24} />
+                <X
+                  className="text-[var(--secondary-color)]"
+                  size={24}
+                />
               </button>
             </div>
-            
+
             {/* Content */}
-            <div className="space-y-4">
-              {children}
-            </div>
+            <div className="space-y-4">{children}</div>
           </motion.div>
         </>
       )}
@@ -1164,12 +1021,13 @@ input[type='checkbox']:checked::after {
 ```
 
 **Usage in JSX:**
+
 ```tsx
 <label className="flex items-center gap-2 cursor-pointer">
   <input
     type="checkbox"
     checked={isSelected}
-    onChange={(e) => setIsSelected(e.target.checked)}
+    onChange={e => setIsSelected(e.target.checked)}
     className="focus-visible:ring-2 focus-visible:ring-[var(--main-color)]"
   />
   <span className="text-[var(--main-color)]">Option label</span>
@@ -1215,6 +1073,7 @@ import { Button } from '@/components/ui/button';
 ## 📚 Additional Resources
 
 ### Internal Documentation
+
 - `CLAUDE.md` - Project overview and architecture
 - `CONTRIBUTING.md` - Contribution guidelines and code style
 - `static/themes.ts` - Theme definitions and management
@@ -1222,6 +1081,7 @@ import { Button } from '@/components/ui/button';
 - `static/styles.ts` - Reusable style constants
 
 ### External Resources
+
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [shadcn/ui Documentation](https://ui.shadcn.com/)
 - [Next.js Documentation](https://nextjs.org/docs)
@@ -1230,6 +1090,7 @@ import { Button } from '@/components/ui/button';
 - [Radix UI Documentation](https://www.radix-ui.com/primitives)
 
 ### Design Tools
+
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - [Coolors.co](https://coolors.co/) - Color palette generator
 - [Realtime Colors](https://realtimecolors.com/) - Theme visualization
@@ -1240,6 +1101,7 @@ import { Button } from '@/components/ui/button';
 ## 🔄 Document Maintenance
 
 This document should be updated whenever:
+
 - New theming patterns are established
 - shadcn/ui components are added or customized
 - CSS variable naming conventions change
