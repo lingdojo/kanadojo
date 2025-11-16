@@ -222,7 +222,7 @@ resetTimedStats: () => {
 
       return { allTimeStats: newAllTimeStats };
     });
-    
+
     // Trigger achievement check after session save
     if (typeof window !== 'undefined') {
       setTimeout(() => {
@@ -232,6 +232,16 @@ resetTimedStats: () => {
           achievementStore.getState().checkAchievements(get());
         }
       }, 100);
+
+      // Trigger auto-sync after session save
+      setTimeout(async () => {
+        try {
+          const { triggerAutoSync } = await import('@/lib/hooks/useAutoSync');
+          await triggerAutoSync();
+        } catch (err) {
+          console.error('Failed to trigger auto-sync:', err);
+        }
+      }, 200);
     }
   },
 
