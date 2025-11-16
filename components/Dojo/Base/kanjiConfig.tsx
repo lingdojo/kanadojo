@@ -116,4 +116,11 @@ export const kanjiGameConfig: GameConfig<IKanjiObj> = {
   getLayoutDirection: (isReverse: boolean) => {
     return isReverse ? 'flex-row' : 'flex-col md:flex-row';
   },
+
+  // SRS support
+  getCharacter: (item: IKanjiObj) => {
+    return item.kanjiChar;
+  },
+
+  contentType: 'kanji',
 };

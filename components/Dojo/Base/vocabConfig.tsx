@@ -114,4 +114,11 @@ export const vocabGameConfig: GameConfig<IWordObj> = {
   getLayoutDirection: (isReverse: boolean) => {
     return isReverse ? 'flex-row' : 'flex-col md:flex-row';
   },
+
+  // SRS support
+  getCharacter: (item: IWordObj) => {
+    return item.word;
+  },
+
+  contentType: 'vocabulary',
 };
