@@ -11,6 +11,7 @@ import { AchievementNotificationContainer } from '@/components/reusable/Achievem
 import AchievementIntegration from '@/components/reusable/AchievementIntegration';
 import { applyTheme } from '@/static/themes';
 import BackToTop from '@/components/reusable/BackToTop';
+import TopNav from '@/components/reusable/TopNav';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {
@@ -87,7 +88,10 @@ export default function ClientLayout({
         overflowY: 'scroll'
       }}
     >
-      {children}
+      <TopNav />
+      <div className="pt-[65px]">
+        {children}
+      </div>
       <ScrollRestoration />
       <WelcomeModal />
       <AchievementNotificationContainer />
