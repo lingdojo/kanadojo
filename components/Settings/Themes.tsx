@@ -7,8 +7,9 @@ import { useClick, useLong } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import { useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { DiceIcon as Dice5Icon } from '@hugeicons/core-free-icons';;
+import { DiceIcon as Dice5Icon, UserIcon as UserIcon } from '@hugeicons/core-free-icons';
 import { Random } from 'random-js';
+import ThemeBuilder from './ThemeBuilder';
 
 const random = new Random();
 
@@ -18,6 +19,7 @@ const Themes = () => {
 
   const selectedTheme = usePreferencesStore(state => state.theme);
   const setSelectedTheme = usePreferencesStore(state => state.setTheme);
+  const customThemes = usePreferencesStore(state => state.customThemes);
 
   const [isHovered, setIsHovered] = useState('');
 
@@ -37,6 +39,9 @@ const Themes = () => {
 
   return (
     <div className="flex flex-col gap-6">
+      <div className="mb-4">
+        <ThemeBuilder />
+      </div>
       <div className="flex gap-2">
         <button
           className={clsx(
@@ -74,6 +79,62 @@ const Themes = () => {
           Random Theme
         </button>
       </div>
+      {/* Custom Themes Section */}
+      {Object.keys(customThemes).length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h4 className="text-xl flex flex-row items-center gap-1.5">
+            <HugeiconsIcon icon={UserIcon} color="currentColor" />
+            <span>Custom Themes</span>
+          </h4>
+          <fieldset
+            className={clsx(
+              'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
+            )}
+          >
+            {Object.values(customThemes).map(currentTheme => (
+              <label
+                key={currentTheme.id}
+                style={{
+                  color: currentTheme.foreground,
+                  backgroundColor:
+                    isHovered === currentTheme.id
+                      ? currentTheme.border
+                      : currentTheme.background,
+                  borderWidth:
+                    process.env.NODE_ENV === 'development' ? '4px' : undefined,
+                  borderColor: currentTheme.border,
+                }}
+                onMouseEnter={() => setIsHovered(currentTheme.id)}
+                onMouseLeave={() => setIsHovered('')}
+                className={clsx(
+                  'py-4 flex justify-center items-center',
+                  'flex-1 overflow-hidden',
+                  buttonBorderStyles
+                )}
+                onClick={() => {
+                  playClick();
+                }}
+              >
+                <input
+                  type="radio"
+                  name="selectedTheme"
+                  onChange={() => {
+                    setSelectedTheme(currentTheme.id);
+                  }}
+                  className="hidden"
+                />
+                <span className="text-center text-lg flex items-center gap-1.5">
+                  <span className='text-[var(--muted-foreground)]'>
+                    {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
+                  </span>
+                  <span>{currentTheme.name}</span>
+                </span>
+              </label>
+            ))}
+          </fieldset>
+        </div>
+      )}
+
       {themeSets.map((themeSet, i) => (
         <div
           key={i}

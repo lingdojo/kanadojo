@@ -28,6 +28,7 @@ export default function ClientLayout({
 }>) {
   const { theme } = usePreferencesStore();
   const font = usePreferencesStore(state => state.font);
+  const customThemes = usePreferencesStore(state => state.customThemes);
 
   // 3. Create state to hold the fonts module
   const [fontsModule, setFontsModule] = useState<FontObject[] | null>(null);
@@ -53,12 +54,12 @@ export default function ClientLayout({
     : '';
 
   useEffect(() => {
-    applyTheme(theme); // This now sets both CSS variables AND data-theme attribute
+    applyTheme(theme, customThemes); // This now sets both CSS variables AND data-theme attribute
 
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
     }
-  }, [theme]);
+  }, [theme, customThemes]);
 
   useEffect(() => {
     // Resume AudioContext on first user interaction

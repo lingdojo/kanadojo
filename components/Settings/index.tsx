@@ -42,6 +42,7 @@ const Settings = () => {
 
   const theme = usePreferencesStore(state => state.theme);
   const setTheme = usePreferencesStore(state => state.setTheme);
+  const customThemes = usePreferencesStore(state => state.customThemes);
   const { playClick } = useClick();
 
   const version = '0.1.1';
@@ -49,11 +50,11 @@ const Settings = () => {
   const handleThemeChange = (themeId: string) => {
     playClick();
     setTheme(themeId);
-    applyTheme(themeId);
+    applyTheme(themeId, customThemes);
     setThemeDialogOpen(false);
   };
 
-  const currentTheme = getTheme(theme);
+  const currentTheme = getTheme(theme, customThemes);
   const themeName = currentTheme?.name || theme;
 
   return (

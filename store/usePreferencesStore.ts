@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { ThemeDefinition } from '@/static/themes/types';
 
 interface PreferencesState {
   displayKana: boolean;
@@ -7,6 +8,11 @@ interface PreferencesState {
 
   theme: string;
   setTheme: (theme: string) => void;
+
+  // Custom theme storage
+  customThemes: Record<string, ThemeDefinition>;
+  setCustomTheme: (themeId: string, theme: ThemeDefinition) => void;
+  removeCustomTheme: (themeId: string) => void;
 
   font: string;
   setFont: (fontName: string) => void;
@@ -42,6 +48,16 @@ const usePreferencesStore = create<PreferencesState>()(
       setDisplayKana: displayKana => set({ displayKana }),
       theme: 'light',
       setTheme: theme => set({ theme }),
+      customThemes: {},
+      setCustomTheme: (themeId, theme) =>
+        set(state => ({
+          customThemes: { ...state.customThemes, [themeId]: theme }
+        })),
+      removeCustomTheme: themeId =>
+        set(state => {
+          const { [themeId]: _, ...rest } = state.customThemes;
+          return { customThemes: rest };
+        }),
       font: 'Zen Maru Gothic',
       setFont: fontName => set({ font: fontName }),
       silentMode: false,

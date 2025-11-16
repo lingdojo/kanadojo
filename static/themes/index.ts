@@ -147,9 +147,13 @@ themes.forEach(group => {
 /**
  * Apply a theme to the document root
  * Uses shadcn/ui CSS custom properties
+ * Checks custom themes first, then built-in themes
  */
-export function applyTheme(themeId: string) {
-  const themeDefinition = themeMap.get(themeId);
+export function applyTheme(themeId: string, customThemes?: Record<string, ThemeDefinition>) {
+  // Check custom themes first if provided
+  let themeDefinition = customThemes && customThemes[themeId]
+    ? customThemes[themeId]
+    : themeMap.get(themeId);
 
   if (!themeDefinition) {
     console.error(`Theme "${themeId}" not found`);
@@ -212,8 +216,14 @@ export function applyTheme(themeId: string) {
 
 /**
  * Get a specific theme by ID
+ * Checks custom themes first, then built-in themes
  */
-export function getTheme(themeId: string): ThemeDefinition | undefined {
+export function getTheme(themeId: string, customThemes?: Record<string, ThemeDefinition>): ThemeDefinition | undefined {
+  // Check custom themes first if provided
+  if (customThemes && customThemes[themeId]) {
+    return customThemes[themeId];
+  }
+  // Fall back to built-in themes
   return themeMap.get(themeId);
 }
 
