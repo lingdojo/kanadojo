@@ -29,10 +29,10 @@ const DojoMenu = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Only trigger on Kanji/Vocab pages
       if (pathWithoutLocale !== '/kanji' && pathWithoutLocale !== '/vocabulary') return;
-      
+
       // Ignore if user is typing in an input field
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      
+
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         setShowGameModes(prev => !prev);
@@ -66,7 +66,7 @@ const DojoMenu = () => {
         />
         {showGameModes && <GameModes />}
 
-        {pathWithoutLocale === '/kana' ? (
+        {(pathWithoutLocale === '/' || pathWithoutLocale === '/kana') ? (
           <KanaCards />
         ) : pathWithoutLocale === '/kanji' ? (
           <KanjiCards />

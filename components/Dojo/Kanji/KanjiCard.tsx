@@ -29,10 +29,8 @@ const KanjiCard = ({
         'group relative flex flex-col items-center justify-between',
         'py-6 px-4',
         'transition-all duration-150',
-        'bg-[var(--background)]',
-        'hover:bg-[var(--muted)]',
-        'border border-[var(--border)]',
-        'rounded-xl',
+        'hover:bg-[var(--muted)]/30',
+        'rounded-lg',
         'focus:outline-none',
         'min-h-[180px]'
       )}
@@ -51,7 +49,7 @@ const KanjiCard = ({
       <span
         className={clsx(
           'text-sm font-light tracking-wide transition-opacity duration-150 mb-1',
-          'text-[var(--muted-foreground)] opacity-50 group-hover:opacity-100'
+          'text-[var(--muted-foreground)] opacity-60 group-hover:opacity-100'
         )}
       >
         {reading}
@@ -61,7 +59,7 @@ const KanjiCard = ({
       <span
         className={clsx(
           'text-xs font-light text-center transition-opacity duration-150',
-          'text-[var(--muted-foreground)] opacity-50 group-hover:opacity-100 line-clamp-2'
+          'text-[var(--muted-foreground)] opacity-60 group-hover:opacity-100 line-clamp-2'
         )}
       >
         {meaning}

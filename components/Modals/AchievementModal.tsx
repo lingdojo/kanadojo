@@ -176,7 +176,6 @@ const AchievementModal = ({
             className={clsx(
               'w-full max-w-md relative',
               'rounded-2xl bg-[var(--card)]',
-              'shadow-2xl shadow-black/25',
               cardBorderStyles
             )}
             onClick={e => e.stopPropagation()}
@@ -249,7 +248,7 @@ const AchievementModal = ({
                 <div
                   className={clsx(
                     'w-24 h-24 mx-auto rounded-full flex items-center justify-center',
-                    'text-4xl font-bold shadow-lg',
+                    'text-4xl font-bold',
                     'border-4'
                   )}
                   style={{

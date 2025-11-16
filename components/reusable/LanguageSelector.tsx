@@ -24,7 +24,7 @@ export function LanguageSelector() {
 
   return (
     <Select value={currentLocale} onValueChange={changeLocale}>
-      <SelectTrigger className="w-auto h-auto border-none bg-transparent text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors focus:ring-0 focus:ring-offset-0 shadow-none px-0 gap-1">
+      <SelectTrigger className="w-auto h-auto border-none bg-transparent text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors focus:ring-0 focus:ring-offset-0 px-0 gap-1">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

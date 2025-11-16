@@ -47,7 +47,7 @@ const TopBar: React.FC<ITopBarProps> = ({
   );
 
   const selectedGameMode =
-    pathWithoutLocale === '/kana'
+    (pathWithoutLocale === '/' || pathWithoutLocale === '/kana')
       ? selectedGameModeKana
       : pathWithoutLocale === '/kanji'
       ? selectedGameModeKanji
@@ -58,7 +58,7 @@ const TopBar: React.FC<ITopBarProps> = ({
   const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
 
   const isFilled =
-    pathWithoutLocale === '/kana'
+    (pathWithoutLocale === '/' || pathWithoutLocale === '/kana')
       ? kanaGroupIndices.length !== 0
       : pathWithoutLocale === '/kanji'
       ? selectedKanjiObjs.length >= 10
@@ -178,9 +178,9 @@ const TopBar: React.FC<ITopBarProps> = ({
       </div>
 
       {/* Timed Challenge Button - Only for Kana */}
-      {pathWithoutLocale === '/kana' && (
+      {(pathWithoutLocale === '/' || pathWithoutLocale === '/kana') && (
         <Link
-          href={`${pathWithoutLocale}/timed-challenge`}
+          href={`${pathWithoutLocale === '/' ? '/kana' : pathWithoutLocale}/timed-challenge`}
           className="w-full"
         >
           <button

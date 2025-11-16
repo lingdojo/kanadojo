@@ -93,7 +93,7 @@ const AchievementCard = ({
         'relative p-6 cursor-pointer transition-all duration-300',
         'rounded-2xl border-2 overflow-hidden group',
         isUnlocked
-          ? 'bg-[var(--card)] border-[var(--border)] hover:shadow-xl hover:border-[var(--foreground)]/30'
+          ? 'bg-[var(--card)] border-[var(--border)] hover:border-[var(--foreground)]/30'
           : 'bg-[var(--background)] border-[var(--border)]/50 opacity-80 hover:opacity-100'
       )}
       onClick={onClick}

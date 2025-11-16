@@ -484,7 +484,6 @@ const WelcomeModal = () => {
           className={clsx(
             'w-full max-w-3xl max-h-[85vh] overflow-y-auto',
             'rounded-2xl bg-[var(--card)] m-3',
-            'shadow-2xl shadow-black/20',
             cardBorderStyles
           )}
           onClick={e => e.stopPropagation()}

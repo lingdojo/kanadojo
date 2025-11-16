@@ -203,7 +203,7 @@ export default function TimedChallengeKana() {
             Please select some kana characters first to begin the timed
             challenge.
           </p>
-          <Link href='/kana'>
+          <Link href='/'>
             <Button className='bg-[var(--foreground)] hover:bg-[var(--foreground)]/90'>
               <HugeiconsIcon icon={ArrowLeftIcon} size={16} color="currentColor" className="mr-2" />
               Select Kana
@@ -275,7 +275,7 @@ export default function TimedChallengeKana() {
             <HugeiconsIcon icon={PlayIcon} size={16} color="currentColor" className="mr-2" />
             Start Challenge
           </Button>
-          <Link href='/kana' className='block'>
+          <Link href='/' className='block'>
             <Button variant='outline' className='w-full'>
               <HugeiconsIcon icon={ArrowLeftIcon} size={16} color="currentColor" className="mr-2" />
               Back to Selection
@@ -329,7 +329,7 @@ export default function TimedChallengeKana() {
     return (
       // Modal overlay con fondo oscuro
       <div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50'>
-        <div className='bg-[var(--bg-color)] max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl relative'>
+        <div className='bg-[var(--bg-color)] max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-2xl relative'>
           <div className='p-6 space-y-6'>
             {/* Header */}
             <div className='text-center space-y-2'>
@@ -479,7 +479,7 @@ export default function TimedChallengeKana() {
                 <HugeiconsIcon icon={RotateCcwIcon} size={16} color="currentColor" className="mr-2" />
                 Try Again
               </Button>
-              <Link href='/kana' className='block'>
+              <Link href='/' className='block'>
                 <Button variant='outline' className='w-full'>
                   <HugeiconsIcon icon={ArrowLeftIcon} size={16} color="currentColor" className="mr-2" />
                   Back to Selection

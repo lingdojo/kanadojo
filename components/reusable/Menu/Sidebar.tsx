@@ -66,21 +66,8 @@ const Sidebar = () => {
       <Link
         href='/'
         className={clsx(
-          'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:p-3 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathWithoutLocale === '/'
-            ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
-            : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
-        )}
-        onClick={playClick}
-      >
-        <HugeiconsIcon icon={HouseIcon} color="currentColor" />
-        <span className='max-lg:hidden'>Home</span>
-      </Link>
-      <Link
-        href='/kana'
-        className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
-          pathWithoutLocale === '/kana'
+          pathWithoutLocale === '/'
             ? 'text-[var(--foreground)] bg-[var(--border)] lg:bg-[var(--card)]'
             : 'hover:bg-[var(--card)] text-[var(--muted-foreground)]'
         )}

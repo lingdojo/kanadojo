@@ -47,7 +47,7 @@ export default function BackToTop() {
       className={
         'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ' +
         'inline-flex items-center justify-center rounded-full ' +
-        'p-3 shadow-lg transition-all duration-200 ' +
+        'p-3 transition-all duration-200 ' +
         'bg-[var(--card)] text-[var(--foreground)] ' +
         'hover:bg-[var(--border)] hover:scale-110 ' +
         'focus:outline-none focus:ring-2 focus:ring-[var(--foreground)] focus:ring-offset-2 ' +

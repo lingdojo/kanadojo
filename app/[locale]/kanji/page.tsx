@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import DojoMenu from '@/components/reusable/Menu/DojoMenu';
+import MainMenu from '@/components/MainMenu';
 
 export const metadata: Metadata = {
   title: 'KanaDojo: Kanji',
@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function KanjiPage() {
-  return <DojoMenu />;
+  return <MainMenu />;
 }

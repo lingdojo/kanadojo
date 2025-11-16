@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   ChartIncreaseIcon as ProgressIcon,
@@ -31,15 +31,24 @@ import themeSets, { getTheme, applyTheme } from '@/static/themes';
 import KanaCards from '@/components/Dojo/Kana/KanaCards';
 import KanjiCards from '@/components/Dojo/Kanji';
 import VocabCards from '@/components/Dojo/Vocab';
+import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const MainMenu = () => {
   const [themeDialogOpen, setThemeDialogOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   const theme = usePreferencesStore(state => state.theme);
   const setTheme = usePreferencesStore(state => state.setTheme);
   const { playClick } = useClick();
 
   const version = '0.1.1';
+
+  // Determine active tab based on route
+  const activeTab = pathWithoutLocale === '/kanji' ? 'kanji'
+    : pathWithoutLocale === '/vocabulary' ? 'vocabulary'
+    : 'kana';
 
   const handleThemeChange = (themeId: string) => {
     playClick();
@@ -106,27 +115,36 @@ const MainMenu = () => {
 
       {/* Content Area with Tabs */}
       <div className="w-full pt-20 pb-20">
-        <Tabs defaultValue="kana" className="w-full">
+        <Tabs value={activeTab} className="w-full">
           {/* Navigation Tabs */}
           <div className="flex justify-center mb-8">
             <TabsList>
               <TabsTrigger
                 value="kana"
-                onClick={() => playClick()}
+                onClick={() => {
+                  playClick();
+                  router.push('/');
+                }}
               >
                 <span lang="ja" className="mr-1.5">かな</span>
                 Kana
               </TabsTrigger>
               <TabsTrigger
                 value="kanji"
-                onClick={() => playClick()}
+                onClick={() => {
+                  playClick();
+                  router.push('/kanji');
+                }}
               >
                 <span lang="ja" className="mr-1.5">漢字</span>
                 Kanji
               </TabsTrigger>
               <TabsTrigger
                 value="vocabulary"
-                onClick={() => playClick()}
+                onClick={() => {
+                  playClick();
+                  router.push('/vocabulary');
+                }}
               >
                 <span lang="ja" className="mr-1.5">語彙</span>
                 Vocabulary
@@ -139,12 +157,16 @@ const MainMenu = () => {
             <KanaCards />
           </TabsContent>
 
-          <TabsContent value="kanji" className="mt-0">
-            <KanjiCards />
+          <TabsContent value="kanji" className="mt-0 px-4 md:px-8">
+            <div className="max-w-7xl mx-auto">
+              <KanjiCards />
+            </div>
           </TabsContent>
 
-          <TabsContent value="vocabulary" className="mt-0">
-            <VocabCards />
+          <TabsContent value="vocabulary" className="mt-0 px-4 md:px-8">
+            <div className="max-w-7xl mx-auto">
+              <VocabCards />
+            </div>
           </TabsContent>
         </Tabs>
       </div>

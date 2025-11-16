@@ -266,8 +266,9 @@ const VocabCards = () => {
         </div>
       )}
 
-      {/* Straight column layout */}
-      <div className="flex flex-col items-center w-full gap-4 px-4">
+      {/* Grid layout */}
+      <div className="w-full px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
         {filteredVocabSets.map((vocabSetTemp) => {
             const wordsInSet = selectedVocabCollection.data.slice(
               vocabSetTemp.start * 10,
@@ -279,7 +280,7 @@ const VocabCards = () => {
               <div
                 key={vocabSetTemp.id + vocabSetTemp.name}
                 className={clsx(
-                  'relative w-full max-w-2xl flex flex-col items-start gap-4',
+                  'relative w-full flex flex-col items-start gap-4',
                   'p-6 rounded-2xl border',
                   'transition-all duration-250 ease-in-out',
                   isSelected
@@ -372,6 +373,7 @@ const VocabCards = () => {
               </div>
             );
           })}
+        </div>
       </div>
 
       {/* Footer - Game Mode Picker & Practice Button */}
