@@ -7,6 +7,7 @@ import {
   ChartIncreaseIcon,
   FavouriteIcon as HeartIcon,
   Coffee01Icon as CoffeeIcon,
+  Target01Icon as TargetIcon,
 } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
@@ -23,6 +24,7 @@ const TopNav = () => {
     { href: '/', label: 'あ', sublabel: 'Kana' },
     { href: '/kanji', label: '字', sublabel: 'Kanji' },
     { href: '/vocabulary', label: '語', sublabel: 'Vocab' },
+    { href: '/practice', icon: TargetIcon, label: 'Practice' },
     { href: '/progress', icon: ChartIncreaseIcon, label: 'Progress' },
     { href: '/preferences', icon: SparklesIcon, label: 'Preferences' },
   ];

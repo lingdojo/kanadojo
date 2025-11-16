@@ -73,4 +73,10 @@ export const kanaGameConfig: GameConfig<KanaPair> = {
   getSkipKey: (isReverse: boolean) => {
     return isReverse ? ' ' : '/';
   },
+
+  // SRS support
+  getCharacter: (item: KanaPair) => {
+    return item.kana;
+  },
+  // contentType will be determined dynamically from the character
 };

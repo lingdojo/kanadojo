@@ -3,6 +3,7 @@ import clsx from 'clsx';
 // 1. Import useState to hold the dynamically imported module
 import { useEffect, useState } from 'react';
 import usePreferencesStore from '@/store/usePreferencesStore';
+import useSRSStore from '@/store/useSRSStore';
 // 2. Remove the static import
 // import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
@@ -73,6 +74,16 @@ export default function ClientLayout({
 
     document.addEventListener('click', handleClick, { once: true });
     return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  // SRS daily reset logic
+  useEffect(() => {
+    const srsStore = useSRSStore.getState();
+    const today = new Date().toISOString().split('T')[0];
+
+    if (srsStore.lastResetDate !== today) {
+      srsStore.resetDailyCounts();
+    }
   }, []);
 
   return (

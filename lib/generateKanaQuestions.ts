@@ -1,3 +1,6 @@
+import { selectNextCharacter } from './srsSelection';
+import { ContentType } from './interfaces';
+
 export type KanaCharacter = {
   kana: string;
   romaji: string;
@@ -5,11 +8,21 @@ export type KanaCharacter = {
   group: string;
 };
 
-export function generateKanaQuestion(selectedKana: KanaCharacter[]): KanaCharacter {
+export function generateKanaQuestion(
+  selectedKana: KanaCharacter[],
+  srsEnabled: boolean = false
+): KanaCharacter {
   if (selectedKana.length === 0) {
     throw new Error('No kana selected');
   }
 
-  const randomIndex = Math.floor(Math.random() * selectedKana.length);
-  return selectedKana[randomIndex];
+  // Determine content type from the first kana
+  const contentType: ContentType = selectedKana[0].type === 'hiragana' ? 'hiragana' : 'katakana';
+
+  return selectNextCharacter(
+    selectedKana,
+    (kana) => kana.kana,
+    contentType,
+    srsEnabled
+  );
 }

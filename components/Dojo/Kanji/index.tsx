@@ -7,6 +7,9 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon, PlayIcon, ArrowDown01Icon, ArrowRight01Icon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon, BookOpen01Icon as BookOpenIcon } from '@hugeicons/core-free-icons';
 import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
+import useSRSStore from '@/store/useSRSStore';
+import { Stage } from '@/lib/interfaces';
+import { getStageColor } from '@/lib/srsUtils';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { useRouter } from 'next/navigation';
@@ -78,6 +81,10 @@ const KanjiCards = () => {
   const selectedKanjiObjs = useKanjiStore(state => state.selectedKanjiObjs);
   const selectedGameModeKanji = useKanjiStore(state => state.selectedGameModeKanji);
   const allTimeStats = useStatsStore(state => state.allTimeStats);
+
+  // SRS state
+  const srsEnabled = useSRSStore(state => state.srsEnabled);
+  const srsCards = useSRSStore(state => state.cards);
 
   const { playClick } = useClick();
 
@@ -354,12 +361,25 @@ const KanjiCards = () => {
               );
               const isSelected = selectedKanjiSets.includes(kanjiSetTemp.name);
 
-              // Calculate mastery progress for this set
-              const masteredInSet = kanjiInSet.filter(kanji =>
-                masteredCharacters.has(kanji.kanjiChar)
-              ).length;
-              const totalInSet = kanjiInSet.length;
-              const masteryPercentage = (masteredInSet / totalInSet) * 100;
+              // Calculate SRS stage breakdown for this set
+              const stageBreakdown: Record<Stage, number> = {
+                new: 0,
+                learning: 0,
+                young: 0,
+                mature: 0,
+                mastered: 0
+              };
+
+              if (srsEnabled) {
+                kanjiInSet.forEach(kanji => {
+                  const srsCard = srsCards[`${kanji.kanjiChar}-kanji`];
+                  if (srsCard) {
+                    stageBreakdown[srsCard.stage]++;
+                  } else {
+                    stageBreakdown.new++;
+                  }
+                });
+              }
 
               return (
                 <div
@@ -401,37 +421,17 @@ const KanjiCards = () => {
                       : 'bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted-foreground)]'
                   )}
                 >
-                  {/* Set title and status */}
+                  {/* Set title and arrow */}
                   <div className="flex items-center justify-between gap-3 w-full">
-                    <div className="flex flex-col gap-2 flex-1">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl font-light">
-                          {kanjiSetTemp.name}
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-light">
+                        {kanjiSetTemp.name}
+                      </span>
+                      {kanjiSetTemp.isMastered && (
+                        <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                          Mastered
                         </span>
-                        {kanjiSetTemp.isMastered && (
-                          <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
-                            Mastered
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="flex items-center gap-2 w-full">
-                        <div className="flex-1 h-1.5 bg-[var(--muted)] rounded-full overflow-hidden">
-                          <div
-                            className={clsx(
-                              'h-full rounded-full transition-all duration-300',
-                              masteryPercentage >= 90 ? 'bg-[var(--chart-1)]' :
-                              masteryPercentage >= 50 ? 'bg-[var(--chart-3)]' :
-                              'bg-[var(--chart-5)]'
-                            )}
-                            style={{ width: `${masteryPercentage}%` }}
-                          />
-                        </div>
-                        <span className="text-xs text-[var(--muted-foreground)] min-w-[3rem] text-right">
-                          {masteredInSet}/{totalInSet}
-                        </span>
-                      </div>
+                      )}
                     </div>
 
                     {/* Expand button */}
@@ -461,27 +461,24 @@ const KanjiCards = () => {
                     </button>
                   </div>
 
-                  {/* Kanji grid */}
-                  <div className="grid grid-cols-5 gap-2 w-full">
-                    {kanjiInSet.map((kanjiObj) => {
-                      const isMastered = masteredCharacters.has(kanjiObj.kanjiChar);
-                      return (
-                        <div
-                          key={kanjiObj.id}
-                          className={clsx(
-                            'flex items-center justify-center',
-                            'text-2xl aspect-square',
-                            'rounded-lg transition-all',
-                            isMastered
-                              ? 'text-[var(--chart-1)] bg-[var(--muted)]'
-                              : 'text-[var(--foreground)]'
-                          )}
-                        >
-                          {kanjiObj.kanjiChar}
-                        </div>
-                      );
-                    })}
-                  </div>
+                  {/* SRS Stage Breakdown */}
+                  {srsEnabled && (
+                    <div className="flex justify-between gap-3 w-full">
+                      {kanjiInSet.slice(0, 10).map((kanjiObj) => {
+                        const srsCard = srsCards[`${kanjiObj.kanjiChar}-kanji`];
+                        const stage = srsCard ? srsCard.stage : 'new';
+                        return (
+                          <div
+                            key={kanjiObj.id}
+                            className="flex flex-col items-center gap-1 flex-1"
+                          >
+                            <div className="text-lg font-medium">{kanjiObj.kanjiChar}</div>
+                            <div className="h-1 w-full rounded" style={{ backgroundColor: getStageColor(stage) }} />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })}

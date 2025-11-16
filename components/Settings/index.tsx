@@ -11,6 +11,7 @@ import {
   ColorPickerIcon as PaletteIcon,
   Target01Icon as TargetIcon,
   Database01Icon as BackupIcon,
+  Layers01Icon as LayersIcon,
 } from '@hugeicons/core-free-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -36,6 +37,7 @@ import Fonts from './Fonts';
 import Behavior from './Behavior';
 import Backup from './Backup';
 import GoalTimers from './GoalTimers';
+import SRS from './SRS';
 
 const Settings = () => {
   const [themeDialogOpen, setThemeDialogOpen] = useState(false);
@@ -150,7 +152,7 @@ const Settings = () => {
 
         <Tabs defaultValue="behavior" className="w-full">
           {/* Navigation Tabs */}
-          <div className="flex justify-start mb-8">
+          <div className="flex justify-start mb-8 overflow-x-auto">
             <TabsList>
               <TabsTrigger
                 value="behavior"
@@ -158,6 +160,13 @@ const Settings = () => {
               >
                 <HugeiconsIcon icon={JoystickIcon} size={16} className="mr-1.5" />
                 Behavior
+              </TabsTrigger>
+              <TabsTrigger
+                value="srs"
+                onClick={() => playClick()}
+              >
+                <HugeiconsIcon icon={LayersIcon} size={16} className="mr-1.5" />
+                SRS
               </TabsTrigger>
               <TabsTrigger
                 value="display"
@@ -187,6 +196,12 @@ const Settings = () => {
           <TabsContent value="behavior" className="mt-0">
             <div className="space-y-6">
               <Behavior />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="srs" className="mt-0">
+            <div className="space-y-6">
+              <SRS />
             </div>
           </TabsContent>
 

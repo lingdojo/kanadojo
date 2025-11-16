@@ -1,6 +1,8 @@
 'use client';
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
+import useSRSStore from '@/store/useSRSStore';
+import { getStageColor, getStageLabel } from '@/lib/srsUtils';
 
 interface VocabCardProps {
   word: string;
@@ -16,6 +18,11 @@ const VocabCard = ({
   onClick,
 }: VocabCardProps) => {
   const { playClick } = useClick();
+  const srsEnabled = useSRSStore(state => state.srsEnabled);
+  const cards = useSRSStore(state => state.cards);
+
+  // Get SRS card for this vocabulary word
+  const srsCard = cards[`${word}-vocabulary`];
 
   const handleClick = () => {
     playClick();
@@ -37,6 +44,19 @@ const VocabCard = ({
         'min-h-[180px]'
       )}
     >
+      {/* SRS Status Indicator */}
+      {srsEnabled && srsCard && (
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: getStageColor(srsCard.stage) }}
+          />
+          <span className="text-[10px] text-[var(--muted-foreground)] opacity-0 group-hover:opacity-100 transition-opacity">
+            {getStageLabel(srsCard.stage)}
+          </span>
+        </div>
+      )}
+
       {/* Word */}
       <span
         className={clsx(

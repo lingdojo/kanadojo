@@ -14,6 +14,21 @@ import { buttonBorderStyles } from '@/static/styles';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
+import useSRSStore from '@/store/useSRSStore';
+import { Grade, ContentType } from '@/lib/interfaces';
+import { determineGrade } from '@/lib/srsAlgorithm';
+
+// Helper to detect content type from character
+function detectContentType(character: string): ContentType {
+  const hiraganaRange = /[\u3040-\u309F]/;
+  const katakanaRange = /[\u30A0-\u30FF]/;
+  const kanjiRange = /[\u4E00-\u9FAF]/;
+
+  if (hiraganaRange.test(character)) return 'hiragana';
+  if (katakanaRange.test(character)) return 'katakana';
+  if (kanjiRange.test(character)) return 'kanji';
+  return 'vocabulary';
+}
 import Stars from '@/components/reusable/Game/Stars';
 import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
@@ -104,13 +119,26 @@ function BaseInputGame<T>({
 
   const handleCorrectAnswer = (userInput: string) => {
     speedStopwatch.pause();
-    addCorrectAnswerTime(speedStopwatch.totalMilliseconds / 1000);
+    const responseTime = speedStopwatch.totalMilliseconds;
+    addCorrectAnswerTime(responseTime / 1000);
     speedStopwatch.reset();
     playCorrect();
     addCharacterToHistory(displayChar);
     incrementCharacterScore(displayChar, 'correct');
     incrementCorrectAnswers();
     setScore(score + 1);
+
+    // SRS tracking
+    if (config.getCharacter && currentItem) {
+      const srsStore = useSRSStore.getState();
+      if (srsStore.srsEnabled) {
+        const character = config.getCharacter(currentItem);
+        const contentType = config.contentType || detectContentType(character);
+        const card = srsStore.getOrCreateCard(character, contentType);
+        const grade = determineGrade(true, responseTime, card.averageResponseTime);
+        srsStore.updateCard(card.id, grade, responseTime);
+      }
+    }
 
     setInputValue('');
     generateNewItem();
@@ -146,6 +174,17 @@ function BaseInputGame<T>({
       setScore(0);
     } else {
       setScore(score - 1);
+    }
+
+    // SRS tracking
+    if (config.getCharacter && currentItem) {
+      const srsStore = useSRSStore.getState();
+      if (srsStore.srsEnabled) {
+        const character = config.getCharacter(currentItem);
+        const contentType = config.contentType || detectContentType(character);
+        const card = srsStore.getOrCreateCard(character, contentType);
+        srsStore.updateCard(card.id, Grade.AGAIN, 0);
+      }
     }
   };
 

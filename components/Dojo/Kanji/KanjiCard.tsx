@@ -1,6 +1,8 @@
 'use client';
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
+import useSRSStore from '@/store/useSRSStore';
+import { getStageColor, getStageLabel } from '@/lib/srsUtils';
 
 interface KanjiCardProps {
   kanji: string;
@@ -16,6 +18,11 @@ const KanjiCard = ({
   onClick,
 }: KanjiCardProps) => {
   const { playClick } = useClick();
+  const srsEnabled = useSRSStore(state => state.srsEnabled);
+  const cards = useSRSStore(state => state.cards);
+
+  // Get SRS card for this kanji
+  const srsCard = cards[`${kanji}-kanji`];
 
   const handleClick = () => {
     playClick();
@@ -35,6 +42,19 @@ const KanjiCard = ({
         'min-h-[180px]'
       )}
     >
+      {/* SRS Status Indicator */}
+      {srsEnabled && srsCard && (
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: getStageColor(srsCard.stage) }}
+          />
+          <span className="text-[10px] text-[var(--muted-foreground)] opacity-0 group-hover:opacity-100 transition-opacity">
+            {getStageLabel(srsCard.stage)}
+          </span>
+        </div>
+      )}
+
       {/* Kanji character */}
       <span
         className={clsx(

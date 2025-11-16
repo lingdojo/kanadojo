@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { IKanjiObj } from '@/store/useKanjiStore';
 import { IWordObj } from '@/store/useVocabStore';
+import { ContentType } from '@/lib/interfaces';
 
 export interface GameConfig<T> {
   getDisplayChar: (item: T, isReverse: boolean) => string;
@@ -17,6 +18,10 @@ export interface GameConfig<T> {
     targetAnswer: string | string[],
     isReverse: boolean
   ) => boolean;
+
+  // SRS support
+  getCharacter?: (item: T) => string;
+  contentType?: ContentType;
 
   renderDisplayChar?: (
     displayChar: string,

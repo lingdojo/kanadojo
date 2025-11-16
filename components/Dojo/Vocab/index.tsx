@@ -7,6 +7,9 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { CheckmarkCircle02Icon as CircleCheckIcon, CircleIcon, FilterIcon, FilterRemoveIcon as FilterXIcon, PlayIcon, ArrowDown01Icon, ArrowRight01Icon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon } from '@hugeicons/core-free-icons';
 import useVocabStore from '@/store/useVocabStore';
 import useStatsStore from '@/store/useStatsStore';
+import useSRSStore from '@/store/useSRSStore';
+import { Stage } from '@/lib/interfaces';
+import { getStageColor } from '@/lib/srsUtils';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import N5Nouns from '@/static/vocab/n5/nouns';
@@ -65,6 +68,10 @@ const VocabCards = () => {
   const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
   const selectedGameModeVocab = useVocabStore(state => state.selectedGameModeVocab);
   const allTimeStats = useStatsStore(state => state.allTimeStats);
+
+  // SRS state
+  const srsEnabled = useSRSStore(state => state.srsEnabled);
+  const srsCards = useSRSStore(state => state.cards);
 
   const { playClick } = useClick();
 
@@ -276,12 +283,25 @@ const VocabCards = () => {
             );
             const isSelected = selectedVocabSets.includes(vocabSetTemp.name);
 
-            // Calculate mastery progress for this set
-            const masteredInSet = wordsInSet.filter(vocab =>
-              masteredWords.has(vocab.word)
-            ).length;
-            const totalInSet = wordsInSet.length;
-            const masteryPercentage = (masteredInSet / totalInSet) * 100;
+            // Calculate SRS stage breakdown for this set
+            const stageBreakdown: Record<Stage, number> = {
+              new: 0,
+              learning: 0,
+              young: 0,
+              mature: 0,
+              mastered: 0
+            };
+
+            if (srsEnabled) {
+              wordsInSet.forEach(vocab => {
+                const srsCard = srsCards[`${vocab.word}-vocabulary`];
+                if (srsCard) {
+                  stageBreakdown[srsCard.stage]++;
+                } else {
+                  stageBreakdown.new++;
+                }
+              });
+            }
 
             return (
               <div
@@ -323,37 +343,17 @@ const VocabCards = () => {
                     : 'bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted-foreground)]'
                 )}
               >
-                {/* Set title and status */}
+                {/* Set title and arrow */}
                 <div className="flex items-center justify-between gap-3 w-full">
-                  <div className="flex flex-col gap-2 flex-1">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-light">
-                        {vocabSetTemp.name}
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl font-light">
+                      {vocabSetTemp.name}
+                    </span>
+                    {vocabSetTemp.isMastered && (
+                      <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                        Mastered
                       </span>
-                      {vocabSetTemp.isMastered && (
-                        <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
-                          Mastered
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Progress bar */}
-                    <div className="flex items-center gap-2 w-full">
-                      <div className="flex-1 h-1.5 bg-[var(--muted)] rounded-full overflow-hidden">
-                        <div
-                          className={clsx(
-                            'h-full rounded-full transition-all duration-300',
-                            masteryPercentage >= 90 ? 'bg-[var(--chart-1)]' :
-                            masteryPercentage >= 50 ? 'bg-[var(--chart-3)]' :
-                            'bg-[var(--chart-5)]'
-                          )}
-                          style={{ width: `${masteryPercentage}%` }}
-                        />
-                      </div>
-                      <span className="text-xs text-[var(--muted-foreground)] min-w-[3rem] text-right">
-                        {masteredInSet}/{totalInSet}
-                      </span>
-                    </div>
+                    )}
                   </div>
 
                   {/* Expand button */}
@@ -383,27 +383,24 @@ const VocabCards = () => {
                   </button>
                 </div>
 
-                {/* Vocab grid */}
-                <div className="grid grid-cols-5 gap-2 w-full">
-                  {wordsInSet.map((wordObj, idx) => {
-                    const isMastered = masteredWords.has(wordObj.word);
-                    return (
-                      <div
-                        key={wordObj.word + idx}
-                        className={clsx(
-                          'flex items-center justify-center',
-                          'text-xl aspect-square',
-                          'rounded-lg transition-all',
-                          isMastered
-                            ? 'text-[var(--chart-1)] bg-[var(--muted)]'
-                            : 'text-[var(--foreground)]'
-                        )}
-                      >
-                        {wordObj.word}
-                      </div>
-                    );
-                  })}
-                </div>
+                {/* SRS Stage Breakdown */}
+                {srsEnabled && (
+                  <div className="flex justify-between gap-3 w-full">
+                    {wordsInSet.slice(0, 10).map((wordObj, idx) => {
+                      const srsCard = srsCards[`${wordObj.word}-vocabulary`];
+                      const stage = srsCard ? srsCard.stage : 'new';
+                      return (
+                        <div
+                          key={wordObj.word + idx}
+                          className="flex flex-col items-center gap-1 flex-1"
+                        >
+                          <div className="text-lg font-medium">{wordObj.word}</div>
+                          <div className="h-1 w-full rounded" style={{ backgroundColor: getStageColor(stage) }} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             );
           })}
