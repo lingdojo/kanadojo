@@ -76,6 +76,14 @@ const themes: ThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: "mirage-solis",
+        backgroundColor: "hsla(322, 68%, 14%, 1)",
+        cardColor: "hsla(24, 86%, 17%, 1)",
+        borderColor: "hsla(281, 78%, 38%, 1)",
+        mainColor: "hsla(43, 100%, 68%, 1)",
+        secondaryColor: "hsla(199, 87%, 70%, 1)",
+      },
+      {
         id: "wasabi-garden",
         backgroundColor: "hsla(100, 42%, 12%, 1)",
         cardColor: "hsla(100, 40%, 16%, 1)",
