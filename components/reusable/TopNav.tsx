@@ -5,6 +5,8 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import {
   SparklesIcon,
   ChartIncreaseIcon,
+  FavouriteIcon as HeartIcon,
+  Coffee01Icon as CoffeeIcon,
 } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
@@ -17,7 +19,7 @@ const TopNav = () => {
   const pathWithoutLocale = pathname.replace(/^\/(en|es)/, '') || '/';
 
   const navItems = [
-    { href: '/kana', label: 'あ', sublabel: 'Kana' },
+    { href: '/', label: 'あ', sublabel: 'Kana' },
     { href: '/kanji', label: '字', sublabel: 'Kanji' },
     { href: '/vocabulary', label: '語', sublabel: 'Vocab' },
     { href: '/progress', icon: ChartIncreaseIcon, label: 'Progress' },
@@ -26,7 +28,7 @@ const TopNav = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--background)] border-b border-[var(--border)]">
-      <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link
           href="/"
@@ -39,38 +41,72 @@ const TopNav = () => {
           </span>
         </Link>
 
-        {/* Navigation Items */}
-        <div className="flex items-center gap-1 md:gap-2">
-          {navItems.map((item) => {
-            const isActive = pathWithoutLocale.startsWith(item.href);
+        {/* Navigation Items and Support Buttons */}
+        <div className="flex items-center gap-3">
+          {/* Main Navigation */}
+          <div className="flex items-center gap-1 md:gap-2">
+            {navItems.map((item) => {
+              const isActive = item.href === '/'
+                ? pathWithoutLocale === '/'
+                : pathWithoutLocale.startsWith(item.href);
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={playClick}
-                className={clsx(
-                  'flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all duration-200',
-                  'text-sm md:text-base',
-                  isActive
-                    ? 'bg-[var(--card)] text-[var(--foreground)]'
-                    : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]'
-                )}
-              >
-                {item.icon ? (
-                  <>
-                    <HugeiconsIcon icon={item.icon} size={18} />
-                    <span className="hidden md:inline">{item.label}</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-lg md:text-xl">{item.label}</span>
-                    <span className="hidden md:inline text-sm">{item.sublabel}</span>
-                  </>
-                )}
-              </Link>
-            );
-          })}
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={playClick}
+                  className={clsx(
+                    'flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all duration-200',
+                    'text-sm md:text-base',
+                    isActive
+                      ? 'bg-[var(--card)] text-[var(--foreground)]'
+                      : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]'
+                  )}
+                >
+                  {item.icon ? (
+                    <>
+                      <HugeiconsIcon icon={item.icon} size={18} />
+                      <span className="hidden md:inline">{item.label}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-lg md:text-xl">{item.label}</span>
+                      <span className="hidden md:inline text-sm">{item.sublabel}</span>
+                    </>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Divider */}
+          <div className="hidden sm:block w-px h-6 bg-[var(--border)]" />
+
+          {/* Support Buttons */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                playClick();
+                window.open('https://ko-fi.com/kanadojo', '_blank');
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)] transition-all duration-200"
+              aria-label="Support on Ko-fi"
+            >
+              <HugeiconsIcon icon={CoffeeIcon} size={18} />
+              <span className="hidden lg:inline text-sm">Ko-fi</span>
+            </button>
+            <button
+              onClick={() => {
+                playClick();
+                window.open('https://www.patreon.com/kanadojo', '_blank');
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)] transition-all duration-200"
+              aria-label="Support on Patreon"
+            >
+              <HugeiconsIcon icon={HeartIcon} size={18} className="fill-current" />
+              <span className="hidden lg:inline text-sm">Patreon</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
