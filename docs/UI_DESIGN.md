@@ -547,6 +547,61 @@ The `mirage-solis` theme embraces a surreal blend of cosmic sunset warmth and au
   * Ensure the theme picker displays: **Mirage Solis (Stellar Mirage)**.
 
 
+#### Moonlit Waterfall Theme (Dark — Dreamy, Enchanting, Reflective)
+
+The `moonlit-waterfall` theme evokes the calm mystery of a moonlit cascade surrounded by bioluminescent foliage. It blends twilight blues, glowing aquas, soft amethysts, and silvery mist tones to create a workspace that feels soothing, magical, and visually immersive. This theme is designed for users who want a tranquil night-mode that still feels alive with gentle highlights and enchanting depth.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "moonlit-waterfall",
+  backgroundColor: "hsla(215, 52%, 13%, 1)",  // Deep moonlit blue, calm night sky
+  cardColor: "hsla(249, 32%, 17%, 1)",        // Misty amethyst shadow, soft elevation
+  borderColor: "hsla(183, 87%, 53%, 1)",      // Glacier aqua — luminous waterfall edges
+  mainColor: "hsla(267, 97%, 81%, 1)",        // Gleaming moon-violet for headlines and key text
+  secondaryColor: "hsla(180, 100%, 89%, 1)",  // Silvery-mint highlight for subtle accents
+}
+ ```
+
+* **Usage guidance:**
+
+  * Use `--background-color` for full-page surfaces to establish the calm, moonlit environment.
+  * Use `--card-color` for elevated surfaces, modals, and panels with a soft amethyst glow.
+  * Use `--border-color` for luminous outlines, dividers, and focus rings inspired by shimmering water.
+  * Use `--main-color` for important text and UI elements that need ethereal visibility.
+  * Use `--secondary-color` for gentle accents, metadata, and supportive icons.
+
+* **Tailwind example:**
+
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Moonlit Waterfall — Dreamy Twilight Flow
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Misty blues, glowing aquas, and silvery accents for night study
+    </p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+
+  * `--main-color` (moon-violet) on the deep blue background meets WCAG AA for normal text.
+  * `--secondary-color` (silvery-mint) maintains strong readability on both background and card layers; validate small text with WebAIM or axe.
+  * `--border-color` (glacier aqua) provides more than a 3:1 ratio on `--card-color`, making it suitable for interactive states.
+  * Avoid oversaturating very small UI elements with high-lightness violet, keeping focus on clarity.
+
+* **Developer checklist when adding/using `moonlit-waterfall`:**
+
+  * Add the theme entry to the Dark group in `static/themes.ts`.
+  * Confirm `applyTheme("moonlit-waterfall")` updates CSS variables and `data-theme` correctly.
+  * Validate accessibility using Lighthouse or axe, especially for glowing accents.
+  * Test buttons, inputs, and dialogs for clarity under low-light conditions.
+  * Add the theme to the theme picker with the name **Moonlit Waterfall**.
+
+
   ### Theme Color Guidelines
 
 #### Color Format
