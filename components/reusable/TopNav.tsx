@@ -10,6 +10,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
+import { Button } from '@/components/ui/button';
 
 const TopNav = () => {
   const pathname = usePathname();
@@ -84,28 +85,30 @@ const TopNav = () => {
 
           {/* Support Buttons */}
           <div className="flex items-center gap-2">
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={() => {
                 playClick();
                 window.open('https://ko-fi.com/kanadojo', '_blank');
               }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)] transition-all duration-200"
               aria-label="Support on Ko-fi"
             >
               <HugeiconsIcon icon={CoffeeIcon} size={18} />
-              <span className="hidden lg:inline text-sm">Ko-fi</span>
-            </button>
-            <button
+              Ko-fi
+            </Button>
+            <Button
+              variant="default"
+              size="sm"
               onClick={() => {
                 playClick();
                 window.open('https://www.patreon.com/kanadojo', '_blank');
               }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)] transition-all duration-200"
               aria-label="Support on Patreon"
             >
               <HugeiconsIcon icon={HeartIcon} size={18} className="fill-current" />
-              <span className="hidden lg:inline text-sm">Patreon</span>
-            </button>
+              Patreon
+            </Button>
           </div>
         </div>
       </div>
