@@ -492,6 +492,60 @@ The `wasabi-garden` theme brings a vibrant, botanical, pop-art twist inspired by
   * Test buttons, inputs, modals, and menus across breakpoints and dark environments.
   * Confirm theme picker preview and label rendering.
 
+#### Mirage Solis Theme (Dark — Dreamlike Stellar Mirage)
+
+The `mirage-solis` theme embraces a surreal blend of cosmic sunset warmth and aurora-cool luminosity. It merges deep magenta-violet shadows with honeyed gold surfaces, purple-indigo shimmer edges, and radiant sunbeam accents. This theme is designed to feel artistic, atmospheric, and memorable—striking but still fully accessible for long study sessions.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "mirage-solis",
+  backgroundColor: "hsla(322, 68%, 14%, 1)",   // Deep lucid magenta-violet
+  cardColor: "hsla(24, 86%, 17%, 1)",          // Dark honey-gold surface
+  borderColor: "hsla(281, 78%, 38%, 1)",       // Aurora purple/indigo shimmer
+  mainColor: "hsla(43, 100%, 68%, 1)",         // Radiant sunbeam yellow-orange
+  secondaryColor: "hsla(199, 87%, 70%, 1)",    // Cosmic teal/cyan accent
+}
+ ```
+
+* **Usage guidance:**
+
+  * Use `--background-color` for deep, immersive magenta-violet surfaces.
+  * Use `--card-color` for warm, grounded panels and UI surfaces.
+  * Use `--border-color` to add luminous aurora-style separation and hover/focus clarity.
+  * Use `--main-color` for high-visibility text and primary action elements.
+  * Use `--secondary-color` for cool, cosmic accents that balance the warm palette.
+
+* **Tailwind example:**
+
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Mirage Solis — Stellar Mirage Aesthetic
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Sunset warmth with aurora-cool accents
+    </p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+
+  * `--main-color` (sunbeam orange-yellow) on `--background-color` passes AA for normal text.
+  * `--secondary-color` (cosmic teal) maintains readable contrast on both card and background surfaces; verify with WebAIM or axe for tiny UI text.
+  * `--border-color` (aurora indigo) on the honey-gold card meets the 3:1 requirement for focus and interaction outlines.
+  * Avoid clustering neon-like accents in extremely small elements; preserve readability and balance.
+
+* **Developer checklist when adding/using `mirage-solis`:**
+
+  * Add the theme to `static/themes.ts` under the Dark group.
+  * Verify `applyTheme("mirage-solis")` correctly applies all CSS variables.
+  * Test buttons, forms, modals, inputs, and navigation UI under this color blend.
+  * Confirm WCAG AA contrast for all text sizes across both warm and cool accents.
+  * Ensure the theme picker displays: **Mirage Solis (Stellar Mirage)**.
+
 
   ### Theme Color Guidelines
 
