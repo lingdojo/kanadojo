@@ -1,7 +1,7 @@
 'use client';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Home01Icon as HouseIcon, SparklesIcon, ChartIncreaseIcon, AwardIcon as TrophyIcon } from '@hugeicons/core-free-icons';;
+import { SparklesIcon, ChartIncreaseIcon, AwardIcon as TrophyIcon } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 import { useClick } from '@/hooks/useAudio';
 import { useEffect, useRef } from 'react';

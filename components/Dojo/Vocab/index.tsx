@@ -276,29 +276,84 @@ const VocabCards = () => {
             );
             const isSelected = selectedVocabSets.includes(vocabSetTemp.name);
 
+            // Calculate mastery progress for this set
+            const masteredInSet = wordsInSet.filter(vocab =>
+              masteredWords.has(vocab.word)
+            ).length;
+            const totalInSet = wordsInSet.length;
+            const masteryPercentage = (masteredInSet / totalInSet) * 100;
+
             return (
               <div
                 key={vocabSetTemp.id + vocabSetTemp.name}
+                onClick={() => {
+                  playClick();
+                  if (selectedVocabSets.includes(vocabSetTemp.name)) {
+                    setSelectedVocabSets(
+                      selectedVocabSets.filter(
+                        set => set !== vocabSetTemp.name
+                      )
+                    );
+                    addWordObjs(
+                      selectedVocabCollection.data.slice(
+                        vocabSetTemp.start * 10,
+                        vocabSetTemp.end * 10
+                      )
+                    );
+                  } else {
+                    setSelectedVocabSets([
+                      ...new Set(
+                        selectedVocabSets.concat(vocabSetTemp.name)
+                      ),
+                    ]);
+                    addWordObjs(
+                      selectedVocabCollection.data.slice(
+                        vocabSetTemp.start * 10,
+                        vocabSetTemp.end * 10
+                      )
+                    );
+                  }
+                }}
                 className={clsx(
                   'relative w-full flex flex-col items-start gap-4',
                   'p-6 rounded-2xl border',
-                  'transition-all duration-250 ease-in-out',
+                  'transition-all duration-250 ease-in-out cursor-pointer',
                   isSelected
                     ? 'bg-[var(--card)] border-[var(--foreground)]'
-                    : 'bg-[var(--background)] border-[var(--border)]'
+                    : 'bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted-foreground)]'
                 )}
               >
                 {/* Set title and status */}
                 <div className="flex items-center justify-between gap-3 w-full">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl font-light">
-                      {vocabSetTemp.name}
-                    </span>
-                    {vocabSetTemp.isMastered && (
-                      <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
-                        Mastered
+                  <div className="flex flex-col gap-2 flex-1">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-light">
+                        {vocabSetTemp.name}
                       </span>
-                    )}
+                      {vocabSetTemp.isMastered && (
+                        <span className="text-xs px-2 py-1 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                          Mastered
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Progress bar */}
+                    <div className="flex items-center gap-2 w-full">
+                      <div className="flex-1 h-1.5 bg-[var(--muted)] rounded-full overflow-hidden">
+                        <div
+                          className={clsx(
+                            'h-full rounded-full transition-all duration-300',
+                            masteryPercentage >= 90 ? 'bg-[var(--chart-1)]' :
+                            masteryPercentage >= 50 ? 'bg-[var(--chart-3)]' :
+                            'bg-[var(--chart-5)]'
+                          )}
+                          style={{ width: `${masteryPercentage}%` }}
+                        />
+                      </div>
+                      <span className="text-xs text-[var(--muted-foreground)] min-w-[3rem] text-right">
+                        {masteredInSet}/{totalInSet}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Expand button */}
@@ -328,48 +383,27 @@ const VocabCards = () => {
                   </button>
                 </div>
 
-                {/* Vocab list - clickable */}
-                <button
-                  onClick={e => {
-                    e.currentTarget.blur();
-                    playClick();
-                    if (selectedVocabSets.includes(vocabSetTemp.name)) {
-                      setSelectedVocabSets(
-                        selectedVocabSets.filter(
-                          set => set !== vocabSetTemp.name
-                        )
-                      );
-                      addWordObjs(
-                        selectedVocabCollection.data.slice(
-                          vocabSetTemp.start * 10,
-                          vocabSetTemp.end * 10
-                        )
-                      );
-                    } else {
-                      setSelectedVocabSets([
-                        ...new Set(
-                          selectedVocabSets.concat(vocabSetTemp.name)
-                        ),
-                      ]);
-                      addWordObjs(
-                        selectedVocabCollection.data.slice(
-                          vocabSetTemp.start * 10,
-                          vocabSetTemp.end * 10
-                        )
-                      );
-                    }
-                  }}
-                  className="flex flex-wrap gap-2 text-2xl text-[var(--muted-foreground)] hover:bg-[var(--muted)] rounded-lg p-2 -m-2 w-full transition-colors"
-                >
-                  {wordsInSet.map((wordObj, idx) => (
-                    <span
-                      key={wordObj.word + idx}
-                      className="hover:text-[var(--foreground)] transition-colors"
-                    >
-                      {wordObj.word}
-                    </span>
-                  ))}
-                </button>
+                {/* Vocab grid */}
+                <div className="grid grid-cols-5 gap-2 w-full">
+                  {wordsInSet.map((wordObj, idx) => {
+                    const isMastered = masteredWords.has(wordObj.word);
+                    return (
+                      <div
+                        key={wordObj.word + idx}
+                        className={clsx(
+                          'flex items-center justify-center',
+                          'text-xl aspect-square',
+                          'rounded-lg transition-all',
+                          isMastered
+                            ? 'text-[var(--chart-1)] bg-[var(--muted)]'
+                            : 'text-[var(--foreground)]'
+                        )}
+                      >
+                        {wordObj.word}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

@@ -153,7 +153,8 @@ const KanaCards = () => {
         {/* Filters */}
         <div className="flex flex-col gap-6">
           {/* Filters and Action Buttons Row */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            {/* Filter Selects */}
             <div className="flex items-center gap-4">
               <Select value={selectedGroup} onValueChange={handleGroupChange}>
                 <SelectTrigger className="w-[200px] bg-transparent border-[var(--border)] font-light">

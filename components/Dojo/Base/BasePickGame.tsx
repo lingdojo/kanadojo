@@ -5,19 +5,20 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import {
   CheckmarkCircle02Icon as CircleCheckIcon,
   CancelCircleIcon as CircleXIcon,
+  Tick02Icon as CheckIcon,
+  ArrowRight01Icon as ArrowRightIcon,
 } from '@hugeicons/core-free-icons';
 import { Random } from 'random-js';
 import { useCorrect, useError } from '@/hooks/useAudio';
-import GameIntel from '@/components/reusable/Game/GameIntel';
 import { buttonBorderStyles } from '@/static/styles';
 import { pickGameKeyMappings } from '@/lib/keyMappings';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/hooks/useStats';
 import useStatsStore from '@/store/useStatsStore';
 import Stars from '@/components/reusable/Game/Stars';
-import AnswerSummary from '@/components/reusable/Game/AnswerSummary';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
 import { BaseGameProps } from './types';
+import { Button } from '@/components/ui/button';
 
 const random = new Random();
 
@@ -43,35 +44,39 @@ function BasePickGame<T>({
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
 
-  const [currentItem, setCurrentItem] = useState(
-    items[random.integer(0, items.length - 1)]
+  const [currentItem, setCurrentItem] = useState<T | null>(
+    items.length > 0 ? items[random.integer(0, items.length - 1)] : null
   );
 
-  const displayChar = config.getDisplayChar(currentItem, isReverse);
-  const targetAnswer = config.getTargetAnswer(currentItem, isReverse);
+  const displayChar = currentItem ? config.getDisplayChar(currentItem, isReverse) : '';
+  const targetAnswer = currentItem ? config.getTargetAnswer(currentItem, isReverse) : '';
 
-  const incorrectOptions = config.getIncorrectOptions(
+  const incorrectOptions = currentItem ? config.getIncorrectOptions(
     items,
     currentItem,
     isReverse,
     2
-  );
+  ) : [];
 
   const targetString = Array.isArray(targetAnswer)
     ? targetAnswer[0]
     : targetAnswer;
 
   const [shuffledOptions, setShuffledOptions] = useState(
-    [targetString, ...incorrectOptions].sort(() => random.real(0, 1) - 0.5)
+    targetString ? [targetString, ...incorrectOptions].sort(() => random.real(0, 1) - 0.5) : []
   );
 
-  const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
   const [wrongSelectedAnswers, setWrongSelectedAnswers] = useState<string[]>(
     []
   );
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   useEffect(() => {
+    if (!currentItem) return;
+
     const newIncorrectOptions = config.getIncorrectOptions(
       items,
       currentItem,
@@ -95,8 +100,18 @@ function BasePickGame<T>({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      // Handle Enter key
+      if (event.code === 'Enter') {
+        if (isSubmitted) {
+          handleContinue();
+        } else if (selectedOption) {
+          handleSubmit();
+        }
+        return;
+      }
+
       const index = pickGameKeyMappings[event.code];
-      if (index !== undefined && index < shuffledOptions.length) {
+      if (index !== undefined && index < shuffledOptions.length && !isSubmitted) {
         buttonRefs.current[index]?.click();
       }
     };
@@ -106,19 +121,27 @@ function BasePickGame<T>({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [shuffledOptions.length]);
+  }, [shuffledOptions.length, selectedOption, isSubmitted]);
 
   useEffect(() => {
     if (isHidden) speedStopwatch.pause();
   }, [isHidden]);
 
-  const handleOptionClick = (selectedOption: string) => {
-    if (config.isAnswerCorrect(selectedOption, targetAnswer, isReverse)) {
-      if (config.shouldShowAnswerSummary) {
-        setDisplayAnswerSummary(true);
-      }
+  const handleOptionClick = (option: string) => {
+    if (!wrongSelectedAnswers.includes(option) && !isSubmitted) {
+      setSelectedOption(option);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (!selectedOption || isSubmitted) return;
+
+    const correct = config.isAnswerCorrect(selectedOption, targetAnswer, isReverse);
+    setIsCorrect(correct);
+    setIsSubmitted(true);
+
+    if (correct) {
       handleCorrectAnswer();
-      generateNewItem();
       setFeedback(
         <>
           <span className="text-[var(--muted-foreground)]">{`${displayChar} = ${selectedOption} `}</span>
@@ -142,6 +165,13 @@ function BasePickGame<T>({
         </>
       );
     }
+  };
+
+  const handleContinue = () => {
+    generateNewItem();
+    setSelectedOption(null);
+    setIsSubmitted(false);
+    setIsCorrect(false);
   };
 
   const handleCorrectAnswer = () => {
@@ -169,40 +199,29 @@ function BasePickGame<T>({
   };
 
   const generateNewItem = () => {
+    if (items.length === 0) return;
     let newItem = items[random.integer(0, items.length - 1)];
-    while (newItem === currentItem) {
+    while (newItem === currentItem && items.length > 1) {
       newItem = items[random.integer(0, items.length - 1)];
     }
     setCurrentItem(newItem);
   };
 
-  const gameMode = isReverse ? 'reverse pick' : 'pick';
   const displayCharLang = config.getDisplayCharLang?.(isReverse);
   const layoutDirection = config.getLayoutDirection?.(isReverse) || 'flex-row';
 
-  const answerSummaryPayload = config.shouldShowAnswerSummary && config.getAnswerSummaryPayload
-    ? config.getAnswerSummaryPayload(currentItem)
-    : null;
+  if (!currentItem || items.length === 0) {
+    return null;
+  }
 
   return (
     <div
       className={clsx(
-        'flex flex-col gap-4 sm:gap-8 items-center w-full sm:w-4/5',
-        isHidden ? 'hidden' : '',
-        !isReverse && 'max-md:pb-12'
+        'flex flex-col gap-4 sm:gap-8 items-center w-full sm:w-4/5 pb-32',
+        isHidden ? 'hidden' : ''
       )}
     >
-      <GameIntel gameMode={gameMode} />
-      {displayAnswerSummary && answerSummaryPayload && (
-        <AnswerSummary
-          payload={answerSummaryPayload}
-          setDisplayAnswerSummary={setDisplayAnswerSummary}
-          feedback={feedback}
-        />
-      )}
-
-      {!displayAnswerSummary && (
-        <>
+      <>
           <div className="flex flex-col items-center gap-4">
             {config.renderDisplayChar ? (
               config.renderDisplayChar(displayChar, currentItem, isReverse)
@@ -241,10 +260,12 @@ function BasePickGame<T>({
                 className={clsx(
                   'text-4xl md:text-5xl py-4 rounded-xl w-full md:w-1/4 xl:w-1/5 flex flex-row justify-center items-center gap-1.5',
                   buttonBorderStyles,
-                  'text-[var(--border)]',
-                  wrongSelectedAnswers.includes(option) && 'hover:bg-[var(--card)]',
-                  !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--foreground)]'
+                  wrongSelectedAnswers.includes(option) && 'text-[var(--border)] hover:bg-[var(--card)]',
+                  !wrongSelectedAnswers.includes(option) && !isSubmitted &&
+                    'text-[var(--foreground)]',
+                  selectedOption === option && !isSubmitted && 'bg-[var(--card)] border-[var(--foreground)] border-2',
+                  isSubmitted && selectedOption === option && isCorrect && 'bg-[var(--chart-1)] border-[var(--chart-1)] text-[var(--background)]',
+                  isSubmitted && selectedOption === option && !isCorrect && 'bg-[var(--chart-5)] border-[var(--chart-5)] text-[var(--background)]'
                 )}
                 onClick={() => handleOptionClick(option)}
               >
@@ -269,6 +290,26 @@ function BasePickGame<T>({
 
           <Stars />
         </>
+
+      {/* Fixed Footer with Feedback and Submit/Continue Button */}
+      {selectedOption && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+          <div className="flex items-center justify-between gap-4 bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4">
+            {/* Feedback on the left */}
+            <div className="flex-1 text-xl">
+              {isSubmitted && feedback}
+            </div>
+
+            {/* Submit/Continue button on the right */}
+            <Button
+              onClick={isSubmitted ? handleContinue : handleSubmit}
+              size="lg"
+            >
+              <HugeiconsIcon icon={isSubmitted ? ArrowRightIcon : CheckIcon} size={20} />
+              {isSubmitted ? 'Continue' : 'Submit'}
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );

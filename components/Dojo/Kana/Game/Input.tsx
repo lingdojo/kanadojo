@@ -14,13 +14,27 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
 
   const kanaPairs = useMemo(() => {
-    const selectedKana = kanaGroupIndices.map(i => kana[i].kana).flat();
-    const selectedRomaji = kanaGroupIndices.map(i => kana[i].romanji).flat();
+    const pairs: KanaPair[] = [];
 
-    const pairs: KanaPair[] = selectedKana.map((kanaChar, i) => ({
-      kana: kanaChar,
-      romaji: selectedRomaji[i],
-    }));
+    kanaGroupIndices.forEach(characterIndex => {
+      // Find which kana group and position this character index belongs to
+      let currentIndex = 0;
+      for (let groupIdx = 0; groupIdx < kana.length; groupIdx++) {
+        const group = kana[groupIdx];
+        const groupSize = group.kana.length;
+
+        if (characterIndex < currentIndex + groupSize) {
+          // This character belongs to this group
+          const positionInGroup = characterIndex - currentIndex;
+          pairs.push({
+            kana: group.kana[positionInGroup],
+            romaji: group.romanji[positionInGroup],
+          });
+          break;
+        }
+        currentIndex += groupSize;
+      }
+    });
 
     return pairs;
   }, [kanaGroupIndices]);

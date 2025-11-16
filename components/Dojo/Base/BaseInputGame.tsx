@@ -49,12 +49,12 @@ function BaseInputGame<T>({
 
   const [inputValue, setInputValue] = useState('');
 
-  const [currentItem, setCurrentItem] = useState(
-    items[random.integer(0, items.length - 1)]
+  const [currentItem, setCurrentItem] = useState<T | null>(
+    items.length > 0 ? items[random.integer(0, items.length - 1)] : null
   );
 
-  const displayChar = config.getDisplayChar(currentItem, isReverse);
-  const targetAnswer = config.getTargetAnswer(currentItem, isReverse);
+  const displayChar = currentItem ? config.getDisplayChar(currentItem, isReverse) : '';
+  const targetAnswer = currentItem ? config.getTargetAnswer(currentItem, isReverse) : '';
 
   const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
@@ -150,8 +150,9 @@ function BaseInputGame<T>({
   };
 
   const generateNewItem = () => {
+    if (items.length === 0) return;
     let newItem = items[random.integer(0, items.length - 1)];
-    while (newItem === currentItem) {
+    while (newItem === currentItem && items.length > 1) {
       newItem = items[random.integer(0, items.length - 1)];
     }
     setCurrentItem(newItem);
@@ -176,9 +177,13 @@ function BaseInputGame<T>({
   const textSize = config.getTextSize?.(isReverse) || 'text-8xl sm:text-9xl';
   const gapSize = config.getGapSize?.(isReverse) || 'gap-4 sm:gap-10';
 
-  const answerSummaryPayload = config.shouldShowAnswerSummary && config.getAnswerSummaryPayload
+  const answerSummaryPayload = config.shouldShowAnswerSummary && config.getAnswerSummaryPayload && currentItem
     ? config.getAnswerSummaryPayload(currentItem)
     : null;
+
+  if (!currentItem || items.length === 0) {
+    return null;
+  }
 
   return (
     <div

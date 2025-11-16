@@ -11,7 +11,6 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import {
   ChartIncreaseIcon as ProgressIcon,
   AwardIcon as TrophyIcon,
-  Settings02Icon as SettingsIcon,
   FavouriteIcon as HeartIcon,
   PaintBoardIcon as ThemeIcon,
   InformationCircleIcon as InfoIcon,
@@ -22,6 +21,7 @@ import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { useClick } from '@/hooks/useAudio';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import { LanguageSelector } from '@/components/reusable/LanguageSelector';
+import BottomNav from '@/components/reusable/BottomNav';
 import themeSets, { getTheme, applyTheme } from '@/static/themes';
 import SimpleProgress from './SimpleProgress';
 import AchievementProgress from './AchievementProgress';
@@ -46,60 +46,89 @@ const ProgressAndAchievements = () => {
   const themeName = currentTheme?.name || theme;
 
   return (
-    <div className="min-h-[100dvh] max-w-[100dvw] flex flex-col relative">
-      {/* Top Left - Logo and Icons */}
-      <div className="fixed top-4 left-4 z-50 flex items-center gap-3">
-        <Link href="/" className="flex flex-col hover:opacity-80 transition-opacity">
-          <span className="text-lg font-semibold">KanaDojo</span>
-          <span className="text-sm text-[var(--muted-foreground)]" lang="ja">かな道場</span>
-        </Link>
-        <div className="flex items-center gap-3">
-          <Link href="/progress">
-            <HugeiconsIcon
-              icon={ProgressIcon}
-              size={20}
-              className="hover:text-[var(--foreground)] text-[var(--muted-foreground)] hover:cursor-pointer transition-colors"
-              onClick={playClick}
-            />
+    <div className="min-h-[100dvh] w-full overflow-x-hidden flex flex-col relative">
+      {/* Top Header */}
+      <div className="fixed top-0 left-0 right-0 z-40 bg-[var(--background)] border-b border-[var(--border)]">
+        <div className="flex items-center justify-between px-4 py-3">
+          {/* Left - Logo */}
+          <Link href="/" className="flex flex-col hover:opacity-80 transition-opacity">
+            <span className="text-base md:text-lg font-semibold">KanaDojo</span>
+            <span className="text-xs md:text-sm text-[var(--muted-foreground)]" lang="ja">かな道場</span>
           </Link>
-          <Link href="/preferences">
-            <HugeiconsIcon
-              icon={SettingsIcon}
-              size={20}
-              className="hover:text-[var(--foreground)] text-[var(--muted-foreground)] hover:cursor-pointer transition-colors"
-              onClick={playClick}
-            />
-          </Link>
+
+          {/* Right - Actions */}
+          <div className="flex items-center gap-2">
+            {/* Mobile - Icon-only buttons */}
+            <div className="flex md:hidden items-center gap-2">
+              <button
+                className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                onClick={() => {
+                  playClick();
+                  window.open('https://ko-fi.com/kanadojo', '_blank');
+                }}
+              >
+                <HugeiconsIcon icon={CoffeeIcon} size={20} />
+              </button>
+              <button
+                className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                onClick={() => {
+                  playClick();
+                  window.open('https://www.patreon.com/kanadojo', '_blank');
+                }}
+              >
+                <HugeiconsIcon icon={HeartIcon} size={20} className="fill-current" />
+              </button>
+              <button
+                className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                onClick={() => {
+                  playClick();
+                  setThemeDialogOpen(true);
+                }}
+              >
+                <HugeiconsIcon icon={ThemeIcon} size={20} />
+              </button>
+            </div>
+
+            <LanguageSelector />
+
+            {/* Desktop - Full buttons */}
+            <div className="hidden md:flex items-center gap-2">
+              <Button
+                size="sm"
+                onClick={() => {
+                  playClick();
+                  window.open('https://ko-fi.com/kanadojo', '_blank');
+                }}
+              >
+                <HugeiconsIcon icon={CoffeeIcon} size={16} />
+                Ko-fi
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => {
+                  playClick();
+                  window.open('https://www.patreon.com/kanadojo', '_blank');
+                }}
+              >
+                <HugeiconsIcon icon={HeartIcon} size={16} className="fill-current" />
+                Patreon
+              </Button>
+              <button
+                className="flex items-center gap-1.5 text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                onClick={() => {
+                  playClick();
+                  setThemeDialogOpen(true);
+                }}
+              >
+                <HugeiconsIcon icon={ThemeIcon} size={16} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Top Right - Language Selector and Support Buttons */}
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
-        <LanguageSelector />
-        <Button
-          size="sm"
-          onClick={() => {
-            playClick();
-            window.open('https://ko-fi.com/kanadojo', '_blank');
-          }}
-        >
-          <HugeiconsIcon icon={CoffeeIcon} size={16} />
-          Ko-fi
-        </Button>
-        <Button
-          size="sm"
-          onClick={() => {
-            playClick();
-            window.open('https://www.patreon.com/kanadojo', '_blank');
-          }}
-        >
-          <HugeiconsIcon icon={HeartIcon} size={16} className="fill-current" />
-          Patreon
-        </Button>
-      </div>
-
       {/* Content */}
-      <div className="flex flex-col items-center w-full pt-20 pb-20">
+      <div className="flex flex-col items-center w-full pt-[65px] pb-[73px] md:pb-12">
         <div className="flex flex-col gap-4 w-full max-w-7xl px-4 md:px-8">
           {/* Header */}
           <div className="pt-6">
@@ -143,51 +172,59 @@ const ProgressAndAchievements = () => {
         </div>
       </div>
 
-      {/* Bottom Left - Social and Legal Links */}
-      <div className="fixed bottom-4 left-4 z-50 flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
-        <FontAwesomeIcon
-          icon={faDiscord}
-          className="hover:text-[var(--foreground)] hover:cursor-pointer transition-colors"
-          onClick={() => {
-            playClick();
-            window.open('https://discord.gg/CyvBNNrSmb', '_blank');
-          }}
-        />
-        <FontAwesomeIcon
-          icon={faGithub}
-          className="hover:text-[var(--foreground)] hover:cursor-pointer transition-colors"
-          onClick={() => {
-            playClick();
-            window.open('https://github.com/lingdojo/kana-dojo', '_blank');
-          }}
-        />
-        <Link href="/terms" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
-          Terms
-        </Link>
-        <Link href="/privacy" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
-          Privacy
-        </Link>
-        <Link href="/security" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
-          Security
-        </Link>
-      </div>
+      {/* Bottom Navigation - Mobile Only */}
+      <BottomNav />
 
-      {/* Bottom Right - Theme Switcher and Version */}
-      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
-        <button
-          className="flex items-center gap-1.5 hover:text-[var(--foreground)] transition-colors hover:cursor-pointer"
-          onClick={() => {
-            playClick();
-            setThemeDialogOpen(true);
-          }}
-        >
-          <HugeiconsIcon icon={ThemeIcon} size={14} />
-          {themeName}
-        </button>
-        <span className="flex items-center gap-1.5">
-          <HugeiconsIcon icon={InfoIcon} size={14} />
-          v{version}
-        </span>
+      {/* Desktop Footer - Hidden on Mobile */}
+      <div className="hidden md:block fixed bottom-0 left-0 right-0 z-30 bg-[var(--background)] border-t border-[var(--border)]">
+        <div className="flex items-center justify-between px-4 py-2">
+          {/* Left - Social and Legal */}
+          <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
+            <FontAwesomeIcon
+              icon={faDiscord}
+              className="hover:text-[var(--foreground)] hover:cursor-pointer transition-colors"
+              onClick={() => {
+                playClick();
+                window.open('https://discord.gg/CyvBNNrSmb', '_blank');
+              }}
+            />
+            <FontAwesomeIcon
+              icon={faGithub}
+              className="hover:text-[var(--foreground)] hover:cursor-pointer transition-colors"
+              onClick={() => {
+                playClick();
+                window.open('https://github.com/lingdojo/kana-dojo', '_blank');
+              }}
+            />
+            <Link href="/terms" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
+              Terms
+            </Link>
+            <Link href="/privacy" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
+              Privacy
+            </Link>
+            <Link href="/security" className="hover:text-[var(--foreground)] transition-colors" onClick={playClick}>
+              Security
+            </Link>
+          </div>
+
+          {/* Right - Theme and Version */}
+          <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
+            <button
+              className="flex items-center gap-1.5 hover:text-[var(--foreground)] transition-colors"
+              onClick={() => {
+                playClick();
+                setThemeDialogOpen(true);
+              }}
+            >
+              <HugeiconsIcon icon={ThemeIcon} size={14} />
+              {themeName}
+            </button>
+            <span className="flex items-center gap-1.5">
+              <HugeiconsIcon icon={InfoIcon} size={14} />
+              v{version}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Theme Switcher Dialog */}

@@ -1,141 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'motion/react';
 import clsx from 'clsx';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { AwardIcon as TrophyIcon, Cancel01Icon as XIcon } from '@hugeicons/core-free-icons';
 import useAchievementStore, {
   type AchievementNotification as NotificationType
 } from '@/store/useAchievementStore';
-import { useClick } from '@/hooks/useAudio';
+import { achievementToast } from '@/components/ui/sonner';
 import { cardBorderStyles } from '@/static/styles';
 
-interface AchievementNotificationProps {
-  notification: NotificationType;
-  onDismiss: (id: string) => void;
-  onViewDetails: (achievement: NotificationType['achievement']) => void;
-}
-
-const AchievementNotification = ({
-  notification,
-  onDismiss,
-  onViewDetails
-}: AchievementNotificationProps) => {
-  const { playClick } = useClick();
-  const [isVisible, setIsVisible] = useState(true);
-
-  // Auto-dismiss after 8 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleDismiss();
-    }, 8000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleDismiss = () => {
-    setIsVisible(false);
-    setTimeout(() => {
-      onDismiss(notification.id);
-    }, 300);
-  };
-
-  const handleViewDetails = () => {
-    playClick();
-    onViewDetails(notification.achievement);
-    handleDismiss();
-  };
-
-  const handleClose = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    playClick();
-    handleDismiss();
-  };
-
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ x: 400, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 400, opacity: 0 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className={clsx(
-            'relative w-80 p-4 cursor-pointer',
-            'bg-[var(--card)]',
-            cardBorderStyles,
-            'border-l-4 border-l-yellow-500'
-          )}
-          onClick={handleViewDetails}
-        >
-          {/* Close button */}
-          <button
-            onClick={handleClose}
-            className={clsx(
-              'absolute top-2 right-2 p-1 rounded',
-              'text-[var(--muted-foreground)] hover:text-[var(--foreground)]',
-              'hover:bg-[var(--background)] transition-colors duration-200'
-            )}
-          >
-            <HugeiconsIcon icon={XIcon} size={14} color="currentColor" />
-          </button>
-
-          <div className='flex items-start gap-3 pr-6'>
-            {/* Achievement Icon */}
-            <div className='flex-shrink-0'>
-              <div
-                className={clsx(
-                  'w-10 h-10 rounded-full flex items-center justify-center',
-                  'bg-yellow-100 text-yellow-600 text-lg font-bold'
-                )}
-              >
-                {notification.achievement.icon}
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className='flex-1 min-w-0'>
-              <div className='flex items-center gap-2 mb-1'>
-                <HugeiconsIcon icon={TrophyIcon} size={14} color="currentColor" className="text-yellow-500" />
-                <span className='text-xs font-semibold text-yellow-600 uppercase tracking-wide'>
-                  Achievement Unlocked
-                </span>
-              </div>
-
-              <h4 className='font-semibold text-[var(--foreground)] text-sm mb-1 truncate'>
-                {notification.achievement.title}
-              </h4>
-
-              <p className='text-xs text-[var(--muted-foreground)] line-clamp-2'>
-                {notification.achievement.description}
-              </p>
-
-              <div className='flex items-center justify-between mt-2'>
-                <span className='text-xs text-yellow-600 font-medium'>
-                  +{notification.achievement.points} points
-                </span>
-                <span className='text-xs text-[var(--muted-foreground)]'>
-                  Click to view
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Progress bar animation */}
-          <motion.div
-            initial={{ width: '100%' }}
-            animate={{ width: '0%' }}
-            transition={{ duration: 8, ease: 'linear' }}
-            className='absolute bottom-0 left-0 h-1 bg-yellow-500 rounded-b-lg'
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
-
-// Container component for managing multiple notifications
+// Container component for managing achievement notifications with Sonner
 export const AchievementNotificationContainer = () => {
   const [isClient, setIsClient] = useState(false);
   const notifications = useAchievementStore(state => state.unseenNotifications);
@@ -146,6 +20,7 @@ export const AchievementNotificationContainer = () => {
     NotificationType['achievement'] | null
   >(null);
   const [showModal, setShowModal] = useState(false);
+  const processedNotifications = useRef<Set<string>>(new Set());
 
   // Client-side only initialization
   useEffect(() => {
@@ -154,18 +29,38 @@ export const AchievementNotificationContainer = () => {
     useAchievementStore.getState().updateComputedProperties();
   }, []);
 
+  // Show Sonner toast for new notifications
+  useEffect(() => {
+    if (!isClient) return;
+
+    notifications.forEach((notification) => {
+      // Only show toast if we haven't processed this notification yet
+      if (!processedNotifications.current.has(notification.id)) {
+        processedNotifications.current.add(notification.id);
+
+        achievementToast({
+          title: notification.achievement.title,
+          description: notification.achievement.description,
+          icon: notification.achievement.icon,
+          points: notification.achievement.points,
+          onClick: () => {
+            setSelectedAchievement(notification.achievement);
+            setShowModal(true);
+            markNotificationSeen(notification.id);
+          }
+        });
+
+        // Auto-mark as seen after 8 seconds
+        setTimeout(() => {
+          markNotificationSeen(notification.id);
+        }, 8000);
+      }
+    });
+  }, [notifications, isClient, markNotificationSeen]);
+
   if (!isClient) {
     return null;
   }
-
-  const handleDismiss = (notificationId: string) => {
-    markNotificationSeen(notificationId);
-  };
-
-  const handleViewDetails = (achievement: NotificationType['achievement']) => {
-    setSelectedAchievement(achievement);
-    setShowModal(true);
-  };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -174,25 +69,7 @@ export const AchievementNotificationContainer = () => {
 
   return (
     <>
-      {/* Notification Stack */}
-      <div className='fixed top-4 right-4 z-50 space-y-2'>
-        {notifications.slice(0, 3).map((notification, index) => (
-          <motion.div
-            key={notification.id}
-            initial={{ y: -20 * index }}
-            animate={{ y: 0 }}
-            style={{ zIndex: 50 - index }}
-          >
-            <AchievementNotification
-              notification={notification}
-              onDismiss={handleDismiss}
-              onViewDetails={handleViewDetails}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Achievement Modal - Import dynamically to avoid circular dependencies */}
+      {/* Achievement Modal */}
       {showModal && selectedAchievement && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -237,4 +114,4 @@ export const AchievementNotificationContainer = () => {
   );
 };
 
-export default AchievementNotification;
+export default AchievementNotificationContainer;

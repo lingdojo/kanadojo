@@ -1,16 +1,12 @@
 'use client';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { SquareLock01Icon as SquareCheckIcon, Cancel01Icon as SquareXIcon, StarIcon, Coffee01Icon as CoffeeIcon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon as KeyboardIcon, Cursor01Icon as MousePointerIcon, ChartIncreaseIcon as ChartSplineIcon } from '@hugeicons/core-free-icons';
+import { SquareLock01Icon as SquareCheckIcon, Cancel01Icon as SquareXIcon, StarIcon, Coffee01Icon as CoffeeIcon, Cursor01Icon as MousePointerClickIcon, KeyboardIcon as KeyboardIcon, ChartIncreaseIcon as ChartSplineIcon } from '@hugeicons/core-free-icons';
 import clsx from 'clsx';
 import { cardBorderStyles } from '@/static/styles';
 import useStatsStore from '@/store/useStatsStore';
 import { miniButtonBorderStyles } from '@/static/styles';
 import { useStopwatch } from 'react-timer-hook';
 import { useClick } from '@/hooks/useAudio';
-import useKanjiStore from '@/store/useKanjiStore';
-import useVocabStore from '@/store/useVocabStore';
-import { usePathname } from 'next/navigation';
-import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const GameIntel = ({
   gameMode,
@@ -31,17 +27,6 @@ const GameIntel = ({
   );
 
   const { playClick } = useClick();
-
-  const pathname = usePathname();
-  const pathWithoutLocale = removeLocaleFromPath(pathname);
-  const trainingDojo = pathWithoutLocale.split('/')[1];
-
-  const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
-  const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
-
-  // useEffect(() => {
-  //   if (!isHidden) totalTimeStopwatch.start();
-  // }, [isHidden]);
 
   return (
     <div
@@ -146,25 +131,6 @@ const GameIntel = ({
           {feedback}
         </p>
       )}
-
-      <p
-        className={clsx(
-          'p-4 border-t-1 w-full border-[var(--border)] flex gap-2  items-center',
-          trainingDojo === 'kana' && 'hidden'
-        )}
-      >
-        <span className='flex gap-2 items-center'>
-          <HugeiconsIcon icon={MousePointerIcon} size={20} color="currentColor" className="text-[var(--foreground)]" />
-          selected sets:
-        </span>
-        <span className='text-[var(--muted-foreground)]'>
-          {trainingDojo === 'kanji'
-            ? selectedKanjiSets.sort().join(', ').toLowerCase()
-            : trainingDojo === 'vocabulary'
-            ? selectedVocabSets.sort().join(', ').toLowerCase()
-            : null}
-        </span>
-      </p>
     </div>
   );
 };
