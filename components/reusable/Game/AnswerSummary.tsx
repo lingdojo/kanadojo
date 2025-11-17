@@ -143,7 +143,7 @@ const KanjiSummary = ({
   </div>
 );
 
-const WordSummary = ({
+const VocabSummary = ({
   payload,
   feedback,
   onContinue,
@@ -203,7 +203,8 @@ const AnswerSummary = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
-        event.key === 'Enter' ||
+        // event.key === 'Enter' ||
+        ((event.ctrlKey || event.metaKey) && event.key === 'Enter') ||
         event.code === 'Space' ||
         event.key === ' '
       ) {
@@ -229,7 +230,7 @@ const AnswerSummary = ({
       buttonRef={buttonRef}
     />
   ) : (
-    <WordSummary
+    <VocabSummary
       key={payload.word}
       payload={payload}
       feedback={feedback}
