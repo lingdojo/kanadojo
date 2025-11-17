@@ -44,7 +44,7 @@ const ContinueButton = ({
 
         // buttonBorderStyles,
         'flex flex-row justify-center items-end gap-2 ',
-        'text-[var(--background-color)] bg-[var(--secondary-color)] hover:bg-[var(--main-color)]'
+        'text-[var(--background-color)] bg-[var(--main-color)]/80 hover:bg-[var(--main-color)]'
       )}
       onClick={onClick}
       disabled={disabled}
