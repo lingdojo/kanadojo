@@ -309,6 +309,400 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
     - Run automated contrast checks (axe, Lighthouse) and manual spot checks for CTAs and small text.
     - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
 
+#### Starlit Plum Theme (Dark — Elegant Celestial Twilight)
+The `starlit-plum` theme is inspired by the refined calm of a plum-colored night sky illuminated by soft starlight. It blends deep purples, twilight magenta, and silver-blue shimmer to create a luxurious, dreamy, and artistic dark mode—perfect for relaxed evening study or slow-paced creative sessions.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "starlit-plum",
+  backgroundColor: "hsla(285, 48%, 11%, 1)",   // Deep plum twilight sky
+  cardColor: "hsla(285, 46%, 15%, 1)",         // Elevated plum (+4% lightness)
+  borderColor: "hsla(285, 43%, 23%, 1)",       // Prominent twilight ridge (+8% over card)
+  mainColor: "hsla(320, 70%, 65%, 1)",         // Soft pink-magenta, illuminated clouds
+  secondaryColor: "hsla(200, 45%, 75%, 1)",    // Silver-blue starlight shimmer
+}
+ ```
+  
+* **Usage guidance:**
+  * Use `--background-color` for the full-page plum twilight base.
+  * Use `--card-color` for elevated surfaces, panels, and menus with softened transitions.
+  * Use `--border-color` to define structure, hover outlines, and subtle interactive edges.
+  * Use `--main-color` for primary text, icons, and accents reflecting magenta twilight clouds.
+  * Use `--secondary-color` for silver-blue star-like highlights, metadata, and subtle supporting text.
+  
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Starlit Plum — Elegant Celestial Twilight
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Dreamy plum tones, magenta glow, and shimmering starlight
+    </p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+  * `--main-color` provides high contrast against the deep plum background while staying gentle on the eyes.
+  * `--secondary-color` offers excellent visibility on both background and card surfaces; confirm via WebAIM or axe, especially for small text.
+  * `--border-color` maintains the required 3:1 contrast for interactive affordances and subtle focus rings.
+  * Avoid oversaturating tiny UI chrome with magenta; its softness is best used in meaningful highlights.
+  
+* **Developer checklist when adding/using `starlit-plum`:**
+  * Add the theme object to `static/themes.ts` under the Dark group.
+  * Verify `applyTheme("starlit-plum")` updates all CSS variables and the `data-theme` attribute.
+  * Run contrast tests (axe, Lighthouse) for both accent colors.
+  * Test buttons, inputs, dialogs, and overlays across breakpoints in low-light environments.
+  * Add the “Starlit Plum” label and preview swatch in the theme picker.
+  
+#### Coral Abyss Theme (Dark — Deep Ocean Vibrance)
+The `coral-abyss` theme draws inspiration from glowing coral reefs in the deep ocean — where abyssal blues meet radiant coral structures and bioluminescent plankton pulse through the dark. It delivers a serene yet electric mood, ideal for users who want a nature-inspired, immersive, and energizing dark theme.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "coral-abyss",
+  backgroundColor: "hsla(210, 65%, 10%, 1)",   // Deep oceanic blue-black, abyss depth
+  cardColor: "hsla(210, 62%, 14%, 1)",         // Elevated ocean layer (+4% lightness)
+  borderColor: "hsla(210, 58%, 22%, 1)",       // Reef edge highlight (+8% over card)
+  mainColor: "hsla(15, 85%, 65%, 1)",          // Vibrant coral orange
+  secondaryColor: "hsla(180, 90%, 62%, 1)",    // Electric aquamarine (bioluminescent glow)
+}
+ ```
+
+* **Usage guidance:**
+  * Use `--background-color` for the deep ocean base layer — calm, dark, and immersive.
+  * Use `--card-color` for elevated UI surfaces that need subtle separation without breaking the mood.
+  * Use `--border-color` for dividers, focus rings, interactive outlines, and hover states referencing reef edges.
+  * Use `--main-color` (coral orange) for strong focal elements: primary text, action buttons, and icons.
+  * Use `--secondary-color` (aquamarine glow) for accents, metadata, supportive UI text, or subtle highlights.
+  
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Coral Abyss — Deep Ocean Vibrance
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Coral warmth, aquamarine glow, abyssal blue depth
+    </p>
+  </div>
+</div>
+```
+  
+* **Accessibility / contrast notes:**
+  * `--main-color` (coral orange) on the deep blue-black background provides strong contrast and meets WCAG AA for normal text.
+  * `--secondary-color` maintains readable contrast on both background and card layers; verify small text contrasts using WebAIM or axe.
+  * `--border-color` on `--card-color` exceeds the 3:1 contrast requirement for interactive affordances.
+  * Avoid overusing neon tones in very small UI elements to maintain clarity and avoid visual strain.
+  
+* **Developer checklist when adding/using `coral-abyss`:**
+  * Add the theme object to `static/themes.ts` under the **Dark** group.
+  * Verify `applyTheme("coral-abyss")` correctly updates all CSS variables and sets the `data-theme` attribute.
+  * Run accessibility contrast checks (axe, Lighthouse) on both coral and aquamarine accents.
+  * Test buttons, inputs, dialogs, and menus across breakpoints to ensure consistent depth and clarity.
+  * Confirm theme picker entry renders with correct label and swatch.
+  
+#### Velvet Bloom Theme (Dark — Midnight Garden Elegance)
+The `velvet-bloom` theme delivers an opulent, romantic dark-mode atmosphere inspired by blooming moonlit flowers and deep royal-purple velvet. It blends shadowed petals, soft rose highlights, and gentle lavender accents to create a luxurious, calming visual mood ideal for late-night study and long meditation sessions.
+  
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "velvet-bloom",
+  backgroundColor: "hsla(280, 55%, 12%, 1)",   // Deep royal purple velvet
+  cardColor: "hsla(280, 52%, 17%, 1)",         // Elevated petal tone (+5% lightness)
+  borderColor: "hsla(280, 48%, 25%, 1)",       // Most prominent violet edge
+  mainColor: "hsla(330, 75%, 68%, 1)",         // Moonlit rose pink
+  secondaryColor: "hsla(285, 65%, 72%, 1)",    // Lavender twilight accent
+}
+ ```
+  
+* **Usage guidance:**
+  * Use `--background-color` to establish the velvet-deep nighttime garden base.
+  * Use `--card-color` for soft elevated surfaces, petal-inspired but subtle.
+  * Use `--border-color` for strong separation, dividers, hover outlines, and interactive affordances.
+  * Use `--main-color` for moonlit rose CTAs, primary text, and important highlights.
+  * Use `--secondary-color` for lavender accents, metadata, and gentle supportive text.
+  
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Velvet Bloom — Midnight Garden Elegance
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Deep velvet tones with rose and lavender moonlight
+    </p>
+  </div>
+</div>
+```
+  
+* **Accessibility / contrast notes:**
+  * `--main-color` (soft rose pink) on dark velvet passes AA for normal text and offers excellent nighttime readability.
+  * `--secondary-color` (lavender) provides adequate contrast on both card and background surfaces; verify with WebAIM or axe for very small text.
+  * `--border-color` meets the 3:1 contrast requirement against `--card-color` for interactive affordances and hover outlines.
+  * The palette is intentionally calm but rich; avoid using saturated pink at very small UI scales.
+  
+* **Developer checklist when adding/using `velvet-bloom`:**
+  * Add the theme object to `static/themes.ts` under the Dark group.
+  * Confirm that `applyTheme("velvet-bloom")` updates all CSS variables and the `data-theme` attribute.
+  * Run contrast checks (axe, Lighthouse) on both accent colors.
+  * Test dialogs, buttons, inputs, and overlays with the velvet palette across breakpoints.
+  * Verify theme picker swatch and label.  
+
+#### Electric Phantasm Theme (Dark — Neon Cyberpunk Overload)
+The `electric-phantasm` theme is the most extreme, hyper-saturated, cyberpunk-inspired palette in KanaDojo. It channels bioluminescent deep-sea glow, lightning storms, radioactive neon, and alien contrast. This theme is unapologetically bold—built for users who want their UI to feel alive, dangerous, and electrically charged.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "electric-phantasm",
+  backgroundColor: "hsla(280, 98%, 8%, 1)",   // Blackest violet, electric void
+  cardColor: "hsla(280, 98%, 13%, 1)",        // Elevated violet glow (+5% lightness)
+  borderColor: "hsla(280, 98%, 21%, 1)",      // Neon edge / hover energy (+8% over card)
+  mainColor: "hsla(194, 100%, 55%, 1)",       // Nuclear cyan — lightning in water
+  secondaryColor: "hsla(96, 100%, 55%, 1)",   // Radioactive acid green — alien glow
+}
+ ```
+
+* **Usage guidance:**
+  * Use `--background-color` to establish the electric void: ultra-dark violet tuned for maximum neon contrast.
+  * Use `--card-color` for raised surfaces with faint bioluminescent lift.
+  * Use `--border-color` for intense hover states, outlines, and interactive affordances.
+  * Use `--main-color` for primary text and CTAs where absolute visibility and futuristic glow are intended.
+  * Use `--secondary-color` for acid-green accents, metadata, and supporting UI elements that need shock value without overpowering content.
+
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Electric Phantasm — Neon Cyberpunk Overload
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Nuclear cyan, acid green, and violet void energy
+    </p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+  * `--main-color` (nuclear cyan) on the ultra-dark violet background exceeds AA requirements for normal text.
+  * `--secondary-color` (acid green) maintains readable contrast on card and background surfaces; verify via WebAIM or axe for fine text.
+  * `--border-color` on `--card-color` surpasses 3:1 contrast, ensuring clear interactive cues even with neon intensity.
+  * Avoid stacking neon accents too heavily in dense UI regions; maintain focus hierarchy.
+
+* **Developer checklist when adding/using `electric-phantasm`:**
+  * Add the theme to `static/themes.ts` under the Dark group.
+  * Ensure `applyTheme("electric-phantasm")` updates all CSS variables and the `data-theme` attribute.
+  * Validate all contrast ratios using accessibility tools before merging.
+  * Test buttons, dialogs, inputs, and dark-mode UI elements for clarity under extreme neon conditions.
+  * Confirm proper theme preview in the theme picker and verify consistency across game modes.
+  
+#### Dreamwave Mirage Theme (Dark — Surreal Neon Horizon)
+The `dreamwave-mirage` theme delivers a surreal, electric aesthetic designed for users who want a bold, unforgettable visual experience. It blends neon magenta, laser cyan, and deep cosmic navy with vaporwave-influenced vibrancy—resulting in a dazzling, high-contrast palette that feels futuristic, surreal, and impossible to ignore.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "dreamwave-mirage",
+  backgroundColor: "hsla(257, 77%, 13%, 1)",   // Digital midnight — deep navy-violet
+  cardColor: "hsla(257, 77%, 17%, 1)",         // Slightly lighter, maintains deep mood
+  borderColor: "hsla(257, 77%, 25%, 1)",       // Soft separation, derived from background
+  mainColor: "hsla(333, 97%, 60%, 1)",         // Neon magenta — striking headlines/CTAs
+  secondaryColor: "hsla(189, 97%, 60%, 1)",    // Laser cyan — sharp accents/highlights
+}
+ ```
+
+* **Usage guidance:**
+  * Use `--background-color` to establish the cosmic navy-violet base reminiscent of a digital midnight sky.
+  * Use `--card-color` for elevated surfaces that maintain the surreal atmosphere while adding subtle depth.
+  * Use `--border-color` for separators, hover outlines, and interactive affordances; the lighter tone ensures clean structure.
+  * Use `--main-color` for primary text, CTAs, and elements meant to pop with neon-magnetic intensity.
+  * Use `--secondary-color` to highlight secondary UI elements, metadata, or accents with laser-like clarity.
+  
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Dreamwave Mirage — Surreal Neon Horizon
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Neon magenta, laser cyan, and cosmic midnight tones
+    </p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+  * `--main-color` (neon magenta) on the dark navy-violet background passes AA for normal text and maintains excellent visibility.
+  * `--secondary-color` (laser cyan) maintains strong contrast on both background and card surfaces; verify for small text with WebAIM or axe.
+  * `--border-color` preserves the minimum 3:1 contrast ratio for interactive elements; adjust intensity only if borders serve as primary focus indicators.
+  * Avoid clustering neon accents in dense UI areas; use them intentionally to maintain clarity.
+  
+* **Developer checklist when adding/using `dreamwave-mirage`:**
+  * Add this theme to `static/themes.ts` under the Dark group.
+  * Verify `applyTheme("dreamwave-mirage")` correctly updates all CSS variables and the `data-theme` attribute.
+  * Run automated contrast tests (axe, Lighthouse) to confirm AA-level readability for both neon accent colors.
+  * Test buttons, inputs, dialogs, and tooltips to ensure neon elements remain readable in dark contexts.
+  * Confirm proper rendering and labeling in the theme picker, and validate preview swatches.
+  
+#### Golden Twilight Grove Theme (Dark — Warm, Magical, Inviting)
+The `golden-twilight-grove` theme captures the cozy brilliance of a magical forest at sunset—deep dusk greens, glowing amber light, soft jade foliage, and the gentle shimmer of fireflies. It offers a warm, optimistic dark mode that feels both relaxing and creatively energizing.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "golden-twilight-grove",
+  backgroundColor: "hsla(105, 22%, 11%, 1)",  // Deep dusk green, tranquil forest shadow
+  cardColor: "hsla(40, 40%, 16%, 1)",         // Gold-tinged earth, warm sunlight through branches
+  borderColor: "hsla(35, 78%, 32%, 1)",       // Golden bark edge, firelit wood tone
+  mainColor: "hsla(45, 96%, 67%, 1)",         // Apricot-gold highlight, firefly/sunbeam glow
+  secondaryColor: "hsla(155, 43%, 59%, 1)",   // Soft jade green, gentle summer leaves
+}
+ ```
+  
+* **Usage guidance:**
+  * Use `--background-color` for the tranquil forest-night base layer—deep, warm, and easy on the eyes.
+  * Use `--card-color` for elevated surfaces, subtle containers, or warm-toned panels.
+  * Use `--border-color` to create rich golden separation between layers—dividers, focus indicators, hover outlines.
+  * Use `--main-color` where clarity and emphasis matter: primary text, icons, important CTAs, or firefly-like highlights.
+  * Use `--secondary-color` for cool-jade counters to the warm palette—metadata, secondary actions, supportive UI accents.
+  
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Golden Twilight Grove — Warm & Magical
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Sunset gold, jade leaves, tranquil dusk atmosphere
+    </p>
+  </div>
+</div>
+```
+
+* **Accessibility / contrast notes:**
+  * `--main-color` (bright apricot-gold) meets AA contrast on the dark background and remains readable across UI sizes.
+  * `--secondary-color` (soft jade) maintains sufficient contrast on both background and card surfaces; verify for very small text via WebAIM or axe.
+  * `--border-color` is intentionally strong to provide clear interactive affordances against warm card tones.
+  * Despite its warmth, the palette avoids harsh saturation; designed for long usage without eye strain.
+
+* **Developer checklist when adding/using `golden-twilight-grove`:**
+  * Add this theme to `static/themes.ts` in the Dark group.
+  * Confirm `applyTheme("golden-twilight-grove")` updates CSS variables and theme attributes correctly.
+  * Run contrast tests (axe, Lighthouse) on all pairings of main/secondary text over card and background.
+  * Validate buttons, panels, menus, dialogs, and forms across dark-mode environments.
+  * Ensure the theme picker displays correct swatches and labeling.
+  
+#### Crystal Frost Meadow Theme (Dark — Frosty, Bright, Hopeful)
+The `crystal-frost-meadow` theme captures the serenity of winter landscapes with the optimism of early spring. It blends frosty blues, soft greens, and warm sunrise tones to create a cool yet inviting palette—gentle, lively, and ideal for long learning sessions without the bleakness of traditional icy themes.
+
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "crystal-frost-meadow",
+  backgroundColor: "hsla(207, 37%, 15%, 1)",  // Deep frost blue — cold morning snow shadow
+  cardColor: "hsla(198, 35%, 20%, 1)",        // Ocean green-blue — frosted grass & shaded streams
+  borderColor: "hsla(184, 81%, 46%, 1)",      // Glacier sparkle blue — icy border highlights
+  mainColor: "hsla(83, 74%, 65%, 1)",         // Sunrise yellow-green — warm light reflected in snow
+  secondaryColor: "hsla(193, 100%, 81%, 1)",  // Airy ice blue — frost sparkle accent
+}
+ ```
+  
+* **Usage guidance:**
+  * Use `--background-color` for deep, cold foundational surfaces inspired by snow-shadowed mornings.
+  * Use `--card-color` to represent frosted field textures and gentle green-blue elevations.
+  * Use `--border-color` for bright glacier-edge highlights around interactive components.
+  * Use `--main-color` for primary text and CTAs, reflecting soft sunrise warmth over snow.
+  * Use `--secondary-color` for frosty accents, metadata, and complementary highlights.
+  
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Crystal Frost Meadow — Frosty, Bright, Hopeful
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Snowlit greens, glacier-blue accents, gentle spring brightness
+    </p>
+  </div>
+</div>
+```
+  
+* **Accessibility / contrast notes:**
+  * All text colors meet WCAG 2.1 AA (4.5:1+) contrast on both background and card surfaces.
+  * `--main-color` provides a warm, readable contrast against the cool frost-blue base.
+  * `--secondary-color` remains legible for smaller accent text; verify with WebAIM or axe when used for small metadata.
+  * `--border-color` is intentionally bright to ensure UI affordances remain visible in low-light or blue-heavy visuals.
+  
+* **Developer checklist when adding/using `crystal-frost-meadow`:**
+  
+  * Add the theme to `static/themes.ts` under the Dark group.
+  * Ensure `applyTheme("crystal-frost-meadow")` updates all CSS variables correctly.
+  * Test accessibility using contrast tools (axe, Lighthouse, WebAIM).
+  * Verify clarity across inputs, buttons, dialogs, and panels.
+  * Confirm theme picker preview and label rendering.
+  
+#### Prism Rainforest Theme (Dark — Emerald Prism Serenity)
+The `prism-rainforest` theme creates an immersive, calming visual environment inspired by tropical rainforest dawn: deep emerald canopies, cool misty shadows, and prism-like highlights from dew catching morning light. It is vibrant yet gentle, designed for long study sessions without visual fatigue.
+  
+- **Palette (from `static/themes.ts`):**
+```ts
+{
+  id: "prism-rainforest",
+  backgroundColor: "hsla(158, 35%, 13%, 1)",   // Deep emerald — rainforest before sunrise
+  cardColor: "hsla(163, 24%, 18%, 1)",         // Misty jade — sunlit undergrowth
+  borderColor: "hsla(92, 60%, 44%, 1)",        // Moss dew — radiant foliage edge
+  mainColor: "hsla(191, 85%, 71%, 1)",         // Prism blue — sky reflection on water droplets
+  secondaryColor: "hsla(54, 96%, 73%, 1)",     // Golden sun — early light breaking through leaves
+}
+ ```
+  
+* **Usage guidance:**
+  * Use `--background-color` to create the deep, cool rainforest base that keeps the UI visually grounded.
+  * Use `--card-color` for panels, cards, and elevated surfaces that mimic leafy undergrowth.
+  * Use `--border-color` as a bright structural accent for dividers, focus rings, and interactive outlines.
+  * Use `--main-color` for prism-like clarity on primary text, icons, and CTAs.
+  * Use `--secondary-color` for warm sunlit accents, metadata, and subtle highlights.
+
+* **Tailwind example:**
+```tsx
+<div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+  <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+    <h1 className="text-2xl font-bold text-[var(--main-color)]">
+      Prism Rainforest — Emerald Prism Serenity
+    </h1>
+    <p className="text-sm text-[var(--secondary-color)]">
+      Misty greens, prism blues, gentle sunrise gold
+    </p>
+  </div>
+</div>
+```
+  
+* **Accessibility / contrast notes:**
+  * `--main-color` and `--secondary-color` both exceed AA contrast requirements on the dark emerald background.
+  * `--border-color` is intentionally luminous, ensuring strong visibility for interactive affordances.
+  * The palette avoids harsh neon; all hues are ergonomically tuned for long reading or practice sessions.
+  * Distinct color roles prevent confusion between highlights, accents, and structure.
+  
+* **Developer checklist when adding/using `prism-rainforest`:**
+  * Add the theme object to `static/themes.ts` under the Dark group.
+  * Confirm `applyTheme("prism-rainforest")` correctly updates CSS variables and the `data-theme` attribute.
+  * Validate contrast using Lighthouse or axe for small text and UI chrome.
+  * Test UI components such as cards, dialogs, lists, and form inputs in this theme for clarity and depth.
+  * Ensure the theme picker displays correct preview and naming.
+
+
   ### Theme Color Guidelines
 
 #### Color Format
