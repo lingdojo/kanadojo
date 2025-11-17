@@ -76,6 +76,14 @@ const themes: ThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: "moonlit-waterfall",
+        backgroundColor: "hsla(215, 52%, 13%, 1)",
+        cardColor: "hsla(249, 32%, 17%, 1)",
+        borderColor: "hsla(183, 87%, 53%, 1)",
+        mainColor: "hsla(267, 97%, 81%, 1)",
+        secondaryColor: "hsla(180, 100%, 89%, 1)",
+      },
+      {
         id: "mirage-solis",
         backgroundColor: "hsla(322, 68%, 14%, 1)",
         cardColor: "hsla(24, 86%, 17%, 1)",
