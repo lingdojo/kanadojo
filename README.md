@@ -16,19 +16,7 @@
 - [中文（繁體）](./docs/translations/README.zh-tw.md)
 
 </details>
-<div style="text-align:center; margin: 0.4rem 0;">
-   <a href="#about-kanadojo" style="text-decoration:none; margin:0 0.6rem;">About KanaDojo</a>
-   <a href="#screenshots" style="text-decoration:none; margin:0 0.6rem;">Screenshots</a>
-   <a href="#ui-design-philosophy" style="text-decoration:none; margin:0 0.6rem;">UI &amp; Design Philosophy</a>
-   <a href="#tech-stack" style="text-decoration:none; margin:0 0.6rem;">Tech Stack</a>
-   <a href="#getting-started" style="text-decoration:none; margin:0 0.6rem;">Getting Started</a>
-   <a href="#project-structure" style="text-decoration:none; margin:0 0.6rem;">Project Structure</a>
-   <a href="#contributing" style="text-decoration:none; margin:0 0.6rem;">Contributing</a>
-   <a href="#license" style="text-decoration:none; margin:0 0.6rem;">License</a>
-   <a href="#acknowledgments" style="text-decoration:none; margin:0 0.6rem;">Acknowledgments</a>
-   <a href="#translations" style="text-decoration:none; margin:0 0.6rem;">Translations</a>
-   <a href="#contact-links" style="text-decoration:none; margin:0 0.6rem;">Contact &amp; Links</a>
-</div>
+<a href="#about-kanadojo">About KanaDojo</a> | <a href="#screenshots">Screenshots</a> | <a href="#ui-design-philosophy">UI &amp; Design Philosophy</a> | <a href="#tech-stack">Tech Stack</a> | <a href="#getting-started">Getting Started</a> | <a href="#project-structure">Project Structure</a> | <a href="#contributing">Contributing</a> | <a href="#license">License</a> | <a href="#acknowledgments">Acknowledgments</a> | <a href="#translations">Translations</a> | <a href="#contact-links">Contact &amp; Links</a> 
 
 # KanaDojo かな道場
 

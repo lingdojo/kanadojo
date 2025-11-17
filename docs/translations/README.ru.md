@@ -1,18 +1,5 @@
 <div id="top"></div>
-
-<div style="text-align:center; margin: 0.4rem 0;">
-   <a href="#about-kanadojo" style="text-decoration:none; margin:0 0.6rem;">О KanaDojo</a>
-   <a href="#screenshots" style="text-decoration:none; margin:0 0.6rem;">Скриншоты</a>
-   <a href="#ui-design-philosophy" style="text-decoration:none; margin:0 0.6rem;">UI &amp; философия дизайна</a>
-   <a href="#tech-stack" style="text-decoration:none; margin:0 0.6rem;">Технический стек</a>
-   <a href="#getting-started" style="text-decoration:none; margin:0 0.6rem;">Начало работы</a>
-   <a href="#project-structure" style="text-decoration:none; margin:0 0.6rem;">Структура проекта</a>
-   <a href="#contributing" style="text-decoration:none; margin:0 0.6rem;">Вклад в проект</a>
-   <a href="#license" style="text-decoration:none; margin:0 0.6rem;">Лицензия</a>
-   <a href="#acknowledgments" style="text-decoration:none; margin:0 0.6rem;">Благодарности</a>
-   <a href="#translations" style="text-decoration:none; margin:0 0.6rem;">Переводы</a>
-   <a href="#contact-links" style="text-decoration:none; margin:0 0.6rem;">Контакты &amp; ссылки</a>
-</div>
+<a href="#about-kanadojo">О KanaDojo</a> | <a href="#screenshots">Скриншоты</a> | <a href="#ui-design-philosophy">UI &amp; философия дизайна</a> | <a href="#tech-stack">Технический стек</a> | <a href="#getting-started">Начало работы</a> | <a href="#project-structure">Структура проекта</a> | <a href="#contributing">Вклад в проект</a> | <a href="#license">Лицензия</a> | <a href="#acknowledgments">Благодарности</a> | <a href="#translations">Переводы</a> | <a href="#contact-links">Контакты &amp; ссылки</a>
 
 # KanaDojo かな道場
 
