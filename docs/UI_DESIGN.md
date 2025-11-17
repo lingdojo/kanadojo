@@ -257,6 +257,58 @@ The `sumi` theme is a minimal, sumi-e (Japanese ink) inspired dark theme added i
   - Test interactive components (buttons, inputs, dialogs) visually and via automated contrast checks.
   - Consider providing a slightly lighter variant of `--main-color` for disabled/low-emphasis states to avoid blending with `--card-color`.
 
+  #### Momiji Theme (Dark — Autumn Maple)
+
+  The `momiji` theme is inspired by autumn maple leaves — warm, cozy, and subtly vibrant. It pairs a deep, neutral page background with amber and yellow-green accents for highlights and CTAs. Use this theme when you want a seasonal, warm-dark aesthetic that still prioritizes readability and clear affordances.
+
+  - **Palette (from `static/themes.ts`):**
+
+  ```ts
+  {
+    id: 'momiji',
+    backgroundColor: 'hsla(15, 35%, 11%, 1)',
+    cardColor: 'hsla(15, 33%, 15%, 1)',
+    borderColor: 'hsla(15, 30%, 23%, 1)',
+    mainColor: 'hsla(5, 85%, 58%, 1)',
+    secondaryColor: 'hsla(45, 88%, 62%, 1)',
+  }
+  ```
+
+  - **Usage guidance:**
+
+    - Use `--background-color` for full-page backgrounds and large overlays.
+    - Use `--card-color` for cards, panels, and elevated UI surfaces to create subtle separation from the page background.
+    - Use `--border-color` for separators, subtle hover outlines, and focus affordances.
+    - Use `--main-color` for primary text, icons, and CTAs that need emphasis.
+    - Use `--secondary-color` for accent highlights, badges, and secondary CTAs.
+
+  - **Tailwind example:**
+
+  ```tsx
+  <div className="bg-[var(--background-color)] min-h-screen text-[var(--main-color)]">
+    <div className="rounded-xl bg-[var(--card-color)] border border-[var(--border-color)] p-6">
+      <h1 className="text-2xl font-bold text-[var(--main-color)]">
+        Momiji — Autumn Warmth
+      </h1>
+      <p className="text-sm text-[var(--secondary-color)]">
+        Accent and supportive text
+      </p>
+    </div>
+  </div>
+  ```
+
+  - **Accessibility / contrast notes:**
+
+    - `--main-color` (warm amber) on `--background-color` (deep charcoal) should provide strong contrast for body text; still validate with WebAIM, axe, or Lighthouse.
+    - `--secondary-color` (yellow-green) is an accent — confirm contrast on both `--background-color` and `--card-color` when used for small or secondary text; reduce saturation or increase lightness if below AA.
+    - Ensure `--border-color` on `--card-color` meets at least a 3:1 contrast ratio for interactive affordances; increase opacity if necessary when used as a primary focus indicator.
+
+  - **Developer checklist when adding/using `momiji`:**
+    - Add the theme object to `static/themes.ts` under the `Dark` theme group.
+    - Verify `applyTheme('momiji')` updates CSS variables and `data-theme` attribute correctly.
+    - Run automated contrast checks (axe, Lighthouse) and manual spot checks for CTAs and small text.
+    - Test interactive components (buttons, inputs, dialogs) visually across breakpoints and accessibility modes.
+
   ### Theme Color Guidelines
 
 #### Color Format

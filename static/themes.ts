@@ -76,6 +76,41 @@ const themes: ThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+<<<<<<< HEAD
+=======
+        id: "moonlit-waterfall",
+        backgroundColor: "hsla(215, 52%, 13%, 1)",
+        cardColor: "hsla(249, 32%, 17%, 1)",
+        borderColor: "hsla(183, 87%, 53%, 1)",
+        mainColor: "hsla(267, 97%, 81%, 1)",
+        secondaryColor: "hsla(180, 100%, 89%, 1)",
+      },
+      {
+        id: "mirage-solis",
+        backgroundColor: "hsla(322, 68%, 14%, 1)",
+        cardColor: "hsla(24, 86%, 17%, 1)",
+        borderColor: "hsla(281, 78%, 38%, 1)",
+        mainColor: "hsla(43, 100%, 68%, 1)",
+        secondaryColor: "hsla(199, 87%, 70%, 1)",
+      },
+      {
+        id: "wasabi-garden",
+        backgroundColor: "hsla(100, 42%, 12%, 1)",
+        cardColor: "hsla(100, 40%, 16%, 1)",
+        borderColor: "hsla(100, 36%, 24%, 1)",
+        mainColor: "hsla(115, 85%, 60%, 1)",
+        secondaryColor: "hsla(33, 80%, 60%, 1)",
+      },
+      {
+        id: "wabi",
+        backgroundColor: "hsla(3, 20%, 11%, 1)",
+        cardColor: "hsla(3, 18%, 15%, 1)",
+        borderColor: "hsla(3, 17%, 22%, 1)",
+        mainColor: "hsla(8, 85%, 59%, 1)",
+        secondaryColor: "hsla(32, 25%, 70%, 1)",
+      },
+      {
+>>>>>>> 0db12f35360b52f48a2efedb94f4327c6dc80fb5
         id: 'monkeytype',
         backgroundColor: 'hsla(210, 5%, 22%, 1)',
         cardColor: 'hsla(220, 5%, 28%, 1)',
@@ -98,6 +133,14 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(220, 45%, 22%, 1)',
         mainColor: 'hsla(350, 82%, 62%, 1)',
         secondaryColor: 'hsla(280, 65%, 68%, 1)',
+      },
+      {
+        id: "dusk-voyager",
+        backgroundColor: "hsla(216, 32%, 11%, 1)",
+        cardColor: "hsla(216, 29%, 16%, 1)",
+        borderColor: "hsla(216, 26%, 24%, 1)",
+        mainColor: "hsla(198, 78%, 71%, 1)",
+        secondaryColor: "hsla(49, 94%, 57%, 1)",
       },
       {
         id: 'aizome',
