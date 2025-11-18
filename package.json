@@ -10,8 +10,10 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "generate:constants": "tsx scripts/generateConstants.ts"
   },
+  "type": "module",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
@@ -57,6 +59,7 @@
     "eslint-config-next": "15.2.4",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

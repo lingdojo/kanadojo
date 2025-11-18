@@ -1,15 +1,41 @@
 'use client';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 import { IWord } from '@/lib/interfaces';
 import { cardBorderStyles } from '@/static/styles';
 import useVocabStore from '@/store/useVocabStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
-import N5Nouns from '@/static/vocab/n5/nouns';
-import N4Nouns from '@/static/vocab/n4/nouns';
-import N3Nouns from '@/static/vocab/n3/nouns';
-import N2Nouns from '@/static/vocab/n2/nouns';
+type RawVocabEntry = {
+  jmdict_seq: string;
+  kana: string;
+  kanji: string;
+  waller_definition: string;
+};
+
+const vocabImporters = {
+  n5: () => import('@/static/vocab/n5.json'),
+  n4: () => import('@/static/vocab/n4.json'),
+  n3: () => import('@/static/vocab/n3.json'),
+  n2: () => import('@/static/vocab/n2.json'),
+} as const;
+
+type VocabCollectionKey = keyof typeof vocabImporters;
+
+const toWordObj = (entry: RawVocabEntry): IWord => {
+  const definitionPieces = entry.waller_definition
+    .split(/[;,]/)
+    .map(piece => piece.trim())
+    .filter(Boolean);
+
+  return {
+    word: entry.kanji?.trim() || entry.kana,
+    reading: `${entry.kana} ${entry.kana}`.trim(),
+    displayMeanings: definitionPieces,
+    meanings: definitionPieces,
+  };
+};
 
 const createVocabSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
@@ -22,32 +48,46 @@ const createVocabSetRanges = (numSets: number) =>
 
 const vocabSetSliceRanges = createVocabSetRanges(200);
 
-const vocabData = {
-  n5: {
-    nouns: N5Nouns,
-  },
-  n4: {
-    nouns: N4Nouns,
-  },
-  n3: {
-    nouns: N3Nouns,
-  },
-  n2: {
-    nouns: N2Nouns,
-  },
-};
-
-type VocabData = Record<string, { nouns: IWord[] }>;
-
 const SetDictionary = ({ set }: { set: string }) => {
   const showKana = usePreferencesStore(state => state.displayKana);
 
   const selectedVocabCollection = useVocabStore(
     state => state.selectedVocabCollection
   );
-  const displayVocabCollection = (vocabData as VocabData)[
-    selectedVocabCollection
-  ]['nouns'];
+  const [vocabCollections, setVocabCollections] = useState<
+    Partial<Record<VocabCollectionKey, IWord[]>>
+  >({});
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadVocab = async () => {
+      const level = selectedVocabCollection as VocabCollectionKey;
+      if (vocabCollections[level]) return;
+
+      const importer = vocabImporters[level];
+      if (!importer) return;
+
+      const vocabModule = await importer();
+      if (!isMounted) return;
+
+      setVocabCollections(prev => ({
+        ...prev,
+        [level]: vocabModule.default.map(toWordObj),
+      }));
+    };
+
+    void loadVocab();
+
+    return () => {
+      isMounted = false;
+    };
+    // Intentionally omitting vocabCollections from deps to avoid refetching
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const displayVocabCollection =
+    vocabCollections[selectedVocabCollection as VocabCollectionKey] ?? [];
 
   const sliceRange =
     vocabSetSliceRanges[set as keyof typeof vocabSetSliceRanges];
@@ -58,7 +98,7 @@ const SetDictionary = ({ set }: { set: string }) => {
         .slice(sliceRange[0], sliceRange[1])
         .map((wordObj: IWord, i: number) => (
           <div
-            key={wordObj.word}
+            key={wordObj.word + Math.random() * 999}
             className={clsx(
               'flex flex-col justify-start items-start gap-4 py-4 max-md:px-4',
               i !== 9 && 'border-b-1 border-[var(--border-color)]'
