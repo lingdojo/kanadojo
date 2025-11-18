@@ -52,8 +52,9 @@ const Fonts = () => {
             className={clsx(
               'flex justify-center items-center',
               buttonBorderStyles,
-              'py-4 px-4',
-              'flex-1 overflow-hidden'
+              'py-4 px-4 border-[var(--card-color)] border-2',
+              'flex-1 overflow-hidden',
+              fontObj.name === currentFont && 'border-[var(--main-color)]'
             )}
             onClick={() => playClick()}
           >
@@ -69,9 +70,7 @@ const Fonts = () => {
               <span className="text-[var(--secondary-color)]">
                 {fontObj.name === currentFont ? '\u2B24 ' : ''}
               </span>
-              <span className="">
-                {fontObj.name}
-              </span>
+              <span className="">{fontObj.name}</span>
               {fontObj.name === 'Zen Maru Gothic' && ' (default)'}
               <span className="ml-2 text-[var(--secondary-color)]">
                 かな道場

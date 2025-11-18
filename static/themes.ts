@@ -78,7 +78,7 @@ const themes: ThemeGroup[] = [
       {
         id: 'monkeytype',
         backgroundColor: 'hsla(210, 5%, 22%, 1)',
-        cardColor: 'hsla(220, 5%, 28%, 1)',
+        cardColor: 'hsla(220, 5%, 27%, 1)',
         borderColor: 'hsla(220, 5%, 35%, 1)',
         mainColor: 'hsla(49, 82%, 49%, 1)',
         secondaryColor: 'hsla(49, 14%, 81%, 1)',
@@ -738,8 +738,8 @@ const themes: ThemeGroup[] = [
       {
         id: 'cosmic-dream',
         backgroundColor: 'hsla(260, 62%, 11%, 1)',
-        cardColor: 'hsla(255, 58%, 16%, 1)',
-        borderColor: 'hsla(190, 98%, 58%, 1)',
+        cardColor: 'hsla(260, 62%, 18%, 1)',
+        borderColor: 'hsla(260, 62%, 25%, 1)',
         mainColor: 'hsla(294, 100%, 67%, 1)',
         secondaryColor: 'hsla(192, 100%, 86%, 1)',
       },

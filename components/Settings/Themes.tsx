@@ -108,7 +108,8 @@ const Themes = () => {
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center',
                   'flex-1 overflow-hidden',
-                  buttonBorderStyles
+                  buttonBorderStyles,
+                  currentTheme.id === selectedTheme && 'border-2'
                 )}
                 onClick={() => {
                   playClick();
@@ -139,7 +140,7 @@ const Themes = () => {
                   className="hidden"
                 />
                 <span className="text-center text-lg flex items-center gap-1.5">
-                  <span className='text-[var(--secondary-color)]'>
+                  <span className="text-[var(--secondary-color)]">
                     {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                   </span>
                   {currentTheme.id === 'long'
