@@ -183,6 +183,7 @@ const KanjiCards = () => {
       )}
 
       {/* Show progress indicator if user has data but no mastered sets yet */}
+      {/* 
       {hasProgressData && masteredCount === 0 && (
         <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)] ">
           <p className="text-sm text-[var(--secondary-color)]">
@@ -193,7 +194,7 @@ const KanjiCards = () => {
           </p>
         </div>
       )}
-
+ */}
       {chunkArray(filteredKanjiSets, numColumns).map((rowSets, rowIndex) => {
         // Get the actual set numbers from the filtered sets
         const firstSetNumber = rowSets[0]?.name.match(/\d+/)?.[0] || '1';
@@ -229,10 +230,10 @@ const KanjiCards = () => {
                 size={28}
               />
               <span className="max-lg:hidden">
-                Sets {firstSetNumber}
+                Levels {firstSetNumber}
                 {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
-              <span className="lg:hidden">Set {firstSetNumber}</span>
+              <span className="lg:hidden">Level {firstSetNumber}</span>
             </h3>
 
             {!collapsedRows.includes(rowIndex) && (
@@ -295,7 +296,7 @@ const KanjiCards = () => {
                       ) : (
                         <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
                       )}
-                      {kanjiSetTemp.name}
+                      {kanjiSetTemp.name.replace('Set ', 'Level ')}
                     </button>
                     <KanjiSetDictionary set={kanjiSetTemp.id} />
                   </div>

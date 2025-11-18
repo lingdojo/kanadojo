@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { IKanjiObj } from '@/store/useKanjiStore';
-import { IWordObj } from '@/store/useVocabStore';
+import { IVocabObj } from '@/store/useVocabStore';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/hooks/useAudio';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
 // Type guard
-const isKanjiObj = (obj: IKanjiObj | IWordObj): obj is IKanjiObj => {
+const isKanjiObj = (obj: IKanjiObj | IVocabObj): obj is IKanjiObj => {
   return (obj as IKanjiObj).kanjiChar !== undefined;
 };
 
@@ -44,7 +44,7 @@ const ContinueButton = ({
 
         // buttonBorderStyles,
         'flex flex-row justify-center items-end gap-2 ',
-        'text-[var(--background-color)] bg-[var(--secondary-color)] hover:bg-[var(--main-color)]'
+        'text-[var(--background-color)] bg-[var(--main-color)]/80 hover:bg-[var(--main-color)]'
       )}
       onClick={onClick}
       disabled={disabled}
@@ -143,13 +143,13 @@ const KanjiSummary = ({
   </div>
 );
 
-const WordSummary = ({
+const VocabSummary = ({
   payload,
   feedback,
   onContinue,
   buttonRef,
 }: {
-  payload: IWordObj;
+  payload: IVocabObj;
   feedback: React.ReactElement;
   onContinue: () => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
@@ -193,7 +193,7 @@ const AnswerSummary = ({
   setDisplayAnswerSummary,
   feedback,
 }: {
-  payload: IKanjiObj | IWordObj;
+  payload: IKanjiObj | IVocabObj;
   setDisplayAnswerSummary: Dispatch<SetStateAction<boolean>>;
   feedback: React.ReactElement;
 }) => {
@@ -203,7 +203,8 @@ const AnswerSummary = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
-        event.key === 'Enter' ||
+        // event.key === 'Enter' ||
+        ((event.ctrlKey || event.metaKey) && event.key === 'Enter') ||
         event.code === 'Space' ||
         event.key === ' '
       ) {
@@ -229,7 +230,7 @@ const AnswerSummary = ({
       buttonRef={buttonRef}
     />
   ) : (
-    <WordSummary
+    <VocabSummary
       key={payload.word}
       payload={payload}
       feedback={feedback}

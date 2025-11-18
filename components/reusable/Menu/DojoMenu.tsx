@@ -17,7 +17,7 @@ const DojoMenu = () => {
   const pathname = usePathname();
   const pathWithoutLocale = removeLocaleFromPath(pathname);
 
-  const [showGameModes, setShowGameModes] = useState(false);
+  const [showGameModes, setShowGameModes] = useState(true);
 
   useEffect(() => {
     // clearKanji();
@@ -28,11 +28,16 @@ const DojoMenu = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Only trigger on Kanji/Vocab pages
-      if (pathWithoutLocale !== '/kanji' && pathWithoutLocale !== '/vocabulary') return;
-      
+      if (pathWithoutLocale !== '/kanji' && pathWithoutLocale !== '/vocabulary')
+        return;
+
       // Ignore if user is typing in an input field
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      )
+        return;
+
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         setShowGameModes(prev => !prev);
@@ -44,7 +49,7 @@ const DojoMenu = () => {
   }, [pathWithoutLocale]);
 
   return (
-    <div className='min-h-[100dvh] max-w-[100dvw] lg:pr-20 flex gap-4'>
+    <div className="min-h-[100dvh] max-w-[100dvw] lg:pr-20 flex gap-4">
       <Sidebar />
       <div
         className={clsx(
@@ -56,13 +61,12 @@ const DojoMenu = () => {
         <Banner />
 
         <Info />
-        {(pathWithoutLocale === '/kanji' || pathWithoutLocale === '/vocabulary') && (
-          <CollectionSelector />
-        )}
+        {(pathWithoutLocale === '/kanji' ||
+          pathWithoutLocale === '/vocabulary') && <CollectionSelector />}
         <TopBar
           showGameModes={showGameModes}
           setShowGameModes={setShowGameModes}
-          currentDojo='kana'
+          currentDojo="kana"
         />
         {showGameModes && <GameModes />}
 

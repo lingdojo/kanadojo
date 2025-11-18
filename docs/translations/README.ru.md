@@ -1,5 +1,9 @@
 <div id="top"></div>
 
+**KanaDojo доступен на нескольких языках благодаря вкладу сообщества:**
+
+[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/**  Русский
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -442,21 +446,6 @@ kanadojo/
 - Данные по японскому языку и информация о символах
 - Сообществу с открытым исходным кодом за отличные инструменты и библиотеки
 - Всем участникам, которые помогают улучшать KanaDojo
-
-## 🌐 Переводы
-
-KanaDojo доступен на нескольких языках благодаря вкладу сообщества:
-
-- English (по умолчанию)
-- [Español](docs/translations/README.es.md)
-- [Français](docs/translations/README.fr.md) — в процессе
-- [Deutsch](docs/translations/README.de.md)
-- [Português](docs/translations/README.pt-br.md)
-- [Türkçe](docs/translations/README.tr.md)
-- [中文（简体）](docs/translations/README.zh-CN.md)
-- [中文（繁體）](docs/translations/README.zh-tw.md)
-- [हिन्दी](docs/translations/README.hin.md)
-- <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
 
 ## 📞 Контакты и ссылки
 

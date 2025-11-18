@@ -78,7 +78,7 @@ const themes: ThemeGroup[] = [
       {
         id: 'monkeytype',
         backgroundColor: 'hsla(210, 5%, 22%, 1)',
-        cardColor: 'hsla(220, 5%, 28%, 1)',
+        cardColor: 'hsla(220, 5%, 27%, 1)',
         borderColor: 'hsla(220, 5%, 35%, 1)',
         mainColor: 'hsla(49, 82%, 49%, 1)',
         secondaryColor: 'hsla(49, 14%, 81%, 1)',
@@ -100,6 +100,14 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(280, 65%, 68%, 1)',
       },
       {
+        id: 'dusk-voyager',
+        backgroundColor: 'hsla(216, 32%, 11%, 1)',
+        cardColor: 'hsla(216, 29%, 16%, 1)',
+        borderColor: 'hsla(216, 26%, 24%, 1)',
+        mainColor: 'hsla(198, 78%, 71%, 1)',
+        secondaryColor: 'hsla(49, 94%, 57%, 1)',
+      },
+      {
         id: 'aizome',
         backgroundColor: 'hsla(215, 48%, 11%, 1)',
         cardColor: 'hsla(215, 46%, 15%, 1)',
@@ -107,6 +115,48 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(210, 75%, 58%, 1)',
         secondaryColor: 'hsla(35, 35%, 72%, 1)',
       },
+      {
+        id: 'fuji',
+        backgroundColor: 'hsla(210, 28%, 11%, 1)',
+        cardColor: 'hsla(210, 26%, 15%, 1)',
+        borderColor: 'hsla(210, 24%, 23%, 1)',
+        mainColor: 'hsla(200, 55%, 75%, 1)',
+        secondaryColor: 'hsla(0, 0%, 92%, 1)',
+      },
+
+      {
+        id: 'arashiyama',
+        backgroundColor: 'hsla(150, 32%, 10%, 1)',
+        cardColor: 'hsla(150, 30%, 14%, 1)',
+        borderColor: 'hsla(150, 28%, 22%, 1)',
+        mainColor: 'hsla(125, 65%, 52%, 1)',
+        secondaryColor: 'hsla(85, 40%, 65%, 1)',
+      },
+      {
+        id: 'moonlit-waterfall',
+        backgroundColor: 'hsla(215, 52%, 13%, 1)',
+        cardColor: 'hsla(215, 52%, 16%, 1)',
+        borderColor: 'hsla(215, 52%, 24%, 1)',
+        mainColor: 'hsla(267, 97%, 81%, 1)',
+        secondaryColor: 'hsla(180, 100%, 89%, 1)',
+      },
+            {
+        id: 'wasabi-garden',
+        backgroundColor: 'hsla(100, 42%, 12%, 1)',
+        cardColor: 'hsla(100, 40%, 16%, 1)',
+        borderColor: 'hsla(100, 36%, 24%, 1)',
+        mainColor: 'hsla(115, 85%, 60%, 1)',
+        secondaryColor: 'hsla(33, 80%, 60%, 1)',
+      },
+      {
+        id: 'wabi',
+        backgroundColor: 'hsla(3, 20%, 11%, 1)',
+        cardColor: 'hsla(3, 18%, 15%, 1)',
+        borderColor: 'hsla(3, 17%, 22%, 1)',
+        mainColor: 'hsla(8, 85%, 59%, 1)',
+        secondaryColor: 'hsla(32, 25%, 70%, 1)',
+      },
+
       {
         id: 'matrix',
         backgroundColor: 'hsl(0, 0%, 0%)',
@@ -389,14 +439,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(182, 100%, 68%, 1)',
       },
       {
-        id: 'lotus-specter',
-        backgroundColor: 'hsla(322, 48%, 11%, 1)',
-        cardColor: 'hsla(322, 53%, 16%, 1)',
-        borderColor: 'hsla(322, 53%, 29%, 1)',
-        mainColor: 'hsla(291, 99%, 72%, 1)',
-        secondaryColor: 'hsla(53, 100%, 67%, 1)',
-      },
-      {
         id: 'sapphire-bloom',
         backgroundColor: 'hsla(224, 41%, 14%, 1)',
         cardColor: 'hsla(224, 47%, 19%, 1)',
@@ -649,8 +691,8 @@ const themes: ThemeGroup[] = [
         backgroundColor: 'hsla(34, 18%, 12%, 1)',
         cardColor: 'hsla(34, 18%, 19%, 1)',
         borderColor: 'hsla(34, 18%, 30%, 1)',
-        mainColor: 'hsla(30, 41%, 60%, 1)',
-        secondaryColor: 'hsla(48, 92%, 58%, 1)',
+        secondaryColor: 'hsla(30, 41%, 60%, 1)',
+        mainColor: 'hsla(48, 92%, 58%, 1)',
       },
       {
         id: 'vaporpop',
@@ -686,13 +728,13 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsl(226, 64%, 88%)',
       },
       {
-        id: "fuji",
-        backgroundColor: "hsla(210, 28%, 11%, 1)",
-        cardColor: "hsla(210, 26%, 15%, 1)",
-        borderColor: "hsla(210, 24%, 23%, 1)",
-        mainColor: "hsla(200, 55%, 75%, 1)",
-        secondaryColor: "hsla(0, 0%, 92%, 1)",
-      }
+        id: 'cosmic-dream',
+        backgroundColor: 'hsla(260, 62%, 11%, 1)',
+        cardColor: 'hsla(260, 62%, 18%, 1)',
+        borderColor: 'hsla(260, 62%, 25%, 1)',
+        mainColor: 'hsla(294, 100%, 67%, 1)',
+        secondaryColor: 'hsla(192, 100%, 86%, 1)',
+      },
     ],
   },
 
@@ -731,7 +773,7 @@ const themes: ThemeGroup[] = [
     name: 'Christmas',
     icon: TreePine,
     themes: [
-            {
+      {
         id: 'santa-night',
         // Deep night blue background
         backgroundColor: 'hsla(220, 50%, 12%, 1)',
@@ -764,7 +806,7 @@ const themes: ThemeGroup[] = [
         // Holly green
         secondaryColor: 'hsla(140, 55%, 40%, 1)',
       },
-      
+
       {
         id: 'northern-lights',
         // Dark arctic night
@@ -776,8 +818,6 @@ const themes: ThemeGroup[] = [
         // Aurora purple/pink
         secondaryColor: 'hsla(280, 85%, 65%, 1)',
       },
-
-      
     ],
   },
 ];
