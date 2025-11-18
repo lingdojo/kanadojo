@@ -96,7 +96,7 @@ const Themes = () => {
                   color: currentTheme.mainColor,
                   backgroundColor:
                     isHovered === currentTheme.id
-                      ? currentTheme.borderColor
+                      ? currentTheme.cardColor
                       : currentTheme.backgroundColor,
                   borderWidth:
                     process.env.NODE_ENV === 'development' ? '4px' : undefined,
@@ -107,7 +107,7 @@ const Themes = () => {
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center',
-                  'flex-1 overflow-hidden border-2 border-[var(--card-color)]',
+                  'flex-1 overflow-hidden border-2 border-[var(--background-color)]',
                   buttonBorderStyles,
                   currentTheme.id === selectedTheme &&
                     'border-[var(--main-color)]'
