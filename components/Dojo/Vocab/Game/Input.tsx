@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
-import { IWordObj } from '@/store/useVocabStore';
+import { IVocabObj } from '@/store/useVocabStore';
 import { useClick, useCorrect, useError } from '@/hooks/useAudio';
 import GameIntel from '@/components/reusable/Game/GameIntel';
 import { buttonBorderStyles } from '@/static/styles';
@@ -18,7 +18,7 @@ import FuriganaText from '@/components/reusable/FuriganaText';
 const random = new Random();
 
 interface VocabInputGameProps {
-  selectedWordObjs: IWordObj[];
+  selectedWordObjs: IVocabObj[];
   isHidden: boolean;
   isReverse?: boolean;
 }
@@ -26,7 +26,7 @@ interface VocabInputGameProps {
 const VocabInputGame = ({
   selectedWordObjs,
   isHidden,
-  isReverse = false
+  isReverse = false,
 }: VocabInputGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -38,7 +38,7 @@ const VocabInputGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playClick } = useClick();
@@ -137,10 +137,10 @@ const VocabInputGame = ({
     generateNewCharacter();
     setFeedback(
       <>
-        <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${userInput
+        <span className="text-[var(--secondary-color)]">{`${correctChar} = ${userInput
           .trim()
           .toLowerCase()} `}</span>
-        <CircleCheck className='inline text-[var(--main-color)]' />
+        <CircleCheck className="inline text-[var(--main-color)]" />
       </>
     );
   };
@@ -149,10 +149,10 @@ const VocabInputGame = ({
     setInputValue('');
     setFeedback(
       <>
-        <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${inputValue
+        <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${inputValue
           .trim()
           .toLowerCase()} `}</span>
-        <CircleX className='inline text-[var(--main-color)]' />
+        <CircleX className="inline text-[var(--main-color)]" />
       </>
     );
     playErrorTwice();
@@ -218,7 +218,7 @@ const VocabInputGame = ({
       )}
       {!displayAnswerSummary && (
         <>
-          <div className='flex flex-col items-center gap-4'>
+          <div className="flex flex-col items-center gap-4">
             <FuriganaText
               text={correctChar}
               reading={!isReverse ? correctWordObj?.reading : undefined}
@@ -227,15 +227,15 @@ const VocabInputGame = ({
             />
             <SSRAudioButton
               text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
+              variant="icon-only"
+              size="lg"
+              className="bg-[var(--card-color)] border-[var(--border-color)]"
             />
           </div>
 
           <input
             ref={inputRef}
-            type='text'
+            type="text"
             value={inputValue}
             className={clsx(
               'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',

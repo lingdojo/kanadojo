@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
-import { IWordObj } from '@/store/useVocabStore';
+import { IVocabObj } from '@/store/useVocabStore';
 import { useCorrect, useError } from '@/hooks/useAudio';
 import { buttonBorderStyles } from '@/static/styles';
 import GameIntel from '@/components/reusable/Game/GameIntel';
@@ -19,7 +19,7 @@ import FuriganaText from '@/components/reusable/FuriganaText';
 const random = new Random();
 
 interface VocabPickGameProps {
-  selectedWordObjs: IWordObj[];
+  selectedWordObjs: IVocabObj[];
   isHidden: boolean;
   isReverse?: boolean;
 }
@@ -27,7 +27,7 @@ interface VocabPickGameProps {
 const VocabPickGame = ({
   selectedWordObjs,
   isHidden,
-  isReverse = false
+  isReverse = false,
 }: VocabPickGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -39,7 +39,7 @@ const VocabPickGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -136,8 +136,8 @@ const VocabPickGame = ({
       generateNewCharacter();
       setFeedback(
         <>
-          <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className='inline text-[var(--main-color)]' />
+          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className="inline text-[var(--main-color)]" />
         </>
       );
       setCurrentWordObj(correctWordObj);
@@ -145,8 +145,8 @@ const VocabPickGame = ({
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className='inline text-[var(--main-color)]' />
+          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className="inline text-[var(--main-color)]" />
         </>
       );
     }
@@ -212,7 +212,7 @@ const VocabPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <div className='flex flex-col items-center gap-4'>
+          <div className="flex flex-col items-center gap-4">
             <FuriganaText
               text={correctChar}
               reading={!isReverse ? correctWordObj?.reading : undefined}
@@ -221,9 +221,9 @@ const VocabPickGame = ({
             />
             <SSRAudioButton
               text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
+              variant="icon-only"
+              size="lg"
+              className="bg-[var(--card-color)] text-[var(--secondary-color)]"
             />
           </div>
 
@@ -239,7 +239,7 @@ const VocabPickGame = ({
                   buttonRefs.current[i] = elem;
                 }}
                 key={option + i}
-                type='button'
+                type="button"
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
                   'py-4 px-2 rounded-xl w-full lg:w-1/4 flex flex-row justify-center items-center gap-1.5',
@@ -250,7 +250,7 @@ const VocabPickGame = ({
                   wrongSelectedAnswers.includes(option) &&
                     'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'hover:scale-110 text-[var(--main-color)] hover:text-[var(--secondary-color)]'
+                    'text-[var(--main-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
@@ -267,7 +267,9 @@ const VocabPickGame = ({
                 <span
                   className={clsx(
                     'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',
-                    'text-[var(--secondary-color)]'
+                    wrongSelectedAnswers.includes(option)
+                      ? 'text-[var(--border-color)]'
+                      : 'text-[var(--secondary-color)]'
                   )}
                 >
                   {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}

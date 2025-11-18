@@ -37,8 +37,8 @@ const Backup: React.FC = () => {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row gap-3">
-        <Button onClick={onExport}>Export</Button>
-        <Button variant="secondary" onClick={() => fileRef.current?.click()}>
+        <Button onClick={onExport} className="hover:cursor-pointer">Export</Button>
+        <Button variant="secondary" onClick={() => fileRef.current?.click()} className="hover:cursor-pointer">
           Import
         </Button>
         <input

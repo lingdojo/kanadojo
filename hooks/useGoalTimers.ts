@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import confetti from 'canvas-confetti';
+import { useGoalTimersStore } from '@/store/useGoalTimersStore';
 
 export interface GoalTimer {
   id: string;
@@ -8,21 +9,33 @@ export interface GoalTimer {
   reached: boolean;
   showAnimation?: boolean;
   playSound?: boolean;
+  templateId?: string; // Reference to template if from store
 }
 
 interface UseGoalTimersOptions {
   enabled?: boolean;
   onGoalReached?: (goal: GoalTimer) => void;
+  saveToHistory?: boolean; // Save achievements to store
+  context?: string; // Context for history (e.g., "Kana Timed Challenge")
 }
 
 export function useGoalTimers(
   currentSeconds: number,
   options: UseGoalTimersOptions = {}
 ) {
-  const { enabled = true, onGoalReached } = options;
+  const { 
+    enabled = true, 
+    onGoalReached,
+    saveToHistory = false,
+    context = 'Unknown'
+  } = options;
   
   const [goals, setGoals] = useState<GoalTimer[]>([]);
   const reachedGoalsRef = useRef<Set<string>>(new Set());
+  
+  // Get store actions and settings
+  const addToHistory = useGoalTimersStore((state) => state.addToHistory);
+  const settings = useGoalTimersStore((state) => state.settings);
 
   // Add new goal
   const addGoal = useCallback((goal: Omit<GoalTimer, 'id' | 'reached'>) => {
@@ -30,13 +43,14 @@ export function useGoalTimers(
       ...goal,
       id: crypto.randomUUID(),
       reached: false,
-      showAnimation: goal.showAnimation ?? true,
-      playSound: goal.playSound ?? true,
+      // Use store settings as defaults if not specified
+      showAnimation: goal.showAnimation ?? settings.defaultShowAnimation,
+      playSound: goal.playSound ?? settings.defaultPlaySound,
     };
     
     setGoals(prev => [...prev, newGoal].sort((a, b) => a.targetSeconds - b.targetSeconds));
     return newGoal.id;
-  }, []);
+  }, [settings]);
 
   // Remove goal
   const removeGoal = useCallback((goalId: string) => {
@@ -65,16 +79,16 @@ export function useGoalTimers(
     });
   }, []);
 
-  // Play goal sound
+  // Play goal sound with volume from settings
   const playGoalSound = useCallback(() => {
     if (typeof Audio !== 'undefined') {
       const audio = new Audio('/sounds/correct.mp3');
-      audio.volume = 0.5;
+      audio.volume = settings.soundVolume / 100; // Convert 0-100 to 0-1
       audio.play().catch(() => {
         // Ignore errors if sound can't play
       });
     }
-  }, []);
+  }, [settings.soundVolume]);
 
   // Check goals and trigger events
   useEffect(() => {
@@ -90,6 +104,17 @@ export function useGoalTimers(
           );
           reachedGoalsRef.current.add(goal.id);
 
+          // Save to history if enabled
+          if (saveToHistory) {
+            addToHistory({
+              goalId: goal.templateId || goal.id,
+              goalLabel: goal.label,
+              achievedAt: new Date(),
+              duration: currentSeconds,
+              context,
+            });
+          }
+
           // Trigger effects
           if (goal.showAnimation) {
             triggerConfetti();
@@ -104,7 +129,17 @@ export function useGoalTimers(
         }
       }
     });
-  }, [currentSeconds, goals, enabled, triggerConfetti, playGoalSound, onGoalReached]);
+  }, [
+    currentSeconds, 
+    goals, 
+    enabled, 
+    triggerConfetti, 
+    playGoalSound, 
+    onGoalReached,
+    saveToHistory,
+    addToHistory,
+    context
+  ]);
 
   // Get next unreached goal
   const nextGoal = goals.find(g => !g.reached);

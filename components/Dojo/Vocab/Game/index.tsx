@@ -21,18 +21,24 @@ const Game = () => {
   const resetStats = useStatsStore(state => state.resetStats);
 
   const gameMode = useVocabStore(state => state.selectedGameModeVocab);
-  const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
+  const selectedWordObjs = useVocabStore(state => state.selectedVocabObjs);
 
   useEffect(() => {
     resetStats();
   }, []);
 
   return (
-    <div className='flex flex-col gap-6 md:gap-10 items-center min-h-[100dvh] max-w-[100dvw] px-4'>
+    <div className="flex flex-col gap-6 md:gap-10 items-center min-h-[100dvh] max-w-[100dvw] px-4">
       {showStats && <Stats />}
-      <Return isHidden={showStats} href={pathname} />
+      <Return
+        isHidden={showStats}
+        href={pathname}
+      />
       {gameMode.toLowerCase() === 'pick' ? (
-        <Pick selectedWordObjs={selectedWordObjs} isHidden={showStats} />
+        <Pick
+          selectedWordObjs={selectedWordObjs}
+          isHidden={showStats}
+        />
       ) : gameMode.toLowerCase() === 'reverse-pick' ? (
         <Pick
           selectedWordObjs={selectedWordObjs}
@@ -40,7 +46,10 @@ const Game = () => {
           isReverse={true}
         />
       ) : gameMode.toLowerCase() === 'input' ? (
-        <Input selectedWordObjs={selectedWordObjs} isHidden={showStats} />
+        <Input
+          selectedWordObjs={selectedWordObjs}
+          isHidden={showStats}
+        />
       ) : gameMode.toLowerCase() === 'reverse-input' ? (
         <Input
           selectedWordObjs={selectedWordObjs}

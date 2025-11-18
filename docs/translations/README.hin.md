@@ -1,5 +1,9 @@
 <div id="top"></div>
 
+**KanaDojo कई भाषाओं में उपलब्ध है, समुदाय के योगदानों के कारण।:**
+
+[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  हिन्दी  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">

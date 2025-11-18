@@ -1,21 +1,15 @@
-import N5Kanji from './kanji/N5';
-import N4Kanji from './kanji/N4';
-import N3Kanji from './kanji/N3';
-import N2Kanji from './kanji/N2';
-import N1Kanji from './kanji/N1';
+// Auto-generated file - DO NOT EDIT MANUALLY
+// Generated on: 2025-11-18T12:57:36.701Z
+// Run 'npm run generate:constants' to regenerate
 
-import N5Vocab from './vocab/n5/nouns';
-import N4Vocab from './vocab/n4/nouns';
-import N3Vocab from './vocab/n3/nouns';
-import N2Vocab from './vocab/n2/nouns';
+export const N5KanjiLength = 80;
+export const N4KanjiLength = 167;
+export const N3KanjiLength = 370;
+export const N2KanjiLength = 374;
+export const N1KanjiLength = 1504;
 
-export const N5KanjiLength = N5Kanji.length;
-export const N4KanjiLength = N4Kanji.length;
-export const N3KanjiLength = N3Kanji.length;
-export const N2KanjiLength = N2Kanji.length;
-export const N1KanjiLength = N1Kanji.length;
-
-export const N5VocabLength = N5Vocab.length;
-export const N4VocabLength = N4Vocab.length;
-export const N3VocabLength = N3Vocab.length;
-export const N2VocabLength = N2Vocab.length;
+export const N5VocabLength = 684;
+export const N4VocabLength = 640;
+export const N3VocabLength = 1730;
+export const N2VocabLength = 1812;
+export const N1VocabLength = 3427;

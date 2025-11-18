@@ -10,7 +10,7 @@ export default function translationGen(t: (key: string) => string) {
           {/* render localized content */}
           <span>{t('greeting')}</span>
           <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
-            v0.1.3 (alpha)
+            v0.1.4 (alpha)
           </i>
         </p>
       ),
@@ -67,7 +67,6 @@ export default function translationGen(t: (key: string) => string) {
             To begin, select at least 1 set, select or change the training mode,
             then hit <b>Go!</b> below and start training now!
           </p>
-          <p className='text-lg italic'>Scroll down to discover the sets!</p>
           <p className='text-lg italic'>
             New: click on a kanji character to find out more about it on{' '}
             <a
@@ -94,7 +93,6 @@ export default function translationGen(t: (key: string) => string) {
             To begin, select at least 1 set, select or change the training mode,
             then hit <b>Go!</b> below and start training now!
           </p>
-          <p className='text-lg italic'>Scroll down to discover the sets!</p>
         </>
       )
     },

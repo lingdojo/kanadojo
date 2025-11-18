@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, X, Target, Clock, CheckCircle2 } from 'lucide-react';
+import { Plus, X, Target, Clock, CheckCircle2, Save } from 'lucide-react';
 import clsx from 'clsx';
 import type { GoalTimer } from '@/hooks/useGoalTimers';
+import { useGoalTimersStore } from '@/store/useGoalTimersStore';
 
 interface GoalTimersPanelProps {
   goals: GoalTimer[];
@@ -22,17 +23,23 @@ export default function GoalTimersPanel({
   onClearGoals,
   disabled = false
 }: GoalTimersPanelProps) {
+  // Get templates from store
+  const { templates, addTemplate, settings } = useGoalTimersStore();
+  
+  // Component state for adding goals
   const [isAdding, setIsAdding] = useState(false);
   const [newGoalLabel, setNewGoalLabel] = useState('');
   const [newGoalMinutes, setNewGoalMinutes] = useState(5);
   const [newGoalSeconds, setNewGoalSeconds] = useState(0);
 
+  // Format seconds into MM:SS
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Add a goal timer
   const handleAddGoal = () => {
     if (!newGoalLabel.trim()) return;
     
@@ -42,8 +49,8 @@ export default function GoalTimersPanel({
     onAddGoal({
       label: newGoalLabel,
       targetSeconds: totalSeconds,
-      showAnimation: true,
-      playSound: true,
+      showAnimation: settings.defaultShowAnimation,
+      playSound: settings.defaultPlaySound,
     });
 
     // Reset form
@@ -53,11 +60,43 @@ export default function GoalTimersPanel({
     setIsAdding(false);
   };
 
-  const quickGoals = [
-    { label: 'Warm-up', minutes: 1 },
-    { label: 'Sprint', minutes: 5 },
-    { label: 'Break', minutes: 10 },
-  ];
+  // Save current goal as a template
+  const handleSaveAsTemplate = () => {
+    if (!newGoalLabel.trim()) return;
+    
+    const totalSeconds = (newGoalMinutes * 60) + newGoalSeconds;
+    if (totalSeconds <= 0) return;
+
+    // Add to store as custom template
+    addTemplate({
+      label: newGoalLabel,
+      targetSeconds: totalSeconds,
+      category: 'custom',
+      icon: '⏱️',
+      color: 'var(--main-color)',
+    });
+
+    // Also add as active goal
+    handleAddGoal();
+  };
+
+  // Add goal from template
+  const handleAddFromTemplate = (templateId: string) => {
+    const template = templates.find(t => t.id === templateId);
+    if (!template) return;
+
+    onAddGoal({
+      label: template.label,
+      targetSeconds: template.targetSeconds,
+      showAnimation: settings.defaultShowAnimation,
+      playSound: settings.defaultPlaySound,
+      templateId: template.id,
+    });
+  };
+
+  // Get default templates for quick add
+  const defaultTemplates = templates.filter(t => settings.defaultTemplates.includes(t.id));
+  const customTemplates = templates.filter(t => t.category === 'custom');
 
   return (
     <div className={clsx(
@@ -220,6 +259,19 @@ export default function GoalTimersPanel({
               Add Goal
             </button>
             <button
+              onClick={handleSaveAsTemplate}
+              className={clsx(
+                'px-4 py-2 border-2 rounded-lg transition-colors',
+                'border-[var(--border-color)]',
+                'hover:bg-[var(--border-color)]',
+                'flex items-center gap-2'
+              )}
+              title="Save as template and add goal"
+            >
+              <Save className="w-4 h-4" />
+              Save
+            </button>
+            <button
               onClick={() => setIsAdding(false)}
               className={clsx(
                 'px-4 py-2 border-2 rounded-lg transition-colors',
@@ -233,31 +285,55 @@ export default function GoalTimersPanel({
         </div>
       ) : (
         <>
-          {/* Quick Goals */}
-          {goals.length === 0 && (
+          {/* Quick Add from Default Templates */}
+          {goals.length === 0 && defaultTemplates.length > 0 && (
             <div className="mb-3">
               <p className="text-xs text-[var(--secondary-color)] mb-2">Quick add:</p>
-              <div className="flex gap-2">
-                {quickGoals.map(quick => (
+              <div className="flex flex-wrap gap-2">
+                {defaultTemplates.map(template => (
                   <button
-                    key={quick.label}
-                    onClick={() => onAddGoal({
-                      label: quick.label,
-                      targetSeconds: quick.minutes * 60,
-                      showAnimation: true,
-                      playSound: true,
-                    })}
+                    key={template.id}
+                    onClick={() => handleAddFromTemplate(template.id)}
                     disabled={disabled}
                     className={clsx(
-                      'flex-1 px-3 py-2 text-sm border-2 rounded-lg transition-colors',
+                      'px-3 py-2 text-sm border-2 rounded-lg transition-colors',
                       'border-[var(--border-color)]',
                       'hover:bg-[var(--border-color)]',
                       disabled && 'opacity-50 cursor-not-allowed'
                     )}
                   >
-                    {quick.label}
+                    <span className="mr-1">{template.icon}</span>
+                    {template.label}
                     <span className="text-xs text-[var(--secondary-color)] ml-1">
-                      ({quick.minutes}m)
+                      ({Math.floor(template.targetSeconds / 60)}m)
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Custom Templates */}
+          {customTemplates.length > 0 && (
+            <div className="mb-3">
+              <p className="text-xs text-[var(--secondary-color)] mb-2">Your templates:</p>
+              <div className="flex flex-wrap gap-2">
+                {customTemplates.map(template => (
+                  <button
+                    key={template.id}
+                    onClick={() => handleAddFromTemplate(template.id)}
+                    disabled={disabled}
+                    className={clsx(
+                      'px-3 py-2 text-sm border-2 rounded-lg transition-colors',
+                      'border-[var(--border-color)]',
+                      'hover:bg-[var(--border-color)]',
+                      disabled && 'opacity-50 cursor-not-allowed'
+                    )}
+                  >
+                    <span className="mr-1">{template.icon}</span>
+                    {template.label}
+                    <span className="text-xs text-[var(--secondary-color)] ml-1">
+                      ({Math.floor(template.targetSeconds / 60)}m)
                     </span>
                   </button>
                 ))}

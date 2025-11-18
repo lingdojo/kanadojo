@@ -1,5 +1,9 @@
 <div id="top"></div>
 
+**KanaDojo 感謝社群貢獻，支持多種語言：**
+
+[English(default)](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/**  中文（繁體） **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -451,19 +455,6 @@ kanadojo/
 - **網站**：[kanadojo.com](https://kanadojo.com)
 - **儲存庫**：[github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
 - **電子郵件**: lingdojo.dev@gmail.com
-
----
-
-## 🌍 翻譯
-
-- [English（預設）](../../README.md)
-- [Español](README.es.md)
-- [Français](README.fr.md)
-- [Deutsch](README.de.md)
-- [Português](README.pt-br.md)
-- 中文（繁體，當前文件）
-- [中文（简体）](README.zh-CN.md)
-- [हिन्दी](README.hin.md)
 
 ---
 

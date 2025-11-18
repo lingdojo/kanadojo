@@ -50,8 +50,10 @@ const AudioButton: React.FC<AudioButtonProps> = ({
       // Refresh voices before speaking
       if (typeof window !== 'undefined') {
         refreshVoices();
-        // Small delay to ensure voices are loaded
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // Firefox needs longer delay to ensure voices are loaded
+        const isFirefox = /Firefox/i.test(navigator.userAgent);
+        const delay = isFirefox ? 300 : 100;
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
 
       await speak(text, {
@@ -86,7 +88,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
         onClick={handleClick}
         className={clsx(
           'rounded-full transition-all duration-200',
-          'hover:scale-105 active:scale-95',
+          ' active:scale-95',
           'flex items-center justify-center',
           sizeClasses[size],
           className
@@ -111,8 +113,8 @@ const AudioButton: React.FC<AudioButtonProps> = ({
         onClick={handleClick}
         disabled={disabled}
         className={clsx(
-          'rounded-full transition-all duration-200',
-          'hover:scale-105 active:scale-95',
+          'rounded-full transition-all duration-275',
+          'active:scale-95 hover:cursor-pointer hover:bg-[var(--border-color)]',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           'flex items-center justify-center',
           sizeClasses[size],

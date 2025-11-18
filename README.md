@@ -1,15 +1,21 @@
 <div id="top"></div>
 
+**KanaDojo is available in multiple languages thanks to community contributions:**
+
+English (default)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/**  [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">
 
 ![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
-![GitHub Stars](https://github.com/user-attachments/assets/de26975d-ce19-4a56-be00-84470d4607e2)
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=lingdojo/kana-dojo&type=date&legend=top-left)](https://www.star-history.com/#lingdojo/kana-dojo&type=date&legend=top-left)
 
-**An aesthetic, minimalist, and highly customizable platform for mastering Japanese**
+**An aesthetic, minimalist, and highly customizable platform for mastering Japanese inspired by Monkeytype**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
+[![DeepWiki](https://img.shields.io/badge/docs-DeepWiki-purple?style=for-the-badge)](https://deepwiki.com/lingdojo/kana-dojo)
 [![License](https://img.shields.io/badge/license-AGPL--v3-blue)](LICENSE.md)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
@@ -213,6 +219,8 @@ npm run postbuild
 ### Troubleshooting
 
 If you encounter issues during development, try these solutions:
+
+> **📘 For detailed troubleshooting, especially for Windows setup issues, see our [Troubleshooting Guide](./TROUBLESHOOTING.md)**
 
 #### Clear Next.js Cache
 
@@ -439,21 +447,6 @@ This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICEN
 - Japanese language data and character information
 - Open-source community for the amazing tools and libraries
 - All contributors who help make KanaDojo better
-
-## Translations
-
-KanaDojo is available in multiple languages thanks to community contributions:
-
-- English (default)
-- [Español](docs/translations/README.es.md)
-- [Français](docs/translations/README.fr.md) in progress
-- [Deutsch](docs/translations/README.de.md)
-- [Português](docs/translations/README.pt-br.md)
-- [Türkçe](docs/translations/README.tr.md)
-- [中文（简体）](docs/translations/README.zh-CN.md)
-- [中文（繁體）](docs/translations/README.zh-tw.md)
-- [हिन्दी](docs/translations/README.hin.md)
-- <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
 
 ## 📞 Contact & Links
 

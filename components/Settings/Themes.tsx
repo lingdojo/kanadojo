@@ -35,8 +35,8 @@ const Themes = () => {
   }, []);
 
   return (
-    <div className='flex flex-col gap-6'>
-      <div className='flex gap-2'>
+    <div className="flex flex-col gap-6">
+      <div className="flex gap-2">
         <button
           className={clsx(
             'p-6 flex justify-center items-center gap-2 w-full md:w-1/2 flex-1 overflow-hidden',
@@ -52,7 +52,7 @@ const Themes = () => {
                 : randomTheme.cardColor,
             borderWidth:
               process.env.NODE_ENV === 'development' ? '2px' : undefined,
-            borderColor: randomTheme.borderColor
+            borderColor: randomTheme.borderColor,
           }}
           onClick={() => {
             playClick();
@@ -64,39 +64,23 @@ const Themes = () => {
             setSelectedTheme(randomTheme.id);
           }}
         >
-          <span className='mb-0.5'>
+          <span className="mb-0.5">
             {randomTheme.id === selectedTheme ? '\u2B24 ' : ''}
           </span>
           <Dice5
             style={{
-              color: randomTheme.secondaryColor
+              color: randomTheme.secondaryColor,
             }}
           />
           Random Theme
         </button>
-        {/*
-        <button
-          className={clsx(
-            'p-4 flex justify-center items-center gap-2',
-            buttonBorderStyles
-          )}
-          onClick={() => {
-            playClick();
-            setRandomTheme(
-              themeSets[2].themes[
-                random.integer(0, themeSets[2].themes.length - 1)
-              ]
-            );
-          }}
-        >
-          <RotateCcw className='text-[var(--secondary-color)] ' />
-          reroll
-        </button>
-        */}
       </div>
       {themeSets.map((themeSet, i) => (
-        <div key={i} className='flex flex-col gap-3'>
-          <h4 className='text-xl flex flex-row items-center gap-1.5'>
+        <div
+          key={i}
+          className="flex flex-col gap-3"
+        >
+          <h4 className="text-xl flex flex-row items-center gap-1.5">
             {createElement(themeSet.icon)}
             <span>{themeSet.name}</span>
           </h4>
@@ -115,16 +99,18 @@ const Themes = () => {
                       ? currentTheme.borderColor
                       : currentTheme.backgroundColor,
                   borderWidth:
-                    process.env.NODE_ENV === 'development' ? '2px' : undefined,
-                  borderColor: currentTheme.borderColor
+                    process.env.NODE_ENV === 'development' ? '4px' : undefined,
+                  borderColor: currentTheme.borderColor,
                 }}
                 onMouseEnter={() => setIsHovered(currentTheme.id)}
                 onMouseLeave={() => setIsHovered('')}
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center',
-                  'flex-1 overflow-hidden',
-                  buttonBorderStyles
+                  'flex-1 overflow-hidden border-2 border-[var(--card-color)]',
+                  buttonBorderStyles,
+                  currentTheme.id === selectedTheme &&
+                    'border-[var(--main-color)]'
                 )}
                 onClick={() => {
                   playClick();
@@ -132,8 +118,8 @@ const Themes = () => {
                 }}
               >
                 <input
-                  type='radio'
-                  name='selectedTheme'
+                  type="radio"
+                  name="selectedTheme"
                   onChange={() => {
                     setSelectedTheme(currentTheme.id);
                     // @ts-expect-error gtag fix
@@ -147,15 +133,15 @@ const Themes = () => {
                         {
                           event_category: 'Theme Change',
                           event_label: currentTheme.id,
-                          value: 1
+                          value: 1,
                         }
                       );
                     }
                   }}
-                  className='hidden'
+                  className="hidden"
                 />
-                <span className='text-center text-lg flex items-center gap-1.5'>
-                  <span>
+                <span className="text-center text-lg flex items-center gap-1.5">
+                  <span className="text-[var(--secondary-color)]">
                     {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                   </span>
                   {currentTheme.id === 'long'
@@ -169,7 +155,7 @@ const Themes = () => {
                                 ? i === 0
                                   ? currentTheme.mainColor
                                   : currentTheme.secondaryColor
-                                : undefined
+                                : undefined,
                           }}
                         >
                           {i > 0 && ' '}

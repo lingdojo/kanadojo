@@ -27,7 +27,7 @@ interface KanjiPickGameProps {
 const KanjiPickGame = ({
   selectedKanjiObjs,
   isHidden,
-  isReverse = false
+  isReverse = false,
 }: KanjiPickGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -39,7 +39,7 @@ const KanjiPickGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore
+    incrementCharacterScore,
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -138,16 +138,16 @@ const KanjiPickGame = ({
       generateNewCharacter();
       setFeedback(
         <>
-          <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className='inline text-[var(--main-color)]' />
+          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className="inline text-[var(--main-color)]" />
         </>
       );
     } else {
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className='inline text-[var(--main-color)]' />
+          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className="inline text-[var(--main-color)]" />
         </>
       );
     }
@@ -213,7 +213,7 @@ const KanjiPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <div className='flex flex-col items-center gap-4'>
+          <div className="flex flex-col items-center gap-4">
             <FuriganaText
               text={correctChar}
               reading={
@@ -226,9 +226,9 @@ const KanjiPickGame = ({
             />
             <SSRAudioButton
               text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
+              variant="icon-only"
+              size="lg"
+              className="bg-[var(--card-color)] text-[var(--secondary-color)]"
             />
           </div>
 
@@ -244,7 +244,7 @@ const KanjiPickGame = ({
                   buttonRefs.current[i] = elem;
                 }}
                 key={option + i}
-                type='button'
+                type="button"
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
                   'text-4xl py-4 rounded-xl w-full md:w-1/4 xl:w-1/5 flex flex-row justify-center items-center gap-1.5',
@@ -253,7 +253,7 @@ const KanjiPickGame = ({
                   wrongSelectedAnswers.includes(option) &&
                     'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'hover:scale-110 text-[var(--main-color)] hover:border-[var(--secondary-color)]'
+                    'text-[var(--main-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
@@ -272,7 +272,9 @@ const KanjiPickGame = ({
                 <span
                   className={clsx(
                     'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',
-                    'text-[var(--secondary-color)]'
+                    wrongSelectedAnswers.includes(option)
+                      ? 'text-[var(--border-color)]'
+                      : 'text-[var(--secondary-color)]'
                   )}
                 >
                   {i + 1 === 1 ? '1' : i + 1 === 2 ? '2' : '3'}

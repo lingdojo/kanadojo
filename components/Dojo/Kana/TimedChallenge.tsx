@@ -91,9 +91,11 @@ export default function TimedChallengeKana() {
   // Calculate elapsed time for goal timers
   const elapsedTime = challengeDuration - timeLeft;
 
-  // Goal Timers
+  // Goal Timers with history saving enabled
   const goalTimers = useGoalTimers(elapsedTime, {
     enabled: showGoalTimers,
+    saveToHistory: true,
+    context: 'Kana Timed Challenge',
     onGoalReached: goal => {
       console.log(`🎯 Goal reached: ${goal.label} at ${elapsedTime}s`);
     }
@@ -211,7 +213,7 @@ export default function TimedChallengeKana() {
             challenge.
           </p>
           <Link href='/kana'>
-            <Button className='bg-[var(--main-color)] hover:bg-[var(--main-color)]/90'>
+            <Button className='bg-[var(--secondary-color)] hover:bg-[var(--main-color)] duration-250'>
               <ArrowLeft size={16} className='mr-2' />
               Select Kana
             </Button>

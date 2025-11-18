@@ -226,7 +226,8 @@ resetTimedStats: () => {
     // Trigger achievement check after session save
     if (typeof window !== 'undefined') {
       setTimeout(() => {
-        const achievementStore = (window as any).__achievementStore;
+        const win = window as unknown as Record<string, unknown>;
+        const achievementStore = win.__achievementStore as { getState: () => { checkAchievements: (stats: unknown) => void } } | undefined;
         if (achievementStore) {
           achievementStore.getState().checkAchievements(get());
         }
