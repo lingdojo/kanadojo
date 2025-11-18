@@ -2,7 +2,21 @@
 
 **KanaDojo is available in multiple languages thanks to community contributions:**
 
-English (default)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/**  [Русский](docs/translations/README.ru.md)
+<details>
+<summary>English README (default)</summary>
+
+- [Español](./docs/translations/README.es.md)
+- [Français](./docs/translations/README.fr.md)
+- [Deutsch](./docs/translations/README.de.md)
+- [Português (pt-BR)](./docs/translations/README.pt-br.md)
+- [Русский](./docs/translations/README.ru.md)
+- [Türkçe](./docs/translations/README.tr.md)
+- [Tiếng Việt](./docs/translations/README.vi.md)
+- [中文（简体）](./docs/translations/README.zh-CN.md)
+- [中文（繁體）](./docs/translations/README.zh-tw.md)
+
+</details>
+<a href="#about-kanadojo">About KanaDojo</a> | <a href="#screenshots">Screenshots</a> | <a href="#ui-design-philosophy">UI &amp; Design Philosophy</a> | <a href="#tech-stack">Tech Stack</a> | <a href="#getting-started">Getting Started</a> | <a href="#project-structure">Project Structure</a> | <a href="#contributing">Contributing</a> | <a href="#license">License</a> | <a href="#acknowledgments">Acknowledgments</a> | <a href="#translations">Translations</a> | <a href="#contact-links">Contact &amp; Links</a> 
 
 # KanaDojo かな道場
 
@@ -23,6 +37,7 @@ English (default)  **/**  [Español](docs/translations/README.es.md) **/** [Fran
 
 </div>
 
+<a id="about-kanadojo"></a>
 ## 📖 About KanaDojo
 
 KanaDojo is an engaging web-based Japanese learning platform that makes mastering Hiragana, Katakana, Kanji, and Vocabulary fun and intuitive. Built with a focus on aesthetics, customization, and effective learning, KanaDojo provides an immersive training environment for Japanese language learners at all levels.
@@ -67,6 +82,7 @@ Each dojo supports four engaging training modes to reinforce learning:
 - Clean, minimalist interface that keeps you focused on learning
 - Smooth animations and transitions powered by Framer Motion
 
+<a id="screenshots"></a>
 ## 🖼️ Screenshots
 
 <div align="center">
@@ -91,6 +107,7 @@ Each dojo supports four engaging training modes to reinforce learning:
 
 </div>
 
+<a id="ui-design-philosophy"></a>
 ## 🎨 UI & Design Philosophy
 
 KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility**. The design philosophy centers around:
@@ -123,6 +140,7 @@ KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility
 - Clear distinction between similar-looking characters
 - Font previews with real Japanese text samples
 
+<a id="tech-stack"></a>
 ## 🛠️ Tech Stack
 
 KanaDojo is built with modern web technologies for optimal performance and developer experience:
@@ -165,6 +183,7 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analytics
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performance monitoring
 
+<a id="getting-started"></a>
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -319,6 +338,7 @@ Or simply run on a different port:
 PORT=3001 npm run dev
 ```
 
+<a id="project-structure"></a>
 ## 📁 Project Structure
 
 ```
@@ -418,6 +438,7 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 3. Provides immediate feedback
 4. Tracks statistics (correct, incorrect, streak)
 
+<a id="contributing"></a>
 ## 🤝 Contributing
 
 Contributions are welcome! KanaDojo is an open-source project built by the community, for the community. Check out [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
@@ -438,10 +459,12 @@ Contributions are welcome! KanaDojo is an open-source project built by the commu
 - Update documentation as needed
 - Keep components focused and reusable
 
+<a id="license"></a>
 ## 📄 License
 
 This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details.
 
+<a id="acknowledgments"></a>
 ## 🙏 Acknowledgments
 
 - Japanese language data and character information
