@@ -1,5 +1,4 @@
-import * as React from "react";
-import { AlertDialog } from "radix-ui";
+/* import { AlertDialog } from "radix-ui";
 
 const AlertDialogConfirm = () => (
   <AlertDialog.Root>
@@ -36,3 +35,4 @@ const AlertDialogConfirm = () => (
 );
 
 export default AlertDialogConfirm;
+ */
