@@ -56,6 +56,9 @@ const MainMenu = () => {
     console.log("User dismissed the banner.");
     localStorage.setItem('nightly_banner_dismissed', 'true');
   };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   const links = [
     {
       name_en: 'Kana',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const NightlyBanner = ({ onSwitch, onDismiss }: { onSwitch: any, onDismiss: any }) => {
+const NightlyBanner = ({ onSwitch, onDismiss }: { onSwitch: () => void, onDismiss: () => void }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
