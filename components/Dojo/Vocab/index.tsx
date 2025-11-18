@@ -20,11 +20,16 @@ type RawVocabEntry = {
 };
 
 const vocabImporters = {
-  n5: () => import('@/static/vocab/n5.json'),
-  n4: () => import('@/static/vocab/n4.json'),
-  n3: () => import('@/static/vocab/n3.json'),
-  n2: () => import('@/static/vocab/n2.json'),
-  n1: () => import('@/static/vocab/n1.json'),
+  n5: () =>
+    fetch('/vocab/n5.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n4: () =>
+    fetch('/vocab/n4.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n3: () =>
+    fetch('/vocab/n3.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n2: () =>
+    fetch('/vocab/n2.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n1: () =>
+    fetch('/vocab/n1.json').then(res => res.json() as Promise<RawVocabEntry[]>),
 } as const;
 
 type VocabCollectionKey = keyof typeof vocabImporters;
@@ -38,7 +43,6 @@ const vocabCollectionNames: Record<VocabCollectionKey, string> = {
   n2: 'N2',
   n1: 'N1',
 };
-
 
 type VocabCollectionMeta = {
   data: IWord[];
@@ -85,8 +89,8 @@ const VocabCards = () => {
     const loadCollections = async () => {
       const results = await Promise.all(
         levelOrder.map(async level => {
-          const vocabModule = await vocabImporters[level]();
-          return { level, words: vocabModule.default.map(toWordObj) };
+          const vocabData = await vocabImporters[level]();
+          return { level, words: vocabData.map(toWordObj) };
         })
       );
 

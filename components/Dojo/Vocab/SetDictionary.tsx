@@ -15,10 +15,14 @@ type RawVocabEntry = {
 };
 
 const vocabImporters = {
-  n5: () => import('@/static/vocab/n5.json'),
-  n4: () => import('@/static/vocab/n4.json'),
-  n3: () => import('@/static/vocab/n3.json'),
-  n2: () => import('@/static/vocab/n2.json'),
+  n5: () =>
+    fetch('/vocab/n5.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n4: () =>
+    fetch('/vocab/n4.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n3: () =>
+    fetch('/vocab/n3.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+  n2: () =>
+    fetch('/vocab/n2.json').then(res => res.json() as Promise<RawVocabEntry[]>),
 } as const;
 
 type VocabCollectionKey = keyof typeof vocabImporters;
@@ -68,12 +72,12 @@ const SetDictionary = ({ set }: { set: string }) => {
       const importer = vocabImporters[level];
       if (!importer) return;
 
-      const vocabModule = await importer();
+      const vocabData = await importer();
       if (!isMounted) return;
 
       setVocabCollections(prev => ({
         ...prev,
-        [level]: vocabModule.default.map(toWordObj),
+        [level]: vocabData.map(toWordObj),
       }));
     };
 
