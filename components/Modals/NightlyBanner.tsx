@@ -23,10 +23,12 @@ const NightlyBanner = ({ onSwitch, onDismiss }: { onSwitch: () => void, onDismis
   return (
     <div
       className={`
-        fixed bottom-5 right-5 z-50 
-        w-full max-w-[400px] 
+        fixed z-50  
         bg-[var(--card-color)]
         shadow-2xl rounded-xl p-5 
+        bottom-4 left-4 right-4
+        sm:bottom-5 sm:right-5 sm:left-auto 
+        sm:w-full sm:max-w-[400px]
         transition-all duration-300 ease-in-out transform
         text-[var(--main-color)] 
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
