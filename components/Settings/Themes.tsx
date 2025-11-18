@@ -107,9 +107,10 @@ const Themes = () => {
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center',
-                  'flex-1 overflow-hidden',
+                  'flex-1 overflow-hidden border-2 border-[var(--card-color)]',
                   buttonBorderStyles,
-                  currentTheme.id === selectedTheme && 'border-2'
+                  currentTheme.id === selectedTheme &&
+                    'border-[var(--main-color)]'
                 )}
                 onClick={() => {
                   playClick();
