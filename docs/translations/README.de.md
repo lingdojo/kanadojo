@@ -1,10 +1,14 @@
 <div id="top"></div>
 
+**KanaDojo ist dank Community-Beiträgen in mehreren Sprachen verfügbar:**
+
+[English](../../README.md) **/** [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md) **/** Deutsch **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/** [हिन्दी](docs/translations/README.hin.md) **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">
 
-![KanaDojo Banner](https://github.com/user-attachments/assets/d64d5fdd-e49b-4eb5-8de6-0e73c8f95d01)
+![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
 
 Eine ästhetische, minimalistische und hochgradig anpassbare Plattform zur Beherrschung der japanischen Sprache
 
@@ -445,20 +449,6 @@ Dieses Projekt ist unter der **AGPL 3.0 Lizenz** lizenziert – Details finden S
 - Japanische Sprachdaten und Zeicheninformationen.
 - Die Open-Source-Community für die großartigen Tools und Bibliotheken.
 - Alle Mitwirkenden, die helfen, KanaDojo besser zu machen.
-
----
-
-## 🌍 Übersetzungen
-
-KanaDojo ist dank Community-Beiträgen in mehreren Sprachen verfügbar:
-
-- [🇬🇧 Englisch (Standard)](../../README.md)
-- [🇪🇸 Español](README.es.md)
-- [🇫🇷 Français](README.fr.md) _(in Bearbeitung)_
-- [🇮🇳 हिन्दी](README.hin.md)
-- [🇧🇷 Português (Brasil)](README.pt-br.md)
-- [🇹🇼 繁體中文](README.zh-tw.md) _(in Bearbeitung)_
-- [🇩🇪 Deutsch](README.de.md)
 
 ---
 

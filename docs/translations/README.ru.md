@@ -1,6 +1,10 @@
 <div id="top"></div>
 <a href="#about-kanadojo">О KanaDojo</a> | <a href="#screenshots">Скриншоты</a> | <a href="#ui-design-philosophy">UI &amp; философия дизайна</a> | <a href="#tech-stack">Технический стек</a> | <a href="#getting-started">Начало работы</a> | <a href="#project-structure">Структура проекта</a> | <a href="#contributing">Вклад в проект</a> | <a href="#license">Лицензия</a> | <a href="#acknowledgments">Благодарности</a> | <a href="#translations">Переводы</a> | <a href="#contact-links">Контакты &amp; ссылки</a>
 
+**KanaDojo доступен на нескольких языках благодаря вкладу сообщества:**
+
+[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/**  Русский
+
 # KanaDojo かな道場
 
 <div align="center">

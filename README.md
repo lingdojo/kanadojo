@@ -239,6 +239,8 @@ npm run postbuild
 
 If you encounter issues during development, try these solutions:
 
+> **📘 For detailed troubleshooting, especially for Windows setup issues, see our [Troubleshooting Guide](./TROUBLESHOOTING.md)**
+
 #### Clear Next.js Cache
 
 **macOS/Linux:**
@@ -469,23 +471,6 @@ This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICEN
 - Open-source community for the amazing tools and libraries
 - All contributors who help make KanaDojo better
 
-<a id="translations"></a>
-## Translations
-
-KanaDojo is available in multiple languages thanks to community contributions:
-
-- English (default)
-- [Español](docs/translations/README.es.md)
-- [Français](docs/translations/README.fr.md) in progress
-- [Deutsch](docs/translations/README.de.md)
-- [Português](docs/translations/README.pt-br.md)
-- [Türkçe](docs/translations/README.tr.md)
-- [中文（简体）](docs/translations/README.zh-CN.md)
-- [中文（繁體）](docs/translations/README.zh-tw.md)
-- [हिन्दी](docs/translations/README.hin.md)
-- <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
-
-<a id="contact-links"></a>
 ## 📞 Contact & Links
 
 - **Website**: [kanadojo.com](https://kanadojo.com)

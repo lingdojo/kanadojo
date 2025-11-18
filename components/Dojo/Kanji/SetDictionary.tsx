@@ -82,11 +82,21 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                 />
               </a>
 
-              <div className="flex flex-col gap-2 w-full">
-                {/* <p className="w-full text-[var(--secondary-color)]">On&apos;yomi</p> */}
+              <div className="flex flex-col gap-1 w-full">
+                <a
+                  className="w-full text-[var(--main-color)]/80 text-xs hover:text-[var(--main-color)] hover:text-underline"
+                  href="https://lingopie.com/blog/onyomi-vs-kunyomi/"
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => {
+                    playClick();
+                  }}
+                >
+                  On{/* &apos;yomi */}
+                </a>
                 <div
                   className={clsx(
-                    'h-1/2',
+                    'h-1/2 ',
                     'bg-[var(--background-color)] rounded-2xl',
                     'flex flex-row gap-2',
                     // 'border-1 border-[var(--border-color)]',
@@ -106,11 +116,23 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                           'border-r-1 border-[var(--border-color)]'
                       )}
                     >
-                      {showKana ? onyomiReading.split(' ')[1] : onyomiReading}
+                      {showKana
+                        ? onyomiReading.split(' ')[1]
+                        : onyomiReading.split(' ')[0]}
                     </span>
                   ))}
                 </div>
-
+                <a
+                  className="w-full text-[var(--main-color)]/80 text-xs hover:text-underline hover:text-[var(--main-color)]"
+                  href="https://lingopie.com/blog/onyomi-vs-kunyomi/"
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => {
+                    playClick();
+                  }}
+                >
+                  Kun{/* &apos;yomi */}
+                </a>
 
                 <div
                   className={clsx(
@@ -134,7 +156,9 @@ const KanjiSetDictionary = ({ set }: { set: string }) => {
                           'border-r-1 border-[var(--border-color)]'
                       )}
                     >
-                      {showKana ? kunyomiReading.split(' ')[1] : kunyomiReading}
+                      {showKana
+                        ? kunyomiReading.split(' ')[1]
+                        : kunyomiReading.split(' ')[0]}
                     </span>
                   ))}
                 </div>

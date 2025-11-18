@@ -1,5 +1,9 @@
 <div id="top"></div>
 
+**KanaDojo está disponible en varios idiomas gracias a las contribuciones de la comunidad:**
+
+[English](../../README.md) **/** Español **/** [Français (in progress)](docs/translations/README.fr.md) **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/** [हिन्दी](docs/translations/README.hin.md) **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -451,19 +455,6 @@ Este proyecto está bajo la Licencia AGPL 3.0 - consulta el archivo [LICENSE.md]
 - **Sitio Web**: [kanadojo.com](https://kanadojo.com)
 - **Repositorio**: [github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
 - **Email**: lingdojo.dev@gmail.com
-
----
-
-## 🌍 Traducciones
-
-- [English (default)](../../README.md)
-- Español (este documento)
-- [Français](README.fr.md)
-- [Deutsch](README.de.md)
-- [Português](README.pt-br.md)
-- [中文（简体）](README.zh-CN.md)
-- [中文（繁體）](README.zh-tw.md)
-- [हिन्दी](README.hin.md)
 
 ---
 

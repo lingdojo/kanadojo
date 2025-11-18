@@ -55,7 +55,7 @@ const TopBar: React.FC<ITopBarProps> = ({
       ? selectedGameModeVocab
       : '';
 
-  const selectedWordObjs = useVocabStore(state => state.selectedWordObjs);
+  const selectedWordObjs = useVocabStore(state => state.selectedVocabObjs);
 
   const isFilled =
     pathWithoutLocale === '/kana'
@@ -204,7 +204,7 @@ const TopBar: React.FC<ITopBarProps> = ({
           <button
             className={clsx(
               'w-full text-xl p-3 flex flex-row justify-center items-center gap-2',
-              'rounded-2xl bg-[var(--card-color)] hover:bg-[var(--main-color)]',
+              'rounded-2xl bg-[var(--card-color)] hover:bg-[var(--main-color)]/80',
               'text-[var(--main-color)] hover:text-[var(--background-color)]',
               'hover:cursor-pointer',
               'transition-all duration-275'

@@ -231,7 +231,7 @@ export default function GoalTimers() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[var(--main-color)]" />
-            <label className="text-sm">
+            <label className="text-sm text-[var(--secondary-color)]">
               Show confetti animation when goal reached
             </label>
           </div>
@@ -239,9 +239,9 @@ export default function GoalTimers() {
             onClick={toggleAnimation}
             aria-label="Toggle confetti animation"
             className={clsx(
-              'w-12 h-6 rounded-full transition-colors',
+              'w-12 h-6 rounded-full transition-colors hover:cursor-pointer',
               settings.defaultShowAnimation
-                ? 'bg-[var(--main-color)]'
+                ? 'bg-[var(--secondary-color)]'
                 : 'bg-[var(--border-color)]'
             )}
           >
@@ -273,7 +273,7 @@ export default function GoalTimers() {
                 key={template.id}
                 onClick={() => toggleDefaultTemplate(template.id)}
                 className={clsx(
-                  'p-3 rounded-lg border-2 transition-colors text-left',
+                  'p-3 rounded-lg border-2 transition-colors text-left hover:cursor-pointer',
                   isDefault
                     ? 'border-[var(--main-color)] bg-[var(--main-color)] bg-opacity-10'
                     : 'border-[var(--border-color)] hover:bg-[var(--card-color)]'
@@ -325,7 +325,7 @@ export default function GoalTimers() {
             <button
               onClick={() => setIsAdding(true)}
               className={clsx(
-                'px-3 py-1.5 rounded-lg border-2 transition-colors',
+                'px-3 py-1.5 rounded-lg border-2 transition-colors hover:cursor-pointer',
                 'border-[var(--border-color)]',
                 'hover:bg-[var(--border-color)]',
                 'flex items-center gap-2'
@@ -394,7 +394,7 @@ export default function GoalTimers() {
                 <button
                   onClick={handleAddTemplate}
                   className={clsx(
-                    'flex-1 px-4 py-2 rounded-lg transition-opacity',
+                    'flex-1 px-4 py-2 rounded-lg transition-opacity hover:cursor-pointer',
                     'bg-[var(--main-color)] text-[var(--background-color)]',
                     'hover:opacity-90'
                   )}
@@ -404,7 +404,7 @@ export default function GoalTimers() {
                 <button
                   onClick={() => setIsAdding(false)}
                   className={clsx(
-                    'px-4 py-2 border-2 rounded-lg transition-colors',
+                    'px-4 py-2 border-2 rounded-lg transition-colors hover:cursor-pointer',
                     'border-[var(--border-color)]',
                     'hover:bg-[var(--border-color)]'
                   )}
@@ -464,7 +464,7 @@ export default function GoalTimers() {
                     </button>
                     <button
                       onClick={() => removeTemplate(template.id)}
-                      className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card-color)] hover:bg-opacity-10 rounded transition-colors"
+                      className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card-color)] hover:bg-opacity-10 rounded transition-colors hover:cursor-pointer"
                       title="Delete template"
                     >
                       <Trash2 className="w-4 h-4" />

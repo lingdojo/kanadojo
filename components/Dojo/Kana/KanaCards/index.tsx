@@ -1,7 +1,6 @@
 'use client';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import clsx from 'clsx';
-import { useState } from 'react';
 import Subset from './Subset';
 import { useClick } from '@/hooks/useAudio';
 import { cardBorderStyles } from '@/static/styles';
@@ -14,41 +13,27 @@ const KanaCards = () => {
     {
       name: 'Hiragana ひらがな',
       subsets: [
-        {
-          name: 'HBase',
-          sliceRange: [0, 10]
-        },
-        {
-          name: 'HDakuon',
-          sliceRange: [10, 15]
-        },
-        {
-          name: 'HYoon',
-          sliceRange: [15, 26]
-        }
-      ]
+        { name: 'HBase', sliceRange: [0, 10] },
+        { name: 'HDakuon', sliceRange: [10, 15] },
+        { name: 'HYoon', sliceRange: [15, 26] },
+      ],
     },
     {
       name: 'Katakana カタカナ',
       subsets: [
-        {
-          name: 'KBase',
-          sliceRange: [26, 36]
-        },
-        {
-          name: 'KDakuon',
-          sliceRange: [36, 41]
-        },
-        {
-          name: 'KYoon',
-          sliceRange: [41, 52]
-        },
-        {
-          name: 'KForeign Sounds',
-          sliceRange: [52, 60]
-        }
-      ]
-    }
+        { name: 'KBase', sliceRange: [26, 36] },
+        { name: 'KDakuon', sliceRange: [36, 41] },
+        { name: 'KYoon', sliceRange: [41, 52] },
+        { name: 'KForeign Sounds', sliceRange: [52, 60] },
+      ],
+    },
+    {
+      name: 'Challenge チャレンジ',
+      subsets: [
+        { name: 'CSimilar Hiragana', sliceRange: [60, 65] },
+        { name: 'CConfusing Katakana', sliceRange: [65, 69] },
+      ],
+    },
   ];
 
   const [hiddenSubsets, setHiddenSubsets] = useState<string[]>([
@@ -56,127 +41,105 @@ const KanaCards = () => {
     'hyoon',
     'kdakuon',
     'kyoon',
-    'kforeign sounds'
+    'kforeign sounds',
+    'csimilar hiragana',
+    'cconfusing katakana',
   ]);
 
+  const toggleVisibility = (name: string) => {
+    playClick();
+    const lowerName = name.toLowerCase();
+
+    setHiddenSubsets(prev =>
+      prev.includes(lowerName)
+        ? prev.filter(item => item !== lowerName)
+        : [...prev, lowerName]
+    );
+  };
+
+  const isHidden = (name: string) => hiddenSubsets.includes(name.toLowerCase());
+
+  const chevronClasses = (hidden: boolean) =>
+    clsx(
+      'duration-300 text-[var(--border-color)]',
+      'max-md:group-active:text-[var(--secondary-color)]',
+      'md:group-hover:text-[var(--secondary-color)]',
+      hidden && 'rotate-180'
+    );
+
   return (
-    <div
-      className={clsx(
-        'flex flex-col gap-2 sm:flex-row w-full ',
-        cardBorderStyles
-      )}
-    >
-      {kanaGroups.map((kanaGroup, i) => (
-        <Fragment key={kanaGroup.name}>
-          <form
-            className={clsx(
-              'flex flex-col w-full gap-2 sm:w-1/2 p-4 rounded-2xl'
-            )}
-          >
-            <legend
+    <div className="flex flex-col gap-2 sm:flex-row w-full sm:items-start">
+      {kanaGroups.map(group => {
+        const groupHidden = isHidden(group.name);
+        const [mainTitle, japaneseTitle] = group.name.split(' ');
+
+        return (
+          <Fragment key={group.name}>
+            <form
               className={clsx(
-                'group text-2xl hover:cursor-pointer',
-                'flex flex-row items-center gap-1'
+                'flex flex-col w-full gap-2 sm:w-1/2 p-4',
+                cardBorderStyles
               )}
-              onClick={() => {
-                playClick();
-                if (hiddenSubsets.includes(kanaGroup.name.toLowerCase())) {
-                  const filteredHiddenSubsets = hiddenSubsets.filter(
-                    subset => subset !== kanaGroup.name.toLowerCase()
-                  );
-                  setHiddenSubsets(filteredHiddenSubsets);
-                  return;
-                }
-                setHiddenSubsets([
-                  ...hiddenSubsets,
-                  kanaGroup.name.toLowerCase()
-                ]);
-              }}
             >
-              <ChevronUp
-                className={clsx(
-                  'duration-300',
-                  'text-[var(--border-color)]',
-                  'max-md:group-active:text-[var(--text-color)]',
-                  'md:group-hover:text-[var(--text-color)]',
-                  hiddenSubsets.includes(kanaGroup.name.toLowerCase()) &&
-                    'rotate-180'
-                )}
-              />
-              <h3 className='flex items-center gap-2'>
-                <span>{kanaGroup.name.split(' ')[0]}</span>
-                <span className='text-[var(--secondary-color)]'>
-                  {kanaGroup.name.split(' ')[1]}
-                </span>
-              </h3>
-            </legend>
-            {!hiddenSubsets.includes(kanaGroup.name.toLowerCase()) &&
-              kanaGroup.subsets.map((subset, i) => (
-                <div key={i} className='flex flex-col w-full gap-2'>
-                  <div>
-                    <h4
-                      className={clsx(
-                        'group text-xl hover:cursor-pointer',
-                        'flex flex-row items-center gap-1'
-                      )}
-                      onClick={() => {
-                        playClick();
+              {/* Group Header */}
+              <legend
+                className="group text-2xl hover:cursor-pointer flex flex-row items-center gap-1"
+                onClick={() => toggleVisibility(group.name)}
+              >
+                <ChevronUp className={chevronClasses(groupHidden)} />
+                <h3 className="flex items-center gap-2">
+                  <span>{mainTitle}</span>
+                  <span className="text-[var(--secondary-color)]">
+                    {japaneseTitle}
+                  </span>
+                </h3>
+              </legend>
 
-                        if (hiddenSubsets.includes(subset.name.toLowerCase())) {
-                          const filteredHiddenSubsets = hiddenSubsets.filter(
-                            currentSubset =>
-                              currentSubset !== subset.name.toLowerCase()
-                          );
-                          setHiddenSubsets(filteredHiddenSubsets);
-                          return;
-                        }
-                        setHiddenSubsets([
-                          ...hiddenSubsets,
-                          subset.name.toLowerCase()
-                        ]);
-                      }}
+              {/* Subsets */}
+              {!groupHidden &&
+                group.subsets.map((subset, index) => {
+                  const subsetHidden = isHidden(subset.name);
+                  const isLastSubset = index === group.subsets.length - 1;
+
+                  return (
+                    <div
+                      key={subset.name}
+                      className="flex flex-col w-full gap-2"
                     >
-                      <ChevronUp
-                        className={clsx(
-                          'duration-300',
-                          'text-[var(--border-color)]',
-                          'max-md:group-active:text-[var(--text-color)]',
-                          'md:group-hover:text-[var(--text-color)]',
-                          hiddenSubsets.includes(subset.name.toLowerCase()) &&
-                            'rotate-180'
+                      <div>
+                        {/* Subset Header */}
+                        <h4
+                          className="group text-xl hover:cursor-pointer flex flex-row items-center gap-1"
+                          onClick={() => toggleVisibility(subset.name)}
+                        >
+                          <ChevronUp
+                            className={chevronClasses(subsetHidden)}
+                            size={24}
+                          />
+                          <span>{subset.name.slice(1)}</span>
+                        </h4>
+
+                        {/* Subset Content */}
+                        {!subsetHidden && (
+                          <Subset
+                            sliceRange={subset.sliceRange}
+                            group={group.name}
+                            subgroup={subset.name}
+                          />
                         )}
-                        size={24}
-                      />
-                      <span>{subset.name.slice(1)}</span>
-                    </h4>
-                    {!hiddenSubsets.includes(subset.name.toLowerCase()) && (
-                      <Subset
-                        sliceRange={subset.sliceRange}
-                        group={kanaGroup.name}
-                        subgroup={subset.name}
-                      />
-                    )}
-                  </div>
+                      </div>
 
-                  {i < kanaGroup.subsets.length - 1 &&
-                    !hiddenSubsets.includes(kanaGroup.name.toLowerCase()) && (
-                      <hr className='border-t-1 border-[var(--border-color)]' />
-                    )}
-                </div>
-              ))}
-          </form>
-
-          {i < kanaGroups.length - 1 && (
-            <div
-              className={clsx(
-                'sm:border-l-1 sm:h-auto sm:w-0',
-                'border-[var(--border-color)]',
-                'border-t-1 w-full border-[var(--border-color)]'
-              )}
-            />
-          )}
-        </Fragment>
-      ))}
+                      {/* Divider (except after last subset) */}
+                      {!isLastSubset && (
+                        <hr className="border-t-1 border-[var(--border-color)]" />
+                      )}
+                    </div>
+                  );
+                })}
+            </form>
+          </Fragment>
+        );
+      })}
     </div>
   );
 };
