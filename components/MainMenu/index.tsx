@@ -3,6 +3,7 @@ import { Fragment, lazy, Suspense, useState, useEffect } from 'react';
 import { Link } from '@/i18n/routing';
 import Banner from './Banner';
 import Info from '@/components/reusable/Menu/Info';
+import NightlyBanner from '@/components/Modals/NightlyBanner'
 import {
   ScrollText,
   FileLock2,
@@ -35,10 +36,29 @@ const MainMenu = () => {
 
   const [expandDecorations, setExpandDecorations] = useState(false);
 
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    // 1. Check if the user has already dismissed the banner
+    const hasDismissed = localStorage.getItem('nightly_banner_dismissed');
+
+    // Only show if they haven't dismissed it yet
+    if (!hasDismissed) {
+      setShowBanner(true);
+    }
+  }, []);
+
+  const handleSwitch = () => {
+    console.log("Redirecting to Nightly build...");
+  };
+
+  const handleDismiss = () => {
+    console.log("User dismissed the banner.");
+    localStorage.setItem('nightly_banner_dismissed', 'true');
+  };
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
   const links = [
     {
       name_en: 'Kana',
@@ -286,6 +306,13 @@ const MainMenu = () => {
           </Link>
         ))}
       </div>
+      {showBanner && (
+        <NightlyBanner
+          onSwitch={handleSwitch}
+          onDismiss={handleDismiss}
+        />
+      )}
+
     </div>
   );
 };
