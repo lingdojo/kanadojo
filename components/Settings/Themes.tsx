@@ -36,7 +36,7 @@ const Themes = () => {
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
     hoverTimeout.current = setTimeout(() => {
       applyTheme(themeId);
-    }, 150);
+    }, 50);
   };
 
   useEffect(() => {
@@ -126,10 +126,10 @@ const Themes = () => {
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center',
-                  'flex-1 overflow-hidden border-2 border-[var(--background-color)]',
+                  'flex-1 overflow-hidden border-[var(--background-color)]',
                   buttonBorderStyles,
                   currentTheme.id === selectedTheme &&
-                    'border-[var(--main-color)]'
+                    'border-2 border-[var(--main-color)]'
                 )}
                 onClick={() => {
                   playClick();

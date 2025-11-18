@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { chunkArray } from '@/lib/helperFunctions';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { cardBorderStyles } from '@/static/styles';
 import useGridColumns from '@/hooks/useGridColumns';
 import { useClick } from '@/hooks/useAudio';
@@ -10,39 +10,39 @@ import { ChevronUp, CircleCheck, Circle, Filter, FilterX } from 'lucide-react';
 import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
 import KanjiSetDictionary from '@/components/Dojo/Kanji/SetDictionary';
-import N5Kanji from '@/static/kanji/N5';
-import N4Kanji from '@/static/kanji/N4';
-import N3Kanji from '@/static/kanji/N3';
-import N2Kanji from '@/static/kanji/N2';
-import N1Kanji from '@/static/kanji/N1';
+import type { IKanjiObj } from '@/store/useKanjiStore';
 
-// ✅ Setup Kanji collections
-const kanjiCollections = {
-  n5: { data: N5Kanji, name: 'N5', prevLength: 0 },
-  n4: {
-    data: N4Kanji,
-    name: 'N4',
-    prevLength: Math.ceil(N5Kanji.length / 10),
-  },
-  n3: {
-    data: N3Kanji,
-    name: 'N3',
-    prevLength: Math.ceil((N5Kanji.length + N4Kanji.length) / 10),
-  },
-  n2: {
-    data: N2Kanji,
-    name: 'N2',
-    prevLength: Math.ceil(
-      (N5Kanji.length + N4Kanji.length + N3Kanji.length) / 10
-    ),
-  },
-  n1: {
-    data: N1Kanji,
-    name: 'N1',
-    prevLength: Math.ceil(
-      (N5Kanji.length + N4Kanji.length + N3Kanji.length + N2Kanji.length) / 10
-    ),
-  },
+type RawKanjiEntry = {
+  id: number;
+  kanjiChar: string;
+  onyomi: string[];
+  kunyomi: string[];
+  displayMeanings: string[];
+  fullDisplayMeanings: string[];
+  meanings: string[];
+};
+
+const kanjiImporters = {
+  n5: () =>
+    fetch('/kanji/N5.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n4: () =>
+    fetch('/kanji/N4.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n3: () =>
+    fetch('/kanji/N3.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n2: () =>
+    fetch('/kanji/N2.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n1: () =>
+    fetch('/kanji/N1.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+} as const;
+
+type KanjiCollectionKey = keyof typeof kanjiImporters;
+
+const levelOrder: KanjiCollectionKey[] = ['n5', 'n4', 'n3', 'n2', 'n1'];
+
+type KanjiCollectionMeta = {
+  data: IKanjiObj[];
+  name: string;
+  prevLength: number;
 };
 
 // ✅ REMOVED: Intersection Observer animation variants to fix bug where users need to scroll to see first sets
@@ -60,11 +60,53 @@ const KanjiCards = () => {
   const allTimeStats = useStatsStore(state => state.allTimeStats);
 
   const { playClick } = useClick();
+  const [kanjiCollections, setKanjiCollections] = useState<
+    Partial<Record<KanjiCollectionKey, KanjiCollectionMeta>>
+  >({});
 
-  const selectedKanjiCollection = kanjiCollections[selectedKanjiCollectionName];
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadCollections = async () => {
+      const results = await Promise.all(
+        levelOrder.map(async level => {
+          const kanjiData = await kanjiImporters[level]();
+          return { level, kanji: kanjiData.map(entry => ({ ...entry })) };
+        })
+      );
+
+      if (!isMounted) return;
+
+      const collections: Partial<
+        Record<KanjiCollectionKey, KanjiCollectionMeta>
+      > = {};
+      let cumulativeSets = 0;
+
+      results.forEach(({ level, kanji }) => {
+        collections[level] = {
+          data: kanji as IKanjiObj[],
+          name: level.toUpperCase(),
+          prevLength: cumulativeSets,
+        };
+        cumulativeSets += Math.ceil(kanji.length / 10);
+      });
+
+      setKanjiCollections(collections);
+    };
+
+    void loadCollections();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Filter state for hiding mastered cards
   const [hideMastered, setHideMastered] = useState(false);
+
+  // Track collapsed rows for UI accordions
+  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
+  const numColumns = useGridColumns();
 
   // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
   const masteredCharacters = useMemo(() => {
@@ -93,6 +135,21 @@ const KanjiCards = () => {
     return mastered;
   }, [allTimeStats.characterMastery]);
 
+  const selectedKanjiCollection =
+    kanjiCollections[selectedKanjiCollectionName as KanjiCollectionKey];
+
+  if (!selectedKanjiCollection) {
+    return (
+      <div className={clsx('flex flex-col w-full gap-4')}>
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
+            Loading kanji sets...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   // Check if a set contains only mastered kanji
   const isSetMastered = (setStart: number, setEnd: number) => {
     const kanjiInSet = selectedKanjiCollection.data.slice(
@@ -120,9 +177,6 @@ const KanjiCards = () => {
     : kanjiSetsTemp;
 
   const masteredCount = kanjiSetsTemp.filter(set => set.isMastered).length;
-
-  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
-  const numColumns = useGridColumns();
 
   // Check if user has any progress data
   const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;

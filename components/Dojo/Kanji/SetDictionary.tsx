@@ -1,15 +1,36 @@
 'use client';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 import { cardBorderStyles } from '@/static/styles';
-import N5Kanji from '@/static/kanji/N5';
-import N4Kanji from '@/static/kanji/N4';
-import N3Kanji from '@/static/kanji/N3';
-import N2Kanji from '@/static/kanji/N2';
-import N1Kanji from '@/static/kanji/N1';
-import useKanjiStore from '@/store/useKanjiStore';
+import useKanjiStore, { type IKanjiObj } from '@/store/useKanjiStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import FuriganaText from '@/components/reusable/FuriganaText';
 import { useClick } from '@/hooks/useAudio';
+
+type RawKanjiEntry = {
+  id: number;
+  kanjiChar: string;
+  onyomi: string[];
+  kunyomi: string[];
+  displayMeanings: string[];
+  fullDisplayMeanings: string[];
+  meanings: string[];
+};
+
+const kanjiImporters = {
+  n5: () =>
+    fetch('/kanji/N5.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n4: () =>
+    fetch('/kanji/N4.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n3: () =>
+    fetch('/kanji/N3.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n2: () =>
+    fetch('/kanji/N2.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+  n1: () =>
+    fetch('/kanji/N1.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+} as const;
+
+type KanjiCollectionKey = keyof typeof kanjiImporters;
 
 const createKanjiSetRanges = (numSets: number) =>
   Array.from({ length: numSets }, (_, i) => i + 1).reduce(
@@ -22,22 +43,46 @@ const createKanjiSetRanges = (numSets: number) =>
 
 const kanjiSetSliceRanges = createKanjiSetRanges(200);
 
-const kanjiCollections = {
-  n5: N5Kanji,
-  n4: N4Kanji,
-  n3: N3Kanji,
-  n2: N2Kanji,
-  n1: N1Kanji,
-};
-
 const KanjiSetDictionary = ({ set }: { set: string }) => {
   const { playClick } = useClick();
 
   const selectedKanjiCollection = useKanjiStore(
     state => state.selectedKanjiCollection
   );
+  const [kanjiCollections, setKanjiCollections] = useState<
+    Partial<Record<KanjiCollectionKey, IKanjiObj[]>>
+  >({});
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadKanji = async () => {
+      const level = selectedKanjiCollection as KanjiCollectionKey;
+      if (kanjiCollections[level]) return;
+
+      const importer = kanjiImporters[level];
+      if (!importer) return;
+
+      const kanjiData = await importer();
+      if (!isMounted) return;
+
+      setKanjiCollections(prev => ({
+        ...prev,
+        [level]: kanjiData.map(entry => ({ ...entry })),
+      }));
+    };
+
+    void loadKanji();
+
+    return () => {
+      isMounted = false;
+    };
+    // Intentionally omitting kanjiCollections from deps to avoid refetching
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const displayKanjiCollection =
-    kanjiCollections[selectedKanjiCollection as keyof typeof kanjiCollections];
+    kanjiCollections[selectedKanjiCollection as KanjiCollectionKey] ?? [];
 
   const sliceRange =
     kanjiSetSliceRanges[set as keyof typeof kanjiSetSliceRanges];
