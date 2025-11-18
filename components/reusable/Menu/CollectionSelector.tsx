@@ -13,7 +13,7 @@ import {
   N5VocabLength,
   N4VocabLength,
   N3VocabLength,
-  N2VocabLength
+  N2VocabLength,
 } from '@/static/unitSets';
 import { useClick } from '@/hooks/useAudio';
 import { CircleCheck, Circle, Trash } from 'lucide-react';
@@ -25,14 +25,14 @@ const numCollectionSets = {
     n4: Math.ceil(N4KanjiLength / 10),
     n3: Math.ceil(N3KanjiLength / 10),
     n2: Math.ceil(N2KanjiLength / 10),
-    n1: Math.ceil(N1KanjiLength / 10)
+    n1: Math.ceil(N1KanjiLength / 10),
   },
   '/vocabulary': {
     n5: Math.ceil(N5VocabLength / 10),
     n4: Math.ceil(N4VocabLength / 10),
     n3: Math.ceil(N3VocabLength / 10),
-    n2: Math.ceil(N2VocabLength / 10)
-  }
+    n2: Math.ceil(N2VocabLength / 10),
+  },
 };
 
 const CollectionSelector = () => {
@@ -88,7 +88,7 @@ const CollectionSelector = () => {
       displayName: `Unit 1, Sets 1-${
         numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n5
-      }`
+      }`,
     },
     {
       name: 'n4',
@@ -100,7 +100,7 @@ const CollectionSelector = () => {
           .n5 +
         numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n4
-      }`
+      }`,
     },
     {
       name: 'n3',
@@ -117,7 +117,7 @@ const CollectionSelector = () => {
           .n4 +
         numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n3
-      }`
+      }`,
     },
     {
       name: 'n2',
@@ -138,7 +138,7 @@ const CollectionSelector = () => {
           .n3 +
         numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n2
-      }`
+      }`,
     },
     {
       name: 'n1',
@@ -165,12 +165,12 @@ const CollectionSelector = () => {
         numCollectionSets[pathWithoutLocale as keyof typeof numCollectionSets]
           .n1
  */
-      }`
-    }
+      }`,
+    },
   ];
 
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <div
         className={clsx(
           'rounded-tl-2xl rounded-tr-2xl bg-[var(--card-color)]',
@@ -226,11 +226,11 @@ const CollectionSelector = () => {
             </span> */}
 
               {collection.name === selectedCollection ? (
-                <CircleCheck className='text-[var(--secondary-color)]' />
+                <CircleCheck className="text-[var(--secondary-color)]" />
               ) : (
-                <Circle className='text-[var(--border-color)]' />
+                <Circle className="text-[var(--border-color)]" />
               )}
-              <span className='text-2xl'>
+              <span className="text-2xl">
                 {collection.displayName.split(', ')[0]}
               </span>
               {/* <span className='text-sm text-[var(--secondary-color)] pt-2'>
@@ -261,19 +261,19 @@ const CollectionSelector = () => {
           'flex flex-col gap-2 items-start '
         )}
       >
-        <p className='flex flex-col'>
-          <span className='flex gap-2 items-center'>
-            <CircleCheck className='text-[var(--secondary-color)]' />
-            Selected Sets:
+        <p className="flex flex-col">
+          <span className="flex gap-2 items-center">
+            <CircleCheck className="text-[var(--secondary-color)]" />
+            Selected Levels:
           </span>
-          <span className='text-[var(--secondary-color)]'>
+          <span className="text-[var(--secondary-color)]">
             {pathWithoutLocale === '/kanji'
               ? selectedKanjiSets.length > 0
-                ? selectedKanjiSets.sort().join(', ')
+                ? selectedKanjiSets.sort().join(', ').replace(/Set /g, 'Level ')
                 : 'None'
               : pathWithoutLocale === '/vocabulary'
               ? selectedVocabSets.length > 0
-                ? selectedVocabSets.sort().join(', ')
+                ? selectedVocabSets.sort().join(', ').replace(/Set /g, 'Level ')
                 : 'None'
               : null}
           </span>

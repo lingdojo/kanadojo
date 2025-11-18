@@ -23,32 +23,29 @@ const createVocabSetRanges = (numSets: number) =>
 const vocabSetSliceRanges = createVocabSetRanges(200);
 
 const vocabData = {
-  jlpt: {
-    n5: {
-      nouns: N5Nouns,
-    },
-    n4: {
-      nouns: N4Nouns,
-    },
-    n3: {
-      nouns: N3Nouns,
-    },
-    n2: {
-      nouns: N2Nouns,
-    },
+  n5: {
+    nouns: N5Nouns,
+  },
+  n4: {
+    nouns: N4Nouns,
+  },
+  n3: {
+    nouns: N3Nouns,
+  },
+  n2: {
+    nouns: N2Nouns,
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type VocabData = Record<string, Record<string, any>>;
+type VocabData = Record<string, { nouns: IWord[] }>;
 
 const SetDictionary = ({ set }: { set: string }) => {
-  const showKana = usePreferencesStore((state) => state.displayKana);
+  const showKana = usePreferencesStore(state => state.displayKana);
 
   const selectedVocabCollection = useVocabStore(
-    (state) => state.selectedVocabCollection
+    state => state.selectedVocabCollection
   );
-  const displayVocabCollection = (vocabData as VocabData)['jlpt'][
+  const displayVocabCollection = (vocabData as VocabData)[
     selectedVocabCollection
   ]['nouns'];
 

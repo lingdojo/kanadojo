@@ -15,7 +15,7 @@ import { removeLocaleFromPath } from '@/lib/pathUtils';
 
 const GameIntel = ({
   gameMode,
-  feedback
+  feedback,
 }: {
   gameMode: string;
   feedback?: React.JSX.Element;
@@ -64,18 +64,18 @@ const GameIntel = ({
             'flex flex-col gap-2 items-center justify-center py-2 w-full'
           )}
         >
-          <p className='text-xl px-4 flex justify-center items-center w-full gap-2.5 py-2'>
+          <p className="text-xl px-4 flex justify-center items-center w-full gap-2.5 py-2">
             {gameMode.toLowerCase() === 'pick' && (
-              <MousePointerClick className='text-[var(--main-color)]' />
+              <MousePointerClick className="text-[var(--main-color)]" />
             )}
             {gameMode.toLowerCase() === 'reverse pick' && (
-              <MousePointerClick className=' scale-x-[-1] text-[var(--main-color)]' />
+              <MousePointerClick className=" scale-x-[-1] text-[var(--main-color)]" />
             )}
             {gameMode.toLowerCase() === 'input' && (
-              <Keyboard className='text-[var(--main-color)]' />
+              <Keyboard className="text-[var(--main-color)]" />
             )}
             {gameMode.toLowerCase() === 'reverse input' && (
-              <Keyboard className='scale-y-[-1] text-[var(--main-color)]' />
+              <Keyboard className="scale-y-[-1] text-[var(--main-color)]" />
             )}
             <span>{gameMode}</span>
 
@@ -91,9 +91,11 @@ const GameIntel = ({
                 window.open('https://ko-fi.com/kanadojo', '_blank');
               }}
             >
-              <Coffee size={24} className='motion-safe:animate-pulse' />
+              <Coffee
+                size={24}
+                className="motion-safe:animate-pulse"
+              />
             </button>
-
           </p>
         </div>
 
@@ -110,15 +112,15 @@ const GameIntel = ({
             'flex flex-row gap-3 items-center justify-center px-4 py-2'
           )}
         >
-          <p className='text-xl flex flex-row items-center gap-1'>
+          <p className="text-xl flex flex-row items-center gap-1">
             <SquareCheck />
             <span>{numCorrectAnswers}</span>
           </p>
-          <p className='text-xl flex flex-row items-center gap-1'>
+          <p className="text-xl flex flex-row items-center gap-1">
             <SquareX />
             <span>{numWrongAnswers}</span>
           </p>
-          <p className='text-xl flex flex-row items-center gap-1'>
+          <p className="text-xl flex flex-row items-center gap-1">
             <Star />
             <span>{numStars}</span>
           </p>
@@ -143,7 +145,7 @@ const GameIntel = ({
       </div>
 
       {feedback && (
-        <p className='text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-t-1 w-full  border-[var(--border-color)]'>
+        <p className="text-xl flex justify-center items-center gap-1.5 px-4 py-3 border-t-1 w-full  border-[var(--border-color)]">
           {feedback}
         </p>
       )}
@@ -154,15 +156,18 @@ const GameIntel = ({
           trainingDojo === 'kana' && 'hidden'
         )}
       >
-        <span className='flex gap-2 items-center'>
-          <MousePointer size={20} className='text-[var(--main-color)]' />
-          selected sets:
+        <span className="flex gap-2 items-center">
+          <MousePointer
+            size={20}
+            className="text-[var(--main-color)]"
+          />
+          selected levels:
         </span>
-        <span className='text-[var(--secondary-color)]'>
+        <span className="text-[var(--secondary-color)]">
           {trainingDojo === 'kanji'
-            ? selectedKanjiSets.sort().join(', ').toLowerCase()
+            ? selectedKanjiSets.sort().join(', ').toLowerCase().replace(/set /g, 'level ')
             : trainingDojo === 'vocabulary'
-            ? selectedVocabSets.sort().join(', ').toLowerCase()
+            ? selectedVocabSets.sort().join(', ').toLowerCase().replace(/set /g, 'level ')
             : null}
         </span>
       </p>
