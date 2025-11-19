@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { toKana, toRomaji } from 'wanakana';
 import { IKanjiObj } from '@/store/useKanjiStore';
 import { IVocabObj } from '@/store/useVocabStore';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/hooks/useAudio';
 import FuriganaText from '@/components/reusable/FuriganaText';
+import usePreferencesStore from '@/store/usePreferencesStore';
 
 // Type guard
 const isKanjiObj = (obj: IKanjiObj | IVocabObj): obj is IKanjiObj => {
@@ -153,39 +155,46 @@ const VocabSummary = ({
   feedback: React.ReactElement;
   onContinue: () => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
-}) => (
-  <div className="flex flex-col justify-start items-center gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
-    <FeedbackHeader feedback={feedback} />
+}) => {
+  const showKana = usePreferencesStore(state => state.displayKana);
+  const rawReading = payload.reading || '';
+  const baseReading = rawReading.split(' ')[1] || rawReading;
+  const displayReading = showKana ? toKana(baseReading) : toRomaji(baseReading);
 
-    <FuriganaText
-      text={payload.word}
-      reading={payload.reading}
-      className="text-6xl flex justify-center w-full"
-      lang="ja"
-    />
+  return (
+    <div className="flex flex-col justify-start items-center gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
+      <FeedbackHeader feedback={feedback} />
 
-    <div className="flex flex-col gap-2 items-start w-full">
-      <span
-        className={clsx(
-          'rounded-xl px-2 py-1 flex flex-row items-center',
-          'bg-[var(--card-color)] text-lg',
-          'text-[var(--secondary-color)]'
-        )}
-      >
-        {payload.reading}
-      </span>
-      <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
-        {payload.displayMeanings.join(', ')}
-      </p>
+      <FuriganaText
+        text={payload.word}
+        reading={payload.reading}
+        className="text-6xl flex justify-center w-full"
+        lang="ja"
+      />
+
+      <div className="flex flex-col gap-2 items-start w-full">
+        <span
+          className={clsx(
+            'rounded-xl px-2 py-1 flex flex-row items-center',
+            'bg-[var(--card-color)] text-lg',
+            'text-[var(--secondary-color)]'
+          )}
+        >
+          {displayReading}
+        </span>
+        <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
+          {payload.displayMeanings.join(', ')}
+        </p>
+      </div>
+
+      <ContinueButton
+        buttonRef={buttonRef}
+        onClick={onContinue}
+        disabled={false}
+      />
     </div>
-
-    <ContinueButton
-      buttonRef={buttonRef}
-      onClick={onContinue}
-      disabled={false}
-    />
-  </div>
-);
+  );
+};
 
 // Main component
 const AnswerSummary = ({

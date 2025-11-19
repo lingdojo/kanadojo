@@ -20,7 +20,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "^4.0.17",
@@ -48,6 +47,7 @@
     "tailwind-merge": "^3.2.0",
     "tw-animate-css": "^1.2.5",
     "use-sound": "^5.0.0",
+    "wanakana": "^5.2.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
