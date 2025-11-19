@@ -297,64 +297,63 @@ const KanjiCards = () => {
                   'md:items-start md:grid lg:grid-cols-2 2xl:grid-cols-3'
                 )}
               >
-                {rowSets.map((kanjiSetTemp, i) => (
-                  <div
-                    key={kanjiSetTemp.id + kanjiSetTemp.name}
-                    className={clsx(
-                      'flex flex-col md:px-4 h-full',
-                      'border-[var(--border-color)]',
-                      i < rowSets.length - 1 && 'md:border-r-1'
-                    )}
-                  >
-                    <button
+                {rowSets.map((kanjiSetTemp, i) => {
+                  const setWords = selectedKanjiCollection.data.slice(
+                    kanjiSetTemp.start * 10,
+                    kanjiSetTemp.end * 10
+                  );
+                  const isSelected = selectedKanjiSets.includes(
+                    kanjiSetTemp.name
+                  );
+
+                  return (
+                    <div
+                      key={kanjiSetTemp.id + kanjiSetTemp.name}
                       className={clsx(
-                        'text-2xl flex justify-center items-center gap-2 group',
-                        'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
-                        'duration-250 transition-all ease-in-out',
-                        'px-2 py-3 max-md:mx-4',
-                        selectedKanjiSets.includes(kanjiSetTemp.name) &&
-                          'bg-[var(--border-color)]'
+                        'flex flex-col md:px-4 h-full',
+                        'border-[var(--border-color)]',
+                        i < rowSets.length - 1 && 'md:border-r-1'
                       )}
-                      onClick={e => {
-                        e.currentTarget.blur();
-                        playClick();
-                        if (selectedKanjiSets.includes(kanjiSetTemp.name)) {
-                          setSelectedKanjiSets(
-                            selectedKanjiSets.filter(
-                              set => set !== kanjiSetTemp.name
-                            )
-                          );
-                          addKanjiObjs(
-                            selectedKanjiCollection.data.slice(
-                              kanjiSetTemp.start * 10,
-                              kanjiSetTemp.end * 10
-                            )
-                          );
-                        } else {
-                          setSelectedKanjiSets([
-                            ...new Set(
-                              selectedKanjiSets.concat(kanjiSetTemp.name)
-                            ),
-                          ]);
-                          addKanjiObjs(
-                            selectedKanjiCollection.data.slice(
-                              kanjiSetTemp.start * 10,
-                              kanjiSetTemp.end * 10
-                            )
-                          );
-                        }
-                      }}
                     >
-                      {selectedKanjiSets.includes(kanjiSetTemp.name) ? (
-                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
-                      ) : (
-                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
-                      )}
-                      {kanjiSetTemp.name.replace('Set ', 'Level ')}
-                    </button>
-                    <KanjiSetDictionary set={kanjiSetTemp.id} />
-                  </div>
-                ))}
+                      <button
+                        className={clsx(
+                          'text-2xl flex justify-center items-center gap-2 group',
+                          'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
+                          'duration-250 transition-all ease-in-out',
+                          'px-2 py-3 max-md:mx-4',
+                          isSelected && 'bg-[var(--border-color)]'
+                        )}
+                        onClick={e => {
+                          e.currentTarget.blur();
+                          playClick();
+                          if (isSelected) {
+                            setSelectedKanjiSets(
+                              selectedKanjiSets.filter(
+                                set => set !== kanjiSetTemp.name
+                              )
+                            );
+                            addKanjiObjs(setWords);
+                          } else {
+                            setSelectedKanjiSets([
+                              ...new Set(
+                                selectedKanjiSets.concat(kanjiSetTemp.name)
+                              ),
+                            ]);
+                            addKanjiObjs(setWords);
+                          }
+                        }}
+                      >
+                        {isSelected ? (
+                          <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
+                        ) : (
+                          <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
+                        )}
+                        {kanjiSetTemp.name.replace('Set ', 'Level ')}
+                      </button>
+                      <KanjiSetDictionary words={setWords} />
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

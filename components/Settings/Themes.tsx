@@ -15,8 +15,8 @@ const Themes = () => {
   const { playClick } = useClick();
   const { playLong } = useLong();
 
-  const selectedTheme = usePreferencesStore((state) => state.theme);
-  const setSelectedTheme = usePreferencesStore((state) => state.setTheme);
+  const selectedTheme = usePreferencesStore(state => state.theme);
+  const setSelectedTheme = usePreferencesStore(state => state.setTheme);
 
   // Initialize with first theme to avoid hydration mismatch
   const [randomTheme, setRandomTheme] = useState(themeSets[2].themes[0]);
@@ -32,13 +32,14 @@ const Themes = () => {
   /* handleHover acts as a debouncer, so it applies the theme when the user stops on top of it.
    Without it, the theme would apply on every hover, causing lag.
  */
+  /* 
   const handleHover = (themeId: string) => {
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
     hoverTimeout.current = setTimeout(() => {
       applyTheme(themeId);
     }, 50);
   };
-
+ */
   useEffect(() => {
     setIsMounted(true);
     console.log(isMounted);
@@ -89,7 +90,10 @@ const Themes = () => {
         </button>
       </div>
       {themeSets.map((themeSet, i) => (
-        <div key={i} className="flex flex-col gap-3">
+        <div
+          key={i}
+          className="flex flex-col gap-3"
+        >
           <h4 className="text-xl flex flex-row items-center gap-1.5">
             {createElement(themeSet.icon)}
             <span>{themeSet.name}</span>
@@ -99,7 +103,7 @@ const Themes = () => {
               'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
             )}
           >
-            {themeSet.themes.map((currentTheme) => (
+            {themeSet.themes.map(currentTheme => (
               <label
                 key={currentTheme.id}
                 style={{
@@ -114,7 +118,7 @@ const Themes = () => {
                 }}
                 onMouseEnter={() => {
                   setIsHovered(currentTheme.id);
-                  handleHover(currentTheme.id);
+                  // handleHover(currentTheme.id);
                 }}
                 onMouseLeave={() => {
                   if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
