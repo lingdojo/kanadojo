@@ -19,6 +19,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
 </div>
+
 <a id="about-kanadojo"></a>
 ## 📖 О KanaDojo
 
