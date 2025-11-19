@@ -26,7 +26,7 @@
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=lingdojo/kana-dojo&type=date&legend=top-left)](https://www.star-history.com/#lingdojo/kana-dojo&type=date&legend=top-left)
 
-**An aesthetic, minimalist, and highly customizable platform for mastering Japanese inspired by Monkeytype**
+**An aesthetic, minimalist and highly customizable platform for mastering Japanese inspired by Monkeytype**
 
 [![Live Demo](https://img.shields.io/badge/demo-kanadojo.com-blue?style=for-the-badge)](https://kanadojo.com)
 [![DeepWiki](https://img.shields.io/badge/docs-DeepWiki-purple?style=for-the-badge)](https://deepwiki.com/lingdojo/kana-dojo)
