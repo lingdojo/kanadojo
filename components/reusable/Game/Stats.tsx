@@ -4,236 +4,239 @@ import {
   Hourglass,
   SquareCheck,
   SquareX,
-  ChartSpline,
   Target,
   Timer,
-  ClockFading,
   Clover,
   HeartCrack,
-  CircleDivide,
   Flame,
   Shapes,
-  Sigma
+  TrendingUp,
+  Clock,
+  Activity,
+  ChevronsLeft,
+  LucideIcon,
 } from 'lucide-react';
 import useStatsStore from '@/store/useStatsStore';
-import { ChevronsLeft } from 'lucide-react';
 import { findHighestCounts } from '@/lib/helperFunctions';
 import { useClick } from '@/hooks/useAudio';
 
-const Stats = () => {
-  const { playClick } = useClick();
+interface StatItem {
+  label: string;
+  value: string;
+  Icon: LucideIcon;
+}
 
+interface StatCardProps {
+  title: string;
+  stats: StatItem[];
+}
+
+const Stats: React.FC = () => {
+  const { playClick } = useClick();
   const toggleStats = useStatsStore(state => state.toggleStats);
 
-  const numCorrectAnswers = useStatsStore(state => state.numCorrectAnswers);
-  const numWrongAnswers = useStatsStore(state => state.numWrongAnswers);
-  const characterHistory = useStatsStore(state => state.characterHistory);
-  const totalMilliseconds = useStatsStore(state => state.totalMilliseconds);
-  const correctAnswerTimes = useStatsStore(state => state.correctAnswerTimes);
+  // Get data from store
+  const numCorrectAnswers: number = useStatsStore(
+    state => state.numCorrectAnswers
+  );
+  const numWrongAnswers: number = useStatsStore(state => state.numWrongAnswers);
+  const characterHistory: string[] = useStatsStore(
+    state => state.characterHistory
+  );
+  const totalMilliseconds: number = useStatsStore(
+    state => state.totalMilliseconds
+  );
+  const correctAnswerTimes: number[] = useStatsStore(
+    state => state.correctAnswerTimes
+  );
   const characterScores = useStatsStore(state => state.characterScores);
 
-  const totalMinutes = Math.floor(totalMilliseconds / 60000);
-  const seconds = ((totalMilliseconds / 1000) % 60).toFixed(0);
-  const accuracy =
-    (numCorrectAnswers / (numCorrectAnswers + numWrongAnswers)) * 100;
-  const ciRatio = numCorrectAnswers / numWrongAnswers;
-  const averageCorrectAnswerTime =
-    correctAnswerTimes.length > 0 &&
-    correctAnswerTimes.reduce((acc, curr) => acc + curr) /
-      correctAnswerTimes.length;
-  const fastestCorrectAnswer = Math.min(...correctAnswerTimes).toFixed(2);
-  const slowestCorrectAnswer = Math.max(...correctAnswerTimes).toFixed(2);
+  // Calculate time
+  const totalMinutes: number = Math.floor(totalMilliseconds / 60000);
+  const seconds: string = ((totalMilliseconds / 1000) % 60).toFixed(0);
+  const timeDisplay: string = `${totalMinutes}m ${seconds}s`;
+
+  // Calculate accuracy metrics
+  const totalAnswers: number = numCorrectAnswers + numWrongAnswers;
+  const accuracy: number =
+    totalAnswers > 0 ? (numCorrectAnswers / totalAnswers) * 100 : 0;
+  const ciRatio: number =
+    numWrongAnswers > 0
+      ? numCorrectAnswers / numWrongAnswers
+      : numCorrectAnswers > 0
+      ? Infinity
+      : 0;
+
+  // Calculate timing metrics
+  const hasAnswers: boolean = correctAnswerTimes.length > 0;
+  const avgTime: string | null = hasAnswers
+    ? (
+        correctAnswerTimes.reduce((sum: number, t: number) => sum + t, 0) /
+        correctAnswerTimes.length
+      ).toFixed(2)
+    : null;
+  const fastestTime: string | null = hasAnswers
+    ? Math.min(...correctAnswerTimes).toFixed(2)
+    : null;
+  const slowestTime: string | null = hasAnswers
+    ? Math.max(...correctAnswerTimes).toFixed(2)
+    : null;
+
+  // Calculate character metrics
+  const uniqueChars: number = [...new Set(characterHistory)].length;
   const {
     highestCorrectChars,
     highestCorrectCharsValue,
     highestWrongChars,
-    highestWrongCharsValue
+    highestWrongCharsValue,
   } = findHighestCounts(characterScores);
 
-  const statsFields = [
-    {
-      field: 'training time',
-      value: `${totalMinutes} minute${
-        totalMinutes === 1 ? '' : 's'
-      }, ${seconds} seconds (paused)`,
-      icons: [Hourglass]
-    },
-    {
-      field: 'correct answers',
-      value: `${numCorrectAnswers}`,
-      icons: [SquareCheck]
-    },
-    {
-      field: 'wrong answers',
-      value: `${numWrongAnswers}`,
-      icons: [SquareX]
-    },
-    {
-      field: 'accuracy',
-      value: `${Number.isNaN(accuracy) ? '~' : accuracy.toFixed(1) + '%'}`,
-      icons: [Target]
-    },
-    {
-      field: 'average time per correct answer',
-      value: `${
-        averageCorrectAnswerTime
-          ? averageCorrectAnswerTime.toFixed(2) + 's'
-          : '~'
-      }`,
-      icons: [Timer]
-    },
+  const formatValue = (
+    value: string | number | null | undefined,
+    suffix: string = ''
+  ): string => {
+    if (value === null || value === undefined) return '~';
+    if (value === Infinity) return '∞';
+    return `${value}${suffix}`;
+  };
 
+  const StatCard: React.FC<StatCardProps> = ({ title, stats }) => (
+    <div className="bg-[var(--bg-color)] border-2 border-[var(--border-color)] rounded-lg p-6 w-full">
+      <h3 className="text-2xl font-bold mb-6 text-[var(--secondary-color)] border-b-2 border-[var(--border-color)] pb-3">
+        {title}
+      </h3>
+      <div className="space-y-4">
+        {stats.map(({ label, value, Icon }: StatItem, i: number) => (
+          <div
+            key={label}
+            className={clsx(
+              'flex items-center justify-between gap-4 pb-4',
+              i < stats.length - 1 && 'border-b border-[var(--border-color)]/40'
+            )}
+          >
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <Icon
+                size={20}
+                className="text-[var(--secondary-color)] flex-shrink-0"
+              />
+              <span className="text-sm md:text-base text-[var(--text-color)]/80 truncate">
+                {label}
+              </span>
+            </div>
+            <span className="font-semibold text-base md:text-lg whitespace-nowrap">
+              {value}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const generalStats: StatItem[] = [
+    { label: 'Training Time', value: timeDisplay, Icon: Hourglass },
     {
-      field: 'fastest correct answer',
-      value: `${
-        fastestCorrectAnswer !== 'Infinity' ? fastestCorrectAnswer + 's' : '~'
-      }`,
-      icons: [Flame]
+      label: 'Correct Answers',
+      value: formatValue(numCorrectAnswers),
+      Icon: SquareCheck,
     },
     {
-      field: 'slowest correct answer',
-      value: `${
-        slowestCorrectAnswer !== '-Infinity' ? slowestCorrectAnswer + 's' : '~'
-      }`,
-      icons: [ClockFading]
+      label: 'Wrong Answers',
+      value: formatValue(numWrongAnswers),
+      Icon: SquareX,
     },
     {
-      field: 'correct / incorrect answers ratio',
-      value: `${
-        Number.isNaN(ciRatio)
-          ? '~'
-          : ciRatio === Infinity
-          ? '∞'
-          : ciRatio.toFixed(2)
-      }`,
-      icons: [CircleDivide]
+      label: 'Accuracy',
+      value: formatValue(accuracy.toFixed(1), '%'),
+      Icon: Target,
+    },
+  ];
+
+  const answerStats: StatItem[] = [
+    { label: 'Average Time', value: formatValue(avgTime, 's'), Icon: Timer },
+    {
+      label: 'Fastest Answer',
+      value: formatValue(fastestTime, 's'),
+      Icon: Flame,
     },
     {
-      field: 'characters played',
-      value: `${characterHistory.length}`,
-      icons: [Sigma]
+      label: 'Slowest Answer',
+      value: formatValue(slowestTime, 's'),
+      Icon: Clock,
     },
     {
-      field: 'unique characters played',
-      value: `${[...new Set(characterHistory)].length}`,
-      icons: [Shapes]
+      label: 'Correct/Incorrect Ratio',
+      value: formatValue(ciRatio === Infinity ? '∞' : ciRatio.toFixed(2)),
+      Icon: TrendingUp,
+    },
+  ];
+
+  const characterStats: StatItem[] = [
+    {
+      label: 'Characters Played',
+      value: formatValue(characterHistory.length),
+      Icon: Activity,
     },
     {
-      field: 'easiest characters',
-      value: `${
-        highestCorrectChars.length >= 1
-          ? highestCorrectChars.join(', ') +
-            ' - ' +
-            highestCorrectCharsValue +
-            ' correct answers'
-          : '~'
-      }`,
-      icons: [Clover]
+      label: 'Unique Characters',
+      value: formatValue(uniqueChars),
+      Icon: Shapes,
     },
     {
-      field: 'hardest characters',
-      value: `${
-        highestWrongChars.length >= 1
-          ? highestWrongChars.join(', ') +
-            ' - ' +
-            highestWrongCharsValue +
-            ' wrong answers'
-          : '~'
-      }`,
-      icons: [HeartCrack]
-    }
+      label: 'Easiest Characters',
+      value:
+        highestCorrectChars.length > 0
+          ? `${highestCorrectChars.join(', ')} (${highestCorrectCharsValue})`
+          : '~',
+      Icon: Clover,
+    },
+    {
+      label: 'Hardest Characters',
+      value:
+        highestWrongChars.length > 0
+          ? `${highestWrongChars.join(', ')} (${highestWrongCharsValue})`
+          : '~',
+      Icon: HeartCrack,
+    },
   ];
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4 max-w-[100dvw] min-h-[100dvh] py-4'>
-      <h2
-        className={clsx(
-          'group text-4xl flex flex-row items-center gap-2.5 hover:cursor-pointer'
-          // buttonBorderStyles
-        )}
-        onClick={() => {
-          playClick();
-          toggleStats();
-        }}
-      >
-        <ChevronsLeft
-          className={clsx(
-            'text-[var(--secondary-color)] md:text-[var(--border-color)] group-hover:text-[var(--secondary-color)] mt-1 duration-250'
-          )}
-          size={32}
-        />
-        <span>Statistics</span>
-        <ChartSpline size={30} className='mt-1.5' />
-      </h2>
-      <div
-        className={clsx('flex flex-col items-start', 'md:flex-row md:gap-10')}
-      >
-        <div className={clsx('flex flex-col gap-4 py-4 items-start')}>
-          <h3 className={clsx('w-full text-2xl')}>General</h3>
-          <div className={clsx('flex flex-col gap-4')}>
-            {statsFields.slice(0, 4).map((statsField, i) => (
-              <p
-                className={clsx(
-                  'flex flex-row items-center justify-start gap-1.5',
-                  i < 3 && 'border-b-1 border-[var(--border-color)] pb-4'
-                )}
-                key={statsField.field}
-              >
-                <span className='text-[var(--secondary-color)]'>
-                  {statsField.field + ': '}
-                </span>
-                <span>{statsField.value}</span>
-                {statsField.icons.map((Icon, i) => (
-                  <Icon size={24} key={i} />
-                ))}
-              </p>
-            ))}
-          </div>
-        </div>
-        <div className={clsx('flex flex-col gap-4 py-4 items-start')}>
-          <h3 className={clsx('w-full text-2xl ')}>Answers</h3>
+    <div className="min-h-screen w-full bg-[var(--bg-color)] px-4 py-8 md:py-12">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <button
+          onClick={() => {
+            playClick();
+            toggleStats();
+          }}
+          className="group flex items-center gap-3 mb-8 md:mb-12 hover:opacity-80 transition-opacity"
+        >
+          <ChevronsLeft
+            size={32}
+            className="text-[var(--secondary-color)] group-hover:translate-x-[-4px] transition-transform"
+          />
+          <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-3">
+            Statistics
+            <Activity
+              size={32}
+              className="text-[var(--secondary-color)]"
+            />
+          </h2>
+        </button>
 
-          <div className={clsx('flex flex-col gap-4')}>
-            {statsFields.slice(4, 8).map((statsField, i) => (
-              <p
-                className={clsx(
-                  'flex flex-row items-center justify-start gap-1.5',
-                  i < 3 && 'border-b-1 border-[var(--border-color)] pb-4'
-                )}
-                key={statsField.field}
-              >
-                <span className='text-[var(--secondary-color)]'>
-                  {statsField.field + ': '}
-                </span>
-                <span>{statsField.value}</span>
-                {statsField.icons.map((Icon, i) => (
-                  <Icon size={24} key={i} />
-                ))}
-              </p>
-            ))}
-          </div>
-        </div>
-        <div className={clsx('flex flex-col gap-4 py-4 items-start')}>
-          <h3 className={clsx('w-full text-2xl')}>Characters</h3>
-          <div className={clsx('flex flex-col gap-4')}>
-            {statsFields.slice(8, 20).map((statsField, i) => (
-              <p
-                className={clsx(
-                  'flex flex-row items-center justify-start gap-1.5 ',
-                  i < 3 && 'border-b-1 border-[var(--border-color)] pb-4'
-                )}
-                key={statsField.field}
-              >
-                <span className='text-[var(--secondary-color)]'>
-                  {statsField.field + ': '}
-                </span>
-                <span>{statsField.value}</span>
-                {statsField.icons.map((Icon, i) => (
-                  <Icon size={24} key={i} />
-                ))}
-              </p>
-            ))}
-          </div>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+          <StatCard
+            title="General"
+            stats={generalStats}
+          />
+          <StatCard
+            title="Answers"
+            stats={answerStats}
+          />
+          <StatCard
+            title="Characters"
+            stats={characterStats}
+          />
         </div>
       </div>
     </div>

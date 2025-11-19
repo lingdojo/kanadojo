@@ -129,7 +129,7 @@ const CollectionSelector = () => {
       >
         {collections.map((collection, index) => {
           // Hide N1 vocab (not available yet)
-          if (isVocab && collection.name === 'n1') return null;
+          // if (isVocab && collection.name === 'n1') return null;
 
           const isFirst = index === 0;
           const isLast = index === collections.length - 1;

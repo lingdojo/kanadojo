@@ -29,7 +29,7 @@ const ContinueButton = ({
 }) => (
   <div
     className={clsx(
-      'w-[99vw]',
+      'w-[100vw]',
       'border-t-1 border-[var(--border-color)] bg-[var(--card-color)]',
       'absolute bottom-0 z-10 py-4 px-4',
       'flex justify-center items-center'
