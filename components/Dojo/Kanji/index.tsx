@@ -11,6 +11,7 @@ import useKanjiStore from '@/store/useKanjiStore';
 import useStatsStore from '@/store/useStatsStore';
 import KanjiSetDictionary from '@/components/Dojo/Kanji/SetDictionary';
 import type { IKanjiObj } from '@/store/useKanjiStore';
+//triggering vercel redeployment
 
 type RawKanjiEntry = {
   id: number;
