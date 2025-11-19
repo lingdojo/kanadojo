@@ -6,7 +6,7 @@
 
 <div align="center">
 
-![KanaDojo Banner](https://github.com/user-attachments/assets/d64d5fdd-e49b-4eb5-8de6-0e73c8f95d01)
+![KanaDojo Banner](https://github.com/user-attachments/assets/b7931764-be5e-43c7-b1b3-9d2568b2fecf)
 
 Eine ästhetische, minimalistische und hochgradig anpassbare Plattform zur Beherrschung der japanischen Sprache
 

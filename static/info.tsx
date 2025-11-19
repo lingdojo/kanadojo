@@ -10,7 +10,7 @@ export default function translationGen(t: (key: string) => string) {
           {/* render localized content */}
           <span>{t('greeting')}</span>
           <i className='text-[var(--secondary-color)] text-xs mt-1.5 max-md:hidden'>
-            v0.1.3 (alpha)
+            v0.1.4 (alpha)
           </i>
         </p>
       ),

@@ -1,6 +1,6 @@
 'use client';
-import { createElement, useEffect } from 'react';
-import themeSets from '@/static/themes';
+import { createElement, useEffect, useRef } from 'react';
+import themeSets, { applyTheme } from '@/static/themes';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import clsx from 'clsx';
 import { useClick, useLong } from '@/hooks/useAudio';
@@ -18,14 +18,28 @@ const Themes = () => {
   const selectedTheme = usePreferencesStore(state => state.theme);
   const setSelectedTheme = usePreferencesStore(state => state.setTheme);
 
-  const [isHovered, setIsHovered] = useState('');
-
   // Initialize with first theme to avoid hydration mismatch
   const [randomTheme, setRandomTheme] = useState(themeSets[2].themes[0]);
 
   // Set random theme only on client side after mount
   const [isMounted, setIsMounted] = useState(false);
 
+  const [isHovered, setIsHovered] = useState('');
+
+  // useRef is used to keep the value persistent without triggering re-renders
+  const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  /* handleHover acts as a debouncer, so it applies the theme when the user stops on top of it.
+   Without it, the theme would apply on every hover, causing lag.
+ */
+  /* 
+  const handleHover = (themeId: string) => {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+    hoverTimeout.current = setTimeout(() => {
+      applyTheme(themeId);
+    }, 50);
+  };
+ */
   useEffect(() => {
     setIsMounted(true);
     console.log(isMounted);
@@ -96,19 +110,30 @@ const Themes = () => {
                   color: currentTheme.mainColor,
                   backgroundColor:
                     isHovered === currentTheme.id
-                      ? currentTheme.borderColor
+                      ? currentTheme.cardColor
                       : currentTheme.backgroundColor,
                   borderWidth:
                     process.env.NODE_ENV === 'development' ? '2px' : undefined,
                   borderColor: currentTheme.borderColor,
                 }}
-                onMouseEnter={() => setIsHovered(currentTheme.id)}
-                onMouseLeave={() => setIsHovered('')}
+                onMouseEnter={() => {
+                  setIsHovered(currentTheme.id);
+                  // handleHover(currentTheme.id);
+                }}
+                onMouseLeave={() => {
+                  if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+                  hoverTimeout.current = setTimeout(() => {
+                    applyTheme(selectedTheme);
+                  }, 150);
+                  setIsHovered('');
+                }}
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center',
-                  'flex-1 overflow-hidden',
-                  buttonBorderStyles
+                  'flex-1 overflow-hidden border-[var(--background-color)]',
+                  buttonBorderStyles,
+                  currentTheme.id === selectedTheme &&
+                    'border-2 border-[var(--main-color)]'
                 )}
                 onClick={() => {
                   playClick();
@@ -139,7 +164,7 @@ const Themes = () => {
                   className="hidden"
                 />
                 <span className="text-center text-lg flex items-center gap-1.5">
-                  <span>
+                  <span className="text-[var(--secondary-color)]">
                     {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                   </span>
                   {currentTheme.id === 'long'

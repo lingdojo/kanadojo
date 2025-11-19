@@ -32,7 +32,7 @@ const FuriganaText = ({
       return (
         <ruby className={className} lang={lang}>
           {children}
-          <rt className={`text-xs ${furiganaClassName}`}>{reading}</rt>
+          <rt className={`text-xs ${furiganaClassName} text-[var(--secondary-color)]`}>{reading}</rt>
         </ruby>
       );
     }
@@ -51,7 +51,7 @@ const FuriganaText = ({
     return (
       <ruby className={className} lang={lang}>
         {text}
-        <rt className={`text-xs ${furiganaClassName}`}>{hiraganaReading}</rt>
+        <rt className={`text-xs ${furiganaClassName} text-[var(--secondary-color)]`}>{hiraganaReading}</rt>
       </ruby>
     );
   }

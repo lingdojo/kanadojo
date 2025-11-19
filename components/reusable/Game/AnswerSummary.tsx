@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import { IKanjiObj } from '@/store/useKanjiStore';
-import { IWordObj } from '@/store/useVocabStore';
-import { buttonBorderStyles } from '@/static/styles';
+import { IVocabObj } from '@/store/useVocabStore';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/hooks/useAudio';
 import FuriganaText from '@/components/reusable/FuriganaText';
 
 // Type guard
-const isKanjiObj = (obj: IKanjiObj | IWordObj): obj is IKanjiObj => {
+const isKanjiObj = (obj: IKanjiObj | IVocabObj): obj is IKanjiObj => {
   return (obj as IKanjiObj).kanjiChar !== undefined;
 };
 
@@ -28,20 +27,32 @@ const ContinueButton = ({
   onClick: () => void;
   disabled: boolean;
 }) => (
-  <button
-    ref={buttonRef}
+  <div
     className={clsx(
-      'text-xl font-medium py-4 px-16 rounded-3xl duration-150 w-full',
-      buttonBorderStyles,
-      'flex flex-row justify-center items-end gap-2 ',
-      'bg-[var(--card-color)] hover:text-[var(--background-color)] hover:bg-[var(--main-color)]'
+      'w-[99vw]',
+      'border-t-1 border-[var(--border-color)] bg-[var(--card-color)]',
+      'absolute bottom-0 z-10 py-4 px-4',
+      'flex justify-center items-center'
     )}
-    onClick={onClick}
-    disabled={disabled}
   >
-    <span>continue</span>
-    <CircleArrowRight className="" />
-  </button>
+    <button
+      ref={buttonRef}
+      className={clsx(
+        'text-xl font-medium py-4 px-16 rounded-3xl duration-250 hover:cursor-pointer',
+
+        'w-full md:w-1/2',
+
+        // buttonBorderStyles,
+        'flex flex-row justify-center items-end gap-2 ',
+        'text-[var(--background-color)] bg-[var(--main-color)]/80 hover:bg-[var(--main-color)]'
+      )}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <span>continue</span>
+      <CircleArrowRight className="" />
+    </button>
+  </div>
 );
 
 const KanjiDisplay = ({ payload }: { payload: IKanjiObj }) => (
@@ -132,18 +143,18 @@ const KanjiSummary = ({
   </div>
 );
 
-const WordSummary = ({
+const VocabSummary = ({
   payload,
   feedback,
   onContinue,
   buttonRef,
 }: {
-  payload: IWordObj;
+  payload: IVocabObj;
   feedback: React.ReactElement;
   onContinue: () => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
 }) => (
-  <div className="flex flex-col justify-start items-start gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
+  <div className="flex flex-col justify-start items-center gap-4 py-4 w-full md:w-3/4 lg:w-1/2">
     <FeedbackHeader feedback={feedback} />
 
     <FuriganaText
@@ -153,7 +164,7 @@ const WordSummary = ({
       lang="ja"
     />
 
-    <div className="flex flex-col gap-2 items-start">
+    <div className="flex flex-col gap-2 items-start w-full">
       <span
         className={clsx(
           'rounded-xl px-2 py-1 flex flex-row items-center',
@@ -182,7 +193,7 @@ const AnswerSummary = ({
   setDisplayAnswerSummary,
   feedback,
 }: {
-  payload: IKanjiObj | IWordObj;
+  payload: IKanjiObj | IVocabObj;
   setDisplayAnswerSummary: Dispatch<SetStateAction<boolean>>;
   feedback: React.ReactElement;
 }) => {
@@ -192,7 +203,8 @@ const AnswerSummary = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
-        event.key === 'Enter' ||
+        // event.key === 'Enter' ||
+        ((event.ctrlKey || event.metaKey) && event.key === 'Enter') ||
         event.code === 'Space' ||
         event.key === ' '
       ) {
@@ -218,7 +230,7 @@ const AnswerSummary = ({
       buttonRef={buttonRef}
     />
   ) : (
-    <WordSummary
+    <VocabSummary
       key={payload.word}
       payload={payload}
       feedback={feedback}

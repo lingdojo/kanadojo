@@ -11,6 +11,7 @@ import { AchievementNotificationContainer } from '@/components/reusable/Achievem
 import AchievementIntegration from '@/components/reusable/AchievementIntegration';
 import { applyTheme } from '@/static/themes';
 import BackToTop from '@/components/reusable/BackToTop';
+import { GlobalErrorBoundary } from '@/components/ErrorBoundary';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {
@@ -21,7 +22,7 @@ type FontObject = {
 };
 
 export default function ClientLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -74,25 +75,27 @@ export default function ClientLayout({
   }, []);
 
   return (
-    <div
-      data-scroll-restoration-id='container'
-      className={clsx(
-        'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
-        // 6. Apply fontClassName. This is now implicitly conditional
-        // because fontClassName will only have a value in prod after load.
-        fontClassName
-      )}
-      style={{
-        height: '100dvh',
-        overflowY: 'scroll'
-      }}
-    >
-      {children}
-      <ScrollRestoration />
-      <WelcomeModal />
-      <AchievementNotificationContainer />
-      <AchievementIntegration />
-      <BackToTop />
-    </div>
+    <GlobalErrorBoundary>
+      <div
+        data-scroll-restoration-id="container"
+        className={clsx(
+          'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
+          // 6. Apply fontClassName. This is now implicitly conditional
+          // because fontClassName will only have a value in prod after load.
+          fontClassName
+        )}
+        style={{
+          height: '100dvh',
+          overflowY: 'scroll',
+        }}
+      >
+        {children}
+        <ScrollRestoration />
+        <WelcomeModal />
+        <AchievementNotificationContainer />
+        <AchievementIntegration />
+        <BackToTop />
+      </div>
+    </GlobalErrorBoundary>
   );
 }

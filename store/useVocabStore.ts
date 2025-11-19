@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export interface IWordObj {
+export interface IVocabObj {
   word: string;
   reading: string;
   displayMeanings: string[];
@@ -9,11 +9,11 @@ export interface IWordObj {
 
 interface IFormState {
   selectedGameModeVocab: string;
-  selectedWordObjs: IWordObj[];
+  selectedVocabObjs: IVocabObj[];
   setSelectedGameModeVocab: (mode: string) => void;
-  addWordObj: (kanji: IWordObj) => void;
-  addWordObjs: (kanjis: IWordObj[]) => void;
-  clearWordObjs: () => void;
+  addVocabObj: (vocabObj: IVocabObj) => void;
+  addVocabObjs: (vocabObjs: IVocabObj[]) => void;
+  clearVocabObjs: () => void;
 
   selectedVocabCollection: string;
   setSelectedVocabCollection: (collection: string) => void;
@@ -25,37 +25,37 @@ interface IFormState {
 
 const useVocabStore = create<IFormState>(set => ({
   selectedGameModeVocab: 'Pick',
-  selectedWordObjs: [],
+  selectedVocabObjs: [],
   setSelectedGameModeVocab: gameMode =>
     set({ selectedGameModeVocab: gameMode }),
-  addWordObj: wordObj =>
+  addVocabObj: vocabObj =>
     set(state => ({
-      selectedWordObjs: state.selectedWordObjs
-        .map(wordObj => wordObj.word)
-        .includes(wordObj.word)
-        ? state.selectedWordObjs.filter(
-            currentWordObj => currentWordObj.word !== wordObj.word
+      selectedVocabObjs: state.selectedVocabObjs
+        .map(vocabObj => vocabObj.word)
+        .includes(vocabObj.word)
+        ? state.selectedVocabObjs.filter(
+            currentVocabObj => currentVocabObj.word !== vocabObj.word
           )
-        : [...state.selectedWordObjs, wordObj]
+        : [...state.selectedVocabObjs, vocabObj],
     })),
-  addWordObjs: wordObjs =>
+  addVocabObjs: vocabObjs =>
     set(state => ({
-      selectedWordObjs: wordObjs.every(currentWordObj =>
-        state.selectedWordObjs
-          .map(currentWordObj => currentWordObj.word)
-          .includes(currentWordObj.word)
+      selectedVocabObjs: vocabObjs.every(currentVocabObj =>
+        state.selectedVocabObjs
+          .map(currentVocabObj => currentVocabObj.word)
+          .includes(currentVocabObj.word)
       )
-        ? state.selectedWordObjs.filter(
-            currentWordObj =>
-              !wordObjs
-                .map(currentWordObj => currentWordObj.word)
-                .includes(currentWordObj.word)
+        ? state.selectedVocabObjs.filter(
+            currentVocabObj =>
+              !vocabObjs
+                .map(currentVocabObj => currentVocabObj.word)
+                .includes(currentVocabObj.word)
           )
-        : [...new Set([...state.selectedWordObjs, ...wordObjs])]
+        : [...new Set([...state.selectedVocabObjs, ...vocabObjs])],
     })),
-  clearWordObjs: () => {
+  clearVocabObjs: () => {
     set(() => ({
-      selectedWordObjs: []
+      selectedVocabObjs: [],
     }));
   },
 
@@ -66,9 +66,9 @@ const useVocabStore = create<IFormState>(set => ({
   setSelectedVocabSets: sets => set({ selectedVocabSets: sets }),
   clearVocabSets: () => {
     set(() => ({
-      selectedVocabSets: []
+      selectedVocabSets: [],
     }));
-  }
+  },
 }));
 
 export default useVocabStore;

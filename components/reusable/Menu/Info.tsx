@@ -62,8 +62,8 @@ const Info = () => {
           className={clsx(
             'duration-250',
             'text-[var(--border-color)]',
-            'max-md:group-active:text-[var(--text-color)]',
-            'md:group-hover:text-[var(--text-color)]',
+            'max-md:group-active:text-[var(--secondary-color)]',
+            'md:group-hover:text-[var(--secondary-color)]',
             !showInfo && 'rotate-180'
           )}
           size={24}

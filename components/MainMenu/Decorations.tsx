@@ -3,21 +3,18 @@ import { useEffect, useState } from 'react';
 import themeSets from '../../static/themes';
 import fonts from '@/static/fonts';
 import clsx from 'clsx';
-import N5Kanji from '@/static/kanji/N5';
-import N4Kanji from '@/static/kanji/N4';
-import N3Kanji from '@/static/kanji/N3';
 
-const kanjiList = [
-  ...N5Kanji.map(kanji => kanji.kanjiChar),
-  ...N4Kanji.map(kanji => kanji.kanjiChar),
-  ...N3Kanji.map(kanji => kanji.kanjiChar)
-];
+type RawKanjiEntry = {
+  kanjiChar: string;
+};
 
-const shuffledKanjiList = kanjiList.sort(() => Math.random() - 0.5);
+const kanjiSources = ['N5', 'N4', 'N3'] as const;
+
+const shuffle = <T,>(arr: T[]) => arr.slice().sort(() => Math.random() - 0.5);
 
 // Tailwind animations
 const animations = [
-  'motion-safe:animate-pulse'
+  'motion-safe:animate-pulse',
   // 'animate-bounce',
   //   'animate-ping',
   //   'animate-spin',
@@ -47,7 +44,7 @@ const KanjiCharacter = ({ char }: { char: string }) => {
   const [styles, setStyles] = useState({
     color: '',
     fontClass: '',
-    animation: ''
+    animation: '',
   });
 
   useEffect(() => {
@@ -61,7 +58,7 @@ const KanjiCharacter = ({ char }: { char: string }) => {
     setStyles({
       color: randomColor,
       fontClass: randomFont.font.className,
-      animation: randomAnimation
+      animation: randomAnimation,
     });
     setMounted(true);
   }, []);
@@ -71,10 +68,10 @@ const KanjiCharacter = ({ char }: { char: string }) => {
   return (
     <span
       className={`text-4xl transition-all duration-1000 ${styles.fontClass} ${styles.animation}`}
-      aria-hidden='true'
+      aria-hidden="true"
       style={{
         color: styles.color,
-        animationDelay: `${Math.random() * 1000}ms`
+        animationDelay: `${Math.random() * 1000}ms`,
       }}
     >
       {char}
@@ -83,6 +80,31 @@ const KanjiCharacter = ({ char }: { char: string }) => {
 };
 
 const Decorations = ({ expandDecorations }: { expandDecorations: boolean }) => {
+  const [kanjiList, setKanjiList] = useState<string[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadKanji = async () => {
+      const results = await Promise.all(
+        kanjiSources.map(async level => {
+          const response = await fetch(`/kanji/${level}.json`);
+          const data = (await response.json()) as RawKanjiEntry[];
+          return data.map(entry => entry.kanjiChar);
+        })
+      );
+
+      if (!isMounted) return;
+      setKanjiList(shuffle(results.flat()));
+    };
+
+    void loadKanji();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div
       className={clsx(
@@ -90,9 +112,12 @@ const Decorations = ({ expandDecorations }: { expandDecorations: boolean }) => {
         expandDecorations ? 'opacity-100' : 'opacity-30'
       )}
     >
-      <div className='grid grid-cols-28 gap-0.5 p-2 h-full w-full'>
-        {shuffledKanjiList.map((char, index) => (
-          <KanjiCharacter char={char} key={index} />
+      <div className="grid grid-cols-28 gap-0.5 p-2 h-full w-full">
+        {kanjiList.map((char, index) => (
+          <KanjiCharacter
+            char={char}
+            key={index}
+          />
         ))}
       </div>
     </div>
