@@ -47,7 +47,7 @@ const CollectionSelector = () => {
   const { playClick } = useClick();
   const pathname = usePathname();
   const contentType = removeLocaleFromPath(pathname).slice(1) as ContentType;
-  
+
   const isKanji = contentType === 'kanji';
   const isVocab = contentType === 'vocabulary';
 
@@ -70,8 +70,12 @@ const CollectionSelector = () => {
   } = useVocabStore();
 
   // Current content type values
-  const selectedCollection = isKanji ? selectedKanjiCollection : selectedVocabCollection;
-  const setSelectedCollection = isKanji ? setSelectedKanjiCollection : setSelectedVocabCollection;
+  const selectedCollection = isKanji
+    ? selectedKanjiCollection
+    : selectedVocabCollection;
+  const setSelectedCollection = isKanji
+    ? setSelectedKanjiCollection
+    : setSelectedVocabCollection;
   const selectedSets = isKanji ? selectedKanjiSets : selectedVocabSets;
   const sets = isKanji ? KANJI_SETS : VOCAB_SETS;
 
@@ -136,14 +140,19 @@ const CollectionSelector = () => {
           const isSelected = collection.name === selectedCollection;
 
           return (
-            <div key={collection.name} className="flex flex-col md:flex-row w-full">
+            <div
+              key={collection.name}
+              className="flex flex-col md:flex-row w-full"
+            >
               <button
                 className={clsx(
                   'flex justify-center items-center gap-2.5 py-6 w-full',
                   'text-[var(--main-color)] text-xl',
                   'hover:cursor-pointer transition-all duration-250',
-                  isFirst && 'max-md:rounded-tl-2xl max-md:rounded-tr-2xl md:rounded-tl-2xl md:rounded-bl-2xl',
-                  isLast && 'max-md:rounded-bl-2xl max-md:rounded-br-2xl md:rounded-tr-2xl md:rounded-br-2xl'
+                  isFirst &&
+                    'max-md:rounded-tl-2xl max-md:rounded-tr-2xl md:rounded-tl-2xl md:rounded-bl-2xl',
+                  isLast &&
+                    'max-md:rounded-bl-2xl max-md:rounded-br-2xl md:rounded-tr-2xl md:rounded-br-2xl'
                 )}
                 onClick={() => handleCollectionSelect(collection.name)}
               >
@@ -153,7 +162,11 @@ const CollectionSelector = () => {
                   <Circle className="text-[var(--border-color)]" />
                 )}
                 <span className="text-2xl">
-                  {collection.displayName.split(', ')[0]}
+                  <span>{collection.displayName.split(', ')[0]}</span>
+                  &nbsp;
+                  <span className="text-[var(--secondary-color)] text-xs">
+                    {collection.name.toUpperCase()}
+                  </span>
                 </span>
               </button>
 
@@ -187,10 +200,7 @@ const CollectionSelector = () => {
           </span>
           <span className="text-[var(--secondary-color)]">
             {selectedSets.length > 0
-              ? selectedSets
-                  .sort()
-                  .join(', ')
-                  .replace(/Set /g, 'Level ')
+              ? selectedSets.sort().join(', ').replace(/Set /g, 'Level ')
               : 'None'}
           </span>
         </div>
