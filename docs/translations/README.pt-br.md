@@ -1,5 +1,7 @@
 <div id="top"></div>
 
+<a href="#about-kanadojo">Sobre o KanaDojo</a> | <a href="#screenshots">Capturas de Tela</a> | <a href="#ui-design-philosophy">UI &amp; Filosofia de Design</a> | <a href="#tech-stack">Stack Tecnológico</a> | <a href="#getting-started">Começando</a> | <a href="#project-structure">Estrutura do Projeto</a> | <a href="#contributing">Contribuindo</a> | <a href="#license">Licença</a> | <a href="#acknowledgments">Agradecimentos</a> | <a href="#contact-links">Contato e Links</a> 
+
 # KanaDojo かな道場
 
 <div align="center">
@@ -18,6 +20,7 @@
 
 ---
 
+<a id="about-kanadojo"></a>
 ## 📖 Sobre o KanaDojo
 
 KanaDojo é uma plataforma web envolvente de aprendizado de japonês que torna o domínio de Hiragana, Katakana, Kanji e Vocabulário divertido e intuitivo. Construída com foco em estética, personalização e aprendizado eficaz, KanaDojo oferece um ambiente de treinamento imersivo para estudantes de japonês de todos os níveis.
@@ -64,6 +67,7 @@ Cada dojo suporta quatro modos de treinamento envolventes para reforçar o apren
 
 ---
 
+<a id="screenshots"></a>
 ## 🖼️ Capturas de Tela
 
 <div align="center">
@@ -88,6 +92,7 @@ Cada dojo suporta quatro modos de treinamento envolventes para reforçar o apren
 
 ---
 
+<a id="ui-design-philosophy"></a>
 ## 🎨 UI & Filosofia de Design
 
 KanaDojo abraça uma **estética minimalista** combinada com **máxima flexibilidade**. A filosofia de design se concentra em:
@@ -122,6 +127,7 @@ KanaDojo abraça uma **estética minimalista** combinada com **máxima flexibili
 
 ---
 
+<a id="tech-stack"></a>
 ## 🛠️ Stack Tecnológico
 
 KanaDojo é construído com tecnologias web modernas para desempenho ideal e experiência do desenvolvedor:
@@ -166,6 +172,7 @@ KanaDojo é construído com tecnologias web modernas para desempenho ideal e exp
 
 ---
 
+<a id="getting-started"></a>
 ## 🚀 Começando
 
 ### Pré-requisitos
@@ -318,6 +325,7 @@ Ou simplesmente execute em uma porta diferente:
 PORT=3001 npm run dev
 ```
 
+<a id="project-structure"></a>
 ## 📁 Estrutura do Projeto
 
 ```
@@ -410,6 +418,7 @@ Cada modo de jogo é uma rota dinâmica (`/[contentType]/train/[gameMode]`) que:
 
 ---
 
+<a id="contributing"></a>
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! KanaDojo é um projeto de código aberto construído pela comunidade, para a comunidade.
@@ -432,12 +441,14 @@ Contribuições são bem-vindas! KanaDojo é um projeto de código aberto constr
 
 ---
 
+<a id="license"></a>
 ## 📄 Licença
 
 Este projeto está licenciado sob a Licença AGPL 3.0 - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
 
 ---
 
+<a id="acknowledgments"></a>
 ## 🙏 Agradecimentos
 
 - Dados do idioma japonês e informações de caracteres
@@ -446,24 +457,12 @@ Este projeto está licenciado sob a Licença AGPL 3.0 - veja o arquivo [LICENSE.
 
 ---
 
+<a id="contact-links"></a>
 ## 📞 Contato e Links
 
 - **Website**: [kanadojo.com](https://kanadojo.com)
 - **Repositório**: [github.com/lingdojo/kanadojo](https://github.com/lingdojo/kanadojo)
 - **Email**: lingdojo.dev@gmail.com
-
----
-
-## 🌍 Traduções
-
-- [English (padrão)](../../README.md)
-- [Español](README.es.md)
-- [Français](README.fr.md)
-- [Deutsch](README.de.md)
-- Português (este documento)
-- [中文（简体）](README.zh-CN.md)
-- [中文（繁體）](README.zh-tw.md)
-- [हिन्दी](README.hin.md)
 
 ---
 
