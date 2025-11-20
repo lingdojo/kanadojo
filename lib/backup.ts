@@ -1,5 +1,6 @@
 // Helpers to export/import user preferences and stats (client-side only)
 
+import { useCustomThemeStore } from '@/store/useCustomThemeStore';
 import usePreferencesStore from '@/store/usePreferencesStore';
 import useStatsStore from '@/store/useStatsStore';
 
@@ -16,6 +17,7 @@ export type BackupFile = {
   version: string;
   createdAt: string;
   theme?: Record<string, JSONValue>;
+  customTheme?: Record<string, JSONValue>;
   stats?: Record<string, JSONValue>;
 };
 
@@ -71,13 +73,15 @@ function getAppVersion(): string {
 
 export function createBackup(): BackupFile {
   const themeState = usePreferencesStore.getState();
+  const customThemeState = useCustomThemeStore.getState();
   const statsState = useStatsStore.getState();
 
   return {
     version: getAppVersion(),
     createdAt: new Date().toISOString(),
     theme: toJSONValue(themeState) as Record<string, JSONValue>,
-    stats: toJSONValue(statsState) as Record<string, JSONValue>
+    customTheme: toJSONValue(customThemeState) as Record<string, JSONValue>,
+    stats: toJSONValue(statsState) as Record<string, JSONValue>,
   };
 }
 
@@ -87,6 +91,11 @@ export function applyBackup(data: BackupFile): boolean {
       const current = usePreferencesStore.getState();
       const picked = filterToKnownKeys(current, data.theme);
       usePreferencesStore.setState(picked);
+    }
+    if (data.customTheme) {
+      const current = useCustomThemeStore.getState();
+      const picked = filterToKnownKeys(current, data.customTheme);
+      useCustomThemeStore.setState(picked);
     }
     if (data.stats) {
       const current = useStatsStore.getState();

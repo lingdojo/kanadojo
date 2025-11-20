@@ -1,3 +1,4 @@
+import { useCustomThemeStore } from '@/store/useCustomThemeStore';
 import {
   Atom,
   Sun,
@@ -140,7 +141,7 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(267, 97%, 81%, 1)',
         secondaryColor: 'hsla(180, 100%, 89%, 1)',
       },
-            {
+      {
         id: 'wasabi-garden',
         backgroundColor: 'hsla(100, 42%, 12%, 1)',
         cardColor: 'hsla(100, 40%, 16%, 1)',
@@ -824,10 +825,16 @@ const themes: ThemeGroup[] = [
 
 // Flatten all themes into a map for easy lookup
 const themeMap = new Map<string, Theme>();
-themes.forEach(group => {
-  group.themes.forEach(theme => {
+themes.forEach((group) => {
+  group.themes.forEach((theme) => {
     themeMap.set(theme.id, theme);
   });
+});
+
+// Sync custom themes into the map whenever the store updates
+useCustomThemeStore.subscribe((state) => {
+  const customThemes = state.themes;
+  customThemes.forEach((theme) => themeMap.set(theme.id, theme));
 });
 
 export function applyTheme(themeId: string) {
@@ -852,9 +859,66 @@ export function applyTheme(themeId: string) {
   root.setAttribute('data-theme', theme.id);
 }
 
+// Apply a theme object directly (live preview theme)
+export function applyThemeObject(theme: Theme) {
+  const root = document.documentElement;
+  root.style.setProperty('--background-color', theme.backgroundColor);
+  root.style.setProperty('--card-color', theme.cardColor);
+  root.style.setProperty('--border-color', theme.borderColor);
+  root.style.setProperty('--main-color', theme.mainColor);
+  if (theme.secondaryColor)
+    root.style.setProperty('--secondary-color', theme.secondaryColor);
+}
+
 // Helper to get a specific theme
 export function getTheme(themeId: string): Theme | undefined {
   return themeMap.get(themeId);
+}
+
+// Convert hex to HSL
+// code from: https://gist.github.com/xenozauros/f6e185c8de2a04cdfecf
+export function hexToHsl(hex: string, valuesOnly = false) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result || result.length !== 4) throw 'Failed to parse hex';
+
+  let r = parseInt(result[1], 16);
+  let g = parseInt(result[2], 16);
+  let b = parseInt(result[3], 16);
+  let cssString = '';
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  (r /= 255), (g /= 255), (b /= 255);
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+  let h = 0,
+    s = 0,
+    l = (max + min) / 2;
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  h = Math.round(h * 360);
+  s = Math.round(s * 100);
+  l = Math.round(l * 100);
+
+  cssString = h + ',' + s + '%,' + l + '%';
+  cssString = !valuesOnly ? 'hsl(' + cssString + ')' : cssString;
+
+  return cssString;
 }
 
 export default themes;
