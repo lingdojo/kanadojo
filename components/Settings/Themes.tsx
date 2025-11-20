@@ -407,6 +407,14 @@ const Themes = () => {
                 <button
                   onClick={() => {
                     applyTheme(selectedTheme);
+                    setCustomTheme({
+                      id: '',
+                      backgroundColor: '#240d2f',
+                      cardColor: '#321441',
+                      borderColor: '#49215e',
+                      mainColor: '#ea70ad',
+                      secondaryColor: '#ce89e6',
+                    });
                     setIsAdding(false);
                   }}
                   className={clsx(
