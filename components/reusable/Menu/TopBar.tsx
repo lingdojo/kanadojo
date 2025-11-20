@@ -195,8 +195,8 @@ const TopBar: React.FC<ITopBarProps> = ({
         </Link>
       </div>
 
-      {/* Timed Challenge Button - Only for Kana */}
-      {pathWithoutLocale === '/kana' && (
+      {/* Timed Challenge Button - Available for Kana, Vocabulary, and Kanji */}
+      {(pathWithoutLocale === '/kana' || pathWithoutLocale === '/vocabulary' || pathWithoutLocale === '/kanji') && (
         <Link
           href={`${pathWithoutLocale}/timed-challenge`}
           className="w-full"
