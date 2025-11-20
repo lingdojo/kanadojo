@@ -48,6 +48,7 @@ const Themes = () => {
   /* handleHover acts as a debouncer, so it applies the theme when the user stops on top of it.
    Without it, the theme would apply on every hover, causing lag.
  */
+  /* 
   const handleHover = (themeId: string) => {
     if (isAdding) return;
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
@@ -132,7 +133,10 @@ const Themes = () => {
         </button>
       </div>
       {themeSets.map((themeSet, i) => (
-        <div key={i} className="flex flex-col gap-3">
+        <div
+          key={i}
+          className="flex flex-col gap-3"
+        >
           <h4 className="text-xl flex flex-row items-center gap-1.5">
             {createElement(themeSet.icon)}
             <span>{themeSet.name}</span>
@@ -142,7 +146,7 @@ const Themes = () => {
               'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
             )}
           >
-            {themeSet.themes.map((currentTheme) => (
+            {themeSet.themes.map(currentTheme => (
               <label
                 key={currentTheme.id}
                 style={{
@@ -157,7 +161,7 @@ const Themes = () => {
                 }}
                 onMouseEnter={() => {
                   setIsHovered(currentTheme.id);
-                  handleHover(currentTheme.id);
+                  // handleHover(currentTheme.id);
                 }}
                 onMouseLeave={() => {
                   if (isAdding) return;

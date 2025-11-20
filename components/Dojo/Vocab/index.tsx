@@ -304,64 +304,63 @@ const VocabCards = () => {
                   'md:items-start md:grid lg:grid-cols-2 2xl:grid-cols-3'
                 )}
               >
-                {rowSets.map((vocabSetTemp, i) => (
-                  <div
-                    key={vocabSetTemp.id + vocabSetTemp.name}
-                    className={clsx(
-                      'flex flex-col md:px-4 h-full',
-                      'border-[var(--border-color)]',
-                      i < rowSets.length - 1 && 'md:border-r-1'
-                    )}
-                  >
-                    <button
+                {rowSets.map((vocabSetTemp, i) => {
+                  const setWords = selectedVocabCollection.data.slice(
+                    vocabSetTemp.start * WORDS_PER_SET,
+                    vocabSetTemp.end * WORDS_PER_SET
+                  );
+                  const isSelected = selectedVocabSets.includes(
+                    vocabSetTemp.name
+                  );
+
+                  return (
+                    <div
+                      key={vocabSetTemp.id + vocabSetTemp.name}
                       className={clsx(
-                        'text-2xl flex justify-center items-center gap-2 group',
-                        'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
-                        'duration-250 transition-all ease-in-out',
-                        'px-2 py-3 max-md:mx-4',
-                        selectedVocabSets.includes(vocabSetTemp.name) &&
-                          'bg-[var(--border-color)]'
+                        'flex flex-col md:px-4 h-full',
+                        'border-[var(--border-color)]',
+                        i < rowSets.length - 1 && 'md:border-r-1'
                       )}
-                      onClick={e => {
-                        e.currentTarget.blur();
-                        playClick();
-                        if (selectedVocabSets.includes(vocabSetTemp.name)) {
-                          setSelectedVocabSets(
-                            selectedVocabSets.filter(
-                              set => set !== vocabSetTemp.name
-                            )
-                          );
-                          addWordObjs(
-                            selectedVocabCollection.data.slice(
-                              vocabSetTemp.start * WORDS_PER_SET,
-                              vocabSetTemp.end * WORDS_PER_SET
-                            )
-                          );
-                        } else {
-                          setSelectedVocabSets([
-                            ...new Set(
-                              selectedVocabSets.concat(vocabSetTemp.name)
-                            ),
-                          ]);
-                          addWordObjs(
-                            selectedVocabCollection.data.slice(
-                              vocabSetTemp.start * WORDS_PER_SET,
-                              vocabSetTemp.end * WORDS_PER_SET
-                            )
-                          );
-                        }
-                      }}
                     >
-                      {selectedVocabSets.includes(vocabSetTemp.name) ? (
-                        <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
-                      ) : (
-                        <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
-                      )}
-                      {vocabSetTemp.name.replace('Set ', 'Level ')}
-                    </button>
-                    <VocabSetDictionary set={vocabSetTemp.id} />
-                  </div>
-                ))}
+                      <button
+                        className={clsx(
+                          'text-2xl flex justify-center items-center gap-2 group',
+                          'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
+                          'duration-250 transition-all ease-in-out',
+                          'px-2 py-3 max-md:mx-4',
+                          isSelected && 'bg-[var(--border-color)]'
+                        )}
+                        onClick={e => {
+                          e.currentTarget.blur();
+                          playClick();
+                          if (isSelected) {
+                            setSelectedVocabSets(
+                              selectedVocabSets.filter(
+                                set => set !== vocabSetTemp.name
+                              )
+                            );
+                            addWordObjs(setWords);
+                          } else {
+                            setSelectedVocabSets([
+                              ...new Set(
+                                selectedVocabSets.concat(vocabSetTemp.name)
+                              ),
+                            ]);
+                            addWordObjs(setWords);
+                          }
+                        }}
+                      >
+                        {isSelected ? (
+                          <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
+                        ) : (
+                          <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
+                        )}
+                        {vocabSetTemp.name.replace('Set ', 'Level ')}
+                      </button>
+                      <VocabSetDictionary words={setWords} />
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
