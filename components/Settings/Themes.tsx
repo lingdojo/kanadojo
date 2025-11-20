@@ -60,26 +60,28 @@ const Themes = () => {
     // To keep the id same as the others themes (default)
     const themeId = customTheme.id.replaceAll(' ', '-').toLowerCase();
 
-    addTheme({
-      id: themeId,
-      backgroundColor: hexToHsl(customTheme.backgroundColor),
-      cardColor: hexToHsl(customTheme.cardColor),
-      borderColor: hexToHsl(customTheme.borderColor),
-      mainColor: hexToHsl(customTheme.mainColor),
-      secondaryColor: hexToHsl(customTheme.secondaryColor),
-    });
+    if (themeId !== '') {
+      addTheme({
+        id: themeId,
+        backgroundColor: hexToHsl(customTheme.backgroundColor),
+        cardColor: hexToHsl(customTheme.cardColor),
+        borderColor: hexToHsl(customTheme.borderColor),
+        mainColor: hexToHsl(customTheme.mainColor),
+        secondaryColor: hexToHsl(customTheme.secondaryColor),
+      });
 
-    setSelectedTheme(themeId);
+      setSelectedTheme(themeId);
 
-    // reset
-    customTheme.id = '';
-    customTheme.backgroundColor = '#240d2f';
-    customTheme.cardColor = '#321441';
-    customTheme.borderColor = '#49215e';
-    customTheme.mainColor = '#ea70ad';
-    customTheme.secondaryColor = '#ce89e6';
+      // reset
+      customTheme.id = '';
+      customTheme.backgroundColor = '#240d2f';
+      customTheme.cardColor = '#321441';
+      customTheme.borderColor = '#49215e';
+      customTheme.mainColor = '#ea70ad';
+      customTheme.secondaryColor = '#ce89e6';
 
-    setIsAdding(false);
+      setIsAdding(false);
+    }
   };
 
   useEffect(() => {
@@ -263,7 +265,7 @@ const Themes = () => {
               <div className="flex gap-3">
                 <input
                   type="text"
-                  placeholder="Theme name eg., Red Velvet or red-velvet"
+                  placeholder="* Theme name eg., Red Velvet or red-velvet"
                   value={customTheme.id}
                   onChange={(e) =>
                     setCustomTheme((prev) => ({
