@@ -74,6 +74,7 @@ export default function TimedChallengeVocab() {
   );
   const [showGoalTimers, setShowGoalTimers] = useState(false);
   const [timerStarted, setTimerStarted] = useState(false);
+  console.log(timerStarted);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Calculate elapsed time for goal timers
