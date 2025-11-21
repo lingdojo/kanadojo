@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
+import * as wanakana from 'wanakana';
 import { IVocabObj } from '@/store/useVocabStore';
 import { useClick, useCorrect, useError } from '@/hooks/useAudio';
 import GameIntel from '@/components/reusable/Game/GameIntel';
@@ -26,7 +27,7 @@ interface VocabInputGameProps {
 const VocabInputGame = ({
   selectedWordObjs,
   isHidden,
-  isReverse = false,
+  isReverse = false
 }: VocabInputGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -38,7 +39,7 @@ const VocabInputGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore,
+    incrementCharacterScore
   } = useStats();
 
   const { playClick } = useClick();
@@ -49,6 +50,9 @@ const VocabInputGame = ({
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const [inputValue, setInputValue] = useState('');
+
+  // Quiz type: 'meaning' or 'reading'
+  const [quizType, setQuizType] = useState<'meaning' | 'reading'>('meaning');
 
   // State management based on mode
   const [correctChar, setCorrectChar] = useState(
@@ -67,9 +71,13 @@ const VocabInputGame = ({
 
   const [currentWordObj, setCurrentWordObj] = useState(correctWordObj);
 
-  const targetChar = isReverse
-    ? correctWordObj?.word
-    : correctWordObj?.meanings;
+  // Determine target based on quiz type and mode
+  const targetChar =
+    quizType === 'meaning'
+      ? isReverse
+        ? correctWordObj?.word
+        : correctWordObj?.meanings
+      : correctWordObj?.reading;
 
   const [displayAnswerSummary, setDisplayAnswerSummary] = useState(false);
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
@@ -110,14 +118,23 @@ const VocabInputGame = ({
   };
 
   const isInputCorrect = (input: string): boolean => {
-    if (!isReverse) {
-      // Normal mode: input should match any of the meanings (case insensitive)
-      return (
-        Array.isArray(targetChar) && targetChar.includes(input.toLowerCase())
-      );
+    if (quizType === 'meaning') {
+      if (!isReverse) {
+        // Normal mode: input should match any of the meanings (case insensitive)
+        return (
+          Array.isArray(targetChar) && targetChar.includes(input.toLowerCase())
+        );
+      } else {
+        // Reverse mode: input should match the exact word
+        return input === targetChar;
+      }
     } else {
-      // Reverse mode: input should match the exact word
-      return input === targetChar;
+      // Reading quiz: accept both romaji and kana input
+      // Convert romaji input to hiragana for comparison
+      const targetReading = typeof targetChar === 'string' ? targetChar : '';
+      const inputAsHiragana = wanakana.toHiragana(input);
+      const targetAsHiragana = wanakana.toHiragana(targetReading);
+      return inputAsHiragana === targetAsHiragana || input === targetReading;
     }
   };
 
@@ -137,10 +154,10 @@ const VocabInputGame = ({
     generateNewCharacter();
     setFeedback(
       <>
-        <span className="text-[var(--secondary-color)]">{`${correctChar} = ${userInput
+        <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${userInput
           .trim()
           .toLowerCase()} `}</span>
-        <CircleCheck className="inline text-[var(--main-color)]" />
+        <CircleCheck className='inline text-[var(--main-color)]' />
       </>
     );
   };
@@ -149,10 +166,10 @@ const VocabInputGame = ({
     setInputValue('');
     setFeedback(
       <>
-        <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${inputValue
+        <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${inputValue
           .trim()
           .toLowerCase()} `}</span>
-        <CircleX className="inline text-[var(--main-color)]" />
+        <CircleX className='inline text-[var(--main-color)]' />
       </>
     );
     playErrorTwice();
@@ -176,6 +193,9 @@ const VocabInputGame = ({
       newChar = sourceArray[random.integer(0, sourceArray.length - 1)];
     }
     setCorrectChar(newChar);
+
+    // Toggle quiz type for the next question
+    setQuizType(prev => (prev === 'meaning' ? 'reading' : 'meaning'));
   };
 
   const handleSkip = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -196,8 +216,8 @@ const VocabInputGame = ({
   };
 
   const gameMode = isReverse ? 'reverse input' : 'input';
-  const displayCharLang = isReverse ? 'en' : 'ja';
-  const inputLang = isReverse ? 'ja' : 'en';
+  const displayCharLang = isReverse && quizType === 'meaning' ? 'en' : 'ja';
+  const inputLang = quizType === 'reading' ? 'ja' : isReverse ? 'ja' : 'en';
   const textSize = isReverse ? 'text-5xl sm:text-7xl' : 'text-5xl md:text-8xl';
 
   return (
@@ -218,24 +238,36 @@ const VocabInputGame = ({
       )}
       {!displayAnswerSummary && (
         <>
-          <div className="flex flex-col items-center gap-4">
+          <div className='flex flex-col items-center gap-4'>
+            {/* Show prompt based on quiz type */}
+            <span className='text-sm text-[var(--secondary-color)] mb-2'>
+              {quizType === 'meaning'
+                ? isReverse
+                  ? 'What is the meaning?'
+                  : 'What is the meaning?'
+                : 'What is the reading?'}
+            </span>
             <FuriganaText
               text={correctChar}
-              reading={!isReverse ? correctWordObj?.reading : undefined}
+              reading={
+                !isReverse && quizType === 'meaning'
+                  ? correctWordObj?.reading
+                  : undefined
+              }
               className={clsx(textSize, 'text-center')}
               lang={displayCharLang}
             />
             <SSRAudioButton
               text={correctChar}
-              variant="icon-only"
-              size="lg"
-              className="bg-[var(--card-color)] border-[var(--border-color)]"
+              variant='icon-only'
+              size='lg'
+              className='bg-[var(--card-color)] border-[var(--border-color)]'
             />
           </div>
 
           <input
             ref={inputRef}
-            type="text"
+            type='text'
             value={inputValue}
             className={clsx(
               'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',

@@ -1,13 +1,11 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-// import useKanaKanjiStore from '@/store/useKanaKanjiStore';
-import useKanaStore from '@/store/useKanaStore';
+import useVocabStore, { type IVocabObj } from '@/store/useVocabStore';
 import useStatsStore from '@/store/useStatsStore';
 import { useChallengeTimer } from '@/hooks/useTimer';
 import { useGoalTimers } from '@/hooks/useGoalTimers';
 import { Button } from '@/components/ui/button';
-import { generateKanaQuestion } from '@/lib/generateKanaQuestions';
 import {
   Timer,
   Target,
@@ -25,41 +23,29 @@ import { useClick, useCorrect, useError } from '@/hooks/useAudio';
 import confetti from 'canvas-confetti';
 import SSRAudioButton from '@/components/reusable/SSRAudioButton';
 import GoalTimersPanel from '@/components/reusable/Timer/GoalTimersPanel';
+import FuriganaText from '@/components/reusable/FuriganaText';
 
-import type { KanaCharacter } from '@/lib/generateKanaQuestions';
-import { flattenKanaGroups } from '@/lib/flattenKanaGroup';
-
-export default function TimedChallengeKana() {
+export default function TimedChallengeVocab() {
   const { playClick } = useClick();
   const { playCorrect } = useCorrect();
   const { playError } = useError();
 
-  const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
-
-  // Force Input mode by default for Timed Challenge
-  const gameMode = 'Input';
-  console.log(gameMode); // fixing vercel deployment
-
-  // Memoize selectedKana to prevent infinite loops
-  const selectedKana = React.useMemo(
-    () => flattenKanaGroups(kanaGroupIndices) as unknown as KanaCharacter[],
-    [kanaGroupIndices]
-  );
+  const selectedVocabObjs = useVocabStore(state => state.selectedVocabObjs);
 
   const {
-    timedCorrectAnswers,
-    timedWrongAnswers,
-    timedStreak,
-    timedBestStreak,
-    incrementTimedCorrectAnswers,
-    incrementTimedWrongAnswers,
-    resetTimedStats
+    timedVocabCorrectAnswers,
+    timedVocabWrongAnswers,
+    timedVocabStreak,
+    timedVocabBestStreak,
+    incrementTimedVocabCorrectAnswers,
+    incrementTimedVocabWrongAnswers,
+    resetTimedVocabStats
   } = useStatsStore();
 
   // Load saved duration from localStorage
   const [challengeDuration, setChallengeDuration] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('timedChallengeDuration');
+      const saved = localStorage.getItem('timedVocabChallengeDuration');
       return saved ? parseInt(saved) : 60;
     }
     return 60;
@@ -69,7 +55,7 @@ export default function TimedChallengeKana() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(
-        'timedChallengeDuration',
+        'timedVocabChallengeDuration',
         challengeDuration.toString()
       );
     }
@@ -78,7 +64,7 @@ export default function TimedChallengeKana() {
   const { seconds, minutes, isRunning, startTimer, resetTimer, timeLeft } =
     useChallengeTimer(challengeDuration);
 
-  const [currentQuestion, setCurrentQuestion] = useState<KanaCharacter | null>(
+  const [currentQuestion, setCurrentQuestion] = useState<IVocabObj | null>(
     null
   );
   const [userAnswer, setUserAnswer] = useState('');
@@ -98,17 +84,19 @@ export default function TimedChallengeKana() {
   const goalTimers = useGoalTimers(elapsedTime, {
     enabled: showGoalTimers,
     saveToHistory: true,
-    context: 'Kana Timed Challenge',
+    context: 'Vocabulary Timed Challenge',
     onGoalReached: goal => {
       console.log(`🎯 Goal reached: ${goal.label} at ${elapsedTime}s`);
     }
   });
 
   useEffect(() => {
-    if (selectedKana.length > 0) {
-      setCurrentQuestion(generateKanaQuestion(selectedKana));
+    if (selectedVocabObjs.length > 0) {
+      // Generate random question from vocab
+      const randomIndex = Math.floor(Math.random() * selectedVocabObjs.length);
+      setCurrentQuestion(selectedVocabObjs[randomIndex]);
     }
-  }, [selectedKana]);
+  }, [selectedVocabObjs]);
 
   useEffect(() => {
     // Detect when timer reaches 0 (challenge ends)
@@ -132,11 +120,15 @@ export default function TimedChallengeKana() {
 
   const handleStart = () => {
     playClick();
-    resetTimedStats();
+    resetTimedVocabStats();
     setIsFinished(false);
     setUserAnswer('');
     setLastAnswerCorrect(null);
-    setCurrentQuestion(generateKanaQuestion(selectedKana));
+    // Generate random question
+    if (selectedVocabObjs.length > 0) {
+      const randomIndex = Math.floor(Math.random() * selectedVocabObjs.length);
+      setCurrentQuestion(selectedVocabObjs[randomIndex]);
+    }
     goalTimers.resetGoals();
     setTimerStarted(true);
 
@@ -171,22 +163,26 @@ export default function TimedChallengeKana() {
 
     playClick();
 
-    // Always use Input mode (user sees kana, types romaji)
-    const isCorrect =
-      userAnswer.trim().toLowerCase() === currentQuestion.romaji.toLowerCase();
+    // Check if user answer matches any of the meanings
+    const isCorrect = currentQuestion.meanings.some(
+      meaning => userAnswer.trim().toLowerCase() === meaning.toLowerCase()
+    );
 
     if (isCorrect) {
       playCorrect(); // Success sound
-      incrementTimedCorrectAnswers();
+      incrementTimedVocabCorrectAnswers();
       setLastAnswerCorrect(true);
       // Move to next question immediately on correct answer
       setTimeout(() => {
-        setCurrentQuestion(generateKanaQuestion(selectedKana));
+        if (selectedVocabObjs.length > 0) {
+          const randomIndex = Math.floor(Math.random() * selectedVocabObjs.length);
+          setCurrentQuestion(selectedVocabObjs[randomIndex]);
+        }
         setLastAnswerCorrect(null);
       }, 300);
     } else {
       playError(); // Error sound
-      incrementTimedWrongAnswers();
+      incrementTimedVocabWrongAnswers();
       setLastAnswerCorrect(false);
       // Show feedback briefly then continue
       setTimeout(() => {
@@ -203,13 +199,13 @@ export default function TimedChallengeKana() {
     }
   };
 
-  const totalAnswers = timedCorrectAnswers + timedWrongAnswers;
+  const totalAnswers = timedVocabCorrectAnswers + timedVocabWrongAnswers;
   const accuracy =
     totalAnswers > 0
-      ? Math.round((timedCorrectAnswers / totalAnswers) * 100)
+      ? Math.round((timedVocabCorrectAnswers / totalAnswers) * 100)
       : 0;
 
-  if (selectedKana.length === 0) {
+  if (selectedVocabObjs.length === 0) {
     return (
       <div className='min-h-[100dvh] flex flex-col items-center justify-center p-4'>
         <div className='max-w-md text-center space-y-6'>
@@ -218,13 +214,13 @@ export default function TimedChallengeKana() {
             Timed Challenge
           </h1>
           <p className='text-[var(--muted-color)]'>
-            Please select some kana characters first to begin the timed
+            Please select some vocabulary words first to begin the timed
             challenge.
           </p>
-          <Link href='/kana'>
+          <Link href='/vocabulary'>
             <Button className='bg-[var(--secondary-color)] hover:bg-[var(--main-color)] duration-250'>
               <ArrowLeft size={16} className='mr-2' />
-              Select Kana
+              Select Vocabulary
             </Button>
           </Link>
         </div>
@@ -241,22 +237,22 @@ export default function TimedChallengeKana() {
             Timed Challenge
           </h1>
           <p className='text-[var(--muted-color)]'>
-            Test your kana recognition speed! Answer as many questions as
+            Test your vocabulary recognition speed! Answer as many questions as
             possible before time runs out.
           </p>
 
           <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2'>
             <p className='text-sm text-[var(--muted-color)]'>
-              Selected Characters:
+              Selected Words:
             </p>
             <p className='font-medium text-[var(--secondary-color)]'>
-              {selectedKana.length} kana
+              {selectedVocabObjs.length} words
             </p>
           </div>
 
           <div className='bg-[var(--card-color)] rounded-lg p-3'>
             <p className='text-sm text-[var(--main-color)] font-medium'>
-              ℹ️ Mode: Input (See kana → Type romaji)
+              ℹ️ Mode: Input (See Japanese word → Type meaning)
             </p>
           </div>
 
@@ -293,7 +289,7 @@ export default function TimedChallengeKana() {
             <Play size={16} className='mr-2' />
             Start Challenge
           </Button>
-          <Link href='/kana' className='block'>
+          <Link href='/vocabulary' className='block'>
             <Button variant='outline' className='w-full'>
               <ArrowLeft size={16} className='mr-2' />
               Back to Selection
@@ -334,10 +330,10 @@ export default function TimedChallengeKana() {
   if (isFinished) {
     const reachedGoals = goalTimers.goals.filter(g => g.reached);
     const missedGoals = goalTimers.goals.filter(g => !g.reached);
-    const totalQuestions = timedCorrectAnswers + timedWrongAnswers;
+    const totalQuestions = timedVocabCorrectAnswers + timedVocabWrongAnswers;
     const accuracy =
       totalQuestions > 0
-        ? Math.round((timedCorrectAnswers / totalQuestions) * 100)
+        ? Math.round((timedVocabCorrectAnswers / totalQuestions) * 100)
         : 0;
     const questionsPerMinute =
       totalQuestions > 0
@@ -371,7 +367,7 @@ export default function TimedChallengeKana() {
               <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
                 <Target className='mx-auto text-green-500' size={28} />
                 <p className='text-3xl font-bold text-green-500'>
-                  {timedCorrectAnswers}
+                  {timedVocabCorrectAnswers}
                 </p>
                 <p className='text-sm text-[var(--muted-color)]'>Correct</p>
               </div>
@@ -379,7 +375,7 @@ export default function TimedChallengeKana() {
               <div className='bg-[var(--card-color)] rounded-xl p-4 text-center space-y-2 border-2 border-[var(--border-color)]'>
                 <XCircle className='mx-auto text-red-500' size={28} />
                 <p className='text-3xl font-bold text-red-500'>
-                  {timedWrongAnswers}
+                  {timedVocabWrongAnswers}
                 </p>
                 <p className='text-sm text-[var(--muted-color)]'>Wrong</p>
               </div>
@@ -409,7 +405,7 @@ export default function TimedChallengeKana() {
               <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2 border border-[var(--border-color)]'>
                 <p className='text-sm text-[var(--muted-color)]'>Best Streak</p>
                 <p className='text-2xl font-bold text-[var(--secondary-color)]'>
-                  🔥 {timedBestStreak}
+                  🔥 {timedVocabBestStreak}
                 </p>
               </div>
 
@@ -499,7 +495,7 @@ export default function TimedChallengeKana() {
                 <RotateCcw size={16} className='mr-2' />
                 Try Again
               </Button>
-              <Link href='/kana' className='block'>
+              <Link href='/vocabulary' className='block'>
                 <Button variant='outline' className='w-full'>
                   <ArrowLeft size={16} className='mr-2' />
                   Back to Selection
@@ -532,8 +528,8 @@ export default function TimedChallengeKana() {
           </div>
           <div className='flex items-center gap-4'>
             <div className='text-right text-sm text-[var(--muted-color)]'>
-              <div>Score: {timedCorrectAnswers}</div>
-              <div>Streak: {timedStreak}</div>
+              <div>Score: {timedVocabCorrectAnswers}</div>
+              <div>Streak: {timedVocabStreak}</div>
             </div>
             <button
               onClick={handleCancel}
@@ -566,16 +562,19 @@ export default function TimedChallengeKana() {
           <div className='flex flex-col items-center gap-4'>
             <div
               className={clsx(
-                'text-8xl font-bold transition-all duration-200',
+                'text-6xl font-bold transition-all duration-200',
                 lastAnswerCorrect === true && 'text-green-500',
                 lastAnswerCorrect === false && 'text-red-500',
                 lastAnswerCorrect === null && 'text-[var(--secondary-color)]'
               )}
             >
-              {currentQuestion?.kana}
+              <FuriganaText
+                text={currentQuestion?.word || ''}
+                reading={currentQuestion?.reading || ''}
+              />
             </div>
             <SSRAudioButton
-              text={currentQuestion?.kana || ''}
+              text={currentQuestion?.word || ''}
               variant='icon-only'
               size='lg'
               className='bg-[var(--card-color)] border-[var(--border-color)]'
@@ -592,7 +591,7 @@ export default function TimedChallengeKana() {
             >
               {lastAnswerCorrect
                 ? '✓ Correct!'
-                : `✗ Incorrect! It was "${currentQuestion?.romaji}"`}
+                : `✗ Incorrect! It was "${currentQuestion?.meanings[0]}"`}
             </div>
           )}
         </div>
@@ -608,7 +607,7 @@ export default function TimedChallengeKana() {
             }}
             onKeyPress={handleKeyPress}
             className='w-full p-4 text-lg text-center border-2 border-[var(--border-color)] rounded-lg bg-[var(--card-color)] text-[var(--secondary-color)] focus:border-[var(--main-color)] focus:outline-none'
-            placeholder='Type the romaji...'
+            placeholder='Type the meaning...'
             autoComplete='off'
             autoFocus
           />
@@ -625,12 +624,12 @@ export default function TimedChallengeKana() {
         <div className='grid grid-cols-3 gap-2 text-center text-sm'>
           <div className='bg-[var(--card-color)] rounded p-2'>
             <div className='text-green-500 font-bold'>
-              {timedCorrectAnswers}
+              {timedVocabCorrectAnswers}
             </div>
             <div className='text-[var(--muted-color)]'>Correct</div>
           </div>
           <div className='bg-[var(--card-color)] rounded p-2'>
-            <div className='text-red-500 font-bold'>{timedWrongAnswers}</div>
+            <div className='text-red-500 font-bold'>{timedVocabWrongAnswers}</div>
             <div className='text-[var(--muted-color)]'>Wrong</div>
           </div>
           <div className='bg-[var(--card-color)] rounded p-2'>

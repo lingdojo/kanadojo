@@ -21,7 +21,7 @@ const Game = () => {
   const resetStats = useStatsStore(state => state.resetStats);
 
   const gameMode = useVocabStore(state => state.selectedGameModeVocab);
-  const selectedWordObjs = useVocabStore(state => state.selectedVocabObjs);
+  const selectedVocabObjs = useVocabStore(state => state.selectedVocabObjs);
 
   useEffect(() => {
     resetStats();
@@ -36,23 +36,23 @@ const Game = () => {
       />
       {gameMode.toLowerCase() === 'pick' ? (
         <Pick
-          selectedWordObjs={selectedWordObjs}
+          selectedWordObjs={selectedVocabObjs}
           isHidden={showStats}
         />
       ) : gameMode.toLowerCase() === 'reverse-pick' ? (
         <Pick
-          selectedWordObjs={selectedWordObjs}
+          selectedWordObjs={selectedVocabObjs}
           isHidden={showStats}
           isReverse={true}
         />
       ) : gameMode.toLowerCase() === 'input' ? (
         <Input
-          selectedWordObjs={selectedWordObjs}
+          selectedWordObjs={selectedVocabObjs}
           isHidden={showStats}
         />
       ) : gameMode.toLowerCase() === 'reverse-input' ? (
         <Input
-          selectedWordObjs={selectedWordObjs}
+          selectedWordObjs={selectedVocabObjs}
           isHidden={showStats}
           isReverse={true}
         />

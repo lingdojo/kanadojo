@@ -29,7 +29,7 @@ const vocabImporters = {
   n2: () =>
     fetch('/vocab/n2.json').then(res => res.json() as Promise<RawVocabEntry[]>),
   n1: () =>
-    fetch('/vocab/n1.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+    fetch('/vocab/n1.json').then(res => res.json() as Promise<RawVocabEntry[]>)
 } as const;
 
 type VocabCollectionKey = keyof typeof vocabImporters;
@@ -41,7 +41,7 @@ const vocabCollectionNames: Record<VocabCollectionKey, string> = {
   n4: 'N4',
   n3: 'N3',
   n2: 'N2',
-  n1: 'N1',
+  n1: 'N1'
 };
 
 type VocabCollectionMeta = {
@@ -58,9 +58,9 @@ const toWordObj = (entry: RawVocabEntry): IWord => {
 
   return {
     word: entry.kanji?.trim() || entry.kana,
-    reading: `${entry.kana} ${entry.kana}`.trim(),
+    reading: `${entry.kana}`.trim(),
     displayMeanings: definitionPieces,
-    meanings: definitionPieces,
+    meanings: definitionPieces
   };
 };
 
@@ -105,7 +105,7 @@ const VocabCards = () => {
         collections[level] = {
           data: words,
           name: vocabCollectionNames[level],
-          prevLength: cumulativeSets,
+          prevLength: cumulativeSets
         };
         cumulativeSets += Math.ceil(words.length / WORDS_PER_SET);
       });
@@ -146,8 +146,8 @@ const VocabCards = () => {
   if (!selectedVocabCollection) {
     return (
       <div className={clsx('flex flex-col w-full gap-4')}>
-        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
-          <p className="text-sm text-[var(--secondary-color)]">
+        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
+          <p className='text-sm text-[var(--secondary-color)]'>
             Loading vocabulary sets...
           </p>
         </div>
@@ -175,7 +175,7 @@ const VocabCards = () => {
       start: i,
       end: i + 1,
       id: `Set ${i + 1}`,
-      isMastered: isSetMastered(i, i + 1),
+      isMastered: isSetMastered(i, i + 1)
     }));
 
   // Filter out mastered sets if hideMastered is true
@@ -189,11 +189,11 @@ const VocabCards = () => {
   const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
 
   return (
-    <div className="flex flex-col w-full gap-4">
+    <div className='flex flex-col w-full gap-4'>
       {/* Info message when no progress data exists */}
       {!hasProgressData && (
-        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
-          <p className="text-sm text-[var(--secondary-color)]">
+        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
+          <p className='text-sm text-[var(--secondary-color)]'>
             💡 <strong>Tip:</strong> Complete some practice sessions to unlock
             the &apos;Hide Mastered Sets&apos; filter. Sets become mastered when
             you achieve 90%+ accuracy with 10+ attempts per word.
@@ -203,7 +203,7 @@ const VocabCards = () => {
 
       {/* Filter Toggle Button - Only show if there are mastered sets */}
       {masteredCount > 0 && (
-        <div className="flex justify-end px-4">
+        <div className='flex justify-end px-4'>
           <button
             onClick={() => {
               playClick();
@@ -220,21 +220,15 @@ const VocabCards = () => {
           >
             {hideMastered ? (
               <>
-                <FilterX
-                  size={20}
-                  className="text-[var(--main-color)]"
-                />
-                <span className="text-[var(--main-color)]">
+                <FilterX size={20} className='text-[var(--main-color)]' />
+                <span className='text-[var(--main-color)]'>
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
             ) : (
               <>
-                <Filter
-                  size={20}
-                  className="text-[var(--secondary-color)]"
-                />
-                <span className="text-[var(--secondary-color)]">
+                <Filter size={20} className='text-[var(--secondary-color)]' />
+                <span className='text-[var(--secondary-color)]'>
                   Hide Mastered Sets ({masteredCount})
                 </span>
               </>
@@ -290,11 +284,11 @@ const VocabCards = () => {
                 )}
                 size={28}
               />
-              <span className="max-lg:hidden">
+              <span className='max-lg:hidden'>
                 Levels {firstSetNumber}
                 {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
-              <span className="lg:hidden">Level {firstSetNumber}</span>
+              <span className='lg:hidden'>Level {firstSetNumber}</span>
             </h3>
 
             {!collapsedRows.includes(rowIndex) && (
@@ -344,16 +338,16 @@ const VocabCards = () => {
                             setSelectedVocabSets([
                               ...new Set(
                                 selectedVocabSets.concat(vocabSetTemp.name)
-                              ),
+                              )
                             ]);
                             addWordObjs(setWords);
                           }
                         }}
                       >
                         {isSelected ? (
-                          <CircleCheck className="mt-0.5 text-[var(--secondary-color)] duration-250" />
+                          <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
                         ) : (
-                          <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
+                          <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
                         )}
                         {vocabSetTemp.name.replace('Set ', 'Level ')}
                       </button>

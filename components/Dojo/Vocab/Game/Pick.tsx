@@ -27,7 +27,7 @@ interface VocabPickGameProps {
 const VocabPickGame = ({
   selectedWordObjs,
   isHidden,
-  isReverse = false,
+  isReverse = false
 }: VocabPickGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -39,11 +39,14 @@ const VocabPickGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore,
+    incrementCharacterScore
   } = useStats();
 
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+
+  // Quiz type: 'meaning' or 'reading'
+  const [quizType, setQuizType] = useState<'meaning' | 'reading'>('meaning');
 
   // State management based on mode
   const [correctChar, setCorrectChar] = useState(
@@ -61,35 +64,43 @@ const VocabPickGame = ({
   )!;
   const [currentWordObj, setCurrentWordObj] = useState(correctWordObj);
 
-  const targetChar = isReverse
-    ? correctWordObj?.word
-    : correctWordObj?.meanings[0];
+  // Determine target based on quiz type and mode
+  const targetChar = quizType === 'meaning'
+    ? isReverse
+      ? correctWordObj?.word
+      : correctWordObj?.meanings[0]
+    : isReverse
+    ? correctWordObj?.reading
+    : correctWordObj?.reading;
 
-  // Get incorrect options based on mode
-  const getIncorrectOptions = () => {
-    if (!isReverse) {
-      const incorrectWordObjs = selectedWordObjs.filter(
-        currentWordObj => currentWordObj.word !== correctChar
-      );
+  // Get incorrect options based on mode and quiz type
+  const getIncorrectOptions = (): string[] => {
+    const incorrectWordObjs = isReverse
+      ? selectedWordObjs.filter(
+          currentWordObj => currentWordObj.meanings[0] !== correctChar
+        )
+      : selectedWordObjs.filter(
+          currentWordObj => currentWordObj.word !== correctChar
+        );
+
+    if (quizType === 'meaning') {
       return incorrectWordObjs
-        .map(obj => obj.meanings[0])
+        .map(obj => (isReverse ? obj.word : obj.meanings[0]))
         .sort(() => random.real(0, 1) - 0.5)
         .slice(0, 2);
-    } else {
-      const incorrectWordObjs = selectedWordObjs.filter(
-        currentWordObj => currentWordObj.meanings[0] !== correctChar
-      );
+    } else if (quizType === 'reading') {
       return incorrectWordObjs
-        .map(obj => obj.word)
+        .map(obj => obj.reading)
         .sort(() => random.real(0, 1) - 0.5)
         .slice(0, 2);
     }
+    return []; // Fallback in case quizType is neither 'meaning' nor 'reading'
   };
 
   const randomIncorrectOptions = getIncorrectOptions();
 
   const [shuffledOptions, setShuffledOptions] = useState(
-    [targetChar, ...randomIncorrectOptions].sort(
+    [targetChar ?? '', ...randomIncorrectOptions].sort(
       () => random.real(0, 1) - 0.5
     ) as string[]
   );
@@ -102,7 +113,7 @@ const VocabPickGame = ({
 
   useEffect(() => {
     setShuffledOptions(
-      [targetChar, ...getIncorrectOptions()].sort(
+      [targetChar ?? '', ...getIncorrectOptions()].sort(
         () => random.real(0, 1) - 0.5
       ) as string[]
     );
@@ -136,8 +147,8 @@ const VocabPickGame = ({
       generateNewCharacter();
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className="inline text-[var(--main-color)]" />
+          <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className='inline text-[var(--main-color)]' />
         </>
       );
       setCurrentWordObj(correctWordObj);
@@ -145,8 +156,8 @@ const VocabPickGame = ({
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className="inline text-[var(--main-color)]" />
+          <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className='inline text-[var(--main-color)]' />
         </>
       );
     }
@@ -186,11 +197,14 @@ const VocabPickGame = ({
       newChar = sourceArray[random.integer(0, sourceArray.length - 1)];
     }
     setCorrectChar(newChar);
+
+    // Toggle quiz type for the next question
+    setQuizType(prev => (prev === 'meaning' ? 'reading' : 'meaning'));
   };
 
   const gameMode = isReverse ? 'reverse pick' : 'pick';
-  const displayCharLang = isReverse ? undefined : 'ja';
-  const optionLang = isReverse ? 'ja' : undefined;
+  const displayCharLang = isReverse && quizType === 'meaning' ? undefined : 'ja';
+  const optionLang = quizType === 'reading' ? 'ja' : isReverse ? 'ja' : undefined;
   const textSize = isReverse ? 'text-4xl md:text-7xl' : 'text-6xl md:text-9xl';
 
   return (
@@ -212,18 +226,30 @@ const VocabPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <div className="flex flex-col items-center gap-4">
+          <div className='flex flex-col items-center gap-4'>
+            {/* Show prompt based on quiz type */}
+            <span className='text-sm text-[var(--secondary-color)] mb-2'>
+              {quizType === 'meaning'
+                ? isReverse
+                  ? 'What is the meaning?'
+                  : 'What is the meaning?'
+                : 'What is the reading?'}
+            </span>
             <FuriganaText
               text={correctChar}
-              reading={!isReverse ? correctWordObj?.reading : undefined}
+              reading={
+                !isReverse && quizType === 'meaning'
+                  ? correctWordObj?.reading
+                  : undefined
+              }
               className={clsx(textSize, 'text-center')}
               lang={displayCharLang}
             />
             <SSRAudioButton
               text={correctChar}
-              variant="icon-only"
-              size="lg"
-              className="bg-[var(--card-color)] text-[var(--secondary-color)]"
+              variant='icon-only'
+              size='lg'
+              className='bg-[var(--card-color)] text-[var(--secondary-color)]'
             />
           </div>
 
@@ -239,7 +265,7 @@ const VocabPickGame = ({
                   buttonRefs.current[i] = elem;
                 }}
                 key={option + i}
-                type="button"
+                type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
                   'py-4 px-2 rounded-xl w-full lg:w-1/4 flex flex-row justify-center items-center gap-1.5',
@@ -255,15 +281,20 @@ const VocabPickGame = ({
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
               >
-                <FuriganaText
-                  text={option}
-                  reading={
-                    isReverse
-                      ? selectedWordObjs.find(obj => obj.word === option)
-                          ?.reading
-                      : undefined
-                  }
-                />
+                {/* Only use FuriganaText when we need furigana (reverse mode or meaning quiz) */}
+                {isReverse || quizType === 'meaning' ? (
+                  <FuriganaText
+                    text={option}
+                    reading={
+                      isReverse
+                        ? selectedWordObjs.find(obj => obj.word === option)
+                            ?.reading
+                        : undefined
+                    }
+                  />
+                ) : (
+                  <span>{option}</span>
+                )}
                 <span
                   className={clsx(
                     'hidden lg:inline text-xs rounded-full bg-[var(--border-color)] px-1',
