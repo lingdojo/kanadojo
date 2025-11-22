@@ -708,7 +708,17 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(176, 20%, 33%, 1)',
         mainColor: 'hsla(317, 98%, 81%, 1)',
         secondaryColor: 'hsla(61, 100%, 62%, 1)'
+      },
+      {
+        id: 'starlit-plum',
+        backgroundColor: 'hsla(285, 48%, 11%, 1)',
+        cardColor: 'hsla(285, 46%, 15%, 1)',
+        borderColor: 'hsla(285, 43%, 23%, 1)',
+        mainColor: 'hsla(320, 70%, 65%, 1)',
+        secondaryColor: 'hsla(200, 45%, 75%, 1)'
       }
+
+ 
     ]
   },
 
