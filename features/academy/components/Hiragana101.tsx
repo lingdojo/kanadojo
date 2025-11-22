@@ -1,4 +1,4 @@
-import { PostWrapper } from '@/shared/components';
+import PostWrapper from '@/shared/components/PostWrapper';
 import hiragana101 from '@/features/academy/data/hiraganaBlogPost';
 
 const Hiragana101 = () => {
