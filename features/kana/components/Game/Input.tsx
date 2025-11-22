@@ -13,6 +13,7 @@ import useStats from '@/shared/hooks/useStats';
 import useStatsStore from '@/features/statistics';
 import Stars from '@/shared/components/Game/Stars';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
+import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 
@@ -38,6 +39,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
   const { playClick } = useClick();
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+  const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -123,6 +125,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
         <CircleCheck className='inline text-[var(--main-color)]' />
       </>
     );
+    triggerCrazyMode();
   };
 
   const handleWrongAnswer = () => {
@@ -142,6 +145,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     } else {
       setScore(score - 1);
     }
+    triggerCrazyMode();
   };
 
   const generateNewCharacter = () => {

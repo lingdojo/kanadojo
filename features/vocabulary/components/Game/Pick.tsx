@@ -15,6 +15,7 @@ import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import FuriganaText from '@/shared/components/FuriganaText';
+import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 
@@ -44,6 +45,7 @@ const VocabPickGame = ({
 
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+  const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   // Quiz type: 'meaning' or 'reading'
   const [quizType, setQuizType] = useState<'meaning' | 'reading'>('meaning');
@@ -52,7 +54,7 @@ const VocabPickGame = ({
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)]
-          .meanings[0]
+        .meanings[0]
       : selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
   );
 
@@ -70,18 +72,18 @@ const VocabPickGame = ({
       ? correctWordObj?.word
       : correctWordObj?.meanings[0]
     : isReverse
-    ? correctWordObj?.reading
-    : correctWordObj?.reading;
+      ? correctWordObj?.reading
+      : correctWordObj?.reading;
 
   // Get incorrect options based on mode and quiz type
   const getIncorrectOptions = (): string[] => {
     const incorrectWordObjs = isReverse
       ? selectedWordObjs.filter(
-          currentWordObj => currentWordObj.meanings[0] !== correctChar
-        )
+        currentWordObj => currentWordObj.meanings[0] !== correctChar
+      )
       : selectedWordObjs.filter(
-          currentWordObj => currentWordObj.word !== correctChar
-        );
+        currentWordObj => currentWordObj.word !== correctChar
+      );
 
     if (quizType === 'meaning') {
       return incorrectWordObjs
@@ -173,6 +175,7 @@ const VocabPickGame = ({
     incrementCorrectAnswers();
     setScore(score + 1);
     setWrongSelectedAnswers([]);
+    triggerCrazyMode();
   };
 
   const handleWrongAnswer = (selectedOption: string) => {
@@ -185,6 +188,7 @@ const VocabPickGame = ({
     } else {
       setScore(score - 1);
     }
+    triggerCrazyMode();
   };
 
   const generateNewCharacter = () => {
@@ -274,9 +278,9 @@ const VocabPickGame = ({
                   'text-[var(--border-color)]',
                   isReverse ? 'text-4xl' : 'text-3xl',
                   wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                  'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--main-color)]'
+                  'text-[var(--main-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
@@ -288,7 +292,7 @@ const VocabPickGame = ({
                     reading={
                       isReverse
                         ? selectedWordObjs.find(obj => obj.word === option)
-                            ?.reading
+                          ?.reading
                         : undefined
                     }
                   />

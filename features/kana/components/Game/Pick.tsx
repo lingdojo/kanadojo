@@ -14,6 +14,7 @@ import useStats from '@/shared/hooks/useStats';
 import useStatsStore from '@/features/statistics';
 import Stars from '@/shared/components/Game/Stars';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
+import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 
@@ -38,6 +39,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
 
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+  const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
 
@@ -104,11 +106,11 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
   const [shuffledVariants, setShuffledVariants] = useState(
     isReverse
       ? [correctKanaCharReverse, ...randomIncorrectOptions].sort(
-          () => random.real(0, 1) - 0.5
-        )
+        () => random.real(0, 1) - 0.5
+      )
       : [correctRomajiChar, ...randomIncorrectOptions].sort(
-          () => random.real(0, 1) - 0.5
-        )
+        () => random.real(0, 1) - 0.5
+      )
   );
 
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
@@ -120,11 +122,11 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
     setShuffledVariants(
       isReverse
         ? [correctKanaCharReverse, ...getIncorrectOptions()].sort(
-            () => random.real(0, 1) - 0.5
-          )
+          () => random.real(0, 1) - 0.5
+        )
         : [correctRomajiChar, ...getIncorrectOptions()].sort(
-            () => random.real(0, 1) - 0.5
-          )
+          () => random.real(0, 1) - 0.5
+        )
     );
     if (isReverse) {
       speedStopwatch.start();
@@ -221,6 +223,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
     incrementCorrectAnswers();
     setScore(score + 1);
     setWrongSelectedAnswers([]);
+    triggerCrazyMode();
   };
 
   const handleWrongAnswer = (selectedChar: string) => {
@@ -236,6 +239,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
     } else {
       setScore(score - 1);
     }
+    triggerCrazyMode();
   };
 
   const displayChar = isReverse ? correctRomajiCharReverse : correctKanaChar;
@@ -274,9 +278,9 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
               'text-5xl font-semibold pb-6 pt-3 w-full sm:w-1/5 flex flex-row justify-center items-center gap-1',
               buttonBorderStyles,
               wrongSelectedAnswers.includes(variantChar) &&
-                'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
+              'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
               !wrongSelectedAnswers.includes(variantChar) &&
-                'text-[var(--main-color)] hover:border-[var(--main-color)]'
+              'text-[var(--main-color)] hover:border-[var(--main-color)]'
             )}
             onClick={() => handleOptionClick(variantChar)}
           >
