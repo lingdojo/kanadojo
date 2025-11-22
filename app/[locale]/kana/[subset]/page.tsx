@@ -1,4 +1,4 @@
-import SubsetDictionary from '@/components/Dojo/Kana/SubsetDictionary';
+import { SubsetDictionary } from '@/features/kana';
 
 export default function KanaSubsetDictionaryPage() {
   return <SubsetDictionary />;

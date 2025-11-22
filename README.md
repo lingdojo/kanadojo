@@ -390,9 +390,11 @@ kanadojo/
 │   ├── fonts.ts                # Font configurations
 │   └── info.tsx                # Informational content
 │
-├── translations/               # Translated text content
-│   ├── en.json                 # English text content
-│   └── es.json                 # Spanish text content
+├── core/
+│   └── i18n/
+│       └── locales/            # Translated text content
+│           ├── en.json         # English text content
+│           └── es.json         # Spanish text content
 │
 ├── public/                      # Static assets
 │   ├── sounds/                 # Audio files
