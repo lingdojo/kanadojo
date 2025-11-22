@@ -1,8 +1,6 @@
 <div id="top"></div>
 
-**KanaDojo, topluluk katkıları sayesinde birden çok dilde mevcuttur:**
-
-[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** Türkçe **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/**  [Русский](docs/translations/README.ru.md)
+<a href="#about-kanadojo">KanaDojo Hakkında</a> | <a href="#screenshots">Ekran Görüntüleri</a> | <a href="#ui-design-philosophy">Arayüz &amp; Tasarım Felsefesi</a> | <a href="#tech-stack">Kullanılan Teknolojiler</a> | <a href="#getting-started">Başlangıç</a> | <a href="#project-structure">Proje Yapısı</a> | <a href="#contributing">Katkıda Bulunma</a> | <a href="#license">Lisans</a> | <a href="#acknowledgments">Teşekkürler</a> | <a href="#contact-links">İletişim &amp; Bağlantılar</a>
 
 # KanaDojo かな道場
 
@@ -21,6 +19,7 @@
 
 </div>
 
+<a id="about-kanadojo"></a>
 ## 📖 KanaDojo Hakkında
 
 KanaDojo, Hiragana, Katakana, Kanji ve kelime bilgisinde ustalaşmayı eğlenceli ve kolay hale getiren etkileşimli bir web tabanlı Japonca öğrenme platformudur. Estetiğe, özelleştirilebilirliğe ve etkili öğrenmeye odaklanılarak tasarlanan KanaDojo, her seviyeden Japonca öğrencisi için kapsamlı bir eğitim ortamı sunar.
@@ -65,6 +64,7 @@ Her dojo, öğrenmeyi pekiştirmek için dört ilgi çekici eğitim modunu deste
 - Öğrenmeye odaklanmanızı sağlayan temiz, minimalist arayüz
 - Framer Motion tarafından sağlanan akıcı animasyonlar ve geçişler
 
+<a id="screenshots"></a>
 ## 🖼️ Ekran Görüntüleri
 
 <div align="center">
@@ -89,6 +89,7 @@ Her dojo, öğrenmeyi pekiştirmek için dört ilgi çekici eğitim modunu deste
 
 </div>
 
+<a id="ui-design-philosophy"></a>
 ## 🎨 Arayüz & Tasarım Felsefesi
 
 KanaDojo, maksimum esneklikle birleştirilmiş minimalist bir estetiği benimser. Tasarım felsefesinin merkezinde şunlar yer alır:
@@ -121,6 +122,7 @@ KanaDojo, maksimum esneklikle birleştirilmiş minimalist bir estetiği benimser
 - Benzer görünen karakterler arasında net ayrım
 - Gerçek Japon metin örnekleriyle yazı tipi önizlemeleri
 
+<a id="tech-stack"></a>
 ## 🛠️ Kullanılan Teknolojiler
 
 KanaDojo, en iyi performans ve geliştirici deneyimi için modern web teknolojileri ile geliştirilmiştir:
@@ -163,6 +165,7 @@ KanaDojo, en iyi performans ve geliştirici deneyimi için modern web teknolojil
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analitiği
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performans izleme
 
+<a id="getting-started"></a>
 ## 🚀 Başlangıç
 
 ### Önkoşullar
@@ -315,50 +318,51 @@ Veya farklı bir portta çalıştırın:
 PORT=3001 npm run dev
 ```
 
+<a id="project-structure"></a>
 ## 📁 Proje Yapısı
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router sayfaları
-│   ├── kana/                    # Kana dojo sayfaları
+├── app/                        # Next.js App Router sayfaları
+│   ├── kana/                   # Kana dojo sayfaları
 │   │   └── train/[gameMode]/   # Her oyun modu için eğitim sayfaları
-│   ├── kanji/                   # Kanji dojosu sayfaları
+│   ├── kanji/                  # Kanji dojosu sayfaları
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Kelime dojosu sayfaları
+│   ├── vocabulary/             # Kelime dojosu sayfaları
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Ayarlar ve özelleştirmeler sayfası
-│   ├── academy/                 # Eğitici içerik
-│   ├── layout.tsx               # Sağlayıcılar için kök tasarım planı
-│   └── page.tsx                 # Ana sayfa
+│   ├── preferences/            # Ayarlar ve özelleştirmeler sayfası
+│   ├── academy/                # Eğitici içerik
+│   ├── layout.tsx              # Sağlayıcılar için kök tasarım planı
+│   └── page.tsx                # Ana sayfa
 │
-├── components/                   # React bileşenleri
-│   ├── Dojo/                    # Belirli eğitime özel bileşenler
+├── components/                 # React bileşenleri
+│   ├── Dojo/                   # Belirli eğitime özel bileşenler
 │   │   ├── Kana/               # Kana seçimi ve kartları
 │   │   ├── Kanji/              # Kanji seçimi ve kartları
 │   │   └── Vocab/              # Kelime seçimi ve kartları
-│   ├── reusable/                # Paylaşımlı bileşenler
+│   ├── reusable/               # Paylaşımlı bileşenler
 │   │   ├── Menu/               # Gezinme ve menü bileşenleri
 │   │   └── ...                 # Yeniden kullanılabilir diğer bileşenler
-│   ├── Settings/                # Tercih bileşenleri
-│   └── ui/                      # shadcn/ui bileşenleri
+│   ├── Settings/               # Tercih bileşenleri
+│   └── ui/                     # shadcn/ui bileşenleri
 │
-├── lib/                         # Yardımcı araçlar ve fonksiyonlar
-│   ├── hooks/                   # Özel React hook'ları
+├── lib/                        # Yardımcı araçlar ve fonksiyonlar
+│   ├── hooks/                  # Özel React hook'ları
 │   │   ├── useAudio.ts         # Sesli geri bildirim hook'ları
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript arayüzleri
-│   └── utils.ts                 # Yardımcı fonksiyonlar
+│   ├── interfaces.ts           # TypeScript arayüzleri
+│   └── utils.ts                # Yardımcı fonksiyonlar
 │
-├── i18n/                        # Çeviri yönetim sistemi
-│   └── request.ts               # Çevrilmiş metin getirme yardımcısı
+├── i18n/                       # Çeviri yönetim sistemi
+│   └── request.ts              # Çevrilmiş metin getirme yardımcısı
 │
-├── store/                       # Zustand durum yönetimi
+├── store/                      # Zustand durum yönetimi
 │   ├── useKanaKanjiStore.ts    # Kana/Kanji seçim durumu
 │   ├── useVocabStore.ts        # Vocabulary seçim durumu
 │   ├── useStatsStore.ts        # İstatistikler ve ilerleme
 │   └── useThemeStore.ts        # Tema ve tercihler
 │
-├── static/                      # Statik veri ve yapılandırma
+├── static/                     # Statik veri ve yapılandırma
 │   ├── kana.ts                 # Kana karakter verisi
 │   ├── kanji/                  # JLPT seviyesine göre Kanji verisi
 │   ├── vocab/                  # Kelime verileri
@@ -370,14 +374,9 @@ kanadojo/
 │   ├── en.json                 # İngilizce metin içeriği
 │   └── es.json                 # İspanyolca metin içeriği
 │
-├── public/                      # Sabit dosyalar
+├── public/                     # Sabit dosyalar
 │   ├── sounds/                 # Ses dosyaları
 │   └── wallpapers/             # Arka plan resimleri
-│
-├── CLAUDE.md                    # Geliştirici dökümanları
-├── next.config.ts              # Next.js yapılandırması
-├── tailwind.config.js          # Tailwind CSS yapılandırması
-└── tsconfig.json               # TypeScript yapılandırması
 ```
 
 ### Temel Kavramlar
@@ -414,6 +413,7 @@ Her oyun modu, aşağıdaki işlevleri yerine getiren dinamik bir yoldur (`/[con
 3. Anında geri bildirim sağlar
 4. İstatistikleri (doğru, yanlış, seri) takip eder
 
+<a id="contributing"></a>
 ## 🤝 Katkıda Bulunma
 
 Katkılarınızı bekliyoruz! KanaDojo, topluluk tarafından topluluk için geliştirilen açık kaynaklı bir projedir. Nasıl katkıda bulunacağınıza dair daha ayrıntılı bilgi için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına göz atın.
@@ -434,16 +434,19 @@ Katkılarınızı bekliyoruz! KanaDojo, topluluk tarafından topluluk için geli
 - Gerektiğinde dökümanları güncelleyin
 - Bileşenleri tek bir amaca odaklı ve yeniden kullanılabilir tutun
 
+<a id="license"></a>
 ## 📄 Lisans
 
 Bu proje AGPL 3.0 Lisansı altında lisanslanmıştır - ayrıntılar için [LICENSE.md](LICENSE.md) dosyasına bakın.
 
+<a id="acknowledgments"></a>
 ## 🙏 Teşekkürler
 
 - Japonca dil verileri ve karakter bilgileri
 - Harika araçlar ve kütüphaneler için açık kaynak topluluğu
 - KanaDojo'yu daha iyi hale getirmek için katkı katkıda bulunanlar
 
+<a id="contact-links"></a>
 ## 📞 İletişim & Bağlantılar
 
 - **Web sitesi**: [kanadojo.com](https://kanadojo.com)

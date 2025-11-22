@@ -1,8 +1,6 @@
 <div id="top"></div>
 
-**KanaDojo está disponible en varios idiomas gracias a las contribuciones de la comunidad:**
-
-[English](../../README.md) **/** Español **/** [Français (in progress)](docs/translations/README.fr.md) **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/** [हिन्दी](docs/translations/README.hin.md) **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+<a href="#about-kanadojo">Sobre KanaDojo</a> | <a href="#screenshots">Capturas de pantalla</a> | <a href="#ui-design-philosophy">Filosofía de UI y Diseño</a> | <a href="#tech-stack">Tecnologías utilizadas</a> | <a href="#getting-started">Primeros Pasos</a> | <a href="#project-structure">Estructura de proyecto</a> | <a href="#contributing">Contribuir</a> | <a href="#license">Licencia</a> | <a href="#acknowledgments">Agradecimientos</a> | <a href="#contact-links">Contacto y Enlaces</a> 
 
 # KanaDojo かな道場
 
@@ -22,6 +20,7 @@
 
 ---
 
+<a id="about-kanadojo"></a>
 ## 📖 Sobre KanaDojo
 
 KanaDojo es una plataforma de aprendizaje de japonés atractiva y basada en la web que hace que dominar Hiragana, Katakana, Kanji y el vocabulario, sea divertido e intuitivo. Construido con un enfoque en la estética, la personalización y el aprendizaje efectivo, KanaDojo proporciona un entorno de entrenamiento inmersivo para los estudiantes de japonés de todos los niveles.
@@ -68,6 +67,7 @@ Cada dojo admite cuatro atractivos modos de entrenamiento para reforzar el apren
 
 ---
 
+<a id="screenshots"></a>
 ## 🖼️ Capturas de pantalla
 
 <div align="center">
@@ -92,6 +92,7 @@ Cada dojo admite cuatro atractivos modos de entrenamiento para reforzar el apren
 
 ---
 
+<a id="ui-design-philosophy"></a>
 ## 🎨 Filosofía de UI y Diseño
 
 KanaDojo utiliza a **estética minimalista** combinada con **flexibilidad máxima**. Esta filosofía de diseño se centra en:
@@ -126,6 +127,7 @@ KanaDojo utiliza a **estética minimalista** combinada con **flexibilidad máxim
 
 ---
 
+<a id="tech-stack"></a>
 ## 🛠️ Tecnologías utilizadas
 
 KanaDojo esta construido con tecnologías web modernas para un rendimiento óptimo y una excelente experiencia para los desarrolladores:
@@ -170,6 +172,7 @@ KanaDojo esta construido con tecnologías web modernas para un rendimiento ópti
 
 ---
 
+<a id="getting-started"></a>
 ## 🚀 Primeros Pasos
 
 ### Prerrequisitos
@@ -322,59 +325,60 @@ O simplemente ejecuta en un puerto diferente:
 PORT=3001 npm run dev
 ```
 
+<a id="project-structure"></a>
 ## 📁 Estructura de proyecto
 
 ```
 kanadojo/
-├── app/                          # Páginas y rutas de Next.js
-│   ├── kana/                    # Páginas del dojo de Kana
+├── app/                        # Páginas y rutas de Next.js
+│   ├── kana/                   # Páginas del dojo de Kana
 │   │   └── train/[gameMode]/   # Páginas de entrenamiento para cada modo de juego
-│   ├── kanji/                   # Páginas del dojo de Kanji
+│   ├── kanji/                  # Páginas del dojo de Kanji
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Páginas del dojo de Vocabulario
+│   ├── vocabulary/             # Páginas del dojo de Vocabulario
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Configuración y personalización de páginas
-│   ├── academy/                 # Contenido educativo
-│   ├── layout.tsx               # Diseño raíz con proveedores
-│   └── page.tsx                 # Página principal
+│   ├── preferences/            # Configuración y personalización de páginas
+│   ├── academy/                # Contenido educativo
+│   ├── layout.tsx              # Diseño raíz con proveedores
+│   └── page.tsx                # Página principal
 │
-├── components/                   # Componentes de React
-│   ├── Dojo/                    # Componentes específicos de entrenamiento
+├── components/                 # Componentes de React
+│   ├── Dojo/                   # Componentes específicos de entrenamiento
 │   │   ├── Kana/               # Selección y tarjetas de Kana
 │   │   ├── Kanji/              # Selección y tarjetas de Kanji
 │   │   └── Vocab/              # Selección y tarjetas de Vocabulario
-│   ├── reusable/                # Componentes compartidos
+│   ├── reusable/               # Componentes compartidos
 │   │   ├── Menu/               # Componentes de navegación y menú
 │   │   └── ...                 # Otros componentes reutilizables
-│   ├── Settings/                # Componentes de preferencias
-│   └── ui/                      # Componentes de shadcn/ui
+│   ├── Settings/               # Componentes de preferencias
+│   └── ui/                     # Componentes de shadcn/ui
 │
-├── lib/                         # Utilidades y funciones auxiliares
-│   ├── hooks/                   # Hooks personalizados de React
+├── lib/                        # Utilidades y funciones auxiliares
+│   ├── hooks/                  # Hooks personalizados de React
 │   │   ├── useAudio.ts         # Hooks para retroalimentación de audio
 │   │   └── ...
-│   ├── interfaces.ts            # Interfaces de TypeScript
-│   └── utils.ts                 # Funciones auxiliares
+│   ├── interfaces.ts           # Interfaces de TypeScript
+│   └── utils.ts                # Funciones auxiliares
 │
-├── store/                       # Gestion del estado con Zustand
+├── store/                      # Gestion del estado con Zustand
 │   ├── useKanaKanjiStore.ts    # Estado de selección de Kana/Kanji
 │   ├── useVocabStore.ts        # Estado de selección de Vocabulario
 │   ├── useStatsStore.ts        # Estadísticas y progreso
 │   └── useThemeStore.ts        # Tema y preferencias
 │
-├── static/                      # Datos y configuración estática
+├── static/                     # Datos y configuración estática
 │   ├── kana.ts                 # Datos de caracteres Kana
-│   ├── kanji/                  # Datos de Kanji por nivel JLPT
+│   ├── kanji/                  # Datos Kanji por nivel JLPT
 │   ├── vocab/                  # Datos de vocabulario
 │   ├── themes.ts               # Definiciones de temas
 │   ├── fonts.ts                # Configuración de fuentes
 │   └── info.tsx                # Contenido informativo
 │
-├── public/                      # Recursos estáticos
+├── public/                     # Recursos estáticos
 │   ├── sounds/                 # Archivos de audio
 │   └── wallpapers/             # Imágenes de fondo
 │
-├── CLAUDE.md                    # Documentación para desarrolladores
+├── CLAUDE.md                   # Documentación para desarrolladores
 ├── next.config.ts              # Configuración de Next.js
 ├── tailwind.config.js          # Configuración de Tailwind CSS
 └── tsconfig.json               # Configuración de TypeScript
@@ -414,6 +418,7 @@ Cada modo de juego es una ruta dinámica (`/[contentType]/train/[gameMode]`) que
 
 ---
 
+<a id="contributing"></a>
 ## 🤝 Contribuir
 
 ¡Las contribuciones son bienvenidas! KanaDojo es un proyecto de código abierto construido por la comunidad y para la comunidad.
@@ -436,12 +441,14 @@ Cada modo de juego es una ruta dinámica (`/[contentType]/train/[gameMode]`) que
 
 ---
 
+<a id="license"></a>
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia AGPL 3.0 - consulta el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
 ---
 
+<a id="acknowledgments"></a>
 ## 🙏 Agradecimientos
 
 - Datos e información sobre caracteres del idioma japonés
@@ -450,6 +457,7 @@ Este proyecto está bajo la Licencia AGPL 3.0 - consulta el archivo [LICENSE.md]
 
 ---
 
+<a id="contact-links"></a>
 ## 📞 Contacto y Enlaces
 
 - **Sitio Web**: [kanadojo.com](https://kanadojo.com)

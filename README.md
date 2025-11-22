@@ -16,7 +16,8 @@
 - [中文（繁體）](./docs/translations/README.zh-tw.md)
 
 </details>
-<a href="#about-kanadojo">About KanaDojo</a> | <a href="#screenshots">Screenshots</a> | <a href="#ui-design-philosophy">UI &amp; Design Philosophy</a> | <a href="#tech-stack">Tech Stack</a> | <a href="#getting-started">Getting Started</a> | <a href="#project-structure">Project Structure</a> | <a href="#contributing">Contributing</a> | <a href="#license">License</a> | <a href="#acknowledgments">Acknowledgments</a> | <a href="#translations">Translations</a> | <a href="#contact-links">Contact &amp; Links</a> 
+
+<a href="#about-kanadojo">About KanaDojo</a> | <a href="#screenshots">Screenshots</a> | <a href="#ui-design-philosophy">UI &amp; Design Philosophy</a> | <a href="#tech-stack">Tech Stack</a> | <a href="#getting-started">Getting Started</a> | <a href="#project-structure">Project Structure</a> | <a href="#contributing">Contributing</a> | <a href="#license">License</a> | <a href="#acknowledgments">Acknowledgments</a> | <a href="#contact-links">Contact &amp; Links</a> 
 
 # KanaDojo かな道場
 
@@ -343,46 +344,46 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router pages
-│   ├── kana/                    # Kana dojo pages
+├── app/                        # Next.js App Router pages
+│   ├── kana/                   # Kana dojo pages
 │   │   └── train/[gameMode]/   # Training pages for each game mode
-│   ├── kanji/                   # Kanji dojo pages
+│   ├── kanji/                  # Kanji dojo pages
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Vocabulary dojo pages
+│   ├── vocabulary/             # Vocabulary dojo pages
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Settings and customization page
-│   ├── academy/                 # Educational content
-│   ├── layout.tsx               # Root layout with providers
-│   └── page.tsx                 # Home page
+│   ├── preferences/            # Settings and customization page
+│   ├── academy/                # Educational content
+│   ├── layout.tsx              # Root layout with providers
+│   └── page.tsx                # Home page
 │
-├── components/                   # React components
-│   ├── Dojo/                    # Training-specific components
+├── components/                 # React components
+│   ├── Dojo/                   # Training-specific components
 │   │   ├── Kana/               # Kana selection and cards
 │   │   ├── Kanji/              # Kanji selection and cards
 │   │   └── Vocab/              # Vocabulary selection and cards
-│   ├── reusable/                # Shared components
+│   ├── reusable/               # Shared components
 │   │   ├── Menu/               # Navigation and menu components
 │   │   └── ...                 # Other reusable components
-│   ├── Settings/                # Preference components
-│   └── ui/                      # shadcn/ui components
+│   ├── Settings/               # Preference components
+│   └── ui/                     # shadcn/ui components
 │
-├── lib/                         # Utilities and helper functions
-│   ├── hooks/                   # Custom React hooks
+├── lib/                        # Utilities and helper functions
+│   ├── hooks/                  # Custom React hooks
 │   │   ├── useAudio.ts         # Audio feedback hooks
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript interfaces
-│   └── utils.ts                 # Utility functions
+│   ├── interfaces.ts           # TypeScript interfaces
+│   └── utils.ts                # Utility functions
 │
-├── i18n/                        # Translation management system
-│   └── request.ts               # Translated text retrieve helper
+├── i18n/                       # Translation management system
+│   └── request.ts              # Translated text retrieve helper
 │
-├── store/                       # Zustand state management
+├── store/                      # Zustand state management
 │   ├── useKanaKanjiStore.ts    # Kana/Kanji selection state
 │   ├── useVocabStore.ts        # Vocabulary selection state
 │   ├── useStatsStore.ts        # Statistics and progress
 │   └── useThemeStore.ts        # Theme and preferences
 │
-├── static/                      # Static data and configuration
+├── static/                     # Static data and configuration
 │   ├── kana.ts                 # Kana character data
 │   ├── kanji/                  # Kanji data by JLPT level
 │   ├── vocab/                  # Vocabulary data
@@ -396,11 +397,11 @@ kanadojo/
 │           ├── en.json         # English text content
 │           └── es.json         # Spanish text content
 │
-├── public/                      # Static assets
+├── public/                     # Static assets
 │   ├── sounds/                 # Audio files
 │   └── wallpapers/             # Background images
 │
-├── CLAUDE.md                    # Developer documentation
+├── CLAUDE.md                   # Developer documentation
 ├── next.config.ts              # Next.js configuration
 ├── tailwind.config.js          # Tailwind CSS configuration
 └── tsconfig.json               # TypeScript configuration
@@ -473,6 +474,7 @@ This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICEN
 - Open-source community for the amazing tools and libraries
 - All contributors who help make KanaDojo better
 
+<a id="contact-links"></a>
 ## 📞 Contact & Links
 
 - **Website**: [kanadojo.com](https://kanadojo.com)

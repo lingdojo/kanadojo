@@ -1,8 +1,6 @@
 <div id="top"></div>
 
-**KanaDojo is available in multiple languages thanks to community contributions:**
-
-[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+<a href="#about-kanadojo">About KanaDojo</a> | <a href="#screenshots">Screenshots</a> | <a href="#ui-design-philosophy">UI &amp; Design Philosophy</a> | <a href="#tech-stack">Tech Stack</a> | <a href="#getting-started">Getting Started</a> | <a href="#project-structure">Project Structure</a> | <a href="#contributing">Contributing</a> | <a href="#license">License</a> | <a href="#acknowledgments">Acknowledgments</a> | <a href="#contact-links">Contact &amp; Links</a>
 
 # KanaDojo かな道場
 
@@ -21,6 +19,7 @@
 
 </div>
 
+<a id="about-kanadojo"></a>
 ## 📖 About KanaDojo
 
 KanaDojo is an engaging web-based Japanese learning platform that makes mastering Hiragana, Katakana, Kanji, and Vocabulary fun and intuitive. Built with a focus on aesthetics, customization, and effective learning, KanaDojo provides an immersive training environment for Japanese language learners at all levels.
@@ -65,6 +64,7 @@ Each dojo supports four engaging training modes to reinforce learning:
 - Clean, minimalist interface that keeps you focused on learning
 - Smooth animations and transitions powered by Framer Motion
 
+<a id="screenshots"></a>
 ## 🖼️ Screenshots
 
 <div align="center">
@@ -89,6 +89,7 @@ Each dojo supports four engaging training modes to reinforce learning:
 
 </div>
 
+<a id="ui-design-philosophy"></a>
 ## 🎨 UI & Design Philosophy
 
 KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility**. The design philosophy centers around:
@@ -121,6 +122,7 @@ KanaDojo embraces a **minimalist aesthetic** combined with **maximum flexibility
 - Clear distinction between similar-looking characters
 - Font previews with real Japanese text samples
 
+<a id="tech-stack"></a>
 ## 🛠️ Tech Stack
 
 KanaDojo is built with modern web technologies for optimal performance and developer experience:
@@ -163,6 +165,7 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analytics
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performance monitoring
 
+<a id="getting-started"></a>
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -315,50 +318,51 @@ Or simply run on a different port:
 PORT=3001 npm run dev
 ```
 
+<a id="project-structure"></a>
 ## 📁 Project Structure
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router pages
-│   ├── kana/                    # Kana dojo pages
+├── app/                        # Next.js App Router pages
+│   ├── kana/                   # Kana dojo pages
 │   │   └── train/[gameMode]/   # Training pages for each game mode
-│   ├── kanji/                   # Kanji dojo pages
+│   ├── kanji/                  # Kanji dojo pages
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Vocabulary dojo pages
+│   ├── vocabulary/             # Vocabulary dojo pages
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Settings and customization page
-│   ├── academy/                 # Educational content
-│   ├── layout.tsx               # Root layout with providers
-│   └── page.tsx                 # Home page
+│   ├── preferences/            # Settings and customization page
+│   ├── academy/                # Educational content
+│   ├── layout.tsx              # Root layout with providers
+│   └── page.tsx                # Home page
 │
-├── components/                   # React components
-│   ├── Dojo/                    # Training-specific components
+├── components/                 # React components
+│   ├── Dojo/                   # Training-specific components
 │   │   ├── Kana/               # Kana selection and cards
 │   │   ├── Kanji/              # Kanji selection and cards
 │   │   └── Vocab/              # Vocabulary selection and cards
-│   ├── reusable/                # Shared components
+│   ├── reusable/               # Shared components
 │   │   ├── Menu/               # Navigation and menu components
 │   │   └── ...                 # Other reusable components
-│   ├── Settings/                # Preference components
-│   └── ui/                      # shadcn/ui components
+│   ├── Settings/               # Preference components
+│   └── ui/                     # shadcn/ui components
 │
-├── lib/                         # Utilities and helper functions
-│   ├── hooks/                   # Custom React hooks
+├── lib/                        # Utilities and helper functions
+│   ├── hooks/                  # Custom React hooks
 │   │   ├── useAudio.ts         # Audio feedback hooks
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript interfaces
-│   └── utils.ts                 # Utility functions
+│   ├── interfaces.ts           # TypeScript interfaces
+│   └── utils.ts                # Utility functions
 │
-├── i18n/                        # Translation management system
-│   └── request.ts               # Translated text retrieve helper
+├── i18n/                       # Translation management system
+│   └── request.ts              # Translated text retrieve helper
 │
-├── store/                       # Zustand state management
+├── store/                      # Zustand state management
 │   ├── useKanaKanjiStore.ts    # Kana/Kanji selection state
-│   ├── useVocabStore.ts        # Vocabulary selection state
+│   ├── useVocabStore.ts        # Kana/Kanji selection state
 │   ├── useStatsStore.ts        # Statistics and progress
 │   └── useThemeStore.ts        # Theme and preferences
 │
-├── static/                      # Static data and configuration
+├── static/                     # Static data and configuration
 │   ├── kana.ts                 # Kana character data
 │   ├── kanji/                  # Kanji data by JLPT level
 │   ├── vocab/                  # Vocabulary data
@@ -370,14 +374,14 @@ kanadojo/
 │   ├── en.json                 # English text content
 │   └── es.json                 # Spanish text content
 │
-├── public/                      # Static assets
+├── public/                     # Static assets
 │   ├── sounds/                 # Audio files
 │   └── wallpapers/             # Background images
-│
-├── CLAUDE.md                    # Developer documentation
-├── next.config.ts              # Next.js configuration
-├── tailwind.config.js          # Tailwind CSS configuration
-└── tsconfig.json               # TypeScript configuration
+```
+├── CLAUDE.md                     # Developer documentation
+├── next.config.ts                # Next.js configuration
+├── tailwind.config.js            # Tailwind CSS configuration
+└── tsconfig.json                 # TypeScript configuration
 ```
 
 ### Key Concepts
@@ -414,6 +418,7 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 3. Provides immediate feedback
 4. Tracks statistics (correct, incorrect, streak)
 
+<a id="contributing"></a>
 ## 🤝 Contributing
 
 Contributions are welcome! KanaDojo is an open-source project built by the community, for the community. Check out [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
@@ -434,16 +439,19 @@ Contributions are welcome! KanaDojo is an open-source project built by the commu
 - Update documentation as needed
 - Keep components focused and reusable
 
+<a id="license"></a>
 ## 📄 License
 
 This project is licensed under the AGPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details.
 
+<a id="acknowledgments"></a>
 ## 🙏 Acknowledgments
 
 - Japanese language data and character information
 - Open-source community for the amazing tools and libraries
 - All contributors who help make KanaDojo better
 
+<a id="contact-links"></a>
 ## 📞 Contact & Links
 
 - **Website**: [kanadojo.com](https://kanadojo.com)

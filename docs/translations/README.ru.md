@@ -1,9 +1,6 @@
-<div id="top"></div>
-<a href="#about-kanadojo">О KanaDojo</a> | <a href="#screenshots">Скриншоты</a> | <a href="#ui-design-philosophy">UI &amp; философия дизайна</a> | <a href="#tech-stack">Технический стек</a> | <a href="#getting-started">Начало работы</a> | <a href="#project-structure">Структура проекта</a> | <a href="#contributing">Вклад в проект</a> | <a href="#license">Лицензия</a> | <a href="#acknowledgments">Благодарности</a> | <a href="#translations">Переводы</a> | <a href="#contact-links">Контакты &amp; ссылки</a>
+﻿<div id="top"></div>
 
-**KanaDojo доступен на нескольких языках благодаря вкладу сообщества:**
-
-[English](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/** [中文（繁體）](docs/translations/README.zh-tw.md) **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/**  Русский
+<a href="#about-kanadojo">О KanaDojo</a> | <a href="#screenshots">Скриншоты</a> | <a href="#ui-design-philosophy">UI &amp; философия дизайна</a> | <a href="#tech-stack">Технический стек</a> | <a href="#getting-started">Начало работы</a> | <a href="#project-structure">Структура проекта</a> | <a href="#contributing">Вклад в проект</a> | <a href="#license">Лицензия</a> | <a href="#acknowledgments">Благодарности</a> | <a href="#contact-links">Контакты &amp; ссылки</a>
 
 # KanaDojo かな道場
 
@@ -23,6 +20,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
 </div>
+
 <a id="about-kanadojo"></a>
 ## 📖 О KanaDojo
 
@@ -455,22 +453,6 @@ kanadojo/
 - Данные по японскому языку и информация о символах
 - Сообществу с открытым исходным кодом за отличные инструменты и библиотеки
 - Всем участникам, которые помогают улучшать KanaDojo
-
-<a id="translations"></a>
-## 🌐 Переводы
-
-KanaDojo доступен на нескольких языках благодаря вкладу сообщества:
-
-- English (по умолчанию)
-- [Español](docs/translations/README.es.md)
-- [Français](docs/translations/README.fr.md) — в процессе
-- [Deutsch](docs/translations/README.de.md)
-- [Português](docs/translations/README.pt-br.md)
-- [Türkçe](docs/translations/README.tr.md)
-- [中文（简体）](docs/translations/README.zh-CN.md)
-- [中文（繁體）](docs/translations/README.zh-tw.md)
-- [हिन्दी](docs/translations/README.hin.md)
-- <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>
 
 <a id="contact-links"></a>
 ## 📞 Контакты и ссылки
