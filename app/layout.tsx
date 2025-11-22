@@ -2,8 +2,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
-import MSClarity from '@/components/analytics/MSClarity';
+import { GoogleAnalytics, MSClarity } from '@/core/analytics';
 import { Metadata, Viewport } from 'next';
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';

@@ -1,4 +1,4 @@
-import TimedChallengeKana from '@/components/Dojo/Kana/TimedChallenge';
+import { TimedChallenge as TimedChallengeKana } from '@/features/kana';
 
 export default function TimedKanaPage() {
   return (

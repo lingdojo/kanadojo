@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
+import { routing } from '@/core/i18n/routing';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import ClientLayout from '../ClientLayout';

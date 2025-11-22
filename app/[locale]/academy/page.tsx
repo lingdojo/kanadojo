@@ -1,4 +1,4 @@
-import Academy from '@/components/Academy';
+import { Academy } from '@/features/academy';
 
 export default function AcademyPage() {
   return <Academy />;

@@ -1,4 +1,4 @@
-import Hiragana101 from '@/components/Academy/Hiragana101';
+import { Hiragana101 } from '@/features/academy';
 
 export default function Hiragana101Page() {
   return <Hiragana101 />;

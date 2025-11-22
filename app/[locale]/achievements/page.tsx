@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import AchievementProgress from '@/components/Progress/AchievementProgress';
-import Sidebar from '@/components/reusable/Menu/Sidebar';
+import { AchievementProgress } from '@/features/statistics';
+import Sidebar from '@/shared/components/Menu/Sidebar';
 
 export const metadata: Metadata = {
   title: 'Achievements - KanaDojo',
