@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import usePreferencesStore from '@/features/themes';
 import { useClick } from '@/shared/hooks';
-import { AudioLines, VolumeX, Volume2, RefreshCw, Play } from 'lucide-react';
+import { AudioLines, VolumeX, Volume2, RefreshCw, Play, Zap, ZapOff } from 'lucide-react';
+import useCrazyModeStore from '@/features/crazy-mode/store/useCrazyModeStore';
 import { useJapaneseTTS } from '@/shared/hooks/useJapaneseTTS';
 // import{Command, KeyboardOff} from 'lucide-react'
 // import HotkeyReference from './HotkeyReference';
@@ -523,6 +524,36 @@ const Behavior = () => {
           </div>
         </>
       )}
+
+      <h4 className="text-lg">Crazy Mode (Experimental):</h4>
+      <div className="flex flex-row gap-4">
+        <button
+          className={clsx(
+            buttonBorderStyles,
+            'text-center text-lg',
+            'w-1/2 md:w-1/4 p-4',
+            'flex flex-row gap-1.5 justify-center items-end',
+            'text-[var(--secondary-color)]',
+            'flex-1 overflow-hidden'
+          )}
+          onClick={() => {
+            playClick();
+            useCrazyModeStore.getState().toggleCrazyMode();
+          }}
+        >
+          <span>
+            <span className="text-[var(--main-color)]">
+              {useCrazyModeStore(state => state.isCrazyMode) && '\u2B24 '}
+            </span>
+            {useCrazyModeStore(state => state.isCrazyMode) ? 'On' : 'Off'}
+          </span>
+          {useCrazyModeStore(state => state.isCrazyMode) ? (
+            <Zap size={20} className="mb-0.5" />
+          ) : (
+            <ZapOff size={20} className="mb-0.5" />
+          )}
+        </button>
+      </div>
 
       {/*       <h4 className="text-lg">Enable hotkeys (desktop only):</h4>
       <div className="flex flex-row gap-4">

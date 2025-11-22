@@ -1,10 +1,9 @@
 'use client';
 import clsx from 'clsx';
-// 1. Import useState to hold the dynamically imported module
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import usePreferencesStore from '@/features/themes';
-// 2. Remove the static import
-// import fonts from '@/static/fonts';
+import useCrazyModeStore from '@/features/crazy-mode/store/useCrazyModeStore';
+import { usePathname } from 'next/navigation';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/shared/components/Modals/WelcomeModal';
 import { AchievementNotificationContainer } from '@/shared/components/AchievementNotification';
@@ -29,10 +28,41 @@ export default function ClientLayout({
   const { theme } = usePreferencesStore();
   const font = usePreferencesStore(state => state.font);
 
+  // Crazy Mode Integration
+  const isCrazyMode = useCrazyModeStore(state => state.isCrazyMode);
+  const activeThemeId = useCrazyModeStore(state => state.activeThemeId);
+  const activeFontName = useCrazyModeStore(state => state.activeFontName);
+  const randomize = useCrazyModeStore(state => state.randomize);
+
+  // Determine effective theme and font
+  const effectiveTheme = isCrazyMode && activeThemeId ? activeThemeId : theme;
+  const effectiveFont = isCrazyMode && activeFontName ? activeFontName : font;
+
   // 3. Create state to hold the fonts module
   const [fontsModule, setFontsModule] = useState<FontObject[] | null>(null);
 
-  // 4. Dynamically import the fonts module only in production
+  // Calculate fontClassName based on the stateful fontsModule
+  const fontClassName = fontsModule
+    ? fontsModule.find((fontObj: FontObject) => effectiveFont === fontObj.name)?.font.className
+    : '';
+
+  useEffect(() => {
+    applyTheme(effectiveTheme); // This now sets both CSS variables AND data-theme attribute
+
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, [effectiveTheme]);
+
+  // Trigger randomization on page navigation
+  const pathname = usePathname();
+  useEffect(() => {
+    if (isCrazyMode) {
+      randomize();
+    }
+  }, [pathname, isCrazyMode, randomize]);
+
+  // Dynamically import the fonts module only in production
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
       import('@/features/themes/data/fonts')
@@ -43,22 +73,13 @@ export default function ClientLayout({
         .catch(err => {
           console.error('Failed to dynamically load fonts:', err);
         });
+    } else {
+      // In development, import statically for easier debugging
+      import('@/features/themes/data/fonts').then(module => {
+        setFontsModule(module.default);
+      });
     }
   }, []); // Empty dependency array ensures this runs only once on mount
-
-  // 5. Calculate fontClassName based on the stateful fontsModule
-  // This will be an empty string if fontsModule is null (i.e., in dev or before prod load)
-  const fontClassName = fontsModule
-    ? fontsModule.find(fontObj => font === fontObj.name)?.font.className
-    : '';
-
-  useEffect(() => {
-    applyTheme(theme); // This now sets both CSS variables AND data-theme attribute
-
-    if (typeof window !== 'undefined') {
-      window.history.scrollRestoration = 'manual';
-    }
-  }, [theme]);
 
   useEffect(() => {
     // Resume AudioContext on first user interaction
@@ -80,8 +101,6 @@ export default function ClientLayout({
         data-scroll-restoration-id="container"
         className={clsx(
           'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
-          // 6. Apply fontClassName. This is now implicitly conditional
-          // because fontClassName will only have a value in prod after load.
           fontClassName
         )}
         style={{

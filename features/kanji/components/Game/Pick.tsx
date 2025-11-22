@@ -15,6 +15,7 @@ import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import FuriganaText from '@/shared/components/FuriganaText';
+import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 
@@ -44,14 +45,15 @@ const KanjiPickGame = ({
 
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+  const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   // State management based on mode
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .meanings[0]
+        .meanings[0]
       : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .kanjiChar
+        .kanjiChar
   );
 
   // Find the correct object based on the current mode
@@ -165,6 +167,7 @@ const KanjiPickGame = ({
     incrementCorrectAnswers();
     setScore(score + 1);
     setWrongSelectedAnswers([]);
+    triggerCrazyMode();
   };
 
   const handleWrongAnswer = (selectedOption: string) => {
@@ -177,6 +180,7 @@ const KanjiPickGame = ({
     } else {
       setScore(score - 1);
     }
+    triggerCrazyMode();
   };
 
   const generateNewCharacter = () => {
@@ -251,9 +255,9 @@ const KanjiPickGame = ({
                   buttonBorderStyles,
                   'text-[var(--border-color)]',
                   wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                  'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--main-color)]'
+                  'text-[var(--main-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
@@ -263,9 +267,9 @@ const KanjiPickGame = ({
                   reading={
                     isReverse
                       ? selectedKanjiObjs.find(obj => obj.kanjiChar === option)
-                          ?.onyomi[0] ||
-                        selectedKanjiObjs.find(obj => obj.kanjiChar === option)
-                          ?.kunyomi[0]
+                        ?.onyomi[0] ||
+                      selectedKanjiObjs.find(obj => obj.kanjiChar === option)
+                        ?.kunyomi[0]
                       : undefined
                   }
                 />

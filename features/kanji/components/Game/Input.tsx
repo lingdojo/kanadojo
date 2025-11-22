@@ -14,6 +14,7 @@ import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import FuriganaText from '@/shared/components/FuriganaText';
+import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 
@@ -44,6 +45,7 @@ const KanjiInputGame = ({
   const { playClick } = useClick();
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+  const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -54,9 +56,9 @@ const KanjiInputGame = ({
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .meanings[0]
+        .meanings[0]
       : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .kanjiChar
+        .kanjiChar
   );
 
   // Find the target character/meaning based on mode
@@ -145,6 +147,7 @@ const KanjiInputGame = ({
         <CircleCheck className="inline text-[var(--main-color)]" />
       </>
     );
+    triggerCrazyMode();
   };
 
   const handleWrongAnswer = () => {
@@ -167,6 +170,7 @@ const KanjiInputGame = ({
     } else {
       setScore(score - 1);
     }
+    triggerCrazyMode();
   };
 
   const generateNewCharacter = () => {
@@ -190,8 +194,8 @@ const KanjiInputGame = ({
     const displayTarget = isReverse
       ? targetChar
       : Array.isArray(targetChar)
-      ? targetChar[0]
-      : targetChar;
+        ? targetChar[0]
+        : targetChar;
 
     setFeedback(<>{`skipped ~ ${correctChar} = ${displayTarget}`}</>);
   };
