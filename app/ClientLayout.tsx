@@ -35,7 +35,7 @@ export default function ClientLayout({
   // 4. Dynamically import the fonts module only in production
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      import('@/static/fonts')
+      import('@/features/themes/data/fonts')
         .then(module => {
           // Assuming 'fonts' is a default export from that module
           setFontsModule(module.default);

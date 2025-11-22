@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'KanaDojo',
     description:
-      'KanaDojo is a fun, aesthetic, minimalist platform for learning and practicing Japanese online.',
+      'KanaDojo is an aesthetic, minimalist platform for learning Japanese inspired by Monkeytype.',
     url: 'https://kanadojo.com',
     type: 'website',
     locale: 'en_US',
