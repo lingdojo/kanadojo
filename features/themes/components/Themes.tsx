@@ -48,13 +48,13 @@ const Themes = () => {
   /* handleHover acts as a debouncer, so it applies the theme when the user stops on top of it.
    Without it, the theme would apply on every hover, causing lag.
  */
-  const handleHover = (themeId: string) => {
-    if (isAdding) return;
-    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-    hoverTimeout.current = setTimeout(() => {
-      applyTheme(themeId);
-    }, 50);
-  };
+  // const handleHover = (themeId: string) => {
+  //   if (isAdding) return;
+  //   if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+  //   hoverTimeout.current = setTimeout(() => {
+  //     applyTheme(themeId);
+  //   }, 150);
+  // };
 
   const handleCustomTheme = () => {
     // To keep the id same as the others themes (default)
@@ -70,7 +70,7 @@ const Themes = () => {
         secondaryColor: hexToHsl(customTheme.secondaryColor),
       });
 
-      setSelectedTheme(themeId);
+      // setSelectedTheme(themeId);
 
       // reset
       customTheme.id = '';
@@ -278,7 +278,6 @@ const Themes = () => {
                     'bg-[var(--card-color)] border-[var(--border-color)]',
                     'text-[var(--main-color)]'
                   )}
-                  autoFocus
                 />
               </div>
               <div className="flex flex-wrap justify-around gap-3 items-center">
@@ -466,7 +465,7 @@ const Themes = () => {
                 }}
                 onMouseEnter={() => {
                   setIsHovered(currentTheme.id);
-                  handleHover(currentTheme.id);
+                  // handleHover(currentTheme.id);
                 }}
                 onMouseLeave={() => {
                   if (isAdding) return;

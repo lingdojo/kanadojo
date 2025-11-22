@@ -831,10 +831,14 @@ themes.forEach((group) => {
   });
 });
 
-// Sync custom themes into the map whenever the store updates
+// populate map immediately with current store state
+useCustomThemeStore
+  .getState()
+  .themes.forEach((theme) => themeMap.set(theme.id, theme));
+
+// subscription for store updates
 useCustomThemeStore.subscribe((state) => {
-  const customThemes = state.themes;
-  customThemes.forEach((theme) => themeMap.set(theme.id, theme));
+  state.themes.forEach((theme) => themeMap.set(theme.id, theme));
 });
 
 export function applyTheme(themeId: string) {
