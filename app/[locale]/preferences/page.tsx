@@ -1,4 +1,4 @@
-import Settings from '@/components/Settings';
+import { Settings } from '@/features/themes';
 
 export default function SettingsPage() {
   return <Settings />;

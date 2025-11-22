@@ -2,16 +2,16 @@
 import clsx from 'clsx';
 // 1. Import useState to hold the dynamically imported module
 import { useEffect, useState } from 'react';
-import usePreferencesStore from '@/store/usePreferencesStore';
+import usePreferencesStore from '@/features/themes';
 // 2. Remove the static import
 // import fonts from '@/static/fonts';
 import { ScrollRestoration } from 'next-scroll-restoration';
-import WelcomeModal from '@/components/Modals/WelcomeModal';
-import { AchievementNotificationContainer } from '@/components/reusable/AchievementNotification';
-import AchievementIntegration from '@/components/reusable/AchievementIntegration';
-import { applyTheme } from '@/static/themes';
-import BackToTop from '@/components/reusable/BackToTop';
-import { GlobalErrorBoundary } from '@/components/ErrorBoundary';
+import WelcomeModal from '@/shared/components/Modals/WelcomeModal';
+import { AchievementNotificationContainer } from '@/shared/components/AchievementNotification';
+import AchievementIntegration from '@/shared/components/AchievementIntegration';
+import { applyTheme } from '@/features/themes';
+import BackToTop from '@/shared/components/BackToTop';
+import { GlobalErrorBoundary } from '@/shared/components';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {

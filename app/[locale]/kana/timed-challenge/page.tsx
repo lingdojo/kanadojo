@@ -1,5 +1,5 @@
-import TimedChallengeKana from '@/components/Dojo/Kana/TimedChallenge';
-import { GameErrorBoundary } from '@/components/ErrorBoundary';
+import { TimedChallenge as TimedChallengeKana } from '@/features/kana';
+import { GameErrorBoundary } from '@/shared/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

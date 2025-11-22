@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import DojoMenu from '@/components/reusable/Menu/DojoMenu';
+import DojoMenu from '@/shared/components/Menu/DojoMenu';
 
 export const metadata: Metadata = {
   title: 'KanaDojo: Kana',

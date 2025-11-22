@@ -1,5 +1,5 @@
-import TimedChallengeVocab from '@/components/Dojo/Vocab/TimedChallenge';
-import { GameErrorBoundary } from '@/components/ErrorBoundary';
+import { TimedChallenge as TimedChallengeVocab } from '@/features/vocabulary';
+import { GameErrorBoundary } from '@/shared/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

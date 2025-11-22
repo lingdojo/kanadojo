@@ -1,4 +1,4 @@
-import KanjiGame from '@/components/Dojo/Kanji/Game';
+import { KanjiGame } from '@/features/kanji';
 
 export default function Train() {
   return <KanjiGame />;
