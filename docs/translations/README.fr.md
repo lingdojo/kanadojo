@@ -322,43 +322,43 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Pages Next.js App Router
-│   ├── kana/                    # Pages du dojo Kana
+├── app/                        # Pages Next.js App Router
+│   ├── kana/                   # Pages du dojo Kana
 │   │   └── train/[gameMode]/   # Pages d'entraînement pour chaque mode
-│   ├── kanji/                   # Pages du dojo Kanji
+│   ├── kanji/                  # Pages du dojo Kanji
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Pages du dojo Vocabulaire
+│   ├── vocabulary/             # Pages du dojo Vocabulaire
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Page de paramètres et personnalisation
-│   ├── academy/                 # Contenu éducatif
-│   ├── layout.tsx               # Layout racine avec providers
-│   └── page.tsx                 # Page d'accueil
+│   ├── preferences/            # Page de paramètres et personnalisation
+│   ├── academy/                # Contenu éducatif
+│   ├── layout.tsx              # Layout racine avec providers
+│   └── page.tsx                # Page d'accueil
 │
-├── components/                   # Composants React
-│   ├── Dojo/                    # Composants spécifiques à l'entraînement
+├── components/                 # Composants React
+│   ├── Dojo/                   # Composants spécifiques à l'entraînement
 │   │   ├── Kana/               # Sélection et cartes Kana
 │   │   ├── Kanji/              # Sélection et cartes Kanji
 │   │   └── Vocab/              # Sélection et cartes Vocabulaire
-│   ├── reusable/                # Composants partagés
+│   ├── reusable/               # Composants partagés
 │   │   ├── Menu/               # Composants de navigation et menu
 │   │   └── ...                 # Autres composants réutilisables
-│   ├── Settings/                # Composants de préférences
-│   └── ui/                      # Composants shadcn/ui
+│   ├── Settings/               # Composants de préférences
+│   └── ui/                     # Composants shadcn/ui
 │
-├── lib/                         # Utilitaires et fonctions helper
-│   ├── hooks/                   # Hooks React personnalisés
+├── lib/                        # Utilitaires et fonctions helper
+│   ├── hooks/                  # Hooks React personnalisés
 │   │   ├── useAudio.ts         # Hooks de retour audio
 │   │   └── ...
-│   ├── interfaces.ts            # Interfaces TypeScript
-│   └── utils.ts                 # Fonctions utilitaires
+│   ├── interfaces.ts           # Interfaces TypeScript
+│   └── utils.ts                # Fonctions utilitaires
 │
-├── store/                       # Gestion d'état Zustand
+├── store/                      # Gestion d'état Zustand
 │   ├── useKanaKanjiStore.ts    # État de sélection Kana/Kanji
 │   ├── useVocabStore.ts        # État de sélection Vocabulaire
 │   ├── useStatsStore.ts        # Statistiques et progression
 │   └── useThemeStore.ts        # Thème et préférences
 │
-├── static/                      # Données et configuration statiques
+├── static/                     # Données et configuration statiques
 │   ├── kana.ts                 # Données des caractères Kana
 │   ├── kanji/                  # Données Kanji par niveau JLPT
 │   ├── vocab/                  # Données de vocabulaire
@@ -366,7 +366,7 @@ kanadojo/
 │   ├── fonts.ts                # Configurations des polices
 │   └── info.tsx                # Contenu informatif
 │
-├── public/                      # Assets statiques
+├── public/                     # Assets statiques
 │   ├── sounds/                 # Fichiers audio
 │   └── wallpapers/             # Images de fond
 ```

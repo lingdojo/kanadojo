@@ -330,55 +330,55 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Páginas y rutas de Next.js
-│   ├── kana/                    # Páginas del dojo de Kana
+├── app/                        # Páginas y rutas de Next.js
+│   ├── kana/                   # Páginas del dojo de Kana
 │   │   └── train/[gameMode]/   # Páginas de entrenamiento para cada modo de juego
-│   ├── kanji/                   # Páginas del dojo de Kanji
+│   ├── kanji/                  # Páginas del dojo de Kanji
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Páginas del dojo de Vocabulario
+│   ├── vocabulary/             # Páginas del dojo de Vocabulario
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Configuración y personalización de páginas
-│   ├── academy/                 # Contenido educativo
-│   ├── layout.tsx               # Diseño raíz con proveedores
-│   └── page.tsx                 # Página principal
+│   ├── preferences/            # Configuración y personalización de páginas
+│   ├── academy/                # Contenido educativo
+│   ├── layout.tsx              # Diseño raíz con proveedores
+│   └── page.tsx                # Página principal
 │
-├── components/                   # Componentes de React
-│   ├── Dojo/                    # Componentes específicos de entrenamiento
+├── components/                 # Componentes de React
+│   ├── Dojo/                   # Componentes específicos de entrenamiento
 │   │   ├── Kana/               # Selección y tarjetas de Kana
 │   │   ├── Kanji/              # Selección y tarjetas de Kanji
 │   │   └── Vocab/              # Selección y tarjetas de Vocabulario
-│   ├── reusable/                # Componentes compartidos
+│   ├── reusable/               # Componentes compartidos
 │   │   ├── Menu/               # Componentes de navegación y menú
 │   │   └── ...                 # Otros componentes reutilizables
-│   ├── Settings/                # Componentes de preferencias
-│   └── ui/                      # Componentes de shadcn/ui
+│   ├── Settings/               # Componentes de preferencias
+│   └── ui/                     # Componentes de shadcn/ui
 │
-├── lib/                         # Utilidades y funciones auxiliares
-│   ├── hooks/                   # Hooks personalizados de React
+├── lib/                        # Utilidades y funciones auxiliares
+│   ├── hooks/                  # Hooks personalizados de React
 │   │   ├── useAudio.ts         # Hooks para retroalimentación de audio
 │   │   └── ...
-│   ├── interfaces.ts            # Interfaces de TypeScript
-│   └── utils.ts                 # Funciones auxiliares
+│   ├── interfaces.ts           # Interfaces de TypeScript
+│   └── utils.ts                # Funciones auxiliares
 │
-├── store/                       # Gestion del estado con Zustand
+├── store/                      # Gestion del estado con Zustand
 │   ├── useKanaKanjiStore.ts    # Estado de selección de Kana/Kanji
 │   ├── useVocabStore.ts        # Estado de selección de Vocabulario
 │   ├── useStatsStore.ts        # Estadísticas y progreso
 │   └── useThemeStore.ts        # Tema y preferencias
 │
-├── static/                      # Datos y configuración estática
+├── static/                     # Datos y configuración estática
 │   ├── kana.ts                 # Datos de caracteres Kana
-│   ├── kanji/                  # Datos de Kanji por nivel JLPT
+│   ├── kanji/                  # Datos Kanji por nivel JLPT
 │   ├── vocab/                  # Datos de vocabulario
 │   ├── themes.ts               # Definiciones de temas
 │   ├── fonts.ts                # Configuración de fuentes
 │   └── info.tsx                # Contenido informativo
 │
-├── public/                      # Recursos estáticos
+├── public/                     # Recursos estáticos
 │   ├── sounds/                 # Archivos de audio
 │   └── wallpapers/             # Imágenes de fondo
 │
-├── CLAUDE.md                    # Documentación para desarrolladores
+├── CLAUDE.md                   # Documentación para desarrolladores
 ├── next.config.ts              # Configuración de Next.js
 ├── tailwind.config.js          # Configuración de Tailwind CSS
 └── tsconfig.json               # Configuración de TypeScript

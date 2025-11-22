@@ -323,46 +323,46 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router sayfaları
-│   ├── kana/                    # Kana dojo sayfaları
+├── app/                        # Next.js App Router sayfaları
+│   ├── kana/                   # Kana dojo sayfaları
 │   │   └── train/[gameMode]/   # Her oyun modu için eğitim sayfaları
-│   ├── kanji/                   # Kanji dojosu sayfaları
+│   ├── kanji/                  # Kanji dojosu sayfaları
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Kelime dojosu sayfaları
+│   ├── vocabulary/             # Kelime dojosu sayfaları
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Ayarlar ve özelleştirmeler sayfası
-│   ├── academy/                 # Eğitici içerik
-│   ├── layout.tsx               # Sağlayıcılar için kök tasarım planı
-│   └── page.tsx                 # Ana sayfa
+│   ├── preferences/            # Ayarlar ve özelleştirmeler sayfası
+│   ├── academy/                # Eğitici içerik
+│   ├── layout.tsx              # Sağlayıcılar için kök tasarım planı
+│   └── page.tsx                # Ana sayfa
 │
-├── components/                   # React bileşenleri
-│   ├── Dojo/                    # Belirli eğitime özel bileşenler
+├── components/                 # React bileşenleri
+│   ├── Dojo/                   # Belirli eğitime özel bileşenler
 │   │   ├── Kana/               # Kana seçimi ve kartları
 │   │   ├── Kanji/              # Kanji seçimi ve kartları
 │   │   └── Vocab/              # Kelime seçimi ve kartları
-│   ├── reusable/                # Paylaşımlı bileşenler
+│   ├── reusable/               # Paylaşımlı bileşenler
 │   │   ├── Menu/               # Gezinme ve menü bileşenleri
 │   │   └── ...                 # Yeniden kullanılabilir diğer bileşenler
-│   ├── Settings/                # Tercih bileşenleri
-│   └── ui/                      # shadcn/ui bileşenleri
+│   ├── Settings/               # Tercih bileşenleri
+│   └── ui/                     # shadcn/ui bileşenleri
 │
-├── lib/                         # Yardımcı araçlar ve fonksiyonlar
-│   ├── hooks/                   # Özel React hook'ları
+├── lib/                        # Yardımcı araçlar ve fonksiyonlar
+│   ├── hooks/                  # Özel React hook'ları
 │   │   ├── useAudio.ts         # Sesli geri bildirim hook'ları
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript arayüzleri
-│   └── utils.ts                 # Yardımcı fonksiyonlar
+│   ├── interfaces.ts           # TypeScript arayüzleri
+│   └── utils.ts                # Yardımcı fonksiyonlar
 │
-├── i18n/                        # Çeviri yönetim sistemi
-│   └── request.ts               # Çevrilmiş metin getirme yardımcısı
+├── i18n/                       # Çeviri yönetim sistemi
+│   └── request.ts              # Çevrilmiş metin getirme yardımcısı
 │
-├── store/                       # Zustand durum yönetimi
+├── store/                      # Zustand durum yönetimi
 │   ├── useKanaKanjiStore.ts    # Kana/Kanji seçim durumu
 │   ├── useVocabStore.ts        # Vocabulary seçim durumu
 │   ├── useStatsStore.ts        # İstatistikler ve ilerleme
 │   └── useThemeStore.ts        # Tema ve tercihler
 │
-├── static/                      # Statik veri ve yapılandırma
+├── static/                     # Statik veri ve yapılandırma
 │   ├── kana.ts                 # Kana karakter verisi
 │   ├── kanji/                  # JLPT seviyesine göre Kanji verisi
 │   ├── vocab/                  # Kelime verileri
@@ -374,14 +374,9 @@ kanadojo/
 │   ├── en.json                 # İngilizce metin içeriği
 │   └── es.json                 # İspanyolca metin içeriği
 │
-├── public/                      # Sabit dosyalar
+├── public/                     # Sabit dosyalar
 │   ├── sounds/                 # Ses dosyaları
 │   └── wallpapers/             # Arka plan resimleri
-│
-├── CLAUDE.md                    # Geliştirici dökümanları
-├── next.config.ts              # Next.js yapılandırması
-├── tailwind.config.js          # Tailwind CSS yapılandırması
-└── tsconfig.json               # TypeScript yapılandırması
 ```
 
 ### Temel Kavramlar

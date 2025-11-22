@@ -332,43 +332,43 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router Seiten
-│   ├── kana/                    # Kana Dojo Seiten
+├── app/                        # Next.js App Router Seiten
+│   ├── kana/                   # Kana Dojo Seiten
 │   │   └── train/[gameMode]/   # Trainingsseiten für jeden Spielmodus
-│   ├── kanji/                   # Kanji Dojo Seiten
+│   ├── kanji/                  # Kanji Dojo Seiten
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Vokabel Dojo Seiten
+│   ├── vocabulary/             # Vokabel Dojo Seiten
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Einstellungen und Anpassungsseite
-│   ├── academy/                 # Bildungsinhalte
-│   ├── layout.tsx               # Root-Layout mit Providern
-│   └── page.tsx                 # Startseite
+│   ├── preferences/            # Einstellungen und Anpassungsseite
+│   ├── academy/                # Bildungsinhalte
+│   ├── layout.tsx              # Root-Layout mit Providern
+│   └── page.tsx                # Startseite
 │
-├── components/                   # React Komponenten
-│   ├── Dojo/                    # Trainingsspezifische Komponenten
+├── components/                 # React Komponenten
+│   ├── Dojo/                   # Trainingsspezifische Komponenten
 │   │   ├── Kana/               # Kana Auswahl und Karten
 │   │   ├── Kanji/              # Kanji Auswahl und Karten
 │   │   └── Vocab/              # Vokabel Auswahl und Karten
-│   ├── reusable/                # Gemeinsame Komponenten
+│   ├── reusable/               # Gemeinsame Komponenten
 │   │   ├── Menu/               # Navigations- und Menükomponenten
-│   │   └── ...                 # Andere wiederverwendbare Komponenten
-│   ├── Settings/                # Präferenzkomponenten
-│   └── ui/                      # shadcn/ui Komponenten
+│   │   └── ...                 # Andere wiederverwendbare компоненты
+│   ├── Settings/               # Präferenzkomponenten
+│   └── ui/                     # shadcn/ui Komponenten
 │
-├── lib/                         # Utilities und Helferfunktionen
-│   ├── hooks/                   # Benutzerdefinierte React Hooks
+├── lib/                        # Utilities und Helferfunktionen
+│   ├── hooks/                  # Benutzerdefinierte React Hooks
 │   │   ├── useAudio.ts         # Audio-Feedback-Hooks
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript Interfaces
-│   └── utils.ts                 # Utility-Funktionen
+│   ├── interfaces.ts           # TypeScript Interfaces
+│   └── utils.ts                # Utility-Funktionen
 │
-├── store/                       # Zustand Zustandsmanagement
+├── store/                      # Zustand Zustandsmanagement
 │   ├── useKanaKanjiStore.ts    # Kana/Kanji Auswahlzustand
 │   ├── useVocabStore.ts        # Vokabel Auswahlzustand
 │   ├── useStatsStore.ts        # Statistiken und Fortschritt
 │   └── useThemeStore.ts        # Theme und Präferenzen
 │
-├── static/                      # Statische Daten und Konfiguration
+├── static/                     # Statische Daten und Konfiguration
 │   ├── kana.ts                 # Kana Zeichendaten
 │   ├── kanji/                  # Kanji Daten nach JLPT-Niveau
 │   ├── vocab/                  # Vokabeldaten
@@ -376,11 +376,11 @@ kanadojo/
 │   ├── fonts.ts                # Schriftart-Konfigurationen
 │   └── info.tsx                # Informationsinhalte
 │
-├── public/                      # Statische Assets
+├── public/                     # Statische Assets
 │   ├── sounds/                 # Audiodateien
 │   └── wallpapers/             # Hintergrundbilder
 │
-├── CLAUDE.md                    # Entwicklerdokumentation
+├── CLAUDE.md                   # Entwicklerdokumentation
 ├── next.config.ts              # Next.js Konfiguration
 ├── tailwind.config.js          # Tailwind CSS Konfiguration
 └── tsconfig.json               # TypeScript Konfiguration

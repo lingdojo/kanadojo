@@ -330,43 +330,43 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Páginas do Next.js App Router
-│   ├── kana/                    # Páginas do dojo de Kana
+├── app/                        # Páginas do Next.js App Router
+│   ├── kana/                   # Páginas do dojo de Kana
 │   │   └── train/[gameMode]/   # Páginas de treinamento para cada modo de jogo
-│   ├── kanji/                   # Páginas do dojo de Kanji
+│   ├── kanji/                  # Páginas do dojo de Kanji
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Páginas do dojo de Vocabulário
+│   ├── vocabulary/             # Páginas do dojo de Vocabulário
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # Página de configurações e personalização
-│   ├── academy/                 # Conteúdo educacional
-│   ├── layout.tsx               # Layout raiz com provedores
-│   └── page.tsx                 # Página inicial
+│   ├── preferences/            # Página de configurações e personalização
+│   ├── academy/                # Conteúdo educacional
+│   ├── layout.tsx              # Layout raiz com provedores
+│   └── page.tsx                # Página inicial
 │
-├── components/                   # Componentes React
-│   ├── Dojo/                    # Componentes específicos de treinamento
+├── components/                 # Componentes React
+│   ├── Dojo/                   # Componentes específicos de treinamento
 │   │   ├── Kana/               # Seleção e cards de Kana
 │   │   ├── Kanji/              # Seleção e cards de Kanji
 │   │   └── Vocab/              # Seleção e cards de Vocabulário
-│   ├── reusable/                # Componentes compartilhados
+│   ├── reusable/               # Componentes compartilhados
 │   │   ├── Menu/               # Componentes de navegação e menu
 │   │   └── ...                 # Outros componentes reutilizáveis
-│   ├── Settings/                # Componentes de preferências
-│   └── ui/                      # Componentes shadcn/ui
+│   ├── Settings/               # Componentes de preferências
+│   └── ui/                     # Componentes shadcn/ui
 │
-├── lib/                         # Utilitários e funções auxiliares
-│   ├── hooks/                   # Hooks personalizados do React
+├── lib/                        # Utilitários e funções auxiliares
+│   ├── hooks/                  # Hooks personalizados do React
 │   │   ├── useAudio.ts         # Hooks de feedback de áudio
 │   │   └── ...
-│   ├── interfaces.ts            # Interfaces TypeScript
-│   └── utils.ts                 # Funções utilitárias
+│   ├── interfaces.ts           # Interfaces TypeScript
+│   └── utils.ts                # Funções utilitárias
 │
-├── store/                       # Gerenciamento de estado Zustand
+├── store/                      # Gerenciamento de estado Zustand
 │   ├── useKanaKanjiStore.ts    # Estado de seleção Kana/Kanji
 │   ├── useVocabStore.ts        # Estado de seleção de Vocabulário
 │   ├── useStatsStore.ts        # Estatísticas e progresso
 │   └── useThemeStore.ts        # Tema e preferências
 │
-├── static/                      # Dados estáticos e configuração
+├── static/                     # Dados estáticos e configuração
 │   ├── kana.ts                 # Dados de caracteres Kana
 │   ├── kanji/                  # Dados de Kanji por nível JLPT
 │   ├── vocab/                  # Dados de vocabulário
@@ -374,11 +374,11 @@ kanadojo/
 │   ├── fonts.ts                # Configurações de fontes
 │   └── info.tsx                # Conteúdo informacional
 │
-├── public/                      # Assets estáticos
+├── public/                     # Assets estáticos
 │   ├── sounds/                 # Arquivos de áudio
 │   └── wallpapers/             # Imagens de fundo
 │
-├── CLAUDE.md                    # Documentação do desenvolvedor
+├── CLAUDE.md                   # Documentação do desenvolvedor
 ├── next.config.ts              # Configuração do Next.js
 ├── tailwind.config.js          # Configuração do Tailwind CSS
 └── tsconfig.json               # Configuração do TypeScript

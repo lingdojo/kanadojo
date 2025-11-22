@@ -331,43 +331,43 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router पृष्ठ
-│   ├── kana/                    # Kana dojo पृष्ठ
+├── app/                        # Next.js App Router पृष्ठ
+│   ├── kana/                   # Kana dojo पृष्ठ
 │   │   └── train/[gameMode]/   # प्रत्येक गेम मोड के लिए प्रशिक्षण पृष्ठ
-│   ├── kanji/                   # Kanji dojo पृष्ठ
+│   ├── kanji/                  # Kanji dojo पृष्ठ
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # Vocabulary dojo पृष्ठ
+│   ├── vocabulary/             # Vocabulary dojo पृष्ठ
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # सेटिंग्स और अनुकूलन पृष्ठ
-│   ├── academy/                 # शैक्षिक सामग्री
-│   ├── layout.tsx               # प्रोवाइडर्स के साथ रूट लेआउट
-│   └── page.tsx                 # होम पृष्ठ
+│   ├── preferences/            # सेटिंग्स और अनुकूलन पृष्ठ
+│   ├── academy/                # शैक्षिक सामग्री
+│   ├── layout.tsx              # प्रोवाइडर्स के साथ रूट लेआउट
+│   └── page.tsx                # होम पृष्ठ
 │
-├── components/                   # React घटक
-│   ├── Dojo/                    # प्रशिक्षण-विशिष्ट घटक
+├── components/                 # React घटक
+│   ├── Dojo/                   # प्रशिक्षण-विशिष्ट घटक
 │   │   ├── Kana/               # काना चयन और कार्ड
 │   │   ├── Kanji/              # कांजी चयन और कार्ड
 │   │   └── Vocab/              # शब्दावली चयन और कार्ड
-│   ├── reusable/                # साझा घटक
+│   ├── reusable/               # साझा घटक
 │   │   ├── Menu/               # नेविगेशन और मेनू घटक
 │   │   └── ...                 # अन्य पुन: प्रयोज्य घटक
-│   ├── Settings/                # प्राथमिकता घटक
-│   └── ui/                      # shadcn/ui घटक
+│   ├── Settings/               # प्राथमिकता घटक
+│   └── ui/                     # shadcn/ui घटक
 │
-├── lib/                         # उपयोगिताएँ और सहायक फ़ंक्शन
-│   ├── hooks/                   # कस्टम React hooks
+├── lib/                        # उपयोगिताएँ और सहायक फ़ंक्शन
+│   ├── hooks/                  # कस्टम React hooks
 │   │   ├── useAudio.ts         # ऑडियो फीडबैक hooks
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript इंटरफ़ेस
-│   └── utils.ts                 # उपयोगिता फ़ंक्शन
+│   ├── interfaces.ts           # TypeScript इंटरफ़ेस
+│   └── utils.ts                # उपयोगिता फ़ंक्शन
 │
-├── store/                       # Zustand स्टेट प्रबंधन
+├── store/                      # Zustand स्टेट प्रबंधन
 │   ├── useKanaKanjiStore.ts    # काना/कांजी चयन राज्य
 │   ├── useVocabStore.ts        # शब्दावली चयन राज्य
 │   ├── useStatsStore.ts        # आँकड़े और प्रगति
 │   └── useThemeStore.ts        # थीम और प्राथमिकताएँ
 │
-├── static/                      # स्थिर डेटा और कॉन्फ़िगरेशन
+├── static/                     # स्थिर डेटा और कॉन्फ़िगरेशन
 │   ├── kana.ts                 # काना वर्ण डेटा
 │   ├── kanji/                  # JLPT स्तर अनुसार कांजी डेटा
 │   ├── vocab/                  # शब्दावली डेटा
@@ -375,11 +375,11 @@ kanadojo/
 │   ├── fonts.ts                # फ़ॉन्ट कॉन्फ़िगरेशन
 │   └── info.tsx                # जानकारी सामग्री
 │
-├── public/                      # स्थिर एसेट्स
+├── public/                     # स्थिर एसेट्स
 │   ├── sounds/                 # ऑडियो फाइलें
 │   └── wallpapers/             # पृष्ठभूमि चित्र
 │
-├── CLAUDE.md                    # डेवलपर दस्तावेज़
+├── CLAUDE.md                   # डेवलपर दस्तावेज़
 ├── next.config.ts              # Next.js विन्यास
 ├── tailwind.config.js          # Tailwind CSS कॉन्फ़िगरेशन
 └── tsconfig.json               # TypeScript कॉन्फ़िगरेशन

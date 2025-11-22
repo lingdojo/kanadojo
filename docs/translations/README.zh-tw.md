@@ -1,8 +1,6 @@
 <div id="top"></div>
 
-**KanaDojo 感謝社群貢獻，支持多種語言：**
-
-[English(default)](../../README.md)  **/**  [Español](docs/translations/README.es.md) **/** [Français (in progress)](docs/translations/README.fr.md)  **/** [Deutsch](docs/translations/README.de.md) **/** [Português](docs/translations/README.pt-br.md) **/** [Türkçe](docs/translations/README.tr.md) **/** [中文（简体）](docs/translations/README.zh-CN.md) **/**  中文（繁體） **/**  [हिन्दी](docs/translations/README.hin.md)  **/**  <span dir="ltr">[العربية](docs/translations/README.ar.md)</span>  **/** [Русский](docs/translations/README.ru.md)
+<a href="#about-kanadojo">關於 KanaDojo</a> | <a href="#screenshots">介面展示</a> | <a href="#ui-design-philosophy">UI 與設計理念</a> | <a href="#tech-stack">技術棧</a> | <a href="#getting-started">快速開始</a> | <a href="#project-structure">專案結構</a> | <a href="#contributing">參與貢獻</a> | <a href="#license">許可證</a> | <a href="#acknowledgments">致謝</a> | <a href="#contact-links">聯絡與連結</a>
 
 # KanaDojo かな道場
 
@@ -22,6 +20,7 @@
 
 ---
 
+<a id="about-kanadojo"></a>
 ## 📖 關於 KanaDojo
 
 KanaDojo 是一個互動式網頁版的日語學習平台，讓您能以有趣且直覺的方式學習平假名、片假名、漢字和詞彙。KanaDojo 專注於美學設計、豐富自訂與高效學習，為所有程度的日語學習者提供一個沉浸式的訓練環境。
@@ -68,6 +67,7 @@ KanaDojo 是一個互動式網頁版的日語學習平台，讓您能以有趣�
 
 ---
 
+<a id="screenshots"></a>
 ## 🖼️ 介面展示
 
 <div align="center">
@@ -92,6 +92,7 @@ KanaDojo 是一個互動式網頁版的日語學習平台，讓您能以有趣�
 
 ---
 
+<a id="ui-design-philosophy"></a>
 ## 🎨 使用者介面與設計理念
 
 KanaDojo 秉持結合**極簡美學**與**最大彈性**的理念，其核心設計理念如下：
@@ -126,6 +127,7 @@ KanaDojo 秉持結合**極簡美學**與**最大彈性**的理念，其核心設
 
 ---
 
+<a id="tech-stack"></a>
 ## 🛠️ 技術棧
 
 KanaDojo 採現代化網頁技術打造，以提供最佳效能與開發者體驗：
@@ -170,6 +172,7 @@ KanaDojo 採現代化網頁技術打造，以提供最佳效能與開發者體�
 
 ---
 
+<a id="getting-started"></a>
 ## 🚀 開始使用
 
 ### 環境需求
@@ -322,47 +325,48 @@ taskkill /PID PID /F
 PORT=3001 npm run dev
 ```
 
+<a id="project-structure"></a>
 ## 📁 專案架構
 
 ```
 kanadojo/
-├── app/                          # Next.js App Router 頁
-│   ├── kana/                    # 假名道場頁面
+├── app/                        # Next.js App Router 頁
+│   ├── kana/                   # 假名道場頁面
 │   │   └── train/[gameMode]/   # 各練習模式的訓練頁面
-│   ├── kanji/                   # 漢字道場頁面
+│   ├── kanji/                  # 漢字道場頁面
 │   │   └── train/[gameMode]/
-│   ├── vocabulary/              # 詞彙道場頁面
+│   ├── vocabulary/             # 詞彙道場頁面
 │   │   └── train/[gameMode]/
-│   ├── preferences/             # 設定與自訂頁面
-│   ├── academy/                 # 教育內容
-│   ├── layout.tsx               # 排版與 Providers
-│   └── page.tsx                 # 首頁
+│   ├── preferences/            # 設定與自訂頁面
+│   ├── academy/                # 教育內容
+│   ├── layout.tsx              # 排版與 Providers
+│   └── page.tsx                # 首頁
 │
-├── components/                   # React 元件
-│   ├── Dojo/                    # 訓練相關元件
+├── components/                 # React 元件
+│   ├── Dojo/                   # 訓練相關元件
 │   │   ├── Kana/               # 假名選擇和卡片
 │   │   ├── Kanji/              # 漢字選擇和卡片
 │   │   └── Vocab/              # 詞彙選擇和卡片
-│   ├── reusable/                # 複用元件
+│   ├── reusable/               # 複用元件
 │   │   ├── Menu/               # 導覽與選單元件
 │   │   └── ...                 # 其他共用元件
-│   ├── Settings/                # 偏好元件
-│   └── ui/                      # shadcn/ui 元件
+│   ├── Settings/               # 偏好元件
+│   └── ui/                     # shadcn/ui 元件
 │
-├── lib/                         # 工具和輔助函式
-│   ├── hooks/                   # 自訂 React hooks
+├── lib/                        # 工具和輔助函式
+│   ├── hooks/                  # 自訂 React hooks
 │   │   ├── useAudio.ts         # 音效回饋 hooks
 │   │   └── ...
-│   ├── interfaces.ts            # TypeScript 介面
-│   └── utils.ts                 # 工具函式
+│   ├── interfaces.ts           # TypeScript 介面
+│   └── utils.ts                # 工具函式
 │
-├── store/                       # Zustand 狀態管理
+├── store/                      # Zustand 狀態管理
 │   ├── useKanaKanjiStore.ts    # 假名/漢字選擇狀態
 │   ├── useVocabStore.ts        # 詞彙選擇狀態
 │   ├── useStatsStore.ts        # 統計與進度
 │   └── useThemeStore.ts        # 主題與偏好
 │
-├── static/                      # 靜態資料與設定
+├── static/                     # 靜態資料與設定
 │   ├── kana.ts                 # 假名字元資料
 │   ├── kanji/                  # 各 JLPT 級別的漢字資料
 │   ├── vocab/                  # 詞彙資料
@@ -370,14 +374,9 @@ kanadojo/
 │   ├── fonts.ts                # 字型設定
 │   └── info.tsx                # 資訊內容
 │
-├── public/                      # 靜態資源
+├── public/                     # 靜態資源
 │   ├── sounds/                 # 音效檔案
 │   └── wallpapers/             # 背景圖片
-│
-├── CLAUDE.md                    # 開發者文件
-├── next.config.ts              # Next.js 設定
-├── tailwind.config.js          # Tailwind CSS 設定
-└── tsconfig.json               # TypeScript 設定
 ```
 
 ### 核心概念
@@ -414,6 +413,7 @@ kanadojo/
 
 ---
 
+<a id="contributing"></a>
 ## 🤝 貢獻
 
 歡迎貢獻！KanaDojo 是一個開放原始碼專案，由社群打造、為社群服務，更多貢獻資訊請參考 [CONTRIBUTING.md](CONTRIBUTING.md)。
@@ -436,12 +436,14 @@ kanadojo/
 
 ---
 
+<a id="license"></a>
 ## 📄 授權條款
 
 此專案採用 AGPL 3.0 授權，詳情請見 [LICENSE.md](LICENSE.md) 檔案。
 
 ---
 
+<a id="acknowledgments"></a>
 ## 🙏 致謝
 
 - 日文語言資料與字元資訊的來源
@@ -450,6 +452,7 @@ kanadojo/
 
 ---
 
+<a id="contact-links"></a>
 ## 📞 聯絡資訊與鏈結
 
 - **網站**：[kanadojo.com](https://kanadojo.com)
