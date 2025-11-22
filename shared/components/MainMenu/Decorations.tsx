@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { themeSets, fontsData as fonts } from '@/features/themes';
+import { themeSets } from '@/features/themes';
+import { decorationFonts as fonts } from './decorationFonts';
 import clsx from 'clsx';
 
 type RawKanjiEntry = {
@@ -13,7 +14,7 @@ const shuffle = <T,>(arr: T[]) => arr.slice().sort(() => Math.random() - 0.5);
 
 // Tailwind animations
 const animations = [
-  'motion-safe:animate-pulse',
+  'motion-safe:animate-pulse'
   // 'animate-bounce',
   //   'animate-ping',
   //   'animate-spin',
@@ -43,7 +44,7 @@ const KanjiCharacter = ({ char }: { char: string }) => {
   const [styles, setStyles] = useState({
     color: '',
     fontClass: '',
-    animation: '',
+    animation: ''
   });
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const KanjiCharacter = ({ char }: { char: string }) => {
     setStyles({
       color: randomColor,
       fontClass: randomFont.font.className,
-      animation: randomAnimation,
+      animation: randomAnimation
     });
     setMounted(true);
   }, []);
@@ -67,10 +68,10 @@ const KanjiCharacter = ({ char }: { char: string }) => {
   return (
     <span
       className={`text-4xl transition-all duration-1000 ${styles.fontClass} ${styles.animation}`}
-      aria-hidden="true"
+      aria-hidden='true'
       style={{
         color: styles.color,
-        animationDelay: `${Math.random() * 1000}ms`,
+        animationDelay: `${Math.random() * 1000}ms`
       }}
     >
       {char}
@@ -111,12 +112,9 @@ const Decorations = ({ expandDecorations }: { expandDecorations: boolean }) => {
         expandDecorations ? 'opacity-100' : 'opacity-30'
       )}
     >
-      <div className="grid grid-cols-28 gap-0.5 p-2 h-full w-full">
+      <div className='grid grid-cols-28 gap-0.5 p-2 h-full w-full'>
         {kanjiList.map((char, index) => (
-          <KanjiCharacter
-            char={char}
-            key={index}
-          />
+          <KanjiCharacter char={char} key={index} />
         ))}
       </div>
     </div>

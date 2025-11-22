@@ -26,7 +26,12 @@ import {
   Kaisei_HarunoUmi,
   Sawarabi_Gothic,
   Zen_Old_Mincho,
-  Sawarabi_Mincho
+  Sawarabi_Mincho,
+  Zen_Antique,
+  Kaisei_Tokumin,
+  Yuji_Syuku,
+  WDXL_Lubrifont_JP_N,
+  Murecho
 } from 'next/font/google';
 
 const notoSansJP = Noto_Sans_JP({
@@ -64,8 +69,7 @@ const zenKurenaido = Zen_Kurenaido({
 const kleeOne = Klee_One({
   subsets: ['latin'],
   weight: ['400'],
-  display: 'swap'
-  ,
+  display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
@@ -73,8 +77,7 @@ const kleeOne = Klee_One({
 const dotGothic16 = DotGothic16({
   subsets: ['latin'],
   weight: ['400'],
-  display: 'swap'
-  ,
+  display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
@@ -252,6 +255,46 @@ const sawarabiMincho = Sawarabi_Mincho({
   fallback: ['system-ui', 'sans-serif']
 });
 
+const zenAntique = Zen_Antique({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const kaiseiTokumin = Kaisei_Tokumin({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const yujiSyuku = Yuji_Syuku({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const wdxlLubrifontJPN = WDXL_Lubrifont_JP_N({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const murecho = Murecho({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
 const fonts = [
   {
     name: 'Zen Maru Gothic',
@@ -365,6 +408,26 @@ const fonts = [
   {
     name: 'Sawarabi Mincho',
     font: sawarabiMincho
+  },
+  {
+    name: 'Zen Antique',
+    font: zenAntique
+  },
+  {
+    name: 'Kaisei Tokumin',
+    font: kaiseiTokumin
+  },
+  {
+    name: 'Yuji Syuku',
+    font: yujiSyuku
+  },
+  {
+    name: 'WDXL Lubrifont JP N',
+    font: wdxlLubrifontJPN
+  },
+  {
+    name: 'Murecho',
+    font: murecho
   }
 ];
 
