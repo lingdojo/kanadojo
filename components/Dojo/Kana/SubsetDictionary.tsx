@@ -20,8 +20,12 @@ const SetDictionary = () => {
   const [group, subgroup] = subset.split('-');
   const displayKana = usePreferencesStore(state => state.displayKana);
 
-  const [startIndex, endIndex] =
-    sliceRanges[(group + subgroup) as keyof typeof sliceRanges];
+  const key = (group + subgroup) as keyof typeof sliceRanges;
+  const range = sliceRanges[key];
+
+  if (!range) return null;
+
+  const [startIndex, endIndex] = range;
 
   const kanaToDisplay = kana.slice(startIndex, endIndex);
 

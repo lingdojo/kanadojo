@@ -63,7 +63,7 @@ const useKanaStore = create<IKanaState>(set => ({
   selectedGameModeKana: 'Pick',
   kanaGroupIndices: [],
   setSelectedGameModeKana: gameMode => set({ selectedGameModeKana: gameMode }),
-  
+
   addKanaGroupIndex: kanaGroupIndex =>
     set(state => {
       const next = toggleNumber(state.kanaGroupIndices, kanaGroupIndex);
@@ -71,14 +71,14 @@ const useKanaStore = create<IKanaState>(set => ({
         ? state
         : { kanaGroupIndices: next };
     }),
-        
+
   addKanaGroupIndices: kanaGroupIndices =>
     set(state => {
       const next = toggleNumbers(state.kanaGroupIndices, kanaGroupIndices);
       return sameArray(next, state.kanaGroupIndices)
         ? state
         : { kanaGroupIndices: next };
-    }),
+    })
 }));
 
 export default useKanaStore;
