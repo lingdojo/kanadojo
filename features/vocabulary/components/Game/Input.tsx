@@ -4,7 +4,7 @@ import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
 import * as wanakana from 'wanakana';
-import { IVocabObj } from '@/features/vocabulary/store/useVocabStore';
+import { IVocabObj } from '@/features/Vocabulary/store/useVocabStore';
 import { useClick, useCorrect, useError } from '@/shared/hooks';
 import GameIntel from '@/shared/components/Game/GameIntel';
 import { buttonBorderStyles } from '@/shared/lib/styles';
@@ -15,7 +15,7 @@ import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import FuriganaText from '@/shared/components/FuriganaText';
-import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
+import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 

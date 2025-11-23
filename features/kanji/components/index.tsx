@@ -7,10 +7,10 @@ import { cardBorderStyles } from '@/shared/lib/styles';
 import useGridColumns from '@/shared/hooks/useGridColumns';
 import { useClick } from '@/shared/hooks';
 import { ChevronUp, CircleCheck, Circle, Filter, FilterX } from 'lucide-react';
-import useKanjiStore from '@/features/kanji/store/useKanjiStore';
+import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
 import useStatsStore from '@/features/Progress';
-import KanjiSetDictionary from '@/features/kanji/components/SetDictionary';
-import type { IKanjiObj } from '@/features/kanji/store/useKanjiStore';
+import KanjiSetDictionary from '@/features/Kanji/components/SetDictionary';
+import type { IKanjiObj } from '@/features/Kanji/store/useKanjiStore';
 //triggering vercel redeployment
 
 type RawKanjiEntry = {

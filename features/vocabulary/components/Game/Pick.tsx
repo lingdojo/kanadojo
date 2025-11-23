@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { CircleCheck, CircleX } from 'lucide-react';
 import { Random } from 'random-js';
-import { IVocabObj } from '@/features/vocabulary/store/useVocabStore';
+import { IVocabObj } from '@/features/Vocabulary/store/useVocabStore';
 import { useCorrect, useError } from '@/shared/hooks';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import GameIntel from '@/shared/components/Game/GameIntel';
@@ -15,7 +15,7 @@ import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import FuriganaText from '@/shared/components/FuriganaText';
-import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
+import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 

@@ -2,10 +2,10 @@
 import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Link } from '@/core/i18n/routing';
-import useKanaStore from '@/features/kana/store/useKanaStore';
-import useKanjiStore from '@/features/kanji/store/useKanjiStore';
-import useVocabStore from '@/features/vocabulary/store/useVocabStore';
-import usePreferencesStore from '@/features/themes';
+import useKanaStore from '@/features/Kana/store/useKanaStore';
+import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
+import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
+import usePreferencesStore from '@/features/Themes';
 import { useClick } from '@/shared/hooks';
 import { ChevronUp, Play, Timer } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -21,7 +21,7 @@ interface ITopBarProps {
 
 const TopBar: React.FC<ITopBarProps> = ({
   showGameModes,
-  setShowGameModes,
+  setShowGameModes
 }) => {
   const hotkeysOn = usePreferencesStore(state => state.hotkeysOn);
 
@@ -87,7 +87,7 @@ const TopBar: React.FC<ITopBarProps> = ({
   }, [hotkeysOn]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className='flex flex-col gap-2'>
       <div
         className={clsx(
           'flex flex-row',
@@ -118,7 +118,7 @@ const TopBar: React.FC<ITopBarProps> = ({
           }}
           onMouseEnter={() => setFocus('gameModes')}
           onMouseLeave={() => setFocus('')}
-          title="Press Enter or Space to toggle (Kanji/Vocab)"
+          title='Press Enter or Space to toggle (Kanji/Vocab)'
         >
           <ChevronUp
             className={clsx(
@@ -134,25 +134,22 @@ const TopBar: React.FC<ITopBarProps> = ({
           {selectedGameMode.toLowerCase() === 'pick' && (
             <MousePointerClick
               size={22}
-              className="text-[var(--secondary-color)]"
+              className='text-[var(--secondary-color)]'
             />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-pick' && (
             <MousePointerClick
               size={22}
-              className=" scale-x-[-1] text-[var(--secondary-color)]"
+              className=' scale-x-[-1] text-[var(--secondary-color)]'
             />
           )}
           {selectedGameMode.toLowerCase() === 'input' && (
-            <Keyboard
-              size={22}
-              className="text-[var(--secondary-color)]"
-            />
+            <Keyboard size={22} className='text-[var(--secondary-color)]' />
           )}
           {selectedGameMode.toLowerCase() === 'reverse-input' && (
             <Keyboard
               size={22}
-              className="scale-y-[-1] text-[var(--secondary-color)]"
+              className='scale-y-[-1] text-[var(--secondary-color)]'
             />
           )}
         </button>
@@ -166,7 +163,7 @@ const TopBar: React.FC<ITopBarProps> = ({
 
         <Link
           href={`${pathWithoutLocale}/train/${selectedGameMode}`}
-          className="w-1/2 group"
+          className='w-1/2 group'
         >
           <button
             disabled={!selectedGameMode || !isFilled}
@@ -196,11 +193,10 @@ const TopBar: React.FC<ITopBarProps> = ({
       </div>
 
       {/* Timed Challenge Button - Available for Kana, Vocabulary, and Kanji */}
-      {(pathWithoutLocale === '/kana' || pathWithoutLocale === '/vocabulary' || pathWithoutLocale === '/kanji') && (
-        <Link
-          href={`${pathWithoutLocale}/timed-challenge`}
-          className="w-full"
-        >
+      {(pathWithoutLocale === '/kana' ||
+        pathWithoutLocale === '/vocabulary' ||
+        pathWithoutLocale === '/kanji') && (
+        <Link href={`${pathWithoutLocale}/timed-challenge`} className='w-full'>
           <button
             className={clsx(
               'w-full text-xl p-3 flex flex-row justify-center items-center gap-2',
@@ -213,7 +209,7 @@ const TopBar: React.FC<ITopBarProps> = ({
             onClick={() => playClick()}
           >
             <Timer size={24} />
-            <span className="font-semibold">Timed Challenge (60s)</span>
+            <span className='font-semibold'>Timed Challenge (60s)</span>
           </button>
         </Link>
       )}

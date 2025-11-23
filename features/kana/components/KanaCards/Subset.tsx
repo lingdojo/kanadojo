@@ -2,9 +2,9 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { MousePointer } from 'lucide-react';
-import { kana } from '@/features/kana/data/kana';
-import useKanaStore from '@/features/kana/store/useKanaStore';
-import usePreferencesStore from '@/features/themes';
+import { kana } from '@/features/Kana/data/kana';
+import useKanaStore from '@/features/Kana/store/useKanaStore';
+import usePreferencesStore from '@/features/Themes';
 import { useClick } from '@/shared/hooks';
 import { miniButtonBorderStyles } from '@/shared/lib/styles';
 
@@ -17,7 +17,7 @@ const FINAL_CHARACTERS = [
   'k.y.py',
   'k.f.ts',
   'challenge.similar.haho',
-  'challenge.katakana.kuwaura',
+  'challenge.katakana.kuwaura'
 ];
 
 interface SubsetProps {
@@ -38,10 +38,10 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
 
   const getGlobalIndex = (localIndex: number) => localIndex + sliceRange[0];
 
-  const isChecked = (localIndex: number) => 
+  const isChecked = (localIndex: number) =>
     kanaGroupIndices.includes(getGlobalIndex(localIndex));
 
-  const isLastInGroup = (groupName: string) => 
+  const isLastInGroup = (groupName: string) =>
     FINAL_CHARACTERS.includes(groupName);
 
   const selectAllInSubset = () => {
@@ -55,27 +55,31 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
 
   const getTextOpacity = (isFocused: boolean, isKana: boolean) => {
     const shouldShowKana = displayKana ? isKana : !isKana;
-    
+
     // Desktop (hover states)
-    const desktopClass = shouldShowKana 
+    const desktopClass = shouldShowKana
       ? 'md:opacity-100 md:group-hover:opacity-0'
       : 'md:opacity-0 md:group-hover:opacity-100';
-    
+
     // Mobile (focus states)
     const mobileClass = shouldShowKana
-      ? isFocused ? 'max-md:opacity-0' : 'max-md:opacity-100'
-      : isFocused ? 'max-md:opacity-100' : 'max-md:opacity-0';
-    
+      ? isFocused
+        ? 'max-md:opacity-0'
+        : 'max-md:opacity-100'
+      : isFocused
+      ? 'max-md:opacity-100'
+      : 'max-md:opacity-0';
+
     return `${desktopClass} ${mobileClass}`;
   };
 
   return (
-    <fieldset className="font-bold flex flex-col items-start gap-1">
+    <fieldset className='font-bold flex flex-col items-start gap-1'>
       {kanaGroups.map((group, i) => {
         const isFocused = focusedRow === group.groupName;
-        
+
         return (
-          <div key={group.groupName} className="w-full flex flex-col gap-1">
+          <div key={group.groupName} className='w-full flex flex-col gap-1'>
             <label
               className={clsx(
                 'w-full flex flex-row items-center gap-2',
@@ -85,7 +89,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
               onClick={playClick}
             >
               <input
-                type="checkbox"
+                type='checkbox'
                 value={group.groupName}
                 checked={isChecked(i)}
                 onChange={e => {
@@ -95,7 +99,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
               />
 
               <div
-                className="group relative grid w-full font-normal min-h-auto place-items-start hover:cursor-pointer"
+                className='group relative grid w-full font-normal min-h-auto place-items-start hover:cursor-pointer'
                 onTouchStart={() => setFocusedRow(group.groupName)}
               >
                 {/* Kana characters */}
@@ -124,16 +128,16 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
 
             {/* Divider (except for last character in group) */}
             {!isLastInGroup(group.groupName) && (
-              <hr className="border-t-1 w-full border-[var(--border-color)]" />
+              <hr className='border-t-1 w-full border-[var(--border-color)]' />
             )}
           </div>
         );
       })}
 
       {/* Select All Button */}
-      <div className="flex flex-row gap-2 w-full">
+      <div className='flex flex-row gap-2 w-full'>
         <button
-          type="button"
+          type='button'
           className={clsx(
             'p-2 font-normal text-lg w-full',
             miniButtonBorderStyles,

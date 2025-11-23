@@ -1,8 +1,8 @@
 'use client';
 import clsx from 'clsx';
-import { kana } from '@/features/kana/data/kana';
+import { kana } from '@/features/Kana/data/kana';
 import { useParams } from 'next/navigation';
-import usePreferencesStore from '@/features/themes';
+import usePreferencesStore from '@/features/Themes';
 
 const sliceRanges = {
   hiraganabase: [0, 10],

@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 import useSound from 'use-sound';
 import { Random } from 'random-js';
-import usePreferencesStore from '@/features/themes';
+import usePreferencesStore from '@/features/Themes';
 
 const random = new Random();
 

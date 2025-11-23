@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
-import usePreferencesStore from '@/features/themes';
+import usePreferencesStore from '@/features/Themes';
 
 interface FuriganaTextProps {
   text: string;
@@ -32,7 +32,11 @@ const FuriganaText = ({
       return (
         <ruby className={className} lang={lang}>
           {children}
-          <rt className={`text-xs ${furiganaClassName} text-[var(--secondary-color)]`}>{reading}</rt>
+          <rt
+            className={`text-xs ${furiganaClassName} text-[var(--secondary-color)]`}
+          >
+            {reading}
+          </rt>
         </ruby>
       );
     }
@@ -51,7 +55,11 @@ const FuriganaText = ({
     return (
       <ruby className={className} lang={lang}>
         {text}
-        <rt className={`text-xs ${furiganaClassName} text-[var(--secondary-color)]`}>{hiraganaReading}</rt>
+        <rt
+          className={`text-xs ${furiganaClassName} text-[var(--secondary-color)]`}
+        >
+          {hiraganaReading}
+        </rt>
       </ruby>
     );
   }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { useGoalTimersStore } from '@/features/themes';
+import { useGoalTimersStore } from '@/features/Themes';
 
 export interface GoalTimer {
   id: string;
@@ -23,34 +23,39 @@ export function useGoalTimers(
   currentSeconds: number,
   options: UseGoalTimersOptions = {}
 ) {
-  const { 
-    enabled = true, 
+  const {
+    enabled = true,
     onGoalReached,
     saveToHistory = false,
     context = 'Unknown'
   } = options;
-  
+
   const [goals, setGoals] = useState<GoalTimer[]>([]);
   const reachedGoalsRef = useRef<Set<string>>(new Set());
-  
+
   // Get store actions and settings
-  const addToHistory = useGoalTimersStore((state) => state.addToHistory);
-  const settings = useGoalTimersStore((state) => state.settings);
+  const addToHistory = useGoalTimersStore(state => state.addToHistory);
+  const settings = useGoalTimersStore(state => state.settings);
 
   // Add new goal
-  const addGoal = useCallback((goal: Omit<GoalTimer, 'id' | 'reached'>) => {
-    const newGoal: GoalTimer = {
-      ...goal,
-      id: crypto.randomUUID(),
-      reached: false,
-      // Use store settings as defaults if not specified
-      showAnimation: goal.showAnimation ?? settings.defaultShowAnimation,
-      playSound: goal.playSound ?? settings.defaultPlaySound,
-    };
-    
-    setGoals(prev => [...prev, newGoal].sort((a, b) => a.targetSeconds - b.targetSeconds));
-    return newGoal.id;
-  }, [settings]);
+  const addGoal = useCallback(
+    (goal: Omit<GoalTimer, 'id' | 'reached'>) => {
+      const newGoal: GoalTimer = {
+        ...goal,
+        id: crypto.randomUUID(),
+        reached: false,
+        // Use store settings as defaults if not specified
+        showAnimation: goal.showAnimation ?? settings.defaultShowAnimation,
+        playSound: goal.playSound ?? settings.defaultPlaySound
+      };
+
+      setGoals(prev =>
+        [...prev, newGoal].sort((a, b) => a.targetSeconds - b.targetSeconds)
+      );
+      return newGoal.id;
+    },
+    [settings]
+  );
 
   // Remove goal
   const removeGoal = useCallback((goalId: string) => {
@@ -99,8 +104,8 @@ export function useGoalTimers(
       if (!goal.reached && !reachedGoalsRef.current.has(goal.id)) {
         if (currentSeconds >= goal.targetSeconds) {
           // Mark as reached
-          setGoals(prev => 
-            prev.map(g => g.id === goal.id ? { ...g, reached: true } : g)
+          setGoals(prev =>
+            prev.map(g => (g.id === goal.id ? { ...g, reached: true } : g))
           );
           reachedGoalsRef.current.add(goal.id);
 
@@ -111,7 +116,7 @@ export function useGoalTimers(
               goalLabel: goal.label,
               achievedAt: new Date(),
               duration: currentSeconds,
-              context,
+              context
             });
           }
 
@@ -119,7 +124,7 @@ export function useGoalTimers(
           if (goal.showAnimation) {
             triggerConfetti();
           }
-          
+
           if (goal.playSound) {
             playGoalSound();
           }
@@ -130,11 +135,11 @@ export function useGoalTimers(
       }
     });
   }, [
-    currentSeconds, 
-    goals, 
-    enabled, 
-    triggerConfetti, 
-    playGoalSound, 
+    currentSeconds,
+    goals,
+    enabled,
+    triggerConfetti,
+    playGoalSound,
     onGoalReached,
     saveToHistory,
     addToHistory,
@@ -145,7 +150,7 @@ export function useGoalTimers(
   const nextGoal = goals.find(g => !g.reached);
 
   // Progress to next goal (0-100)
-  const progressToNextGoal = nextGoal 
+  const progressToNextGoal = nextGoal
     ? Math.min((currentSeconds / nextGoal.targetSeconds) * 100, 100)
     : 100;
 
@@ -158,6 +163,6 @@ export function useGoalTimers(
     nextGoal,
     progressToNextGoal,
     reachedGoals: goals.filter(g => g.reached),
-    pendingGoals: goals.filter(g => !g.reached),
+    pendingGoals: goals.filter(g => !g.reached)
   };
 }

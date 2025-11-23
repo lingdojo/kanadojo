@@ -4,7 +4,7 @@ import Return from '@/shared/components/Game/ReturnFromGame';
 import Pick from './Pick';
 import Input from './Input';
 
-import useVocabStore from '@/features/vocabulary/store/useVocabStore';
+import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
 import useStatsStore from '@/features/Progress';
 import Stats from '@/shared/components/Game/Stats';
 import { usePathname } from 'next/navigation';

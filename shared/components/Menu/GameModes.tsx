@@ -1,8 +1,8 @@
 'use client';
 import { Fragment } from 'react';
-import useKanaStore from '@/features/kana/store/useKanaStore';
-import useKanjiStore from '@/features/kanji/store/useKanjiStore';
-import useVocabStore from '@/features/vocabulary/store/useVocabStore';
+import useKanaStore from '@/features/Kana/store/useKanaStore';
+import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
+import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
 import { MousePointerClick, Keyboard, CircleCheck, Circle } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks';

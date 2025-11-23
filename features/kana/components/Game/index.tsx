@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Return from '@/shared/components/Game/ReturnFromGame';
 import Pick from './Pick';
 import Input from './Input';
-import useKanaStore from '@/features/kana/store/useKanaStore';
+import useKanaStore from '@/features/Kana/store/useKanaStore';
 import useStatsStore from '@/features/Progress';
 import Stats from '@/shared/components/Game/Stats';
 

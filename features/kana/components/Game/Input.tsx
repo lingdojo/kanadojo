@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { kana } from '@/features/kana/data/kana';
-import useKanaStore from '@/features/kana/store/useKanaStore';
+import { kana } from '@/features/Kana/data/kana';
+import useKanaStore from '@/features/Kana/store/useKanaStore';
 import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
 import clsx from 'clsx';
@@ -13,7 +13,7 @@ import useStats from '@/shared/hooks/useStats';
 import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
-import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
+import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrigger';
 
 const random = new Random();
 

@@ -3,7 +3,7 @@ import { Fragment, lazy, Suspense, useState, useEffect } from 'react';
 import { Link } from '@/core/i18n/routing';
 import Banner from './Banner';
 import Info from '@/shared/components/Menu/Info';
-import NightlyBanner from '@/shared/components/Modals/NightlyBanner'
+import NightlyBanner from '@/shared/components/Modals/NightlyBanner';
 import {
   ScrollText,
   FileLock2,
@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks';
-import usePreferencesStore from '@/features/themes';
+import usePreferencesStore from '@/features/Themes';
 import { useMediaQuery } from 'react-responsive';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import { Button } from '@/shared/components/ui/button';

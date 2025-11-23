@@ -8,8 +8,8 @@ import { miniButtonBorderStyles } from '@/shared/lib/styles';
 import { ChartSpline } from 'lucide-react';
 import { useStopwatch } from 'react-timer-hook';
 import { useClick } from '@/shared/hooks';
-import useKanjiStore from '@/features/kanji/store/useKanjiStore';
-import useVocabStore from '@/features/vocabulary/store/useVocabStore';
+import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
+import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
 import { usePathname } from 'next/navigation';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 

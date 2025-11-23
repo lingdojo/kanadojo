@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
-import useKanjiStore from '@/features/kanji/store/useKanjiStore';
-import useVocabStore from '@/features/vocabulary/store/useVocabStore';
+import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
+import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
 import { usePathname } from 'next/navigation';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 import {
@@ -14,7 +14,7 @@ import {
   N4VocabLength,
   N3VocabLength,
   N2VocabLength,
-  N1VocabLength,
+  N1VocabLength
 } from '@/shared/lib/unitSets';
 import { useClick } from '@/shared/hooks';
 import { CircleCheck, Circle, Trash } from 'lucide-react';
@@ -32,7 +32,7 @@ const KANJI_SETS = {
   n4: calculateSets(N4KanjiLength),
   n3: calculateSets(N3KanjiLength),
   n2: calculateSets(N2KanjiLength),
-  n1: calculateSets(N1KanjiLength),
+  n1: calculateSets(N1KanjiLength)
 };
 
 const VOCAB_SETS = {
@@ -40,7 +40,7 @@ const VOCAB_SETS = {
   n4: calculateSets(N4VocabLength),
   n3: calculateSets(N3VocabLength),
   n2: calculateSets(N2VocabLength),
-  n1: calculateSets(N1VocabLength),
+  n1: calculateSets(N1VocabLength)
 };
 
 const CollectionSelector = () => {
@@ -57,7 +57,7 @@ const CollectionSelector = () => {
     setSelectedKanjiCollection,
     selectedKanjiSets,
     clearKanjiObjs,
-    clearKanjiSets,
+    clearKanjiSets
   } = useKanjiStore();
 
   // Vocab store
@@ -66,7 +66,7 @@ const CollectionSelector = () => {
     setSelectedVocabCollection,
     selectedVocabSets,
     clearVocabObjs,
-    clearVocabSets,
+    clearVocabSets
   } = useVocabStore();
 
   // Current content type values
@@ -115,13 +115,13 @@ const CollectionSelector = () => {
 
       return {
         name: level,
-        displayName: `Unit ${index + 1}, Sets ${startSet}-${endSet}`,
+        displayName: `Unit ${index + 1}, Sets ${startSet}-${endSet}`
       };
     });
   }, [sets]);
 
   return (
-    <div className="flex flex-col">
+    <div className='flex flex-col'>
       {/* Collection Buttons */}
       <div
         className={clsx(
@@ -142,7 +142,7 @@ const CollectionSelector = () => {
           return (
             <div
               key={collection.name}
-              className="flex flex-col md:flex-row w-full"
+              className='flex flex-col md:flex-row w-full'
             >
               <button
                 className={clsx(
@@ -157,14 +157,14 @@ const CollectionSelector = () => {
                 onClick={() => handleCollectionSelect(collection.name)}
               >
                 {isSelected ? (
-                  <CircleCheck className="text-[var(--secondary-color)]" />
+                  <CircleCheck className='text-[var(--secondary-color)]' />
                 ) : (
-                  <Circle className="text-[var(--border-color)]" />
+                  <Circle className='text-[var(--border-color)]' />
                 )}
-                <span className="text-2xl">
+                <span className='text-2xl'>
                   <span>{collection.displayName.split(', ')[0]}</span>
                   &nbsp;
-                  <span className="text-[var(--secondary-color)] text-xs">
+                  <span className='text-[var(--secondary-color)] text-xs'>
                     {collection.name.toUpperCase()}
                   </span>
                 </span>
@@ -193,12 +193,12 @@ const CollectionSelector = () => {
           'w-full text-lg flex flex-col gap-2 items-start'
         )}
       >
-        <div className="flex flex-col">
-          <span className="flex gap-2 items-center">
-            <CircleCheck className="text-[var(--secondary-color)]" />
+        <div className='flex flex-col'>
+          <span className='flex gap-2 items-center'>
+            <CircleCheck className='text-[var(--secondary-color)]' />
             Selected Levels:
           </span>
-          <span className="text-[var(--secondary-color)]">
+          <span className='text-[var(--secondary-color)]'>
             {selectedSets.length > 0
               ? selectedSets.sort().join(', ').replace(/Set /g, 'Level ')
               : 'None'}
@@ -213,7 +213,7 @@ const CollectionSelector = () => {
             'flex justify-center'
           )}
           onClick={handleClear}
-          aria-label="Clear selected levels"
+          aria-label='Clear selected levels'
         >
           <Trash size={32} />
         </button>

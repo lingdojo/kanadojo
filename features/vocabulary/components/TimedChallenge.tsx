@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useVocabStore, {
   type IVocabObj
-} from '@/features/vocabulary/store/useVocabStore';
+} from '@/features/Vocabulary/store/useVocabStore';
 import useStatsStore from '@/features/Progress';
 import {
   useChallengeTimer,

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { toKana, toRomaji } from 'wanakana';
 import { IWord } from '@/shared/types';
 import { cardBorderStyles } from '@/shared/lib/styles';
-import usePreferencesStore from '@/features/themes';
+import usePreferencesStore from '@/features/Themes';
 import FuriganaText from '@/shared/components/FuriganaText';
 
 type SetDictionaryProps = {
@@ -36,10 +36,10 @@ const SetDictionary = ({ words }: SetDictionaryProps) => {
             <FuriganaText
               text={wordObj.word}
               reading={wordObj.reading}
-              className="text-6xl md:text-5xl"
-              lang="ja"
+              className='text-6xl md:text-5xl'
+              lang='ja'
             />
-            <div className="flex flex-col gap-2 items-start">
+            <div className='flex flex-col gap-2 items-start'>
               <span
                 className={clsx(
                   'rounded-xl px-2 py-1 flex flex-row items-center',
@@ -49,7 +49,7 @@ const SetDictionary = ({ words }: SetDictionaryProps) => {
               >
                 {displayReading}
               </span>
-              <p className="text-xl md:text-2xl text-[var(--secondary-color)]">
+              <p className='text-xl md:text-2xl text-[var(--secondary-color)]'>
                 {wordObj.displayMeanings.join(', ')}
               </p>
             </div>

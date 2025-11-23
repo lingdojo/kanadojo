@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { themes } from '@/features/themes';
-import fonts from '@/features/themes/data/fonts';
+import { themes } from '@/features/Themes';
+import fonts from '@/features/Themes/data/fonts';
 import { Random } from 'random-js';
 
 interface CrazyModeState {
@@ -34,14 +34,14 @@ const useCrazyModeStore = create<CrazyModeState>((set, get) => ({
     // Flatten themes to get all available theme IDs
     const allThemes = themes.flatMap(group => group.themes);
     const randomTheme = allThemes[random.integer(0, allThemes.length - 1)];
-    
+
     const randomFont = fonts[random.integer(0, fonts.length - 1)];
 
     set({
       activeThemeId: randomTheme.id,
-      activeFontName: randomFont.name,
+      activeFontName: randomFont.name
     });
-  },
+  }
 }));
 
 export default useCrazyModeStore;

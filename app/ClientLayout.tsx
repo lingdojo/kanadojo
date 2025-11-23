@@ -1,14 +1,14 @@
 'use client';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import usePreferencesStore from '@/features/themes';
-import useCrazyModeStore from '@/features/crazy-mode/store/useCrazyModeStore';
+import usePreferencesStore from '@/features/Themes';
+import useCrazyModeStore from '@/features/CrazyMode/store/useCrazyModeStore';
 import { usePathname } from 'next/navigation';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/shared/components/Modals/WelcomeModal';
 import { AchievementNotificationContainer } from '@/shared/components/AchievementNotification';
 import AchievementIntegration from '@/shared/components/AchievementIntegration';
-import { applyTheme } from '@/features/themes';
+import { applyTheme } from '@/features/Themes';
 import BackToTop from '@/shared/components/BackToTop';
 import { GlobalErrorBoundary } from '@/shared/components';
 
@@ -21,7 +21,7 @@ type FontObject = {
 };
 
 export default function ClientLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -43,7 +43,8 @@ export default function ClientLayout({
 
   // Calculate fontClassName based on the stateful fontsModule
   const fontClassName = fontsModule
-    ? fontsModule.find((fontObj: FontObject) => effectiveFont === fontObj.name)?.font.className
+    ? fontsModule.find((fontObj: FontObject) => effectiveFont === fontObj.name)
+        ?.font.className
     : '';
 
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function ClientLayout({
   // Dynamically import the fonts module only in production
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      import('@/features/themes/data/fonts')
+      import('@/features/Themes/data/fonts')
         .then(module => {
           // Assuming 'fonts' is a default export from that module
           setFontsModule(module.default);
@@ -75,7 +76,7 @@ export default function ClientLayout({
         });
     } else {
       // In development, import statically for easier debugging
-      import('@/features/themes/data/fonts').then(module => {
+      import('@/features/Themes/data/fonts').then(module => {
         setFontsModule(module.default);
       });
     }
@@ -98,14 +99,14 @@ export default function ClientLayout({
   return (
     <GlobalErrorBoundary>
       <div
-        data-scroll-restoration-id="container"
+        data-scroll-restoration-id='container'
         className={clsx(
           'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
           fontClassName
         )}
         style={{
           height: '100dvh',
-          overflowY: 'scroll',
+          overflowY: 'scroll'
         }}
       >
         {children}
