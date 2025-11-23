@@ -184,6 +184,20 @@ KanaDojo is built with modern web technologies for optimal performance and devel
 - **[@vercel/analytics](https://vercel.com/analytics)** - Web analytics
 - **[@vercel/speed-insights](https://vercel.com/docs/speed-insights)** - Performance monitoring
 
+<a id="architecture"></a>
+## 🏗️ Architecture
+
+KanaDojo follows a **feature-based architecture** that organizes code by functionality rather than by file type. This modular approach improves maintainability, scalability, and developer experience.
+
+### Main Structure
+
+- **`features/`** - Self-contained modules by functionality (kana, kanji, vocabulary, statistics, achievements, themes, academy, cloze)
+- **`shared/`** - Reusable components, hooks, utilities, and types shared across features
+- **`core/`** - Fundamental infrastructure (i18n, analytics)
+- **`app/`** - Next.js App Router with pages and layouts
+
+Each feature contains its own components, stores, data, types, and business logic, enabling independent development and easier code understanding. For detailed architecture information, see [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
+
 <a id="getting-started"></a>
 ## 🚀 Getting Started
 
@@ -344,64 +358,62 @@ PORT=3001 npm run dev
 
 ```
 kanadojo/
-├── app/                        # Next.js App Router pages
-│   ├── kana/                   # Kana dojo pages
-│   │   └── train/[gameMode]/   # Training pages for each game mode
-│   ├── kanji/                  # Kanji dojo pages
-│   │   └── train/[gameMode]/
-│   ├── vocabulary/             # Vocabulary dojo pages
-│   │   └── train/[gameMode]/
-│   ├── preferences/            # Settings and customization page
-│   ├── academy/                # Educational content
-│   ├── layout.tsx              # Root layout with providers
-│   └── page.tsx                # Home page
-│
-├── components/                 # React components
-│   ├── Dojo/                   # Training-specific components
-│   │   ├── Kana/               # Kana selection and cards
-│   │   ├── Kanji/              # Kanji selection and cards
-│   │   └── Vocab/              # Vocabulary selection and cards
-│   ├── reusable/               # Shared components
-│   │   ├── Menu/               # Navigation and menu components
-│   │   └── ...                 # Other reusable components
-│   ├── Settings/               # Preference components
-│   └── ui/                     # shadcn/ui components
-│
-├── lib/                        # Utilities and helper functions
-│   ├── hooks/                  # Custom React hooks
-│   │   ├── useAudio.ts         # Audio feedback hooks
+├── app/                        # Next.js App Router
+│   ├── [locale]/               # Internationalized routes
+│   │   ├── kana/               # Kana dojo pages
+│   │   ├── kanji/              # Kanji dojo pages
+│   │   ├── vocabulary/         # Vocabulary dojo pages
+│   │   ├── preferences/        # Settings page
+│   │   ├── academy/            # Educational content
+│   │   ├── achievements/       # Achievements page
+│   │   ├── progress/           # Progress tracking
 │   │   └── ...
-│   ├── interfaces.ts           # TypeScript interfaces
-│   └── utils.ts                # Utility functions
+│   ├── layout.tsx              # Root layout
+│   └── globals.css             # Global styles
 │
-├── i18n/                       # Translation management system
-│   └── request.ts              # Translated text retrieve helper
+├── features/                   # Feature-based modules
+│   ├── kana/                   # Kana learning feature
+│   │   ├── components/         # Kana-specific components
+│   │   ├── data/               # Kana character data
+│   │   ├── lib/                # Kana utilities
+│   │   ├── store/              # Kana state management
+│   │   └── index.ts            # Barrel exports
+│   ├── kanji/                  # Kanji learning feature
+│   ├── vocabulary/             # Vocabulary learning feature
+│   ├── statistics/             # Progress tracking feature
+│   ├── achievements/           # Achievements system
+│   ├── themes/                 # Theme & preferences
+│   ├── academy/                # Educational content
+│   └── cloze/                  # Cloze test feature
 │
-├── store/                      # Zustand state management
-│   ├── useKanaKanjiStore.ts    # Kana/Kanji selection state
-│   ├── useVocabStore.ts        # Vocabulary selection state
-│   ├── useStatsStore.ts        # Statistics and progress
-│   └── useThemeStore.ts        # Theme and preferences
+├── shared/                     # Shared resources
+│   ├── components/             # Reusable components
+│   ├── hooks/                  # Custom React hooks
+│   ├── lib/                    # Shared utilities
+│   ├── store/                  # Shared state stores
+│   └── types/                  # TypeScript types
 │
-├── static/                     # Static data and configuration
-│   ├── kana.ts                 # Kana character data
-│   ├── kanji/                  # Kanji data by JLPT level
-│   ├── vocab/                  # Vocabulary data
-│   ├── themes.ts               # Theme definitions
-│   ├── fonts.ts                # Font configurations
-│   └── info.tsx                # Informational content
-│
-├── core/
-│   └── i18n/
-│       └── locales/            # Translated text content
-│           ├── en.json         # English text content
-│           └── es.json         # Spanish text content
+├── core/                       # Core infrastructure
+│   ├── i18n/                   # Internationalization
+│   │   ├── config.ts           # i18n configuration
+│   │   ├── routing.ts          # Route localization
+│   │   └── locales/            # Translation files
+│   │       ├── en.json         # English
+│   │       ├── es.json         # Spanish
+│   │       └── ...
+│   └── analytics/              # Analytics providers
 │
 ├── public/                     # Static assets
 │   ├── sounds/                 # Audio files
-│   └── wallpapers/             # Background images
+│   ├── wallpapers/             # Background images
+│   ├── kanji/                  # Kanji JSON data
+│   └── vocab/                  # Vocabulary JSON data
 │
-├── CLAUDE.md                   # Developer documentation
+├── docs/                       # Documentation
+│   ├── ARCHITECTURE.md         # Architecture guide
+│   ├── TRANSLATING.md          # Translation guide
+│   └── ...
+│
 ├── next.config.ts              # Next.js configuration
 ├── tailwind.config.js          # Tailwind CSS configuration
 └── tsconfig.json               # TypeScript configuration
@@ -411,20 +423,28 @@ kanadojo/
 
 ---
 
+#### Feature-Based Architecture
+
+KanaDojo uses a modular architecture pattern where each functionality is independent:
+
+- **Encapsulation**: Each feature contains everything it needs (components, state, data, logic)
+- **Barrel Exports**: Each module exports its public API through `index.ts`
+- **Type Safety**: TypeScript with path aliases (`@/features/*`, `@/shared/*`, `@/core/*`)
+- **Separation of Concerns**: Isolated features, reusable shared code, fundamental core
+
 #### State Management Flow
 
 1. User selects content in menu components
-2. Selections stored in Zustand stores (`useKanaKanjiStore`, `useVocabStore`)
+2. Selections stored in Zustand stores (feature-specific stores)
 3. Training components read from stores to generate questions
-4. Stats tracked and persisted in `useStatsStore`
-5. User preferences saved in `useThemeStore` with localStorage persistence
+4. Stats tracked and persisted in `features/statistics/store`
+5. User preferences saved in `features/themes/store` with localStorage persistence
 
 #### Component Architecture
 
-- **Dojo Components**: Handle character/word selection for each content type
-- **Training Components**: Render game modes and handle user interactions
-- **Reusable Components**: Shared UI elements (buttons, cards, modals, etc.)
-- **Menu Components**: Navigation, info sections, and dojo selection
+- **Feature Components**: Specific to each functionality (kana, kanji, vocabulary)
+- **Shared Components**: Reusable UI across features (Game, Modals, AudioButton)
+- **Layout Components**: Navigation, main menu, page structures
 
 #### Data Organization
 
