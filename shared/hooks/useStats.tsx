@@ -1,11 +1,11 @@
 'use client';
 import { useCallback } from 'react';
-import useStatsStore from '@/features/statistics';
-import { useAchievementTrigger } from '@/features/achievements';
+import useStatsStore from '@/features/Progress';
+import { useAchievementTrigger } from '@/features/Achievements';
 
 const useStats = () => {
   const { triggerAchievementCheck } = useAchievementTrigger();
-  
+
   const baseIncrementCorrectAnswers = useStatsStore(
     state => state.incrementCorrectAnswers
   );

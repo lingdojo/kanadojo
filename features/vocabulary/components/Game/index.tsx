@@ -5,7 +5,7 @@ import Pick from './Pick';
 import Input from './Input';
 
 import useVocabStore from '@/features/vocabulary/store/useVocabStore';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stats from '@/shared/components/Game/Stats';
 import { usePathname } from 'next/navigation';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
@@ -28,17 +28,11 @@ const Game = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 md:gap-10 items-center min-h-[100dvh] max-w-[100dvw] px-4">
+    <div className='flex flex-col gap-6 md:gap-10 items-center min-h-[100dvh] max-w-[100dvw] px-4'>
       {showStats && <Stats />}
-      <Return
-        isHidden={showStats}
-        href={pathname}
-      />
+      <Return isHidden={showStats} href={pathname} />
       {gameMode.toLowerCase() === 'pick' ? (
-        <Pick
-          selectedWordObjs={selectedVocabObjs}
-          isHidden={showStats}
-        />
+        <Pick selectedWordObjs={selectedVocabObjs} isHidden={showStats} />
       ) : gameMode.toLowerCase() === 'reverse-pick' ? (
         <Pick
           selectedWordObjs={selectedVocabObjs}
@@ -46,10 +40,7 @@ const Game = () => {
           isReverse={true}
         />
       ) : gameMode.toLowerCase() === 'input' ? (
-        <Input
-          selectedWordObjs={selectedVocabObjs}
-          isHidden={showStats}
-        />
+        <Input selectedWordObjs={selectedVocabObjs} isHidden={showStats} />
       ) : gameMode.toLowerCase() === 'reverse-input' ? (
         <Input
           selectedWordObjs={selectedVocabObjs}

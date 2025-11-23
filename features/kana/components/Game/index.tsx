@@ -5,7 +5,7 @@ import Return from '@/shared/components/Game/ReturnFromGame';
 import Pick from './Pick';
 import Input from './Input';
 import useKanaStore from '@/features/kana/store/useKanaStore';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stats from '@/shared/components/Game/Stats';
 
 const Game = () => {

@@ -1,5 +1,5 @@
 'use client';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import { Star } from 'lucide-react';
 import clsx from 'clsx';
 

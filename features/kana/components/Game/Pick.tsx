@@ -11,7 +11,7 @@ import { buttonBorderStyles } from '@/shared/lib/styles';
 import { pickGameKeyMappings } from '@/shared/lib/keyMappings';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/shared/hooks/useStats';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
@@ -106,11 +106,11 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
   const [shuffledVariants, setShuffledVariants] = useState(
     isReverse
       ? [correctKanaCharReverse, ...randomIncorrectOptions].sort(
-        () => random.real(0, 1) - 0.5
-      )
+          () => random.real(0, 1) - 0.5
+        )
       : [correctRomajiChar, ...randomIncorrectOptions].sort(
-        () => random.real(0, 1) - 0.5
-      )
+          () => random.real(0, 1) - 0.5
+        )
   );
 
   const [feedback, setFeedback] = useState(<>{'feedback ~'}</>);
@@ -122,11 +122,11 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
     setShuffledVariants(
       isReverse
         ? [correctKanaCharReverse, ...getIncorrectOptions()].sort(
-          () => random.real(0, 1) - 0.5
-        )
+            () => random.real(0, 1) - 0.5
+          )
         : [correctRomajiChar, ...getIncorrectOptions()].sort(
-          () => random.real(0, 1) - 0.5
-        )
+            () => random.real(0, 1) - 0.5
+          )
     );
     if (isReverse) {
       speedStopwatch.start();
@@ -275,9 +275,9 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
               'text-5xl font-semibold pb-6 pt-3 w-full sm:w-1/5 flex flex-row justify-center items-center gap-1',
               buttonBorderStyles,
               wrongSelectedAnswers.includes(variantChar) &&
-              'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
+                'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
               !wrongSelectedAnswers.includes(variantChar) &&
-              'text-[var(--main-color)] hover:border-[var(--main-color)]'
+                'text-[var(--main-color)] hover:border-[var(--main-color)]'
             )}
             onClick={() => handleOptionClick(variantChar)}
           >

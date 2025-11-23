@@ -10,7 +10,7 @@ import GameIntel from '@/shared/components/Game/GameIntel';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/shared/hooks/useStats';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
@@ -60,7 +60,7 @@ const VocabInputGame = ({
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)]
-        .meanings[0]
+          .meanings[0]
       : selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
   );
 
@@ -213,8 +213,8 @@ const VocabInputGame = ({
     const displayTarget = isReverse
       ? targetChar
       : Array.isArray(targetChar)
-        ? targetChar[0]
-        : targetChar;
+      ? targetChar[0]
+      : targetChar;
 
     setFeedback(<>{`skipped ~ ${correctChar} = ${displayTarget}`}</>);
   };

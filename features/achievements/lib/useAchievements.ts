@@ -1,6 +1,8 @@
 import { useEffect, useCallback } from 'react';
-import useAchievementStore, { type Achievement } from '@/features/achievements';
-import useStatsStore from '@/features/statistics';
+import useAchievementStore, {
+  type Achievement
+} from '../store/useAchievementStore';
+import useStatsStore from '@/features/Progress';
 
 interface UseAchievementsReturn {
   checkForNewAchievements: () => Achievement[];
@@ -33,8 +35,12 @@ export const useAchievements = (): UseAchievementsReturn => {
     checkForNewAchievements
   ]);
 
-  const unlockedCount = Object.keys(achievementStore.unlockedAchievements).length;
-  const hasUnseenNotifications = useAchievementStore(state => state.hasUnseenNotifications);
+  const unlockedCount = Object.keys(
+    achievementStore.unlockedAchievements
+  ).length;
+  const hasUnseenNotifications = useAchievementStore(
+    state => state.hasUnseenNotifications
+  );
 
   return {
     checkForNewAchievements,

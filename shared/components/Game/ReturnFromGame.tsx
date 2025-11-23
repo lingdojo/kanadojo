@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Link } from '@/core/i18n/routing';
 import { useClick } from '@/shared/hooks';
 import { useStopwatch } from 'react-timer-hook';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import { X } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 
@@ -46,7 +46,7 @@ const Return = ({ isHidden, href }: { isHidden: boolean; href: string }) => {
     >
       <Link
         href={href}
-        className=""
+        className=''
         ref={buttonRef}
         onClick={() => {
           playClick();

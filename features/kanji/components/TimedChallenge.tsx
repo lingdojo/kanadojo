@@ -1,9 +1,17 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import useKanjiStore, { type IKanjiObj } from '@/features/kanji/store/useKanjiStore';
-import useStatsStore from '@/features/statistics';
-import { useChallengeTimer, useGoalTimers, useClick, useCorrect, useError } from '@/shared/hooks';
+import useKanjiStore, {
+  type IKanjiObj
+} from '@/features/kanji/store/useKanjiStore';
+import useStatsStore from '@/features/Progress';
+import {
+  useChallengeTimer,
+  useGoalTimers,
+  useClick,
+  useCorrect,
+  useError
+} from '@/shared/hooks';
 import { Button, SSRAudioButton } from '@/shared/components';
 import {
   Timer,
@@ -140,7 +148,10 @@ export default function TimedChallengeKanji() {
       if (inputRef.current) {
         inputRef.current.focus();
         // Scroll input into view for mobile devices
-        inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        inputRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
       }
     }, 100);
   };
@@ -170,7 +181,9 @@ export default function TimedChallengeKanji() {
       setLastAnswerCorrect(true);
       // Move to next question immediately on correct answer
       setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * selectedKanjiObjs.length);
+        const randomIndex = Math.floor(
+          Math.random() * selectedKanjiObjs.length
+        );
         setCurrentQuestion(selectedKanjiObjs[randomIndex]);
         setLastAnswerCorrect(null);
       }, 300);
@@ -350,8 +363,9 @@ export default function TimedChallengeKanji() {
               <p className='text-[var(--muted-color)]'>
                 {challengeDuration < 60
                   ? `${challengeDuration} seconds`
-                  : `${challengeDuration / 60} minute${challengeDuration > 60 ? 's' : ''
-                  }`}{' '}
+                  : `${challengeDuration / 60} minute${
+                      challengeDuration > 60 ? 's' : ''
+                    }`}{' '}
                 challenge finished
               </p>
             </div>
@@ -545,8 +559,9 @@ export default function TimedChallengeKanji() {
           <div
             className='bg-[var(--main-color)] h-2 rounded-full transition-all duration-1000'
             style={{
-              width: `${((challengeDuration - timeLeft) / challengeDuration) * 100
-                }%`
+              width: `${
+                ((challengeDuration - timeLeft) / challengeDuration) * 100
+              }%`
             }}
           />
         </div>
@@ -620,7 +635,9 @@ export default function TimedChallengeKanji() {
             <div className='text-[var(--muted-color)]'>Correct</div>
           </div>
           <div className='bg-[var(--card-color)] rounded p-2'>
-            <div className='text-red-500 font-bold'>{timedKanjiWrongAnswers}</div>
+            <div className='text-red-500 font-bold'>
+              {timedKanjiWrongAnswers}
+            </div>
             <div className='text-[var(--muted-color)]'>Wrong</div>
           </div>
           <div className='bg-[var(--card-color)] rounded p-2'>

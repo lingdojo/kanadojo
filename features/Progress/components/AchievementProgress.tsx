@@ -9,8 +9,8 @@ import useAchievementStore, {
   ACHIEVEMENTS,
   type Achievement,
   type AchievementRarity
-} from '@/features/achievements';
-import useStatsStore from '@/features/statistics';
+} from '@/features/Achievements';
+import useStatsStore from '@/features/Progress';
 import { useClick } from '@/shared/hooks';
 import { cardBorderStyles, buttonBorderStyles } from '@/shared/lib/styles';
 

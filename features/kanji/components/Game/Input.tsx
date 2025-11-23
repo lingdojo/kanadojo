@@ -9,7 +9,7 @@ import GameIntel from '@/shared/components/Game/GameIntel';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/shared/hooks/useStats';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
@@ -27,7 +27,7 @@ interface KanjiInputGameProps {
 const KanjiInputGame = ({
   selectedKanjiObjs,
   isHidden,
-  isReverse = false,
+  isReverse = false
 }: KanjiInputGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -39,7 +39,7 @@ const KanjiInputGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore,
+    incrementCharacterScore
   } = useStats();
 
   const { playClick } = useClick();
@@ -56,9 +56,9 @@ const KanjiInputGame = ({
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-        .meanings[0]
+          .meanings[0]
       : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-        .kanjiChar
+          .kanjiChar
   );
 
   // Find the target character/meaning based on mode
@@ -141,10 +141,10 @@ const KanjiInputGame = ({
     generateNewCharacter();
     setFeedback(
       <>
-        <span className="text-[var(--secondary-color)]">{`${correctChar} = ${userInput
+        <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${userInput
           .trim()
           .toLowerCase()} `}</span>
-        <CircleCheck className="inline text-[var(--main-color)]" />
+        <CircleCheck className='inline text-[var(--main-color)]' />
       </>
     );
     triggerCrazyMode();
@@ -154,11 +154,11 @@ const KanjiInputGame = ({
     setInputValue('');
     setFeedback(
       <>
-        <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${inputValue
+        <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${inputValue
           .trim()
           .toLowerCase()} `}</span>
 
-        <CircleX className="inline text-[var(--main-color)]" />
+        <CircleX className='inline text-[var(--main-color)]' />
       </>
     );
     playErrorTwice();
@@ -194,8 +194,8 @@ const KanjiInputGame = ({
     const displayTarget = isReverse
       ? targetChar
       : Array.isArray(targetChar)
-        ? targetChar[0]
-        : targetChar;
+      ? targetChar[0]
+      : targetChar;
 
     setFeedback(<>{`skipped ~ ${correctChar} = ${displayTarget}`}</>);
   };
@@ -224,7 +224,7 @@ const KanjiInputGame = ({
       )}
       {!displayAnswerSummary && (
         <>
-          <div className="flex flex-col items-center gap-4">
+          <div className='flex flex-col items-center gap-4'>
             <FuriganaText
               text={correctChar}
               reading={
@@ -237,15 +237,15 @@ const KanjiInputGame = ({
             />
             <SSRAudioButton
               text={correctChar}
-              variant="icon-only"
-              size="lg"
-              className="bg-[var(--card-color)] border-[var(--border-color)]"
+              variant='icon-only'
+              size='lg'
+              className='bg-[var(--card-color)] border-[var(--border-color)]'
             />
           </div>
 
           <input
             ref={inputRef}
-            type="text"
+            type='text'
             value={inputValue}
             className={clsx(
               'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',

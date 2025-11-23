@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { Trophy, X } from 'lucide-react';
 import useAchievementStore, {
   type AchievementNotification as NotificationType
-} from '@/features/achievements';
+} from '@/features/Achievements';
 import { useClick } from '@/shared/hooks';
 import { cardBorderStyles } from '@/shared/lib/styles';
 

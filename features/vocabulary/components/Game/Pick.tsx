@@ -10,7 +10,7 @@ import GameIntel from '@/shared/components/Game/GameIntel';
 import { pickGameKeyMappings } from '@/shared/lib/keyMappings';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/shared/hooks/useStats';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
@@ -54,7 +54,7 @@ const VocabPickGame = ({
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)]
-        .meanings[0]
+          .meanings[0]
       : selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
   );
 
@@ -67,11 +67,12 @@ const VocabPickGame = ({
   const [currentWordObj, setCurrentWordObj] = useState(correctWordObj);
 
   // Determine target based on quiz type and mode
-  const targetChar = quizType === 'meaning'
-    ? isReverse
-      ? correctWordObj?.word
-      : correctWordObj?.meanings[0]
-    : isReverse
+  const targetChar =
+    quizType === 'meaning'
+      ? isReverse
+        ? correctWordObj?.word
+        : correctWordObj?.meanings[0]
+      : isReverse
       ? correctWordObj?.reading
       : correctWordObj?.reading;
 
@@ -79,11 +80,11 @@ const VocabPickGame = ({
   const getIncorrectOptions = (): string[] => {
     const incorrectWordObjs = isReverse
       ? selectedWordObjs.filter(
-        currentWordObj => currentWordObj.meanings[0] !== correctChar
-      )
+          currentWordObj => currentWordObj.meanings[0] !== correctChar
+        )
       : selectedWordObjs.filter(
-        currentWordObj => currentWordObj.word !== correctChar
-      );
+          currentWordObj => currentWordObj.word !== correctChar
+        );
 
     if (quizType === 'meaning') {
       return incorrectWordObjs
@@ -207,8 +208,10 @@ const VocabPickGame = ({
   };
 
   const gameMode = isReverse ? 'reverse pick' : 'pick';
-  const displayCharLang = isReverse && quizType === 'meaning' ? undefined : 'ja';
-  const optionLang = quizType === 'reading' ? 'ja' : isReverse ? 'ja' : undefined;
+  const displayCharLang =
+    isReverse && quizType === 'meaning' ? undefined : 'ja';
+  const optionLang =
+    quizType === 'reading' ? 'ja' : isReverse ? 'ja' : undefined;
   const textSize = isReverse ? 'text-4xl md:text-7xl' : 'text-6xl md:text-9xl';
 
   return (
@@ -278,9 +281,9 @@ const VocabPickGame = ({
                   'text-[var(--border-color)]',
                   isReverse ? 'text-4xl' : 'text-3xl',
                   wrongSelectedAnswers.includes(option) &&
-                  'hover:bg-[var(--card-color)]',
+                    'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                  'text-[var(--main-color)]'
+                    'text-[var(--main-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}
@@ -292,7 +295,7 @@ const VocabPickGame = ({
                     reading={
                       isReverse
                         ? selectedWordObjs.find(obj => obj.word === option)
-                          ?.reading
+                            ?.reading
                         : undefined
                     }
                   />

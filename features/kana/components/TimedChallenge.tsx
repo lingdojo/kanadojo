@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { useKanaStore } from '@/features/kana';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import { useChallengeTimer, useGoalTimers } from '@/shared/hooks';
 import { Button } from '@/shared/components';
 import { generateKanaQuestion } from '@/features/kana';
@@ -150,7 +150,10 @@ export default function TimedChallengeKana() {
       if (inputRef.current) {
         inputRef.current.focus();
         // Scroll input into view for mobile devices
-        inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        inputRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
       }
     }, 100);
   };
@@ -358,8 +361,9 @@ export default function TimedChallengeKana() {
               <p className='text-[var(--muted-color)]'>
                 {challengeDuration < 60
                   ? `${challengeDuration} seconds`
-                  : `${challengeDuration / 60} minute${challengeDuration > 60 ? 's' : ''
-                  }`}{' '}
+                  : `${challengeDuration / 60} minute${
+                      challengeDuration > 60 ? 's' : ''
+                    }`}{' '}
                 challenge finished
               </p>
             </div>
@@ -553,8 +557,9 @@ export default function TimedChallengeKana() {
           <div
             className='bg-[var(--main-color)] h-2 rounded-full transition-all duration-1000'
             style={{
-              width: `${((challengeDuration - timeLeft) / challengeDuration) * 100
-                }%`
+              width: `${
+                ((challengeDuration - timeLeft) / challengeDuration) * 100
+              }%`
             }}
           />
         </div>

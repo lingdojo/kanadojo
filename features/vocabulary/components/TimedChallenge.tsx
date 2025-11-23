@@ -1,9 +1,17 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import useVocabStore, { type IVocabObj } from '@/features/vocabulary/store/useVocabStore';
-import useStatsStore from '@/features/statistics';
-import { useChallengeTimer, useGoalTimers, useClick, useCorrect, useError } from '@/shared/hooks';
+import useVocabStore, {
+  type IVocabObj
+} from '@/features/vocabulary/store/useVocabStore';
+import useStatsStore from '@/features/Progress';
+import {
+  useChallengeTimer,
+  useGoalTimers,
+  useClick,
+  useCorrect,
+  useError
+} from '@/shared/hooks';
 import { Button, SSRAudioButton, FuriganaText } from '@/shared/components';
 import {
   Timer,
@@ -140,7 +148,10 @@ export default function TimedChallengeVocab() {
       if (inputRef.current) {
         inputRef.current.focus();
         // Scroll input into view for mobile devices
-        inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        inputRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
       }
     }, 100);
   };
@@ -171,7 +182,9 @@ export default function TimedChallengeVocab() {
       // Move to next question immediately on correct answer
       setTimeout(() => {
         if (selectedVocabObjs.length > 0) {
-          const randomIndex = Math.floor(Math.random() * selectedVocabObjs.length);
+          const randomIndex = Math.floor(
+            Math.random() * selectedVocabObjs.length
+          );
           setCurrentQuestion(selectedVocabObjs[randomIndex]);
         }
         setLastAnswerCorrect(null);
@@ -238,9 +251,7 @@ export default function TimedChallengeVocab() {
           </p>
 
           <div className='bg-[var(--card-color)] rounded-lg p-4 space-y-2'>
-            <p className='text-sm text-[var(--muted-color)]'>
-              Selected Words:
-            </p>
+            <p className='text-sm text-[var(--muted-color)]'>Selected Words:</p>
             <p className='font-medium text-[var(--secondary-color)]'>
               {selectedVocabObjs.length} words
             </p>
@@ -352,8 +363,9 @@ export default function TimedChallengeVocab() {
               <p className='text-[var(--muted-color)]'>
                 {challengeDuration < 60
                   ? `${challengeDuration} seconds`
-                  : `${challengeDuration / 60} minute${challengeDuration > 60 ? 's' : ''
-                  }`}{' '}
+                  : `${challengeDuration / 60} minute${
+                      challengeDuration > 60 ? 's' : ''
+                    }`}{' '}
                 challenge finished
               </p>
             </div>
@@ -547,8 +559,9 @@ export default function TimedChallengeVocab() {
           <div
             className='bg-[var(--main-color)] h-2 rounded-full transition-all duration-1000'
             style={{
-              width: `${((challengeDuration - timeLeft) / challengeDuration) * 100
-                }%`
+              width: `${
+                ((challengeDuration - timeLeft) / challengeDuration) * 100
+              }%`
             }}
           />
         </div>
@@ -625,7 +638,9 @@ export default function TimedChallengeVocab() {
             <div className='text-[var(--muted-color)]'>Correct</div>
           </div>
           <div className='bg-[var(--card-color)] rounded p-2'>
-            <div className='text-red-500 font-bold'>{timedVocabWrongAnswers}</div>
+            <div className='text-red-500 font-bold'>
+              {timedVocabWrongAnswers}
+            </div>
             <div className='text-[var(--muted-color)]'>Wrong</div>
           </div>
           <div className='bg-[var(--card-color)] rounded p-2'>

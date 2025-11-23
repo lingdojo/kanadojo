@@ -10,7 +10,7 @@ import GameIntel from '@/shared/components/Game/GameIntel';
 import { pickGameKeyMappings } from '@/shared/lib/keyMappings';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/shared/hooks/useStats';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import AnswerSummary from '@/shared/components/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
@@ -28,7 +28,7 @@ interface KanjiPickGameProps {
 const KanjiPickGame = ({
   selectedKanjiObjs,
   isHidden,
-  isReverse = false,
+  isReverse = false
 }: KanjiPickGameProps) => {
   const score = useStatsStore(state => state.score);
   const setScore = useStatsStore(state => state.setScore);
@@ -40,7 +40,7 @@ const KanjiPickGame = ({
     incrementWrongAnswers,
     addCharacterToHistory,
     addCorrectAnswerTime,
-    incrementCharacterScore,
+    incrementCharacterScore
   } = useStats();
 
   const { playCorrect } = useCorrect();
@@ -51,9 +51,9 @@ const KanjiPickGame = ({
   const [correctChar, setCorrectChar] = useState(
     isReverse
       ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-        .meanings[0]
+          .meanings[0]
       : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-        .kanjiChar
+          .kanjiChar
   );
 
   // Find the correct object based on the current mode
@@ -140,16 +140,16 @@ const KanjiPickGame = ({
       generateNewCharacter();
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} = ${selectedOption} `}</span>
-          <CircleCheck className="inline text-[var(--main-color)]" />
+          <span className='text-[var(--secondary-color)]'>{`${correctChar} = ${selectedOption} `}</span>
+          <CircleCheck className='inline text-[var(--main-color)]' />
         </>
       );
     } else {
       handleWrongAnswer(selectedOption);
       setFeedback(
         <>
-          <span className="text-[var(--secondary-color)]">{`${correctChar} ≠ ${selectedOption} `}</span>
-          <CircleX className="inline text-[var(--main-color)]" />
+          <span className='text-[var(--secondary-color)]'>{`${correctChar} ≠ ${selectedOption} `}</span>
+          <CircleX className='inline text-[var(--main-color)]' />
         </>
       );
     }
@@ -217,7 +217,7 @@ const KanjiPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <div className="flex flex-col items-center gap-4">
+          <div className='flex flex-col items-center gap-4'>
             <FuriganaText
               text={correctChar}
               reading={
@@ -230,9 +230,9 @@ const KanjiPickGame = ({
             />
             <SSRAudioButton
               text={correctChar}
-              variant="icon-only"
-              size="lg"
-              className="bg-[var(--card-color)] text-[var(--secondary-color)]"
+              variant='icon-only'
+              size='lg'
+              className='bg-[var(--card-color)] text-[var(--secondary-color)]'
             />
           </div>
 
@@ -248,16 +248,16 @@ const KanjiPickGame = ({
                   buttonRefs.current[i] = elem;
                 }}
                 key={option + i}
-                type="button"
+                type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
                   'text-4xl py-4 rounded-xl w-full md:w-1/4 xl:w-1/5 flex flex-row justify-center items-center gap-1.5',
                   buttonBorderStyles,
                   'text-[var(--border-color)]',
                   wrongSelectedAnswers.includes(option) &&
-                  'hover:bg-[var(--card-color)]',
+                    'hover:bg-[var(--card-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                  'text-[var(--main-color)]'
+                    'text-[var(--main-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
@@ -267,9 +267,9 @@ const KanjiPickGame = ({
                   reading={
                     isReverse
                       ? selectedKanjiObjs.find(obj => obj.kanjiChar === option)
-                        ?.onyomi[0] ||
-                      selectedKanjiObjs.find(obj => obj.kanjiChar === option)
-                        ?.kunyomi[0]
+                          ?.onyomi[0] ||
+                        selectedKanjiObjs.find(obj => obj.kanjiChar === option)
+                          ?.kunyomi[0]
                       : undefined
                   }
                 />

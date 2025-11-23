@@ -10,7 +10,7 @@ import GameIntel from '@/shared/components/Game/GameIntel';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import { useStopwatch } from 'react-timer-hook';
 import useStats from '@/shared/hooks/useStats';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import Stars from '@/shared/components/Game/Stars';
 import SSRAudioButton from '@/shared/components/SSRAudioButton';
 import { useCrazyModeTrigger } from '@/features/crazy-mode/hooks/useCrazyModeTrigger';
