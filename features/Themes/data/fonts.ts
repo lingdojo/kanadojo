@@ -324,7 +324,7 @@ export const shipporiAntique = localFont({
   fallback: ['system-ui', 'sans-serif']
 });
 
-const fonts = [
+export const fonts = [
   { name: 'Noto Sans JP', font: notoSansJP },
   { name: 'Zen Maru Gothic', font: zenMaruGothic },
   { name: 'Rampart One', font: rampartOne },

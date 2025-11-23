@@ -81,7 +81,7 @@ export const mochiyPopOne = localFont({
   fallback: ['system-ui', 'sans-serif']
 });
 
-const fonts = [
+export const decorationFonts = [
   { name: 'Zen Maru Gothic', font: zenMaruGothic },
   { name: 'Rampart One', font: rampartOne },
   { name: 'Klee One', font: kleeOne },
@@ -93,4 +93,4 @@ const fonts = [
   { name: 'Mochiy Pop One', font: mochiyPopOne }
 ];
 
-export default fonts;
+export default decorationFonts;

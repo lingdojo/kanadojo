@@ -167,10 +167,11 @@ def generate():
                 f"  {{ name: '{family}', font: {key} }}"
             )
 
-        ts_lines.append("const fonts = [")
+        list_var_name = OUTPUT_TS_PATH.stem
+        ts_lines.append(f"export const {list_var_name} = [")
         ts_lines.append(",\n".join(font_entries_for_array))
         ts_lines.append("];\n")
-        ts_lines.append("export default fonts;\n")
+        ts_lines.append(f"export default {list_var_name};\n")
 
         OUTPUT_TS_PATH.parent.mkdir(parents=True, exist_ok=True)
         OUTPUT_TS_PATH.write_text("\n".join(ts_lines), encoding="utf-8")
