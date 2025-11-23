@@ -1,5 +1,4 @@
-
-import { kana } from '@/features/kana/data/kana';
+import { kana } from '@/features/Kana/data/kana';
 
 export type KanaCharacter = {
   kana: string;
@@ -8,13 +7,13 @@ export type KanaCharacter = {
 };
 
 export function flattenKanaGroups(indices: number[]): KanaCharacter[] {
-  return indices.flatMap((i) => {
+  return indices.flatMap(i => {
     const group = kana[i];
     if (!group) return [];
     return group.kana.map((char, idx) => ({
       kana: char,
       romaji: group.romanji[idx],
-      group: group.groupName,
+      group: group.groupName
     }));
   });
 }

@@ -1,9 +1,5 @@
-import { KanjiGame } from '@/features/kanji';
+import { KanjiGame } from '@/features/Kanji';
 
 export default function Train() {
   return <KanjiGame />;
 }
-
-
-
-

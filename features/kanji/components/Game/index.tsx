@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Return from '@/shared/components/Game/ReturnFromGame';
 import Pick from './Pick';
 import Input from './Input';
-import useKanjiStore from '@/features/kanji/store/useKanjiStore';
+import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
 import useStatsStore from '@/features/Progress';
 import Stats from '@/shared/components/Game/Stats';
 import { usePathname } from 'next/navigation';

@@ -1,5 +1,5 @@
 import PostWrapper from '@/shared/components/PostWrapper';
-import hiragana101 from '@/features/academy/data/hiraganaBlogPost';
+import hiragana101 from '@/features/Academy/data/hiraganaBlogPost';
 
 const Hiragana101 = () => {
   return <PostWrapper textContent={hiragana101} />;

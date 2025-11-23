@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { useKanaStore } from '@/features/kana';
+import { useKanaStore } from '@/features/Kana';
 import useStatsStore from '@/features/Progress';
 import { useChallengeTimer, useGoalTimers } from '@/shared/hooks';
 import { Button } from '@/shared/components';
-import { generateKanaQuestion } from '@/features/kana';
+import { generateKanaQuestion } from '@/features/Kana';
 import {
   Timer,
   Target,
@@ -24,8 +24,8 @@ import confetti from 'canvas-confetti';
 import { SSRAudioButton } from '@/shared/components';
 import GoalTimersPanel from '@/shared/components/Timer/GoalTimersPanel';
 
-import type { KanaCharacter } from '@/features/kana/lib/generateKanaQuestions';
-import { flattenKanaGroups } from '@/features/kana';
+import type { KanaCharacter } from '@/features/Kana/lib/generateKanaQuestions';
+import { flattenKanaGroups } from '@/features/Kana';
 
 export default function TimedChallengeKana() {
   const { playClick } = useClick();

@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/shared/components/Menu/Sidebar';
 import Info from '@/shared/components/Menu/Info';
 import GameModes from '@/shared/components/Menu/GameModes';
-import KanaCards from '@/features/kana/components/KanaCards';
+import KanaCards from '@/features/Kana/components/KanaCards';
 import Banner from '@/shared/components/Menu/Banner';
 import CollectionSelector from '@/shared/components/Menu/CollectionSelector';
-import KanjiCards from '@/features/kanji/components';
+import KanjiCards from '@/features/Kanji/components';
 import { usePathname } from 'next/navigation';
-import VocabCards from '@/features/vocabulary/components';
+import VocabCards from '@/features/Vocabulary/components';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 
 const DojoMenu = () => {
@@ -49,7 +49,7 @@ const DojoMenu = () => {
   }, [pathWithoutLocale]);
 
   return (
-    <div className="min-h-[100dvh] max-w-[100dvw] lg:pr-20 flex gap-4">
+    <div className='min-h-[100dvh] max-w-[100dvw] lg:pr-20 flex gap-4'>
       <Sidebar />
       <div
         className={clsx(
@@ -66,7 +66,7 @@ const DojoMenu = () => {
         <TopBar
           showGameModes={showGameModes}
           setShowGameModes={setShowGameModes}
-          currentDojo="kana"
+          currentDojo='kana'
         />
         {showGameModes && <GameModes />}
 
