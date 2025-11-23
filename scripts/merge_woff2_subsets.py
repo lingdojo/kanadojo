@@ -22,11 +22,25 @@ from fontTools.merge import Merger
 
 
 ROOT_DIR = os.path.join(os.path.dirname(__file__), "..", "public", "fonts")
+APP_FONTS_DIR = os.path.join(os.path.dirname(__file__), "..", "app", "fonts")
 
 
 def merge_family(dirpath) -> None:
-    woff2_files = sorted(glob.glob(os.path.join(dirpath, "*.woff2")))
     family = os.path.basename(dirpath)
+    merged_public = os.path.join(dirpath, f"{family}-merged.woff2")
+    merged_app = os.path.join(APP_FONTS_DIR, family, f"{family}-merged.woff2")
+
+    locations = []
+    if os.path.isfile(merged_public):
+        locations.append("public/fonts")
+    if os.path.isfile(merged_app):
+        locations.append("app/fonts")
+
+    if locations:
+        print(f"[skip] {family}: merged WOFF2 already exists in {', '.join(locations)}")
+        return
+
+    woff2_files = sorted(glob.glob(os.path.join(dirpath, "*.woff2")))
 
     if len(woff2_files) <= 1:
         print(f"[skip] {family}: only {len(woff2_files)} .woff2 file(s)")

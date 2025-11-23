@@ -19,7 +19,6 @@ from fontTools import ttLib
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_GLOB = f"{ROOT}/**/*fonts.config.json"
 CONFIG_RE = re.compile(fnmatch.translate(CONFIG_GLOB), re.IGNORECASE)
-#CONFIG_PATH = ROOT / "features" / "Themes" / "data" / "fonts.config.json"
 CONFIG_PATHS = [
     Path(root) / filename
     for root, _, files in os.walk(ROOT)
@@ -29,8 +28,6 @@ CONFIG_PATHS = [
 PUBLIC_FONTS_DIR = ROOT / "public" / "fonts"
 REL_PUBLIC_FONTS_DIR = "public/fonts"
 APP_FONTS_DIR = ROOT / "app" / "fonts"
-
-#OUTPUT_TS_PATH = ROOT / "features" / "Themes" / "data" / "fonts.ts"
 
 OUTPUT_TS_PATHS = [
     config_path.with_name(
@@ -143,8 +140,8 @@ def generate():
             app_font_path = app_font_dir / final_font_path.name
 
             if not app_font_path.exists():
-                shutil.copy2(final_font_path, app_font_path)
-                print(f"[{family}] copied font to app dir --> {app_font_path}")
+                shutil.move(final_font_path, app_font_path)
+                print(f"[{family}] moved font to app dir --> {app_font_path}")
             else:
                 print(f"[{family}] font already present in app dir --> {app_font_path}")
 

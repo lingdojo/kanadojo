@@ -208,6 +208,21 @@ Typical response time is within a few days. We’re doing this for the love of J
 
 ---
 
+## Common Issues
+
+If you want to add fonts during development, follow this process:
+
+1. Identify the font you want. This should be from Google Fonts so that the following steps work.
+
+2. Find the proper font.config.json file. An example might be features/Themes/data/fonts.config.json.
+
+3. Add your font to that file. Ensure that you follow the format shown in the previous entries **exactly**. Include all the keys that other entries have.
+
+4. Run ``npm run preparefonts``. If you run it on an empty directory it might take 30+ minutes to run to completion because of the number of fonts used, however all the pre-existing fonts should already exist so it shouldn't take more than a few minutes for you.
+
+5. Now you're done, and you can use it in the rest of the project!
+---
+
 ## ❤️ Thank You
 
 Seriously — thanks for taking the time to read this. Every contribution, big or small, keeps KanaDojo growing.
