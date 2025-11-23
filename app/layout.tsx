@@ -4,7 +4,6 @@ import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { GoogleAnalytics, MSClarity } from '@/core/analytics';
 import { Metadata, Viewport } from 'next';
-// triggering vercel redeployment
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
 const msVerificationToken = process.env.MS_VERIFICATION_TOKEN || '';
