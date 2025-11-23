@@ -1,474 +1,366 @@
-import {
-  Noto_Sans_JP,
-  Zen_Maru_Gothic,
-  Rampart_One,
-  Zen_Kurenaido,
-  Klee_One,
-  DotGothic16,
-  Kiwi_Maru,
-  Potta_One,
-  Hachi_Maru_Pop,
-  Yuji_Mai,
-  RocknRoll_One,
-  Reggae_One,
-  Stick,
-  M_PLUS_Rounded_1c,
-  M_PLUS_1,
-  Yusei_Magic,
-  Dela_Gothic_One,
-  New_Tegomin,
-  Kosugi_Maru,
-  Hina_Mincho,
-  Shippori_Mincho,
-  Kaisei_Decol,
-  Mochiy_Pop_One,
-  Yuji_Boku,
-  Kaisei_HarunoUmi,
-  Sawarabi_Gothic,
-  Zen_Old_Mincho,
-  Sawarabi_Mincho,
-  Zen_Antique,
-  Kaisei_Tokumin,
-  Yuji_Syuku,
-  WDXL_Lubrifont_JP_N,
-  Murecho,
-  Kaisei_Opti,
-  BIZ_UDMincho,
-  Shippori_Antique
-} from 'next/font/google';
+import localFont from 'next/font/local';
 
-const notoSansJP = Noto_Sans_JP({
-  subsets: ['latin'],
-  weight: ['400'],
+export const notoSansJP = localFont({
+  src: [
+    { path: '../../../app/fonts/noto-sans-jp/noto-sans-jp-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const zenMaruGothic = Zen_Maru_Gothic({
-  subsets: ['latin'],
-  weight: ['400'],
+export const zenMaruGothic = localFont({
+  src: [
+    { path: '../../../app/fonts/zen-maru-gothic/zen-maru-gothic-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const rampartOne = Rampart_One({
-  subsets: ['latin'],
-  weight: ['400'],
+export const rampartOne = localFont({
+  src: [
+    { path: '../../../app/fonts/rampart-one/rampart-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const zenKurenaido = Zen_Kurenaido({
-  subsets: ['latin'],
-  weight: ['400'],
+export const zenKurenaido = localFont({
+  src: [
+    { path: '../../../app/fonts/zen-kurenaido/zen-kurenaido-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const kleeOne = Klee_One({
-  subsets: ['latin'],
-  weight: ['400'],
+export const kleeOne = localFont({
+  src: [
+    { path: '../../../app/fonts/klee-one/klee-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const dotGothic16 = DotGothic16({
-  subsets: ['latin'],
-  weight: ['400'],
+export const dotGothic16 = localFont({
+  src: [
+    { path: '../../../app/fonts/dotgothic16/dotgothic16-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const kiwiMaru = Kiwi_Maru({
-  subsets: ['latin'],
-  weight: ['400'],
+export const kiwiMaru = localFont({
+  src: [
+    { path: '../../../app/fonts/kiwi-maru/kiwi-maru-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const pottaOne = Potta_One({
-  subsets: ['latin'],
-  weight: ['400'],
+export const pottaOne = localFont({
+  src: [
+    { path: '../../../app/fonts/potta-one/potta-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const hachiMaruPop = Hachi_Maru_Pop({
-  subsets: ['latin'],
-  weight: ['400'],
+export const hachiMaruPop = localFont({
+  src: [
+    { path: '../../../app/fonts/hachi-maru-pop/hachi-maru-pop-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const yujiMai = Yuji_Mai({
-  subsets: ['latin'],
-  weight: ['400'],
+export const yujiMai = localFont({
+  src: [
+    { path: '../../../app/fonts/yuji-mai/yuji-mai-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const rocknRollOne = RocknRoll_One({
-  subsets: ['latin'],
-  weight: ['400'],
+export const rocknRollOne = localFont({
+  src: [
+    { path: '../../../app/fonts/rocknroll-one/rocknroll-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const reggaeOne = Reggae_One({
-  subsets: ['latin'],
-  weight: ['400'],
+export const reggaeOne = localFont({
+  src: [
+    { path: '../../../app/fonts/reggae-one/reggae-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const stick = Stick({
-  subsets: ['latin'],
-  weight: ['400'],
+export const stick = localFont({
+  src: [
+    { path: '../../../app/fonts/stick/stick-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const mPlusRounded1c = M_PLUS_Rounded_1c({
-  subsets: ['latin'],
-  weight: ['400'],
+export const mPlusRounded1c = localFont({
+  src: [
+    { path: '../../../app/fonts/m-plus-rounded-1c/m-plus-rounded-1c-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const mPlus1 = M_PLUS_1({
-  subsets: ['latin'],
-  weight: ['400'],
+export const mPlus1 = localFont({
+  src: [
+    { path: '../../../app/fonts/m-plus-1/m-plus-1-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const yuseiMagic = Yusei_Magic({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-  preload: false,
-  fallback: ['system-ui', 'sans-serif']
-});
-const delaGothicOne = Dela_Gothic_One({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-  preload: false,
-  fallback: ['system-ui', 'sans-serif']
-});
-const newTegomin = New_Tegomin({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-  preload: false,
-  fallback: ['system-ui', 'sans-serif']
-});
-const kosugiMaru = Kosugi_Maru({
-  subsets: ['latin'],
-  weight: ['400'],
+export const yuseiMagic = localFont({
+  src: [
+    { path: '../../../app/fonts/yusei-magic/yusei-magic-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const hinaMincho = Hina_Mincho({
-  subsets: ['latin'],
-  weight: ['400'],
+export const delaGothicOne = localFont({
+  src: [
+    { path: '../../../app/fonts/dela-gothic-one/dela-gothic-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const shipporiMincho = Shippori_Mincho({
-  subsets: ['latin'],
-  weight: ['400'],
+export const newTegomin = localFont({
+  src: [
+    { path: '../../../app/fonts/new-tegomin/new-tegomin-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const kaiseiDecol = Kaisei_Decol({
-  subsets: ['latin'],
-  weight: ['400'],
+export const kosugiMaru = localFont({
+  src: [
+    { path: '../../../app/fonts/kosugi-maru/kosugi-maru-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const mochiyPopOne = Mochiy_Pop_One({
-  subsets: ['latin'],
-  weight: ['400'],
+export const hinaMincho = localFont({
+  src: [
+    { path: '../../../app/fonts/hina-mincho/hina-mincho-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const yujiBoku = Yuji_Boku({
-  subsets: ['latin'],
-  weight: ['400'],
+export const shipporiMincho = localFont({
+  src: [
+    { path: '../../../app/fonts/shippori-mincho/shippori-mincho-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const kaiseiHarunoUmi = Kaisei_HarunoUmi({
-  subsets: ['latin'],
-  weight: ['400'],
+export const kaiseiDecol = localFont({
+  src: [
+    { path: '../../../app/fonts/kaisei-decol/kaisei-decol-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const sawarabiGothic = Sawarabi_Gothic({
-  subsets: ['latin'],
-  weight: ['400'],
+export const mochiyPopOne = localFont({
+  src: [
+    { path: '../../../app/fonts/mochiy-pop-one/mochiy-pop-one-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const zenOldMincho = Zen_Old_Mincho({
-  subsets: ['latin'],
-  weight: ['400'],
+export const yujiBoku = localFont({
+  src: [
+    { path: '../../../app/fonts/yuji-boku/yuji-boku-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const sawarabiMincho = Sawarabi_Mincho({
-  subsets: ['latin'],
-  weight: ['400'],
+export const kaiseiHarunoUmi = localFont({
+  src: [
+    { path: '../../../app/fonts/kaisei-harunoumi/kaisei-harunoumi-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const zenAntique = Zen_Antique({
-  subsets: ['latin'],
-  weight: ['400'],
+export const sawarabiGothic = localFont({
+  src: [
+    { path: '../../../app/fonts/sawarabi-gothic/sawarabi-gothic-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const kaiseiTokumin = Kaisei_Tokumin({
-  subsets: ['latin'],
-  weight: ['400'],
+export const zenOldMincho = localFont({
+  src: [
+    { path: '../../../app/fonts/zen-old-mincho/zen-old-mincho-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const yujiSyuku = Yuji_Syuku({
-  subsets: ['latin'],
-  weight: ['400'],
+export const sawarabiMincho = localFont({
+  src: [
+    { path: '../../../app/fonts/sawarabi-mincho/sawarabi-mincho-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const wdxlLubrifontJPN = WDXL_Lubrifont_JP_N({
-  subsets: ['latin'],
-  weight: ['400'],
+export const zenAntique = localFont({
+  src: [
+    { path: '../../../app/fonts/zen-antique/zen-antique-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const murecho = Murecho({
-  subsets: ['latin'],
-  weight: ['400'],
+export const kaiseiTokumin = localFont({
+  src: [
+    { path: '../../../app/fonts/kaisei-tokumin/kaisei-tokumin-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const kaiseiOpti = Kaisei_Opti({
-  subsets: ['latin'],
-  weight: ['400'],
+export const yujiSyuku = localFont({
+  src: [
+    { path: '../../../app/fonts/yuji-syuku/yuji-syuku-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const bIZUDMincho = BIZ_UDMincho({
-  subsets: ['latin'],
-  weight: ['400'],
+export const wdxlLubrifontJPN = localFont({
+  src: [
+    { path: '../../../app/fonts/wdxl-lubrifont-jp-n/wdxl-lubrifont-jp-n-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
-const shipporiAntique = Shippori_Antique({
-  subsets: ['latin'],
-  weight: ['400'],
+export const murecho = localFont({
+  src: [
+    { path: '../../../app/fonts/murecho/murecho-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+export const kaiseiOpti = localFont({
+  src: [
+    { path: '../../../app/fonts/kaisei-opti/kaisei-opti-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+export const bIZUDMincho = localFont({
+  src: [
+    { path: '../../../app/fonts/biz-udmincho/biz-udmincho-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+export const shipporiAntique = localFont({
+  src: [
+    { path: '../../../app/fonts/shippori-antique/shippori-antique-400-latin.woff2', weight: '400', style: 'normal' },
+  ],
   display: 'swap',
   preload: false,
   fallback: ['system-ui', 'sans-serif']
 });
 
 const fonts = [
-  {
-    name: 'Zen Maru Gothic',
-    font: zenMaruGothic
-  },
-  {
-    name: 'Noto Sans JP',
-    font: notoSansJP
-  },
-
-  {
-    name: 'Rampart One',
-    font: rampartOne
-  },
-  {
-    name: 'Zen Kurenaido',
-    font: zenKurenaido
-  },
-  {
-    name: 'Klee One',
-    font: kleeOne
-  },
-  {
-    name: 'Dot Gothic 16',
-    font: dotGothic16
-  },
-  {
-    name: 'Kiwi Maru',
-    font: kiwiMaru
-  },
-  {
-    name: 'Potta One',
-    font: pottaOne
-  },
-  {
-    name: 'Hachi Maru Pop',
-    font: hachiMaruPop
-  },
-  {
-    name: 'Yuji Mai',
-    font: yujiMai
-  },
-  {
-    name: 'RocknRoll One',
-    font: rocknRollOne
-  },
-  {
-    name: 'Reggae One',
-    font: reggaeOne
-  },
-  {
-    name: 'Stick',
-    font: stick
-  },
-  {
-    name: 'M PLUS Rounded 1c',
-    font: mPlusRounded1c
-  },
-  {
-    name: 'M PLUS 1',
-    font: mPlus1
-  },
-  {
-    name: 'Yusei Magic',
-    font: yuseiMagic
-  },
-  {
-    name: 'Dela Gothic One',
-    font: delaGothicOne
-  },
-  {
-    name: 'New Tegomin',
-    font: newTegomin
-  },
-  {
-    name: 'Kosugi Maru',
-    font: kosugiMaru
-  },
-  {
-    name: 'Hina Mincho',
-    font: hinaMincho
-  },
-  {
-    name: 'Shippori Mincho',
-    font: shipporiMincho
-  },
-  {
-    name: 'Kaisei Decol',
-    font: kaiseiDecol
-  },
-  {
-    name: 'Mochiy Pop One',
-    font: mochiyPopOne
-  },
-  {
-    name: 'Yuji Boku',
-    font: yujiBoku
-  },
-  {
-    name: 'Kaisei HarunoUmi',
-    font: kaiseiHarunoUmi
-  },
-  {
-    name: 'Sawarabi Gothic',
-    font: sawarabiGothic
-  },
-  {
-    name: 'Zen Old Mincho',
-    font: zenOldMincho
-  },
-  {
-    name: 'Sawarabi Mincho',
-    font: sawarabiMincho
-  },
-  {
-    name: 'Zen Antique',
-    font: zenAntique
-  },
-  {
-    name: 'Kaisei Tokumin',
-    font: kaiseiTokumin
-  },
-  {
-    name: 'Yuji Syuku',
-    font: yujiSyuku
-  },
-  {
-    name: 'WDXL Lubrifont JP N',
-    font: wdxlLubrifontJPN
-  },
-  {
-    name: 'Murecho',
-    font: murecho
-  },
-  {
-    name: 'Kaisei Opti',
-    font: kaiseiOpti
-  }
-  ,
-  {
-    name: 'BIZ UDMincho',
-    font: bIZUDMincho
-  },
-  {
-    name: 'Shippori Antique',
-    font: shipporiAntique
-  }
+  { name: 'Noto Sans JP', font: notoSansJP },
+  { name: 'Zen Maru Gothic', font: zenMaruGothic },
+  { name: 'Rampart One', font: rampartOne },
+  { name: 'Zen Kurenaido', font: zenKurenaido },
+  { name: 'Klee One', font: kleeOne },
+  { name: 'Dot Gothic 16', font: dotGothic16 },
+  { name: 'Kiwi Maru', font: kiwiMaru },
+  { name: 'Potta One', font: pottaOne },
+  { name: 'Hachi Maru Pop', font: hachiMaruPop },
+  { name: 'Yuji Mai', font: yujiMai },
+  { name: 'RocknRoll One', font: rocknRollOne },
+  { name: 'Reggae One', font: reggaeOne },
+  { name: 'Stick', font: stick },
+  { name: 'M PLUS Rounded 1c', font: mPlusRounded1c },
+  { name: 'M PLUS 1', font: mPlus1 },
+  { name: 'Yusei Magic', font: yuseiMagic },
+  { name: 'Dela Gothic One', font: delaGothicOne },
+  { name: 'New Tegomin', font: newTegomin },
+  { name: 'Kosugi Maru', font: kosugiMaru },
+  { name: 'Hina Mincho', font: hinaMincho },
+  { name: 'Shippori Mincho', font: shipporiMincho },
+  { name: 'Kaisei Decol', font: kaiseiDecol },
+  { name: 'Mochiy Pop One', font: mochiyPopOne },
+  { name: 'Yuji Boku', font: yujiBoku },
+  { name: 'Kaisei HarunoUmi', font: kaiseiHarunoUmi },
+  { name: 'Sawarabi Gothic', font: sawarabiGothic },
+  { name: 'Zen Old Mincho', font: zenOldMincho },
+  { name: 'Sawarabi Mincho', font: sawarabiMincho },
+  { name: 'Zen Antique', font: zenAntique },
+  { name: 'Kaisei Tokumin', font: kaiseiTokumin },
+  { name: 'Yuji Syuku', font: yujiSyuku },
+  { name: 'WDXL Lubrifont JP N', font: wdxlLubrifontJPN },
+  { name: 'Murecho', font: murecho },
+  { name: 'Kaisei Opti', font: kaiseiOpti },
+  { name: 'BIZ UDMincho', font: bIZUDMincho },
+  { name: 'Shippori Antique', font: shipporiAntique }
 ];
 
 export default fonts;

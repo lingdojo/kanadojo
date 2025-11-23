@@ -1,0 +1,365 @@
+{
+  "fonts": [
+    {
+      "key": "notoSansJP",
+      "family": "Noto Sans JP",
+      "slug": "noto-sans-jp",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": true,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "zenMaruGothic",
+      "family": "Zen Maru Gothic",
+      "slug": "zen-maru-gothic",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": true,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "rampartOne",
+      "family": "Rampart One",
+      "slug": "rampart-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "zenKurenaido",
+      "family": "Zen Kurenaido",
+      "slug": "zen-kurenaido",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kleeOne",
+      "family": "Klee One",
+      "slug": "klee-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "dotGothic16",
+      "family": "Dot Gothic 16",
+      "slug": "dotgothic16",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kiwiMaru",
+      "family": "Kiwi Maru",
+      "slug": "kiwi-maru",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "pottaOne",
+      "family": "Potta One",
+      "slug": "potta-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "hachiMaruPop",
+      "family": "Hachi Maru Pop",
+      "slug": "hachi-maru-pop",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "yujiMai",
+      "family": "Yuji Mai",
+      "slug": "yuji-mai",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "rocknRollOne",
+      "family": "RocknRoll One",
+      "slug": "rocknroll-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "reggaeOne",
+      "family": "Reggae One",
+      "slug": "reggae-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "stick",
+      "family": "Stick",
+      "slug": "stick",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "mPlusRounded1c",
+      "family": "M PLUS Rounded 1c",
+      "slug": "m-plus-rounded-1c",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "mPlus1",
+      "family": "M PLUS 1",
+      "slug": "m-plus-1",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "yuseiMagic",
+      "family": "Yusei Magic",
+      "slug": "yusei-magic",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "delaGothicOne",
+      "family": "Dela Gothic One",
+      "slug": "dela-gothic-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "newTegomin",
+      "family": "New Tegomin",
+      "slug": "new-tegomin",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kosugiMaru",
+      "family": "Kosugi Maru",
+      "slug": "kosugi-maru",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "hinaMincho",
+      "family": "Hina Mincho",
+      "slug": "hina-mincho",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "shipporiMincho",
+      "family": "Shippori Mincho",
+      "slug": "shippori-mincho",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kaiseiDecol",
+      "family": "Kaisei Decol",
+      "slug": "kaisei-decol",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "mochiyPopOne",
+      "family": "Mochiy Pop One",
+      "slug": "mochiy-pop-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "yujiBoku",
+      "family": "Yuji Boku",
+      "slug": "yuji-boku",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kaiseiHarunoUmi",
+      "family": "Kaisei HarunoUmi",
+      "slug": "kaisei-harunoumi",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "sawarabiGothic",
+      "family": "Sawarabi Gothic",
+      "slug": "sawarabi-gothic",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "zenOldMincho",
+      "family": "Zen Old Mincho",
+      "slug": "zen-old-mincho",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "sawarabiMincho",
+      "family": "Sawarabi Mincho",
+      "slug": "sawarabi-mincho",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "zenAntique",
+      "family": "Zen Antique",
+      "slug": "zen-antique",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kaiseiTokumin",
+      "family": "Kaisei Tokumin",
+      "slug": "kaisei-tokumin",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "yujiSyuku",
+      "family": "Yuji Syuku",
+      "slug": "yuji-syuku",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "wdxlLubrifontJPN",
+      "family": "WDXL Lubrifont JP N",
+      "slug": "wdxl-lubrifont-jp-n",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "murecho",
+      "family": "Murecho",
+      "slug": "murecho",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kaiseiOpti",
+      "family": "Kaisei Opti",
+      "slug": "kaisei-opti",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "bIZUDMincho",
+      "family": "BIZ UDMincho",
+      "slug": "biz-udmincho",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "shipporiAntique",
+      "family": "Shippori Antique",
+      "slug": "shippori-antique",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    }
+  ]
+}
+

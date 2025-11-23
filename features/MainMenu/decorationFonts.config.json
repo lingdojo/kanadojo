@@ -1,0 +1,95 @@
+{
+  "fonts": [
+    {
+      "key": "zenMaruGothic",
+      "family": "Zen Maru Gothic",
+      "slug": "zen-maru-gothic",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": true,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "rampartOne",
+      "family": "Rampart One",
+      "slug": "rampart-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "kleeOne",
+      "family": "Klee One",
+      "slug": "klee-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "hachiMaruPop",
+      "family": "Hachi Maru Pop",
+      "slug": "hachi-maru-pop",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "yujiMai",
+      "family": "Yuji Mai",
+      "slug": "yuji-mai",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "rocknRollOne",
+      "family": "RocknRoll One",
+      "slug": "rocknroll-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "delaGothicOne",
+      "family": "Dela Gothic One",
+      "slug": "dela-gothic-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "yuseiMagic",
+      "family": "Yusei Magic",
+      "slug": "yusei-magic",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    },
+    {
+      "key": "mochiyPopOne",
+      "family": "Mochiy Pop One",
+      "slug": "mochiy-pop-one",
+      "subsets": ["latin"],
+      "weights": ["400"],
+      "display": "swap",
+      "preload": false,
+      "fallback": ["system-ui", "sans-serif"]
+    }
+  ]
+}
+

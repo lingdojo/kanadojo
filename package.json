@@ -12,7 +12,11 @@
     "format:check": "prettier --check .",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "check": "tsc --noEmit --pretty && next lint --format pretty",
-    "generate:constants": "tsx scripts/generateConstants.ts"
+    "generate:constants": "tsx scripts/generateConstants.ts",
+    "download:fonts": "node scripts/download-fonts.mjs",
+    "merge:fonts": "python scripts/merge_woff2_subsets.py",
+    "generate:fonts": "python scripts/generate_fonts_ts.py",
+    "preparefonts": "npm run download:fonts && npm run merge:fonts && npm run generate:fonts"
   },
   "type": "module",
   "dependencies": {
