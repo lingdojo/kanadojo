@@ -1,5 +1,4 @@
 import {
-  Noto_Sans_JP,
   Zen_Maru_Gothic,
   Rampart_One,
   Klee_One,
@@ -10,14 +9,6 @@ import {
   Yusei_Magic,
   Mochiy_Pop_One
 } from 'next/font/google';
-
-const notoSansJP = Noto_Sans_JP({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-  preload: false,
-  fallback: ['system-ui', 'sans-serif']
-});
 
 const zenMaruGothic = Zen_Maru_Gothic({
   subsets: ['latin'],
@@ -95,10 +86,6 @@ export const decorationFonts = [
   {
     name: 'Zen Maru Gothic',
     font: zenMaruGothic
-  },
-  {
-    name: 'Noto Sans JP',
-    font: notoSansJP
   },
   {
     name: 'Rampart One',

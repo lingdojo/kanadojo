@@ -1,11 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { themeSets } from '@/features/themes';
-import { decorationFonts as fonts } from './decorationFonts';
 import clsx from 'clsx';
 
 type RawKanjiEntry = {
   kanjiChar: string;
+};
+
+type DecorationFont = {
+  name: string;
+  font: {
+    className: string;
+  };
 };
 
 const kanjiSources = ['N5', 'N4', 'N3'] as const;
@@ -38,6 +44,23 @@ const getAllMainColors = () => {
 
 const allMainColors = getAllMainColors();
 
+// Lazy-load fonts cache
+let fontsCache: DecorationFont[] | null = null;
+let fontsLoadingPromise: Promise<DecorationFont[]> | null = null;
+
+const loadDecorationFonts = async (): Promise<DecorationFont[]> => {
+  if (fontsCache) return fontsCache;
+  if (fontsLoadingPromise) return fontsLoadingPromise;
+
+  fontsLoadingPromise = import('./decorationFonts').then(module => {
+    fontsCache = module.decorationFonts;
+    fontsLoadingPromise = null;
+    return module.decorationFonts;
+  });
+
+  return fontsLoadingPromise;
+};
+
 // Component to render a single kanji character with random styles
 const KanjiCharacter = ({ char }: { char: string }) => {
   const [mounted, setMounted] = useState(false);
@@ -48,19 +71,34 @@ const KanjiCharacter = ({ char }: { char: string }) => {
   });
 
   useEffect(() => {
-    // Generate random styles on mount
-    const randomColor =
-      allMainColors[Math.floor(Math.random() * allMainColors.length)];
-    const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-    const randomAnimation =
-      animations[Math.floor(Math.random() * animations.length)];
+    let isMounted = true;
 
-    setStyles({
-      color: randomColor,
-      fontClass: randomFont.font.className,
-      animation: randomAnimation
-    });
-    setMounted(true);
+    const initializeStyles = async () => {
+      // Lazy load fonts
+      const fonts = await loadDecorationFonts();
+
+      if (!isMounted) return;
+
+      // Generate random styles on mount
+      const randomColor =
+        allMainColors[Math.floor(Math.random() * allMainColors.length)];
+      const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+      const randomAnimation =
+        animations[Math.floor(Math.random() * animations.length)];
+
+      setStyles({
+        color: randomColor,
+        fontClass: randomFont.font.className,
+        animation: randomAnimation
+      });
+      setMounted(true);
+    };
+
+    void initializeStyles();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (!mounted) return null;

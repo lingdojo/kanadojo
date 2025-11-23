@@ -31,7 +31,10 @@ import {
   Kaisei_Tokumin,
   Yuji_Syuku,
   WDXL_Lubrifont_JP_N,
-  Murecho
+  Murecho,
+  Kaisei_Opti,
+  BIZ_UDMincho,
+  Shippori_Antique
 } from 'next/font/google';
 
 const notoSansJP = Noto_Sans_JP({
@@ -295,6 +298,30 @@ const murecho = Murecho({
   fallback: ['system-ui', 'sans-serif']
 });
 
+const kaiseiOpti = Kaisei_Opti({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const bIZUDMincho = BIZ_UDMincho({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const shipporiAntique = Shippori_Antique({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', 'sans-serif']
+});
+
 const fonts = [
   {
     name: 'Zen Maru Gothic',
@@ -428,6 +455,19 @@ const fonts = [
   {
     name: 'Murecho',
     font: murecho
+  },
+  {
+    name: 'Kaisei Opti',
+    font: kaiseiOpti
+  }
+  ,
+  {
+    name: 'BIZ UDMincho',
+    font: bIZUDMincho
+  },
+  {
+    name: 'Shippori Antique',
+    font: shipporiAntique
   }
 ];
 
