@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { themes } from '@/features/Themes';
 import fonts from '@/features/Themes/data/fonts';
 import { Random } from 'random-js';
+import { persist } from 'zustand/middleware';
 
 interface CrazyModeState {
   isCrazyMode: boolean;
@@ -13,12 +14,14 @@ interface CrazyModeState {
 
 const random = new Random();
 
-const useCrazyModeStore = create<CrazyModeState>((set, get) => ({
-  isCrazyMode: false,
-  activeThemeId: null,
-  activeFontName: null,
+const useCrazyModeStore = create<CrazyModeState>()(
+  persist(
+    (set, get) => ({
+    isCrazyMode: false,
+    activeThemeId: null,
+    activeFontName: null,
 
-  toggleCrazyMode: () => {
+    toggleCrazyMode: () => {
     const wasActive = get().isCrazyMode;
     if (!wasActive) {
       // Turning ON: Trigger immediate randomization
@@ -28,9 +31,9 @@ const useCrazyModeStore = create<CrazyModeState>((set, get) => ({
       // Turning OFF: Reset active values
       set({ isCrazyMode: false, activeThemeId: null, activeFontName: null });
     }
-  },
+    },
 
-  randomize: () => {
+    randomize: () => {
     // Flatten themes to get all available theme IDs
     const allThemes = themes.flatMap(group => group.themes);
     const randomTheme = allThemes[random.integer(0, allThemes.length - 1)];
@@ -41,7 +44,10 @@ const useCrazyModeStore = create<CrazyModeState>((set, get) => ({
       activeThemeId: randomTheme.id,
       activeFontName: randomFont.name
     });
-  }
-}));
+    }
+  }),
+  {
+    name: 'local-storage'
+  }));
 
 export default useCrazyModeStore;
