@@ -20,6 +20,23 @@ type FontObject = {
   };
 };
 
+// Module-level cache for fonts (persists across component remounts)
+let fontsCache: FontObject[] | null = null;
+let fontsLoadingPromise: Promise<FontObject[]> | null = null;
+
+const loadFontsModule = async (): Promise<FontObject[]> => {
+  if (fontsCache) return fontsCache;
+  if (fontsLoadingPromise) return fontsLoadingPromise;
+
+  fontsLoadingPromise = import('@/features/Themes/data/fonts').then(module => {
+    fontsCache = module.default;
+    fontsLoadingPromise = null;
+    return module.default;
+  });
+
+  return fontsLoadingPromise;
+};
+
 export default function ClientLayout({
   children
 }: Readonly<{
@@ -63,24 +80,27 @@ export default function ClientLayout({
     }
   }, [pathname, isCrazyMode, randomize]);
 
-  // Dynamically import the fonts module only in production
+  // Load fonts using cached loader
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      import('@/features/Themes/data/fonts')
-        .then(module => {
-          // Assuming 'fonts' is a default export from that module
-          setFontsModule(module.default);
-        })
-        .catch(err => {
-          console.error('Failed to dynamically load fonts:', err);
-        });
-    } else {
-      // In development, import statically for easier debugging
-      import('@/features/Themes/data/fonts').then(module => {
-        setFontsModule(module.default);
-      });
-    }
-  }, []); // Empty dependency array ensures this runs only once on mount
+    let isMounted = true;
+
+    const initFonts = async () => {
+      try {
+        const fonts = await loadFontsModule();
+        if (isMounted) {
+          setFontsModule(fonts);
+        }
+      } catch (err) {
+        console.error('Failed to dynamically load fonts:', err);
+      }
+    };
+
+    void initFonts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     // Resume AudioContext on first user interaction
