@@ -67,6 +67,14 @@ const themes: ThemeGroup[] = [
     name: 'Dark',
     icon: Moon,
     themes: [
+        {
+        id: 'coral-abyss',
+        backgroundColor: 'hsla(210, 65%, 10%, 1)',
+        cardColor: 'hsla(210, 62%, 14%, 1)',
+        borderColor: 'hsla(210, 58%, 22%, 1)',
+        mainColor: 'hsla(15, 85%, 65%, 1)',
+        secondaryColor: 'hsla(180, 90%, 62%, 1)'
+      },
       {
         id: 'nord',
         backgroundColor: 'hsl(220, 16%, 23%)',
