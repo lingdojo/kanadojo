@@ -80,7 +80,7 @@ export default function ClientLayout({
     }
   }, [pathname, isCrazyMode, randomize]);
 
-  // Load fonts using cached loader
+  // Load fonts using cached loader - only in production
   useEffect(() => {
     let isMounted = true;
 
