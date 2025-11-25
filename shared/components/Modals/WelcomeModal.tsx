@@ -12,7 +12,7 @@ import {
   AudioLines,
   VolumeX,
   Joystick,
-  Dice5
+  Dice5,
 } from 'lucide-react';
 import useOnboardingStore from '@/shared/store/useOnboardingStore';
 import usePreferencesStore from '@/features/Themes';
@@ -102,60 +102,60 @@ const WelcomeModal = () => {
     switch (step) {
       case 'welcome':
         return (
-          <div className='text-center space-y-6'>
-            <div className='space-y-2'>
+          <div className="text-center space-y-6">
+            <div className="space-y-2">
               <h2
-                id='welcome-modal-title'
-                className='text-3xl font-bold text-[var(--main-color)]'
+                id="welcome-modal-title"
+                className="text-3xl font-bold text-[var(--main-color)]"
               >
                 Welcome to KanaDojo!
               </h2>
-              <p className='text-lg text-[var(--secondary-color)]'>
+              <p className="text-lg text-[var(--secondary-color)]">
                 Let&apos;s personalize your learning experience
               </p>
             </div>
 
-            <div className='space-y-4 text-left'>
-              <div className='flex items-center gap-3 p-3 rounded-lg bg-[var(--background-color)]'>
+            <div className="space-y-4 text-left">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--background-color)]">
                 <Joystick
-                  className='text-[var(--main-color)] flex-shrink-0'
+                  className="text-[var(--main-color)] flex-shrink-0"
                   size={24}
                 />
                 <div>
-                  <h3 className='font-semibold text-[var(--main-color)]'>
+                  <h3 className="font-semibold text-[var(--main-color)]">
                     Configure Behavior
                   </h3>
-                  <p className='text-sm text-[var(--secondary-color)]'>
+                  <p className="text-sm text-[var(--secondary-color)]">
                     Set display language and sound preferences
                   </p>
                 </div>
               </div>
 
-              <div className='flex items-center gap-3 p-3 rounded-lg bg-[var(--background-color)]'>
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--background-color)]">
                 <Palette
-                  className='text-[var(--main-color)] flex-shrink-0'
+                  className="text-[var(--main-color)] flex-shrink-0"
                   size={24}
                 />
                 <div>
-                  <h3 className='font-semibold text-[var(--main-color)]'>
+                  <h3 className="font-semibold text-[var(--main-color)]">
                     Choose Your Theme
                   </h3>
-                  <p className='text-sm text-[var(--secondary-color)]'>
+                  <p className="text-sm text-[var(--secondary-color)]">
                     Select a theme that matches your style
                   </p>
                 </div>
               </div>
 
-              <div className='flex items-center gap-3 p-3 rounded-lg bg-[var(--background-color)]'>
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--background-color)]">
                 <Type
-                  className='text-[var(--main-color)] flex-shrink-0'
+                  className="text-[var(--main-color)] flex-shrink-0"
                   size={24}
                 />
                 <div>
-                  <h3 className='font-semibold text-[var(--main-color)]'>
+                  <h3 className="font-semibold text-[var(--main-color)]">
                     Select Your Font
                   </h3>
-                  <p className='text-sm text-[var(--secondary-color)]'>
+                  <p className="text-sm text-[var(--secondary-color)]">
                     Choose the perfect font for characters
                   </p>
                 </div>
@@ -166,26 +166,26 @@ const WelcomeModal = () => {
 
       case 'behavior':
         return (
-          <div className='space-y-6'>
-            <div className='text-center space-y-2'>
-              <h2 className='text-2xl font-bold text-[var(--main-color)] flex items-center justify-center gap-2'>
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl font-bold text-[var(--main-color)] flex items-center justify-center gap-2">
                 <Joystick size={28} />
                 Configure Behavior
               </h2>
-              <p className='text-[var(--secondary-color)]'>
+              <p className="text-[var(--secondary-color)]">
                 Set your display and sound preferences
               </p>
             </div>
 
-            <div className='space-y-6'>
-              <div className='space-y-3'>
-                <h3 className='text-lg font-semibold text-[var(--main-color)]'>
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-[var(--main-color)]">
                   Display Language
                 </h3>
-                <p className='text-sm text-[var(--secondary-color)]'>
+                <p className="text-sm text-[var(--secondary-color)]">
                   In character selection menus, by default display:
                 </p>
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button
                     className={clsx(
                       'p-3 rounded-lg border-2 transition-colors duration-200 text-left cursor-pointer',
@@ -200,11 +200,11 @@ const WelcomeModal = () => {
                       setDisplayKana(false);
                     }}
                   >
-                    <div className='flex items-center gap-2'>
-                      <span className='text-[var(--main-color)]'>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[var(--main-color)]">
                         {!localDisplayKana && '● '}
                       </span>
-                      <span className='font-medium'>
+                      <span className="font-medium">
                         Romaji, Translations 🇺🇸
                       </span>
                     </div>
@@ -224,24 +224,24 @@ const WelcomeModal = () => {
                       setDisplayKana(true);
                     }}
                   >
-                    <div className='flex items-center gap-2'>
-                      <span className='text-[var(--main-color)]'>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[var(--main-color)]">
                         {localDisplayKana && '● '}
                       </span>
-                      <span className='font-medium'>Kana, Kanji 🇯🇵</span>
+                      <span className="font-medium">Kana, Kanji 🇯🇵</span>
                     </div>
                   </button>
                 </div>
               </div>
 
-              <div className='space-y-3'>
-                <h3 className='text-lg font-semibold text-[var(--main-color)]'>
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-[var(--main-color)]">
                   Sound Effects
                 </h3>
-                <p className='text-sm text-[var(--secondary-color)]'>
+                <p className="text-sm text-[var(--secondary-color)]">
                   Play UI and feedback sound effects:
                 </p>
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button
                     className={clsx(
                       'p-3 rounded-lg border-2 transition-colors duration-200 cursor-pointer',
@@ -256,11 +256,11 @@ const WelcomeModal = () => {
                       setSilentMode(false);
                     }}
                   >
-                    <div className='flex items-center justify-center gap-2'>
-                      <span className='text-[var(--main-color)]'>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-[var(--main-color)]">
                         {!localSilentMode && '● '}
                       </span>
-                      <span className='font-medium'>On</span>
+                      <span className="font-medium">On</span>
                       <AudioLines size={20} />
                     </div>
                   </button>
@@ -279,11 +279,11 @@ const WelcomeModal = () => {
                       setSilentMode(true);
                     }}
                   >
-                    <div className='flex items-center justify-center gap-2'>
-                      <span className='text-[var(--main-color)]'>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-[var(--main-color)]">
                         {localSilentMode && '● '}
                       </span>
-                      <span className='font-medium'>Off</span>
+                      <span className="font-medium">Off</span>
                       <VolumeX size={20} />
                     </div>
                   </button>
@@ -295,18 +295,18 @@ const WelcomeModal = () => {
 
       case 'themes':
         return (
-          <div className='space-y-6'>
-            <div className='text-center space-y-2'>
-              <h2 className='text-2xl font-bold text-[var(--main-color)] flex items-center justify-center gap-2'>
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl font-bold text-[var(--main-color)] flex items-center justify-center gap-2">
                 <Palette size={28} />
                 Choose Your Theme
               </h2>
-              <p className='text-[var(--secondary-color)]'>
+              <p className="text-[var(--secondary-color)]">
                 Select a theme that matches your style
               </p>
             </div>
 
-            <div className='mb-4'>
+            <div className="mb-4">
               <button
                 className={clsx(
                   'w-full p-3 rounded-lg border-2 border-black/30 transition-colors duration-200 cursor-pointer',
@@ -326,19 +326,22 @@ const WelcomeModal = () => {
                   }
                 }}
               >
-                <Dice5 className='text-[var(--secondary-color)]' />
+                <Dice5 className="text-[var(--secondary-color)]" />
                 Random Theme
               </button>
             </div>
 
-            <div className='space-y-4 max-h-96 overflow-y-auto px-1'>
+            <div className="space-y-4 max-h-96 overflow-y-auto px-1">
               {themeSets.map(themeSet => (
-                <div key={themeSet.name} className='space-y-3'>
-                  <h3 className='text-lg font-semibold text-[var(--main-color)] flex items-center gap-2'>
+                <div
+                  key={themeSet.name}
+                  className="space-y-3"
+                >
+                  <h3 className="text-lg font-semibold text-[var(--main-color)] flex items-center gap-2">
                     <themeSet.icon size={20} />
                     {themeSet.name}
                   </h3>
-                  <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2'>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
                     {themeSet.themes.map(theme => (
                       <button
                         key={theme.id}
@@ -353,7 +356,7 @@ const WelcomeModal = () => {
                         style={{
                           backgroundColor: theme.backgroundColor,
                           color: theme.mainColor,
-                          borderColor: theme.borderColor
+                          borderColor: theme.borderColor,
                         }}
                         onClick={() => {
                           playClick();
@@ -362,8 +365,8 @@ const WelcomeModal = () => {
                         }}
                         title={theme.id}
                       >
-                        <div className='text-center'>
-                          <div className='text-xs font-medium'>
+                        <div className="text-center">
+                          <div className="text-xs font-medium">
                             {localTheme === theme.id && '● '}
                             {theme.id === 'long'
                               ? 'long'
@@ -381,18 +384,18 @@ const WelcomeModal = () => {
 
       case 'fonts':
         return (
-          <div className='space-y-6'>
-            <div className='text-center space-y-2'>
-              <h2 className='text-2xl font-bold text-[var(--main-color)] flex items-center justify-center gap-2'>
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl font-bold text-[var(--main-color)] flex items-center justify-center gap-2">
                 <Type size={28} />
                 Choose Your Font
               </h2>
-              <p className='text-[var(--secondary-color)]'>
+              <p className="text-[var(--secondary-color)]">
                 Choose the perfect font for characters
               </p>
             </div>
 
-            <div className='mb-4'>
+            <div className="mb-4">
               <button
                 className={clsx(
                   'w-full p-3 rounded-lg border-2 border-black/30 transition-colors duration-200 cursor-pointer',
@@ -408,13 +411,13 @@ const WelcomeModal = () => {
                   setFont(randomFont.name);
                 }}
               >
-                <Dice5 className='text-[var(--secondary-color)]' />
+                <Dice5 className="text-[var(--secondary-color)]" />
                 Random Font
               </button>
             </div>
 
-            <div className='space-y-3 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[var(--border-color)] scrollbar-track-transparent p-1'>
-              {fonts.map(fontObj => (
+            <div className="space-y-3 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[var(--border-color)] scrollbar-track-transparent p-1">
+              {fonts.map((fontObj: (typeof fonts)[number]) => (
                 <button
                   key={fontObj.name}
                   className={clsx(
@@ -431,14 +434,14 @@ const WelcomeModal = () => {
                   }}
                 >
                   <div className={clsx('space-y-1', fontObj.font.className)}>
-                    <div className='flex items-center justify-between'>
-                      <span className='text-sm font-medium text-[var(--main-color)]'>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-[var(--main-color)]">
                         {localFont === fontObj.name && '● '}
                         {fontObj.name}
                         {fontObj.name === 'Zen Maru Gothic' && ' (default)'}
                       </span>
                     </div>
-                    <div className='text-lg text-[var(--secondary-color)]'>
+                    <div className="text-lg text-[var(--secondary-color)]">
                       かな道場
                     </div>
                   </div>
@@ -450,21 +453,21 @@ const WelcomeModal = () => {
 
       case 'complete':
         return (
-          <div className='text-center space-y-6'>
-            <div className='space-y-2'>
-              <h2 className='text-3xl font-bold text-[var(--main-color)]'>
+          <div className="text-center space-y-6">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold text-[var(--main-color)]">
                 All Set!
               </h2>
-              <p className='text-lg text-[var(--secondary-color)]'>
+              <p className="text-lg text-[var(--secondary-color)]">
                 Your KanaDojo is now personalized
               </p>
             </div>
 
-            <div className='space-y-4'>
-              <p className='text-[var(--secondary-color)]'>
+            <div className="space-y-4">
+              <p className="text-[var(--secondary-color)]">
                 You can always change these settings later in the Preferences.
               </p>
-              <p className='text-sm text-[var(--secondary-color)]'>
+              <p className="text-sm text-[var(--secondary-color)]">
                 Happy learning!
               </p>
             </div>
@@ -484,15 +487,15 @@ const WelcomeModal = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className='fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-[9999] overscroll-none'
+        className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-[9999] overscroll-none"
         onClick={e => {
           if (e.target === e.currentTarget) {
             handleClose();
           }
         }}
-        role='dialog'
-        aria-modal='true'
-        aria-labelledby='welcome-modal-title'
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="welcome-modal-title"
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -507,19 +510,19 @@ const WelcomeModal = () => {
           onClick={e => e.stopPropagation()}
         >
           {/* Header */}
-          <div className='sticky top-0 bg-[var(--card-color)] p-3 sm:p-5 border-b border-[var(--border-color)]/30 z-10'>
-            <div className='flex items-center justify-between'>
-              <div className='flex items-center gap-2'>
+          <div className="sticky top-0 bg-[var(--card-color)] p-3 sm:p-5 border-b border-[var(--border-color)]/30 z-10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
                 <div
-                  className='flex gap-1'
-                  role='progressbar'
+                  className="flex gap-1"
+                  role="progressbar"
                   aria-valuenow={
                     [
                       'welcome',
                       'behavior',
                       'themes',
                       'fonts',
-                      'complete'
+                      'complete',
                     ].indexOf(step) + 1
                   }
                   aria-valuemax={5}
@@ -532,7 +535,7 @@ const WelcomeModal = () => {
                           'behavior',
                           'themes',
                           'fonts',
-                          'complete'
+                          'complete',
                         ].indexOf(step) >= index;
                       return (
                         <div
@@ -565,12 +568,12 @@ const WelcomeModal = () => {
           </div>
 
           {/* Content */}
-          <div className='p-3 sm:p-5 pb-2'>{renderStepContent()}</div>
+          <div className="p-3 sm:p-5 pb-2">{renderStepContent()}</div>
 
           {/* Actions */}
           {step !== 'complete' && (
-            <div className='sticky bottom-0 bg-[var(--card-color)] p-3 sm:p-5 pt-3 border-t border-[var(--border-color)]/30'>
-              <div className='flex justify-between items-center'>
+            <div className="sticky bottom-0 bg-[var(--card-color)] p-3 sm:p-5 pt-3 border-t border-[var(--border-color)]/30">
+              <div className="flex justify-between items-center">
                 {step !== 'welcome' ? (
                   <button
                     onClick={handlePrevious}
@@ -583,10 +586,10 @@ const WelcomeModal = () => {
                   >
                     <ChevronLeft
                       size={16}
-                      className='sm:w-[18px] sm:h-[18px]'
+                      className="sm:w-[18px] sm:h-[18px]"
                     />
-                    <span className='hidden sm:inline'>Previous</span>
-                    <span className='sm:hidden'>Back</span>
+                    <span className="hidden sm:inline">Previous</span>
+                    <span className="sm:hidden">Back</span>
                   </button>
                 ) : (
                   <div />
@@ -608,7 +611,10 @@ const WelcomeModal = () => {
                       ? 'Finish Setup'
                       : 'Next'}
                   </span>
-                  <ChevronRight size={16} className='sm:w-[18px] sm:h-[18px]' />
+                  <ChevronRight
+                    size={16}
+                    className="sm:w-[18px] sm:h-[18px]"
+                  />
                 </button>
               </div>
             </div>
