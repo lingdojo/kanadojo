@@ -255,12 +255,14 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
       <GameIntel gameMode={gameMode} feedback={feedback} />
       <div className='flex flex-row items-center gap-1'>
         <p className='text-8xl sm:text-9xl font-medium'>{displayChar}</p>
-        <SSRAudioButton
-          text={displayChar}
-          variant='icon-only'
-          size='sm'
-          className='bg-[var(--card-color)] text-[var(--secondary-color)]'
-        />
+        {!isReverse && (
+          <SSRAudioButton
+            text={displayChar}
+            variant='icon-only'
+            size='sm'
+            className='bg-[var(--card-color)] text-[var(--secondary-color)]'
+          />
+        )}
       </div>
       <div className='flex flex-row w-full gap-5 sm:gap-0 sm:justify-evenly'>
         {shuffledVariants.map((variantChar, i) => (
