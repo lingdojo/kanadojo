@@ -162,7 +162,7 @@ const TopBar: React.FC<ITopBarProps> = ({
         />
 
         <Link
-          href={`${pathWithoutLocale}/train/${selectedGameMode}`}
+          href={`${pathWithoutLocale}/train`}
           className='w-1/2 group'
         >
           <button
