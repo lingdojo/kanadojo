@@ -29,11 +29,11 @@ const Game = () => {
       <Return isHidden={showStats} href='/kana' gameMode={gameMode} />
       {gameMode.toLowerCase() === 'pick' ? (
         <Pick isHidden={showStats} />
-      ) : gameMode.toLowerCase() === 'reverse-pick' ? (
+      ) : gameMode.toLowerCase() === 'anti-pick' ? (
         <Pick isHidden={showStats} isReverse={true} />
-      ) : gameMode.toLowerCase() === 'input' ? (
+      ) : gameMode.toLowerCase() === 'type' ? (
         <Input isHidden={showStats} />
-      ) : gameMode.toLowerCase() === 'reverse-input' ? (
+      ) : gameMode.toLowerCase() === 'anti-type' ? (
         <Input isHidden={showStats} isReverse={true} />
       ) : null}
     </div>

@@ -94,13 +94,13 @@ const Return = ({
           {gameMode.toLowerCase() === 'pick' && (
             <MousePointerClick className='text-[var(--main-color)]' />
           )}
-          {gameMode.toLowerCase() === 'reverse-pick' && (
+          {gameMode.toLowerCase() === 'anti-pick' && (
             <MousePointerClick className=' scale-x-[-1] text-[var(--main-color)]' />
           )}
-          {gameMode.toLowerCase() === 'input' && (
+          {gameMode.toLowerCase() === 'type' && (
             <Keyboard className='text-[var(--main-color)]' />
           )}
-          {gameMode.toLowerCase() === 'reverse-input' && (
+          {gameMode.toLowerCase() === 'anti-type' && (
             <Keyboard className='scale-y-[-1] text-[var(--main-color)]' />
           )}
           <span className='text-[var(--secondary-color)]'>

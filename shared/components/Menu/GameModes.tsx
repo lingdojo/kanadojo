@@ -56,7 +56,8 @@ const GameModes = () => {
       ? setSelectedGameModeVocab
       : () => {};
 
-  const gameModes = ['Pick', 'Reverse-Pick', 'Input', 'Reverse-Input'];
+  // const gameModes = ['Pick', 'Reverse-Pick', 'Input', 'Reverse-Input'];
+  const gameModes = ['Pick', 'Anti-Pick', 'Type'];
 
   return (
     <fieldset
@@ -96,23 +97,23 @@ const GameModes = () => {
               ) : (
                 <Circle className='text-[var(--border-color)]' />
               )}
-              <span>{gameMode.split('-').join(' ')}</span>
+              <span>{gameMode}</span>
               {gameMode.toLowerCase() === 'pick' && (
                 <MousePointerClick
                   size={22}
                   className='text-[var(--main-color)]'
                 />
               )}
-              {gameMode.toLowerCase() === 'reverse-pick' && (
+              {gameMode.toLowerCase() === 'anti-pick' && (
                 <MousePointerClick
                   size={22}
                   className=' scale-x-[-1] text-[var(--main-color)]'
                 />
               )}
-              {gameMode.toLowerCase() === 'input' && (
+              {gameMode.toLowerCase() === 'type' && (
                 <Keyboard size={22} className='text-[var(--main-color)]' />
               )}
-              {gameMode.toLowerCase() === 'reverse-input' && (
+              {gameMode.toLowerCase() === 'anti-type' && (
                 <Keyboard
                   size={22}
                   className='scale-y-[-1] text-[var(--main-color)]'
