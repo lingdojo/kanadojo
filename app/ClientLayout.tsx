@@ -10,7 +10,7 @@ import { AchievementNotificationContainer } from '@/shared/components/Achievemen
 import AchievementIntegration from '@/shared/components/AchievementIntegration';
 import { applyTheme } from '@/features/Themes';
 import BackToTop from '@/shared/components/BackToTop';
-import { GlobalErrorBoundary } from '@/shared/components';
+// import { GlobalErrorBoundary } from '@/shared/components';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {
@@ -117,7 +117,7 @@ export default function ClientLayout({
   }, []);
 
   return (
-    <GlobalErrorBoundary>
+    // <GlobalErrorBoundary>
       <div
         data-scroll-restoration-id='container'
         className={clsx(
@@ -136,6 +136,6 @@ export default function ClientLayout({
         <AchievementIntegration />
         <BackToTop />
       </div>
-    </GlobalErrorBoundary>
+    // </GlobalErrorBoundary>
   );
 }

@@ -4,7 +4,7 @@
 export { default as KanaCards } from './components/KanaCards';
 export { default as SubsetDictionary } from './components/SubsetDictionary';
 export { default as TimedChallenge } from './components/TimedChallenge';
-export { default as KanaGame } from './components/Game/Game';
+export { default as KanaGame } from './components/Game';
 
 // Store
 export { default as useKanaStore } from './store/useKanaStore';

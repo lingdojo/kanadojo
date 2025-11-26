@@ -21,10 +21,12 @@ const Game = () => {
     <div
       className={clsx(
         'flex flex-col gap-6 md:gap-10 items-center min-h-[100dvh] max-w-[100dvw] px-4'
+        // "bg-[url('/wallpapers/neonretrocarcity.jpg')] bg-cover bg-center"
+        // "bg-[url('/wallpapers/kanaDojoWallpaper.png')] bg-cover bg-center backdrop-blur-lg"
       )}
     >
       {showStats && <Stats />}
-      <Return isHidden={showStats} href='/kana' />
+      <Return isHidden={showStats} href='/kana' gameMode={gameMode} />
       {gameMode.toLowerCase() === 'pick' ? (
         <Pick isHidden={showStats} />
       ) : gameMode.toLowerCase() === 'reverse-pick' ? (

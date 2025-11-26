@@ -101,7 +101,7 @@ const Stats: React.FC = () => {
   };
 
   const StatCard: React.FC<StatCardProps> = ({ title, stats }) => (
-    <div className='bg-[var(--bg-color)] border-2 border-[var(--border-color)] rounded-lg p-6 w-full'>
+    <div className='bg-[var(--bg-color)]  border-[var(--border-color)] rounded-lg p-6 w-full'>
       <h3 className='text-2xl font-bold mb-6 text-[var(--secondary-color)] border-b-2 border-[var(--border-color)] pb-3'>
         {title}
       </h3>
@@ -111,7 +111,7 @@ const Stats: React.FC = () => {
             key={label}
             className={clsx(
               'flex items-center justify-between gap-4 pb-4',
-              i < stats.length - 1 && 'border-b border-[var(--border-color)]/40'
+              i < stats.length - 1 && 'border-b border-[var(--border-color)]/70'
             )}
           >
             <div className='flex items-center gap-2 flex-1 min-w-0'>
@@ -208,13 +208,13 @@ const Stats: React.FC = () => {
             playClick();
             toggleStats();
           }}
-          className='group flex items-center gap-3 mb-8 md:mb-12 hover:opacity-80 transition-opacity'
+          className='group flex items-center gap-3 mb-8 md:mb-12 justify-center w-full hover:cursor-pointer'
         >
           <ChevronsLeft
             size={32}
-            className='text-[var(--secondary-color)] group-hover:translate-x-[-4px] transition-transform'
+            className='text-[var(--border-color)] hover:text-[var(--secondary-color)]'
           />
-          <h2 className='text-3xl md:text-4xl font-bold flex items-center gap-3'>
+          <h2 className='text-3xl md:text-4xl font-bold flex items-center justify-center gap-3'>
             Statistics
             <Activity size={32} className='text-[var(--secondary-color)]' />
           </h2>

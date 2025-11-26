@@ -235,29 +235,31 @@ const VocabPickGame = ({
         <>
           <div className='flex flex-col items-center gap-4'>
             {/* Show prompt based on quiz type */}
-            <span className='text-sm text-[var(--secondary-color)] mb-2'>
+            <span className='text-xs md:text-sm text-[var(--secondary-color)] mb-2'>
               {quizType === 'meaning'
                 ? isReverse
                   ? 'What is the meaning?'
                   : 'What is the meaning?'
                 : 'What is the reading?'}
             </span>
-            <FuriganaText
-              text={correctChar}
-              reading={
-                !isReverse && quizType === 'meaning'
-                  ? correctWordObj?.reading
-                  : undefined
-              }
-              className={clsx(textSize, 'text-center')}
-              lang={displayCharLang}
-            />
-            <SSRAudioButton
-              text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] text-[var(--secondary-color)]'
-            />
+            <div className='flex flex-row justify-center items-center gap-1'>
+              <FuriganaText
+                text={correctChar}
+                reading={
+                  !isReverse && quizType === 'meaning'
+                    ? correctWordObj?.reading
+                    : undefined
+                }
+                className={clsx(textSize, 'text-center')}
+                lang={displayCharLang}
+              />
+              <SSRAudioButton
+                text={correctChar}
+                variant='icon-only'
+                size='sm'
+                className='bg-[var(--card-color)] text-[var(--secondary-color)]'
+              />
+            </div>
           </div>
 
           <div
