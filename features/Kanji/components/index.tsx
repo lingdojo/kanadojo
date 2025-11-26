@@ -317,8 +317,8 @@ const KanjiCards = () => {
                           'duration-250 transition-all ease-in-out border-b-4',
                           'px-2 py-3 max-md:mx-4',
                           isSelected
-                            ? 'bg-[var(--main-color)] text-[var(--background-color)] '
-                            : 'bg-[var(--background-color)]'
+                            ? 'bg-[var(--main-color)]/90 text-[var(--background-color)] '
+                            : 'bg-[var(--background-color)] hover:border-[var(--main-color)]/80'
                         )}
                         onClick={e => {
                           e.currentTarget.blur();
