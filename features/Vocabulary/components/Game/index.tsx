@@ -7,14 +7,8 @@ import Input from './Input';
 import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
 import useStatsStore from '@/features/Progress';
 import Stats from '@/shared/components/Game/Stats';
-import { usePathname } from 'next/navigation';
-import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 
 const Game = () => {
-  const fullPathname = usePathname();
-  // Remove locale and get back to vocabulary root
-  const pathWithoutLocale = removeLocaleFromPath(fullPathname);
-  const pathname = pathWithoutLocale.split('/').slice(0, -2).join('/');
 
   const showStats = useStatsStore(state => state.showStats);
 
@@ -30,7 +24,7 @@ const Game = () => {
   return (
     <div className='flex flex-col gap-4 md:gap-6 items-center min-h-[100dvh] max-w-[100dvw] px-4'>
       {showStats && <Stats />}
-      <Return isHidden={showStats} href={pathname} gameMode={gameMode} />
+      <Return isHidden={showStats} href='/vocabulary' gameMode={gameMode} />
       {gameMode.toLowerCase() === 'pick' ? (
         <Pick selectedWordObjs={selectedVocabObjs} isHidden={showStats} />
       ) : gameMode.toLowerCase() === 'anti-pick' ? (
