@@ -130,7 +130,7 @@ const TopBar: React.FC<ITopBarProps> = ({
             )}
             size={24}
           />
-          {selectedGameMode ? selectedGameMode.split('-').join(' ') : 'not set'}
+          {selectedGameMode ? selectedGameMode : 'not set'}
           {selectedGameMode.toLowerCase() === 'pick' && (
             <MousePointerClick
               size={22}

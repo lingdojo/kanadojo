@@ -177,7 +177,8 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
       <GameIntel gameMode={gameMode} feedback={feedback} />
       <div className='flex flex-row items-center gap-1'>
         <p className='text-8xl sm:text-9xl font-medium'>{correctChar}</p>
-        {!isReverse && (
+
+        {/* {!isReverse && (
           <SSRAudioButton
             text={correctChar}
             variant='icon-only'
@@ -185,6 +186,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
             className='bg-[var(--card-color)] text-[var(--secondary-color)]'
           />
         )}
+ */}
       </div>
       <input
         ref={inputRef}

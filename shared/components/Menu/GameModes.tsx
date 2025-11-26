@@ -101,22 +101,22 @@ const GameModes = () => {
               {gameMode.toLowerCase() === 'pick' && (
                 <MousePointerClick
                   size={22}
-                  className='text-[var(--main-color)]'
+                  className='text-[var(--main-color)] motion-safe:animate-pulse'
                 />
               )}
               {gameMode.toLowerCase() === 'anti-pick' && (
                 <MousePointerClick
                   size={22}
-                  className=' scale-x-[-1] text-[var(--main-color)]'
+                  className=' scale-x-[-1] text-[var(--main-color)] motion-safe:animate-pulse'
                 />
               )}
               {gameMode.toLowerCase() === 'type' && (
-                <Keyboard size={22} className='text-[var(--main-color)]' />
+                <Keyboard size={22} className='text-[var(--main-color)] motion-safe:animate-pulse' />
               )}
               {gameMode.toLowerCase() === 'anti-type' && (
                 <Keyboard
                   size={22}
-                  className='scale-y-[-1] text-[var(--main-color)]'
+                  className='scale-y-[-1] text-[var(--main-color)] motion-safe:animate-pulse'
                 />
               )}
             </span>

@@ -323,7 +323,7 @@ const VocabCards = () => {
                           'duration-250 transition-all ease-in-out',
                           'px-2 py-3 max-md:mx-4 border-b-4  border-[var(--border-color)]',
                           isSelected
-                            ? 'bg-[var(--main-color)]/90 text-[var(--background-color)] '
+                            ? 'bg-[var(--main-color)]/80 text-[var(--background-color)] '
                             : ' bg-[var(--background-color)] hover:border-[var(--main-color)]/80'
                         )}
                         onClick={e => {

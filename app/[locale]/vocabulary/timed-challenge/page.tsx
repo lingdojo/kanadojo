@@ -1,5 +1,4 @@
 import { TimedChallenge as TimedChallengeVocab } from '@/features/Vocabulary';
-import { GameErrorBoundary } from '@/shared/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,9 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function TimedChallengePage() {
-  return (
-    <GameErrorBoundary gameName='Vocabulary Timed Challenge'>
-      <TimedChallengeVocab />
-    </GameErrorBoundary>
-  );
+  return <TimedChallengeVocab />;
 }
