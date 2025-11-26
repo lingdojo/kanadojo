@@ -1,33 +1,31 @@
 'use client';
 
-import clsx from 'clsx';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import Banner from './Menu/Banner';
-import { buttonBorderStyles } from '@/shared/lib/styles';
-import { ChevronsLeft } from 'lucide-react';
-import { Link } from '@/core/i18n/routing';
-import { useClick } from '@/shared/hooks';
 
-const PostWrapper = ({ textContent }: { textContent: string }) => {
-  const { playClick } = useClick();
-
+const PostWrapper = ({
+  textContent,
+  tag,
+  date,
+}: {
+  textContent: string;
+  tag?: string;
+  date?: string;
+}) => {
   return (
-    <div className="min-h-[100dvh] max-w-[100dvw] px-4 pb-10 sm:px-8 md:px-20 xl:px-66">
-      <Banner />
-      <Link href="/" className="w-full md:w-1/3 lg:w-1/4">
-        <button
-          onClick={() => playClick()}
-          className={clsx(
-            buttonBorderStyles,
-            'py-4 px-16',
-            'w-full',
-            'flex items-center justify-center'
-          )}
-        >
-          <ChevronsLeft />
-        </button>
-      </Link>
+    <div>
+      {tag && date && (
+        <div className="my-2 flex justify-between items-center w-full">
+          <h1 className="text-3xl font-bold mt-4 pb-3">{tag}</h1>
+          <span className="my-1 leading-relaxed text-[var(--main-color)]">
+            {new Date(date).toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric',
+            })}
+          </span>
+        </div>
+      )}
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -59,7 +57,13 @@ const PostWrapper = ({ textContent }: { textContent: string }) => {
             />
           ),
           li: (props) => <li className="mb-1" {...props} />,
-          a: (props) => <a className="underline" {...props} />,
+          a: (props) => (
+            <a
+              target="_blank"
+              className="underline text-[var(--main-color)]"
+              {...props}
+            />
+          ),
 
           table: (props) => (
             <table

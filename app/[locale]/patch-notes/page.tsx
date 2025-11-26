@@ -1,6 +1,5 @@
-import PatchNotes from '@/shared/components/PatchNotes';
+import PatchNotes from '@/features/PatchNotes/PatchNotes';
 
 export default function PatchNotesPage() {
   return <PatchNotes />;
 }
-
