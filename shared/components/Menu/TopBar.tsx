@@ -137,16 +137,16 @@ const TopBar: React.FC<ITopBarProps> = ({
               className='text-[var(--secondary-color)]'
             />
           )}
-          {selectedGameMode.toLowerCase() === 'reverse-pick' && (
+          {selectedGameMode.toLowerCase() === 'anti-pick' && (
             <MousePointerClick
               size={22}
               className=' scale-x-[-1] text-[var(--secondary-color)]'
             />
           )}
-          {selectedGameMode.toLowerCase() === 'input' && (
+          {selectedGameMode.toLowerCase() === 'type' && (
             <Keyboard size={22} className='text-[var(--secondary-color)]' />
           )}
-          {selectedGameMode.toLowerCase() === 'reverse-input' && (
+          {selectedGameMode.toLowerCase() === 'anti-type' && (
             <Keyboard
               size={22}
               className='scale-y-[-1] text-[var(--secondary-color)]'
