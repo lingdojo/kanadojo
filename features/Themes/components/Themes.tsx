@@ -3,7 +3,7 @@ import { createElement, useEffect, useRef } from 'react';
 import themeSets, {
   applyTheme,
   applyThemeObject,
-  hexToHsl,
+  hexToHsl
 } from '@/features/Themes/data/themes';
 import usePreferencesStore from '@/features/Themes';
 import clsx from 'clsx';
@@ -28,12 +28,12 @@ const Themes = () => {
     cardColor: '#321441',
     borderColor: '#49215e',
     mainColor: '#ea70ad',
-    secondaryColor: '#ce89e6',
+    secondaryColor: '#ce89e6'
   });
 
-  const selectedTheme = usePreferencesStore((state) => state.theme);
-  const setSelectedTheme = usePreferencesStore((state) => state.setTheme);
-  const themePreview = usePreferencesStore((state) => state.themePreview);
+  const selectedTheme = usePreferencesStore(state => state.theme);
+  const setSelectedTheme = usePreferencesStore(state => state.setTheme);
+  const themePreview = usePreferencesStore(state => state.themePreview);
 
   // Initialize with first theme to avoid hydration mismatch
   const [randomTheme, setRandomTheme] = useState(themeSets[2].themes[0]);
@@ -68,7 +68,7 @@ const Themes = () => {
         cardColor: hexToHsl(customTheme.cardColor),
         borderColor: hexToHsl(customTheme.borderColor),
         mainColor: hexToHsl(customTheme.mainColor),
-        secondaryColor: hexToHsl(customTheme.secondaryColor),
+        secondaryColor: hexToHsl(customTheme.secondaryColor)
       });
 
       // setSelectedTheme(themeId);
@@ -94,8 +94,8 @@ const Themes = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex gap-2">
+    <div className='flex flex-col gap-6'>
+      <div className='flex gap-2'>
         <button
           className={clsx(
             'p-6 flex justify-center items-center gap-2 w-full md:w-1/2 flex-1 overflow-hidden',
@@ -111,7 +111,7 @@ const Themes = () => {
                 : randomTheme.cardColor,
             borderWidth:
               process.env.NODE_ENV === 'development' ? '2px' : undefined,
-            borderColor: randomTheme.borderColor,
+            borderColor: randomTheme.borderColor
           }}
           onClick={() => {
             playClick();
@@ -123,20 +123,20 @@ const Themes = () => {
             setSelectedTheme(randomTheme.id);
           }}
         >
-          <span className="mb-0.5">
+          <span className='mb-0.5'>
             {randomTheme.id === selectedTheme ? '\u2B24 ' : ''}
           </span>
           <Dice5
             style={{
-              color: randomTheme.secondaryColor,
+              color: randomTheme.secondaryColor
             }}
           />
           Random Theme
         </button>
       </div>
       {themeSets.map((themeSet, i) => (
-        <div key={i} className="flex flex-col gap-3">
-          <h4 className="text-xl flex flex-row items-center gap-1.5">
+        <div key={i} className='flex flex-col gap-3'>
+          <h4 className='text-xl flex flex-row items-center gap-1.5'>
             {createElement(themeSet.icon)}
             <span>{themeSet.name}</span>
           </h4>
@@ -145,7 +145,7 @@ const Themes = () => {
               'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
             )}
           >
-            {themeSet.themes.map((currentTheme) => (
+            {themeSet.themes.map(currentTheme => (
               <label
                 key={currentTheme.id}
                 style={{
@@ -154,9 +154,11 @@ const Themes = () => {
                     isHovered === currentTheme.id
                       ? currentTheme.cardColor
                       : currentTheme.backgroundColor,
+                  /* 
                   borderWidth:
                     process.env.NODE_ENV === 'development' ? '2px' : undefined,
-                  borderColor: currentTheme.borderColor,
+ */
+                  borderColor: currentTheme.borderColor
                 }}
                 onMouseEnter={() => {
                   setIsHovered(currentTheme.id);
@@ -172,11 +174,10 @@ const Themes = () => {
                 }}
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
-                  'py-4 flex justify-center items-center',
-                  'flex-1 overflow-hidden border-[var(--background-color)]',
-                  buttonBorderStyles,
+                  'py-4 flex justify-center items-center hover:cursor-pointer duration-275 rounded-xl',
+                  'flex-1 overflow-hidden border-b-4',
                   currentTheme.id === selectedTheme &&
-                    'border-2 border-[var(--main-color)]'
+                    'border-0 border-[var(--main-color)]'
                 )}
                 onClick={() => {
                   playClick();
@@ -184,8 +185,8 @@ const Themes = () => {
                 }}
               >
                 <input
-                  type="radio"
-                  name="selectedTheme"
+                  type='radio'
+                  name='selectedTheme'
                   onChange={() => {
                     setSelectedTheme(currentTheme.id);
                     // @ts-expect-error gtag fix
@@ -199,15 +200,15 @@ const Themes = () => {
                         {
                           event_category: 'Theme Change',
                           event_label: currentTheme.id,
-                          value: 1,
+                          value: 1
                         }
                       );
                     }
                   }}
-                  className="hidden"
+                  className='hidden'
                 />
-                <span className="text-center text-lg flex items-center gap-1.5">
-                  <span className="text-[var(--secondary-color)]">
+                <span className='text-center text-lg flex items-center gap-1.5'>
+                  <span className='text-[var(--secondary-color)]'>
                     {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                   </span>
                   {currentTheme.id === 'long'
@@ -221,7 +222,7 @@ const Themes = () => {
                                 ? i === 0
                                   ? currentTheme.mainColor
                                   : currentTheme.secondaryColor
-                                : undefined,
+                                : undefined
                           }}
                         >
                           {i > 0 && ' '}
@@ -237,8 +238,8 @@ const Themes = () => {
 
       {/* Custom Themes */}
       <div>
-        <div className="flex items-center justify-between mb-3">
-          <h4 className="text-lg font-semibold">Your Custom Themes</h4>
+        <div className='flex items-center justify-between mb-3'>
+          <h4 className='text-lg font-semibold'>Your Custom Themes</h4>
           {!isAdding && (
             <button
               onClick={() => setIsAdding(true)}
@@ -249,7 +250,7 @@ const Themes = () => {
                 'flex items-center gap-2'
               )}
             >
-              <Plus className="w-4 h-4" />
+              <Plus className='w-4 h-4' />
               New Theme
             </button>
           )}
@@ -262,16 +263,16 @@ const Themes = () => {
               'bg-[var(--card-color)] border-[var(--border-color)]'
             )}
           >
-            <div className="space-y-3">
-              <div className="flex gap-3">
+            <div className='space-y-3'>
+              <div className='flex gap-3'>
                 <input
-                  type="text"
-                  placeholder="* Theme name eg., Red Velvet or red-velvet"
+                  type='text'
+                  placeholder='* Theme name eg., Red Velvet or red-velvet'
                   value={customTheme.id}
-                  onChange={(e) =>
-                    setCustomTheme((prev) => ({
+                  onChange={e =>
+                    setCustomTheme(prev => ({
                       ...prev,
-                      id: e.target.value,
+                      id: e.target.value
                     }))
                   }
                   className={clsx(
@@ -281,14 +282,14 @@ const Themes = () => {
                   )}
                 />
               </div>
-              <div className="flex flex-wrap justify-around gap-3 items-center">
-                <div className="flex items-center gap-2 flex-col">
+              <div className='flex flex-wrap justify-around gap-3 items-center'>
+                <div className='flex items-center gap-2 flex-col'>
                   <input
-                    type="color"
+                    type='color'
                     value={customTheme.backgroundColor}
-                    onChange={(e) => {
+                    onChange={e => {
                       const value = e.target.value;
-                      setCustomTheme((prev) => {
+                      setCustomTheme(prev => {
                         const updated = { ...prev, backgroundColor: value };
                         applyThemeObject(updated);
                         return updated;
@@ -300,17 +301,17 @@ const Themes = () => {
                       'text-[var(--main-color)]'
                     )}
                   />
-                  <span className="text-sm text-[var(--secondary-color)]">
+                  <span className='text-sm text-[var(--secondary-color)]'>
                     Background Color
                   </span>
                 </div>
-                <div className="flex items-center gap-2  flex-col">
+                <div className='flex items-center gap-2  flex-col'>
                   <input
-                    type="color"
+                    type='color'
                     value={customTheme.cardColor}
-                    onChange={(e) => {
+                    onChange={e => {
                       const value = e.target.value;
-                      setCustomTheme((prev) => {
+                      setCustomTheme(prev => {
                         const updated = { ...prev, cardColor: value };
                         applyThemeObject(updated);
                         return updated;
@@ -322,17 +323,17 @@ const Themes = () => {
                       'text-[var(--main-color)]'
                     )}
                   />
-                  <span className="text-sm text-[var(--secondary-color)]">
+                  <span className='text-sm text-[var(--secondary-color)]'>
                     Card Color
                   </span>
                 </div>
-                <div className="flex items-center gap-2  flex-col">
+                <div className='flex items-center gap-2  flex-col'>
                   <input
-                    type="color"
+                    type='color'
                     value={customTheme.borderColor}
-                    onChange={(e) => {
+                    onChange={e => {
                       const value = e.target.value;
-                      setCustomTheme((prev) => {
+                      setCustomTheme(prev => {
                         const updated = { ...prev, borderColor: value };
                         applyThemeObject(updated);
                         return updated;
@@ -344,17 +345,17 @@ const Themes = () => {
                       'text-[var(--main-color)]'
                     )}
                   />
-                  <span className="text-sm text-[var(--secondary-color)]">
+                  <span className='text-sm text-[var(--secondary-color)]'>
                     Border Color
                   </span>
                 </div>
-                <div className="flex items-center gap-2  flex-col">
+                <div className='flex items-center gap-2  flex-col'>
                   <input
-                    type="color"
+                    type='color'
                     value={customTheme.mainColor}
-                    onChange={(e) => {
+                    onChange={e => {
                       const value = e.target.value;
-                      setCustomTheme((prev) => {
+                      setCustomTheme(prev => {
                         const updated = { ...prev, mainColor: value };
                         applyThemeObject(updated);
                         return updated;
@@ -366,17 +367,17 @@ const Themes = () => {
                       'text-[var(--main-color)]'
                     )}
                   />
-                  <span className="text-sm text-[var(--secondary-color)]">
+                  <span className='text-sm text-[var(--secondary-color)]'>
                     Main Color
                   </span>
                 </div>
-                <div className="flex items-center gap-2  flex-col">
+                <div className='flex items-center gap-2  flex-col'>
                   <input
-                    type="color"
+                    type='color'
                     value={customTheme.secondaryColor}
-                    onChange={(e) => {
+                    onChange={e => {
                       const value = e.target.value;
-                      setCustomTheme((prev) => {
+                      setCustomTheme(prev => {
                         const updated = { ...prev, secondaryColor: value };
                         applyThemeObject(updated);
                         return updated;
@@ -388,12 +389,12 @@ const Themes = () => {
                       'text-[var(--main-color)]'
                     )}
                   />
-                  <span className="text-sm text-[var(--secondary-color)]">
+                  <span className='text-sm text-[var(--secondary-color)]'>
                     Secondary Color
                   </span>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className='flex gap-2'>
                 <button
                   onClick={handleCustomTheme}
                   className={clsx(
@@ -413,7 +414,7 @@ const Themes = () => {
                       cardColor: '#321441',
                       borderColor: '#49215e',
                       mainColor: '#ea70ad',
-                      secondaryColor: '#ce89e6',
+                      secondaryColor: '#ce89e6'
                     });
                     setIsAdding(false);
                   }}
@@ -426,20 +427,20 @@ const Themes = () => {
                   Cancel
                 </button>
               </div>
-              <p className="text-sm text-[var(--secondary-color)] text-center py-2">
+              <p className='text-sm text-[var(--secondary-color)] text-center py-2'>
                 Check the{' '}
                 <a
-                  className="text-[var(--main-color)] font-bold underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/lingdojo/kana-dojo/blob/main/docs/UI_DESIGN.md#theming-system"
+                  className='text-[var(--main-color)] font-bold underline'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://github.com/lingdojo/kana-dojo/blob/main/docs/UI_DESIGN.md#theming-system'
                 >
                   UI_DESIGN
                 </a>{' '}
                 documentation for better understanding of the{' '}
-                <span className="text-[var(--main-color)]">theming system</span>{' '}
+                <span className='text-[var(--main-color)]'>theming system</span>{' '}
                 and{' '}
-                <span className="text-[var(--main-color)]">accessibility</span>
+                <span className='text-[var(--main-color)]'>accessibility</span>
               </p>
             </div>
           </div>
@@ -451,7 +452,7 @@ const Themes = () => {
               'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
             )}
           >
-            {themes.map((currentTheme) => (
+            {themes.map(currentTheme => (
               <label
                 key={currentTheme.id}
                 style={{
@@ -462,7 +463,7 @@ const Themes = () => {
                       : currentTheme.backgroundColor,
                   borderWidth:
                     process.env.NODE_ENV === 'development' ? '2px' : undefined,
-                  borderColor: currentTheme.borderColor,
+                  borderColor: currentTheme.borderColor
                 }}
                 onMouseEnter={() => {
                   setIsHovered(currentTheme.id);
@@ -489,8 +490,8 @@ const Themes = () => {
                 }}
               >
                 <input
-                  type="radio"
-                  name="selectedTheme"
+                  type='radio'
+                  name='selectedTheme'
                   onChange={() => {
                     setSelectedTheme(currentTheme.id);
                     // @ts-expect-error gtag fix
@@ -504,16 +505,16 @@ const Themes = () => {
                         {
                           event_category: 'Theme Change',
                           event_label: currentTheme.id,
-                          value: 1,
+                          value: 1
                         }
                       );
                     }
                   }}
-                  className="hidden"
+                  className='hidden'
                 />
-                <div className="flex w-full justify-around items-center">
-                  <span className="text-center text-lg flex items-center gap-1.5">
-                    <span className="text-[var(--secondary-color)]">
+                <div className='flex w-full justify-around items-center'>
+                  <span className='text-center text-lg flex items-center gap-1.5'>
+                    <span className='text-[var(--secondary-color)]'>
                       {currentTheme.id === selectedTheme ? '\u2B24 ' : ''}
                     </span>
                     {currentTheme.id.split('-').map((themeNamePart, i) => (
@@ -525,7 +526,7 @@ const Themes = () => {
                               ? i === 0
                                 ? currentTheme.mainColor
                                 : currentTheme.secondaryColor
-                              : undefined,
+                              : undefined
                         }}
                       >
                         {i > 0 && ' '}
@@ -543,17 +544,17 @@ const Themes = () => {
                       setRandomTheme(randomTheme);
                       setSelectedTheme(randomTheme.id);
                     }}
-                    className="p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card-color)] hover:bg-opacity-10 rounded transition-colors hover:cursor-pointer"
-                    title="Delete theme"
+                    className='p-2 text-red-500 hover:bg-red-500 hover:text-[var(--card-color)] hover:bg-opacity-10 rounded transition-colors hover:cursor-pointer'
+                    title='Delete theme'
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className='w-4 h-4' />
                   </button>
                 </div>
               </label>
             ))}
           </fieldset>
         ) : (
-          <p className="text-sm text-[var(--secondary-color)] text-center py-8">
+          <p className='text-sm text-[var(--secondary-color)] text-center py-8'>
             No custom themes yet. Create one to get started!
           </p>
         )}

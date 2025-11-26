@@ -558,7 +558,7 @@ const Behavior = () => {
           )}
         </button>
       </div>
-      <h4 className="text-lg">Enable hover theme preview:</h4>
+      <h4 className="text-lg">Enable theme preview on hover:</h4>
       <div className="flex flex-row gap-4">
         <button
           className={clsx(
