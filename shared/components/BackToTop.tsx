@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
@@ -8,25 +8,29 @@ export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
 
-  // target the container in ClientLayout
-  const container = document.querySelector(
-    '[data-scroll-restoration-id="container"]'
-  );
+  // target the container in ClientLayout and store it in ref
+  const container = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!container) return;
+    if (typeof document === 'undefined') return;
+
+    container.current = document.querySelector(
+      '[data-scroll-restoration-id="container"]'
+    );
+
+    if (!container.current) return;
 
     const onScroll = () => {
       // Show after user scrolls down 300px
-      setVisible(container.scrollTop > 300);
+      setVisible(container.current!.scrollTop > 300);
     };
 
     // attach scroll listener to the container, not window
-    container.addEventListener('scroll', onScroll, { passive: true });
+    container.current.addEventListener('scroll', onScroll, { passive: true });
     // Initial check
     onScroll();
 
-    return () => container.removeEventListener('scroll', onScroll);
+    return () => container.current?.removeEventListener('scroll', onScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -39,7 +43,7 @@ export default function BackToTop() {
 
   const handleClick = () => {
     if (typeof window !== 'undefined') {
-      container?.scrollTo({ top: 0, behavior: 'smooth' });
+      container.current?.scrollTo({ top: 0, behavior: 'smooth' });
       // Move focus to body for keyboard users after scroll
       // (give the browser a tick so scrolling starts)
       setTimeout(() => {
@@ -50,8 +54,8 @@ export default function BackToTop() {
 
   return (
     <button
-      aria-label='Back to top'
-      title='Back to top'
+      aria-label="Back to top"
+      title="Back to top"
       onClick={handleClick}
       className={clsx(
         'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ',
