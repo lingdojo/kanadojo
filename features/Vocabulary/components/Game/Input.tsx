@@ -251,22 +251,26 @@ const VocabInputGame = ({
                   : 'What is the meaning?'
                 : 'What is the reading?'}
             </span>
-            <FuriganaText
-              text={correctChar}
-              reading={
-                !isReverse && quizType === 'meaning'
-                  ? correctWordObj?.reading
-                  : undefined
-              }
-              className={clsx(textSize, 'text-center')}
-              lang={displayCharLang}
-            />
-            <SSRAudioButton
-              text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] border-[var(--border-color)]'
-            />
+            <div className='flex flex-row items-center gap-1'>
+              <FuriganaText
+                text={correctChar}
+                reading={
+                  !isReverse && quizType === 'meaning'
+                    ? correctWordObj?.reading
+                    : undefined
+                }
+                className={clsx(textSize, 'text-center')}
+                lang={displayCharLang}
+              />
+              {!isReverse && (
+                <SSRAudioButton
+                  text={correctChar}
+                  variant='icon-only'
+                  size='sm'
+                  className='bg-[var(--card-color)] border-[var(--border-color)]'
+                />
+              )}
+            </div>
           </div>
 
           <input
@@ -274,8 +278,8 @@ const VocabInputGame = ({
             type='text'
             value={inputValue}
             className={clsx(
-              'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',
-              'border-[var(--card-color)] focus:border-[var(--border-color)]'
+              'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl text-[var(--secondary-color)]',
+              'border-[var(--border-color)] focus:border-[var(--secondary-color)]/80'
             )}
             onChange={e => setInputValue(e.target.value)}
             onKeyDown={handleEnter}
@@ -289,7 +293,8 @@ const VocabInputGame = ({
               buttonBorderStyles,
               'flex flex-row items-end gap-2',
               'active:scale-95 md:active:scale-98 active:duration-225',
-              'text-[var(--secondary-color)]'
+              'text-[var(--secondary-color)]',
+              'border-b-4 border-[var(--border-color)] hover:border-[var(--secondary-color)]/80'
             )}
             onClick={handleSkip}
           >

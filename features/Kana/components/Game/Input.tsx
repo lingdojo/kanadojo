@@ -175,22 +175,24 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
       )}
     >
       <GameIntel gameMode={gameMode} feedback={feedback} />
-      <div className='flex flex-col items-center gap-4'>
+      <div className='flex flex-row items-center gap-1'>
         <p className='text-8xl sm:text-9xl font-medium'>{correctChar}</p>
-        <SSRAudioButton
-          text={correctChar}
-          variant='icon-only'
-          size='lg'
-          className='bg-[var(--card-color)] border-[var(--border-color)]'
-        />
+        {!isReverse && (
+          <SSRAudioButton
+            text={correctChar}
+            variant='icon-only'
+            size='sm'
+            className='bg-[var(--card-color)] border-[var(--border-color)]'
+          />
+        )}
       </div>
       <input
         ref={inputRef}
         type='text'
         value={inputValue}
         className={clsx(
-          'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl',
-          'border-[var(--card-color)] focus:border-[var(--border-color)]'
+          'border-b-2 pb-1 text-center focus:outline-none text-2xl lg:text-5xl text-[var(--secondary-color)]',
+          'border-[var(--border-color)] focus:border-[var(--secondary-color)]/80'
         )}
         onChange={e => setInputValue(e.target.value)}
         onKeyDown={handleEnter}
@@ -202,7 +204,8 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
           'flex flex-row items-end gap-2',
           buttonBorderStyles,
           'active:scale-95 md:active:scale-98 active:duration-200',
-          'text-[var(--secondary-color)]'
+          'text-[var(--secondary-color)]',
+          'border-b-4 border-[var(--border-color)] hover:border-[var(--secondary-color)]/80'
         )}
         onClick={handleSkip}
       >

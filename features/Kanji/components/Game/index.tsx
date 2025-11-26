@@ -32,15 +32,15 @@ const Game = () => {
       <Return isHidden={showStats} href={pathname} gameMode={gameMode} />
       {gameMode.toLowerCase() === 'pick' ? (
         <Pick selectedKanjiObjs={selectedKanjiObjs} isHidden={showStats} />
-      ) : gameMode.toLowerCase() === 'reverse-pick' ? (
+      ) : gameMode.toLowerCase() === 'anti-pick' ? (
         <Pick
           selectedKanjiObjs={selectedKanjiObjs}
           isHidden={showStats}
           isReverse={true}
         />
-      ) : gameMode.toLowerCase() === 'input' ? (
+      ) : gameMode.toLowerCase() === 'type' ? (
         <Input selectedKanjiObjs={selectedKanjiObjs} isHidden={showStats} />
-      ) : gameMode.toLowerCase() === 'reverse-input' ? (
+      ) : gameMode.toLowerCase() === 'anti-type' ? (
         <Input
           selectedKanjiObjs={selectedKanjiObjs}
           isHidden={showStats}
