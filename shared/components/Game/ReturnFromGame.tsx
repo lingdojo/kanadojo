@@ -89,7 +89,7 @@ const Return = ({
         </Link>
         <ProgressBar />
       </div>
-      <div className='flex flex-row w-full'>
+      <div className='flex flex-row w-full items-center'>
         <p className='w-1/2 text-xl px-2 flex justify-start items-center gap-2.5 py-2 '>
           {gameMode.toLowerCase() === 'pick' && (
             <MousePointerClick className='text-[var(--main-color)]' />

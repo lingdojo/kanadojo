@@ -201,7 +201,7 @@ const KanjiPickGame = ({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-4 sm:gap-8 items-center w-full sm:w-4/5',
+        'flex flex-col gap-8 sm:gap-10 items-center w-full sm:w-4/5',
         isHidden ? 'hidden' : '',
         !isReverse && 'max-md:pb-12'
       )}
@@ -217,7 +217,7 @@ const KanjiPickGame = ({
 
       {!displayAnswerSummary && (
         <>
-          <div className='flex flex-col items-center gap-4'>
+          <div className='flex flex-row justify-center items-center gap-1'>
             <FuriganaText
               text={correctChar}
               reading={
@@ -232,7 +232,7 @@ const KanjiPickGame = ({
               <SSRAudioButton
                 text={correctChar}
                 variant='icon-only'
-                size='lg'
+                size='sm'
                 className='bg-[var(--card-color)] text-[var(--secondary-color)]'
               />
             )}
@@ -240,8 +240,8 @@ const KanjiPickGame = ({
 
           <div
             className={clsx(
-              'flex w-full gap-5 md:gap-0 sm:justify-evenly',
-              isReverse ? 'flex-row' : 'flex-col md:flex-row'
+              'flex w-full gap-6 items-center',
+              isReverse ? 'flex-row justify-evenly' : 'flex-col'
             )}
           >
             {shuffledOptions.map((option, i) => (
@@ -253,7 +253,8 @@ const KanjiPickGame = ({
                 type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
-                  'text-4xl py-4 rounded-xl w-full md:w-1/4 xl:w-1/5 flex flex-row justify-center items-center gap-1.5',
+                  isReverse ? 'w-1/3 md:w-1/4 lg:w-1/5 justify-center' : 'w-full md:w-1/2 pl-8 justify-start',
+                  'text-4xl py-5   rounded-xl flex flex-row  items-center gap-1.5',
                   buttonBorderStyles,
                   'text-[var(--border-color)]',
                   wrongSelectedAnswers.includes(option) &&

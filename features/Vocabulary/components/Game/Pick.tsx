@@ -235,7 +235,7 @@ const VocabPickGame = ({
         <>
           <div className='flex flex-col items-center gap-4'>
             {/* Show prompt based on quiz type */}
-            <span className='text-xs md:text-sm text-[var(--secondary-color)] mb-2'>
+            <span className='text-sm text-[var(--secondary-color)] mb-2'>
               {quizType === 'meaning'
                 ? isReverse
                   ? 'What is the meaning?'
@@ -279,7 +279,7 @@ const VocabPickGame = ({
                 type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
-                  'py-6  pl-8 rounded-xl w-full md:w-1/2 flex flex-row justify-start items-center gap-1.5',
+                  'py-5  pl-8 rounded-xl w-full md:w-1/2 flex flex-row justify-start items-center gap-1.5',
                   buttonBorderStyles,
                   'active:scale-95 md:active:scale-98 active:duration-200',
                   'text-[var(--border-color)]',
