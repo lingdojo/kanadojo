@@ -18,7 +18,6 @@ import {
 } from '@/shared/lib/unitSets';
 import { useClick } from '@/shared/hooks';
 import { CircleCheck, Circle, Trash } from 'lucide-react';
-import { miniButtonBorderStyles } from '@/shared/lib/styles';
 import { useMemo } from 'react';
 
 type CollectionLevel = 'n5' | 'n4' | 'n3' | 'n2' | 'n1';
@@ -208,7 +207,7 @@ const CollectionSelector = () => {
         <button
           className={clsx(
             'py-3 px-16 w-full',
-            miniButtonBorderStyles,
+            'rounded-xl duration-275 hover:cursor-pointer bg-[var(--background-color)] border-b-4 border-[var(--border-color)]',
             'text-[var(--main-color)]',
             'flex justify-center'
           )}

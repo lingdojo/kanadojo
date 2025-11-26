@@ -65,7 +65,8 @@ const GameModes = () => {
         'duration-250',
         'transition-all ease-in-out',
         'flex flex-col md:flex-row',
-        'w-full '
+        'w-full',
+        'border-b-4 border-[var(--border-color)]'
       )}
     >
       {gameModes.map((gameMode, i) => (

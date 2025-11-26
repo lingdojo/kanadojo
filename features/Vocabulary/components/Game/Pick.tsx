@@ -289,7 +289,7 @@ const VocabPickGame = ({
                   wrongSelectedAnswers.includes(option) &&
                     'hover:bg-[var(--card-color)] border-[var(--border-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--secondary-color)] border-[var(--secondary-color)]/60 hover:border-[var(--secondary-color)]'
+                    'text-[var(--secondary-color)] border-[var(--secondary-color)]/50 hover:border-[var(--secondary-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}

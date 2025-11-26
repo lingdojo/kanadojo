@@ -278,7 +278,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
               wrongSelectedAnswers.includes(variantChar) &&
                 'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
               !wrongSelectedAnswers.includes(variantChar) &&
-                'text-[var(--secondary-color)] border-[var(--secondary-color)]/60 hover:border-[var(--secondary-color)]'
+                'text-[var(--secondary-color)] border-[var(--secondary-color)]/50 hover:border-[var(--secondary-color)]'
             )}
             onClick={() => handleOptionClick(variantChar)}
           >
