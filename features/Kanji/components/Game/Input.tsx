@@ -240,7 +240,7 @@ const KanjiInputGame = ({
                 text={correctChar}
                 variant='icon-only'
                 size='sm'
-                className='bg-[var(--card-color)] border-[var(--border-color)]'
+                className='bg-[var(--card-color)] text-[var(--secondary-color)]'
               />
             )}
           </div>
