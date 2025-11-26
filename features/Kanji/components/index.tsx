@@ -313,11 +313,12 @@ const KanjiCards = () => {
                       <button
                         className={clsx(
                           'text-2xl flex justify-center items-center gap-2 group',
-                          'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
-                          'duration-250 transition-all ease-in-out',
+                          'rounded-xl  hover:cursor-pointer border-[var(--border-color)]',
+                          'duration-250 transition-all ease-in-out border-b-4',
                           'px-2 py-3 max-md:mx-4',
-                          isSelected && 'bg-[var(--border-color)] border-[var(--main-color)]/60',
-                          'border-b-4 border-[var(--border-color)]'
+                          isSelected
+                            ? 'bg-[var(--main-color)] text-[var(--background-color)] '
+                            : 'bg-[var(--background-color)]'
                         )}
                         onClick={e => {
                           e.currentTarget.blur();
@@ -340,7 +341,7 @@ const KanjiCards = () => {
                         }}
                       >
                         {isSelected ? (
-                          <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
+                          <CircleCheck className='mt-0.5 text-[var(--background-color)] duration-250' />
                         ) : (
                           <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
                         )}

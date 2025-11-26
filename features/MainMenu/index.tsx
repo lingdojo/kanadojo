@@ -232,7 +232,8 @@ const MainMenu = () => {
             'duration-250',
             'transition-all ease-in-out',
             'flex flex-col md:flex-row',
-            'w-full'
+            'w-full',
+            'border-b-4 border-[var(--border-color)]'
           )}
         >
           {links.map((link, i) => (
@@ -247,9 +248,7 @@ const MainMenu = () => {
                     i === 0 && 'rounded-tl-2xl rounded-bl-2xl',
                     i === links.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
                     'hover:cursor-pointer',
-                    'hover:bg-[var(--border-color)]',
-                    'border-b-4 border-[var(--border-color)]',
-                    // 'duration-100'
+                    'hover:bg-[var(--border-color)]'
                   )}
                   onClick={() => playClick()}
                 >
