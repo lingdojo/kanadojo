@@ -1,23 +1,33 @@
-"use client";
+'use client';
 import { useEffect, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
 
+  // target the container in ClientLayout
+  const container = document.querySelector(
+    '[data-scroll-restoration-id="container"]'
+  );
+
   useEffect(() => {
+    if (!container) return;
+
     const onScroll = () => {
       // Show after user scrolls down 300px
-      setVisible(window.scrollY > 300);
+      setVisible(container.scrollTop > 300);
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    // attach scroll listener to the container, not window
+    container.addEventListener('scroll', onScroll, { passive: true });
     // Initial check
     onScroll();
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => container.removeEventListener('scroll', onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Hide on top-level locale route (e.g. /en or /es) or root
@@ -29,7 +39,7 @@ export default function BackToTop() {
 
   const handleClick = () => {
     if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      container?.scrollTo({ top: 0, behavior: 'smooth' });
       // Move focus to body for keyboard users after scroll
       // (give the browser a tick so scrolling starts)
       setTimeout(() => {
@@ -43,15 +53,15 @@ export default function BackToTop() {
       aria-label="Back to top"
       title="Back to top"
       onClick={handleClick}
-      className={
-        'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ' +
-        'inline-flex items-center justify-center rounded-full ' +
-        'p-3 shadow-lg transition-all duration-200 ' +
-        'bg-[var(--card-color)] text-[var(--main-color)] ' +
-        'hover:bg-[var(--border-color)] hover:scale-110 ' +
-        'focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 ' +
+      className={clsx(
+        'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ',
+        'inline-flex items-center justify-center rounded-full ',
+        'p-3 shadow-lg transition-all duration-200 ',
+        'bg-[var(--card-color)] text-[var(--main-color)] ',
+        'hover:bg-[var(--border-color)] hover:scale-110 ',
+        'focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 ',
         'border-2 border-[var(--border-color)]'
-      }
+      )}
     >
       <ChevronUp size={24} strokeWidth={2.5} />
     </button>
