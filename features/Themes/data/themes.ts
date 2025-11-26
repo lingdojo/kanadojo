@@ -616,22 +616,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(29, 100%, 59%, 1)',
       },
       {
-        id: 'digital-bloom',
-        backgroundColor: 'hsla(308, 16%, 13%, 1)',
-        cardColor: 'hsla(308, 16%, 20%, 1)',
-        borderColor: 'hsla(308, 16%, 31%, 1)',
-        mainColor: 'hsla(93, 90%, 55%, 1)',
-        secondaryColor: 'hsla(207, 95%, 66%, 1)',
-      },
-      {
-        id: 'velvet-nightshade',
-        backgroundColor: 'hsla(268, 34%, 12%, 1)',
-        cardColor: 'hsla(268, 34%, 20%, 1)',
-        borderColor: 'hsla(268, 34%, 30%, 1)',
-        mainColor: 'hsla(98, 72%, 62%, 1)',
-        secondaryColor: 'hsla(19, 86%, 56%, 1)',
-      },
-      {
         id: 'rainforest-mist',
         backgroundColor: 'hsla(141, 26%, 11%, 1)',
         cardColor: 'hsla(141, 26%, 19%, 1)',
