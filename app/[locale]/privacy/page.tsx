@@ -1,4 +1,4 @@
-import PrivacyPolicy from '@/features/Academy/Legal/Privacy';
+import PrivacyPolicy from '@/features/Legal/Privacy';
 
 export default function PrivacyPolicyPage() {
   return <PrivacyPolicy />;
