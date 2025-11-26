@@ -253,12 +253,12 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
       )}
     >
       <GameIntel gameMode={gameMode} feedback={feedback} />
-      <div className='flex flex-col items-center gap-4'>
+      <div className='flex flex-row items-center gap-1'>
         <p className='text-8xl sm:text-9xl font-medium'>{displayChar}</p>
         <SSRAudioButton
           text={displayChar}
           variant='icon-only'
-          size='lg'
+          size='sm'
           className='bg-[var(--card-color)] text-[var(--secondary-color)]'
         />
       </div>
@@ -274,10 +274,11 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
             className={clsx(
               'text-5xl font-semibold pb-6 pt-3 w-full sm:w-1/5 flex flex-row justify-center items-center gap-1',
               buttonBorderStyles,
+              'border-b-4 ',
               wrongSelectedAnswers.includes(variantChar) &&
                 'hover:bg-[var(--card-color)] hover:border-[var(--border-color)] text-[var(--border-color)]',
               !wrongSelectedAnswers.includes(variantChar) &&
-                'text-[var(--main-color)] hover:border-[var(--main-color)]'
+                'text-[var(--secondary-color)] border-[var(--secondary-color)]/60 hover:border-[var(--secondary-color)]'
             )}
             onClick={() => handleOptionClick(variantChar)}
           >

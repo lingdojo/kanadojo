@@ -279,15 +279,17 @@ const VocabPickGame = ({
                 type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
-                  'py-5  pl-8 rounded-xl w-full md:w-1/2 flex flex-row justify-start items-center gap-1.5',
+                  'py-5 pl-8 rounded-xl w-full md:w-1/2 flex flex-row justify-start items-center gap-1.5',
                   buttonBorderStyles,
                   'active:scale-95 md:active:scale-98 active:duration-200',
                   'text-[var(--border-color)]',
+                  ' border-b-4',
+
                   isReverse ? 'text-4xl' : 'text-3xl',
                   wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                    'hover:bg-[var(--card-color)] border-[var(--border-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--main-color)]'
+                    'text-[var(--secondary-color)] border-[var(--secondary-color)]/60 hover:border-[var(--secondary-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={optionLang}

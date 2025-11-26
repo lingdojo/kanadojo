@@ -253,14 +253,19 @@ const KanjiPickGame = ({
                 type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
-                  isReverse ? 'w-1/3 md:w-1/4 lg:w-1/5 justify-center' : 'w-full md:w-1/2 pl-8 justify-start',
+                  isReverse
+                    ? 'w-1/3 md:w-1/4 lg:w-1/5 justify-center'
+                    : 'w-full md:w-1/2 pl-8 justify-start',
                   'text-4xl py-5   rounded-xl flex flex-row  items-center gap-1.5',
                   buttonBorderStyles,
                   'text-[var(--border-color)]',
+
+                  ' border-b-4',
+
                   wrongSelectedAnswers.includes(option) &&
-                    'hover:bg-[var(--card-color)]',
+                    'hover:bg-[var(--card-color)] border-[var(--border-color)]',
                   !wrongSelectedAnswers.includes(option) &&
-                    'text-[var(--main-color)]'
+                    'text-[var(--secondary-color)] border-[var(--secondary-color)]/60 hover:border-[var(--secondary-color)]'
                 )}
                 onClick={() => handleOptionClick(option)}
                 lang={isReverse ? 'ja' : undefined}
