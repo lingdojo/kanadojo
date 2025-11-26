@@ -48,26 +48,26 @@ const KanjiPickGame = ({
   const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   // State management based on mode
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .meanings[0]
-      : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .kanjiChar
-  );
+  const [correctChar, setCorrectChar] = useState(() => {
+    if (selectedKanjiObjs.length === 0) return '';
+    const index = random.integer(0, selectedKanjiObjs.length - 1);
+    return isReverse
+      ? selectedKanjiObjs[index].meanings[0]
+      : selectedKanjiObjs[index].kanjiChar;
+  });
 
   // Find the correct object based on the current mode
-  const correctKanjiObj = (
-    isReverse
-      ? selectedKanjiObjs.find(obj => obj.meanings[0] === correctChar)
-      : selectedKanjiObjs.find(obj => obj.kanjiChar === correctChar)
-  )!;
+  const correctKanjiObj = isReverse
+    ? selectedKanjiObjs.find(obj => obj.meanings[0] === correctChar)
+    : selectedKanjiObjs.find(obj => obj.kanjiChar === correctChar);
 
-  const [currentKanjiObj, setCurrentKanjiObj] = useState(correctKanjiObj);
+  const [currentKanjiObj, setCurrentKanjiObj] = useState<IKanjiObj>(
+    correctKanjiObj as IKanjiObj
+  );
 
   const targetChar = isReverse
     ? correctKanjiObj?.kanjiChar
-    : correctKanjiObj?.meanings[0];
+    : correctKanjiObj?.meanings?.[0];
 
   // Get incorrect options based on mode
   const getIncorrectOptions = () => {
@@ -133,6 +133,10 @@ const KanjiPickGame = ({
     if (isHidden) speedStopwatch.pause();
   }, [isHidden]);
 
+  if (!selectedKanjiObjs || selectedKanjiObjs.length === 0) {
+    return null;
+  }
+
   const handleOptionClick = (selectedOption: string) => {
     if (selectedOption === targetChar) {
       setDisplayAnswerSummary(true);
@@ -160,7 +164,7 @@ const KanjiPickGame = ({
     addCorrectAnswerTime(speedStopwatch.totalMilliseconds / 1000);
     speedStopwatch.reset();
     playCorrect();
-    setCurrentKanjiObj(correctKanjiObj);
+    setCurrentKanjiObj(correctKanjiObj as IKanjiObj);
 
     addCharacterToHistory(correctChar);
     incrementCharacterScore(correctChar, 'correct');

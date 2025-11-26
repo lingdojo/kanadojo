@@ -53,22 +53,22 @@ const KanjiInputGame = ({
   const [inputValue, setInputValue] = useState('');
 
   // State management based on mode
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .meanings[0]
-      : selectedKanjiObjs[random.integer(0, selectedKanjiObjs.length - 1)]
-          .kanjiChar
-  );
+  const [correctChar, setCorrectChar] = useState(() => {
+    if (selectedKanjiObjs.length === 0) return '';
+    const index = random.integer(0, selectedKanjiObjs.length - 1);
+    return isReverse
+      ? selectedKanjiObjs[index].meanings[0]
+      : selectedKanjiObjs[index].kanjiChar;
+  });
 
   // Find the target character/meaning based on mode
-  const correctKanjiObj = (
-    isReverse
-      ? selectedKanjiObjs.find(obj => obj.meanings[0] === correctChar)
-      : selectedKanjiObjs.find(obj => obj.kanjiChar === correctChar)
-  )!;
+  const correctKanjiObj = isReverse
+    ? selectedKanjiObjs.find(obj => obj.meanings[0] === correctChar)
+    : selectedKanjiObjs.find(obj => obj.kanjiChar === correctChar);
 
-  const [currentKanjiObj, setCurrentKanjiObj] = useState(correctKanjiObj);
+  const [currentKanjiObj, setCurrentKanjiObj] = useState<IKanjiObj>(
+    correctKanjiObj as IKanjiObj
+  );
 
   const targetChar = isReverse
     ? correctKanjiObj?.kanjiChar
@@ -101,6 +101,10 @@ const KanjiInputGame = ({
     if (isHidden) speedStopwatch.pause();
   }, [isHidden]);
 
+  if (!selectedKanjiObjs || selectedKanjiObjs.length === 0) {
+    return null;
+  }
+
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputValue.trim().length) {
       if (isInputCorrect(inputValue)) {
@@ -129,7 +133,7 @@ const KanjiInputGame = ({
     speedStopwatch.pause();
     addCorrectAnswerTime(speedStopwatch.totalMilliseconds / 1000);
     speedStopwatch.reset();
-    setCurrentKanjiObj(correctKanjiObj);
+    setCurrentKanjiObj(correctKanjiObj as IKanjiObj);
 
     playCorrect();
     addCharacterToHistory(correctChar);

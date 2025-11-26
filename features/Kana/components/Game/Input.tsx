@@ -59,11 +59,15 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
   );
 
   // State for characters
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedRomaji[random.integer(0, selectedRomaji.length - 1)]
-      : selectedKana[random.integer(0, selectedKana.length - 1)]
-  );
+  const [correctChar, setCorrectChar] = useState(() => {
+    if (isReverse) {
+      if (selectedRomaji.length === 0) return '';
+      return selectedRomaji[random.integer(0, selectedRomaji.length - 1)];
+    } else {
+      if (selectedKana.length === 0) return '';
+      return selectedKana[random.integer(0, selectedKana.length - 1)];
+    }
+  });
 
   const targetChar = selectedPairs[correctChar];
 
@@ -93,6 +97,13 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
   useEffect(() => {
     if (isHidden) speedStopwatch.pause();
   }, [isHidden]);
+
+  if (
+    (isReverse && (!selectedRomaji || selectedRomaji.length === 0)) ||
+    (!isReverse && (!selectedKana || selectedKana.length === 0))
+  ) {
+    return null;
+  }
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputValue.trim().length) {

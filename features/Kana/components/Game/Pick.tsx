@@ -69,14 +69,18 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
   );
 
   // State for normal pick mode
-  const [correctKanaChar, setCorrectKanaChar] = useState(
-    selectedKana[random.integer(0, selectedKana.length - 1)]
-  );
+  const [correctKanaChar, setCorrectKanaChar] = useState(() => {
+    if (selectedKana.length === 0) return '';
+    return selectedKana[random.integer(0, selectedKana.length - 1)];
+  });
   const correctRomajiChar = selectedPairs[correctKanaChar];
 
   // State for reverse pick mode
   const [correctRomajiCharReverse, setCorrectRomajiCharReverse] = useState(
-    selectedRomaji[random.integer(0, selectedRomaji.length - 1)]
+    () => {
+      if (selectedRomaji.length === 0) return '';
+      return selectedRomaji[random.integer(0, selectedRomaji.length - 1)];
+    }
   );
   const correctKanaCharReverse = random.bool()
     ? selectedPairs1[correctRomajiCharReverse]
@@ -153,6 +157,10 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
   useEffect(() => {
     if (isHidden) speedStopwatch.pause();
   }, [isHidden]);
+
+  if (!selectedKana || selectedKana.length === 0) {
+    return null;
+  }
 
   const handleOptionClick = (selectedChar: string) => {
     if (!isReverse) {
@@ -255,7 +263,7 @@ const PickGame = ({ isHidden, isReverse = false }: PickGameProps) => {
       <GameIntel gameMode={gameMode} feedback={feedback} />
       <div className='flex flex-row items-center gap-1'>
         <p className='text-8xl sm:text-9xl font-medium'>{displayChar}</p>
-{/* 
+        {/* 
         {!isReverse && (
           <SSRAudioButton
             text={displayChar}

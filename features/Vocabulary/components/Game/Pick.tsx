@@ -51,20 +51,22 @@ const VocabPickGame = ({
   const [quizType, setQuizType] = useState<'meaning' | 'reading'>('meaning');
 
   // State management based on mode
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)]
-          .meanings[0]
-      : selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
-  );
+  const [correctChar, setCorrectChar] = useState(() => {
+    if (selectedWordObjs.length === 0) return '';
+    const index = random.integer(0, selectedWordObjs.length - 1);
+    return isReverse
+      ? selectedWordObjs[index].meanings[0]
+      : selectedWordObjs[index].word;
+  });
 
   // Find the correct object based on the current mode
-  const correctWordObj = (
-    isReverse
-      ? selectedWordObjs.find(obj => obj.meanings[0] === correctChar)
-      : selectedWordObjs.find(obj => obj.word === correctChar)
-  )!;
-  const [currentWordObj, setCurrentWordObj] = useState(correctWordObj);
+  const correctWordObj = isReverse
+    ? selectedWordObjs.find(obj => obj.meanings[0] === correctChar)
+    : selectedWordObjs.find(obj => obj.word === correctChar);
+
+  const [currentWordObj, setCurrentWordObj] = useState<IVocabObj>(
+    correctWordObj as IVocabObj
+  );
 
   // Determine target based on quiz type and mode
   const targetChar =
@@ -122,6 +124,10 @@ const VocabPickGame = ({
     );
   }, [correctChar]);
 
+  if (!selectedWordObjs || selectedWordObjs.length === 0) {
+    return null;
+  }
+
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
@@ -154,7 +160,7 @@ const VocabPickGame = ({
           <CircleCheck className='inline text-[var(--main-color)]' />
         </>
       );
-      setCurrentWordObj(correctWordObj);
+      setCurrentWordObj(correctWordObj as IVocabObj);
     } else {
       handleWrongAnswer(selectedOption);
       setFeedback(
@@ -218,7 +224,7 @@ const VocabPickGame = ({
     <div
       className={clsx(
         'flex flex-col gap-6 sm:gap-10 items-center w-full sm:w-4/5',
-        isHidden ? 'hidden' : '',
+        isHidden ? 'hidden' : ''
       )}
     >
       <GameIntel gameMode={gameMode} />

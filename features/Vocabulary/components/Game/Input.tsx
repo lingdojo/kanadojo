@@ -57,21 +57,22 @@ const VocabInputGame = ({
   const [quizType, setQuizType] = useState<'meaning' | 'reading'>('meaning');
 
   // State management based on mode
-  const [correctChar, setCorrectChar] = useState(
-    isReverse
-      ? selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)]
-          .meanings[0]
-      : selectedWordObjs[random.integer(0, selectedWordObjs.length - 1)].word
-  );
+  const [correctChar, setCorrectChar] = useState(() => {
+    if (selectedWordObjs.length === 0) return '';
+    const index = random.integer(0, selectedWordObjs.length - 1);
+    return isReverse
+      ? selectedWordObjs[index].meanings[0]
+      : selectedWordObjs[index].word;
+  });
 
   // Find the target character/meaning based on mode
-  const correctWordObj = (
-    isReverse
-      ? selectedWordObjs.find(obj => obj.meanings[0] === correctChar)
-      : selectedWordObjs.find(obj => obj.word === correctChar)
-  )!;
+  const correctWordObj = isReverse
+    ? selectedWordObjs.find(obj => obj.meanings[0] === correctChar)
+    : selectedWordObjs.find(obj => obj.word === correctChar);
 
-  const [currentWordObj, setCurrentWordObj] = useState(correctWordObj);
+  const [currentWordObj, setCurrentWordObj] = useState<IVocabObj>(
+    correctWordObj as IVocabObj
+  );
 
   // Determine target based on quiz type and mode
   const targetChar =
@@ -107,6 +108,10 @@ const VocabInputGame = ({
   useEffect(() => {
     if (isHidden) speedStopwatch.pause();
   }, [isHidden]);
+
+  if (!selectedWordObjs || selectedWordObjs.length === 0) {
+    return null;
+  }
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputValue.trim().length) {
@@ -144,7 +149,7 @@ const VocabInputGame = ({
     speedStopwatch.pause();
     addCorrectAnswerTime(speedStopwatch.totalMilliseconds / 1000);
     speedStopwatch.reset();
-    setCurrentWordObj(correctWordObj);
+    setCurrentWordObj(correctWordObj as IVocabObj);
 
     playCorrect();
     addCharacterToHistory(correctChar);
@@ -205,7 +210,7 @@ const VocabInputGame = ({
   const handleSkip = (e: React.MouseEvent<HTMLButtonElement>) => {
     playClick();
     e.currentTarget.blur();
-    setCurrentWordObj(correctWordObj);
+    setCurrentWordObj(correctWordObj as IVocabObj);
     setDisplayAnswerSummary(true);
     setInputValue('');
     generateNewCharacter();
