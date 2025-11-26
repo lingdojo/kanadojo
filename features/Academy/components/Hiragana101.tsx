@@ -1,3 +1,4 @@
+'use client';
 import PostWrapper from '@/shared/components/PostWrapper';
 import hiragana101 from '@/features/Academy/data/hiraganaBlogPost';
 
