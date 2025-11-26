@@ -228,12 +228,14 @@ const KanjiPickGame = ({
               className={clsx(isReverse ? 'text-6xl md:text-8xl' : 'text-9xl')}
               lang={displayCharLang}
             />
-            <SSRAudioButton
-              text={correctChar}
-              variant='icon-only'
-              size='lg'
-              className='bg-[var(--card-color)] text-[var(--secondary-color)]'
-            />
+            {!isReverse && (
+              <SSRAudioButton
+                text={correctChar}
+                variant='icon-only'
+                size='lg'
+                className='bg-[var(--card-color)] text-[var(--secondary-color)]'
+              />
+            )}
           </div>
 
           <div

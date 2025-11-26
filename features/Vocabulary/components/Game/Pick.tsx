@@ -253,19 +253,21 @@ const VocabPickGame = ({
                 className={clsx(textSize, 'text-center')}
                 lang={displayCharLang}
               />
-              <SSRAudioButton
-                text={correctChar}
-                variant='icon-only'
-                size='sm'
-                className='bg-[var(--card-color)] text-[var(--secondary-color)]'
-              />
+              {!isReverse && (
+                <SSRAudioButton
+                  text={correctChar}
+                  variant='icon-only'
+                  size='sm'
+                  className='bg-[var(--card-color)] text-[var(--secondary-color)]'
+                />
+              )}
             </div>
           </div>
 
           <div
             className={clsx(
-              'flex flex-col w-full gap-6 lg:gap-0 lg:justify-evenly',
-              'lg:flex-row'
+              'flex flex-col w-full gap-6 items-center '
+              // 'lg:flex-row'
             )}
           >
             {shuffledOptions.map((option, i) => (
@@ -277,7 +279,7 @@ const VocabPickGame = ({
                 type='button'
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
-                  'py-4 px-2 rounded-xl w-full lg:w-1/4 flex flex-row justify-center items-center gap-1.5',
+                  'py-6  pl-8 rounded-xl w-full md:w-1/2 flex flex-row justify-start items-center gap-1.5',
                   buttonBorderStyles,
                   'active:scale-95 md:active:scale-98 active:duration-200',
                   'text-[var(--border-color)]',
