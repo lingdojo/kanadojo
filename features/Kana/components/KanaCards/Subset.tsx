@@ -142,7 +142,7 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
             'p-2 font-normal text-lg w-full',
             miniButtonBorderStyles,
             'flex flex-row justify-center items-center gap-1.5',
-            'border-b-4 border-[var(--border-color)]'
+            'border-b-4 border-[var(--border-color)] hover:border-[var(--main-color)]/80'
           )}
           onClick={e => {
             e.currentTarget.blur();

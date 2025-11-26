@@ -137,16 +137,16 @@ const TopBar: React.FC<ITopBarProps> = ({
               className='text-[var(--secondary-color)]'
             />
           )}
-          {selectedGameMode.toLowerCase() === 'reverse-pick' && (
+          {selectedGameMode.toLowerCase() === 'anti-pick' && (
             <MousePointerClick
               size={22}
               className=' scale-x-[-1] text-[var(--secondary-color)]'
             />
           )}
-          {selectedGameMode.toLowerCase() === 'input' && (
+          {selectedGameMode.toLowerCase() === 'type' && (
             <Keyboard size={22} className='text-[var(--secondary-color)]' />
           )}
-          {selectedGameMode.toLowerCase() === 'reverse-input' && (
+          {selectedGameMode.toLowerCase() === 'anti-type' && (
             <Keyboard
               size={22}
               className='scale-y-[-1] text-[var(--secondary-color)]'
@@ -200,16 +200,17 @@ const TopBar: React.FC<ITopBarProps> = ({
           <button
             className={clsx(
               'w-full text-xl p-3 flex flex-row justify-center items-center gap-2',
-              'rounded-2xl bg-[var(--card-color)] hover:bg-[var(--main-color)]/80',
-              'text-[var(--main-color)] hover:text-[var(--background-color)]',
+              'rounded-2xl bg-[var(--card-color)] hover:bg-[var(--border-color)]',
+              'text-[var(--main-color)]',
               'hover:cursor-pointer',
-              'transition-all duration-275'
+              'transition-all duration-275',
+              'border-b-4 border-[var(--border-color)] hover:border-[var(--main-color)]/50',
               // 'border-0 border-[var(--main-color)]/20',
             )}
             onClick={() => playClick()}
           >
             <Timer size={24} />
-            <span className='font-semibold'>Timed Challenge (60s)</span>
+            <span className='font-semibold'>Timed Challenge</span>
           </button>
         </Link>
       )}

@@ -319,11 +319,12 @@ const VocabCards = () => {
                       <button
                         className={clsx(
                           'text-2xl flex justify-center items-center gap-2 group',
-                          'rounded-xl bg-[var(--background-color)] hover:cursor-pointer',
+                          'rounded-xl  hover:cursor-pointer',
                           'duration-250 transition-all ease-in-out',
-                          'px-2 py-3 max-md:mx-4',
-                          isSelected && 'bg-[var(--border-color)] border-[var(--main-color)]/60',
-                          'border-b-4 border-[var(--border-color)]'
+                          'px-2 py-3 max-md:mx-4 border-b-4  border-[var(--border-color)]',
+                          isSelected
+                            ? 'bg-[var(--main-color)] text-[var(--background-color)] '
+                            : ' bg-[var(--background-color)]'
                         )}
                         onClick={e => {
                           e.currentTarget.blur();
@@ -346,7 +347,7 @@ const VocabCards = () => {
                         }}
                       >
                         {isSelected ? (
-                          <CircleCheck className='mt-0.5 text-[var(--secondary-color)] duration-250' />
+                          <CircleCheck className='mt-0.5 text-[var(--background-color)] duration-250' />
                         ) : (
                           <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
                         )}

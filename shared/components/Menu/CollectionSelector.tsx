@@ -207,7 +207,7 @@ const CollectionSelector = () => {
         <button
           className={clsx(
             'py-3 px-16 w-full',
-            'rounded-xl duration-275 hover:cursor-pointer bg-[var(--background-color)] border-b-4 border-[var(--border-color)]',
+            'rounded-xl duration-275 hover:cursor-pointer bg-[var(--background-color)] border-b-4 border-[var(--border-color)] hover:border-[var(--main-color)]/80',
             'text-[var(--main-color)]',
             'flex justify-center'
           )}

@@ -50,8 +50,8 @@ export default function BackToTop() {
 
   return (
     <button
-      aria-label="Back to top"
-      title="Back to top"
+      aria-label='Back to top'
+      title='Back to top'
       onClick={handleClick}
       className={clsx(
         'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ',

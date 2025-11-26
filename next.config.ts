@@ -34,8 +34,6 @@ const nextConfig: NextConfig = {
 
   // Reduce overhead in development
   devIndicators: {
-    buildActivity: false, // Disable build activity indicator
-    buildActivityPosition: 'bottom-right'
   },
 
   // Optimize images

@@ -41,39 +41,38 @@ interface PreferencesState {
 
 const usePreferencesStore = create<PreferencesState>()(
   persist(
-    (set) => ({
+    set => ({
       displayKana: false,
-      setDisplayKana: (displayKana) => set({ displayKana }),
+      setDisplayKana: displayKana => set({ displayKana }),
       theme: 'light',
-      setTheme: (theme) => set({ theme }),
+      setTheme: theme => set({ theme }),
       font: 'Zen Maru Gothic',
-      setFont: (fontName) => set({ font: fontName }),
+      setFont: fontName => set({ font: fontName }),
       silentMode: false,
-      setSilentMode: (silent) => set({ silentMode: silent }),
+      setSilentMode: silent => set({ silentMode: silent }),
       hotkeysOn: true,
-      setHotkeys: (hotkeys) => set({ hotkeysOn: hotkeys }),
+      setHotkeys: hotkeys => set({ hotkeysOn: hotkeys }),
 
       // Pronunciation settings
       pronunciationEnabled: true,
-      setPronunciationEnabled: (enabled) =>
+      setPronunciationEnabled: enabled =>
         set({ pronunciationEnabled: enabled }),
       pronunciationSpeed: 1.0,
-      setPronunciationSpeed: (speed) => set({ pronunciationSpeed: speed }),
+      setPronunciationSpeed: speed => set({ pronunciationSpeed: speed }),
       pronunciationPitch: 1.0,
-      setPronunciationPitch: (pitch) => set({ pronunciationPitch: pitch }),
+      setPronunciationPitch: pitch => set({ pronunciationPitch: pitch }),
       pronunciationVoiceName: null,
-      setPronunciationVoiceName: (name) =>
-        set({ pronunciationVoiceName: name }),
-      furiganaEnabled: true,
-      setFuriganaEnabled: (enabled) => set({ furiganaEnabled: enabled }),
+      setPronunciationVoiceName: name => set({ pronunciationVoiceName: name }),
+      furiganaEnabled: false,
+      setFuriganaEnabled: enabled => set({ furiganaEnabled: enabled }),
 
       // Theme preview
       themePreview: false,
-      setThemePreview: (enabled) => set({ themePreview: enabled }),
+      setThemePreview: enabled => set({ themePreview: enabled })
     }),
 
     {
-      name: 'theme-storage',
+      name: 'theme-storage'
     }
   )
 );

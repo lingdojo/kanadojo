@@ -54,7 +54,7 @@ const Fonts = () => {
             className={clsx(
               'flex justify-center items-center',
               buttonBorderStyles,
-              'py-4 px-4 border-[var(--card-color)] border-2',
+              'py-4 px-4 border-[var(--card-color)] border-1',
               'flex-1 overflow-hidden',
               fontObj.name === currentFont && 'border-[var(--main-color)]'
             )}

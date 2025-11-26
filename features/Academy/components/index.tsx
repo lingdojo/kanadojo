@@ -1,3 +1,4 @@
+'use client';
 import { Link } from '@/core/i18n';
 import Banner from '@/shared/components/Menu/Banner';
 import clsx from 'clsx';

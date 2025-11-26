@@ -175,7 +175,8 @@ const Themes = () => {
                 className={clsx(
                   currentTheme.id === 'long' && 'col-span-full',
                   'py-4 flex justify-center items-center hover:cursor-pointer duration-275 rounded-xl',
-                  'flex-1 overflow-hidden border-b-4',
+                  'flex-1 overflow-hidden ',
+                  // 'border-b-4',
                   currentTheme.id === selectedTheme &&
                     'border-0 border-[var(--main-color)]'
                 )}
