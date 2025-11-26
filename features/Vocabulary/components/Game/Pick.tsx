@@ -219,7 +219,6 @@ const VocabPickGame = ({
       className={clsx(
         'flex flex-col gap-6 sm:gap-10 items-center w-full sm:w-4/5',
         isHidden ? 'hidden' : '',
-        'max-md:mb-8'
       )}
     >
       <GameIntel gameMode={gameMode} />

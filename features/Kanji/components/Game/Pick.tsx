@@ -203,7 +203,7 @@ const KanjiPickGame = ({
       className={clsx(
         'flex flex-col gap-8 sm:gap-10 items-center w-full sm:w-4/5',
         isHidden ? 'hidden' : '',
-        !isReverse && 'max-md:pb-12'
+        !isReverse && ''
       )}
     >
       <GameIntel gameMode={gameMode} />
@@ -254,9 +254,9 @@ const KanjiPickGame = ({
                 disabled={wrongSelectedAnswers.includes(option)}
                 className={clsx(
                   isReverse
-                    ? 'w-1/3 md:w-1/4 lg:w-1/5 justify-center'
-                    : 'w-full md:w-1/2 pl-8 justify-start',
-                  'text-4xl py-5   rounded-xl flex flex-row  items-center gap-1.5',
+                    ? 'w-1/3 md:w-1/4 lg:w-1/5 justify-center text-5xl'
+                    : 'w-full md:w-1/2 pl-8 justify-start text-3xl md:text-4xl',
+                  ' py-5   rounded-xl flex flex-row  items-center gap-1.5',
                   buttonBorderStyles,
                   'text-[var(--border-color)]',
 
