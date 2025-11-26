@@ -720,6 +720,14 @@ const themes: ThemeGroup[] = [
         mainColor: 'hsla(294, 100%, 67%, 1)',
         secondaryColor: 'hsla(192, 100%, 86%, 1)',
       },
+	  {
+		id: "dreamwave-mirage",
+		backgroundColor: "hsla(257, 77%, 13%, 1)",
+		cardColor: "hsla(257, 77%, 17%, 1)",
+		borderColor: "hsla(257, 77%, 25%, 1)",
+		mainColor: "hsla(333, 97%, 60%, 1)",
+		secondaryColor: "hsla(189, 97%, 60%, 1)",
+	  },
     ],
   },
 
