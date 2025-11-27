@@ -139,7 +139,7 @@ const TopBar: React.FC<ITopBarProps> = ({ currentDojo }: ITopBarProps) => {
               playClick();
             }}
           >
-            {/* <span className='group-hover:underline'>Go!</span> */}
+            <span className="group-hover:motion-safe:animate-none">Go!</span>
             <Play
               className={clsx(
                 selectedGameMode && isFilled && 'motion-safe:animate-pulse'
