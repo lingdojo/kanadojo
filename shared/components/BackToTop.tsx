@@ -62,11 +62,11 @@ export default function BackToTop() {
 
   return (
     <button
-      aria-label="Back to top"
-      title="Back to top"
+      aria-label='Back to top'
+      title='Back to top'
       onClick={handleClick}
       className={clsx(
-        'fixed z-[60] right-4 bottom-18 sm:right-8 sm:bottom-8',
+        'fixed z-[60] right-2 bottom-18 sm:right-8 sm:bottom-8',
         'inline-flex items-center justify-center rounded-full ',
         'p-3 shadow-lg transition-all duration-200 ',
         'bg-[var(--card-color)] text-[var(--main-color)] ',
@@ -75,10 +75,7 @@ export default function BackToTop() {
         'border-2 border-[var(--border-color)]'
       )}
     >
-      <ChevronUp
-        size={28}
-        strokeWidth={2.5}
-      />
+      <ChevronUp size={28} strokeWidth={2.5} />
     </button>
   );
 }

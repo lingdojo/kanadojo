@@ -73,7 +73,7 @@ const TopBar: React.FC<ITopBarProps> = ({ currentDojo }: ITopBarProps) => {
   }, [hotkeysOn]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className='flex flex-col gap-2'>
       <div
         className={clsx(
           'flex flex-row',
@@ -90,7 +90,7 @@ const TopBar: React.FC<ITopBarProps> = ({ currentDojo }: ITopBarProps) => {
           currentDojo === 'kanji') && (
           <Link
             href={`${currentDojo}/timed-challenge`}
-            className="w-1/2 h-full"
+            className='w-1/2 h-full'
           >
             <button
               className={clsx(
@@ -105,7 +105,7 @@ const TopBar: React.FC<ITopBarProps> = ({ currentDojo }: ITopBarProps) => {
               onClick={() => playClick()}
             >
               <Timer size={24} />
-              <span className="font-semibold">Timed Challenge</span>
+              <span className='font-semibold'>Timed Challenge</span>
             </button>
           </Link>
         )}
@@ -117,10 +117,7 @@ const TopBar: React.FC<ITopBarProps> = ({ currentDojo }: ITopBarProps) => {
           )}
         />
 
-        <Link
-          href={`/${currentDojo}/train`}
-          className="w-1/2 group"
-        >
+        <Link href={`/${currentDojo}/train`} className='w-1/2 group'>
           <button
             disabled={!selectedGameMode || !isFilled}
             ref={buttonRef}
@@ -139,12 +136,12 @@ const TopBar: React.FC<ITopBarProps> = ({ currentDojo }: ITopBarProps) => {
               playClick();
             }}
           >
-            <span className="group-hover:motion-safe:animate-none">Go!</span>
+            <span className='group-hover:motion-safe:animate-none'>Go!</span>
             <Play
               className={clsx(
-                selectedGameMode && isFilled && 'motion-safe:animate-pulse'
+                selectedGameMode && isFilled && 'motion-safe:animate-bounce'
               )}
-              size={32}
+              size={28}
             />
           </button>
         </Link>
