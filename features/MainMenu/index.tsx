@@ -236,7 +236,8 @@ const MainMenu = () => {
             'duration-250',
             'transition-all ease-in-out',
             'flex flex-col md:flex-row',
-            'w-full'
+            'w-full',
+            'max-md:border-b-4 max-md:border-[var(--border-color)]'
           )}
         >
           {links.map((link, i) => (
@@ -249,12 +250,12 @@ const MainMenu = () => {
                   className={clsx(
                     'flex w-full h-full text-2xl',
                     ' justify-center items-center gap-1.5 border-[var(--border-color)] ',
-                    'border-b-4 ',
+                    'md:border-b-4 ',
                     'py-8',
                     'group',
                     i === 0 && 'rounded-tl-2xl rounded-bl-2xl',
                     i === links.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
-                    'hover:cursor-pointer hover:border-[var(--main-color)]/80',
+                    'hover:cursor-pointer md:hover:border-[var(--main-color)]/80',
                     'hover:bg-[var(--border-color)]'
                   )}
                   onClick={() => playClick()}

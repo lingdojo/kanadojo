@@ -66,7 +66,8 @@ const GameModes = () => {
         'duration-250',
         'transition-all ease-in-out',
         'flex flex-col md:flex-row',
-        'w-full'
+        'w-full',
+        'max-md:border-b-4 max-md:border-[var(--border-color)]'
       )}
     >
       {gameModes.map((gameMode, i) => (
@@ -82,9 +83,9 @@ const GameModes = () => {
               i === gameModes.length - 1 && 'rounded-tr-2xl rounded-br-2xl',
               'duration-250',
 
-              'border-b-4 border-[var(--border-color)]',
+              'md:border-b-4 border-[var(--border-color)]',
               gameMode === selectedGameMode &&
-                'border-[var(--secondary-color)]/80'
+                'md:border-[var(--secondary-color)]/80'
             )}
             onClick={() => playClick()}
           >
