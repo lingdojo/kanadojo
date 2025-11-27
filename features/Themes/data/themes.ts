@@ -248,7 +248,7 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(192, 92%, 71%, 1)',
       },
       {
-        id: 'velvet-citrus-dream',
+        id: 'citrus-dream',
         backgroundColor: 'hsla(274, 33%, 13%, 1)',
         cardColor: 'hsla(274, 36%, 17%, 1)',
         borderColor: 'hsla(274, 36%, 27%, 1)',
@@ -294,14 +294,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(209, 54%, 26%, 1)',
         mainColor: 'hsla(45, 96%, 62%, 1)',
         secondaryColor: 'hsla(188, 85%, 50%, 1)',
-      },
-      {
-        id: 'orchid-eclipse',
-        backgroundColor: 'hsla(325, 24%, 14%, 1)',
-        cardColor: 'hsla(325, 27%, 18%, 1)',
-        borderColor: 'hsla(325, 27%, 28%, 1)',
-        mainColor: 'hsla(304, 71%, 67%, 1)',
-        secondaryColor: 'hsla(164, 75%, 54%, 1)',
       },
       {
         id: 'andromeda-dream',
@@ -472,14 +464,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(321, 99%, 78%, 1)',
       },
       {
-        id: 'vortex-requiem',
-        backgroundColor: 'hsla(290, 51%, 10%, 1)',
-        cardColor: 'hsla(227, 41%, 18%, 1)',
-        borderColor: 'hsla(227, 41%, 29%, 1)',
-        mainColor: 'hsla(192, 100%, 64%, 1)',
-        secondaryColor: 'hsla(292, 100%, 62%, 1)',
-      },
-      {
         id: 'ultraviolet-oracle',
         backgroundColor: 'hsla(265, 81%, 9%, 1)',
         cardColor: 'hsla(267, 82%, 16%, 1)',
@@ -518,14 +502,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(256, 42%, 25%, 1)',
         mainColor: 'hsla(5, 92%, 66%, 1)',
         secondaryColor: 'hsla(208, 70%, 70%, 1)',
-      },
-      {
-        id: 'silica-dusk',
-        backgroundColor: 'hsla(19, 29%, 8%, 1)',
-        cardColor: 'hsla(29, 17%, 14%, 1)',
-        borderColor: 'hsla(29, 17%, 24%, 1)',
-        mainColor: 'hsla(359, 95%, 78%, 1)',
-        secondaryColor: 'hsla(186, 88%, 69%, 1)',
       },
       {
         id: 'galaxy-oracle',
@@ -582,14 +558,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(210, 71%, 31%, 1)',
         mainColor: 'hsla(193, 97%, 67%, 1)',
         secondaryColor: 'hsla(299, 94%, 62%, 1)',
-      },
-      {
-        id: 'aero-blossom',
-        backgroundColor: 'hsla(200, 25%, 10%, 1)',
-        cardColor: 'hsla(222, 61%, 18%, 1)',
-        borderColor: 'hsla(222, 61%, 29%, 1)',
-        mainColor: 'hsla(155, 93%, 66%, 1)',
-        secondaryColor: 'hsla(335, 92%, 72%, 1)',
       },
       {
         id: 'prairie-star',
@@ -686,14 +654,6 @@ const themes: ThemeGroup[] = [
         borderColor: 'hsla(176, 20%, 33%, 1)',
         mainColor: 'hsla(317, 98%, 81%, 1)',
         secondaryColor: 'hsla(61, 100%, 62%, 1)',
-      },
-      {
-        id: 'gruvbox',
-        backgroundColor: 'hsla(0, 0%, 13%, 1)',
-        cardColor: 'hsla(0, 0%, 18%, 1)',
-        borderColor: 'hsla(0, 0%, 25%, 1)',
-        mainColor: 'hsla(120, 14%, 52%, 1)',
-        secondaryColor: 'hsla(344, 34%, 61%, 1)',
       },
       {
         id: 'absolute-darkness',
@@ -809,8 +769,8 @@ const themes: ThemeGroup[] = [
 
 // Flatten all themes into a map for easy lookup
 const themeMap = new Map<string, Theme>();
-themes.forEach((group) => {
-  group.themes.forEach((theme) => {
+themes.forEach(group => {
+  group.themes.forEach(theme => {
     themeMap.set(theme.id, theme);
   });
 });
@@ -818,11 +778,11 @@ themes.forEach((group) => {
 // populate map immediately with current store state
 useCustomThemeStore
   .getState()
-  .themes.forEach((theme) => themeMap.set(theme.id, theme));
+  .themes.forEach(theme => themeMap.set(theme.id, theme));
 
 // subscription for store updates
-useCustomThemeStore.subscribe((state) => {
-  state.themes.forEach((theme) => themeMap.set(theme.id, theme));
+useCustomThemeStore.subscribe(state => {
+  state.themes.forEach(theme => themeMap.set(theme.id, theme));
 });
 
 export function applyTheme(themeId: string) {
