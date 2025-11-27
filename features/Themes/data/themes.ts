@@ -384,14 +384,6 @@ const themes: ThemeGroup[] = [
         secondaryColor: 'hsla(47, 100%, 63%, 1)',
       },
       {
-        id: 'velvet-starlight',
-        backgroundColor: 'hsla(291, 39%, 11%, 1)',
-        cardColor: 'hsla(291, 43%, 19%, 1)',
-        borderColor: 'hsla(291, 43%, 32%, 1)',
-        mainColor: 'hsla(317, 94%, 67%, 1)',
-        secondaryColor: 'hsla(235, 92%, 82%, 1)',
-      },
-      {
         id: 'astral-mirage',
         backgroundColor: 'hsla(191, 75%, 9%, 1)',
         cardColor: 'hsla(191, 81%, 13%, 1)',
