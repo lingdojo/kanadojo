@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
@@ -11,10 +11,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "generate:constants": "tsx scripts/generateConstants.ts",
     "i18n:validate": "node scripts/i18n/validate-translations.js",
     "i18n:generate-types": "node scripts/i18n/generate-types.js",
-    "i18n:check": "npm run i18n:validate && npm run i18n:generate-types"
+    "i18n:check": "npm run i18n:validate && npm run i18n:generate-types",
+    "check": "tsc --noEmit --pretty && next lint --format pretty",
+    "generate:constants": "tsx scripts/generateConstants.ts"
   },
   "type": "module",
   "dependencies": {
@@ -61,6 +62,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "eslint-formatter-pretty": "^4.1.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
     "tsx": "^4.20.6",

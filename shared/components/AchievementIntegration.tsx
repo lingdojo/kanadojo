@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import useAchievementStore from '@/features/achievements';
+import useAchievementStore from '@/features/Achievements';
 
 /**
  * Component to make achievement store available globally for integration
@@ -26,7 +26,7 @@ const AchievementIntegration = () => {
     };
   }, [achievementStore]);
 
-  return null; // This component doesn't render anything
+  return null; //This component doesn't render anything
 };
 
 export default AchievementIntegration;

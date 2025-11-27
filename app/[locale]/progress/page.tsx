@@ -1,9 +1,10 @@
-import { ProgressWithSidebar } from '@/features/statistics';
+import { ProgressWithSidebar } from '@/features/Progress';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'KanaDojo: Progress',
-  description: 'Track your Japanese learning progress and see detailed statistics.',
+  description:
+    'Track your Japanese learning progress and see detailed statistics.'
 };
 
 export default function ProgressPage() {

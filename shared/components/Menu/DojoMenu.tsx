@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/shared/components/Menu/Sidebar';
 import Info from '@/shared/components/Menu/Info';
 import GameModes from '@/shared/components/Menu/GameModes';
-import KanaCards from '@/features/kana/components/KanaCards';
+import KanaCards from '@/features/Kana/components/KanaCards';
 import Banner from '@/shared/components/Menu/Banner';
 import CollectionSelector from '@/shared/components/Menu/CollectionSelector';
-import KanjiCards from '@/features/kanji/components';
+import KanjiCards from '@/features/Kanji/components';
 import { usePathname } from 'next/navigation';
-import VocabCards from '@/features/vocabulary/components';
+import VocabCards from '@/features/Vocabulary/components';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 
 const DojoMenu = () => {
@@ -63,11 +63,7 @@ const DojoMenu = () => {
         <Info />
         {(pathWithoutLocale === '/kanji' ||
           pathWithoutLocale === '/vocabulary') && <CollectionSelector />}
-        <TopBar
-          showGameModes={showGameModes}
-          setShowGameModes={setShowGameModes}
-          currentDojo="kana"
-        />
+        <TopBar currentDojo={pathWithoutLocale.slice(1)} />
         {showGameModes && <GameModes />}
 
         {pathWithoutLocale === '/kana' ? (

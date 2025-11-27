@@ -14,9 +14,9 @@ import {
   Clock,
   Activity,
   ChevronsLeft,
-  LucideIcon,
+  LucideIcon
 } from 'lucide-react';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 import { findHighestCounts } from '@/shared/lib';
 import { useClick } from '@/shared/hooks';
 
@@ -88,7 +88,7 @@ const Stats: React.FC = () => {
     highestCorrectChars,
     highestCorrectCharsValue,
     highestWrongChars,
-    highestWrongCharsValue,
+    highestWrongCharsValue
   } = findHighestCounts(characterScores);
 
   const formatValue = (
@@ -101,29 +101,29 @@ const Stats: React.FC = () => {
   };
 
   const StatCard: React.FC<StatCardProps> = ({ title, stats }) => (
-    <div className="bg-[var(--bg-color)] border-2 border-[var(--border-color)] rounded-lg p-6 w-full">
-      <h3 className="text-2xl font-bold mb-6 text-[var(--secondary-color)] border-b-2 border-[var(--border-color)] pb-3">
+    <div className='bg-[var(--bg-color)]  border-[var(--border-color)] rounded-lg p-6 w-full'>
+      <h3 className='text-2xl font-bold mb-6 text-[var(--secondary-color)] border-b-2 border-[var(--border-color)] pb-3'>
         {title}
       </h3>
-      <div className="space-y-4">
+      <div className='space-y-4'>
         {stats.map(({ label, value, Icon }: StatItem, i: number) => (
           <div
             key={label}
             className={clsx(
               'flex items-center justify-between gap-4 pb-4',
-              i < stats.length - 1 && 'border-b border-[var(--border-color)]/40'
+              i < stats.length - 1 && 'border-b border-[var(--border-color)]/70'
             )}
           >
-            <div className="flex items-center gap-2 flex-1 min-w-0">
+            <div className='flex items-center gap-2 flex-1 min-w-0'>
               <Icon
                 size={20}
-                className="text-[var(--secondary-color)] flex-shrink-0"
+                className='text-[var(--secondary-color)] flex-shrink-0'
               />
-              <span className="text-sm md:text-base text-[var(--text-color)]/80 truncate">
+              <span className='text-sm md:text-base text-[var(--text-color)]/80 truncate'>
                 {label}
               </span>
             </div>
-            <span className="font-semibold text-base md:text-lg whitespace-nowrap">
+            <span className='font-semibold text-base md:text-lg whitespace-nowrap'>
               {value}
             </span>
           </div>
@@ -137,18 +137,18 @@ const Stats: React.FC = () => {
     {
       label: 'Correct Answers',
       value: formatValue(numCorrectAnswers),
-      Icon: SquareCheck,
+      Icon: SquareCheck
     },
     {
       label: 'Wrong Answers',
       value: formatValue(numWrongAnswers),
-      Icon: SquareX,
+      Icon: SquareX
     },
     {
       label: 'Accuracy',
       value: formatValue(accuracy.toFixed(1), '%'),
-      Icon: Target,
-    },
+      Icon: Target
+    }
   ];
 
   const answerStats: StatItem[] = [
@@ -156,30 +156,30 @@ const Stats: React.FC = () => {
     {
       label: 'Fastest Answer',
       value: formatValue(fastestTime, 's'),
-      Icon: Flame,
+      Icon: Flame
     },
     {
       label: 'Slowest Answer',
       value: formatValue(slowestTime, 's'),
-      Icon: Clock,
+      Icon: Clock
     },
     {
       label: 'Correct/Incorrect Ratio',
       value: formatValue(ciRatio === Infinity ? '∞' : ciRatio.toFixed(2)),
-      Icon: TrendingUp,
-    },
+      Icon: TrendingUp
+    }
   ];
 
   const characterStats: StatItem[] = [
     {
       label: 'Characters Played',
       value: formatValue(characterHistory.length),
-      Icon: Activity,
+      Icon: Activity
     },
     {
       label: 'Unique Characters',
       value: formatValue(uniqueChars),
-      Icon: Shapes,
+      Icon: Shapes
     },
     {
       label: 'Easiest Characters',
@@ -187,7 +187,7 @@ const Stats: React.FC = () => {
         highestCorrectChars.length > 0
           ? `${highestCorrectChars.join(', ')} (${highestCorrectCharsValue})`
           : '~',
-      Icon: Clover,
+      Icon: Clover
     },
     {
       label: 'Hardest Characters',
@@ -195,48 +195,36 @@ const Stats: React.FC = () => {
         highestWrongChars.length > 0
           ? `${highestWrongChars.join(', ')} (${highestWrongCharsValue})`
           : '~',
-      Icon: HeartCrack,
-    },
+      Icon: HeartCrack
+    }
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[var(--bg-color)] px-4 py-8 md:py-12">
-      <div className="max-w-7xl mx-auto">
+    <div className='min-h-screen w-full bg-[var(--bg-color)] px-4 py-8 md:py-12'>
+      <div className='max-w-7xl mx-auto'>
         {/* Header */}
         <button
           onClick={() => {
             playClick();
             toggleStats();
           }}
-          className="group flex items-center gap-3 mb-8 md:mb-12 hover:opacity-80 transition-opacity"
+          className='group flex items-center gap-3 mb-8 md:mb-12 justify-center w-full hover:cursor-pointer'
         >
           <ChevronsLeft
             size={32}
-            className="text-[var(--secondary-color)] group-hover:translate-x-[-4px] transition-transform"
+            className='text-[var(--border-color)] hover:text-[var(--secondary-color)]'
           />
-          <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-3">
+          <h2 className='text-3xl md:text-4xl font-bold flex items-center justify-center gap-3'>
             Statistics
-            <Activity
-              size={32}
-              className="text-[var(--secondary-color)]"
-            />
+            <Activity size={32} className='text-[var(--secondary-color)]' />
           </h2>
         </button>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-          <StatCard
-            title="General"
-            stats={generalStats}
-          />
-          <StatCard
-            title="Answers"
-            stats={answerStats}
-          />
-          <StatCard
-            title="Characters"
-            stats={characterStats}
-          />
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8'>
+          <StatCard title='General' stats={generalStats} />
+          <StatCard title='Answers' stats={answerStats} />
+          <StatCard title='Characters' stats={characterStats} />
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { toKana, toRomaji } from 'wanakana';
-import { IKanjiObj } from '@/features/kanji/store/useKanjiStore';
-import { IVocabObj } from '@/features/vocabulary/store/useVocabStore';
+import { IKanjiObj } from '@/features/Kanji/store/useKanjiStore';
+import { IVocabObj } from '@/features/Vocabulary/store/useVocabStore';
 import { CircleArrowRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { useClick } from '@/shared/hooks';
 import FuriganaText from '@/shared/components/FuriganaText';
-import usePreferencesStore from '@/features/themes';
+import usePreferencesStore from '@/features/Themes';
 
 // Type guard
 const isKanjiObj = (obj: IKanjiObj | IVocabObj): obj is IKanjiObj => {
@@ -46,7 +46,8 @@ const ContinueButton = ({
 
         // buttonBorderStyles,
         'flex flex-row justify-center items-end gap-2 ',
-        'text-[var(--background-color)] bg-[var(--main-color)]/80 hover:bg-[var(--main-color)]'
+        'text-[var(--background-color)] bg-[var(--main-color)]/80 hover:bg-[var(--main-color)]',
+        'border-b-4 rounded-2xl border-[var(--border-color)]'
       )}
       onClick={onClick}
       disabled={disabled}

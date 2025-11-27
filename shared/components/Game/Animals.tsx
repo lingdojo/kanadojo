@@ -1,5 +1,5 @@
 'use client';
-import useStatsStore from '@/features/statistics';
+import useStatsStore from '@/features/Progress';
 // import { Star } from 'lucide-react';
 import clsx from 'clsx';
 import { animalIcons } from '@/shared/lib/icons';
@@ -48,7 +48,9 @@ const Stars = () => {
                 : ''
             )}
             style={{
-              animationDelay: `${index * (iconIndices.length >= 20 ? 500 : 100)}ms`
+              animationDelay: `${
+                index * (iconIndices.length >= 20 ? 500 : 100)
+              }ms`
             }}
           >
             {Icon}
@@ -60,4 +62,3 @@ const Stars = () => {
 };
 
 export default Stars;
-

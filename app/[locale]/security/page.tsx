@@ -1,4 +1,4 @@
-import SecurityPolicy from '@/shared/components/Legal/Security';
+import SecurityPolicy from '@/features/Legal/Security';
 
 export default function SecurityPolicyPage() {
   return <SecurityPolicy />;

@@ -1,8 +1,8 @@
 // Helpers to export/import user preferences and stats (client-side only)
 
-import { useCustomThemeStore } from '@/features/themes';
-import usePreferencesStore from '@/features/themes';
-import useStatsStore from '@/features/statistics';
+import { useCustomThemeStore } from '@/features/Themes';
+import usePreferencesStore from '@/features/Themes';
+import useStatsStore from '@/features/Progress';
 
 // JSON-safe type
 export type JSONValue =
@@ -81,7 +81,7 @@ export function createBackup(): BackupFile {
     createdAt: new Date().toISOString(),
     theme: toJSONValue(themeState) as Record<string, JSONValue>,
     customTheme: toJSONValue(customThemeState) as Record<string, JSONValue>,
-    stats: toJSONValue(statsState) as Record<string, JSONValue>,
+    stats: toJSONValue(statsState) as Record<string, JSONValue>
   };
 }
 

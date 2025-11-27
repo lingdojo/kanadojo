@@ -1,4 +1,4 @@
-import fonts from '@/features/themes/data/fonts';
+import fonts from '@/features/Themes/data/fonts';
 import clsx from 'clsx';
 
 const fontClassName = fonts[2].font.className;
