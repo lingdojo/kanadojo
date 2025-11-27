@@ -2,10 +2,12 @@
 import { useEffect, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations('common');
 
   useEffect(() => {
     const onScroll = () => {
@@ -40,8 +42,8 @@ export default function BackToTop() {
 
   return (
     <button
-      aria-label="Back to top"
-      title="Back to top"
+      aria-label={t('actions.backToTop')}
+      title={t('actions.backToTop')}
       onClick={handleClick}
       className={
         'fixed z-[60] right-4 bottom-4 sm:right-6 sm:bottom-8 ' +
