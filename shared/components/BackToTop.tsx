@@ -12,6 +12,7 @@ export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+  const container = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     // Only run on client side
