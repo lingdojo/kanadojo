@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { useGoalTimersStore } from '@/features/Themes';
+import { useGoalTimersStore } from '@/features/Preferences';
 
 export interface GoalTimer {
   id: string;

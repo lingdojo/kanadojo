@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Plus, X, Target, Clock, CheckCircle2, Save } from 'lucide-react';
 import clsx from 'clsx';
 import type { GoalTimer } from '@/shared/hooks';
-import { useGoalTimersStore } from '@/features/Themes';
+import { useGoalTimersStore } from '@/features/Preferences';
 
 interface GoalTimersPanelProps {
   goals: GoalTimer[];

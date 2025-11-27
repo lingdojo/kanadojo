@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { MousePointer } from 'lucide-react';
 import { kana } from '@/features/Kana/data/kana';
 import useKanaStore from '@/features/Kana/store/useKanaStore';
-import usePreferencesStore from '@/features/Themes';
+import usePreferencesStore from '@/features/Preferences';
 import { useClick } from '@/shared/hooks';
 import { miniButtonBorderStyles } from '@/shared/lib/styles';
 

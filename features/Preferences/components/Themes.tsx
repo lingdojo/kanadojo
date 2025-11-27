@@ -4,15 +4,15 @@ import themeSets, {
   applyTheme,
   applyThemeObject,
   hexToHsl
-} from '@/features/Themes/data/themes';
-import usePreferencesStore from '@/features/Themes';
+} from '@/features/Preferences/data/themes';
+import usePreferencesStore from '@/features/Preferences';
 import clsx from 'clsx';
 import { useClick, useLong } from '@/shared/hooks';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import { useState } from 'react';
 import { Dice5, Plus, Trash2 } from 'lucide-react';
 import { Random } from 'random-js';
-import { useCustomThemeStore } from '@/features/Themes';
+import { useCustomThemeStore } from '@/features/Preferences';
 
 const random = new Random();
 

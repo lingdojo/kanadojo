@@ -151,12 +151,14 @@ app/
 ```
 
 **Responsibilities:**
+
 - Routing and navigation
 - Layouts and page structures
 - Server components and data fetching
 - Metadata and SEO
 
 **Rules:**
+
 - ❌ NO business logic in pages
 - ✅ Pages only orchestrate features and shared components
 - ✅ Use Server Components by default, Client Components when needed
@@ -258,22 +260,22 @@ features/
 // features/kana/index.ts
 
 // Components (default exports)
-export { default as KanaCards } from './components/KanaCards'
-export { default as SubsetDictionary } from './components/SubsetDictionary'
-export { default as KanaGame } from './components/Game'
+export { default as KanaCards } from './components/KanaCards';
+export { default as SubsetDictionary } from './components/SubsetDictionary';
+export { default as KanaGame } from './components/Game';
 
 // Store (default + named for compatibility)
-export { default as useKanaStore } from './store/useKanaStore'
-export { useKanaStore } from './store/useKanaStore'
+export { default as useKanaStore } from './store/useKanaStore';
+export { useKanaStore } from './store/useKanaStore';
 
 // Data
-export * from './data/kana'
+export * from './data/kana';
 
 // Utils
-export * from './lib/utils'
+export * from './lib/utils';
 
 // Types
-export type { KanaCharacter, KanaGroup } from './data/kana'
+export type { KanaCharacter, KanaGroup } from './data/kana';
 ```
 
 ### 🔗 `shared/` - Shared Resources
@@ -358,6 +360,7 @@ core/
 Each module (`features/`, `shared/`) exposes its public API through an `index.ts` file.
 
 **Benefits:**
+
 - ✅ Clean imports: `import { KanaCards } from '@/features/kana'`
 - ✅ Encapsulation: Only expose what's necessary
 - ✅ Easy refactoring: Internal changes don't affect consumers
@@ -366,10 +369,10 @@ Each module (`features/`, `shared/`) exposes its public API through an `index.ts
 
 ```typescript
 // ❌ BAD - Direct import
-import KanaCards from '@/features/kana/components/KanaCards'
+import KanaCards from '@/features/kana/components/KanaCards';
 
 // ✅ GOOD - Barrel export
-import { KanaCards } from '@/features/kana'
+import { KanaCards } from '@/features/kana';
 ```
 
 ### 2. TypeScript Path Aliases
@@ -393,12 +396,12 @@ Configured in `tsconfig.json` for clean imports:
 
 ```typescript
 // ✅ With path alias
-import { useKanaStore } from '@/features/kana'
-import { AudioButton } from '@/shared/components'
-import { getTranslations } from '@/core/i18n'
+import { useKanaStore } from '@/features/kana';
+import { AudioButton } from '@/shared/components';
+import { getTranslations } from '@/core/i18n';
 
 // ❌ Without path alias (relative)
-import { useKanaStore } from '../../../features/kana'
+import { useKanaStore } from '../../../features/kana';
 ```
 
 ### 3. State Management with Zustand
@@ -409,54 +412,55 @@ Each feature can have its own Zustand store with localStorage persistence.
 
 ```typescript
 // features/[feature]/store/use[Feature]Store.ts
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface FeatureState {
   // State
-  data: SomeType[]
-  
+  data: SomeType[];
+
   // Actions
-  setData: (data: SomeType[]) => void
-  reset: () => void
+  setData: (data: SomeType[]) => void;
+  reset: () => void;
 }
 
 export const useFeatureStore = create<FeatureState>()(
   persist(
-    (set) => ({
+    set => ({
       // Initial state
       data: [],
-      
+
       // Actions
-      setData: (data) => set({ data }),
-      reset: () => set({ data: [] }),
+      setData: data => set({ data }),
+      reset: () => set({ data: [] })
     }),
     {
-      name: 'feature-storage', // localStorage key
+      name: 'feature-storage' // localStorage key
     }
   )
-)
+);
 
-export default useFeatureStore
+export default useFeatureStore;
 ```
 
 **Current Stores:**
 
-| Store | Feature | localStorage Key | Purpose |
-|-------|---------|------------------|---------|
-| `useKanaStore` | kana | `kana-storage` | Kana selection |
-| `useKanjiStore` | kanji | `kanji-storage` | Kanji selection |
-| `useVocabStore` | vocabulary | `vocab-storage` | Vocabulary selection |
-| `useStatsStore` | statistics | `stats-storage` | Statistics and progress |
-| `useAchievementStore` | achievements | `achievement-storage` | Achievement system |
-| `usePreferencesStore` | themes | `preferences-storage` | General preferences |
-| `useCustomThemeStore` | themes | `custom-theme-storage` | Custom themes |
-| `useGoalTimersStore` | themes | `goal-timers` | Goal timers |
-| `useOnboardingStore` | shared/store | `onboarding-storage` | Onboarding state |
+| Store                 | Feature      | localStorage Key       | Purpose                 |
+| --------------------- | ------------ | ---------------------- | ----------------------- |
+| `useKanaStore`        | kana         | `kana-storage`         | Kana selection          |
+| `useKanjiStore`       | kanji        | `kanji-storage`        | Kanji selection         |
+| `useVocabStore`       | vocabulary   | `vocab-storage`        | Vocabulary selection    |
+| `useStatsStore`       | statistics   | `stats-storage`        | Statistics and progress |
+| `useAchievementStore` | achievements | `achievement-storage`  | Achievement system      |
+| `usePreferencesStore` | themes       | `preferences-storage`  | General preferences     |
+| `useCustomThemeStore` | themes       | `custom-theme-storage` | Custom themes           |
+| `useGoalTimersStore`  | themes       | `goal-timers`          | Goal timers             |
+| `useOnboardingStore`  | shared/store | `onboarding-storage`   | Onboarding state        |
 
 ### 4. Components: Default vs Named Exports
 
 **General Rule:**
+
 - **Components**: Default export in file, named export in barrel
 - **Hooks/Utils**: Named exports
 - **Stores**: Default + named export (compatibility)
@@ -465,36 +469,41 @@ export default useFeatureStore
 
 ```typescript
 // features/kana/components/KanaCards/index.tsx
-const KanaCards = () => { /* ... */ }
-export default KanaCards
+const KanaCards = () => {
+  /* ... */
+};
+export default KanaCards;
 
 // features/kana/index.ts
-export { default as KanaCards } from './components/KanaCards'
+export { default as KanaCards } from './components/KanaCards';
 
 // Usage in page
-import { KanaCards } from '@/features/kana'
+import { KanaCards } from '@/features/kana';
 ```
 
 ### 5. Preventing Circular Dependencies
 
 **Problem:**
+
 ```typescript
 // ❌ BAD - Circular dependency
-// features/themes/data/themes.ts
-import { useCustomThemeStore } from '@/features/themes' // Barrel export
+// features/Preferences/data/themes.ts
+import { useCustomThemeStore } from '@/features/Preferences'; // Barrel export
 
-// features/themes/index.ts
-export * from './data/themes' // Exports themes.ts which imports from index.ts
+// features/Preferences/index.ts
+export * from './data/themes'; // Exports themes.ts which imports from index.ts
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ GOOD - Direct import
 // features/themes/data/themes.ts
-import { useCustomThemeStore } from '../store/useCustomThemeStore'
+import { useCustomThemeStore } from '../store/useCustomThemeStore';
 ```
 
 **Rule:**
+
 - Inside a feature, import directly from files
 - Outside a feature, import from barrel export (`index.ts`)
 
@@ -514,17 +523,17 @@ mkdir -p features/new-feature/{components,data,lib,store}
 
 ```typescript
 // features/new-feature/index.ts
-export { default as MainComponent } from './components/MainComponent'
-export { default as useNewFeatureStore } from './store/useNewFeatureStore'
-export * from './data/constants'
+export { default as MainComponent } from './components/MainComponent';
+export { default as useNewFeatureStore } from './store/useNewFeatureStore';
+export * from './data/constants';
 ```
 
 3. **Implement store (if needed):**
 
 ```typescript
 // features/new-feature/store/useNewFeatureStore.ts
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface NewFeatureState {
   // ...
@@ -532,45 +541,46 @@ interface NewFeatureState {
 
 export const useNewFeatureStore = create<NewFeatureState>()(
   persist(
-    (set) => ({
+    set => ({
       // ...
     }),
     {
-      name: 'new-feature-storage',
+      name: 'new-feature-storage'
     }
   )
-)
+);
 
-export default useNewFeatureStore
+export default useNewFeatureStore;
 ```
 
 4. **Create components:**
 
 ```typescript
 // features/new-feature/components/MainComponent/index.tsx
-import { useNewFeatureStore } from '../../store/useNewFeatureStore'
+import { useNewFeatureStore } from '../../store/useNewFeatureStore';
 
 const MainComponent = () => {
   // ...
-}
+};
 
-export default MainComponent
+export default MainComponent;
 ```
 
 5. **Use in page:**
 
 ```typescript
 // app/[locale]/new-feature/page.tsx
-import { MainComponent } from '@/features/new-feature'
+import { MainComponent } from '@/features/new-feature';
 
 export default function NewFeaturePage() {
-  return <MainComponent />
+  return <MainComponent />;
 }
 ```
 
 ### Adding a Shared Component
 
 1. **Determine if truly shared:**
+
    - Is it used by 2+ features?
    - Is it generic and not feature-specific?
 
@@ -580,20 +590,20 @@ export default function NewFeaturePage() {
 // shared/components/NewComponent.tsx
 export const NewComponent = () => {
   // ...
-}
+};
 ```
 
 3. **Export in barrel:**
 
 ```typescript
 // shared/components/index.ts
-export { NewComponent } from './NewComponent'
+export { NewComponent } from './NewComponent';
 ```
 
 4. **Use:**
 
 ```typescript
-import { NewComponent } from '@/shared/components'
+import { NewComponent } from '@/shared/components';
 ```
 
 ### Adding a New Translation
@@ -615,13 +625,13 @@ import { NewComponent } from '@/shared/components'
 2. **Use in component:**
 
 ```typescript
-import { useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl';
 
 const Component = () => {
-  const t = useTranslations()
-  
-  return <p>{t('newKey')}</p>
-}
+  const t = useTranslations();
+
+  return <p>{t('newKey')}</p>;
+};
 ```
 
 ### Debugging Imports
@@ -629,18 +639,21 @@ const Component = () => {
 If you encounter webpack errors about exports:
 
 1. **Check the source file:**
+
 ```bash
 # See how it's actually exported
 cat features/[feature]/components/Component.tsx
 ```
 
 2. **Check the barrel export:**
+
 ```bash
 # See what's exported in index.ts
 cat features/[feature]/index.ts
 ```
 
 3. **Make sure they match:**
+
 - If component uses `export default`, barrel must use `export { default as ... }`
 - If it uses `export const`, barrel must use `export *` or `export { name }`
 
@@ -679,26 +692,26 @@ The migration of KanaDojo from an unstructured codebase to a feature-based archi
 
 ### Migration Mapping
 
-| Old Location | New Location | Type |
-|-------------|--------------|------|
-| `components/Dojo/Kana/` | `features/kana/components/` | Components |
-| `components/Dojo/Kanji/` | `features/kanji/components/` | Components |
-| `components/Dojo/Vocab/` | `features/vocabulary/components/` | Components |
-| `components/Settings/` | `features/themes/components/Settings/` | Components |
-| `components/reusable/` | `shared/components/` | Components |
-| `store/useKanaKanjiStore.ts` | `features/kana/store/useKanaStore.ts` | Store |
-| `store/useKanaKanjiStore.ts` | `features/kanji/store/useKanjiStore.ts` | Store |
-| `store/useVocabStore.ts` | `features/vocabulary/store/useVocabStore.ts` | Store |
-| `store/useStatsStore.ts` | `features/statistics/store/useStatsStore.ts` | Store |
-| `store/useThemeStore.ts` | `features/themes/store/usePreferencesStore.ts` | Store |
-| `static/kana.ts` | `features/kana/data/kana.ts` | Data |
-| `static/themes.ts` | `features/themes/data/themes.ts` | Data |
-| `static/fonts.ts` | `features/themes/data/fonts.ts` | Data |
-| `lib/hooks/` | `shared/hooks/` | Hooks |
-| `lib/utils.ts` | `shared/lib/utils.ts` | Utils |
-| `lib/useOnboardingStore.ts` | `shared/store/useOnboardingStore.ts` | Store |
-| `i18n/` | `core/i18n/` | Infrastructure |
-| `translations/` | `core/i18n/locales/` | Translations |
+| Old Location                 | New Location                                   | Type           |
+| ---------------------------- | ---------------------------------------------- | -------------- |
+| `components/Dojo/Kana/`      | `features/kana/components/`                    | Components     |
+| `components/Dojo/Kanji/`     | `features/kanji/components/`                   | Components     |
+| `components/Dojo/Vocab/`     | `features/vocabulary/components/`              | Components     |
+| `components/Settings/`       | `features/themes/components/Settings/`         | Components     |
+| `components/reusable/`       | `shared/components/`                           | Components     |
+| `store/useKanaKanjiStore.ts` | `features/kana/store/useKanaStore.ts`          | Store          |
+| `store/useKanaKanjiStore.ts` | `features/kanji/store/useKanjiStore.ts`        | Store          |
+| `store/useVocabStore.ts`     | `features/vocabulary/store/useVocabStore.ts`   | Store          |
+| `store/useStatsStore.ts`     | `features/statistics/store/useStatsStore.ts`   | Store          |
+| `store/useThemeStore.ts`     | `features/themes/store/usePreferencesStore.ts` | Store          |
+| `static/kana.ts`             | `features/kana/data/kana.ts`                   | Data           |
+| `static/themes.ts`           | `features/themes/data/themes.ts`               | Data           |
+| `static/fonts.ts`            | `features/themes/data/fonts.ts`                | Data           |
+| `lib/hooks/`                 | `shared/hooks/`                                | Hooks          |
+| `lib/utils.ts`               | `shared/lib/utils.ts`                          | Utils          |
+| `lib/useOnboardingStore.ts`  | `shared/store/useOnboardingStore.ts`           | Store          |
+| `i18n/`                      | `core/i18n/`                                   | Infrastructure |
+| `translations/`              | `core/i18n/locales/`                           | Translations   |
 
 ### Files Removed
 
@@ -717,15 +730,18 @@ During migration, obsolete files were removed:
 
 ### Critical Fixes
 
-1. **Circular dependency in themes.ts:**
-   - Changed import from `@/features/themes` to `../store/useCustomThemeStore`
+1. **Circular dependency in Preferences.ts:**
+
+   - Changed import from `@/features/Preferences` to `../store/useCustomThemeStore`
 
 2. **Incorrect exports in barrels:**
+
    - Fixed 7+ `index.ts` files to match actual exports
    - Added missing component exports
    - Added missing type exports
 
 3. **Component paths:**
+
    - Fixed Game paths (from `Game/Game` to `Game`)
    - Removed non-existent exports (hiragana, katakana)
 

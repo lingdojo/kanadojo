@@ -2,9 +2,9 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useClick } from '@/shared/hooks';
-import usePreferencesStore from '@/features/Themes';
+import usePreferencesStore from '@/features/Preferences';
 import { buttonBorderStyles } from '@/shared/lib/styles';
-import fonts from '@/features/Themes/data/fonts';
+import fonts from '@/features/Preferences/data/fonts';
 import { Dice5 } from 'lucide-react';
 import { Random } from 'random-js';
 

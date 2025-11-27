@@ -4,7 +4,7 @@ import { House, Sparkles, TrendingUp, Trophy } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks';
 import { useEffect, useRef } from 'react';
-import usePreferencesStore from '@/features/Themes';
+import usePreferencesStore from '@/features/Preferences';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 
 const Sidebar = () => {

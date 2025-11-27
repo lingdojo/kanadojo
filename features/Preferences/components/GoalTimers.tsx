@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Trash2, Plus, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import clsx from 'clsx';
-import { useGoalTimersStore } from '@/features/Themes';
+import { useGoalTimersStore } from '@/features/Preferences';
 
 // Settings component for Goal Timers feature
 export default function GoalTimers() {

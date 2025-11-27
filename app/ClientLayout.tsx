@@ -1,14 +1,14 @@
 'use client';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import usePreferencesStore from '@/features/Themes';
+import usePreferencesStore from '@/features/Preferences';
 import useCrazyModeStore from '@/features/CrazyMode/store/useCrazyModeStore';
 import { usePathname } from 'next/navigation';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/shared/components/Modals/WelcomeModal';
 import { AchievementNotificationContainer } from '@/shared/components/AchievementNotification';
 import AchievementIntegration from '@/shared/components/AchievementIntegration';
-import { applyTheme } from '@/features/Themes';
+import { applyTheme } from '@/features/Preferences';
 import BackToTop from '@/shared/components/BackToTop';
 
 // Define a type for the font object for clarity, adjust as needed
@@ -27,11 +27,13 @@ const loadFontsModule = async (): Promise<FontObject[]> => {
   if (fontsCache) return fontsCache;
   if (fontsLoadingPromise) return fontsLoadingPromise;
 
-  fontsLoadingPromise = import('@/features/Themes/data/fonts').then(module => {
-    fontsCache = module.default;
-    fontsLoadingPromise = null;
-    return module.default;
-  });
+  fontsLoadingPromise = import('@/features/Preferences/data/fonts').then(
+    module => {
+      fontsCache = module.default;
+      fontsLoadingPromise = null;
+      return module.default;
+    }
+  );
 
   return fontsLoadingPromise;
 };
@@ -116,23 +118,23 @@ export default function ClientLayout({
   }, []);
 
   return (
-      <div
-        data-scroll-restoration-id='container'
-        className={clsx(
-          'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
-          fontClassName
-        )}
-        style={{
-          height: '100dvh',
-          overflowY: 'scroll'
-        }}
-      >
-        {children}
-        <ScrollRestoration />
-        <WelcomeModal />
-        <AchievementNotificationContainer />
-        <AchievementIntegration />
-        <BackToTop />
-      </div>
+    <div
+      data-scroll-restoration-id='container'
+      className={clsx(
+        'bg-[var(--background-color)] text-[var(--main-color)] min-h-[100dvh] max-w-[100dvw]',
+        fontClassName
+      )}
+      style={{
+        height: '100dvh',
+        overflowY: 'scroll'
+      }}
+    >
+      {children}
+      <ScrollRestoration />
+      <WelcomeModal />
+      <AchievementNotificationContainer />
+      <AchievementIntegration />
+      <BackToTop />
+    </div>
   );
 }
