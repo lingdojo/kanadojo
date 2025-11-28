@@ -1,4 +1,5 @@
 import { DevNotice } from '@/shared/components';
+import RandomFact from '@/shared/components/RandomFact';
 // import { Link } from '@/i18n/routing';
 
 // Updated to receive translations as a parameter instead of using hook
@@ -36,6 +37,7 @@ export default function translationGen(t: (key: string) => string) {
           - thank you!
         </p> */}
           <DevNotice />
+          <RandomFact />
         </>
       )
     },
