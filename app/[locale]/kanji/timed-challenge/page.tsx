@@ -2,16 +2,25 @@ import { TimedChallenge as TimedChallengeKanji } from '@/features/Kanji';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KanaDojo: Kanji Timed Challenge',
+  title: 'Kanji Timed Challenge - Test Your Kanji Recognition Speed',
   description:
-    'Test your kanji recognition skills in a timed challenge. Race against the clock and see how many kanji you can correctly identify!',
+    'Test your Kanji knowledge with a timed challenge. Race against the clock to see how many kanji characters you can identify correctly in 60 seconds. Perfect for JLPT preparation and speed practice.',
+  keywords: [
+    'kanji challenge',
+    'kanji speed test',
+    'timed kanji practice',
+    'JLPT speed test',
+    'kanji recognition'
+  ],
   openGraph: {
-    title: 'KanaDojo: Kanji Timed Challenge',
+    title: 'Kanji Timed Challenge - Test Your Speed',
     description:
-      'Test your kanji recognition skills in a timed challenge. Race against the clock and see how many kanji you can correctly identify!',
+      'Race against the clock to test your Kanji mastery and recognition speed.',
     url: 'https://kanadojo.com/kanji/timed-challenge',
-    type: 'website',
-    locale: 'en_US'
+    type: 'website'
+  },
+  alternates: {
+    canonical: 'https://kanadojo.com/kanji/timed-challenge'
   }
 };
 

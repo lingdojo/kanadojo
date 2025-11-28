@@ -2,9 +2,19 @@ import { ProgressWithSidebar } from '@/features/Progress';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KanaDojo: Progress',
+  title: 'Progress - Track Your Japanese Learning Statistics',
   description:
-    'Track your Japanese learning progress and see detailed statistics.'
+    'Monitor your Japanese learning journey with detailed progress statistics. Track your mastery of Hiragana, Katakana, Kanji, and Vocabulary with comprehensive analytics and performance metrics.',
+  openGraph: {
+    title: 'Progress - Track Your Japanese Learning Statistics',
+    description:
+      'Monitor your Japanese learning with detailed statistics and performance analytics.',
+    url: 'https://kanadojo.com/progress',
+    type: 'website'
+  },
+  alternates: {
+    canonical: 'https://kanadojo.com/progress'
+  }
 };
 
 export default function ProgressPage() {

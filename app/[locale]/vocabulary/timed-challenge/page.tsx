@@ -2,16 +2,25 @@ import { TimedChallenge as TimedChallengeVocab } from '@/features/Vocabulary';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KanaDojo: Vocabulary Timed Challenge',
+  title: 'Vocabulary Timed Challenge - Test Your Japanese Vocabulary Speed',
   description:
-    'Test your vocabulary skills in a timed challenge. Race against the clock and see how many words you can correctly translate!',
+    'Test your Japanese vocabulary knowledge with a timed challenge. Race against the clock to see how many words you can translate correctly in 60 seconds. Perfect for JLPT preparation and vocabulary mastery.',
+  keywords: [
+    'vocabulary challenge',
+    'japanese vocab speed test',
+    'timed vocabulary practice',
+    'JLPT vocabulary test',
+    'japanese words quiz'
+  ],
   openGraph: {
-    title: 'KanaDojo: Vocabulary Timed Challenge',
+    title: 'Vocabulary Timed Challenge - Test Your Speed',
     description:
-      'Test your vocabulary skills in a timed challenge. Race against the clock and see how many words you can correctly translate!',
+      'Race against the clock to test your Japanese vocabulary mastery.',
     url: 'https://kanadojo.com/vocabulary/timed-challenge',
-    type: 'website',
-    locale: 'en_US'
+    type: 'website'
+  },
+  alternates: {
+    canonical: 'https://kanadojo.com/vocabulary/timed-challenge'
   }
 };
 

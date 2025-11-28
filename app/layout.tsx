@@ -12,38 +12,96 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1.0,
   maximumScale: 1.0,
-  userScalable: false,
+  userScalable: false
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kanadojo.com'),
   manifest: '/manifest.json',
-  title: 'KanaDojo',
+  title: {
+    default:
+      'KanaDojo - Learn Japanese Hiragana, Katakana, Kanji & Vocabulary Online',
+    template: '%s | KanaDojo'
+  },
   description:
-    'KanaDojo is a fun, aesthetic, minimalist platform for learning and practicing Japanese online.',
+    'Master Japanese with KanaDojo - a fun, aesthetic, minimalist platform for learning Hiragana, Katakana, Kanji, and Vocabulary. Practice with interactive games, track progress, and customize your learning experience.',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2' },
       { url: '/favicon.ico?v=2', sizes: '16x16', type: 'image/x-icon' },
-      { url: '/favicon.ico?v=2', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.ico?v=2', sizes: '32x32', type: 'image/x-icon' }
     ],
     shortcut: '/favicon.ico?v=2',
-    apple: '/favicon.ico?v=2',
+    apple: '/favicon.ico?v=2'
   },
   verification: {
     google: googleVerificationToken,
-    other: { 'msvalidate.01': msVerificationToken },
+    other: { 'msvalidate.01': msVerificationToken }
   },
-  keywords:
-    'learn japanese, learn hiragana, learn katakana, learn kana, learn japanese kana, hiragana practice, katakana practice, learn kanji, kanji practice online, kana learning, japanese online lessons, japanese writing system',
+  keywords: [
+    'learn japanese',
+    'learn hiragana',
+    'learn katakana',
+    'learn kana',
+    'learn kanji',
+    'japanese vocabulary',
+    'hiragana practice',
+    'katakana practice',
+    'kanji practice',
+    'japanese learning app',
+    'japanese online lessons',
+    'japanese writing system',
+    'JLPT preparation',
+    'japanese language learning',
+    'kana dojo',
+    'japanese study tool',
+    'free japanese lessons'
+  ],
+  authors: [{ name: 'LingDojo', url: 'https://kanadojo.com' }],
+  creator: 'LingDojo',
+  publisher: 'LingDojo',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
   openGraph: {
-    title: 'KanaDojo',
+    title: 'KanaDojo - Learn Japanese Hiragana, Katakana, Kanji & Vocabulary',
     description:
-      'KanaDojo is an aesthetic, minimalist platform for learning Japanese inspired by Monkeytype.',
+      'Master Japanese with KanaDojo - an aesthetic, minimalist platform for learning Hiragana, Katakana, Kanji, and Vocabulary. Interactive games, progress tracking, and 100+ themes.',
     url: 'https://kanadojo.com',
+    siteName: 'KanaDojo',
     type: 'website',
     locale: 'en_US',
+    alternateLocale: ['es_ES', 'ja_JP']
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'KanaDojo - Learn Japanese Online',
+    description:
+      'Master Japanese Hiragana, Katakana, Kanji & Vocabulary with interactive games and beautiful themes.',
+    creator: '@kanadojo'
+  },
+  alternates: {
+    canonical: 'https://kanadojo.com',
+    languages: {
+      en: 'https://kanadojo.com',
+      es: 'https://kanadojo.com',
+      ja: 'https://kanadojo.com'
+    }
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  category: 'education'
 };
 
 // Move analytics condition to a constant to avoid repeated evaluation
@@ -57,10 +115,59 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html lang='en' suppressHydrationWarning>
+      <head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': 'https://kanadojo.com/#organization',
+                  name: 'KanaDojo',
+                  url: 'https://kanadojo.com',
+                  logo: 'https://kanadojo.com/favicon.ico',
+                  description:
+                    'An aesthetic, minimalist platform for learning Japanese',
+                  sameAs: ['https://github.com/lingdojo/kanadojo']
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://kanadojo.com/#website',
+                  url: 'https://kanadojo.com',
+                  name: 'KanaDojo',
+                  description: 'Master Japanese with interactive learning',
+                  publisher: { '@id': 'https://kanadojo.com/#organization' },
+                  inLanguage: ['en', 'es', 'ja']
+                },
+                {
+                  '@type': 'WebApplication',
+                  '@id': 'https://kanadojo.com/#webapp',
+                  name: 'KanaDojo',
+                  url: 'https://kanadojo.com',
+                  applicationCategory: 'EducationalApplication',
+                  operatingSystem: 'Any',
+                  offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'USD'
+                  },
+                  featureList: [
+                    'Learn Hiragana and Katakana',
+                    'Practice Kanji by JLPT level',
+                    'Build Japanese vocabulary',
+                    'Interactive games and quizzes',
+                    'Progress tracking',
+                    '100+ customizable themes'
+                  ]
+                }
+              ]
+            })
+          }}
+        />
+      </head>
       <body>
         {isAnalyticsEnabled && (
           <>
