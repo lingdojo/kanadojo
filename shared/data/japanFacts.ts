@@ -1,3 +1,7 @@
+import { Random } from 'random-js';
+
+const random = new Random();
+
 /**
  * A collection of interesting, lesser-known facts about Japan and the Japanese language
  * These facts are displayed randomly on the homepage
@@ -111,6 +115,6 @@ export const japanFacts = [
  * Returns a random fact from the collection
  */
 export const getRandomFact = (): string => {
-  const randomIndex = Math.floor(Math.random() * japanFacts.length);
+  const randomIndex = random.integer(0, japanFacts.length - 1);
   return japanFacts[randomIndex];
 };

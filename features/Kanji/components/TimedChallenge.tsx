@@ -28,6 +28,9 @@ import { Link } from '@/core/i18n/routing';
 import clsx from 'clsx';
 import confetti from 'canvas-confetti';
 import GoalTimersPanel from '@/shared/components/Timer/GoalTimersPanel';
+import { Random } from 'random-js';
+
+const random = new Random();
 
 export default function TimedChallengeKanji() {
   const { playClick } = useClick();
@@ -100,7 +103,7 @@ export default function TimedChallengeKanji() {
 
   useEffect(() => {
     if (selectedKanjiObjs.length > 0) {
-      const randomIndex = Math.floor(Math.random() * selectedKanjiObjs.length);
+      const randomIndex = random.integer(0, selectedKanjiObjs.length - 1);
       setCurrentQuestion(selectedKanjiObjs[randomIndex]);
     }
   }, [selectedKanjiObjs]);
@@ -131,7 +134,7 @@ export default function TimedChallengeKanji() {
     setIsFinished(false);
     setUserAnswer('');
     setLastAnswerCorrect(null);
-    const randomIndex = Math.floor(Math.random() * selectedKanjiObjs.length);
+    const randomIndex = random.integer(0, selectedKanjiObjs.length - 1);
     setCurrentQuestion(selectedKanjiObjs[randomIndex]);
     goalTimers.resetGoals();
     setTimerStarted(true);
@@ -181,9 +184,7 @@ export default function TimedChallengeKanji() {
       setLastAnswerCorrect(true);
       // Move to next question immediately on correct answer
       setTimeout(() => {
-        const randomIndex = Math.floor(
-          Math.random() * selectedKanjiObjs.length
-        );
+        const randomIndex = random.integer(0, selectedKanjiObjs.length - 1);
         setCurrentQuestion(selectedKanjiObjs[randomIndex]);
         setLastAnswerCorrect(null);
       }, 300);

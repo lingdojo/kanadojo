@@ -282,23 +282,27 @@ const MainMenu = () => {
       </div>
       <div
         className={clsx(
-          'fixed bottom-5 flex flex-row sm:gap-2 gap-1',
-          'max-md:bg-[var(--card-color)] rounded-xl z-50',
-          'md:opacity-90',
+          'fixed bottom-0 left-0 right-0 z-50',
+          'max-md:flex md:hidden', // Only visible on screens smaller than md
+          'bg-[var(--background-color)] border-t-1 border-[var(--border-color)]',
+          'px-4 py-1',
+          'flex items-center justify-between',
           expandDecorations && 'hidden'
         )}
       >
-        {legalLinks.map((link, i) => (
-          <Link
-            href={link.href}
-            key={i}
-            className='p-2 text-sm hover:cursor-pointer  rounded-2xl flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)]'
-            onClick={() => playClick()}
-          >
-            <link.icon className='size-4' />
-            <span>{link.name}</span>
-          </Link>
-        ))}
+        <div className='flex justify-evenly items-center  w-full'>
+          {legalLinks.map((link, i) => (
+            <Link
+              href={link.href}
+              key={i}
+              className='hover:cursor-pointer flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)] duration-250 hover:scale-110 active:scale-100 active:duration-225'
+              onClick={() => playClick()}
+            >
+              <link.icon className='size-4' />
+              <span className='text-xs'>{link.name}</span>
+            </Link>
+          ))}
+        </div>
       </div>
       {showBanner && (
         <NightlyBanner onSwitch={handleSwitch} onDismiss={handleDismiss} />

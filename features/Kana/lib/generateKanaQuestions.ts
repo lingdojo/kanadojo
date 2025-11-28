@@ -1,3 +1,7 @@
+import { Random } from 'random-js';
+
+const random = new Random();
+
 export type KanaCharacter = {
   kana: string;
   romaji: string;
@@ -5,11 +9,13 @@ export type KanaCharacter = {
   group: string;
 };
 
-export function generateKanaQuestion(selectedKana: KanaCharacter[]): KanaCharacter {
+export function generateKanaQuestion(
+  selectedKana: KanaCharacter[]
+): KanaCharacter {
   if (selectedKana.length === 0) {
     throw new Error('No kana selected');
   }
 
-  const randomIndex = Math.floor(Math.random() * selectedKana.length);
+  const randomIndex = random.integer(0, selectedKana.length - 1);
   return selectedKana[randomIndex];
 }
