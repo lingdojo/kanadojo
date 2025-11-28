@@ -26,10 +26,10 @@ interface IKanjiState {
   setSelectedKanjiSets: (sets: string[]) => void;
   clearKanjiSets: () => void;
 
-  collapsedRows: number[];
-  setCollapsedRows: (rows: number[]) => void;
-  toggleCollapsedRow: (rowIndex: number) => void;
-  initializeCollapsedRows: (numRows: number) => void;
+  collapsedRows: Record<string, number[]>;
+  setCollapsedRows: (unit: string, rows: number[]) => void;
+  toggleCollapsedRow: (unit: string, rowIndex: number) => void;
+  initializeCollapsedRows: (unit: string, numRows: number) => void;
 }
 
 const sameKanjiArray = (a: IKanjiObj[], b: IKanjiObj[]) =>
@@ -129,16 +129,30 @@ const useKanjiStore = create<IKanjiState>()(
 
       clearKanjiSets: () => set({ selectedKanjiSets: [] }),
 
-      collapsedRows: [],
-      setCollapsedRows: (rows) => set({ collapsedRows: rows }),
-      toggleCollapsedRow: (rowIndex) =>
+      collapsedRows: {},
+      setCollapsedRows: (unit, rows) =>
         set((state) => ({
-          collapsedRows: state.collapsedRows.includes(rowIndex)
-            ? state.collapsedRows.filter((i) => i !== rowIndex)
-            : [...state.collapsedRows, rowIndex],
+          collapsedRows: { ...state.collapsedRows, [unit]: rows },
         })),
-      initializeCollapsedRows: (numRows: number) =>
-        set({ collapsedRows: Array.from({ length: numRows }, (_, i) => i) }),
+      toggleCollapsedRow: (unit, rowIndex) =>
+        set((state) => {
+          const unitRows = state.collapsedRows[unit] || [];
+          return {
+            collapsedRows: {
+              ...state.collapsedRows,
+              [unit]: unitRows.includes(rowIndex)
+                ? unitRows.filter((i) => i !== rowIndex)
+                : [...unitRows, rowIndex],
+            },
+          };
+        }),
+      initializeCollapsedRows: (unit: string, numRows: number) =>
+        set((state) => ({
+          collapsedRows: {
+            ...state.collapsedRows,
+            [unit]: Array.from({ length: numRows }, (_, i) => i),
+          },
+        })),
     }),
     {
       name: 'kanji-store',
