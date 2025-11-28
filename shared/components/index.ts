@@ -8,6 +8,7 @@ export * from './ui/select';
 export { default as FuriganaText } from './FuriganaText';
 export { default as SSRAudioButton } from './SSRAudioButton';
 export { default as DevNotice } from './DevNotice';
+export { default as MobileBottomBar } from './BottomBar';
 
 // Error Boundary
 export { ErrorFallback } from './ErrorBoundary/ErrorFallback';

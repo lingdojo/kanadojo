@@ -10,6 +10,7 @@ import { AchievementNotificationContainer } from '@/shared/components/Achievemen
 import AchievementIntegration from '@/shared/components/AchievementIntegration';
 import { applyTheme } from '@/features/Preferences';
 import BackToTop from '@/shared/components/BackToTop';
+import MobileBottomBar from '@/shared/components/BottomBar';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {
@@ -135,6 +136,7 @@ export default function ClientLayout({
       <AchievementNotificationContainer />
       <AchievementIntegration />
       <BackToTop />
+      <MobileBottomBar />
     </div>
   );
 }
