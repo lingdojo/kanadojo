@@ -158,6 +158,8 @@ const VocabCards = () => {
     (state) => state.initializeCollapsedRows
   );
 
+  const unitCollapsedRows = collapsedRows[selectedCollectionKey] || [];
+
   useEffect(() => {
     if (!selectedVocabCollection) return;
 
@@ -166,11 +168,12 @@ const VocabCards = () => {
     );
     const numRows = Math.ceil(totalSets / numColumns);
 
-    if (collapsedRows.length === 0) {
-      initializeCollapsedRows(numRows);
+    if (!collapsedRows[selectedCollectionKey]) {
+      initializeCollapsedRows(selectedCollectionKey, numRows);
     }
   }, [
     selectedVocabCollection,
+    selectedCollectionKey,
     numColumns,
     initializeCollapsedRows,
     collapsedRows,
@@ -297,11 +300,11 @@ const VocabCards = () => {
             <h3
               onClick={() => {
                 playClick();
-                toggleCollapsedRow(rowIndex);
+                toggleCollapsedRow(selectedCollectionKey, rowIndex);
               }}
               className={clsx(
                 'group text-3xl ml-4 flex flex-row items-center gap-2 rounded-xl hover:cursor-pointer',
-                collapsedRows.includes(rowIndex) && 'mb-1.5'
+                unitCollapsedRows.includes(rowIndex) && 'mb-1.5'
               )}
             >
               <ChevronUp
@@ -309,7 +312,7 @@ const VocabCards = () => {
                   'duration-250 text-[var(--border-color)]',
                   'max-md:group-active:text-[var(--secondary-color)]',
                   'md:group-hover:text-[var(--secondary-color)]',
-                  collapsedRows.includes(rowIndex) && 'rotate-180'
+                  unitCollapsedRows.includes(rowIndex) && 'rotate-180'
                 )}
                 size={28}
               />
@@ -320,7 +323,7 @@ const VocabCards = () => {
               <span className="lg:hidden">Level {firstSetNumber}</span>
             </h3>
 
-            {!collapsedRows.includes(rowIndex) && (
+            {!unitCollapsedRows.includes(rowIndex) && (
               <div
                 className={clsx(
                   'flex flex-col w-full',

@@ -154,17 +154,20 @@ const KanjiCards = () => {
     (state) => state.initializeCollapsedRows
   );
 
+  const unitCollapsedRows = collapsedRows[selectedKanjiCollectionName] || [];
+
   useEffect(() => {
     if (!selectedKanjiCollection) return;
 
     const totalSets = Math.ceil(selectedKanjiCollection.data.length / 10);
     const numRows = Math.ceil(totalSets / numColumns);
 
-    if (collapsedRows.length === 0) {
-      initializeCollapsedRows(numRows);
+    if (!collapsedRows[selectedKanjiCollectionName]) {
+      initializeCollapsedRows(selectedKanjiCollectionName, numRows);
     }
   }, [
     selectedKanjiCollection,
+    selectedKanjiCollectionName,
     numColumns,
     initializeCollapsedRows,
     collapsedRows,
@@ -289,11 +292,11 @@ const KanjiCards = () => {
             <h3
               onClick={() => {
                 playClick();
-                toggleCollapsedRow(rowIndex);
+                toggleCollapsedRow(selectedKanjiCollectionName, rowIndex);
               }}
               className={clsx(
                 'group text-3xl ml-4 flex flex-row items-center gap-2 rounded-xl hover:cursor-pointer',
-                collapsedRows.includes(rowIndex) && 'mb-1.5'
+                unitCollapsedRows.includes(rowIndex) && 'mb-1.5'
               )}
             >
               <ChevronUp
@@ -301,7 +304,7 @@ const KanjiCards = () => {
                   'duration-250 text-[var(--border-color)]',
                   'max-md:group-active:text-[var(--secondary-color)]',
                   'md:group-hover:text-[var(--secondary-color)]',
-                  collapsedRows.includes(rowIndex) && 'rotate-180'
+                  unitCollapsedRows.includes(rowIndex) && 'rotate-180'
                 )}
                 size={28}
               />
@@ -312,7 +315,7 @@ const KanjiCards = () => {
               <span className="lg:hidden">Level {firstSetNumber}</span>
             </h3>
 
-            {!collapsedRows.includes(rowIndex) && (
+            {!unitCollapsedRows.includes(rowIndex) && (
               <div
                 className={clsx(
                   'flex flex-col w-full',
