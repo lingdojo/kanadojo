@@ -280,7 +280,7 @@ const MainMenu = () => {
       </div>
       <div
         className={clsx(
-          'fixed bottom-3 flex flex-row sm:gap-2 gap-1',
+          'fixed bottom-5 flex flex-row sm:gap-2 gap-1',
           'max-md:bg-[var(--card-color)] rounded-xl z-50',
           'opacity-90',
           expandDecorations && 'hidden'

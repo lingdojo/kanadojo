@@ -23,7 +23,7 @@ const MobileBottomBar = () => {
       className={clsx(
         'fixed bottom-0 left-0 right-0 z-50',
         'max-md:hidden', // Only visible on screens bigger than md
-        'bg-[var(--card-color)] border-t-1 border-[var(--border-color)]',
+        'bg-[var(--background-color)] border-t-1 border-[var(--border-color)]',
         'px-4 py-1',
         'flex items-center justify-between'
       )}

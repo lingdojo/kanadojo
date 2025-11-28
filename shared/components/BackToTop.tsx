@@ -40,13 +40,11 @@ export default function BackToTop() {
     return () => container.current?.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Hide on top-level locale route (e.g. /en or /es) or root
-  // Pathname like: '/', '/en', '/en/' or '/en/some/page'
-  const pathSegments = (pathname || '').split('/').filter(Boolean);
-  const isLocaleRoot = pathSegments.length === 1 || pathname === '/';
+  // Hide on root path only
+  const isRootPath = pathname === '/' || pathname === '';
 
-  // Don't render during SSR or if not visible or on locale root
-  if (!isMounted || !visible || isLocaleRoot) return null;
+  // Don't render during SSR or if not visible or on root path
+  if (!isMounted || !visible || isRootPath) return null;
 
   const handleClick = () => {
     if (typeof window !== 'undefined') {
@@ -70,7 +68,7 @@ export default function BackToTop() {
       className={clsx(
         'fixed z-[60] right-2 bottom-18 sm:right-8 sm:bottom-8',
         'inline-flex items-center justify-center rounded-full ',
-        'p-3 shadow-lg transition-all duration-200 ',
+        'p-2 shadow-lg transition-all duration-200 ',
         'bg-[var(--card-color)] text-[var(--main-color)] ',
         'hover:bg-[var(--border-color)] hover:scale-110 ',
         // 'focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 ',
