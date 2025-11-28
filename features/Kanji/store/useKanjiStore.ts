@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export interface IKanjiObj {
   id: number;
@@ -19,9 +20,16 @@ interface IKanjiState {
   addKanjiObj: (kanji: IKanjiObj) => void;
   addKanjiObjs: (kanjis: IKanjiObj[]) => void;
   clearKanjiObjs: () => void;
-  setSelectedKanjiCollection: (collection: 'n5' | 'n4' | 'n3' | 'n2' | 'n1') => void;
+  setSelectedKanjiCollection: (
+    collection: 'n5' | 'n4' | 'n3' | 'n2' | 'n1'
+  ) => void;
   setSelectedKanjiSets: (sets: string[]) => void;
   clearKanjiSets: () => void;
+
+  collapsedRows: number[];
+  setCollapsedRows: (rows: number[]) => void;
+  toggleCollapsedRow: (rowIndex: number) => void;
+  initializeCollapsedRows: (numRows: number) => void;
 }
 
 const sameKanjiArray = (a: IKanjiObj[], b: IKanjiObj[]) =>
@@ -30,7 +38,7 @@ const sameKanjiArray = (a: IKanjiObj[], b: IKanjiObj[]) =>
 const toggleKanji = (array: IKanjiObj[], kanjiObj: IKanjiObj): IKanjiObj[] => {
   if (!kanjiObj || !kanjiObj.kanjiChar) return array;
   const kanjiIndex = array.findIndex(
-    item => item.kanjiChar === kanjiObj.kanjiChar
+    (item) => item.kanjiChar === kanjiObj.kanjiChar
   );
   if (kanjiIndex >= 0) {
     if (array.length === 1) return [];
@@ -57,15 +65,15 @@ const toggleKanjis = (
   }
   if (!dedupIncoming.length) return array;
 
-  const currentChars = new Set(array.map(item => item.kanjiChar));
-  const incomingChars = new Set(dedupIncoming.map(item => item.kanjiChar));
+  const currentChars = new Set(array.map((item) => item.kanjiChar));
+  const incomingChars = new Set(dedupIncoming.map((item) => item.kanjiChar));
 
-  const allPresent = dedupIncoming.every(obj =>
+  const allPresent = dedupIncoming.every((obj) =>
     currentChars.has(obj.kanjiChar)
   );
   if (allPresent) {
     let changed = false;
-    const next = array.filter(item => {
+    const next = array.filter((item) => {
       const drop = incomingChars.has(item.kanjiChar);
       if (drop) changed = true;
       return !drop;
@@ -85,39 +93,59 @@ const toggleKanjis = (
   return changed ? next : array;
 };
 
-const useKanjiStore = create<IKanjiState>(set => ({
-  selectedGameModeKanji: 'Pick',
-  selectedKanjiObjs: [],
-  selectedKanjiCollection: 'n5',
-  selectedKanjiSets: [],
+const useKanjiStore = create<IKanjiState>()(
+  persist(
+    (set) => ({
+      selectedGameModeKanji: 'Pick',
+      selectedKanjiObjs: [],
+      selectedKanjiCollection: 'n5',
+      selectedKanjiSets: [],
 
-  setSelectedGameModeKanji: gameMode =>
-    set({ selectedGameModeKanji: gameMode }),
+      setSelectedGameModeKanji: (gameMode) =>
+        set({ selectedGameModeKanji: gameMode }),
 
-  addKanjiObj: kanjiObj =>
-    set(state => {
-      const next = toggleKanji(state.selectedKanjiObjs, kanjiObj);
-      return sameKanjiArray(next, state.selectedKanjiObjs)
-        ? state
-        : { selectedKanjiObjs: next };
+      addKanjiObj: (kanjiObj) =>
+        set((state) => {
+          const next = toggleKanji(state.selectedKanjiObjs, kanjiObj);
+          return sameKanjiArray(next, state.selectedKanjiObjs)
+            ? state
+            : { selectedKanjiObjs: next };
+        }),
+
+      addKanjiObjs: (kanjiObjects) =>
+        set((state) => {
+          const next = toggleKanjis(state.selectedKanjiObjs, kanjiObjects);
+          return sameKanjiArray(next, state.selectedKanjiObjs)
+            ? state
+            : { selectedKanjiObjs: next };
+        }),
+
+      clearKanjiObjs: () => set({ selectedKanjiObjs: [] }),
+
+      setSelectedKanjiCollection: (collection) =>
+        set({ selectedKanjiCollection: collection }),
+
+      setSelectedKanjiSets: (sets) => set({ selectedKanjiSets: sets }),
+
+      clearKanjiSets: () => set({ selectedKanjiSets: [] }),
+
+      collapsedRows: [],
+      setCollapsedRows: (rows) => set({ collapsedRows: rows }),
+      toggleCollapsedRow: (rowIndex) =>
+        set((state) => ({
+          collapsedRows: state.collapsedRows.includes(rowIndex)
+            ? state.collapsedRows.filter((i) => i !== rowIndex)
+            : [...state.collapsedRows, rowIndex],
+        })),
+      initializeCollapsedRows: (numRows: number) =>
+        set({ collapsedRows: Array.from({ length: numRows }, (_, i) => i) }),
     }),
-
-  addKanjiObjs: kanjiObjects =>
-    set(state => {
-      const next = toggleKanjis(state.selectedKanjiObjs, kanjiObjects);
-      return sameKanjiArray(next, state.selectedKanjiObjs)
-        ? state
-        : { selectedKanjiObjs: next };
-    }),
-
-  clearKanjiObjs: () => set({ selectedKanjiObjs: [] }),
-
-  setSelectedKanjiCollection: collection =>
-    set({ selectedKanjiCollection: collection }),
-
-  setSelectedKanjiSets: sets => set({ selectedKanjiSets: sets }),
-
-  clearKanjiSets: () => set({ selectedKanjiSets: [] })
-}));
+    {
+      name: 'kanji-store',
+      //persist only the collapsedRows
+      partialize: (state) => ({ collapsedRows: state.collapsedRows }),
+    }
+  )
+);
 
 export default useKanjiStore;
