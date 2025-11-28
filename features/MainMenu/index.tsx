@@ -285,7 +285,7 @@ const MainMenu = () => {
           'fixed bottom-0 left-0 right-0 z-50',
           'max-md:flex md:hidden', // Only visible on screens smaller than md
           'bg-[var(--background-color)] border-t-1 border-[var(--border-color)]',
-          'px-4 py-1',
+          'px-4 py-2',
           'flex items-center justify-between',
           expandDecorations && 'hidden'
         )}
