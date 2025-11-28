@@ -466,6 +466,71 @@ Each game mode is a dynamic route (`/[contentType]/train/[gameMode]`) that:
 
 Contributions are welcome! KanaDojo is an open-source project built by the community, for the community. Check out [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
 
+### 🌍 Translation Contributions
+
+We're actively working on making KanaDojo available in multiple languages! If you'd like to help translate:
+
+1. **Read the guide**: Review [docs/TRANSLATION_GUIDE.md](docs/TRANSLATION_GUIDE.md)
+2. **Edit translations**: Modify JSON files in `core/i18n/locales/{lang}/`
+3. **Validate**: Run `npm run i18n:validate` to check your work
+4. **Submit PR**: Open a pull request with your translations
+
+**Currently supported**: English 🇬🇧, Spanish 🇪🇸, Japanese 🇯🇵
+**Planned**: Portuguese, French, German, Italian, Chinese, Korean, Russian, Arabic
+
+#### 📊 i18n System Status
+
+**Infrastructure**: ✅ Complete (100%)
+- Namespace-based translation system using next-intl
+- 9 namespaces organized by feature: `common`, `navigation`, `kana`, `kanji`, `vocabulary`, `achievements`, `statistics`, `settings`, `errors`
+- Automated validation and TypeScript type generation
+- 345 translation keys across 3 languages
+
+**Translation Progress**: 🚧 In Progress (~43%)
+- ✅ Base UI elements translated (buttons, messages, navigation)
+- ✅ Core feature metadata (kana, kanji, vocabulary pages)
+- 🚧 Remaining: ~464 UI strings to add
+- 🚧 Component migration: 2/90 files using translations
+
+**How It Works**:
+```tsx
+// Components use the useTranslations hook
+import { useTranslations } from 'next-intl';
+
+function MyComponent() {
+  const t = useTranslations('common');
+  return <button>{t('buttons.submit')}</button>;
+}
+```
+
+**Translation Files Structure**:
+```
+core/i18n/locales/
+├── en/  # English (reference language)
+│   ├── common.json        # Buttons, messages, UI elements
+│   ├── navigation.json    # Menu, breadcrumbs, footer
+│   ├── kana.json         # Kana feature translations
+│   ├── kanji.json        # Kanji feature translations
+│   ├── vocabulary.json   # Vocabulary translations
+│   ├── achievements.json # Achievement system
+│   ├── statistics.json   # Progress tracking
+│   ├── settings.json     # User preferences
+│   └── errors.json       # Error messages
+├── es/  # Spanish (same structure)
+└── ja/  # Japanese (same structure)
+```
+
+**Available Commands**:
+- `npm run i18n:validate` - Verify all translation keys match across languages
+- `npm run i18n:generate-types` - Generate TypeScript autocomplete
+- `npm run i18n:check` - Run both validation and type generation
+
+**What's Next**:
+1. Add remaining ~464 UI strings to namespace files
+2. Migrate 88 remaining components to use translation hooks
+3. Expand to 8+ additional languages
+4. Setup CI/CD validation in GitHub Actions
+
 ### How to Contribute
 
 1. Fork the repository

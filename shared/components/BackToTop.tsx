@@ -4,6 +4,7 @@ import { ChevronUp } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { useClick } from '../hooks';
+import { useTranslations } from 'next-intl';
 
 export default function BackToTop() {
   const { playClick } = useClick();
@@ -11,8 +12,6 @@ export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
-
-  // target the container in ClientLayout and store it in ref
   const container = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -62,8 +61,8 @@ export default function BackToTop() {
 
   return (
     <button
-      aria-label='Back to top'
-      title='Back to top'
+      aria-label="Back to top"
+      title="Back to top"
       onClick={handleClick}
       className={clsx(
         'fixed z-[60] right-2 bottom-18 sm:right-8 sm:bottom-8',
