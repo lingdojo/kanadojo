@@ -21,7 +21,7 @@ const Themes = () => {
   const { playLong } = useLong();
   const { addTheme, removeTheme, themes } = useCustomThemeStore();
 
-  const [isAdding, setIsAdding] = useState(false);
+  const [isAdding, setIsAdding] = useState(true);
   const [customTheme, setCustomTheme] = useState({
     id: '',
     backgroundColor: '#240d2f',
@@ -161,6 +161,7 @@ const Themes = () => {
                   borderColor: currentTheme.borderColor
                 }}
                 onMouseEnter={() => {
+                  if (isAdding) return;
                   setIsHovered(currentTheme.id);
                   if (themePreview) handleHover(currentTheme.id);
                 }}
