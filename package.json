@@ -11,6 +11,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "i18n:validate": "node scripts/i18n/validate-translations.js",
+    "i18n:generate-types": "node scripts/i18n/generate-types.js",
+    "i18n:check": "npm run i18n:validate && npm run i18n:generate-types",
     "check": "tsc --noEmit --pretty && next lint --format pretty",
     "generate:constants": "tsx scripts/generateConstants.ts"
   },

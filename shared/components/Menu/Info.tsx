@@ -12,7 +12,7 @@ import { useTranslations } from 'next-intl';
 
 const Info = () => {
   const pathname = usePathname();
-  const t = useTranslations('MenuInfo');
+  const t = useTranslations('menuInfo');
 
   // Remove locale from pathname (e.g., /en/kana -> /kana)
   const pathWithoutLocale = removeLocaleFromPath(pathname);

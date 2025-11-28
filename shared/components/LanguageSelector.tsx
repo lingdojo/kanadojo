@@ -1,8 +1,8 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useRouter, usePathname } from '@/core/i18n/routing';
-import { localeNames, type Locale } from '@/core/i18n';
+import { useRouter, usePathname, type Locale } from '@/core/i18n/routing';
+import { localeNames } from '@/core/i18n/config';
 import { routing } from '@/core/i18n/routing';
 
 export function LanguageSelector() {
