@@ -25,15 +25,25 @@ type RawKanjiEntry = {
 
 const kanjiImporters = {
   n5: () =>
-    fetch('/kanji/N5.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+    fetch('/kanji/N5.json').then(
+      (res) => res.json() as Promise<RawKanjiEntry[]>
+    ),
   n4: () =>
-    fetch('/kanji/N4.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+    fetch('/kanji/N4.json').then(
+      (res) => res.json() as Promise<RawKanjiEntry[]>
+    ),
   n3: () =>
-    fetch('/kanji/N3.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+    fetch('/kanji/N3.json').then(
+      (res) => res.json() as Promise<RawKanjiEntry[]>
+    ),
   n2: () =>
-    fetch('/kanji/N2.json').then(res => res.json() as Promise<RawKanjiEntry[]>),
+    fetch('/kanji/N2.json').then(
+      (res) => res.json() as Promise<RawKanjiEntry[]>
+    ),
   n1: () =>
-    fetch('/kanji/N1.json').then(res => res.json() as Promise<RawKanjiEntry[]>)
+    fetch('/kanji/N1.json').then(
+      (res) => res.json() as Promise<RawKanjiEntry[]>
+    ),
 } as const;
 
 type KanjiCollectionKey = keyof typeof kanjiImporters;
@@ -50,15 +60,15 @@ type KanjiCollectionMeta = {
 
 const KanjiCards = () => {
   const selectedKanjiCollectionName = useKanjiStore(
-    state => state.selectedKanjiCollection
+    (state) => state.selectedKanjiCollection
   );
 
-  const selectedKanjiSets = useKanjiStore(state => state.selectedKanjiSets);
+  const selectedKanjiSets = useKanjiStore((state) => state.selectedKanjiSets);
   const setSelectedKanjiSets = useKanjiStore(
-    state => state.setSelectedKanjiSets
+    (state) => state.setSelectedKanjiSets
   );
-  const addKanjiObjs = useKanjiStore(state => state.addKanjiObjs);
-  const allTimeStats = useStatsStore(state => state.allTimeStats);
+  const addKanjiObjs = useKanjiStore((state) => state.addKanjiObjs);
+  const allTimeStats = useStatsStore((state) => state.allTimeStats);
 
   const { playClick } = useClick();
   const [kanjiCollections, setKanjiCollections] = useState<
@@ -70,9 +80,9 @@ const KanjiCards = () => {
 
     const loadCollections = async () => {
       const results = await Promise.all(
-        levelOrder.map(async level => {
+        levelOrder.map(async (level) => {
           const kanjiData = await kanjiImporters[level]();
-          return { level, kanji: kanjiData.map(entry => ({ ...entry })) };
+          return { level, kanji: kanjiData.map((entry) => ({ ...entry })) };
         })
       );
 
@@ -87,7 +97,7 @@ const KanjiCards = () => {
         collections[level] = {
           data: kanji as IKanjiObj[],
           name: level.toUpperCase(),
-          prevLength: cumulativeSets
+          prevLength: cumulativeSets,
         };
         cumulativeSets += Math.ceil(kanji.length / 10);
       });
@@ -106,7 +116,6 @@ const KanjiCards = () => {
   const [hideMastered, setHideMastered] = useState(false);
 
   // Track collapsed rows for UI accordions
-  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
 
   // Calculate mastered characters (accuracy >= 90%, attempts >= 10)
@@ -139,11 +148,33 @@ const KanjiCards = () => {
   const selectedKanjiCollection =
     kanjiCollections[selectedKanjiCollectionName as KanjiCollectionKey];
 
+  const collapsedRows = useKanjiStore((state) => state.collapsedRows);
+  const toggleCollapsedRow = useKanjiStore((state) => state.toggleCollapsedRow);
+  const initializeCollapsedRows = useKanjiStore(
+    (state) => state.initializeCollapsedRows
+  );
+
+  useEffect(() => {
+    if (!selectedKanjiCollection) return;
+
+    const totalSets = Math.ceil(selectedKanjiCollection.data.length / 10);
+    const numRows = Math.ceil(totalSets / numColumns);
+
+    if (collapsedRows.length === 0) {
+      initializeCollapsedRows(numRows);
+    }
+  }, [
+    selectedKanjiCollection,
+    numColumns,
+    initializeCollapsedRows,
+    collapsedRows,
+  ]);
+
   if (!selectedKanjiCollection) {
     return (
       <div className={clsx('flex flex-col w-full gap-4')}>
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
             Loading kanji sets...
           </p>
         </div>
@@ -157,7 +188,7 @@ const KanjiCards = () => {
       setStart * 10,
       setEnd * 10
     );
-    return kanjiInSet.every(kanji => masteredCharacters.has(kanji.kanjiChar));
+    return kanjiInSet.every((kanji) => masteredCharacters.has(kanji.kanjiChar));
   };
 
   const kanjiSetsTemp = new Array(
@@ -169,25 +200,25 @@ const KanjiCards = () => {
       start: i,
       end: i + 1,
       id: `Set ${i + 1}`,
-      isMastered: isSetMastered(i, i + 1)
+      isMastered: isSetMastered(i, i + 1),
     }));
 
   // Filter out mastered sets if hideMastered is true
   const filteredKanjiSets = hideMastered
-    ? kanjiSetsTemp.filter(set => !set.isMastered)
+    ? kanjiSetsTemp.filter((set) => !set.isMastered)
     : kanjiSetsTemp;
 
-  const masteredCount = kanjiSetsTemp.filter(set => set.isMastered).length;
+  const masteredCount = kanjiSetsTemp.filter((set) => set.isMastered).length;
 
   // Check if user has any progress data
   const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
 
   return (
-    <div className='flex flex-col w-full gap-4'>
+    <div className="flex flex-col w-full gap-4">
       {/* Info message when no progress data exists */}
       {!hasProgressData && (
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
             💡 <strong>Tip:</strong> Complete some practice sessions to unlock
             the &ldquo;Hide Mastered Sets&rdquo; filter. Sets become mastered
             when you achieve 90%+ accuracy with 10+ attempts per character.
@@ -197,11 +228,11 @@ const KanjiCards = () => {
 
       {/* Filter Toggle Button - Only show if there are mastered sets */}
       {masteredCount > 0 && (
-        <div className='flex justify-end px-4'>
+        <div className="flex justify-end px-4">
           <button
             onClick={() => {
               playClick();
-              setHideMastered(prev => !prev);
+              setHideMastered((prev) => !prev);
             }}
             className={clsx(
               'flex items-center gap-2 px-4 py-2 rounded-xl',
@@ -214,15 +245,15 @@ const KanjiCards = () => {
           >
             {hideMastered ? (
               <>
-                <FilterX size={20} className='text-[var(--main-color)]' />
-                <span className='text-[var(--main-color)]'>
+                <FilterX size={20} className="text-[var(--main-color)]" />
+                <span className="text-[var(--main-color)]">
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
             ) : (
               <>
-                <Filter size={20} className='text-[var(--secondary-color)]' />
-                <span className='text-[var(--secondary-color)]'>
+                <Filter size={20} className="text-[var(--secondary-color)]" />
+                <span className="text-[var(--secondary-color)]">
                   Hide Mastered Sets ({masteredCount})
                 </span>
               </>
@@ -258,11 +289,7 @@ const KanjiCards = () => {
             <h3
               onClick={() => {
                 playClick();
-                setCollapsedRows(prev =>
-                  prev.includes(rowIndex)
-                    ? prev.filter(i => i !== rowIndex)
-                    : [...prev, rowIndex]
-                );
+                toggleCollapsedRow(rowIndex);
               }}
               className={clsx(
                 'group text-3xl ml-4 flex flex-row items-center gap-2 rounded-xl hover:cursor-pointer',
@@ -278,11 +305,11 @@ const KanjiCards = () => {
                 )}
                 size={28}
               />
-              <span className='max-lg:hidden'>
+              <span className="max-lg:hidden">
                 Levels {firstSetNumber}
                 {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
-              <span className='lg:hidden'>Level {firstSetNumber}</span>
+              <span className="lg:hidden">Level {firstSetNumber}</span>
             </h3>
 
             {!collapsedRows.includes(rowIndex) && (
@@ -320,13 +347,13 @@ const KanjiCards = () => {
                             ? 'bg-[var(--secondary-color)]/80 text-[var(--background-color)] '
                             : 'bg-[var(--background-color)] hover:border-[var(--main-color)]/80'
                         )}
-                        onClick={e => {
+                        onClick={(e) => {
                           e.currentTarget.blur();
                           playClick();
                           if (isSelected) {
                             setSelectedKanjiSets(
                               selectedKanjiSets.filter(
-                                set => set !== kanjiSetTemp.name
+                                (set) => set !== kanjiSetTemp.name
                               )
                             );
                             addKanjiObjs(setWords);
@@ -334,16 +361,16 @@ const KanjiCards = () => {
                             setSelectedKanjiSets([
                               ...new Set(
                                 selectedKanjiSets.concat(kanjiSetTemp.name)
-                              )
+                              ),
                             ]);
                             addKanjiObjs(setWords);
                           }
                         }}
                       >
                         {isSelected ? (
-                          <CircleCheck className='mt-0.5 text-[var(--background-color)] duration-250' />
+                          <CircleCheck className="mt-0.5 text-[var(--background-color)] duration-250" />
                         ) : (
-                          <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
+                          <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
                         )}
                         {kanjiSetTemp.name.replace('Set ', 'Level ')}
                       </button>

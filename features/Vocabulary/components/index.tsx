@@ -21,15 +21,25 @@ type RawVocabEntry = {
 
 const vocabImporters = {
   n5: () =>
-    fetch('/vocab/n5.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+    fetch('/vocab/n5.json').then(
+      (res) => res.json() as Promise<RawVocabEntry[]>
+    ),
   n4: () =>
-    fetch('/vocab/n4.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+    fetch('/vocab/n4.json').then(
+      (res) => res.json() as Promise<RawVocabEntry[]>
+    ),
   n3: () =>
-    fetch('/vocab/n3.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+    fetch('/vocab/n3.json').then(
+      (res) => res.json() as Promise<RawVocabEntry[]>
+    ),
   n2: () =>
-    fetch('/vocab/n2.json').then(res => res.json() as Promise<RawVocabEntry[]>),
+    fetch('/vocab/n2.json').then(
+      (res) => res.json() as Promise<RawVocabEntry[]>
+    ),
   n1: () =>
-    fetch('/vocab/n1.json').then(res => res.json() as Promise<RawVocabEntry[]>)
+    fetch('/vocab/n1.json').then(
+      (res) => res.json() as Promise<RawVocabEntry[]>
+    ),
 } as const;
 
 type VocabCollectionKey = keyof typeof vocabImporters;
@@ -41,7 +51,7 @@ const vocabCollectionNames: Record<VocabCollectionKey, string> = {
   n4: 'N4',
   n3: 'N3',
   n2: 'N2',
-  n1: 'N1'
+  n1: 'N1',
 };
 
 type VocabCollectionMeta = {
@@ -53,14 +63,14 @@ type VocabCollectionMeta = {
 const toWordObj = (entry: RawVocabEntry): IWord => {
   const definitionPieces = entry.waller_definition
     .split(/[;,]/)
-    .map(piece => piece.trim())
+    .map((piece) => piece.trim())
     .filter(Boolean);
 
   return {
     word: entry.kanji?.trim() || entry.kana,
     reading: `${entry.kana}`.trim(),
     displayMeanings: definitionPieces,
-    meanings: definitionPieces
+    meanings: definitionPieces,
   };
 };
 
@@ -68,15 +78,15 @@ const toWordObj = (entry: RawVocabEntry): IWord => {
 
 const VocabCards = () => {
   const selectedVocabCollectionName = useVocabStore(
-    state => state.selectedVocabCollection
+    (state) => state.selectedVocabCollection
   );
 
-  const selectedVocabSets = useVocabStore(state => state.selectedVocabSets);
+  const selectedVocabSets = useVocabStore((state) => state.selectedVocabSets);
   const setSelectedVocabSets = useVocabStore(
-    state => state.setSelectedVocabSets
+    (state) => state.setSelectedVocabSets
   );
-  const addWordObjs = useVocabStore(state => state.addVocabObjs);
-  const allTimeStats = useStatsStore(state => state.allTimeStats);
+  const addWordObjs = useVocabStore((state) => state.addVocabObjs);
+  const allTimeStats = useStatsStore((state) => state.allTimeStats);
 
   const { playClick } = useClick();
   const [vocabCollections, setVocabCollections] = useState<
@@ -88,7 +98,7 @@ const VocabCards = () => {
 
     const loadCollections = async () => {
       const results = await Promise.all(
-        levelOrder.map(async level => {
+        levelOrder.map(async (level) => {
           const vocabData = await vocabImporters[level]();
           return { level, words: vocabData.map(toWordObj) };
         })
@@ -105,7 +115,7 @@ const VocabCards = () => {
         collections[level] = {
           data: words,
           name: vocabCollectionNames[level],
-          prevLength: cumulativeSets
+          prevLength: cumulativeSets,
         };
         cumulativeSets += Math.ceil(words.length / WORDS_PER_SET);
       });
@@ -140,14 +150,37 @@ const VocabCards = () => {
     return mastered;
   }, [allTimeStats.characterMastery]);
 
-  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
   const numColumns = useGridColumns();
+
+  const collapsedRows = useVocabStore((state) => state.collapsedRows);
+  const toggleCollapsedRow = useVocabStore((state) => state.toggleCollapsedRow);
+  const initializeCollapsedRows = useVocabStore(
+    (state) => state.initializeCollapsedRows
+  );
+
+  useEffect(() => {
+    if (!selectedVocabCollection) return;
+
+    const totalSets = Math.ceil(
+      selectedVocabCollection.data.length / WORDS_PER_SET
+    );
+    const numRows = Math.ceil(totalSets / numColumns);
+
+    if (collapsedRows.length === 0) {
+      initializeCollapsedRows(numRows);
+    }
+  }, [
+    selectedVocabCollection,
+    numColumns,
+    initializeCollapsedRows,
+    collapsedRows,
+  ]);
 
   if (!selectedVocabCollection) {
     return (
       <div className={clsx('flex flex-col w-full gap-4')}>
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
             Loading vocabulary sets...
           </p>
         </div>
@@ -175,25 +208,25 @@ const VocabCards = () => {
       start: i,
       end: i + 1,
       id: `Set ${i + 1}`,
-      isMastered: isSetMastered(i, i + 1)
+      isMastered: isSetMastered(i, i + 1),
     }));
 
   // Filter out mastered sets if hideMastered is true
   const filteredVocabSets = hideMastered
-    ? vocabSetsTemp.filter(set => !set.isMastered)
+    ? vocabSetsTemp.filter((set) => !set.isMastered)
     : vocabSetsTemp;
 
-  const masteredCount = vocabSetsTemp.filter(set => set.isMastered).length;
+  const masteredCount = vocabSetsTemp.filter((set) => set.isMastered).length;
 
   // Check if user has any progress data
   const hasProgressData = Object.keys(allTimeStats.characterMastery).length > 0;
 
   return (
-    <div className='flex flex-col w-full gap-4'>
+    <div className="flex flex-col w-full gap-4">
       {/* Info message when no progress data exists */}
       {!hasProgressData && (
-        <div className='mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]'>
-          <p className='text-sm text-[var(--secondary-color)]'>
+        <div className="mx-4 px-4 py-3 rounded-xl bg-[var(--card-color)] border-2 border-[var(--border-color)]">
+          <p className="text-sm text-[var(--secondary-color)]">
             💡 <strong>Tip:</strong> Complete some practice sessions to unlock
             the &apos;Hide Mastered Sets&apos; filter. Sets become mastered when
             you achieve 90%+ accuracy with 10+ attempts per word.
@@ -203,11 +236,11 @@ const VocabCards = () => {
 
       {/* Filter Toggle Button - Only show if there are mastered sets */}
       {masteredCount > 0 && (
-        <div className='flex justify-end px-4'>
+        <div className="flex justify-end px-4">
           <button
             onClick={() => {
               playClick();
-              setHideMastered(prev => !prev);
+              setHideMastered((prev) => !prev);
             }}
             className={clsx(
               'flex items-center gap-2 px-4 py-2 rounded-xl',
@@ -220,15 +253,15 @@ const VocabCards = () => {
           >
             {hideMastered ? (
               <>
-                <FilterX size={20} className='text-[var(--main-color)]' />
-                <span className='text-[var(--main-color)]'>
+                <FilterX size={20} className="text-[var(--main-color)]" />
+                <span className="text-[var(--main-color)]">
                   Show All Sets ({masteredCount} mastered hidden)
                 </span>
               </>
             ) : (
               <>
-                <Filter size={20} className='text-[var(--secondary-color)]' />
-                <span className='text-[var(--secondary-color)]'>
+                <Filter size={20} className="text-[var(--secondary-color)]" />
+                <span className="text-[var(--secondary-color)]">
                   Hide Mastered Sets ({masteredCount})
                 </span>
               </>
@@ -264,11 +297,7 @@ const VocabCards = () => {
             <h3
               onClick={() => {
                 playClick();
-                setCollapsedRows(prev =>
-                  prev.includes(rowIndex)
-                    ? prev.filter(i => i !== rowIndex)
-                    : [...prev, rowIndex]
-                );
+                toggleCollapsedRow(rowIndex);
               }}
               className={clsx(
                 'group text-3xl ml-4 flex flex-row items-center gap-2 rounded-xl hover:cursor-pointer',
@@ -284,11 +313,11 @@ const VocabCards = () => {
                 )}
                 size={28}
               />
-              <span className='max-lg:hidden'>
+              <span className="max-lg:hidden">
                 Levels {firstSetNumber}
                 {firstSetNumber !== lastSetNumber ? `-${lastSetNumber}` : ''}
               </span>
-              <span className='lg:hidden'>Level {firstSetNumber}</span>
+              <span className="lg:hidden">Level {firstSetNumber}</span>
             </h3>
 
             {!collapsedRows.includes(rowIndex) && (
@@ -326,13 +355,13 @@ const VocabCards = () => {
                             ? 'bg-[var(--secondary-color)]/80 text-[var(--background-color)] '
                             : ' bg-[var(--background-color)] hover:border-[var(--main-color)]/80'
                         )}
-                        onClick={e => {
+                        onClick={(e) => {
                           e.currentTarget.blur();
                           playClick();
                           if (isSelected) {
                             setSelectedVocabSets(
                               selectedVocabSets.filter(
-                                set => set !== vocabSetTemp.name
+                                (set) => set !== vocabSetTemp.name
                               )
                             );
                             addWordObjs(setWords);
@@ -340,16 +369,16 @@ const VocabCards = () => {
                             setSelectedVocabSets([
                               ...new Set(
                                 selectedVocabSets.concat(vocabSetTemp.name)
-                              )
+                              ),
                             ]);
                             addWordObjs(setWords);
                           }
                         }}
                       >
                         {isSelected ? (
-                          <CircleCheck className='mt-0.5 text-[var(--background-color)] duration-250' />
+                          <CircleCheck className="mt-0.5 text-[var(--background-color)] duration-250" />
                         ) : (
-                          <Circle className='mt-0.5 text-[var(--border-color)] duration-250' />
+                          <Circle className="mt-0.5 text-[var(--border-color)] duration-250" />
                         )}
                         {vocabSetTemp.name.replace('Set ', 'Level ')}
                       </button>
