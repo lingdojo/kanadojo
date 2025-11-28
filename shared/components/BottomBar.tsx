@@ -1,7 +1,7 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { Keyboard } from 'lucide-react';
+import { Keyboard, Heart } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks';
 import usePreferencesStore from '@/features/Preferences';
@@ -62,12 +62,25 @@ const MobileBottomBar = () => {
           className={clsx(
             'hover:cursor-pointer duration-250 hover:scale-110',
             'active:scale-100 active:duration-225',
-            'text-[var(--main-color)] hover:text-[var(--main-color)]',
-            'motion-safe:animate-pulse'
+            'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
           )}
           onClick={() => {
             playClick();
             window.open('https://monkeytype.com', '_blank');
+          }}
+        />
+        <Heart
+          size={16}
+          className={clsx(
+            'hover:cursor-pointer duration-250 hover:scale-110',
+            'active:scale-100 active:duration-225',
+            // 'text-[var(--main-color)] hover:text-[var(--main-color)]',
+            'motion-safe:animate-pulse',
+            'text-red-500 fill-current'
+          )}
+          onClick={() => {
+            playClick();
+            window.open('https://ko-fi.com/kanadojo', '_blank');
           }}
         />
       </div>
