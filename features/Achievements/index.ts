@@ -11,4 +11,4 @@ export type { Achievement, AchievementRarity, AchievementNotification } from './
 export { ACHIEVEMENTS } from './store/useAchievementStore';
 
 // Lib
-export { useAchievements, useAchievementTrigger } from './lib/useAchievements';
+export { useAchievements, useAchievementTrigger } from './hooks/useAchievements';

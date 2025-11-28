@@ -284,7 +284,7 @@ const MainMenu = () => {
         className={clsx(
           'fixed bottom-5 flex flex-row sm:gap-2 gap-1',
           'max-md:bg-[var(--card-color)] rounded-xl z-50',
-          'opacity-90',
+          'md:opacity-90',
           expandDecorations && 'hidden'
         )}
       >

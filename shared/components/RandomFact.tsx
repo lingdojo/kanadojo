@@ -20,8 +20,8 @@ const RandomFact = () => {
   return (
     <div className='mt-3 pt-3 border-t border-[var(--border-color)]'>
       <div className='flex items-start gap-2'>
-        <Lightbulb className='size-4 mt-1 flex-shrink-0 text-[var(--main-color)]' />
-        <p className='text-sm text-[var(--secondary-color)] italic'>{fact}</p>
+        <Lightbulb className='size-4  flex-shrink-0 text-[var(--main-color)]' />
+        <p className='text-xs text-[var(--secondary-color)] italic'>{fact}</p>
       </div>
     </div>
   );
