@@ -17,7 +17,6 @@ const Sidebar = () => {
   const { playClick } = useClick();
 
   const escButtonRef = useRef<HTMLButtonElement | null>(null);
-  const homeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (!hotkeysOn) return;
@@ -26,7 +25,7 @@ const Sidebar = () => {
       if (event.key === 'Escape') {
         escButtonRef.current?.click();
       } else if (event.key.toLowerCase() === 'h') {
-        homeButtonRef.current?.click();
+        router.push('/');
       } else if (event.key.toLowerCase() === 'p') {
         router.push('/preferences');
       }
@@ -47,7 +46,7 @@ const Sidebar = () => {
         'max-lg:fixed max-lg:bottom-0 max-lg:w-full',
         'max-lg:bg-[var(--card-color)]',
         'z-50',
-        'max-lg:border-t-2 border-[var(--border-color)] max-lg:py-2 max-lg:justify-evenly max-lg:items-center',
+        'max-lg:border-t-1 border-[var(--border-color)] max-lg:py-2 max-lg:justify-evenly max-lg:items-center',
         'lg:border-r-1 lg:h-auto lg:w-0 lg:px-3'
       )}
     >

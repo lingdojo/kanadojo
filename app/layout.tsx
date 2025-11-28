@@ -3,6 +3,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { GoogleAnalytics, MSClarity } from '@/core/analytics';
+import {
+  StructuredData,
+  kanaDojoSchema
+} from '@/shared/components/SEO/StructuredData';
 import { Metadata, Viewport } from 'next';
 
 const googleVerificationToken = process.env.GOOGLE_VERIFICATION_TOKEN || '';
@@ -117,56 +121,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@graph': [
-                {
-                  '@type': 'Organization',
-                  '@id': 'https://kanadojo.com/#organization',
-                  name: 'KanaDojo',
-                  url: 'https://kanadojo.com',
-                  logo: 'https://kanadojo.com/favicon.ico',
-                  description:
-                    'An aesthetic, minimalist platform for learning Japanese',
-                  sameAs: ['https://github.com/lingdojo/kanadojo']
-                },
-                {
-                  '@type': 'WebSite',
-                  '@id': 'https://kanadojo.com/#website',
-                  url: 'https://kanadojo.com',
-                  name: 'KanaDojo',
-                  description: 'Master Japanese with interactive learning',
-                  publisher: { '@id': 'https://kanadojo.com/#organization' },
-                  inLanguage: ['en', 'es', 'ja']
-                },
-                {
-                  '@type': 'WebApplication',
-                  '@id': 'https://kanadojo.com/#webapp',
-                  name: 'KanaDojo',
-                  url: 'https://kanadojo.com',
-                  applicationCategory: 'EducationalApplication',
-                  operatingSystem: 'Any',
-                  offers: {
-                    '@type': 'Offer',
-                    price: '0',
-                    priceCurrency: 'USD'
-                  },
-                  featureList: [
-                    'Learn Hiragana and Katakana',
-                    'Practice Kanji by JLPT level',
-                    'Build Japanese vocabulary',
-                    'Interactive games and quizzes',
-                    'Progress tracking',
-                    '100+ customizable themes'
-                  ]
-                }
-              ]
-            })
-          }}
-        />
+        <StructuredData data={kanaDojoSchema} />
       </head>
       <body>
         {isAnalyticsEnabled && (
