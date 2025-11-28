@@ -1,7 +1,7 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { Keyboard, Heart } from 'lucide-react';
+import { Keyboard, Heart, Palette, GitBranch } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks';
 import usePreferencesStore from '@/features/Preferences';
@@ -62,7 +62,7 @@ const MobileBottomBar = () => {
           className={clsx(
             'hover:cursor-pointer duration-250 hover:scale-110',
             'active:scale-100 active:duration-225',
-            'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
+            'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
           )}
           onClick={() => {
             playClick();
@@ -87,9 +87,14 @@ const MobileBottomBar = () => {
 
       {/* Right side - Theme name and version */}
       <div className='flex items-center gap-2 text-xs text-[var(--secondary-color)]'>
-        <span>{effectiveTheme.replace('-', ' ')}</span>
-        <span>•</span>
-        <span>v{APP_VERSION}</span>
+        <span className='flex gap-1'>
+          <Palette size={16} />
+          {effectiveTheme.replace('-', ' ')}
+        </span>
+        <span>~</span>
+        <span className='flex gap-1'>
+          <GitBranch size={16} />v{APP_VERSION}
+        </span>
       </div>
     </div>
   );
