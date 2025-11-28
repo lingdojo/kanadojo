@@ -14,7 +14,8 @@ const NAMESPACES = [
     'achievements',
     'statistics',
     'settings',
-    'errors'
+    'errors',
+    'menuInfo'
 ] as const;
 
 export default getRequestConfig(async ({locale}) =>{

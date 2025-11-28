@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 
 export default function BackToTop() {
   const { playClick } = useClick();
+  const t = useTranslations('common');
 
   const [visible, setVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -59,10 +60,12 @@ export default function BackToTop() {
     }
   };
 
+  const backToTopLabel = t('actions.backToTop');
+
   return (
     <button
-      aria-label="Back to top"
-      title="Back to top"
+      aria-label={backToTopLabel}
+      title={backToTopLabel}
       onClick={handleClick}
       className={clsx(
         'fixed z-[60] right-2 bottom-18 sm:right-8 sm:bottom-8',
