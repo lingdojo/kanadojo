@@ -11,6 +11,7 @@ import AchievementIntegration from '@/shared/components/AchievementIntegration';
 import { applyTheme } from '@/features/Preferences';
 import BackToTop from '@/shared/components/BackToTop';
 import MobileBottomBar from '@/shared/components/BottomBar';
+import { useVisitTracker } from '@/features/Progress/hooks/useVisitTracker';
 
 // Define a type for the font object for clarity, adjust as needed
 type FontObject = {
@@ -103,6 +104,9 @@ export default function ClientLayout({
       isMounted = false;
     };
   }, []);
+
+  // Track user visits for streak feature
+  useVisitTracker();
 
   useEffect(() => {
     // Resume AudioContext on first user interaction

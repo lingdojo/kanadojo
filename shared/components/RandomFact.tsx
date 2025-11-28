@@ -1,18 +1,31 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { getRandomFact } from '@/shared/data/japanFacts';
 import { Lightbulb } from 'lucide-react';
+import { Random } from 'random-js';
 
 /**
  * Component that displays a random fact about Japan or the Japanese language
  * The fact changes each time the component mounts (page reload/visit)
+ * Facts are fetched from a JSON file to optimize bundle size
  */
 const RandomFact = () => {
   const [fact, setFact] = useState<string>('');
 
   useEffect(() => {
-    // Get a random fact when component mounts
-    setFact(getRandomFact());
+    // Fetch facts from JSON file and select a random one
+    const fetchRandomFact = async () => {
+      try {
+        const response = await fetch('/japan-facts.json');
+        const facts: string[] = await response.json();
+        const random = new Random();
+        const randomIndex = random.integer(0, facts.length - 1);
+        setFact(facts[randomIndex]);
+      } catch (error) {
+        console.error('Failed to load Japan facts:', error);
+      }
+    };
+
+    fetchRandomFact();
   }, []);
 
   if (!fact) return null;
