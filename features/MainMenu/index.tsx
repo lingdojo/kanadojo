@@ -117,7 +117,8 @@ const MainMenu = () => {
           >
             <Sparkle />
           </Button>
-          <Button
+
+          {/* <Button
             variant='secondary'
             size='icon'
             className={clsx(
@@ -133,6 +134,7 @@ const MainMenu = () => {
               <Keyboard />
             </a>
           </Button>
+ */}
         </Suspense>
       )}
       <div
