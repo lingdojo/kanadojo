@@ -481,6 +481,12 @@ export interface ErrorsTranslations {
   };
 }
 
+export interface MenuInfoTranslations {
+  greeting: string;
+  description: string;
+  instructions: string;
+}
+
 /**
  * Complete translation structure with all namespaces
  */
@@ -494,6 +500,7 @@ export interface Translations {
   statistics: StatisticsTranslations;
   settings: SettingsTranslations;
   errors: ErrorsTranslations;
+  menuInfo: MenuInfoTranslations;
 }
 
 /**
@@ -509,12 +516,13 @@ export type TranslationKey =
   | `achievements.${keyof AchievementsTranslations}`
   | `statistics.${keyof StatisticsTranslations}`
   | `settings.${keyof SettingsTranslations}`
-  | `errors.${keyof ErrorsTranslations}`;
+  | `errors.${keyof ErrorsTranslations}`
+  | `menuInfo.${keyof MenuInfoTranslations}`;
 
 /**
  * Available namespaces
  */
-export type Namespace = 'common' | 'navigation' | 'kana' | 'kanji' | 'vocabulary' | 'achievements' | 'statistics' | 'settings' | 'errors';
+export type Namespace = 'common' | 'navigation' | 'kana' | 'kanji' | 'vocabulary' | 'achievements' | 'statistics' | 'settings' | 'errors' | 'menuInfo';
 
 /**
  * Available languages
