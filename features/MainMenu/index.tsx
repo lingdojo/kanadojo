@@ -281,20 +281,20 @@ const MainMenu = () => {
       </div>
       <div
         className={clsx(
-          'fixed bottom-0 left-0 right-0 z-50',
-          'max-md:flex md:hidden', // Only visible on screens smaller than md
-          'bg-[var(--background-color)] border-t-2 border-[var(--border-color)]',
-          'px-4 py-2',
-          'flex items-center justify-between',
+          'fixed bottom-0 md:bottom-6 left-0 right-0 z-50',
+          'max-md:flex justify-center gap-2',
+          'bg-[var(--background-color)] max-md:border-t-2 border-[var(--border-color)]',
+          'px-2 sm:px-4 py-2',
+          'flex items-center justify-between ',
           expandDecorations && 'hidden'
         )}
       >
-        <div className='flex justify-evenly items-center  w-full'>
+        <div className='flex justify-evenly items-center  w-full lg:w-1/3   '>
           {legalLinks.map((link, i) => (
             <Link
               href={link.href}
               key={i}
-              className='hover:cursor-pointer flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)] duration-250 hover:scale-110 active:scale-100 active:duration-225'
+              className='hover:cursor-pointer flex flex-row gap-1 items-center text-[var(--secondary-color)] hover:text-[var(--main-color)] duration-250 active:scale-100 active:duration-225'
               onClick={() => playClick()}
             >
               <link.icon className='size-4' />
