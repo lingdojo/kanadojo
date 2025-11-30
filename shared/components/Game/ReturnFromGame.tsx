@@ -83,7 +83,7 @@ const Return = ({
           <X
             size={32}
             className={clsx(
-              'hover:cursor-pointer duration-250 hover:scale-125 text-[var(--border-color)] hover:text-[var(--secondary-color)]'
+              'hover:cursor-pointer duration-250 text-[var(--border-color)] hover:text-[var(--secondary-color)]'
             )}
           />
         </Link>

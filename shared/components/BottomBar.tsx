@@ -35,7 +35,7 @@ const MobileBottomBar = () => {
           icon={faGithub}
           size='sm'
           className={clsx(
-            'hover:cursor-pointer duration-250 hover:scale-110',
+            'hover:cursor-pointer duration-250 ',
             'active:scale-100 active:duration-225',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
           )}
@@ -48,7 +48,7 @@ const MobileBottomBar = () => {
           icon={faDiscord}
           size='sm'
           className={clsx(
-            'hover:cursor-pointer duration-250 hover:scale-110',
+            'hover:cursor-pointer duration-250 ',
             'active:scale-100 active:duration-225',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
           )}
@@ -60,7 +60,7 @@ const MobileBottomBar = () => {
         <Keyboard
           size={16}
           className={clsx(
-            'hover:cursor-pointer duration-250 hover:scale-110',
+            'hover:cursor-pointer duration-250 ',
             'active:scale-100 active:duration-225',
             'text-[var(--secondary-color)] hover:text-[var(--main-color)]'
           )}
@@ -72,7 +72,7 @@ const MobileBottomBar = () => {
         <Heart
           size={16}
           className={clsx(
-            'hover:cursor-pointer duration-250 hover:scale-110',
+            'hover:cursor-pointer duration-250',
             'active:scale-100 active:duration-225',
             // 'text-[var(--main-color)] hover:text-[var(--main-color)]',
             'motion-safe:animate-pulse',
