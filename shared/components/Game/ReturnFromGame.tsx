@@ -12,134 +12,133 @@ import {
   Star,
   ChartSpline,
   MousePointerClick,
-  Keyboard
+  Keyboard,
+  Flame,
+  type LucideIcon
 } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 
-const Return = ({
-  isHidden,
-  href,
-  gameMode
-}: {
+// Game mode icon configuration
+const GAME_MODE_ICONS: Record<
+  string,
+  { icon: LucideIcon; className?: string }
+> = {
+  pick: { icon: MousePointerClick },
+  'anti-pick': { icon: MousePointerClick, className: 'scale-x-[-1]' },
+  type: { icon: Keyboard },
+  'anti-type': { icon: Keyboard, className: 'scale-y-[-1]' }
+};
+
+interface StatItemProps {
+  icon: LucideIcon;
+  value: number;
+}
+
+const StatItem = ({ icon: Icon, value }: StatItemProps) => (
+  <p className='text-xl flex flex-row items-center gap-1'>
+    <Icon />
+    <span>{value}</span>
+  </p>
+);
+
+interface ReturnProps {
   isHidden: boolean;
   href: string;
   gameMode: string;
-}) => {
+}
+
+const Return = ({ isHidden, href, gameMode }: ReturnProps) => {
   const totalTimeStopwatch = useStopwatch({ autoStart: false });
-  const saveSession = useStatsStore(state => state.saveSession);
-  const numCorrectAnswers = useStatsStore(state => state.numCorrectAnswers);
-  const numWrongAnswers = useStatsStore(state => state.numWrongAnswers);
-  const numStars = useStatsStore(state => state.stars);
-  const toggleStats = useStatsStore(state => state.toggleStats);
-  const setNewTotalMilliseconds = useStatsStore(
-    state => state.setNewTotalMilliseconds
-  );
+  const buttonRef = useRef<HTMLAnchorElement | null>(null);
+
+  const saveSession = useStatsStore(s => s.saveSession);
+  const numCorrectAnswers = useStatsStore(s => s.numCorrectAnswers);
+  const numWrongAnswers = useStatsStore(s => s.numWrongAnswers);
+  const numStars = useStatsStore(s => s.stars);
+  const currentStreak = useStatsStore(s => s.currentStreak);
+  const toggleStats = useStatsStore(s => s.toggleStats);
+  const setNewTotalMilliseconds = useStatsStore(s => s.setNewTotalMilliseconds);
 
   const { playClick } = useClick();
 
+  // Start stopwatch when component becomes visible
   useEffect(() => {
     if (!isHidden) totalTimeStopwatch.start();
-  }, []);
+  }, [isHidden]);
 
-  const buttonRef = useRef<HTMLAnchorElement | null>(null);
-
+  // Keyboard shortcuts
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        buttonRef.current?.click();
-      } else if (event.code === 'Space' || event.key === ' ') {
-        // event.preventDefault();
-      }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') buttonRef.current?.click();
     };
     window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  const handleExit = () => {
+    playClick();
+    saveSession();
+  };
+
+  const handleShowStats = () => {
+    playClick();
+    toggleStats();
+    totalTimeStopwatch.pause();
+    setNewTotalMilliseconds(totalTimeStopwatch.totalMilliseconds);
+  };
+
+  const normalizedMode = gameMode.toLowerCase();
+  const modeConfig = GAME_MODE_ICONS[normalizedMode];
+  const ModeIcon = modeConfig?.icon;
 
   return (
     <div
       className={clsx(
-        'flex flex-col  w-full md:w-1/2 mt-4 md:mt-8',
-        isHidden ? 'hidden' : ''
+        'flex flex-col w-full md:w-1/2 mt-4 md:mt-8',
+        isHidden && 'hidden'
       )}
     >
-      <div
-        className={clsx(
-          'w-full flex flex-row gap-4 items-center justify-between',
-          'md:gap-6'
-        )}
-      >
-        <Link
-          href={href}
-          className=''
-          ref={buttonRef}
-          onClick={() => {
-            playClick();
-            saveSession();
-          }}
-        >
+      {/* Header with exit and progress */}
+      <div className='w-full flex flex-row gap-4 md:gap-6 items-center justify-between'>
+        <Link href={href} ref={buttonRef} onClick={handleExit}>
           <X
             size={32}
-            className={clsx(
-              'hover:cursor-pointer duration-250 text-[var(--border-color)] hover:text-[var(--secondary-color)]'
-            )}
+            className='hover:cursor-pointer duration-250 text-[var(--border-color)] hover:text-[var(--secondary-color)]'
           />
         </Link>
         <ProgressBar />
       </div>
+
+      {/* Game mode and stats row */}
       <div className='flex flex-row w-full items-center'>
-        <p className='w-1/2 text-xl px-2 flex justify-start items-center gap-2.5 py-2 '>
-          {gameMode.toLowerCase() === 'pick' && (
-            <MousePointerClick className='text-[var(--main-color)]' />
-          )}
-          {gameMode.toLowerCase() === 'anti-pick' && (
-            <MousePointerClick className=' scale-x-[-1] text-[var(--main-color)]' />
-          )}
-          {gameMode.toLowerCase() === 'type' && (
-            <Keyboard className='text-[var(--main-color)]' />
-          )}
-          {gameMode.toLowerCase() === 'anti-type' && (
-            <Keyboard className='scale-y-[-1] text-[var(--main-color)]' />
+        {/* Game mode indicator */}
+        <p className='w-1/2 text-lg md:text-xl  flex justify-start items-center gap-1 sm:gap-2 sm:pl-1'>
+          {ModeIcon && (
+            <ModeIcon
+              className={clsx('text-[var(--main-color)]', modeConfig.className)}
+            />
           )}
           <span className='text-[var(--secondary-color)]'>
-            {gameMode.toLowerCase()}
+            {normalizedMode}
           </span>
         </p>
-        <div
-          className={clsx(
-            'w-1/2 flex flex-row gap-3 items-center justify-end px-0 py-2 text-[var(--secondary-color)] '
-          )}
-        >
-          <p className='text-xl flex flex-row items-center gap-1'>
-            <SquareCheck />
-            <span>{numCorrectAnswers}</span>
-          </p>
-          <p className='text-xl flex flex-row items-center gap-1'>
-            <SquareX />
-            <span>{numWrongAnswers}</span>
-          </p>
-          <p className='text-xl flex flex-row items-center gap-1'>
-            <Star />
-            <span>{numStars}</span>
-          </p>
+
+        {/* Stats display */}
+        <div className='w-1/2 flex flex-row gap-1.5 sm:gap-2 md:gap-3 items-center justify-end  py-2 text-[var(--secondary-color)]'>
+          <StatItem icon={SquareCheck} value={numCorrectAnswers} />
+          <StatItem icon={SquareX} value={numWrongAnswers} />
+          <StatItem icon={Flame} value={currentStreak} />
+          <StatItem icon={Star} value={numStars} />
 
           <button
             className={clsx(
-              'p-2 text-xl flex flex-row justify-center items-center gap-2 hover:cursor-pointer',
-              'duration-275 bg-[var(--main-color)] rounded-xl',
-              'transition-all ease-in-out',
-              'border-b-4 border-[var(--border-color)]',
-              'group ',
+              'p-2 text-xl flex flex-row justify-center items-center gap-2',
+              'hover:cursor-pointer duration-275 rounded-xl',
+              'transition-all ease-in-out border-b-4',
+              'bg-[var(--main-color)] border-[var(--border-color)]',
               'text-[var(--background-color)]'
             )}
-            onClick={() => {
-              playClick();
-              toggleStats();
-              totalTimeStopwatch.pause();
-              setNewTotalMilliseconds(totalTimeStopwatch.totalMilliseconds);
-            }}
+            onClick={handleShowStats}
           >
             <ChartSpline size={24} />
           </button>
